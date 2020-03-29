@@ -4,6 +4,9 @@
 import argparse
 from pathlib import Path
 from subprocess import run
+import os
+from itertools import chain
+from contextlib import suppress
 
 
 WORKDIR = Path(__file__).parent
@@ -104,6 +107,20 @@ CLEANTHESIS_VERSION     = "c4609c4c70"
 TEMPLATE_FILES          = [f"{EISVOGEL_TEMPLATE}",f"{CLEANTHESIS_TEMPLATE}"]
 
 
+parser = argparse.ArgumentParser(
+    description="Build script for dissertation"
+)
+parser.add_argument(
+    "--simple",
+    action="store_true",
+    help="Build dissertation in simple book style."
+)
+parser.add_argument(
+    "--clean",
+    action="store_true",
+    help="Clean auxiliary files that are transiently generated during build."
+)
+
 def build_auxiliary():
     """ Build auxiliary files required by other builds """
     for template, result in zip([TITLEPAGE, FRONTMATTER], [TMP1, TMP2]):
@@ -113,7 +130,6 @@ def build_auxiliary():
             cwd=WORKDIR
         )
 
-def clean_auxilary():
 
 def build_simple():
     """
@@ -126,4 +142,18 @@ def build_simple():
         cwd=WORKDIR,
         shell=True
     )
+
+
+def clean():
+    """ Clean generated files """
+    for path in chain(TMP, [TARGET]):
+        with suppress(FileNotFoundError):
+            os.remove(path)
     
+if __name__ == '__main__':
+
+    arguments = parser.parse_args()
+    if arguments.simple:
+        build_simple()
+    elif arguments.clean:
+        clean()
