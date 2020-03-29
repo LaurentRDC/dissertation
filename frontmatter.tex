@@ -1,0 +1,52 @@
+
+%------------------------------------- Custom Title (Back) Page --------------------
+$if(cleanthesis)$
+\clearpage
+\customtitlebackpage
+$endif$
+%------------------------------------- Custom Title (Back) Page --------------------
+
+
+
+%------------------------------------- Custom Abstract Page ------------------------
+\cleardoublepage
+\begin{minipage}{\linewidth}
+
+\chapter*{Abstract}
+%\addcontentsline{toc}{chapter}{Abstract}
+$abstract-en$
+
+\chapter*{Résumé}
+%\addcontentsline{toc}{chapter}{Résumé}
+$abstract-fr$
+
+\end{minipage}
+\cleardoublepage
+%------------------------------------- Custom Abstract Page ------------------------
+
+
+
+%------------------------------------- Acknowledgements Page -----------------------
+$if(acknowledgements)$
+\chapter*{Aknowledgements}
+%\addcontentsline{toc}{chapter}{Aknowledgements}
+$acknowledgements$
+$endif$
+%------------------------------------- Acknowledgements Page -----------------------
+
+
+%------------------------------------- Clear page before TOC -----------------------
+\cleardoublepage
+%------------------------------------- Clear page before TOC -----------------------
+
+
+
+%------------------------------------- Use Eisvogel Header/Footer ------------------
+$if(eisvogel)$
+\pagestyle{eisvogel-header-footer}
+$if(headeralternative)$
+\lhead[\leftmark]{$date$}
+\rhead[$date$]{\rightmark}
+$endif$
+$endif$
+%------------------------------------- Use Eisvogel Header/Footer ------------------

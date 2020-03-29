@@ -1,0 +1,38 @@
+---
+## mandatory (subtitle and header-left are optional)
+title: "Ultrafast energy flow in strongly-correlated materials"
+#subtitle: "From Markdown to LaTeX to PDF"
+author: "Laurent P. René de Cotret"
+keywords: [Markdown, Example]
+
+### really long titles may require (multiple) line break(s) in page headers when using Eisvogel
+### activate (i.e. uncomment the next line) "header-left" to define a shortened single-line version of your long title to be used in page headers
+#header-left: "Shortened version of title for running page headers ..."
+### (note to myself: "header-left" is a meta-data variable in the Eisvogel template)
+
+### activate (i.e. uncomment the next line) "headeralternative" to use chapter/section in header instead of title
+headeralternative: true
+
+studentnumber: "260446509"
+date: "April 2021"
+
+reviewer1:  "XXX, FH Bielefeld"
+reviewer2:  "XXX, Wuppie GmbH"
+
+
+abstract-fr: |
+  Ceci est le résumé.
+
+
+abstract-en: |
+  This is an english abstract.
+
+
+acknowledgements: |
+  Acknowledgements go here.
+
+
+## mandatory
+declaration: |
+  Declaration of originality
+---

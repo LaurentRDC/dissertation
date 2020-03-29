@@ -1,0 +1,95 @@
+
+%------------------------------------- Custom Title Page ---------------------------
+\renewcommand{\maketitle}{
+\thispagestyle{empty}
+
+\parindent=0pt
+\begin{center}
+    \Large
+    \textsc{
+        Fachhochschule Bielefeld\\
+        Fachbereich Campus Minden\\
+        \vspace{\baselineskip}\noindent
+        Studiengang Informatik
+    }
+\end{center}
+
+\vspace{20mm}
+\hrule
+\vspace{5mm}
+
+\begin{center}
+    \LARGE
+    \textbf{\textsc{ $title$ }}
+\end{center}
+
+\vspace{5mm}
+\hrule
+\vspace{10mm}
+
+$if(subtitle)$
+\begin{center}
+    \Large
+    \textsc{ $subtitle$ }
+\end{center}
+$endif$
+
+\vfill
+
+\vspace{\baselineskip}\noindent
+\large
+\begin{tabular}{lp{\textwidth}}
+    vorgelegt von: & \texttt{$for(author)$$author$$sep$ \and $endfor$}\\
+    Matrikelnummer: & \texttt{$studentnumber$} \\
+    &\\[12pt]
+    Abgabe am: & \texttt{$date$}\\
+    &\\[24pt]
+    Erstprüfer/in: & \texttt{$reviewer1$}\\
+    Zweitprüfer/in: & \texttt{$reviewer2$}
+\end{tabular}
+}
+%------------------------------------- Custom Title Page ---------------------------
+
+
+
+%------------------------------------- Custom Title (Back) Page --------------------
+\newcommand\customtitlebackpage{
+\thispagestyle{empty}
+\hfill
+\vfill
+\textbf{$author$} ($studentnumber$) \\
+\textit{$title$} \\
+$date$ \\[12pt]
+Erstprüfer/in: $reviewer1$ \\
+Zweitprüfer/in: $reviewer2$
+}
+%------------------------------------- Custom Title (Back) Page --------------------
+
+
+
+%------------------------------------- Patch Eisvogel's frontmatter ----------------
+%% Eisvogel template uses `\frontmatter` directly *after* `\maketitle`, thus there is
+%% a `\doubleclearpage` after the titlepage, which prevents our title-back-page to be
+%% positioned on the backside of the titlepage ...
+%% (Pandocs default template uses `\frontmatter` *before* `\maketitle`)
+$if(eisvogel)$
+\usepackage{xpatch}
+\xpretocmd{\frontmatter}{\customtitlebackpage}{}{}
+\xapptocmd{\frontmatter}{\setcounter{page}{3}}{}{}
+$endif$
+%------------------------------------- Patch Eisvogel's frontmatter ----------------
+
+
+
+%------------------------------------- Workaround for CleanStyle -------------------
+%% cleanthesis.sty *will* check the bibfile, even if `configurebiblatex=false` ...
+%% So we need to set it appropriately using our metadata variable "cleanthesisbibfile"
+$if(cleanthesis)$
+\PassOptionsToPackage{
+    figuresep=colon,
+    configurelistings=true,
+    configurebiblatex=false,
+    bibfile=$cleanthesisbibfile$
+}{cleanthesis}
+$endif$
+%------------------------------------- Workaround for CleanStyle -------------------
