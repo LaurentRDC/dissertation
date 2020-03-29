@@ -105,7 +105,7 @@ CLEANTHESIS_REPO = "https://github.com/derric/cleanthesis"
 CLEANTHESIS_VERSION = "c4609c4c70"
 
 
-parser = argparse.ArgumentParser(description="Build script for dissertation")
+parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
 parser.add_argument(
     "--simple", action="store_true", help="Build dissertation in simple book style."
 )
@@ -232,3 +232,5 @@ if __name__ == "__main__":
         clean()
     elif arguments.download_templates:
         download_template_files()
+    else:
+        parser.print_help()
