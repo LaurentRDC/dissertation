@@ -7,7 +7,9 @@ from subprocess import run
 import os
 from itertools import chain
 from contextlib import suppress
-
+import shutil
+import tempfile
+import time
 
 WORKDIR = Path(__file__).parent
 CONTENTDIR = WORKDIR / "content"
@@ -94,8 +96,6 @@ OPTIONS += ["-V toc-own-page=true"]
 
 
 ## Template variables
-TEMPLATE_DL_DIR         = WORKDIR / ".tmp_template_dl"
-
 EISVOGEL_TEMPLATE       = "eisvogel.tex"
 EISVOGEL_REPO           = "https://github.com/Wandmalfarbe/pandoc-latex-template"
 EISVOGEL_VERSION        = "d5155adebf"
@@ -103,8 +103,6 @@ EISVOGEL_VERSION        = "d5155adebf"
 CLEANTHESIS_TEMPLATE    = "cleanthesis.sty"
 CLEANTHESIS_REPO        = "https://github.com/derric/cleanthesis"
 CLEANTHESIS_VERSION     = "c4609c4c70"
-
-TEMPLATE_FILES          = [f"{EISVOGEL_TEMPLATE}",f"{CLEANTHESIS_TEMPLATE}"]
 
 
 parser = argparse.ArgumentParser(
@@ -120,6 +118,25 @@ parser.add_argument(
     action="store_true",
     help="Clean auxiliary files that are transiently generated during build."
 )
+parser.add_argument(
+    "--download-templates",
+    action="store_true",
+    help="Download optional templates Eisvogel and Cleanthesis.",
+    dest="download_templates"
+)
+
+def download_template_files():
+    """ Download template files to download directory """
+    for repo, version, template in zip(
+        [EISVOGEL_REPO, CLEANTHESIS_REPO], 
+        [EISVOGEL_VERSION, CLEANTHESIS_VERSION],
+        [EISVOGEL_TEMPLATE, CLEANTHESIS_TEMPLATE]
+    ):
+        with tempfile.TemporaryDirectory(dir=WORKDIR) as downloaddir:
+            run(f"git clone --quiet --single-branch --branch master --depth 100 {repo} {downloaddir}", shell=True)
+            run(f"git checkout --quiet {version}", cwd=downloaddir, shell=True)
+            shutil.copy(Path(downloaddir) / template, WORKDIR / template)
+
 
 def build_auxiliary():
     """ Build auxiliary files required by other builds """
@@ -157,3 +174,5 @@ if __name__ == '__main__':
         build_simple()
     elif arguments.clean:
         clean()
+    elif arguments.download_templates:
+        download_template_files()
