@@ -24,7 +24,7 @@ SRC = [
     CONTENTDIR / "conclusion.md",
 ]
 
-BIBFILE = "references.bib"
+BIBFILE = Path("references.bib")
 
 APPENDIX = CONTENTDIR / "appendix.md"
 
@@ -96,68 +96,121 @@ OPTIONS += ["-V toc-own-page=true"]
 
 
 ## Template variables
-EISVOGEL_TEMPLATE       = "eisvogel.tex"
-EISVOGEL_REPO           = "https://github.com/Wandmalfarbe/pandoc-latex-template"
-EISVOGEL_VERSION        = "d5155adebf"
+EISVOGEL_TEMPLATE = "eisvogel.tex"
+EISVOGEL_REPO = "https://github.com/Wandmalfarbe/pandoc-latex-template"
+EISVOGEL_VERSION = "d5155adebf"
 
-CLEANTHESIS_TEMPLATE    = "cleanthesis.sty"
-CLEANTHESIS_REPO        = "https://github.com/derric/cleanthesis"
-CLEANTHESIS_VERSION     = "c4609c4c70"
+CLEANTHESIS_TEMPLATE = "cleanthesis.sty"
+CLEANTHESIS_REPO = "https://github.com/derric/cleanthesis"
+CLEANTHESIS_VERSION = "c4609c4c70"
 
 
-parser = argparse.ArgumentParser(
-    description="Build script for dissertation"
+parser = argparse.ArgumentParser(description="Build script for dissertation")
+parser.add_argument(
+    "--simple", action="store_true", help="Build dissertation in simple book style."
 )
 parser.add_argument(
-    "--simple",
-    action="store_true",
-    help="Build dissertation in simple book style."
+    "--cleanthesis", action="store_true", help="Build dissertation in cleanthesis style."
 )
 parser.add_argument(
     "--clean",
     action="store_true",
-    help="Clean auxiliary files that are transiently generated during build."
+    help="Clean auxiliary files that are transiently generated during build.",
 )
 parser.add_argument(
     "--download-templates",
     action="store_true",
     help="Download optional templates Eisvogel and Cleanthesis.",
-    dest="download_templates"
+    dest="download_templates",
 )
+
+
+def runpandoc(options, target, sourcefiles, references=None, appendices=None):
+    """
+    Run pandoc with options and source files
+
+    Parameters
+    ----------
+    options : List[str]
+        List of options, e.g. ["--test true", "--foo=bar"]
+    target : path-like
+        Target file
+    sourcefiles : List[path-like]
+        List of source files
+    references : path-like
+        Reference file
+    appendices : path-like
+        Appendices
+    """
+    stringify = lambda xs: " ".join([str(x) for x in xs])
+    if references is not None:
+        sourcefiles += [references]
+    if appendices is not None:
+        sourcefiles += [appendices]
+    return run(
+        f"pandoc --filter pandoc-crossref {stringify(options)} -o {target} {stringify(sourcefiles)}",
+        shell=True,
+        cwd=WORKDIR,
+    )
+
 
 def download_template_files():
     """ Download template files to download directory """
     for repo, version, template in zip(
-        [EISVOGEL_REPO, CLEANTHESIS_REPO], 
+        [EISVOGEL_REPO, CLEANTHESIS_REPO],
         [EISVOGEL_VERSION, CLEANTHESIS_VERSION],
-        [EISVOGEL_TEMPLATE, CLEANTHESIS_TEMPLATE]
+        [EISVOGEL_TEMPLATE, CLEANTHESIS_TEMPLATE],
     ):
         with tempfile.TemporaryDirectory(dir=WORKDIR) as downloaddir:
-            run(f"git clone --quiet --single-branch --branch master --depth 100 {repo} {downloaddir}", shell=True)
+            run(
+                f"git clone --quiet --single-branch --branch master --depth 100 {repo} {downloaddir}",
+                shell=True,
+            )
             run(f"git checkout --quiet {version}", cwd=downloaddir, shell=True)
             shutil.copy(Path(downloaddir) / template, WORKDIR / template)
 
 
-def build_auxiliary():
+def build_auxiliary(aux_options=AUX_OPTS):
     """ Build auxiliary files required by other builds """
     for template, result in zip([TITLEPAGE, FRONTMATTER], [TMP1, TMP2]):
-        run(
-            f"{PANDOC} {' '.join(AUX_OPTS)} --template={template} --metadata-file={META} -o {result} {template}",
-            shell=True,
-            cwd=WORKDIR
+        runpandoc(
+            options=aux_options + [f"--template={template}", f"--metadata-file={META}"],
+            target=result,
+            sourcefiles=[template],
         )
 
 
 def build_simple():
-    """
-    Build the dissertation in the simple book style
-    """
+    """ Build the dissertation in the simple book style """
     build_auxiliary()
+    runpandoc(
+        options=OPTIONS,
+        target=TARGET,
+        sourcefiles=SRC,
+        references=REFERENCES,
+        appendices=APPENDIX,
+    )
 
-    run(
-        f"{PANDOC} {' '.join(OPTIONS)} -o {TARGET} {' '.join([str(path) for path in SRC])} {REFERENCES} {APPENDIX}",
-        cwd=WORKDIR,
-        shell=True
+
+def build_cleanthesis():
+    """ Build the dissertation in the Cleanthesis style """
+    if not (WORKDIR / CLEANTHESIS_TEMPLATE).exists():
+        download_template_files()
+
+    aux_options = AUX_OPTS
+    aux_options += [f"-M cleanthesis=true -M cleanthesisbibfile={BIBFILE.stem}"]
+    build_auxiliary(aux_options=aux_options)
+
+    options = OPTIONS
+    options += [f"--include-in-header=cleanthesis-include.tex"]
+    options += aux_options
+
+    runpandoc(
+        options=options,
+        target=TARGET,
+        sourcefiles=SRC,
+        references=REFERENCES,
+        appendices=APPENDIX,
     )
 
 
@@ -166,12 +219,15 @@ def clean():
     for path in chain(TMP, [TARGET]):
         with suppress(FileNotFoundError):
             os.remove(path)
-    
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
 
     arguments = parser.parse_args()
     if arguments.simple:
         build_simple()
+    elif arguments.cleanthesis:
+        build_cleanthesis()
     elif arguments.clean:
         clean()
     elif arguments.download_templates:

@@ -4,14 +4,15 @@
 \thispagestyle{empty}
 
 \parindent=0pt
+
+\begin{center}
+    \LARGE
+    \textbf{\textsc{ $title$ }}
+\end{center}
+
 \begin{center}
     \Large
-    \textsc{
-        Fachhochschule Bielefeld\\
-        Fachbereich Campus Minden\\
-        \vspace{\baselineskip}\noindent
-        Studiengang Informatik
-    }
+    $for(author)$$author$$sep$ \and $endfor$
 \end{center}
 
 \vspace{20mm}
@@ -19,8 +20,13 @@
 \vspace{5mm}
 
 \begin{center}
-    \LARGE
-    \textbf{\textsc{ $title$ }}
+    \Large
+    \textsc{
+        McGill University\\
+        Faculty of Science\\
+        %\vspace{\baselineskip}\noindent
+        Department of Physics
+    }
 \end{center}
 
 \vspace{5mm}
@@ -37,34 +43,12 @@ $endif$
 \vfill
 
 \vspace{\baselineskip}\noindent
-\large
-\begin{tabular}{lp{\textwidth}}
-    vorgelegt von: & \texttt{$for(author)$$author$$sep$ \and $endfor$}\\
-    Matrikelnummer: & \texttt{$studentnumber$} \\
-    &\\[12pt]
-    Abgabe am: & \texttt{$date$}\\
-    &\\[24pt]
-    Erstprüfer/in: & \texttt{$reviewer1$}\\
-    Zweitprüfer/in: & \texttt{$reviewer2$}
-\end{tabular}
+\begin{center}
+    \large
+    $date$
+\end{center}
 }
 %------------------------------------- Custom Title Page ---------------------------
-
-
-
-%------------------------------------- Custom Title (Back) Page --------------------
-\newcommand\customtitlebackpage{
-\thispagestyle{empty}
-\hfill
-\vfill
-\textbf{$author$} ($studentnumber$) \\
-\textit{$title$} \\
-$date$ \\[12pt]
-Erstprüfer/in: $reviewer1$ \\
-Zweitprüfer/in: $reviewer2$
-}
-%------------------------------------- Custom Title (Back) Page --------------------
-
 
 
 %------------------------------------- Patch Eisvogel's frontmatter ----------------
