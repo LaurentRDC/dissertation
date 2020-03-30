@@ -23,6 +23,8 @@ SRC = [
     CONTENTDIR / "preface.md",
     CONTENTDIR / "introduction.md",
     CONTENTDIR / "scattering.md",
+    CONTENTDIR / "graphite.md",
+    CONTENTDIR / "snse.md",
     CONTENTDIR / "conclusion.md",
 ]
 

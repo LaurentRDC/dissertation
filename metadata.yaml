@@ -14,10 +14,7 @@ keywords: [Markdown, Example]
 headeralternative: true
 
 studentnumber: "260446509"
-date: "April 2021"
-
-reviewer1:  "XXX, FH Bielefeld"
-reviewer2:  "XXX, Wuppie GmbH"
+date: "April 15, 2021"
 
 
 abstract-fr: |
@@ -30,7 +27,6 @@ abstract-en: |
 
 acknowledgements: |
   Acknowledgements go here.
-
 
 ## mandatory
 declaration: |
