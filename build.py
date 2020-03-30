@@ -19,6 +19,8 @@ PANDOC = "pandoc"
 META = WORKDIR / "metadata.yaml"
 
 SRC = [
+    CONTENTDIR / "listoffigures.md",
+    CONTENTDIR / "preface.md",
     CONTENTDIR / "introduction.md",
     CONTENTDIR / "scattering.md",
     CONTENTDIR / "conclusion.md",
@@ -45,7 +47,7 @@ TMP = [TMP1, TMP2]
 ## Pandoc options
 AUX_OPTS = ["--wrap=preserve"]
 
-OPTIONS = ["-f markdown"]
+OPTIONS = ["-f markdown+raw_tex"] # Some raw tex for \listoffigures macro
 OPTIONS += ["--pdf-engine=pdflatex"]
 OPTIONS += ["--standalone"]
 
@@ -65,7 +67,7 @@ OPTIONS += ["-M link-citations=true"]
 # OPTIONS                += ["--csl=ieee.csl
 # OPTIONS                += ["--csl=oxford-university-press-note.csl
 
-OPTIONS += ["--listings"]
+# OPTIONS += ["--listings"]
 
 OPTIONS += ["-V documentclass=scrbook"]
 OPTIONS += ["-V papersize=a4"]
@@ -85,6 +87,7 @@ OPTIONS += ["-V geometry:bindingoffset=6mm"]
 OPTIONS += ["--toc"]
 OPTIONS += ["--toc-depth=3"]
 OPTIONS += ["--number-sections"]
+OPTIONS += ["--top-level-division=chapter"]
 
 OPTIONS += ["-V colorlinks=true"]
 
