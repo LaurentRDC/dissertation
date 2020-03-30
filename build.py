@@ -56,6 +56,7 @@ OPTIONS += ["--standalone"]
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]
 
+OPTIONS += [f"--include-in-header=include.tex"]
 OPTIONS += [f"--include-in-header={TMP1}"]
 OPTIONS += [f"--include-before-body={TMP2}"]
 
