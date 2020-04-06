@@ -53,6 +53,8 @@ OPTIONS = ["-f markdown+raw_tex"] # Some raw tex for \listoffigures macro
 OPTIONS += ["--pdf-engine=pdflatex"]
 OPTIONS += ["--standalone"]
 
+OPTIONS += ["--filter pandoc-plot"]
+
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]
 
