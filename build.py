@@ -49,7 +49,7 @@ TMP = [TMP1, TMP2]
 ## Pandoc options
 AUX_OPTS = ["--wrap=preserve"]
 
-OPTIONS = ["-f markdown+raw_tex"] # Some raw tex for \listoffigures macro
+OPTIONS = ["-f markdown+raw_tex"]  # Some raw tex for \listoffigures macro
 OPTIONS += ["--pdf-engine=pdflatex"]
 OPTIONS += ["--standalone"]
 
@@ -118,7 +118,12 @@ parser.add_argument(
     "--simple", action="store_true", help="Build dissertation in simple book style."
 )
 parser.add_argument(
-    "--cleanthesis", action="store_true", help="Build dissertation in cleanthesis style."
+    "--cleanthesis",
+    action="store_true",
+    help="Build dissertation in cleanthesis style.",
+)
+parser.add_argument(
+    "--eisvogel", action="store_true", help="Build dissertation in Eisvogel style."
 )
 parser.add_argument(
     "--clean",
@@ -222,6 +227,29 @@ def build_cleanthesis():
     )
 
 
+def build_eisvogel():
+    """ Build the dissertation in the Eisvogel style. """
+    if not (WORKDIR / EISVOGEL_TEMPLATE).exists():
+        download_template_files()
+
+    aux_options = AUX_OPTS
+    aux_options += ["-M eisvogel=true"]
+    build_auxiliary(aux_options=aux_options)
+
+    options = OPTIONS
+    options += ["-V float-placement-figure=htbp"]
+    options += ["-V listings-no-page-break=true"]
+    options += [f"--template={WORKDIR / EISVOGEL_TEMPLATE}"]
+
+    runpandoc(
+        options=options,
+        target=TARGET,
+        sourcefiles=SRC,
+        references=REFERENCES,
+        appendices=APPENDIX,
+    )
+
+
 def clean():
     """ Clean generated files """
     for path in chain(TMP, [TARGET]):
@@ -236,6 +264,8 @@ if __name__ == "__main__":
         build_simple()
     elif arguments.cleanthesis:
         build_cleanthesis()
+    elif arguments.eisvogel:
+        build_eisvogel()
     elif arguments.clean:
         clean()
     elif arguments.download_templates:
