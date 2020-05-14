@@ -25,6 +25,7 @@ SRC = [
     CONTENTDIR / "scattering.md",
     CONTENTDIR / "graphite.md",
     CONTENTDIR / "snse.md",
+    CONTENTDIR / "tase2.md",
     CONTENTDIR / "conclusion.md",
 ]
 

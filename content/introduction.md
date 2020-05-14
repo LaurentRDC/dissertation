@@ -12,6 +12,13 @@ Two things are required from the laser system: that its pulses be short, and tha
 
 Ultrafast laser systems like those used herein are composed of two optical assemblies. Ultrashort (\SI{<100}{\femto\second}) laser pulses are produced by a mode-locked laser system. These short pulses lack the high peak power, and are amplified via chirped pulse amplification. in a regenerative laser amplifier The resulting pulses are short (\SI{<100}{\femto\second}), while also reaching peak powers of up to \SI{1}{\peta\watt}.
 
+In the following two subsections, a brief description of the two components of the laser system is given. These sections only highlight the basic functionality, while overlooking numerous details for brevity. All bust the most avid reader is encouraged to skip ahead to @sec:spectroscopy.
+
+### Femtosecond mode-locked oscillators
+
+### Regenerative laser amplifiers
+
+
 ## Ultrafast spectroscopic techniques and their limitations {#sec:spectroscopy}
 
 ## Electron microscopy {#sec:microscopy}
