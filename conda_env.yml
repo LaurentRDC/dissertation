@@ -43,6 +43,7 @@ dependencies:
   - olefile=0.46=py_0
   - openssl=1.1.1g=he774522_0
   - pandoc=2.9.2.1=0
+  - pandoc-crossref=0.3.6.1.2=0
   - pandoc-plot=0.3.0.0=1
   - pillow=7.1.2=py38h7011068_0
   - pip=20.1=pyh9f0ad1d_0
