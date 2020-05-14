@@ -40,7 +40,7 @@ Labels based on [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref
 ```markdown
 # Introduction {#sec:intro}
 
-As you can read in the @sec:introd, ...
+As you can read in the @sec:intro, ...
 
 ```
 
