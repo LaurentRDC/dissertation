@@ -16,6 +16,35 @@ In the following two subsections, a brief description of the two components of t
 
 ### Femtosecond mode-locked oscillators
 
+The core working principle of mode-locked oscillators is to fix the phase relationship between allowed amplitude modes within a laser cavity. This phase relationship enforces that constructive interference happen regularly, producing a train of ultrashort pulses. These systems typically use titanium-doped sapphire as the gain medium (Ti-sapphire), because the gain bandwidth of this medium accomodates the intrinsically large bandwidth of short laser pulses (\SI{>45}{\nano\meter}, or \SI{>3}{\tera\hertz}).
+
+```{.matplotlib caption=""}
+fig, (ax1, ax2) = plt.subplots(2,1, figsize=(FIGURE_WIDTH, 4), sharex=True)
+
+x = np.linspace(0, 1, 128)
+pulse = np.zeros_like(x)
+mode = lambda x, n: np.sin(np.pi*(n*x + 5/2))
+for n in range(1, 10):
+    ax1.plot(x, mode(x,n))
+    pulse += mode(x,n)
+
+for n in range(11, 30):
+    pulse += mode(x,n)
+
+ax2.plot(x, pulse/pulse.max())
+
+ax1.xaxis.set_visible(False)
+ax2.set_xlabel("Cavity position (a.u.)")
+ax1.set_ylabel("E-field amplitude (a.u.)")
+ax2.set_ylabel("E-field amplitude (a.u.)")
+
+tag_axis(ax1, "a)")
+tag_axis(ax2, "b)")
+
+normalize_axes_fontsize(ax1)
+normalize_axes_fontsize(ax2)
+```
+
 ### Regenerative laser amplifiers
 
 

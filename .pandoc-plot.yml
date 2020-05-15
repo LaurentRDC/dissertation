@@ -15,12 +15,13 @@
 # The following parameters affect all toolkits
 directory: plots/
 source: false
-dpi: 80
+dpi: 200
 format: PNG
+caption_format: markdown+raw_tex
 
 # The possible parameters for the Matplotlib toolkit
 matplotlib:
-  # preamble: matplotlib.py
+  preamble: plotting.py
   tight_bbox: false
   transparent: false
   executable: python

@@ -11,6 +11,7 @@ import argparse
 from pathlib import Path
 from subprocess import run
 import os
+import sys
 from itertools import chain
 from contextlib import suppress
 import shutil
@@ -19,6 +20,7 @@ import time
 
 WORKDIR = Path(__file__).parent
 CONTENTDIR = WORKDIR / "content"
+PLOTSDIR = WORKDIR / "plots"
 
 PANDOC = "pandoc"
 
@@ -54,7 +56,9 @@ TMP = [TMP1, TMP2]
 
 AUX_OPTS = ["--wrap=preserve"]
 
-OPTIONS = ["-f markdown+raw_tex"]  # Some raw tex for \listoffigures macro and siunitx package
+OPTIONS = [
+    "-f markdown+raw_tex"
+]  # Some raw tex for \listoffigures macro and siunitx package
 OPTIONS += ["--pdf-engine=pdflatex"]
 OPTIONS += ["--standalone"]
 
@@ -121,27 +125,22 @@ CLEANTHESIS_VERSION = "c4609c4c70"
 
 
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
-parser.add_argument(
-    "--simple", action="store_true", help="Build dissertation in simple book style."
+
+subparsers = parser.add_subparsers(help="sub-command help", dest="command")
+parser_clean = subparsers.add_parser(
+    "clean", help="Clean auxiliary files that are transiently generated during build."
 )
-parser.add_argument(
-    "--cleanthesis",
-    action="store_true",
-    help="Build dissertation in cleanthesis style.",
+parser_download_tempaltes = subparsers.add_parser(
+    "download-templates", help="Download optional templates Eisvogel and Cleanthesis."
 )
-parser.add_argument(
-    "--eisvogel", action="store_true", help="Build dissertation in Eisvogel style."
-)
-parser.add_argument(
-    "--clean",
-    action="store_true",
-    help="Clean auxiliary files that are transiently generated during build.",
-)
-parser.add_argument(
-    "--download-templates",
-    action="store_true",
-    help="Download optional templates Eisvogel and Cleanthesis.",
-    dest="download_templates",
+
+parser_build = subparsers.add_parser("build", help="Build dissertation.")
+parser_build.add_argument(
+    "--style",
+    action="store",
+    help="Style of dissertation to use. Default is `cleanthesis`.",
+    choices=["simple", "eisvogel", "cleanthesis"],
+    default="cleanthesis",
 )
 
 
@@ -266,7 +265,7 @@ def build_eisvogel():
 
 def clean():
     """ Clean generated files """
-    for path in chain(TMP, [TARGET]):
+    for path in chain(TMP, [TARGET], [PLOTSDIR]):
         with suppress(FileNotFoundError):
             os.remove(path)
 
@@ -274,15 +273,16 @@ def clean():
 if __name__ == "__main__":
 
     arguments = parser.parse_args()
-    if arguments.simple:
-        build_simple()
-    elif arguments.cleanthesis:
-        build_cleanthesis()
-    elif arguments.eisvogel:
-        build_eisvogel()
-    elif arguments.clean:
+    if arguments.command == "build":
+        multiplexor = {
+            "cleanthesis": build_cleanthesis,
+            "simple": build_simple,
+            "eisvogel": build_eisvogel,
+        }
+        multiplexor[arguments.style]()
+    elif arguments.command == "clean":
         clean()
-    elif arguments.download_templates:
+    elif arguments.command == "download-templates":
         download_template_files()
     else:
         parser.print_help()
