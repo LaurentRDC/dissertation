@@ -1,5 +1,11 @@
 """
+Dissertation compiler
 
+This script is meant to be used as a command-line program:
+
+```
+python -m dissc --help
+```
 """
 import argparse
 from pathlib import Path
@@ -46,15 +52,18 @@ TMP1 = f"__titlepage.filled.tex"
 TMP2 = f"__frontmatter.filled.tex"
 TMP = [TMP1, TMP2]
 
-
-## Pandoc options
 AUX_OPTS = ["--wrap=preserve"]
 
-OPTIONS = ["-f markdown+raw_tex"]  # Some raw tex for \listoffigures macro
+OPTIONS = ["-f markdown+raw_tex"]  # Some raw tex for \listoffigures macro and siunitx package
 OPTIONS += ["--pdf-engine=pdflatex"]
 OPTIONS += ["--standalone"]
 
+# The order of filters is important!
 OPTIONS += ["--filter pandoc-plot"]
+OPTIONS += ["--filter pandoc-crossref"]
+OPTIONS += ["--filter=pandoc-citeproc"]
+OPTIONS += [f"-M bibliography={BIBFILE}"]
+OPTIONS += ["-M link-citations=true"]
 
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]
@@ -63,9 +72,6 @@ OPTIONS += [f"--include-in-header=include.tex"]
 OPTIONS += [f"--include-in-header={TMP1}"]
 OPTIONS += [f"--include-before-body={TMP2}"]
 
-OPTIONS += ["--filter=pandoc-citeproc"]
-OPTIONS += [f"-M bibliography={BIBFILE}"]
-OPTIONS += ["-M link-citations=true"]
 ## download from https://www.zotero.org/styles
 ## cf. https://pandoc.org/MANUAL.html#citations
 # OPTIONS                += ["--csl=chicago-author-date-de.csl
@@ -162,7 +168,7 @@ def runpandoc(options, target, sourcefiles, references=None, appendices=None):
     if appendices is not None:
         sourcefiles += [appendices]
     return run(
-        f"pandoc --filter pandoc-crossref {stringify(options)} -o {target} {stringify(sourcefiles)}",
+        f"pandoc {stringify(options)} -o {target} {stringify(sourcefiles)}",
         shell=True,
         cwd=WORKDIR,
     )
@@ -185,7 +191,14 @@ def download_template_files():
 
 
 def build_auxiliary(aux_options=AUX_OPTS):
-    """ Build auxiliary files required by other builds """
+    """ 
+    Build auxiliary files required by other builds.
+    
+    Parameters
+    ----------
+    aux_options : List[str]
+        List of options, e.g. ["--test true", "--foo=bar"]
+    """
     for template, result in zip([TITLEPAGE, FRONTMATTER], [TMP1, TMP2]):
         runpandoc(
             options=aux_options + [f"--template={template}", f"--metadata-file={META}"],
