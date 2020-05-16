@@ -18,21 +18,23 @@ In the following two subsections, a brief description of the two components of t
 
 The core working principle of mode-locked oscillators is to fix the phase relationship between allowed amplitude modes within a laser cavity. This phase relationship enforces that constructive interference happen regularly, producing a train of ultrashort pulses. These systems typically use titanium-doped sapphire as the gain medium (Ti-sapphire), because the gain bandwidth of this medium accomodates the intrinsically large bandwidth of short laser pulses (\SI{>45}{\nano\meter}, or \SI{>3}{\tera\hertz}).
 
-```{.matplotlib caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse"}
+@fig:mode-locking shows an example of the first 30 longitudinal modes of a cavity coming together to form a strong pulse. In reality, pulses may combine $10^6$ modes to maximize peak power.
+
+```{#fig:mode-locking .matplotlib caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse. **a)** The first six longitudinal modes of a laser cavity. **b** Combination of the first 30 modes of the cavity creates a very strong pulse in the center of the cavity."}
 from skued import spectrum_colors
 
 fig, (ax1, ax2) = plt.subplots(2,1, figsize=(FIGURE_WIDTH, 4), sharex=True)
 
-x = np.linspace(-0.5, 0.5, 256)
+x = np.linspace(-0.5, 1.5, 256)
 pulse = np.zeros_like(x)
-mode = lambda x, n: np.sin(np.pi*(n*x + 5/2))
+mode = lambda x, n: np.sin(np.pi*n*(x-1/2) + np.pi)
 
-colors = reversed(list(spectrum_colors(7)))
-for n, c in enumerate(colors):
-    ax1.plot(x, mode(x,n+1), color=c)
+colors = reversed(list(spectrum_colors(6)))
+for n, c in enumerate(colors, start=1):
+    ax1.plot(x, mode(x,n), color=c)
     pulse += mode(x,n)
 
-for n in range(9, 30):
+for n in range(7, 30):
     pulse += mode(x,n)
 
 ax2.plot(x, pulse/pulse.max(), '-k')

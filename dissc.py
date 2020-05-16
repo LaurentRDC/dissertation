@@ -68,7 +68,10 @@ OPTIONS += ["--standalone"]
 
 # The order of filters is important!
 OPTIONS += ["--filter pandoc-plot"]
+
 OPTIONS += ["--filter pandoc-crossref"]
+OPTIONS += ["-M figPrefix=\"Figure\""]
+
 OPTIONS += ["--filter=pandoc-citeproc"]
 OPTIONS += [f"-M bibliography={BIBFILE}"]
 OPTIONS += ["-M link-citations=true"]

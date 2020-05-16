@@ -11,10 +11,10 @@ def tag_axis(
     ax,
     text,
     fontsize=FONTSIZE,
-    x=0.05,
-    y=0.05,
+    x=0.02,
+    y=0.95,
     horizontalalignment="left",
-    verticalalignment="bottom",
+    verticalalignment="top",
 ):
     """ Tag an axis with some text, e.g. "a)" """
     ax.text(
