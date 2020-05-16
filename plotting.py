@@ -4,7 +4,7 @@ from itertools import chain
 
 FIGURE_WIDTH = 6 + 3 / 4
 
-FONTSIZE = 6
+FONTSIZE = 8
 
 
 def tag_axis(

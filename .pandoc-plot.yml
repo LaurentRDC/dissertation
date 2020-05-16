@@ -13,7 +13,7 @@
 # notices it.
 
 # The following parameters affect all toolkits
-directory: plots/
+directory: build/plots/
 source: false
 dpi: 200
 format: PNG

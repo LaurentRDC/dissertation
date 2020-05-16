@@ -18,13 +18,17 @@ import shutil
 import tempfile
 import time
 
-WORKDIR = Path(__file__).parent
-CONTENTDIR = WORKDIR / "content"
-PLOTSDIR = WORKDIR / "plots"
+HERE = Path(__file__).parent
+BUILDDIR =  HERE / "build"
+BUILDDIR.mkdir(exist_ok=True)
+
+CONTENTDIR = HERE / "content"
+PLOTSDIR = BUILDDIR / "plots"
+TEMPLATEDIR = HERE / "templates"
 
 PANDOC = "pandoc"
 
-META = WORKDIR / "metadata.yaml"
+META = HERE / "metadata.yaml"
 
 SRC = [
     CONTENTDIR / "listoffigures.md",
@@ -41,7 +45,7 @@ BIBFILE = Path("references.bib")
 
 APPENDIX = CONTENTDIR / "appendix.md"
 
-TARGET = WORKDIR / "dissertation.pdf"
+TARGET = HERE / "dissertation.pdf"
 
 
 ## Auxiliary files
@@ -50,8 +54,8 @@ TITLEPAGE = "titlepage.tex"
 FRONTMATTER = "frontmatter.tex"
 REFERENCES = "references.md"
 
-TMP1 = f"__titlepage.filled.tex"
-TMP2 = f"__frontmatter.filled.tex"
+TMP1 = BUILDDIR / "__titlepage.filled.tex"
+TMP2 = BUILDDIR / "__frontmatter.filled.tex"
 TMP = [TMP1, TMP2]
 
 AUX_OPTS = ["--wrap=preserve"]
@@ -169,7 +173,7 @@ def runpandoc(options, target, sourcefiles, references=None, appendices=None):
     return run(
         f"pandoc {stringify(options)} -o {target} {stringify(sourcefiles)}",
         shell=True,
-        cwd=WORKDIR,
+        cwd=HERE,
     )
 
 
@@ -180,13 +184,14 @@ def download_template_files():
         [EISVOGEL_VERSION, CLEANTHESIS_VERSION],
         [EISVOGEL_TEMPLATE, CLEANTHESIS_TEMPLATE],
     ):
-        with tempfile.TemporaryDirectory(dir=WORKDIR) as downloaddir:
+        TEMPLATEDIR.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=TEMPLATEDIR) as downloaddir:
             run(
                 f"git clone --quiet --single-branch --branch master --depth 100 {repo} {downloaddir}",
                 shell=True,
             )
             run(f"git checkout --quiet {version}", cwd=downloaddir, shell=True)
-            shutil.copy(Path(downloaddir) / template, WORKDIR / template)
+            shutil.copy(Path(downloaddir) / template, TEMPLATEDIR / template)
 
 
 def build_auxiliary(aux_options=AUX_OPTS):
@@ -220,7 +225,7 @@ def build_simple():
 
 def build_cleanthesis():
     """ Build the dissertation in the Cleanthesis style """
-    if not (WORKDIR / CLEANTHESIS_TEMPLATE).exists():
+    if not (TEMPLATEDIR / CLEANTHESIS_TEMPLATE).exists():
         download_template_files()
 
     aux_options = AUX_OPTS
@@ -242,7 +247,7 @@ def build_cleanthesis():
 
 def build_eisvogel():
     """ Build the dissertation in the Eisvogel style. """
-    if not (WORKDIR / EISVOGEL_TEMPLATE).exists():
+    if not (TEMPLATEDIR / EISVOGEL_TEMPLATE).exists():
         download_template_files()
 
     aux_options = AUX_OPTS
@@ -252,7 +257,7 @@ def build_eisvogel():
     options = OPTIONS
     options += ["-V float-placement-figure=htbp"]
     options += ["-V listings-no-page-break=true"]
-    options += [f"--template={WORKDIR / EISVOGEL_TEMPLATE}"]
+    options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
 
     runpandoc(
         options=options,
@@ -265,10 +270,9 @@ def build_eisvogel():
 
 def clean():
     """ Clean generated files """
-    for path in chain(TMP, [TARGET], [PLOTSDIR]):
-        with suppress(FileNotFoundError):
-            os.remove(path)
-
+    shutil.rmtree(BUILDDIR, ignore_errors=True)
+    with suppress(FileNotFoundError):
+        os.remove(TARGET)
 
 if __name__ == "__main__":
 

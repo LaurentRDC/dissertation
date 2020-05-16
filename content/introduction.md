@@ -18,22 +18,31 @@ In the following two subsections, a brief description of the two components of t
 
 The core working principle of mode-locked oscillators is to fix the phase relationship between allowed amplitude modes within a laser cavity. This phase relationship enforces that constructive interference happen regularly, producing a train of ultrashort pulses. These systems typically use titanium-doped sapphire as the gain medium (Ti-sapphire), because the gain bandwidth of this medium accomodates the intrinsically large bandwidth of short laser pulses (\SI{>45}{\nano\meter}, or \SI{>3}{\tera\hertz}).
 
-```{.matplotlib caption=""}
+```{.matplotlib caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse"}
+from skued import spectrum_colors
+
 fig, (ax1, ax2) = plt.subplots(2,1, figsize=(FIGURE_WIDTH, 4), sharex=True)
 
-x = np.linspace(0, 1, 128)
+x = np.linspace(-0.5, 0.5, 256)
 pulse = np.zeros_like(x)
 mode = lambda x, n: np.sin(np.pi*(n*x + 5/2))
-for n in range(1, 10):
-    ax1.plot(x, mode(x,n))
+
+colors = reversed(list(spectrum_colors(7)))
+for n, c in enumerate(colors):
+    ax1.plot(x, mode(x,n+1), color=c)
     pulse += mode(x,n)
 
-for n in range(11, 30):
+for n in range(9, 30):
     pulse += mode(x,n)
 
-ax2.plot(x, pulse/pulse.max())
+ax2.plot(x, pulse/pulse.max(), '-k')
 
-ax1.xaxis.set_visible(False)
+for ax in ax1, ax2:
+    ax.xaxis.set_ticks([])
+
+ax1.yaxis.set_ticks([-1, 0, 1])
+ax2.yaxis.set_ticks([0, 1])
+
 ax2.set_xlabel("Cavity position (a.u.)")
 ax1.set_ylabel("E-field amplitude (a.u.)")
 ax2.set_ylabel("E-field amplitude (a.u.)")
