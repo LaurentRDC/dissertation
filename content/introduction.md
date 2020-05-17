@@ -20,7 +20,7 @@ The core working principle of mode-locked oscillators is to fix the phase relati
 
 @fig:mode-locking shows an example of the first 30 longitudinal modes of a cavity coming together to form a strong pulse. In reality, pulses may combine $10^6$ modes to maximize peak power.
 
-```{#fig:mode-locking .matplotlib caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse. **a)** The first six longitudinal modes of a laser cavity. **b** Combination of the first 30 modes of the cavity creates a very strong pulse in the center of the cavity."}
+```{#fig:mode-locking .matplotlib caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse. **a)** The first six longitudinal modes of a laser cavity. **b)** Combination of the first 30 modes of the cavity creates a very strong pulse in the center of the cavity."}
 from skued import spectrum_colors
 
 fig, (ax1, ax2) = plt.subplots(2,1, figsize=(FIGURE_WIDTH, 4), sharex=True)
