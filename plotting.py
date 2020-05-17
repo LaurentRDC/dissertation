@@ -6,15 +6,12 @@ FIGURE_WIDTH = 6 + 3 / 4
 
 FONTSIZE = 8
 
+# Initiate default parameters
+plt.rcParams["font.size"] = FONTSIZE
+
 
 def tag_axis(
-    ax,
-    text,
-    fontsize=FONTSIZE,
-    x=0.02,
-    y=0.95,
-    horizontalalignment="left",
-    verticalalignment="top",
+    ax, text, x=0.02, y=0.95, horizontalalignment="left", verticalalignment="top",
 ):
     """ Tag an axis with some text, e.g. "a)" """
     ax.text(
@@ -24,18 +21,6 @@ def tag_axis(
         color="k",
         bbox={"facecolor": "w", "alpha": 1, "boxstyle": "round"},
         horizontalalignment=horizontalalignment,
-        fontsize=fontsize,
         verticalalignment=verticalalignment,
         transform=ax.transAxes,
     )
-
-
-def normalize_axes_fontsize(ax, fontsize=FONTSIZE):
-    """ Set a uniform font size for axes components (e.g. tick labels, axis labels, titles, etc.) """
-    items = chain(
-        [ax.title, ax.xaxis.label, ax.yaxis.label],
-        ax.get_xticklabels(),
-        ax.get_yticklabels(),
-    )
-    for item in items:
-        item.set_fontsize(FONTSIZE)

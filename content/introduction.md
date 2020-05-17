@@ -29,12 +29,12 @@ x = np.linspace(-0.5, 1.5, 256)
 pulse = np.zeros_like(x)
 mode = lambda x, n: np.sin(np.pi*n*(x-1/2) + np.pi)
 
-colors = reversed(list(spectrum_colors(6)))
+colors = reversed(list(spectrum_colors(5)))
 for n, c in enumerate(colors, start=1):
     ax1.plot(x, mode(x,n), color=c)
     pulse += mode(x,n)
 
-for n in range(7, 30):
+for n in range(6, 30):
     pulse += mode(x,n)
 
 ax2.plot(x, pulse/pulse.max(), '-k')
@@ -51,9 +51,6 @@ ax2.set_ylabel("E-field amplitude (a.u.)")
 
 tag_axis(ax1, "a)")
 tag_axis(ax2, "b)")
-
-normalize_axes_fontsize(ax1)
-normalize_axes_fontsize(ax2)
 ```
 
 ### Regenerative laser amplifiers

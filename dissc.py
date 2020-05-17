@@ -19,7 +19,7 @@ import tempfile
 import time
 
 HERE = Path(__file__).parent
-BUILDDIR =  HERE / "build"
+BUILDDIR = HERE / "build"
 BUILDDIR.mkdir(exist_ok=True)
 
 CONTENTDIR = HERE / "content"
@@ -70,7 +70,7 @@ OPTIONS += ["--standalone"]
 OPTIONS += ["--filter pandoc-plot"]
 
 OPTIONS += ["--filter pandoc-crossref"]
-OPTIONS += ["-M figPrefix=\"Figure\""]
+OPTIONS += ['-M figPrefix="Figure"']
 
 OPTIONS += ["--filter=pandoc-citeproc"]
 OPTIONS += [f"-M bibliography={BIBFILE}"]
@@ -124,11 +124,11 @@ OPTIONS += ["-V toc-own-page=true"]
 ## Template variables
 EISVOGEL_TEMPLATE = "eisvogel.tex"
 EISVOGEL_REPO = "https://github.com/Wandmalfarbe/pandoc-latex-template"
-EISVOGEL_VERSION = "d5155adebf"
+EISVOGEL_VERSION = "5f740f8de0fb4c96dfb2772ef86e861fd3971654"
 
 CLEANTHESIS_TEMPLATE = "cleanthesis.sty"
 CLEANTHESIS_REPO = "https://github.com/derric/cleanthesis"
-CLEANTHESIS_VERSION = "c4609c4c70"
+CLEANTHESIS_VERSION = "d89b30e141d2c62ae26bc5e34fe3db515015f258"
 
 
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
@@ -195,6 +195,7 @@ def download_template_files():
             )
             run(f"git checkout --quiet {version}", cwd=downloaddir, shell=True)
             shutil.copy(Path(downloaddir) / template, TEMPLATEDIR / template)
+            print("Successfully downloaded", template)
 
 
 def build_auxiliary(aux_options=AUX_OPTS):
@@ -276,6 +277,7 @@ def clean():
     shutil.rmtree(BUILDDIR, ignore_errors=True)
     with suppress(FileNotFoundError):
         os.remove(TARGET)
+
 
 if __name__ == "__main__":
 
