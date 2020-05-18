@@ -75,6 +75,7 @@ OPTIONS += ['-M figPrefix="Figure"']
 OPTIONS += ["--filter=pandoc-citeproc"]
 OPTIONS += [f"-M bibliography={BIBFILE}"]
 OPTIONS += ["-M link-citations=true"]
+OPTIONS += ["-M csl=ieee.csl"]
 
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]

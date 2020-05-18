@@ -18,7 +18,7 @@ In the following two subsections, a brief description of the two components of t
 
 The core working principle of mode-locked oscillators is to fix the phase relationship between allowed amplitude modes within a laser cavity. This phase relationship enforces that constructive interference happen regularly, producing a train of ultrashort pulses. These systems typically use titanium-doped sapphire as the gain medium (Ti-sapphire), because the gain bandwidth of this medium accomodates the intrinsically large bandwidth of short laser pulses (\SI{>45}{\nano\meter}, or \SI{>3}{\tera\hertz}).
 
-@fig:mode-locking shows an example of the first 30 longitudinal modes of a cavity coming together to form a strong pulse. In reality, pulses may combine $10^6$ modes to maximize peak power.
+@fig:mode-locking shows an example of the first 30 longitudinal modes of a cavity coming together to form a strong pulse. In reality, pulses may combine $10^6$ modes to maximize peak power [@Siegman1986].
 
 ```{#fig:mode-locking .matplotlib caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse. **a)** The first six longitudinal modes of a laser cavity. **b)** Combination of the first 30 modes of the cavity creates a very strong pulse in the center of the cavity."}
 from skued import spectrum_colors
@@ -52,6 +52,8 @@ ax2.set_ylabel("E-field amplitude (a.u.)")
 tag_axis(ax1, "a)")
 tag_axis(ax2, "b)")
 ```
+
+
 
 ### Regenerative laser amplifiers
 
