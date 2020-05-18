@@ -72,10 +72,10 @@ OPTIONS += ["--filter pandoc-plot"]
 OPTIONS += ["--filter pandoc-crossref"]
 OPTIONS += ['-M figPrefix="Figure"']
 
-OPTIONS += ["--filter=pandoc-citeproc"]
-OPTIONS += [f"-M bibliography={BIBFILE}"]
-OPTIONS += ["-M link-citations=true"]
-OPTIONS += ["-M csl=ieee.csl"]
+# We purposefully bypass pandoc-citeproc because we want
+# to have references at the end of each chapter
+# This is much easier to do with natbib.
+OPTIONS += ["--natbib"]
 
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]
@@ -83,13 +83,6 @@ OPTIONS += [f"--metadata-file={META}"]
 OPTIONS += [f"--include-in-header=include.tex"]
 OPTIONS += [f"--include-in-header={TMP1}"]
 OPTIONS += [f"--include-before-body={TMP2}"]
-
-## download from https://www.zotero.org/styles
-## cf. https://pandoc.org/MANUAL.html#citations
-# OPTIONS                += ["--csl=chicago-author-date-de.csl
-# OPTIONS                += ["--csl=chicago-note-bibliography.csl
-# OPTIONS                += ["--csl=ieee.csl
-# OPTIONS                += ["--csl=oxford-university-press-note.csl
 
 # OPTIONS += ["--listings"]
 
@@ -181,6 +174,28 @@ def runpandoc(options, target, sourcefiles, references=None, appendices=None):
     )
 
 
+def runlatex(source, target):
+    """
+    Run a full build of latex (i.e. latex, bibtex, 2xlatex)
+    """
+    run(f"pdflatex -interaction=batchmode {source} -job-name={Path(target).stem}")
+    run(f"bibtex {Path(target).stem}")
+    run(f"pdflatex -interaction=batchmode {source} -job-name={Path(target).stem}")
+    run(f"pdflatex -interaction=batchmode {source} -job-name={Path(target).stem}")
+
+
+def build(options, target, sourcefiles, references=None, appendices=None):
+    runpandoc(
+        options=options,
+        target=HERE / "temp.tex",
+        sourcefiles=sourcefiles,
+        references=references,
+        appendices=appendices,
+    )
+
+    runlatex(source="temp.tex", target=target)
+
+
 def download_template_files():
     """ Download template files to download directory """
     for repo, version, template in zip(
@@ -219,7 +234,7 @@ def build_auxiliary(aux_options=AUX_OPTS):
 def build_simple():
     """ Build the dissertation in the simple book style """
     build_auxiliary()
-    runpandoc(
+    build(
         options=OPTIONS,
         target=TARGET,
         sourcefiles=SRC,
@@ -241,7 +256,7 @@ def build_cleanthesis():
     options += [f"--include-in-header=cleanthesis-include.tex"]
     options += aux_options
 
-    runpandoc(
+    build(
         options=options,
         target=TARGET,
         sourcefiles=SRC,
@@ -264,14 +279,13 @@ def build_eisvogel():
     options += ["-V listings-no-page-break=true"]
     options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
 
-    runpandoc(
+    build(
         options=options,
         target=TARGET,
         sourcefiles=SRC,
         references=REFERENCES,
         appendices=APPENDIX,
     )
-
 
 def clean():
     """ Clean generated files """

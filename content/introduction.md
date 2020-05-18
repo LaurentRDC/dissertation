@@ -64,6 +64,6 @@ tag_axis(ax2, "b)")
 
 ## Overview of the dissertation {#sec:overview}
 
-\addcontentsline{toc}{section}{References}
+## References {.unnumbered}
 \bibliographystyle{unsrtnatclean}
 \bibliography{references}
