@@ -178,10 +178,10 @@ def runlatex(source, target):
     """
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
     """
-    run(f"pdflatex -interaction=batchmode {source} -job-name={Path(target).stem}")
-    run(f"bibtex {Path(target).stem}")
-    run(f"pdflatex -interaction=batchmode {source} -job-name={Path(target).stem}")
-    run(f"pdflatex -interaction=batchmode {source} -job-name={Path(target).stem}")
+    run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
+    run(f"bibtex build/{Path(target).stem}")
+    run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
+    run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
 
 
 def build(options, target, sourcefiles, references=None, appendices=None):
@@ -194,6 +194,8 @@ def build(options, target, sourcefiles, references=None, appendices=None):
     )
 
     runlatex(source="temp.tex", target=target)
+
+    os.remove("temp.tex")
 
 
 def download_template_files():
