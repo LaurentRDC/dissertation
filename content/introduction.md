@@ -53,8 +53,6 @@ tag_axis(ax1, "a)")
 tag_axis(ax2, "b)")
 ```
 
-
-
 ### Regenerative laser amplifiers
 
 
@@ -65,3 +63,7 @@ tag_axis(ax2, "b)")
 ## Ultrafast electron scattering {#sec:scattering}
 
 ## Overview of the dissertation {#sec:overview}
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{unsrtnatclean}
+\bibliography{references}
