@@ -44,7 +44,7 @@ dependencies:
   - openssl=1.1.1g=he774522_0
   - pandoc=2.9.1.1=0
   - pandoc-crossref=0.3.6.1.2=0
-  - pandoc-plot=0.3.0.0=1
+  - pandoc-plot=0.4.0.1=0
   - pillow=7.1.2=py38h7011068_0
   - pip=20.1=pyh9f0ad1d_0
   - pycifrw=4.4.1=py38hfa6e2cd_0
