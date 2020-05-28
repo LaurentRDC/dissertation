@@ -1,3 +1,4 @@
+
 # Introduction {#sec:introduction}
 
 The fields of condensed matter physics and material science tackle a variety of intertwined questions, from fundamental physics to concrete applications.  Given that condensed matter systems are complex, many experimental dimensions are used to distinguish between phenomena. Electron microscopy comes to mind as an example of a technique which can selectively observe physical systems in real-space (via imaging) or in momentum (via diffraction).
@@ -76,5 +77,5 @@ The amplified pulse train is split between two branches: pump and probe. On the 
 ## Overview of the dissertation {#sec:overview}
 
 ## References {.unnumbered}
-\bibliographystyle{unsrtnatclean}
-\bibliography{references}
+
+\printbibliography[heading=none]

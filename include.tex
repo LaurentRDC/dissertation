@@ -1,7 +1,14 @@
 
 \usepackage{siunitx}
-\usepackage[numbers]{natbib}
-\usepackage{chapterbib}
+
+\usepackage[
+    citestyle=numeric,
+    bibstyle=numeric, 
+    refsection=chapter, 
+    sorting=none, 
+    %backref=true
+]{biblatex}
+\addbibresource{references.bib}
 
 % This is only to remove the title of bibliographies
 % See here:

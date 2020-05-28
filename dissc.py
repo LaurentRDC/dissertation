@@ -74,8 +74,8 @@ OPTIONS += ['-M figPrefix="Figure"']
 
 # We purposefully bypass pandoc-citeproc because we want
 # to have references at the end of each chapter
-# This is much easier to do with natbib.
-OPTIONS += ["--natbib"]
+# This is much easier to do with biblatex.
+OPTIONS += ["--biblatex"]
 
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]
@@ -179,7 +179,7 @@ def runlatex(source, target):
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
     """
     run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
-    run(f"bibtex build/{Path(target).stem}")
+    run(f"biber build/{Path(target).stem}")
     run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
     run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
 
