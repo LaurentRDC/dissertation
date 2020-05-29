@@ -1,16 +1,13 @@
 
 \usepackage{siunitx}
+\sisetup{detect-all}
 
 \usepackage[
     citestyle=numeric,
     bibstyle=numeric, 
     refsection=chapter, 
     sorting=none, 
+    autocite=superscript,
     %backref=true
 ]{biblatex}
 \addbibresource{references.bib}
-
-% This is only to remove the title of bibliographies
-% See here:
-%   https://tex.stackexchange.com/questions/22645/hiding-the-title-of-the-bibliography
-\renewcommand{\bibsection}{}
