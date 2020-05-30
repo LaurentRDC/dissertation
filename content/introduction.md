@@ -63,6 +63,44 @@ tag_axis(ax2, "b)")
 
 ## Ultrafast electron scattering {#sec:ues}
 
+The extension of electron microscopy into time-domain studies is not new. As early as 1982, Gerard Mourou and Steve Williamson [@Mourou1982] follow the picosecond-scale transformation of an aluminum film following photoexcitation. In this work, the authors prepare \SI{100}{\pico\second} electron bunches using a streak camera. They note that the temporal resolution of the experiment is ultimately limited by the length of the electron bunch:
+
+> *The electron pulse width has been measured by using the camera in the normal streak mode and is found to be ~ 100 ps. This value departs significantly from the 15-ps pulse width expected. The pulse broadening is due to the space-charge effect caused by the relatively high electron flux required to photograph the pattern with our present system.*
+
+The challenges of ultrafast electron scattering on the \SI{100}{\femto\second} time-scale were apparent in the first ultrafast electron scattering experiments. Measurements of atomic structure require high beam brightness (i.e. high signal-to-noise), but dense electron bunches experience space-charge repulsion (i.e. worsening time-resolution). The trade-off between signal-to-noise and time-resolution is represented as the expansion of the bunch length $l$:
+
+$$
+\frac{d^2l}{dt^2} = \frac{N e^2}{m_e \epsilon_0 \pi r^2} \left[ 1 - \frac{l}{\sqrt{l^2 + 4 r^2}}\right]
+$$ {#eq:bunch_expansion}
+
+where $N$ is the number of electrons in the bunch, $e$ the electron charge, $m_e$ the electron mass, $\epsilon_0$ the vacuum permittivity, and $r$ is the beam radius[@Siwick2002]. The expression in @eq:bunch_expansion naturally leads to an expression of the bunch length $l(t)$ as the pulse propagates:
+
+$$
+
+$$
+
+
+```{.python .matplotlib caption=""}
+import skued
+import scipy.constants as constants
+from scipy.constants import physical_constants
+
+def bunch_length(N, distance, spotsize=200e-6, energy=90):
+    """
+    Determine the bunch length of an electron bunch with `N` electrons
+    propagating for `distance` meters. Electrons have `energy` keV. The bunch
+    has a transverse radius of `spotsize`.
+    """
+    electron_velocity = skued.electron_velocity(energy) / 1e10 # m/s
+    propagation_time = distance / electron_velocity
+
+    l0 = 50e-15 * electron_velocity # initial bunch length
+
+    prefactor = (N * constants.e**2)/(2*constants.epsilon_0 * np.pi*spotsize**2)
+    return prefactor * (1/2) * (propagation_time**2) * (1-(1/np.sqrt()))
+
+```
+
 ### Temporal control of electron bunches {#sec:cavity}
 
 ## Experimental apparatus
@@ -75,7 +113,7 @@ The heart of the apparatus consists of the ultrafast laser system. A mode-locked
 
 On the pump line, the laser pulses propagate to a delay stage (Newport ILS250PP) supporting a retroreflector. This delay stage provides a resolution of \SI{2}{\micro\meter}, with total travel of \SI{25}{\centi\meter} (or \SI{50}{\centi\meter} of extra optical path length). These dimensions translate to a time-delay resolution of \SI{6}{\femto\second} and temporal range of \SI{1.6}{\nano\second}. The energy of the pump pulses is then attenuated by using a neutral-density filter, to the desired pump energies. A lens is also used to focus the pump pulses onto the sample. The attenuation and focus of the beam are adjusted to achieve the desired photoexcitation density (or *fluence*) on an area that is much larger than the sample, ensuring uniform illumination confitions. The attenuated and focused pump pulses are routed inside the vacuum chamber through a z-cut quartz (SiO$_2$) window, which is transparent over a large range of wavelengths. Inside the vacuum, two mirrors is positioned so that the pump pulses are transmitted through the sample and routed outside to a photodiode, for alignment purposes.
 
-On the probe line, two barium borate (BBO) crystals are used to generate the third harmonic of \SI{800}{\nano\meter}. A first conversion to \SI{400}{\nano\meter}, and then a second conversion to \SI{266}{\nano\meter}. A calcite crystal is placed between the two BBO crystals to compensate for the wavelength-dependent dispersion in the crystals. This non-linear light conversion is possible because the pulses are extremely energy-dense, resulting in a conversion efficiency of 1%. The ultraviolet (UV) photons are then routed into the electron gun assembly, where they are focused on a copper hemispherical cathode. The work function of copper (\SI{4.5}{\electronvolt}[@Anderson1949]) is slightly lower than the UV photon energy (\SI{4.65}{\electronvolt}), resulting in electrons being freed from the copper cathode with little extra energy. These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to 53% of the speed of light. After acceleration, a solenoid lens loosely focuses the electron bunches through the \SI{3}{\milli\meter} aperture of a radio-frequency (RF) compression cavity, ensuring that electron bunches do not lose much charge before compression. Electron bunches are compressed using the cavity described in @sec:cavity, amplifying the 40^th^ harmonic of the oscillator reprate (\SI{2.9985}{\giga\hertz}). The RF compression power is tuned so that the temporal focus happens at the sample. Electron bunches are transmitted through the sample at normal incidence. The scattering pattern is collected by an electron camera (Gatan Ultrascan 895), on a cooled charge-coupled detector. The transmitted, unscattered beam is collected by a Faraday cup. A Keithley 6514 electrometer measures the charge on the Faraday cup at a rate of \SI{1}{\kilo\hertz}, giving a rough estimation of the bunch-to-bunch charge.
+On the probe line, two barium borate (BBO) crystals are used to generate the third harmonic of \SI{800}{\nano\meter}. A first conversion to \SI{400}{\nano\meter}, and then a second conversion to \SI{266}{\nano\meter}. A calcite crystal is placed between the two BBO crystals to compensate for the wavelength-dependent dispersion in the crystals. This non-linear light conversion is possible because the pulses are extremely energy-dense, resulting in a conversion efficiency of 1%. The ultraviolet (UV) photons are then routed into the electron gun assembly, where they are focused on a copper hemispherical cathode. The work function of copper (\SI{4.5}{\electronvolt}[@Anderson1949]) is slightly lower than the UV photon energy (\SI{4.65}{\electronvolt}), resulting in electrons being freed from the copper cathode with little extra energy. These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to 53% of the speed of light. After acceleration, a solenoid lens loosely focuses the electron bunches through the \SI{3}{\milli\meter} aperture of a radio-frequency (RF) compression cavity, ensuring that electron bunches do not lose much charge before compression. Electron bunches are compressed using the cavity described in @sec:cavity, amplifying the 40^th^ harmonic of the oscillator reprate (\SI{2.9985}{\giga\hertz}). The RF compression power is tuned so that the temporal focus happens at the sample. After the RF compression cavity, another solenoid lens focuses the transverse profile of the electron bunches onto the detector, so that the diffraction pattern is imaged clearly. Electron bunches are transmitted through the sample at normal incidence. The scattering pattern is collected by an electron camera (Gatan Ultrascan 895), on a cooled charge-coupled detector. The transmitted, unscattered beam is collected by a Faraday cup. A Keithley 6514 electrometer measures the charge on the Faraday cup at a rate of \SI{1}{\kilo\hertz}, giving a rough estimation of the bunch-to-bunch charge.
 
 ## Overview of the dissertation {#sec:overview}
 
