@@ -68,6 +68,7 @@ OPTIONS += ["--standalone"]
 
 # The order of filters is important!
 OPTIONS += ["--filter pandoc-plot"]
+OPTIONS += ["-M plot-configuration=plot-config.yml"]
 
 OPTIONS += ["--filter pandoc-crossref"]
 OPTIONS += ['-M figPrefix="Figure"']
