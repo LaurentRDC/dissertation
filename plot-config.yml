@@ -7,6 +7,7 @@ caption_format: markdown+raw_tex
 
 logging:
   verbosity: info
+  filepath: build/plot-log.txt
 
 matplotlib:
   preamble: plotting.py
