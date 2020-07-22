@@ -52,7 +52,6 @@ TARGET = HERE / "dissertation.pdf"
 ## (Do not change!)
 TITLEPAGE = "titlepage.tex"
 FRONTMATTER = "frontmatter.tex"
-REFERENCES = "references.md"
 
 TMP1 = BUILDDIR / "__titlepage.filled.tex"
 TMP2 = BUILDDIR / "__frontmatter.filled.tex"
@@ -146,7 +145,7 @@ parser_build.add_argument(
 )
 
 
-def runpandoc(options, target, sourcefiles, references=None, appendices=None):
+def runpandoc(options, target, sourcefiles, appendices=None):
     """
     Run pandoc with options and source files
 
@@ -164,8 +163,6 @@ def runpandoc(options, target, sourcefiles, references=None, appendices=None):
         Appendices
     """
     stringify = lambda xs: " ".join([str(x) for x in xs])
-    if references is not None:
-        sourcefiles += [references]
     if appendices is not None:
         sourcefiles += [appendices]
     return run(
@@ -185,12 +182,11 @@ def runlatex(source, target):
     run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
 
 
-def build(options, target, sourcefiles, references=None, appendices=None):
+def build(options, target, sourcefiles, appendices=None):
     runpandoc(
         options=options,
         target=HERE / "temp.tex",
         sourcefiles=sourcefiles,
-        references=references,
         appendices=appendices,
     )
 
@@ -241,7 +237,6 @@ def build_simple():
         options=OPTIONS,
         target=TARGET,
         sourcefiles=SRC,
-        references=REFERENCES,
         appendices=APPENDIX,
     )
 
@@ -263,7 +258,6 @@ def build_cleanthesis():
         options=options,
         target=TARGET,
         sourcefiles=SRC,
-        references=REFERENCES,
         appendices=APPENDIX,
     )
 
@@ -286,7 +280,6 @@ def build_eisvogel():
         options=options,
         target=TARGET,
         sourcefiles=SRC,
-        references=REFERENCES,
         appendices=APPENDIX,
     )
 
