@@ -1,7 +1,7 @@
 
 directory: build/plots/
 source: false
-dpi: 200
+dpi: 300
 format: PNG
 caption_format: markdown+raw_tex
 
