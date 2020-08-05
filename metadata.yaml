@@ -13,6 +13,10 @@ keywords: [Markdown, Example]
 ### activate (i.e. uncomment the next line) "headeralternative" to use chapter/section in header instead of title
 headeralternative: true
 
+# http://lierdakil.github.io/pandoc-crossref/
+# Number all equations, even those without an explicit label.
+autoEqnLabels: true
+
 studentnumber: "260446509"
 date: "April 15, 2021"
 
