@@ -30,17 +30,19 @@ $$
 \left[ \nabla^2 + k_a^2\right] u_a(\vec{x}) = 0
 $${#eq:helmholtz}
 where $k_a^2 \equiv 2 m_e E_a/\hbar^2$. We may use physical reasoning and the classical result of the Helmholtz equation to name $k_a$ the **wavevector**, related to momentum as $k_a^2 \equiv \vec{k}_a \cdot \vec{k}_a \equiv \vec{p}_a^2/\hbar^2$. [Eq. @eq:helmholtz] can be solved using separation of variables, where the solution along linearly-independent directions are considered independently:
-$$
+\begin{equation}
 u_a(\vec{x})\equiv u_{a,x}(\vec{x} \cdot \hat{\vec{x}}) u_{a,y}(\vec{x} \cdot \hat{\vec{y}}) u_{a,z}(\vec{x} \cdot \hat{\vec{z}}).
-$$
+\end{equation}
 [Eq. @eq:helmholtz] then becomes:
 $$
 \sum_{i\in\{x,y,z\}}\frac{1}{u_{a,i}(\vec{x} \cdot \hat{\vec{i}})} \frac{d^2 u_{a,i}}{di^2}(\vec{x} \cdot \hat{\vec{i}}) + |\vec{k} \cdot \hat{\vec{i}}|} = 0
 $$
 and the solution can be synthetized as a product of one-dimensional plane wave:
-$$
-u_a(\vec{x}) = \prod_{j \in \{x,y,z\}} A_j e^{i (\vec{k}_a \cdot \hat{\vec{j}}) (\vec{x} \cdot \hat{\vec{j}})} = A e^{i \vec{k}_a \cdot \vec{x}}
-$${#eq:plane-wave}
+\begin{align}
+u_a(\vec{x}) &= \prod_{j \in \{x,y,z\}} A_j e^{i (\vec{k}_a \cdot \hat{\vec{j}}) (\vec{x} \cdot \hat{\vec{j}})} \nonumber\\
+             &= A e^{i \vec{k}_a \cdot \vec{x}}
+\label{eq:plane-wave}
+\end{align}
 for some scalars $\{A_x, A_y, A_z, A\}$. Combining [@eq:free-space] [@eq:plane-wave] leads to the energy eigenstate of a free electron propagating in vacuum:
 $$
 \Psi_a(\vec{x}, t) = A e^{i (\vec{k}_a \cdot \vec{x} - \omega_a t)}

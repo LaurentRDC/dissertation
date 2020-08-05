@@ -61,8 +61,19 @@ As you can read in the @sec:intro, ...
 ```markdown
 $$ e = m c ^2 $$ {#eq:label}
 
-Equation @eq:label ...
+Equation [@eq:label] ...
 ```
+
+For more complex equation forms (e.g. aligned equations), `\label`s can be used. For example:
+
+````markdown
+\begin{align}
+...
+\label{eq:myequation}
+\end{align}
+
+You can refer to the equation like so[@eq:myequation]
+````
 
 ### Appendices
 
