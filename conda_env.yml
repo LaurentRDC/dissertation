@@ -52,7 +52,7 @@ dependencies:
   - pycparser=2.20=pyh9f0ad1d_2
   - pyopenssl=19.1.0=py_1
   - pyparsing=2.4.7=pyh9f0ad1d_0
-  - pyqt=5.12.3=py38h7ae7562_3
+  - pyqt=5.12.3
   - pyqtgraph=0.11.0=pyh9f0ad1d_0
   - pyreadline=2.1=py38_1001
   - pysocks=1.7.1=py38h32f6830_1
@@ -67,7 +67,7 @@ dependencies:
   - requests=2.24.0=pyh9f0ad1d_0
   - scikit-image=0.16.2=py38he350917_0
   - scikit-ued=2.0.5=py_2
-  - scipy=1.3.2=py38h582fac2_0
+  - scipy=1.3.2
   - setuptools=49.6.0=py38h32f6830_0
   - six=1.15.0=pyh9f0ad1d_0
   - spglib=1.16.0=py38h1e00858_0
