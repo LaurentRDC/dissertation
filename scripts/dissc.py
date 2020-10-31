@@ -18,7 +18,7 @@ import shutil
 import tempfile
 import time
 
-HERE = Path(__file__).parent
+HERE = Path(os.getcwd())
 BUILDDIR = HERE / "build"
 BUILDDIR.mkdir(exist_ok=True)
 
@@ -185,14 +185,14 @@ def runlatex(source, target):
 def build(options, target, sourcefiles, appendices=None):
     runpandoc(
         options=options,
-        target=HERE / "temp.tex",
+        target=BUILDDIR / "temp.tex",
         sourcefiles=sourcefiles,
         appendices=appendices,
     )
 
-    runlatex(source="temp.tex", target=target)
+    runlatex(source=BUILDDIR / "temp.tex", target=target)
 
-    os.remove("temp.tex")
+    os.remove(BUILDDIR / "temp.tex")
 
 
 def download_template_files():
