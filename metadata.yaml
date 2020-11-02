@@ -35,4 +35,8 @@ acknowledgements: |
 ## mandatory
 declaration: |
   Declaration of originality
+
+# For Eisvogel template specifically
+# https://github.com/Wandmalfarbe/pandoc-latex-template#typesetting-a-book
+book: true
 ---
