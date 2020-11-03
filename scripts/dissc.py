@@ -17,6 +17,7 @@ from contextlib import suppress
 import shutil
 import tempfile
 import time
+import runpy
 
 HERE = Path(os.getcwd())
 BUILDDIR = HERE / "build"
@@ -176,10 +177,16 @@ def runlatex(source, target):
     """
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
     """
-    run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
+    run(
+        f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
+    )
     run(f"biber build/{Path(target).stem}")
-    run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
-    run(f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}")
+    run(
+        f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
+    )
+    run(
+        f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
+    )
 
 
 def build(options, target, sourcefiles, appendices=None):
@@ -211,7 +218,7 @@ def download_template_files():
             run(f"git checkout --quiet {version}", cwd=downloaddir, shell=True)
             shutil.copy(Path(downloaddir) / template, TEMPLATEDIR / template)
             print("Successfully downloaded", template)
-
+    
 
 def build_auxiliary(aux_options=AUX_OPTS):
     """ 
@@ -234,10 +241,7 @@ def build_simple():
     """ Build the dissertation in the simple book style """
     build_auxiliary()
     build(
-        options=OPTIONS,
-        target=TARGET,
-        sourcefiles=SRC,
-        appendices=APPENDIX,
+        options=OPTIONS, target=TARGET, sourcefiles=SRC, appendices=APPENDIX,
     )
 
 
@@ -255,10 +259,7 @@ def build_cleanthesis():
     options += aux_options
 
     build(
-        options=options,
-        target=TARGET,
-        sourcefiles=SRC,
-        appendices=APPENDIX,
+        options=options, target=TARGET, sourcefiles=SRC, appendices=APPENDIX,
     )
 
 
@@ -267,6 +268,10 @@ def build_eisvogel():
     if not (TEMPLATEDIR / EISVOGEL_TEMPLATE).exists():
         download_template_files()
 
+    # We use run-py as a kind of script-runner
+    # because it's
+    runpy.run_path(HERE / "scripts" / "mktitlepage.py")
+
     aux_options = AUX_OPTS
     aux_options += ["-M eisvogel=true"]
     build_auxiliary(aux_options=aux_options)
@@ -274,14 +279,17 @@ def build_eisvogel():
     options = OPTIONS
     options += ["-V float-placement-figure=htbp"]
     options += ["-V listings-no-page-break=true"]
+    options += ["-V titlepage-background=build/titlepage.pdf"]
+    options += ["-V book=true"]
+    options += ["-V titlepage=true"]
+    options += ["-V titlepage-text-color=FFFFFF"]
+    options += ["-V titlepage-rule-height=0"]
     options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
 
     build(
-        options=options,
-        target=TARGET,
-        sourcefiles=SRC,
-        appendices=APPENDIX,
+        options=options, target=TARGET, sourcefiles=SRC, appendices=APPENDIX,
     )
+
 
 def clean():
     """ Clean generated files """
