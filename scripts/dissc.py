@@ -37,8 +37,8 @@ SRC = [
     CONTENTDIR / "introduction.md",
     CONTENTDIR / "scattering.md",
     CONTENTDIR / "graphite.md",
-    CONTENTDIR / "snse.md",
     CONTENTDIR / "tase2.md",
+    CONTENTDIR / "snse.md",
     CONTENTDIR / "conclusion.md",
 ]
 
@@ -108,12 +108,6 @@ OPTIONS += ["--number-sections"]
 OPTIONS += ["--top-level-division=chapter"]
 
 OPTIONS += ["-V colorlinks=true"]
-
-## Eisvogel (do not change!)
-## https://github.com/Wandmalfarbe/pandoc-latex-template
-OPTIONS += ["-V book=true"]
-OPTIONS += ["-V titlepage=true"]
-OPTIONS += ["-V toc-own-page=true"]
 
 
 ## Template variables
@@ -269,7 +263,8 @@ def build_eisvogel():
         download_template_files()
 
     # We use run-py as a kind of script-runner
-    # because it's
+    # because it's too hard to import other python scripts
+    # into this one
     runpy.run_path(HERE / "scripts" / "mktitlepage.py")
 
     aux_options = AUX_OPTS
@@ -281,6 +276,7 @@ def build_eisvogel():
     options += ["-V listings-no-page-break=true"]
     options += ["-V titlepage-background=build/titlepage.pdf"]
     options += ["-V book=true"]
+    options += ["-V toc-own-page=true"]
     options += ["-V titlepage=true"]
     options += ["-V titlepage-text-color=FFFFFF"]
     options += ["-V titlepage-rule-height=0"]
