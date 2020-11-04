@@ -27,6 +27,7 @@ mm_to_in = 0.03937008
 # CMAP "cool" also looks, uh, cool
 cmap = plt.get_cmap("inferno")
 
+
 def draw_hexagon(ax, center, color):
     # because the dimensions of the axes have been set in mm,
     # the dimensions of thie hexagon are given in mm as well.
@@ -43,6 +44,7 @@ def draw_hexagon(ax, center, color):
             fill=True,
         )
     )
+
 
 figure, ax = plt.subplots(
     1, 1, figsize=(PAGEWIDTH * mm_to_in, PAGEHEIGHT * mm_to_in), frameon=False

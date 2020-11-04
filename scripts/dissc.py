@@ -212,7 +212,7 @@ def download_template_files():
             run(f"git checkout --quiet {version}", cwd=downloaddir, shell=True)
             shutil.copy(Path(downloaddir) / template, TEMPLATEDIR / template)
             print("Successfully downloaded", template)
-    
+
 
 def build_auxiliary(aux_options=AUX_OPTS):
     """ 
