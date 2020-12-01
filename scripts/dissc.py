@@ -7,12 +7,14 @@ This script is meant to be used as a command-line program:
 python -m dissc --help
 ```
 """
+import contextlib
 import argparse
 from pathlib import Path
-from subprocess import run
+from subprocess import run, CalledProcessError
 import os
 import sys
 from itertools import chain
+import warnings
 from contextlib import suppress
 import shutil
 import tempfile
@@ -119,7 +121,6 @@ CLEANTHESIS_TEMPLATE = "cleanthesis.sty"
 CLEANTHESIS_REPO = "https://github.com/derric/cleanthesis"
 CLEANTHESIS_VERSION = "d89b30e141d2c62ae26bc5e34fe3db515015f258"
 
-
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
 
 subparsers = parser.add_subparsers(help="sub-command help", dest="command")
@@ -167,6 +168,25 @@ def runpandoc(options, target, sourcefiles, appendices=None):
     )
 
 
+def render_diagram(source, target):
+    """
+    Render SVG diagram to PDF
+    """
+    try:
+        run(
+            f"inkscape --export-area-page --export-filename {target} {source}",
+            shell=True,
+            capture_output=True,
+            cwd=HERE,
+        ).check_returncode()
+    except CalledProcessError:
+        warnings.warn(
+            "Rendering of diagrams with inkscape failed. It might not be installed.",
+            category=RuntimeWarning,
+            stacklevel=0,
+        )
+
+
 def runlatex(source, target):
     """
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
@@ -184,6 +204,7 @@ def runlatex(source, target):
 
 
 def build(options, target, sourcefiles, appendices=None):
+
     runpandoc(
         options=options,
         target=BUILDDIR / "temp.tex",
@@ -215,14 +236,17 @@ def download_template_files():
 
 
 def build_auxiliary(aux_options=AUX_OPTS):
-    """ 
+    """
     Build auxiliary files required by other builds.
-    
+
     Parameters
     ----------
     aux_options : List[str]
         List of options, e.g. ["--test true", "--foo=bar"]
     """
+    for diagram in (HERE / "diagrams").iterdir():
+        render_diagram(source=diagram, target=diagram.with_suffix(".pdf"))
+
     for template, result in zip([TITLEPAGE, FRONTMATTER], [TMP1, TMP2]):
         runpandoc(
             options=aux_options + [f"--template={template}", f"--metadata-file={META}"],
@@ -235,7 +259,10 @@ def build_simple():
     """ Build the dissertation in the simple book style """
     build_auxiliary()
     build(
-        options=OPTIONS, target=TARGET, sourcefiles=SRC, appendices=APPENDIX,
+        options=OPTIONS,
+        target=TARGET,
+        sourcefiles=SRC,
+        appendices=APPENDIX,
     )
 
 
@@ -253,7 +280,10 @@ def build_cleanthesis():
     options += aux_options
 
     build(
-        options=options, target=TARGET, sourcefiles=SRC, appendices=APPENDIX,
+        options=options,
+        target=TARGET,
+        sourcefiles=SRC,
+        appendices=APPENDIX,
     )
 
 
@@ -283,7 +313,10 @@ def build_eisvogel():
     options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
 
     build(
-        options=options, target=TARGET, sourcefiles=SRC, appendices=APPENDIX,
+        options=options,
+        target=TARGET,
+        sourcefiles=SRC,
+        appendices=APPENDIX,
     )
 
 
