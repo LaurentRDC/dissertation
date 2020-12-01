@@ -11,7 +11,12 @@ plt.rcParams["font.size"] = FONTSIZE
 
 
 def tag_axis(
-    ax, text, x=0.02, y=0.95, horizontalalignment="left", verticalalignment="top",
+    ax,
+    text,
+    x=0.02,
+    y=0.95,
+    horizontalalignment="left",
+    verticalalignment="top",
 ):
     """ Tag an axis with some text, e.g. "a)" """
     ax.text(
