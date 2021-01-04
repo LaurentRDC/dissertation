@@ -10,8 +10,10 @@ python -m dissc --help
 import contextlib
 import argparse
 from pathlib import Path
-from subprocess import run, CalledProcessError
+import subprocess
 import os
+from functools import wraps
+import multiprocessing as mp
 import sys
 from itertools import chain
 import warnings
@@ -20,6 +22,9 @@ import shutil
 import tempfile
 import time
 import runpy
+import logging
+
+logging.basicConfig(encoding='utf-8', level=logging.INFO)
 
 HERE = Path(os.getcwd())
 BUILDDIR = HERE / "build"
@@ -30,6 +35,7 @@ PLOTSDIR = BUILDDIR / "plots"
 TEMPLATEDIR = HERE / "templates"
 
 PANDOC = "pandoc"
+LATEX_ENGINE = "pdflatex"
 
 META = HERE / "metadata.yaml"
 
@@ -65,7 +71,6 @@ AUX_OPTS = ["--wrap=preserve"]
 OPTIONS = [
     "-f markdown+raw_tex"
 ]  # Some raw tex for \listoffigures macro and siunitx package
-OPTIONS += ["--pdf-engine=pdflatex"]
 OPTIONS += ["--standalone"]
 
 # The order of filters is important!
@@ -74,6 +79,7 @@ OPTIONS += ["-M plot-configuration=plot-config.yml"]
 
 OPTIONS += ["--filter pandoc-crossref"]
 OPTIONS += ['-M figPrefix="Figure"']
+OPTIONS += ['-M secPrefix="Section"']
 
 # We purposefully bypass pandoc-citeproc because we want
 # to have references at the end of each chapter
@@ -140,6 +146,12 @@ parser_build.add_argument(
     default="cleanthesis",
 )
 
+@wraps(subprocess.run)
+def run(*args, **kwargs):
+    cmd = args[0]
+    logging.info("Running " + cmd)
+    return subprocess.run(*args, **kwargs)
+
 
 def runpandoc(options, target, sourcefiles, appendices=None):
     """
@@ -162,16 +174,14 @@ def runpandoc(options, target, sourcefiles, appendices=None):
     if appendices is not None:
         sourcefiles += [appendices]
     return run(
-        f"pandoc {stringify(options)} -o {target} {stringify(sourcefiles)}",
+        f"pandoc +RTS -N -RTS {stringify(options)} -o {target} {stringify(sourcefiles)}",
         shell=True,
         cwd=HERE,
     )
 
 
 def render_diagram(source, target):
-    """
-    Render SVG diagram to PDF
-    """
+    """ Render SVG diagram `source` to `target` """
     try:
         run(
             f"inkscape --export-area-page --export-filename {target} {source}",
@@ -179,7 +189,7 @@ def render_diagram(source, target):
             capture_output=True,
             cwd=HERE,
         ).check_returncode()
-    except CalledProcessError:
+    except subprocess.CalledProcessError:
         warnings.warn(
             "Rendering of diagrams with inkscape failed. It might not be installed.",
             category=RuntimeWarning,
@@ -192,14 +202,14 @@ def runlatex(source, target):
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
     """
     run(
-        f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
+        f"{LATEX_ENGINE} -interaction=batchmode -draftmode {source} -aux-directory=build -job-name={Path(target).stem}"
     )
     run(f"biber build/{Path(target).stem}")
     run(
-        f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
+        f"{LATEX_ENGINE} -interaction=batchmode -draftmode {source} -aux-directory=build -job-name={Path(target).stem}"
     )
     run(
-        f"pdflatex -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
+        f"{LATEX_ENGINE} -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
     )
 
 
@@ -244,8 +254,10 @@ def build_auxiliary(aux_options=AUX_OPTS):
     aux_options : List[str]
         List of options, e.g. ["--test true", "--foo=bar"]
     """
-    for diagram in (HERE / "diagrams").iterdir():
-        render_diagram(source=diagram, target=diagram.with_suffix(".pdf"))
+    diagrams = list((HERE / "diagrams").glob("*.svg"))
+    targets = [diagram.with_suffix(".pdf") for diagram in diagrams]
+    with mp.Pool(len(diagrams)) as pool:
+        pool.starmap(render_diagram, zip(diagrams, targets))
 
     for template, result in zip([TITLEPAGE, FRONTMATTER], [TMP1, TMP2]):
         runpandoc(
