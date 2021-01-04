@@ -7,11 +7,11 @@ caption_format: markdown+raw_tex
 
 logging:
   verbosity: info
-  filepath: build/plot-log.txt
+  # filepath: build/plot-log.txt
 
 matplotlib:
   preamble: plotting.py
-  tight_bbox: false
-  transparent: false
+  tight_bbox: true
+  transparent: true
   executable: python
 
