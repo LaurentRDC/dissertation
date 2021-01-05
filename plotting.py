@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
 import matplotlib.patches as mpatches
 
+from pathlib import Path
 import numpy as np
 from itertools import chain
 from functools import partial
@@ -24,8 +25,6 @@ ImageGrid = partial(
 
 FIGURE_WIDTH = 6 + 3 / 4  # inches
 
-FONTSIZE = 10
-
 # Diffraction patterns are rotated by 8 degrees clockwise from aligned
 GRAPHITE_ANGLE = 8  # degrees
 GRAPHITE_CAMERA_LENGTH = 0.25  # centi-meters
@@ -36,8 +35,26 @@ GRAPHITE_CENTER = np.array(0.5 * (_peak1 + _peak2), dtype=np.int)
 # -----------------------------------------------------------------------------
 
 # Initiate default parameters
-plt.rcParams["font.size"] = FONTSIZE
+#plt.rcParams["figure.figsize"] = (FIGURE_WIDTH, FIGURE_WIDTH)
+plt.rcParams["font.size"] = 10
+plt.rcParams["savefig.pad_inches"] = 0.0
+plt.rcParams["figure.subplot.left"] = 0.05
+plt.rcParams["figure.subplot.right"] = 0.95
+plt.rcParams["figure.subplot.bottom"] = 0.05
+plt.rcParams["figure.subplot.top"] = 0.88
 
+def set_height_auto(fig, width=FIGURE_WIDTH):
+    """
+    Modify the figure height to minimize whitespace, given a width.
+    """
+    axes = fig.axes
+    def get_area(ax):
+        bbox = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+        return bbox.width * bbox.height
+    largest_ax = sorted(fig.axes, key=get_area)[0]
+    bbox = largest_ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    factor = FIGURE_WIDTH / bbox.width
+    fig.set_size_inches(w=FIGURE_WIDTH, h=factor * bbox.height)
 
 def tag_axis(
     ax,
@@ -74,6 +91,8 @@ def draw_hexagon_field(
 
 def draw_hexagon(ax, center, radius, orientation=np.deg2rad(30), color="w", **kwargs):
     """ Draw a hexagon within an Axes object"""
+    if "linewidth" not in kwargs:
+        kwargs["linewidth"] = 1
     hexagon = mpatches.RegularPolygon(
         xy=center,
         numVertices=6,

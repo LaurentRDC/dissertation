@@ -1,7 +1,8 @@
 
 directory: build/plots/
 source: false
-dpi: 300
+# TODO: publication-quality is 600dpi
+dpi: 150
 format: PNG
 caption_format: markdown+raw_tex
 
@@ -11,7 +12,7 @@ logging:
 
 matplotlib:
   preamble: plotting.py
-  tight_bbox: true
+  tight_bbox: false
   transparent: true
   executable: python
 

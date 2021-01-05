@@ -1,6 +1,10 @@
 
 # Momentum-resolved excitation couplings in graphite {#sec:graphite}
 
+Ultrafast electron diffuse scattering is an experimental technique pioneered over the past few years [@Chase2016; @Harb2016; @Waldecker2017]. The author also participated in the early development of the technique with work by M. Stern, L. P. René de Cotret *et al* [@Stern2018]. This early work on graphite was an experimental tour-de-force, but the observations remained qualitative rather than quantitative.
+
+This chapter will detail how to extract the quantitative information encoded in UEDS experiments.
+
 TODO: important differentiator for UEDS vs X-ray is the amount of redundancy. The redundancy leads to the ability to invert the energy-integrated nature of UEDS.
 
 ## The first hundred femtoseconds viewed by trARPES
@@ -104,8 +108,8 @@ for ax, im, label in zip(grid, [b4t0, b4t0_symmetrized], ["a)", "b)"]):
             range(-4,4), range(-4,4), [0]
         ),
         color="w",
-        linestyle="-",
-        linewidth=0.3
+        linewidth=0.5,
+        linestyle=":",
     )
     tag_axis(ax, text=label)
 
@@ -159,8 +163,9 @@ grid = ImageGrid(fig, 111, nrows_ncols=(2,2), cbar_location="top")
 with DiffractionDataset(Path("data") / "graphite" / "TDS_delta.hdf5") as dset:
     for time, ax, letter in zip([0.5, 1.5, 5, 100], grid, "abcd"):
 
-        image = dset.diff_data(time)[xs, ys]
-        image[:] = rotate(image, angle=GRAPHITE_ANGLE, mode="reflect")
+        image = dset.diff_data(time)
+        image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect")
+        image = image[xs, ys]
         image[qq < 1.5] = 0
         m = ax.imshow(
             image,
@@ -178,8 +183,7 @@ with DiffractionDataset(Path("data") / "graphite" / "TDS_delta.hdf5") as dset:
                 [-4, -3, -2, -1, 0], [-4, -3, -2, -1, 0, 1, 2, 3], [0]
             ),
             color="k",
-            linestyle="-",
-            linewidth=0.3
+            linestyle=":",
         )
 
         ax.xaxis.set_visible(False)
@@ -195,6 +199,184 @@ cbar = ax.cax.colorbar(
 )
 cbar.ax.xaxis.set_label_position("top")
 cbar.ax.set_xlabel("Scattering intensity change [a.u.]")
+```
+
+## The one-phonon structure factor
+
+```{.python .matplotlib caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, t=0)|^2$ of in-plane transverse modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds."}
+from pathlib import Path
+from matplotlib.ticker import FixedFormatter, FixedLocator
+from crystals import Crystal
+
+INPUT = Path("data") / "graphite"
+
+# Mode ordering of graphite according to the file
+# Gra-C_XDM_mode_grid_new2.json
+MODE_ORDERING = {
+    "LA": 0,
+    "TA": 1,
+    "ZA": 2,
+    "LO1": 3,
+    "LO2": 4,
+    "LO3": 5,
+    "TO1": 6,
+    "TO2": 7,
+    "TO3": 8,
+    "ZO1": 9,
+    "ZO2": 10,
+    "ZO3": 11,
+}
+MODES = sorted(MODE_ORDERING.keys())
+IN_PLANE_MODES = sorted(set(MODE_ORDERING.keys()) - {"ZA", "ZO1", "ZO2", "ZO3"})
+
+in_plane_refls = filter(
+    lambda tup: tup[2] == 0, Crystal.from_database("C").bounded_reflections(12)
+)
+
+reflections = tuple(in_plane_refls)
+
+fig = plt.figure(figsize=(FIGURE_WIDTH, 1.1 * FIGURE_WIDTH))
+grid = ImageGrid(
+    fig,
+    111,
+    nrows_ncols=(2, 2),
+    cbar_location="top",
+)
+
+qx = np.load(INPUT / "oneph" / "qx.npy")
+qy = np.load(INPUT / "oneph" / "qy.npy")
+bragg_peaks = np.load(INPUT / "oneph" / "bragg_peaks.npy")
+cryst = Crystal.from_pwscf(INPUT / "output.out")
+
+# Only Longitudinal modes here
+modes = filter(lambda s: s.startswith("L"), IN_PLANE_MODES)
+for mode, ax in zip(modes, grid):
+    image = np.load(INPUT / "oneph" / f"{mode}.npy")
+
+    # Image is scaled so maximum is always 1
+    m = ax.imshow(
+        image / image.max(),
+        extent=[qx.min(), qx.max(), qy.min(), qy.max()],
+        cmap="inferno",
+        vmin=0,
+        vmax=1,
+    )
+    ax.scatter(x=bragg_peaks[:, 0], y=bragg_peaks[:, 1], s=1, c="w")
+
+    # Bragg peaks might extend beyond the rest of the image
+    ax.set_xlim([qx.min(), qx.max()])
+    ax.set_ylim([qy.min(), qy.max()])
+    ax.xaxis.set_visible(False)
+    ax.yaxis.set_visible(False)
+
+    tag_axis(ax, text=f"{mode}")
+
+    draw_hexagon_field(
+        ax=ax,
+        radius=1.7,
+        crystal=cryst,
+        color=(0.7, 0.7, 0.7, 1),  # light gray
+        linestyle=":",
+        reflections=reflections,
+    )
+
+cbar = ax.cax.colorbar(
+    m,
+    ticks=FixedLocator([0, m.get_array().max()]),
+    format=FixedFormatter(["0", "1"]),
+)
+cbar.ax.xaxis.set_label_position("top")
+cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, t_0)|^2$ [a.u.]")
+
+set_height_auto(fig)
+```
+
+```{.python .matplotlib caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, t=0)|^2$ of in-plane transverse modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds."}
+from pathlib import Path
+from matplotlib.ticker import FixedFormatter, FixedLocator
+from crystals import Crystal
+
+INPUT = Path("data") / "graphite"
+
+# Mode ordering of graphite according to the file
+# Gra-C_XDM_mode_grid_new2.json
+MODE_ORDERING = {
+    "LA": 0,
+    "TA": 1,
+    "ZA": 2,
+    "LO1": 3,
+    "LO2": 4,
+    "LO3": 5,
+    "TO1": 6,
+    "TO2": 7,
+    "TO3": 8,
+    "ZO1": 9,
+    "ZO2": 10,
+    "ZO3": 11,
+}
+MODES = sorted(MODE_ORDERING.keys())
+IN_PLANE_MODES = sorted(set(MODE_ORDERING.keys()) - {"ZA", "ZO1", "ZO2", "ZO3"})
+
+in_plane_refls = filter(
+    lambda tup: tup[2] == 0, Crystal.from_database("C").bounded_reflections(12)
+)
+
+reflections = tuple(in_plane_refls)
+
+fig = plt.figure(figsize=(FIGURE_WIDTH, 1.1 * FIGURE_WIDTH))
+grid = ImageGrid(
+    fig,
+    111,
+    nrows_ncols=(2, 2),
+    cbar_location="top",
+)
+
+qx = np.load(INPUT / "oneph" / "qx.npy")
+qy = np.load(INPUT / "oneph" / "qy.npy")
+bragg_peaks = np.load(INPUT / "oneph" / "bragg_peaks.npy")
+cryst = Crystal.from_pwscf(INPUT / "output.out")
+
+# Only transverse modes here
+modes = filter(lambda s: s.startswith("T"), IN_PLANE_MODES)
+for mode, ax in zip(modes, grid):
+    image = np.load(INPUT / "oneph" / f"{mode}.npy")
+
+    # Image is scaled so maximum is always 1
+    m = ax.imshow(
+        image / image.max(),
+        extent=[qx.min(), qx.max(), qy.min(), qy.max()],
+        cmap="inferno",
+        vmin=0,
+        vmax=1,
+    )
+    ax.scatter(x=bragg_peaks[:, 0], y=bragg_peaks[:, 1], s=1, c="w")
+
+    # Bragg peaks might extend beyond the rest of the image
+    ax.set_xlim([qx.min(), qx.max()])
+    ax.set_ylim([qy.min(), qy.max()])
+    ax.xaxis.set_visible(False)
+    ax.yaxis.set_visible(False)
+
+    tag_axis(ax, text=f"{mode}")
+
+    draw_hexagon_field(
+        ax=ax,
+        radius=1.7,
+        crystal=cryst,
+        color=(0.7, 0.7, 0.7, 1),  # light gray
+        linestyle=":",
+        reflections=reflections,
+    )
+
+cbar = ax.cax.colorbar(
+    m,
+    ticks=FixedLocator([0, m.get_array().max()]),
+    format=FixedFormatter(["0", "1"]),
+)
+cbar.ax.xaxis.set_label_position("top")
+cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, t_0)|^2$ [a.u.]")
+
+set_height_auto(fig)
 ```
 
 ## References {.unnumbered}
