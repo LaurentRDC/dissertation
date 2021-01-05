@@ -24,7 +24,7 @@ import time
 import runpy
 import logging
 
-logging.basicConfig(encoding='utf-8', level=logging.INFO)
+logging.basicConfig(encoding="utf-8", level=logging.INFO)
 
 HERE = Path(os.getcwd())
 BUILDDIR = HERE / "build"
@@ -146,6 +146,7 @@ parser_build.add_argument(
     default="cleanthesis",
 )
 
+
 @wraps(subprocess.run)
 def run(*args, **kwargs):
     cmd = args[0]
@@ -256,7 +257,8 @@ def build_auxiliary(aux_options=AUX_OPTS):
     """
     diagrams = list((HERE / "diagrams").glob("*.svg"))
     targets = [diagram.with_suffix(".pdf") for diagram in diagrams]
-    with mp.Pool(len(diagrams)) as pool:
+    nprocs = min([len(diagrams), os.cpu_count()])
+    with mp.Pool(processes=nprocs) as pool:
         pool.starmap(render_diagram, zip(diagrams, targets))
 
     for template, result in zip([TITLEPAGE, FRONTMATTER], [TMP1, TMP2]):
