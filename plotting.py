@@ -38,10 +38,6 @@ GRAPHITE_CENTER = np.array(0.5 * (_peak1 + _peak2), dtype=np.int)
 #plt.rcParams["figure.figsize"] = (FIGURE_WIDTH, FIGURE_WIDTH)
 plt.rcParams["font.size"] = 10
 plt.rcParams["savefig.pad_inches"] = 0.0
-plt.rcParams["figure.subplot.left"] = 0.05
-plt.rcParams["figure.subplot.right"] = 0.95
-plt.rcParams["figure.subplot.bottom"] = 0.05
-plt.rcParams["figure.subplot.top"] = 0.88
 
 def set_height_auto(fig, width=FIGURE_WIDTH):
     """

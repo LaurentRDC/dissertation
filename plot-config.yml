@@ -12,7 +12,7 @@ logging:
 
 matplotlib:
   preamble: plotting.py
-  tight_bbox: false
+  tight_bbox: true
   transparent: true
   executable: python
 
