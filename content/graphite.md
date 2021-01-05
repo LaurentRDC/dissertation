@@ -3,11 +3,58 @@
 
 Ultrafast electron diffuse scattering is an experimental technique pioneered over the past few years [@Chase2016; @Harb2016; @Waldecker2017]. The author also participated in the early development of the technique with work by M. Stern, L. P. René de Cotret *et al* [@Stern2018]. This early work on graphite was an experimental tour-de-force, but the observations remained qualitative rather than quantitative.
 
-This chapter will detail how to extract the quantitative information encoded in UEDS experiments.
+This chapter will detail how to extract the quantitative information encoded in UEDS experiments. 
 
 TODO: important differentiator for UEDS vs X-ray is the amount of redundancy. The redundancy leads to the ability to invert the energy-integrated nature of UEDS.
 
+## Single-crystal graphite
+
+Single-crystal graphite is a two-dimensional material made of a repeating layers of carbon atoms arranged in a hexagonal lattice. Its lattice vectors $\left\{ \vec{a}_i \right\}$ are:
+$$
+\begin{pmatrix}
+    \vec{a}_1 \\
+    \vec{a}_2 \\
+    \vec{a}_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \sfrac{\sqrt{3}}{2} a & -\sfrac{1}{2} a & 0 \\
+    0                     &               a & 0 \\
+    0                     &               0 & c 
+\end{pmatrix}
+\begin{pmatrix}
+    \vec{e}_1 \\
+    \vec{e}_2 \\
+    \vec{e}_3
+\end{pmatrix}
+$$
+where $a=\SI{2.464}{\angstrom}$, $c=\SI{6.711}{\angstrom}$, and $\left\{ \vec{e}_i \right\}$ are understood to be the usual Euclidean vectors. Carbon atoms $\left\{ \vec{c}_i \right\}$ are positioned as follows:
+$$
+\begin{pmatrix}
+    \vec{c}_1 \\
+    \vec{c}_2 \\
+    \vec{c}_3 \\
+    \vec{c}_4 
+\end{pmatrix}
+=
+\begin{pmatrix}
+    0            & 0            & 0            \\
+    0            & 0            & \sfrac{1}{2} \\
+    \sfrac{1}{3} & \sfrac{2}{3} & 0            \\
+    \sfrac{2}{3} & \sfrac{1}{3} & \sfrac{1}{2} \\
+\end{pmatrix}
+\begin{pmatrix}
+    \vec{a}_1 \\
+    \vec{a}_2 \\
+    \vec{a}_3
+\end{pmatrix}
+$$
+
+The point group for this structure is $6/mmm$, which includes a six-fold discrete rotational symmetry, while the Hermann-Mauguin symbol for the space group is $P6_3/mmc$.
+
 ## The first hundred femtoseconds viewed by trARPES
+
+Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Altough UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second} as observed by time- and angle-resolved photoemission spectroscopy (trARPES).
 
 ## Experimental methods
 
@@ -21,7 +68,7 @@ Single-crystal flakes of natural graphite \SIrange{10}{90}{\nano\meter} thick we
 
 The UEDS experiments presented in this chapter made use of the experimental setup presented in @sec:experimental_setup. Ultrashort laser pulses of light  were shone at $t=t_0$ on a thin single-crystal specimen of graphite, oriented in the $\left[001\right]$ direction. Compressed electron bunches with 10^7^ electrons per bunch were transmitted through the sample at $t=t_0 + \tau$. The time-delay $\tau$ was scanned from \SI{-40}{\pico\second} to \SI{680}{\pico\second}.
 
-The interrogated film were pumped with a pump spot of 1 × 1 \si{\square\milli\meter} full-width at half-maximum (FWHM), ensuring nearly uniform illumination of the probed volume. The film was pumped at a fluence of \SI{12}{\milli\J\per\square\centi\meter}, resulting in an absorbed energy density of \SI{8}{\J\per\meter\cube}. The scattering patterns are collected with a Gatan Ultrascan 895 camera: a \SI{1}{\square\inch} phosphor screen fiber coupled to a 2048 px × 2048 px charge-coupled detector (CCD) placed \SI{25}{\centi\meter} away from the sample. The experiment herein consists of time delays in the range of \SIrange{−40}{680}{\pico\second}. Per-pixel scattering intensity fluctuations over laboratory time reveals a transient dynamic range of 1 : 10^8^, allowing the acquisition of diffraction patterns and diffuse scattering patterns simultaneously. A static diffraction pattern is shown in @fig:graphite-static a).
+The interrogated film were pumped with a pump spot of 1 × 1 \si{\square\milli\meter} full-width at half-maximum (FWHM), ensuring nearly uniform illumination of the probed volume. The film was pumped at a fluence of \SI{12}{\milli\joule\per\square\centi\meter}, resulting in an absorbed energy density of \SI{8}{\joule\per\cubic\meter}. The scattering patterns are collected with a Gatan Ultrascan 895 camera: a 2.54 × 2.54 \si{\square\cm} phosphor screen fiber coupled to a 2048 px × 2048 px charge-coupled detector (CCD) placed \SI{25}{\centi\meter} away from the sample. The experiment herein consists of time delays in the range of $\SIrange{-40}{680}{\pico\second}$. Per-pixel scattering intensity fluctuations over laboratory time reveals a transient dynamic range of 1 : 10^8^, allowing the acquisition of diffraction patterns and diffuse scattering patterns simultaneously. A static diffraction pattern is shown in @fig:graphite-static a).
 
 Due to the flatness of the Ewald sphere for \SI{90}{\kilo\electronvolt} electrons, many symmetry-related reflections are visible within each pattern. The information contained in a set of symmetry-equivalent reflections is redundant due to the point-group symmetry of the scattering crystal. As long as the point-group symmetry is not broken by photoexcitation its consequences, it is possible to harness the redundancy to enhance the signal-to-noise ratio of a UEDS dataset. In the case of graphite, no observable symmetry-breaking phenomena is brought on by photoexcitation at \SI{1.55}{\electronvolt} when looking at the raw data. Moreover, trARPES experiments [@Stange2015] do not show the opening of a gap in the electronic band structure, albeit at much lower photoexcitation densities, which would be indicative of point-group symmetry breaking. The point-group of graphite is $6/mmm$, which encompasses 6-fold discrete rotational symmetry in the $\vec{a} \times \vec{b}$ plane. Therefore, specifically in the case of graphite oriented in the $\left[ 001 \right]$ direction, we can safely enhance the diffuse signals by a factor of $\sqrt{6}$ by the use of a six-fold discrete azimuthal average:
 $$
@@ -379,5 +426,6 @@ cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, t_0)|^2$ [a.u.]")
 set_height_auto(fig)
 ```
 
+\FloatBarrier
 ## References {.unnumbered}
 \printbibliography[heading=none]

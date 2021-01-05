@@ -161,6 +161,6 @@ On the probe line, two barium borate (BBO) crystals are used to generate the thi
 
 ## Overview of the dissertation {#sec:overview}
 
+\FloatBarrier
 ## References {.unnumbered}
-
 \printbibliography[heading=none]

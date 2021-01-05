@@ -202,15 +202,16 @@ def runlatex(source, target):
     """
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
     """
+    target = Path(target)
     run(
-        f"{LATEX_ENGINE} -interaction=batchmode -draftmode {source} -aux-directory=build -job-name={Path(target).stem}"
+        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source} "
     )
     run(f"biber build/{Path(target).stem}")
     run(
-        f"{LATEX_ENGINE} -interaction=batchmode -draftmode {source} -aux-directory=build -job-name={Path(target).stem}"
+        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source}"
     )
     run(
-        f"{LATEX_ENGINE} -interaction=batchmode {source} -aux-directory=build -job-name={Path(target).stem}"
+        f"{LATEX_ENGINE} -interaction=batchmode -aux-directory={BUILDDIR} -job-name={target.stem} -output-directory={target.parent} {source}"
     )
 
 
@@ -224,8 +225,6 @@ def build(options, target, sourcefiles, appendices=None):
     )
 
     runlatex(source=BUILDDIR / "temp.tex", target=target)
-
-    os.remove(BUILDDIR / "temp.tex")
 
 
 def download_template_files():
@@ -309,7 +308,8 @@ def build_eisvogel():
     # We use run-py as a kind of script-runner
     # because it's too hard to import other python scripts
     # into this one
-    runpy.run_path(HERE / "scripts" / "mktitlepage.py")
+    if not (BUILDDIR / "titlepage.pdf").exists():
+        runpy.run_path(HERE / "scripts" / "mktitlepage.py")
 
     aux_options = AUX_OPTS
     aux_options += ["-M eisvogel=true"]

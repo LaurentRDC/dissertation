@@ -30,12 +30,12 @@ $$
 \left[ \nabla^2 + k_a^2\right] u_a(\vec{x}) = 0
 $${#eq:helmholtz}
 where $k_a^2 \equiv 2 m_e E_a/\hbar^2$. We may use physical reasoning and the classical result of the Helmholtz equation to name $k_a$ the **wavevector**, related to momentum as $k_a^2 \equiv \vec{k}_a \cdot \vec{k}_a \equiv \vec{p}_a^2/\hbar^2$. [Eq. @eq:helmholtz] can be solved using separation of variables, where the solution along linearly-independent directions are considered independently:
-\begin{equation}
+$$
 u_a(\vec{x})\equiv u_{a,x}(\vec{x} \cdot \hat{\vec{x}}) u_{a,y}(\vec{x} \cdot \hat{\vec{y}}) u_{a,z}(\vec{x} \cdot \hat{\vec{z}}).
-\end{equation}
+$$
 [Eq. @eq:helmholtz] then becomes:
 $$
-\sum_{i\in\{x,y,z\}}\frac{1}{u_{a,i}(\vec{x} \cdot \hat{\vec{i}})} \frac{d^2 u_{a,i}}{di^2}(\vec{x} \cdot \hat{\vec{i}}) + |\vec{k} \cdot \hat{\vec{i}}|} = 0
+\sum_{i\in\{x,y,z\}}\frac{1}{u_{a,i}(\vec{x} \cdot \hat{\vec{i}})} \frac{d^2 u_{a,i}}{di^2}(\vec{x} \cdot \hat{\vec{i}}) + |\vec{k} \cdot \hat{\vec{i}}| = 0
 $$
 and the solution can be synthetized as a product of one-dimensional plane wave:
 \begin{align}
@@ -49,6 +49,6 @@ $$
 $$
 with associated energy eigenvalue $E_a = \hbar^2 \vec{k}_a^2 / 2 m_e=\hbar \omega_a$
 
-
+\FloatBarrier
 ## References {.unnumbered}
 \printbibliography[heading=none]
