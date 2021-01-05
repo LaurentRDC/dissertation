@@ -206,7 +206,7 @@ def runlatex(source, target):
     run(
         f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source} "
     )
-    run(f"biber build/{Path(target).stem}")
+    run(f"biber --quiet build/{Path(target).stem}")
     run(
         f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source}"
     )
