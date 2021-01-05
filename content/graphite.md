@@ -18,9 +18,9 @@ $$
 \end{pmatrix}
 =
 \begin{pmatrix}
-    \sfrac{\sqrt{3}}{2} a & -\sfrac{1}{2} a & 0 \\
-    0                     &               a & 0 \\
-    0                     &               0 & c 
+    \sqrt{3}a  & -a & 0 \\
+    0          & 2a & 0 \\
+    0          &  0 & c 
 \end{pmatrix}
 \begin{pmatrix}
     \vec{e}_1 \\
@@ -28,7 +28,7 @@ $$
     \vec{e}_3
 \end{pmatrix}
 $$
-where $a=\SI{2.464}{\angstrom}$, $c=\SI{6.711}{\angstrom}$, and $\left\{ \vec{e}_i \right\}$ are understood to be the usual Euclidean vectors. Carbon atoms $\left\{ \vec{c}_i \right\}$ are positioned as follows:
+where $a=\SI{1.232}{\angstrom}$, $c=\SI{6.711}{\angstrom}$, and $\left\{ \vec{e}_i \right\}$ are understood to be the usual Euclidean vectors. Carbon atoms $\left\{ \vec{c}_i \right\}$ are positioned as follows:
 $$
 \begin{pmatrix}
     \vec{c}_1 \\
@@ -39,8 +39,8 @@ $$
 =
 \begin{pmatrix}
     0            & 0            & 0            \\
-    0            & 0            & \sfrac{1}{2} \\
     \sfrac{1}{3} & \sfrac{2}{3} & 0            \\
+    0            & 0            & \sfrac{1}{2} \\
     \sfrac{2}{3} & \sfrac{1}{3} & \sfrac{1}{2} \\
 \end{pmatrix}
 \begin{pmatrix}
@@ -50,7 +50,78 @@ $$
 \end{pmatrix}
 $$
 
-The point group for this structure is $6/mmm$, which includes a six-fold discrete rotational symmetry, while the Hermann-Mauguin symbol for the space group is $P6_3/mmc$.
+Note carbon atoms $\vec{c}_1$ and $\vec{c}_2$ form a sheet of graphene, while $\vec{c}_3$ and $\vec{c}_4$ form a separate separate sheet of graphene rotated by $\tfrac{\pi}{3}$ (\ang{60}). The stacking of both sublattices along the $\vec{a}_3$ axis confers graphite increased discrete rotational symmetry (6-fold) about the stacking axis, compared to the 3-fold rotational symmetry of graphene. More specifically, the point group for graphite is $6/mmm$, while the Hermann-Mauguin symbol for the space group is $P6_3/mmc$. 
+
+The real-space 6-fold rotational symmetry is mirrored in reciprocal space. The geometry of the Brillouin zone is shown in @fig:graphite-bz, including the high-symmetry points  $\vec{\Gamma}$ (zone-center), $\vec{M}$, and $\vec{K}$.
+
+```{.python #fig:graphite-bz .matplotlib caption="In-plane section of the Brillouin zone of graphite, spanned by reciprocal lattice vectors $\vec{b}_1$ and $\vec{b}_2$. The three classes of high-symmetry points are shown. $\vec{M}$ and $\vec{K}$ have symmetry equivalents on every edge and vertex respectively (not shown)."}
+from math import radians, sqrt
+from matplotlib.patches import Circle, RegularPolygon
+
+def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):
+    """ Draw an arrow annotated with some text """
+    ax.arrow(x=x, y=y, dx=dx, dy=dy, **kwargs)
+    ax.text(x=x + dx / 2, y=y + dy / 2, s=text, **tkwds)
+
+
+fig, ax = plt.subplots(1, 1, figsize=(2, 2))
+ax.set_xlim([-1.1, 1.1])
+ax.set_ylim([-1.1, 1.1])
+ax.set_aspect("equal")
+ax.axis("off")
+
+GAMMA = (0, 0)
+K = (-1, 0)
+M = (0, sqrt(3) / 2)
+
+hexagon = RegularPolygon(
+    xy=(0, 0),
+    numVertices=6,
+    orientation=radians(30),
+    radius=1,
+    facecolor="None",
+    fill=False,
+    edgecolor="k",
+)
+ax.add_patch(hexagon)
+offset = np.array([-0.06, 0.06])
+for point, label in zip([GAMMA, M, K], [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"]):
+    ax.add_patch(Circle(xy=point, radius=0.05, edgecolor="None", facecolor="k"))
+    ax.annotate(
+        xy=point,
+        ha="right",
+        text=label,
+        xytext=np.array(point) + offset,
+    )
+
+# reciprocal lattice vectors
+named_arrow(
+    ax,
+    x=0,
+    y=0,
+    dx=-1 / 2,
+    dy=-sqrt(3) / 2,
+    text=r"$\mathbf{b}_1$",
+    tkwds=dict(ha="right", va="bottom"),
+    length_includes_head=True,
+    width=0.001,
+    head_width=0.07,
+    fc='k'
+)
+named_arrow(
+    ax,
+    x=0,
+    y=0,
+    dx=1,
+    dy=0,
+    text=r"$\mathbf{b}_2$",
+    tkwds=dict(va="bottom", ha="center"),
+    length_includes_head=True,
+    width=0.001,
+    head_width=0.07,
+    fc='k'
+)
+```
 
 ## The first hundred femtoseconds viewed by trARPES
 
