@@ -89,17 +89,25 @@ def draw_hexagon_field(
         )
 
 
-def draw_hexagon(ax, center, radius, orientation=np.deg2rad(30), color="w", **kwargs):
+def draw_hexagon(
+    ax,
+    center,
+    radius,
+    orientation=np.deg2rad(30),
+    color="w",
+    facecolor="none",
+    **kwargs
+):
     """ Draw a hexagon within an Axes object"""
     if "linewidth" not in kwargs:
         kwargs["linewidth"] = 1
+    print('facecolor', facecolor)
     hexagon = mpatches.RegularPolygon(
         xy=center,
         numVertices=6,
         radius=radius,
         orientation=orientation,
-        facecolor="None",
-        fill=False,
+        facecolor=facecolor,
         edgecolor=color,
         **kwargs,
     )

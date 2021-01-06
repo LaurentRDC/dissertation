@@ -54,7 +54,7 @@ Note carbon atoms $\vec{c}_1$ and $\vec{c}_2$ form a sheet of graphene, while $\
 
 The real-space 6-fold rotational symmetry is mirrored in reciprocal space. The geometry of the Brillouin zone is shown in @fig:graphite-bz, including the high-symmetry points  $\vec{\Gamma}$ (zone-center), $\vec{M}$, and $\vec{K}$.
 
-```{.python #fig:graphite-bz .matplotlib caption="In-plane section of the Brillouin zone of graphite, spanned by reciprocal lattice vectors $\vec{b}_1$ and $\vec{b}_2$. The three classes of high-symmetry points are shown. $\vec{M}$ and $\vec{K}$ have symmetry equivalents on every edge and vertex respectively (not shown)."}
+```{.python #fig:graphite-bz .matplotlib caption="In-plane section of the Brillouin zone of graphite, spanned by reciprocal lattice vectors $\vec{b}_1$ and $\vec{b}_2$. The three classes of high-symmetry points are shown. $\vec{M}$ and $\vec{K}$ have symmetry equivalents on every edge and vertex respectively."}
 from math import radians, sqrt
 from matplotlib.patches import Circle, RegularPolygon
 
@@ -63,16 +63,39 @@ def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):
     ax.arrow(x=x, y=y, dx=dx, dy=dy, **kwargs)
     ax.text(x=x + dx / 2, y=y + dy / 2, s=text, **tkwds)
 
-
 fig, ax = plt.subplots(1, 1, figsize=(2, 2))
 ax.set_xlim([-1.1, 1.1])
 ax.set_ylim([-1.1, 1.1])
 ax.set_aspect("equal")
 ax.axis("off")
 
-GAMMA = (0, 0)
-K = (-1, 0)
-M = (0, sqrt(3) / 2)
+# reciprocal lattice vectors
+arrow_kwds = dict(
+    x=0, y=0, length_includes_head=True, width=0.001, head_width=0.07, fc="k"
+)
+
+named_arrow(
+    ax,
+    dx=-1 / 2,
+    dy=-sqrt(3) / 2,
+    text=r"$\mathbf{b}_1$",
+    tkwds=dict(ha="right", va="bottom"),
+    **arrow_kwds
+)
+named_arrow(
+    ax,
+    dx=1,
+    dy=0,
+    text=r"$\mathbf{b}_2$",
+    tkwds=dict(va="bottom", ha="center"),
+    **arrow_kwds
+)
+
+GAMMA = np.array((0, 0))
+K = np.array((-1, 0))
+M = np.array((0, sqrt(3) / 2))
+
+R60deg = np.array([[1 / 2, -sqrt(3) / 2], [sqrt(3) / 2, 1 / 2]])
 
 hexagon = RegularPolygon(
     xy=(0, 0),
@@ -85,49 +108,107 @@ hexagon = RegularPolygon(
 )
 ax.add_patch(hexagon)
 offset = np.array([-0.06, 0.06])
-for point, label in zip([GAMMA, M, K], [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"]):
-    ax.add_patch(Circle(xy=point, radius=0.05, edgecolor="None", facecolor="k"))
+for point, label, sym_color in zip(
+    [GAMMA, M, K],
+    [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"],
+    ["k", "firebrick", "royalblue"],
+):
+    point_ = point
+    for n in range(1, 7):
+        point_ = R60deg @ point_
+        ax.add_patch(
+            Circle(xy=point_, radius=0.05, edgecolor="None", facecolor=sym_color)
+        )
+
     ax.annotate(
         xy=point,
         ha="right",
         text=label,
         xytext=np.array(point) + offset,
+        color=sym_color
     )
+```
 
-# reciprocal lattice vectors
-named_arrow(
-    ax,
-    x=0,
-    y=0,
-    dx=-1 / 2,
-    dy=-sqrt(3) / 2,
-    text=r"$\mathbf{b}_1$",
-    tkwds=dict(ha="right", va="bottom"),
-    length_includes_head=True,
-    width=0.001,
-    head_width=0.07,
-    fc='k'
+### Phonon landscape
+
+With four atoms per unit cell, the structure of graphite supports twelve distinct phonon modes. The layered nature of graphite results in a clear distinction between in-plane and out-of-plane phonon modes. These modes are longitudinal modes LA, LO1 - LO3, in-plane transverse modes TA, TO1 - TO3, and out-of-plane traverse modes ZA, ZO1 - ZO3. The phonon dispersion relation for in-plane modes was calculated as described further below in @sec:computational-details, and is shown in @fig:graphite-static-dispersion. The out-of-plane transverse modes are not taken into account as the experiments are not sensitive to them. 
+
+@fig:graphite-static-dispersion reveals why graphite is the *perfect* benchmark material for UEDS. All of the lattice modes are so stiff (high-energy) that, at room temperature, thermally-occupied modes are concentrated at $\vec{\Gamma}$. Therefore, the contrast between static diffuse intensity and diffuse intensity after photoexcitation is bound to be maximal.
+
+```{.python #fig:graphite-static-dispersion .matplotlib caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
+from math import sqrt
+from scipy.constants import physical_constants
+import matplotlib.ticker as ticker
+from pathlib import Path
+
+HBAR = physical_constants["Planck constant over 2 pi in eV s"][0]
+HZ_TO_EV = HBAR * 2 * np.pi
+
+modes = ["LA", "LO2", "TA", "TO2"]
+
+fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 3))
+ax_thz = ax.twinx()
+
+for mode in modes:
+    f = np.load(Path("data") / "graphite" / "static-dispersion" / f"{mode}.npy")
+    ax.scatter(x=range(np.size(f)), y=f * HZ_TO_EV * 1000, s=2)  # meV
+    ax_thz.scatter(x=range(np.size(f)), y=f * 1e-12, s=0)  # THz,
+
+labels = [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$", r"$\mathbf{\Gamma}$"]
+nsteps = np.size(f) / 3
+for i in range(1, len(labels)):
+    ax.axvline(x=i * nsteps, color="k", linestyle="--", linewidth=1)
+
+ax.axhline(y=25, color="k", linestyle="--", linewidth=1)  # room temperature
+
+# Draw BZ
+# draw_hexagon(ax, center=(0,0), radius=100, color='k', transform=ax.transAxes)
+hex_radius = 0.4
+w, h = fig.get_size_inches()
+path_ax = fig.add_axes([0.45, 0.10, 0.15, (w / h) * 0.15])
+path_ax.axis("off")
+path_ax.set_xlim([-0.5, 0.5])
+path_ax.set_ylim([-0.5, 0.5])
+draw_hexagon(path_ax, center=(0, 0), radius=hex_radius, color="k", facecolor='w')
+for (x, y), label, ha in zip(
+    [
+        (0, 0),
+        (0, hex_radius * sqrt(3) / 2),
+        (hex_radius/2, hex_radius * sqrt(3) / 2),
+    ],
+    [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"],
+    ["right", "right", "left"],
+):
+    path_ax.scatter(x, y, s=5, c="k", zorder=np.inf)
+    path_ax.annotate(label, (x, y), va="bottom", ha=ha)
+    path_ax.arrow(x=0, y=0, dx=x, dy=y, linewidth=1, color='k', length_includes_head=True, )
+
+# Annotate the modes
+for label, pt in zip(
+    ["TA", "LA", "TO", "LO"],
+    [(0.14, 0.15), (0.07, 0.35), (0.1, 0.8), (0.25, 0.94)],
+):
+    ax.annotate(label, pt, color="k", textcoords=ax.transAxes)
+
+ax.xaxis.set_minor_locator(ticker.NullLocator())
+ax.xaxis.set_major_locator(
+    ticker.FixedLocator([i * nsteps for i in range(len(labels))])
 )
-named_arrow(
-    ax,
-    x=0,
-    y=0,
-    dx=1,
-    dy=0,
-    text=r"$\mathbf{b}_2$",
-    tkwds=dict(va="bottom", ha="center"),
-    length_includes_head=True,
-    width=0.001,
-    head_width=0.07,
-    fc='k'
-)
+
+ax.xaxis.set_major_formatter(plt.FixedFormatter(labels))
+ax.set_xlim([0, np.size(f)])
+ax.set_ylabel("Energy [meV]")
+ax.set_ylim([0, 210])
+
+ax_thz.set_ylabel("Frequency [THz]")
+ax_thz.yaxis.set_label_position("right")
 ```
 
 ## The first hundred femtoseconds viewed by trARPES
 
-Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Altough UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second} as observed by time- and angle-resolved photoemission spectroscopy (trARPES).
+Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Although UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second} as observed by time- and angle-resolved photoemission spectroscopy (trARPES).
 
-## Experimental methods
+## Experimental and computational methods
 
 ### Sample preparation
 
@@ -243,6 +324,8 @@ cbar = grid[0].cax.colorbar(
 cbar.ax.xaxis.set_label_position("top")
 cbar.ax.set_xlabel("Scattering intensity [a.u.]")
 ```
+
+### Computational details {#sec:computational-details}
 
 ## Diffuse intensity dynamics
 
