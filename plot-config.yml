@@ -2,9 +2,10 @@
 directory: build/plots/
 source: false
 # TODO: publication-quality is 600dpi
-dpi: 150
-format: PNG
+dpi: 300
+format: PDF
 caption_format: markdown+raw_tex
+strict: true
 
 logging:
   verbosity: info
