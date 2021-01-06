@@ -316,7 +316,7 @@ def build_eisvogel():
     build_auxiliary(aux_options=aux_options)
 
     options = OPTIONS
-    options += ["-V float-placement-figure=htbp"]
+    options += ["-V float-placement-figure=ht"]
     options += ["-V listings-no-page-break=true"]
     options += ["-V book=true"]
     options += ["-V toc-own-page=true"]

@@ -1,8 +1,7 @@
 
 directory: build/plots/
 source: false
-# TODO: publication-quality is 600dpi
-dpi: 300
+dpi: 600
 format: PDF
 caption_format: markdown+raw_tex
 strict: true

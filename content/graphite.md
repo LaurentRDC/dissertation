@@ -27,7 +27,7 @@ $$
     \vec{e}_2 \\
     \vec{e}_3
 \end{pmatrix}
-$$
+$${#eq:graphite-lattice}
 where $a=\SI{1.232}{\angstrom}$, $c=\SI{6.711}{\angstrom}$, and $\left\{ \vec{e}_i \right\}$ are understood to be the usual Euclidean vectors. Carbon atoms $\left\{ \vec{c}_i \right\}$ are positioned as follows:
 $$
 \begin{pmatrix}
@@ -326,6 +326,14 @@ cbar.ax.set_xlabel("Scattering intensity [a.u.]")
 ```
 
 ### Computational details {#sec:computational-details}
+
+This section contains the details of the calculations used throughout this chapter, including what is shown in @fig:graphite-static-dispersion. The aim of the computations was to extract the phonon mode frequencies $\left\{ \omega_{j, \vec{k}}\right\}$ and polarization vectors $\left\{ \vec{e}_{j, s, \vec{k}}\right\}$ that appear in TODO: ONEPH EQUATION.
+
+In order to calculate the force between atoms, the structure of graphite was computed via *structure relaxation*. Structure relaxation was performed using the plane-wave self-consistent field program `PWSCF` from the `QUANTUM ESPRESSO` software suite [@Giannozzi2017]. The structure was relaxed using a 18 × 18 × 10 $\vec{k}$ mesh centered at $\vec{\Gamma}$ -- selected using the Monkhorst-Pack method [@Monkhorst1976] -- and force and energy thresholds of \SI{1e-8}{\rydberg\per\bohr} and \SI{1e-15}{\rydberg} respectively, where \si{\bohr} is the Bohr radius.
+
+The dynamical matrices were computed on a 5 × 5 × 3 $\vec{q}$ mesh using a self-consistency threshold of \SI{1e-18}{\rydberg}. The resulting graphite structure is equivalent to @eq:graphite-lattice, with $a=\SI{1.231}{\angstrom}$ and $c=\SI{6.837}{\angstrom}$.
+
+The phonon mode frequencies $\left\{ \omega_{j, \vec{k}}\right\}$ and polarization vectors $\left\{ \vec{e}_{j, s, \vec{k}}\right\}$ were computed using the `PHONON` program, again within the `QUANTUM ESPRESSO` software suite. This calculation made use of the B86b exchange-coupled Perdew-Burke-Ernzerhof generalized-gradient approximation [@Becke1986; @Perdew1996] and the projector augmented-wave method [@Blochl1994]. The cutoff energy of the wave function was set to \SI{100}{\rydberg}, while the cutoff energy for the charge density was set to \SI{1.2e3}{\rydberg}. A Fermi-Dirac smearing of \SI{0.06}{\rydberg} was also applied. To include the dispersion of energy along the stacking axis $\vec{a}_3$, the exchange-hole dipole moment method was used [@Becke2007]. 
 
 ## Diffuse intensity dynamics
 
