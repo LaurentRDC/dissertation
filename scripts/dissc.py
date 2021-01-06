@@ -121,7 +121,7 @@ OPTIONS += ["-V colorlinks=true"]
 ## Template variables
 EISVOGEL_TEMPLATE = "eisvogel.tex"
 EISVOGEL_REPO = "https://github.com/Wandmalfarbe/pandoc-latex-template"
-EISVOGEL_VERSION = "5f740f8de0fb4c96dfb2772ef86e861fd3971654"
+EISVOGEL_VERSION = "27fb7e455536012aa7e92151ffad28ff70986f41"
 
 CLEANTHESIS_TEMPLATE = "cleanthesis.sty"
 CLEANTHESIS_REPO = "https://github.com/derric/cleanthesis"
@@ -318,12 +318,12 @@ def build_eisvogel():
     options = OPTIONS
     options += ["-V float-placement-figure=htbp"]
     options += ["-V listings-no-page-break=true"]
-    options += ["-V titlepage-background=build/titlepage.pdf"]
     options += ["-V book=true"]
     options += ["-V toc-own-page=true"]
     options += ["-V titlepage=true"]
     options += ["-V titlepage-text-color=FFFFFF"]
     options += ["-V titlepage-rule-height=0"]
+    options += ["-V titlepage-background=build/titlepage.pdf"]
     options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
 
     build(
