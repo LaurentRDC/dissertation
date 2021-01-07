@@ -80,7 +80,7 @@ Electron scattering measurements are not able to isolate to the dynamics of the 
 
 Single-crystal flakes of natural graphite \SIrange{10}{90}{\nano\meter} thick were prepared using a mechanical exfoliation procedure analogous to the work by Novoselov *et al* [@Novoselov2004], briefly described here. Thick flakes were embedded in Crystalbond glue on a \SI{3}{\milli\meter} copper TEM grid (200 lines per inch). The embedded flakes are then exfoliated using ordinary adhesive tape. The procedure was repeated until the embedded flakes were translucent when observed under an optical microscope. The glue is then delicately washed away with a solvent. The choice of the solvent is dependent on the glue used; in the present case, acetone was used. Sample thickness has been measured directly using atomic force microscopy characterization (see @fig:graphite-afm). Once a suitable sample has been identified, an aperture was made using aluminum foil to isolate a sample region with uniform thickness. The resulting sample used in this work covered 500 × 500 \si{\square\micro\meter}, with a thickness of \SI{70}{\nano\meter}.
 
-![Characterization of the thickness of potential graphite samples. **Left** optical microscope image of exfoliated graphite. Translucent regions A and B are highlighted as potential samples. **Right** Atomic force microscope measurement shows a sample thickness of \SI{88}{\nano\meter}. Modified from Chatelain [@Chatelain2014].](diagrams/graphite_exfoliation.pdf){#fig:graphite-afm}
+![Characterization of the thickness of potential graphite samples. **Left** optical microscope image of exfoliated graphite. Translucent regions A and B are highlighted as potential samples. **Right** Atomic force microscope measurement shows a sample thickness of \SI{88}{\nano\meter}[^1].](diagrams/graphite_exfoliation.pdf){#fig:graphite-afm}
 
 ### Data acquisition 
 
@@ -199,3 +199,5 @@ An alternative visualization for one-phonon structure factors are weighted dispe
 \FloatBarrier
 ## References {.unnumbered}
 \printbibliography[heading=none]
+
+[^1]: Modified from Chatelain [@Chatelain2014].
