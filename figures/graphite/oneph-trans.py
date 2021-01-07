@@ -11,7 +11,6 @@ from plotutils import (
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
-    set_height_auto,
 )
 
 INPUT = Path("data") / "graphite"
@@ -94,4 +93,4 @@ cbar = ax.cax.colorbar(
 cbar.ax.xaxis.set_label_position("top")
 cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, t_0)|^2$ [a.u.]")
 
-set_height_auto(fig, FIGURE_WIDTH)
+plt.subplots_adjust(bottom=0.01)

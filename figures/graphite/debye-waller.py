@@ -58,3 +58,5 @@ cmp_cbar.ax.set_xlabel(r"$\Delta \sum_s W_s(\mathbf{q})$ [a.u.]")
 
 tag_axis(ax_rmt, "a)")
 tag_axis(ax_cmp, "b)")
+
+plt.subplots_adjust(bottom=0.01)

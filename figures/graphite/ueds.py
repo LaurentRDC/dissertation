@@ -81,3 +81,5 @@ cbar = ax.cax.colorbar(
 )
 cbar.ax.xaxis.set_label_position("top")
 cbar.ax.set_xlabel("Scattering intensity change [a.u.]")
+
+plt.subplots_adjust(bottom=0.01)

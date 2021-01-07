@@ -66,7 +66,7 @@ def set_height_auto(fig, width):
         return bbox.width * bbox.height
 
     largest_ax = sorted(fig.axes, key=get_area)[0]
-    bbox = largest_ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    bbox = fig.get_tightbbox(fig.canvas.get_renderer())
     factor = width / bbox.width
     fig.set_size_inches(w=width, h=factor * bbox.height)
 
