@@ -20,6 +20,7 @@ import warnings
 from contextlib import suppress
 import shutil
 import tempfile
+import termcolor
 import time
 import runpy
 import logging
@@ -147,6 +148,16 @@ parser_build.add_argument(
 )
 
 
+def check_for_todo(path):
+    """ Scan a file and return if there are any TODOs are left """
+    logging.info("Checking for TODOs...")
+    with open(path, mode="r") as f:
+        for line in f:
+            if line.find("TODO"):
+                return True
+    return False
+
+
 @wraps(subprocess.run)
 def run(*args, **kwargs):
     cmd = args[0]
@@ -224,7 +235,10 @@ def build(options, target, sourcefiles, appendices=None):
         appendices=appendices,
     )
 
+    todo_left = check_for_todo(BUILDDIR / "temp.tex")
     runlatex(source=BUILDDIR / "temp.tex", target=target)
+    if todo_left:
+        print(termcolor.colored("WARNING: There are still TODOs remaining.", "red"))
 
 
 def download_template_files():
