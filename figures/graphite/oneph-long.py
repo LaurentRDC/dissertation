@@ -91,6 +91,6 @@ cbar = ax.cax.colorbar(
     format=FixedFormatter(["0", "1"]),
 )
 cbar.ax.xaxis.set_label_position("top")
-cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, t_0)|^2$ [a.u.]")
+cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, \tau=-\infty)|^2$ [a.u.]")
 
 plt.subplots_adjust(bottom=0.01)

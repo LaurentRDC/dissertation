@@ -25,12 +25,13 @@ GRAPHITE_CENTER = np.array(0.5 * (_peak1 + _peak2), dtype=np.int)
 # Wrapper around ImageGrid with some parameters fixed
 GRID_AXES_PAD = 0.05
 GRID_CBAR_PAD = GRID_AXES_PAD
+CBAR_SIZE = 0.1
 ImageGrid = partial(
     ImageGrid,
     axes_pad=GRID_AXES_PAD,
     cbar_pad=GRID_CBAR_PAD,
     cbar_mode="single",
-    cbar_size=0.1,
+    cbar_size=CBAR_SIZE,
 )
 
 

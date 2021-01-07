@@ -15,13 +15,17 @@ from tqdm import tqdm
 
 from mkoneph import (
     prepare_modes,
+    debye_waller_factors,
+    one_phonon_structure_factor,
     render,
     IN_PLANE_MODES,
 )
 
 INPUT = Path(__file__).parent.parent / "data" / "graphite"
-OUTPUT = INPUT / "static-dispersion"
-OUTPUT.mkdir(exist_ok=True)
+OUTPUT_STATIC = INPUT / "static-dispersion"
+OUTPUT_STATIC.mkdir(exist_ok=True)
+OUTPUT_WEIGHTED = INPUT / "weighted-dispersion"
+OUTPUT_WEIGHTED.mkdir(exist_ok=True)
 
 
 def mkpath(points, nsteps):
@@ -58,9 +62,7 @@ def mkpath(points, nsteps):
 
 
 def dispersion(mode_str, path, reflections):
-    """
-    Calculate a dispersion curve weighted by the one-phonon structure factor
-    """
+    """ Calculate a dispersion curve. """
     modes = prepare_modes(reflections=tuple(reflections))
     mode = modes[mode_str]
 
@@ -81,18 +83,72 @@ def dispersion(mode_str, path, reflections):
     return freq
 
 
-# BZ (010)
-_, e2, _ = np.eye(3)
-gamma = np.array((0, 0, 0)) + e2
-mpoint = np.array((0, 1 / 2, 0)) + e2
-kpoint = np.array((1 / 3, 1 / 3, 0)) + e2
+def weighted_dispersion(mode_sre, path, reflections):
+    """ Calculate a dispersion curve weighted by the one-phonon structure factor """
+    modes = prepare_modes(reflections=tuple(reflections))
+    Ms = debye_waller_factors(modes)
+    mode = modes[mode_str]
 
-nsteps = 1000
-q_path, vertices = mkpath(points=[gamma, mpoint, kpoint, gamma], nsteps=nsteps)
+    F1j = np.abs(one_phonon_structure_factor(mode, dw_factors=Ms)) ** 2
 
-reflections = tuple([(0, 0, 0), (0, 1, 0), (-1, 1, 0)])
+    # Interpolate values of the dispersion over the path
+    pathx, pathy, _ = np.hsplit(path, 3)
+    pathx, pathy = np.squeeze(pathx), np.squeeze(pathy)
+
+    weight = np.squeeze(
+        griddata(
+            points=mode.q_points[:, 0:2],
+            values=F1j,
+            xi=(pathx, pathy),
+            method="linear",
+            fill_value=0.0,
+        )
+    )
+
+    freq = np.squeeze(
+        griddata(
+            points=mode.q_points[:, 0:2],
+            values=mode.frequencies,
+            xi=(pathx, pathy),
+            method="linear",
+            fill_value=0.0,
+        )
+    )
+
+    return freq, weight
+
 
 if __name__ == "__main__":
+    # BZ (010)
+    e1, e2, _ = np.eye(3)
+    gamma1 = np.array((0, 0, 0)) + e2
+    mpoint1 = np.array((0, 1 / 2, 0)) + e2
+    kpoint1 = np.array((1 / 3, 1 / 3, 0)) + e2
+
+    # BZ (-110)
+    gamma2 = gamma1 - e1
+    mpoint2 = mpoint1 - e1
+    kpoint2 = kpoint1 - e1
+
+    nsteps = 1000
+    q_path1, vertices1 = mkpath(
+        points=[gamma1, mpoint1, kpoint1, gamma1], nsteps=nsteps
+    )
+    q_path2, vertices2 = mkpath(
+        points=[gamma2, kpoint2, mpoint2, gamma2], nsteps=nsteps
+    )
+
+    reflections = tuple([(0, 0, 0), (0, 1, 0), (-1, 1, 0)])
+
+    # Static dispersion
     for mode_str in tqdm(IN_PLANE_MODES):
-        f = dispersion(mode_str, path=q_path, reflections=reflections)
-        np.save(OUTPUT / f"{mode_str}.npy", f)
+        f = dispersion(mode_str, path=q_path1, reflections=reflections)
+        np.save(OUTPUT_STATIC / f"{mode_str}.npy", f)
+
+        q_path = np.concatenate([q_path1, q_path2], axis=0)
+        f, w = weighted_dispersion(mode_str, path=q_path, reflections=reflections)
+        np.save(OUTPUT_WEIGHTED / f"{mode_str}_frequencies.npy", f)
+        np.save(OUTPUT_WEIGHTED / f"{mode_str}_oneph.npy", w)
+
+    np.save(OUTPUT_WEIGHTED / "vertices1.npy", vertices1)
+    np.save(OUTPUT_WEIGHTED / "vertices2.npy", vertices2)

@@ -54,7 +54,7 @@ Note carbon atoms $\vec{c}_1$ and $\vec{c}_2$ form a sheet of graphene, while $\
 
 The real-space 6-fold rotational symmetry is mirrored in reciprocal space. The geometry of the Brillouin zone is shown in @fig:graphite-bz, including the high-symmetry points  $\vec{\Gamma}$ (zone-center), $\vec{M}$, and $\vec{K}$.
 
-```{.python #fig:graphite-bz .matplotlib file="figures/graphite/bz.py" caption="In-plane section of the Brillouin zone of graphite, spanned by reciprocal lattice vectors $\vec{b}_1$ and $\vec{b}_2$. The three classes of high-symmetry points are shown. $\vec{M}$ and $\vec{K}$ have symmetry equivalents on every edge and vertex respectively."}
+```{#fig:graphite-bz .matplotlib file="figures/graphite/bz.py" caption="In-plane section of the Brillouin zone of graphite, spanned by reciprocal lattice vectors $\vec{b}_1$ and $\vec{b}_2$. The three classes of high-symmetry points are shown. $\vec{M}$ and $\vec{K}$ have symmetry equivalents on every edge and vertex respectively."}
 ```
 
 TODO: electronic landscape (Dirac cones)
@@ -67,7 +67,7 @@ With four atoms per unit cell, the structure of graphite supports twelve distinc
 
 TODO: talk about Kohn anomalies, not super visible
 
-```{.python #fig:graphite-static-dispersion .matplotlib file="figures/graphite/static-dispersion.py" caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
+```{#fig:graphite-static-dispersion .matplotlib file="figures/graphite/static-dispersion.py" caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
 ```
 
 ## The first hundred femtoseconds viewed by trARPES
@@ -102,7 +102,7 @@ $$
 $$
 Throughout the rest of this chapter, "scattering intensity" will imply discrete azimuthal average unless otherwise noted. An example of six-fold averaged diffraction pattern is shown in @fig:graphite-static b).
 
-```{.python #fig:graphite-static .matplotlib file="figures/graphite/diff-static.py" caption="Static diffraction pattern of graphite. Brillouin zones are shown around each reflection to guide the eye. **a)** static, unprocessed diffraction pattern. **b)** Six-fold discrete azimuthal average of the diffraction pattern in a) results in $\sqrt{6}$ increase in signal-to-noise ratio."}
+```{#fig:graphite-static .matplotlib file="figures/graphite/diff-static.py" caption="Static diffraction pattern of graphite. Brillouin zones are shown around each reflection to guide the eye. **a)** static, unprocessed diffraction pattern. **b)** Six-fold discrete azimuthal average of the diffraction pattern in a) results in $\sqrt{6}$ increase in signal-to-noise ratio."}
 ```
 
 ### Computational details {#sec:computational-details}
@@ -136,17 +136,17 @@ The procedure described above has been adapted for numerical evaluation and is n
 
 The change in scattering intensity $\Delta I(\vec{q}, t=\tau) = I(\vec{q}, \tau) - I(\vec{q}, -\infty)$ for representative time-delays is shown in @fig:graphite-ueds. 
 
-```{.python #fig:graphite-ueds .matplotlib file="figures/graphite/ueds.py" caption="Change in scattering intensity $\Delta I(\vec{q}, t=\tau) = I(\vec{q}, \tau) - I(\vec{q}, -\infty)$ of photoexcited graphite for a few representative time-delays $\tau$. Hexagonal Brillouin zones are shown on half of the reflections to guide the eye. Scattering patterns show diffuse dynamics in the range of $|\vec{q}| < \SI{12}{\per\angstrom}$. Negative going features (blue) are exclusively due to the transient Debye-Waller effect on the Bragg peaks. All positive changes (red) are dynamics of the diffuse scattering intensity."}
+```{#fig:graphite-ueds .matplotlib file="figures/graphite/ueds.py" caption="Change in scattering intensity $\Delta I(\vec{q}, t=\tau) = I(\vec{q}, \tau) - I(\vec{q}, -\infty)$ of photoexcited graphite for a few representative time-delays $\tau$. Hexagonal Brillouin zones are shown on half of the reflections to guide the eye. Scattering patterns show diffuse dynamics in the range of $|\vec{q}| < \SI{12}{\per\angstrom}$. Negative going features (blue) are exclusively due to the transient Debye-Waller effect on the Bragg peaks. All positive changes (red) are dynamics of the diffuse scattering intensity."}
 ```
 
 First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall symmetry of the lattice, which in turn results in smaller Bragg peaks. This is analogous to the (static) thermal Debye-Waller effect [@Debye1913; @Waller1923]. This leaves only positive-going features everywhere away from Bragg peaks, which must be diffuse in nature.
 
 Second, the structure visible across the Brillouin zone is different for reflections that ought to represent the same physical lattice waves. For example, consider the $(010)$ and $(020)$ reflections, \SI{500}{\femto\second} after photoexcitation, shown in @fig:graphite-ueds-zoomed. Around $(010)$, diffuse intensity increases near two of the $\vec{K}$ points, while diffuse intensity is increasing along steaks between $\vec{\Gamma}$ and $\vec{K}$ near $(020)$. This drastic difference between two physically-equivalent reflections can be explained by the difference in the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2$.
 
-```{.python #fig:graphite-ueds-zoomed .matplotlib file="figures/graphite/ueds-zoomed.py" caption="Comparison of the diffuse intensity change after \SI{500}{\femto\second} for two Brillouin zones, $(010)$ and $(020)$. The colormap scaling is identical to @fig:graphite-ueds. The difference between those two images can be explained by the difference in one-phonon structure factors $|F_{1j}(\vec{q}, \tau)^2|$."}
+```{#fig:graphite-ueds-zoomed .matplotlib file="figures/graphite/ueds-zoomed.py" caption="Comparison of the diffuse intensity change after \SI{500}{\femto\second} for two Brillouin zones, $(010)$ and $(020)$. The colormap scaling is identical to @fig:graphite-ueds. The difference between those two images can be explained by the difference in one-phonon structure factors $|F_{1j}(\vec{q}, \tau)^2|$."}
 ```
 
-## The one-phonon structure factor
+## The one-phonon structure factors
 
 Recall the definition of diffuse intensity from TODO: ONEPH EQUATION:
 $$
@@ -156,7 +156,7 @@ and
 $$
     F_{1j}(\vec{q}, \tau) = \sum_s e^{-W_s(\vec{q}, \tau)} \frac{f_s(\vec{q})}{\sqrt{\mu_s}} \left( \vec{q} \cdot \vec{e}_{j,s}(\vec{k})\right) 
 $$
-where $N_c$ is the number of scattering unit cells, $I_e$ is the intensity of a single scattering event, $s$ are indices that label atoms in the unit cell, $W_s(\vec{q}, \tau)$ is the Debye-Waller factor associated with atom $s$, $f_s(\vec{q})$ are the atomic form factors, $j \in \left\{ 1, 2, ... 3N\right\}$ runs over the phonon modes, $\left\{ n_j(\vec{k}, \tau)\right\}$ are the phonon populations, and $\left\{ \omega_j(\vec{k}, \tau)\right\}$ are the phonon frequencies.
+where $N_c$ is the number of scattering unit cells, $I_e$ is the intensity of a single scattering event, $s$ are indices that label atoms in the unit cell, $W_s(\vec{q}, \tau)$ is the Debye-Waller factor associated with atom $s$, $f_s(\vec{q})$ are the atomic form factors, $j \in \left\{ 1, 2, ..., 3N\right\}$ runs over the phonon modes, $\left\{ n_j(\vec{k}, \tau)\right\}$ are the phonon populations, and $\left\{ \omega_j(\vec{k}, \tau)\right\}$ are the phonon frequencies.
 
 As shown in @fig:graphite-ueds-zoomed, observed diffuse intensity is the combination of quantities that can be separated in two categories. Some quantities, like phonon frequencies are *local* in reciprocal space (i.e. defined on $\vec{k}$). On the other hand, the one-phonon structure factor is nonlocal in reciprocal space (defined on $\vec{q}$). This results in measurable differences when comparing diffuse intensity at various reflections, which will be used to overcome the energy-integrative nature of UEDS experiments.
 
@@ -172,16 +172,28 @@ where $a_j$ is vibrational amplitude for the phonon mode $j$:
 $$
     |a_j(\vec{k}, \tau)|^2 = \frac{2 \hbar}{N_c \omega_j(\vec{k}, \tau)} \left( n_j(\vec{k}, \tau) + \frac{1}{2}\right)
 $$
+Based on @eq:graphite-debye-waller, the Debye-Waller factor is not sensitive measure to the wavevector-dependent nonequilibrium dynamics of lattice waves because it involves the contribution from *all* lattice waves, integrated over $\vec{k}$. Therefore, phonon population dynamics can only affect the magnitude of Debye-Waller factors. 
 
-Based on @eq:graphite-debye-waller, the Debye-Waller factor is not sensitive measure to the wavevector-dependent nonequilibrium dynamics of lattice waves because it involves the contribution from *all* lattice waves, integrated over $\vec{k}$. Therefore, phonon population dynamics can only affect the magnitude of Debye-Waller factors. The potential time-dependence of the Debye-Waller factors was investigated, via the time-dependence of mode populations. Profoundly non-equilibrium distribution of phonon mode populations were simulated, with all modes populated according to room-temperature average energy except for one mode at high temperature. To account for differences in heat capacities, the maximum temperature for optical modes was \SI{5000}{\kelvin}, while the maximum temperature for acoustic modes was capped at \SI{1500}{\kelvin}. These extreme non-equilibrium scenarios increase the value of $\sum_s W_s(\vec{q})$ by at most 1.5\% for optical modes, and 8\% for acoustic modes. The most significant example is shown in @fig:graphite-debye-waller-la, where the LA mode is populated according to a temperature of \SI{1500}{\kelvin}. Since those fractional changes are constant across $\vec{q}$, wavevector-dependent changes in UEDS signals are not significantly impacted by changes in the Debye-Waller factors $W_s(\vec{q}, \tau)$, and so any time-dependence of the one-phonon structure factors can be ignored to a first approximation.
+The potential time-dependence of the Debye-Waller factors was investigated, via the time-dependence of mode populations. Profoundly non-equilibrium distribution of phonon mode populations were simulated, with all modes populated according to room-temperature average energy except for one mode at high temperature. To account for differences in heat capacities, the maximum temperature for optical modes was \SI{5000}{\kelvin}, while the maximum temperature for acoustic modes was capped at \SI{1500}{\kelvin}. These extreme non-equilibrium scenarios increase the value of $\sum_s W_s(\vec{q})$ by at most 1.5\% for optical modes, and 8\% for acoustic modes. The most significant example is shown in @fig:graphite-debye-waller-la, where the LA mode is populated according to a temperature of \SI{1500}{\kelvin}. Since those fractional changes are constant across $\vec{q}$, wavevector-dependent changes in UEDS signals are not significantly impacted by changes in the Debye-Waller factors $W_s(\vec{q}, \tau)$, and so any time-dependence of the one-phonon structure factors can be ignored to a first approximation.
 
-```{.python #fig:graphite-debye-waller-la .matplotlib file="figures/graphite/debye-waller.py" caption="Effect of profoundly non-equilibrium distribution of phonon mode populations on the Debye-Waller factors. **a)** Sum of Debye-Waller factors according to the expected phonon distribution at room temperature. **b)** Difference between a) and the sum of Debye-Waller factors where all phonon modes are distributed according to room-temperature, except where the LA mode is populated according to a temperature of \SI{1500}{\kelvin}."}
+```{#fig:graphite-debye-waller-la .matplotlib file="figures/graphite/debye-waller.py" caption="Effect of profoundly non-equilibrium distribution of phonon mode populations on the Debye-Waller factors. **a)** Sum of Debye-Waller factors according to the expected phonon distribution at room temperature. **b)** Difference between a) and the sum of Debye-Waller factors where all phonon modes are distributed according to room-temperature, except where the LA mode is populated according to a temperature of \SI{1500}{\kelvin}."}
 ```
 
-```{.python .matplotlib #fig:graphite-oneph-longitudinal file="figures/graphite/oneph-long.py" caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, t=0)|^2$ of in-plane longitudinal modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds. See @fig:graphite-oneph-transverse for the transverse modes equivalent."}
+### One-phonon structure factor calculations
+
+The calculation for the one-phonon structure factors $|F_{1j}(\vec{q}, \tau=-\infty)|^2$ was carried out from (TODO: ONEPH EQUATION). As discussed in the previous section, the dynamics in one-phonon structure factors due to photoexcitation via the change in Debye-Waller factors can be neglected in this work. Therefore, the calculations of this section assume room-temperature thermal distribution of lattice waves; this is implied by time-delay $\tau=-\infty$ (pre-photoexcitation). The one-phonon structure factors for longitudinal modes LA, LO1 - LO3 are shown @fig:graphite-oneph-longitudinal. The one-phonon structure factors for transverse modes TA, TO1 - TO3 are shown @fig:graphite-oneph-transverse. Out-of-plane modes yield trivial one-phonon structure factors because $\vec{q} \cdot \vec{e}_{j,s}(\vec{k}) = 0$ for all scattering vectors $\vec{q}$ probed by the experiments presented herein.
+
+```{.matplotlib #fig:graphite-oneph-longitudinal file="figures/graphite/oneph-long.py" caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, \tau=-\infty)|^2$ of in-plane longitudinal modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds. See @fig:graphite-oneph-transverse for the transverse modes equivalent."}
 ```
 
-```{.python .matplotlib #fig:graphite-oneph-transverse file="figures/graphite/oneph-trans.py" caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, t=0)|^2$ of in-plane transverse modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds. See @fig:graphite-oneph-longitudinal for the longitudinal modes equivalent."}
+```{.matplotlib #fig:graphite-oneph-transverse file="figures/graphite/oneph-trans.py" caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, \tau=-\infty)|^2$ of in-plane transverse modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds. See @fig:graphite-oneph-longitudinal for the longitudinal modes equivalent."}
+```
+
+The one-phonon structure factors are display complex structure in reciprocal space. The structure for a particular mode can be thought of as selection rule: regions in $\vec{q}$ space where the one-phonon structure factor for mode $j$ is large are regions where phonon mode $j$ contributes importantly to diffuse intensity. The structure of $|F_{1j}|^2$ is most determined by the values of terms like $\left\{ \vec{q} \cdot \vec{e}_{j,s}(\vec{k}) \right\}$. For acoustic modes LA and TA, the structure of the one-phonon structure factor is easier to understand near $\vec{\Gamma}$. For example, $|F_{1j}|^2$ is highest for the LA mode in the radial $\vec{q}$ direction because the polarization vectors of those modes are parallel to $\vec{q}$; this fact defines longitudinal waves. For transverse waves, where atomic motion is perpendicular to the lattice wave propagation direction, $|F_{1j}|^2$ is higher in the azimuthal direction.
+
+An alternative visualization for one-phonon structure factors are weighted dispersion curves, as shown in @fig:graphite-weighted-dispersion.
+
+```{.matplotlib #fig:graphite-weighted-dispersion file="figures/graphite/weighted-dispersion.py" caption="Calculated one-phonon structure factors visualized as weighted dispersion curves for selected in-plane modes. The color saturation of dispersion curves is proportional to $|F_{1j}|^2$ of the associated mode. Equivalent paths in the Brillouin zone around two reflections are shown to highlight the high degree of reciprocal space structure: $(010)$ on the left and $(\bar{1}10)$ on the right. The geometry of the paths with respect to $(000)$ are shown in the inset on the lower left."}
 ```
 
 \FloatBarrier
