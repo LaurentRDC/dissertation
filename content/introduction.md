@@ -23,37 +23,7 @@ The core working principle of mode-locked oscillators is to fix the phase relati
 
 @fig:mode-locking shows an example of the first 30 longitudinal modes of a cavity coming together to form a strong pulse. In reality, pulses may combine $10^6$ modes to maximize peak power [@Siegman1986].
 
-```{.python #fig:mode-locking .matplotlib caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse. **a)** The first few longitudinal modes of a laser cavity. **b)** Combination of the first 45 modes of the cavity creates a very strong pulse in the center of the cavity."}
-from skued import spectrum_colors
-
-fig, (ax1, ax2) = plt.subplots(2,1, figsize=(FIGURE_WIDTH, 4), sharex=True)
-
-x = np.linspace(-0.5, 0.5, 512)
-pulse = np.zeros_like(x)
-mode = lambda x, n: np.cos(np.pi*(2*n + 1)*x)
-
-colors = reversed(list(spectrum_colors(4)))
-for n, c in enumerate(colors, start=1):
-    ax1.plot(x, mode(x,n), color=c)
-    pulse += mode(x,n)
-
-for n in range(1, 45):
-    pulse += mode(x,n)
-
-ax2.plot(x, pulse/pulse.max(), '-k')
-
-for ax in ax1, ax2:
-    ax.xaxis.set_ticks([])
-
-ax1.yaxis.set_ticks([0])
-ax2.yaxis.set_ticks([0])
-
-ax2.set_xlabel("Cavity position (a.u.)")
-ax1.set_ylabel("E-field amplitude (a.u.)")
-ax2.set_ylabel("E-field amplitude (a.u.)")
-
-tag_axis(ax1, "a)", y=0.8)
-tag_axis(ax2, "b)", y=0.8)
+```{.python #fig:mode-locking .matplotlib file="figures/introduction/mode-locking.py" caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse. **a)** The first few longitudinal modes of a laser cavity. **b)** Combination of the first 45 modes of the cavity creates a very strong pulse in the center of the cavity."}
 ```
 
 ### Regenerative laser amplifiers
@@ -77,72 +47,7 @@ $$ {#eq:bunch_length}
 
 where $N$ is the number of electrons in the bunch, $e$ the electron charge, $m_e$ the electron mass, $\epsilon_0$ the vacuum permittivity, and $r$ is the beam radius[@Siwick2002]. A numerical solution of @eq:bunch_length is presented in @fig:bunch-length.
 
-```{.python #fig:bunch-length .matplotlib caption=""}
-import skued
-import scipy.constants as constants
-from scipy.constants import physical_constants
-from scipy.integrate import odeint
-
-def bunch_length(distance, N, spotsize=200e-6, energy=90):
-    """
-    Determine the bunch length of an electron bunch with `N` electrons
-    propagating for `distance` meters. Electrons have `energy` keV. The bunch
-    has a transverse radius of `spotsize`.
-
-    Returns
-    -------
-    length : array_like
-        FWHM bunch length in femtosecond.
-    """
-    # From reference, the FWHM bunch length can be calculated (vs. full bunch length)
-    # if the following substitution is made:
-    num_electrons = N/2
-
-    # We cast the 2nd order nonlinear ODE l'' = f(l) into two equations
-    # 
-    #   u' = f(l)
-    #   l' = u
-    #
-    # Let y = [u, l], a vector. Then, the two equations above become:
-    #
-    #   y' = [f(l), u]
-    prefactor = (num_electrons * constants.e**2)/(constants.m_e * constants.epsilon_0 * np.pi * spotsize**2)
-    f = lambda l: prefactor * (1 - l/np.sqrt(l**2 + 4 * spotsize**2))
-
-    def system(y, t):
-        u, l = y
-        return [u, f(l)] # dy/dt
-    
-    # Propagation time is derived from propagation distance
-    electron_velocity = skued.electron_velocity(energy) / 1e10 # m/s
-    propagation_time = distance / electron_velocity
-
-    # Initial conditions: bunch length is equivalent length to laser pulse (~50 fs),
-    # and bunch is not expanding
-    # Note that the initial condition for l' is taken from Brad's thesis,
-    # where l' = 2 * vz (not that it matters...)
-    y0 = [2*electron_velocity, 500e-15 * electron_velocity]
-    
-    sol = odeint(system, y0, propagation_time)
-    length = sol[:,1] # only care about bunch length
-    length /= electron_velocity
-    return length
-
-distance = np.linspace(0, 0.05, 1024) # meters
-
-fig, ax = plt.subplots(1,1, figsize=(FIGURE_WIDTH,FIGURE_WIDTH))
-order_of_magnitudes = [2,3,4,5,6,7]
-colors = skued.spectrum_colors(len(order_of_magnitudes))
-
-for i, c in zip(order_of_magnitudes, colors):
-    num = 10**i
-    ax.plot(distance, bunch_length(distance, N=num), '-', color=c, label=f"$10^{i}$ e/bunch")
-
-#ax.axhline(y=1, linestyle='dashed', linewidth=1, color='k')
-
-ax.set_xlabel('Propagation distance [m]')
-ax.set_ylabel('FWHM pulse duration [s]')
-plt.legend()
+```{.python #fig:bunch-length .matplotlib file="figures/introduction/bunch-length.py" caption=""}
 ```
 
 ### Temporal control of electron bunches {#sec:cavity}

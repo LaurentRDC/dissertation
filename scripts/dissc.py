@@ -142,9 +142,9 @@ parser_build = subparsers.add_parser("build", help="Build dissertation.")
 parser_build.add_argument(
     "--style",
     action="store",
-    help="Style of dissertation to use. Default is `cleanthesis`.",
+    help="Style of dissertation to use. Default is `eisvogel`.",
     choices=["simple", "eisvogel", "cleanthesis"],
-    default="cleanthesis",
+    default="eisvogel",
 )
 
 
@@ -330,7 +330,7 @@ def build_eisvogel():
     build_auxiliary(aux_options=aux_options)
 
     options = OPTIONS
-    options += ["-V float-placement-figure=ht"]
+    # options += ["-V float-placement-figure=ht"]
     options += ["-V listings-no-page-break=true"]
     options += ["-V book=true"]
     options += ["-V toc-own-page=true"]

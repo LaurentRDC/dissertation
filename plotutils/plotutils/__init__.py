@@ -9,6 +9,19 @@ from functools import partial
 
 from crystals.affine import change_of_basis
 
+# CONSTANTS -------------------------------------------------------------------
+
+FIGURE_WIDTH = 6 + 3 / 4  # inches
+
+# Diffraction patterns are rotated by 8 degrees clockwise from aligned
+GRAPHITE_ANGLE = 8  # degrees
+GRAPHITE_CAMERA_LENGTH = 0.25  # centi-meters
+_peak1 = np.array((754, 905))
+_peak2 = np.array((1265, 1318))
+GRAPHITE_CENTER = np.array(0.5 * (_peak1 + _peak2), dtype=np.int)
+
+# -----------------------------------------------------------------------------
+
 # Wrapper around ImageGrid with some parameters fixed
 GRID_AXES_PAD = 0.05
 GRID_CBAR_PAD = GRID_AXES_PAD
@@ -59,14 +72,25 @@ def set_height_auto(fig, width):
 
 
 def draw_hexagon_field(
-    ax, radius, crystal, reflections, orientation=np.deg2rad(30), **kwargs
+    ax,
+    radius,
+    crystal,
+    reflections,
+    orientation=np.deg2rad(30),
+    center=(0, 0),
+    **kwargs
 ):
     """ Fill the plot with hexagons centered at the Bragg points """
+    center = np.array(center)
     from_frac = change_of_basis(np.array(crystal.reciprocal_vectors), np.eye(3))
     for refl in reflections:
         xyz = from_frac @ refl
         draw_hexagon(
-            ax, center=xyz[0:2], radius=radius, orientation=orientation, **kwargs
+            ax,
+            center=xyz[0:2] + center,
+            radius=radius,
+            orientation=orientation,
+            **kwargs,
         )
 
 
@@ -82,7 +106,6 @@ def draw_hexagon(
     """ Draw a hexagon within an Axes object"""
     if "linewidth" not in kwargs:
         kwargs["linewidth"] = 1
-    print("facecolor", facecolor)
     hexagon = mpatches.RegularPolygon(
         xy=center,
         numVertices=6,
