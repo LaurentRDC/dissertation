@@ -69,7 +69,7 @@ plt.colorbar(mappable=om, cax=optical_cax, orientation="vertical")
 optical_cax.yaxis.tick_right()
 optical_cax.yaxis.set_label_position("right")
 optical_cax.yaxis.set_visible(True)
-optical_cax.set_ylabel(r"$|F_{1j}(\mathbf{q}, t_0)|^2$ [a.u.]")
+optical_cax.set_ylabel(r"$|F_{1j}(\mathbf{q}, \tau<0)|^2$ [a.u.]")
 
 for i in range(1, len(LABELS)):
     ax.axvline(x=i * NSTEPS, color="k", linestyle="--", linewidth=1)

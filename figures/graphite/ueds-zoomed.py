@@ -37,7 +37,7 @@ hex_radius = sqrt(3) * np.linalg.norm(q020 - q010) / 2.7
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(4, 2))
 
 with DiffractionDataset(Path("data") / "graphite" / "TDS_delta.hdf5") as dset:
-    image = dset.diff_data(0.5)
+    image = dset.diff_data(100)
 
 image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect")
 image[qq < 1.5] = 0

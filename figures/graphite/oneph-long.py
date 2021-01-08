@@ -56,7 +56,7 @@ cryst = Crystal.from_pwscf(INPUT / "output.out")
 # Only Longitudinal modes here
 modes = filter(lambda s: s.startswith("L"), IN_PLANE_MODES)
 for mode, ax in zip(modes, grid):
-    image = np.load(INPUT / "oneph" / f"{mode}.npy")
+    image = np.load(INPUT / "oneph" / f"{mode}_oneph.npy")
 
     # Image is scaled so maximum is always 1
     m = ax.imshow(
@@ -91,6 +91,6 @@ cbar = ax.cax.colorbar(
     format=FixedFormatter(["0", "1"]),
 )
 cbar.ax.xaxis.set_label_position("top")
-cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, \tau=-\infty)|^2$ [a.u.]")
+cbar.ax.set_xlabel(r"$|F_{1j}(\mathbf{q}, \tau<0)|^2$ [a.u.]")
 
 plt.subplots_adjust(bottom=0.01)
