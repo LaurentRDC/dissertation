@@ -7,23 +7,25 @@ This script is meant to be used as a command-line program:
 python -m dissc --help
 ```
 """
-import contextlib
 import argparse
-from pathlib import Path
-import subprocess
-import os
-from functools import wraps
+import contextlib
+import json
+import logging
 import multiprocessing as mp
+import os
+import runpy
+import shutil
+import subprocess
 import sys
-from itertools import chain
+import tempfile
+import time
 import warnings
 from contextlib import suppress
-import shutil
-import tempfile
+from functools import wraps
+from itertools import chain
+from pathlib import Path
+
 import termcolor
-import time
-import runpy
-import logging
 
 logging.basicConfig(encoding="utf-8", level=logging.INFO)
 

@@ -121,7 +121,7 @@ The calculation of phonon properties relevant to his work involves diagonalizing
 
 As of writing this, there is no component within the `QUANTUM ESPRESSO` software suite that can do this. The scheme described in this section was used instead. The general idea behind the procedure is that phonon properties are continuous. Let $P_{j, \vec{k}_i}$ be the abstract vector representing phonon properties of mode $j$ at one of the irreducible $\vec{k}$ points $\left\{\vec{k}_i\right\}$:
 $$
-    P_{j, \vec{k}_i} = \begin{bmatrix} \omega_{j, \vec{k}_i} & \vec{e}_{s=1,j,\vec{k}_i} & ... & \vec{e}_{s=M,j,\vec{k}_i} \end{bmatrix}^T
+    P_{j, \vec{k}_i} \equiv \begin{bmatrix} \omega_{j, \vec{k}_i} & \vec{e}_{s=1,j,\vec{k}_i} & ... & \vec{e}_{s=M,j,\vec{k}_i} \end{bmatrix}^T
 $$
 where the index $s$ runs over all $M$ atoms of the unit cell. Define the metric between two such abstract vectors $\vec{P}_{i, \vec{k}}$ and $\vec{P}_{j, \vec{k}'}$ as:
 $$
@@ -136,7 +136,7 @@ The procedure described above has been adapted for numerical evaluation and is n
 
 The change in scattering intensity $\Delta I(\vec{q}, t=\tau) = I(\vec{q}, \tau) - I(\vec{q}, -\infty)$ for representative time-delays is shown in @fig:graphite-ueds. 
 
-```{#fig:graphite-ueds .matplotlib file="figures/graphite/ueds.py" caption="Change in scattering intensity $\Delta I(\vec{q}, t=\tau) = I(\vec{q}, \tau) - I(\vec{q}, -\infty)$ of photoexcited graphite for a few representative time-delays $\tau$. Hexagonal Brillouin zones are shown on half of the reflections to guide the eye. Scattering patterns show diffuse dynamics in the range of $|\vec{q}| < \SI{12}{\per\angstrom}$. Negative going features (blue) are exclusively due to the transient Debye-Waller effect on the Bragg peaks. All positive changes (red) are dynamics of the diffuse scattering intensity."}
+```{#fig:graphite-ueds .matplotlib file="figures/graphite/ueds.py" caption="Change in scattering intensity $\Delta I(\vec{q}, t=\tau) = I(\vec{q}, \tau) - I(\vec{q}, \tau < 0)$ of photoexcited graphite for a few representative time-delays $\tau$. Hexagonal Brillouin zones are shown on half of the reflections to guide the eye. Scattering patterns show diffuse dynamics in the range of $|\vec{q}| < \SI{12}{\per\angstrom}$. Negative going features (blue) are exclusively due to the transient Debye-Waller effect on the Bragg peaks. All positive changes (red) are dynamics of the diffuse scattering intensity."}
 ```
 
 First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall symmetry of the lattice, which in turn results in smaller Bragg peaks. This is analogous to the (static) thermal Debye-Waller effect [@Debye1913; @Waller1923]. This leaves only positive-going features everywhere away from Bragg peaks, which must be diffuse in nature.
@@ -162,7 +162,7 @@ As shown in @fig:graphite-ueds-zoomed, observed diffuse intensity is the combina
 
 In order to recover mode-dependent phonon populations, one-phonon structure factors need to be calculated for every relevant phonon mode. Most importantly, the phonon polarization vectors $\left\{ \vec{e}_{j, s}(\vec{k})\right\}$ need to be determined. These vectors describe the direction of movement for each atom due to a particular lattice wave. Fortunately, polarization vectors are a byproduct of the calculation of the phonon dispersion relation, shown in @fig:graphite-static-dispersion.
 
-### Transient Debye-Waller factors
+### Transient Debye-Waller factors {#sec:graphite-debye-waller}
 
 One more quantity needs to be discussed before one-phonon structure factors can be computed: the Debye-Waller factors $W_s(\vec{q}, \tau)$. The Debye-Waller factors describe the reduction of scattering intensity at $\vec{q}$ due to the effective deformation of the scattering potential of atom $s$ by *all* phonon branches. The general expression for the *anisotropic* Debye-Waller factor for atom $s$ is given by[@Xu2005]:
 $$
@@ -191,15 +191,39 @@ The calculation for the one-phonon structure factors $|F_{1j}(\vec{q}, \tau<0)|^
 
 The one-phonon structure factors are display complex structure in reciprocal space. The structure for a particular mode can be thought of as selection rule: regions in $\vec{q}$ space where the one-phonon structure factor for mode $j$ is large are regions where phonon mode $j$ contributes importantly to diffuse intensity. The structure of $|F_{1j}|^2$ is most determined by the values of terms like $\left\{ \vec{q} \cdot \vec{e}_{j,s}(\vec{k}) \right\}$. For acoustic modes LA and TA, the structure of the one-phonon structure factor is easier to understand near $\vec{\Gamma}$. For example, $|F_{1j}|^2$ is highest for the LA mode in the radial $\vec{q}$ direction because the polarization vectors of those modes are parallel to $\vec{q}$; this fact defines longitudinal waves. For transverse waves, where atomic motion is perpendicular to the lattice wave propagation direction, $|F_{1j}|^2$ is higher in the azimuthal direction.
 
+### Weighted phonon dispersion
+
 An alternative visualization for one-phonon structure factors are weighted dispersion curves, as shown in @fig:graphite-weighted-dispersion. This way of looking at $|F_{1j}|^2$ clearly highlights the difference across Brillouin zones. For example, the difference $|F_{1,j=\text{TA}}|^2 - |F_{1,j=\text{LA}}|^2$ is either negative ($\vec{q} \approx \vec{\Gamma}_{(010)}$) or positive ($\vec{q} \approx \vec{\Gamma}_{(\bar{1}10)}$). The variation of $|F_{1j}|^2$ explains the diffuse intensity difference shown in @fig:graphite-ueds-zoomed.
 
 ```{.matplotlib #fig:graphite-weighted-dispersion file="figures/graphite/weighted-dispersion.py" caption="Calculated one-phonon structure factors visualized as weighted dispersion curves for selected in-plane modes. The color saturation of dispersion curves is proportional to $|F_{1j}|^2$ of the associated mode. Equivalent paths in the Brillouin zone around two reflections are shown to highlight the high degree of reciprocal space structure: $(010)$ on the left and $(\bar{1}10)$ on the right. The geometry of the paths with respect to $(000)$ are shown in the inset on the lower left."}
 ```
 
-By examining @fig:graphite-weighted-dispersion, it appears that at certain locations, the one-phonon structure factor for one phonon mode dominates; for example, $|F_{1,j=\text{LA}}|^$ near $\vec{q} \approx \vec{\Gamma}_{(010)}$). It might therefore be tempting to attribute the diffuse intensity dynamics at that location exclusively to one mode. If enough such locations in reciprocal space existed, it would be possible to bypass the energy-insensitivity of UEDS and extract mode-dependent phonon dynamics at special points in the Brillouin zone; this idea forms the basis of previous work on graphite [@Stern2018]. However, the information presented by @fig:graphite-weighted-dispersion is incomplete. @fig:graphite-oneph-majority shows where, across the reciprocal space area equivalent to @fig:graphite-ueds, a phonon mode's one-phonon structure factor contributes either 50\% or 75\% the sum $\sum_j |F_{1j}|^2/\omega_j$.
+By examining @fig:graphite-weighted-dispersion, it appears that at certain locations, the one-phonon structure factor for one phonon mode dominates; for example, $|F_{1,j=\text{LA}}|^$ near $\vec{q} \approx \vec{\Gamma}_{(010)}$). It might therefore be tempting to attribute the diffuse intensity dynamics at that location exclusively to one mode. If enough such locations in reciprocal space existed, it would be possible to bypass the energy-insensitivity of UEDS and extract mode-dependent phonon dynamics at special points in the Brillouin zone; this idea forms the basis of previous work on graphite [@Stern2018]. However, the information presented by @fig:graphite-weighted-dispersion is incomplete. 
 
-```{.matplotlib #fig:graphite-oneph-majority file="figures/graphite/oneph-majority.py" caption=""}
+### Relative mode contributions
+
+In order to compare the contribution of a particular phonon mode $j$ on UEDS data, the following weight can be defined:
+$$
+    W_j(\vec{q}, \tau) \equiv \frac{\left| F_{1j}(\vec{q}, \tau)\right|}{\omega_j(\vec{k}, \tau)}
+$${#eq:graphite-ueds-weight}
+With the weight definition of @eq:graphite-ueds-weight, the change in diffuse intensity (TODO: ONEPH EQUATION) can be re-written as:
+\begin{align}
+    \Delta I_1(\vec{q}, \tau) &\equiv I_1(\vec{q}, \tau) - I_1(\vec{q}, \tau < 0) \nonumber \\
+                              &= \left( n_j(\vec{q}, \tau) + \sfrac{1}{2} \right) W_j(\vec{q}, \tau) - \left( n_j(\vec{q}, \tau < 0) + \sfrac{1}{2} \right) W_j(\vec{q}, \tau < 0) \nonumber \\
+                              &\approx \left[ n_j(\vec{q}, \tau) - n_j(\vec{q}, \tau < 0)\right] W_j(\vec{q}, \tau < 0)
+\end{align}
+where, in the last line, the quasi-static nature of the one-phonon structure factor $|F_{1j}(\vec{q}, \tau}|^2 \approx |F_{1j}(\vec{q}, \tau < 0}|^2$ was used as discussed in @sec:graphite-debye-waller.
+
+@fig:graphite-oneph-majority shows where, across the reciprocal space area equivalent to @fig:graphite-ueds, a single new phonon from a particular branch contributes more than 50\% or more than 75\% of the diffuse intensity increase. In other words, @fig:graphite-oneph-majority shows where *any* branch $j$, with associated weight $W_j(\vec{q}, \tau<0)$, contributes more than 50\% or 75\% of the total weight $\sum_j W_j(\vec{q}, \tau<0)$. The calculation presented in @fig:graphite-oneph-majority are categorical: dynamics in the transient diffuse intensity **cannot** be associated with the dynamics of a single phonon branch. Furthermore, @fig:graphite-oneph-majority shows that at in-plane high symmetry points $\vec{K}$ and $\vec{M}$, no phonon branch contributes to more than 50\% of the associated dynamics in the diffuse intensity.
+
+In order to access the ultrafast phonon dynamics in a material with UEDS, a more comprehensive analysis of UEDS must be devised -- making good use of one-phonon structure factors.
+
+```{.matplotlib #fig:graphite-oneph-majority file="figures/graphite/oneph-majority.py" caption="Locations in reciprocal space where a single new phonon from a particular branch contributes to more than **a)** 50\% and **b)** 75\% of the associated increase in diffuse intensity."}
 ```
+
+## Phonon spectroscopy across the Brillouin zone.
+
+
 
 \FloatBarrier
 ## References {.unnumbered}
