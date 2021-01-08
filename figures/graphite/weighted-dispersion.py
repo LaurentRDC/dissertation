@@ -18,7 +18,7 @@ HZ_TO_EV = HBAR * 2 * np.pi
 ACOUSTIC_CMAP = "Reds"
 OPTICAL_CMAP = "Blues"
 
-fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 0.35 * FIGURE_WIDTH))
+fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 0.5 * FIGURE_WIDTH))
 
 LABELS = [
     r"$\mathbf{\Gamma}_{(010)}$",
@@ -113,7 +113,6 @@ ax.legend(
     ncol=2,
     bbox_to_anchor=(0.5, 1.07),
     loc="center",
-    fontsize=8,
 )
 
 # Annotate the modes
@@ -121,18 +120,17 @@ for label, pt in zip(
     ["TA", "LA", "TO2", "LO2"],
     [(0.08, 0.15), (0.025, 0.45), (0.42, 0.77), (0.35, 0.94)],
 ):
-    ax.annotate(label, pt, color="k", textcoords=ax.transAxes, fontsize=8)
+    ax.annotate(label, pt, color="k", textcoords=ax.transAxes)
     ax.annotate(
         label,
         np.asarray(pt) + np.array([0.5, 0]),
         color="k",
         textcoords=ax.transAxes,
-        fontsize=8,
     )
 
 
 # Draw path in inset
-path_ax = fig.add_axes([0.25, 0.11, 0.12, 0.33])
+path_ax = fig.add_axes([0.25, 0.12, 0.16, 0.32])
 path_ax.axis("off")
 
 # Draw path and hexagon
@@ -143,9 +141,13 @@ vertices2 = np.load(INPUT / "vertices2.npy")
 # point from gamma)
 # If the path ever changes, the definition of this radius will have to change
 hex_radius = 1.7015921874416833
-draw_hexagon(path_ax, center=vertices1[0][0:2], radius=hex_radius, color="k")
-draw_hexagon(path_ax, center=vertices2[0][0:2], radius=hex_radius, color="k")
-draw_hexagon(path_ax, center=(0, 0), radius=hex_radius, color="k")
+draw_hexagon(
+    path_ax, center=vertices1[0][0:2], radius=hex_radius, color="k", facecolor="w"
+)
+draw_hexagon(
+    path_ax, center=vertices2[0][0:2], radius=hex_radius, color="k", facecolor="w"
+)
+draw_hexagon(path_ax, center=(0, 0), radius=hex_radius, color="k", facecolor="w")
 
 # Last vertex is same as first
 # Note that for display reasons, we remove the e2 offset
@@ -161,6 +163,7 @@ for vertex, label, v_alignment, h_alignment in zip(
         y=vertex[1],
         s=2,
         c="k",
+        zorder=np.inf,
     )
     path_ax.annotate(
         label,
@@ -168,16 +171,14 @@ for vertex, label, v_alignment, h_alignment in zip(
         color="k",
         verticalalignment=v_alignment,
         horizontalalignment=h_alignment,
-        fontsize=8,
     )
 
 # Show center of (000) reflections
-path_ax.scatter(0, 0, s=2, c="k")
+path_ax.scatter(0, 0, s=2, c="k", zorder=np.inf)
 path_ax.annotate(
     "$\mathbf{\Gamma}_{(000)}$",
     (0, 0),
     color="k",
     verticalalignment="top",
     horizontalalignment="center",
-    fontsize=8,
 )
