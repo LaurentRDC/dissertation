@@ -17,7 +17,11 @@ from plotutils import (
     tag_axis,
 )
 from skimage.transform import rotate
-from skued import detector_scattvectors, indices_to_text
+from skimage.filters import gaussian
+from skued import detector_scattvectors, indices_to_text, nfold, combine_masks
+
+DATADIR = Path("data") / "graphite"
+DATASET = DATADIR / "graphite_time_corrected_iris5.hdf5"
 
 qx, qy, _ = detector_scattvectors(
     keV=90,
@@ -28,17 +32,32 @@ qx, qy, _ = detector_scattvectors(
 )
 qq = np.sqrt(qx ** 2 + qy ** 2)
 
+
+beamblock = np.ones((2048, 2048), dtype=np.bool)
+beamblock[0:1260, 900:1130] = False
+
+artifact_mask = np.ones((2048, 2048), dtype=np.bool)
+artifact_mask[1084::, 437:482] = False
+artifact_mask[0:932, 1296:1324] = False
+
+mask = combine_masks(beamblock, artifact_mask)
+
+with DiffractionDataset(DATASET) as source:
+    b4t0 = source.diff_eq()
+
 # Find location of (100) and (200) BZs
-graphite = Crystal.from_pwscf(Path("data") / "graphite" / "output.out")
+graphite = Crystal.from_pwscf(DATADIR / "output.out")
 q010 = graphite.scattering_vector((0, 1, 0))
 q020 = graphite.scattering_vector((0, 2, 0))
 hex_radius = sqrt(3) * np.linalg.norm(q020 - q010) / 2.7
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(4, 2))
 
-with DiffractionDataset(Path("data") / "graphite" / "TDS_delta.hdf5") as dset:
-    image = dset.diff_data(100)
+with DiffractionDataset(DATASET) as dset:
+    image = dset.diff_data(100) - b4t0
 
+gaussian(image, sigma=4, output=image)
+image[:] = nfold(image, mod=6, center=GRAPHITE_CENTER, mask=mask, fill_value=np.nan)
 image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect")
 image[qq < 1.5] = 0
 

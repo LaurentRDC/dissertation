@@ -17,7 +17,10 @@ from plotutils import (
     tag_axis,
 )
 from skimage.transform import rotate
-from skued import detector_scattvectors
+from skimage.filters import gaussian
+from skued import detector_scattvectors, nfold, combine_masks
+
+DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
 
 xc, yc = GRAPHITE_CENTER
 qx, qy, _ = detector_scattvectors(
@@ -27,6 +30,19 @@ qx, qy, _ = detector_scattvectors(
     pixel_size=14e-6,
     center=(yc, xc),
 )
+
+beamblock = np.ones((2048, 2048), dtype=np.bool)
+beamblock[0:1260, 900:1130] = False
+
+artifact_mask = np.ones((2048, 2048), dtype=np.bool)
+artifact_mask[1084::, 437:482] = False
+artifact_mask[0:932, 1296:1324] = False
+
+mask = combine_masks(beamblock, artifact_mask)
+
+
+with DiffractionDataset(DATASET) as source:
+    b4t0 = source.diff_eq()
 
 # Determine the smallest center -> side distance, and crop around that
 side_length = floor(min([xc, abs(xc - 2048), yc, abs(yc - 2048)]))
@@ -40,10 +56,17 @@ qq = np.sqrt(qx ** 2 + qy ** 2)
 fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH))
 grid = ImageGrid(fig, 111, nrows_ncols=(2, 2), cbar_location="top")
 
-with DiffractionDataset(Path("data") / "graphite" / "TDS_delta.hdf5") as dset:
+with DiffractionDataset(DATASET) as dset:
     for time, ax, letter in zip([0.5, 1.5, 5, 100], grid, "abcd"):
 
-        image = dset.diff_data(time)
+        image = nfold(
+            dset.diff_data(time) - b4t0,
+            mod=6,
+            center=GRAPHITE_CENTER,
+            mask=mask,
+            fill_value=np.nan,
+        )
+        gaussian(image, sigma=4, output=image)
         image[:] = rotate(
             image, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect"
         )
