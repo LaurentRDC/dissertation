@@ -53,6 +53,8 @@ jobs:
 
     - name: Install LaTeX dependencies
       run: |
+        sudo apt-get update
+        sudo apt-get install --yes inkscape
         sudo apt-get install --yes texlive
 
     - name: Show build information

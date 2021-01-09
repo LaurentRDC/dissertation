@@ -161,10 +161,10 @@ def check_for_todo(path):
 
 
 @wraps(subprocess.run)
-def run(*args, **kwargs):
-    cmd = args[0]
+def run(cmd, *args, **kwargs):
     logging.info("Running " + cmd)
-    return subprocess.run(*args, **kwargs)
+    cwd=kwargs.pop('cwd', HERE)
+    return subprocess.run(cmd, *args, shell=True, cwd=cwd, **kwargs)
 
 
 def runpandoc(options, target, sourcefiles, appendices=None):
@@ -189,8 +189,6 @@ def runpandoc(options, target, sourcefiles, appendices=None):
         sourcefiles += [appendices]
     return run(
         f"pandoc +RTS -N -RTS {stringify(options)} -o {target} {stringify(sourcefiles)}",
-        shell=True,
-        cwd=HERE,
     )
 
 
@@ -199,9 +197,7 @@ def render_diagram(source, target):
     try:
         run(
             f"inkscape --export-area-page --export-filename {target} {source}",
-            shell=True,
             capture_output=True,
-            cwd=HERE,
         ).check_returncode()
     except subprocess.CalledProcessError:
         warnings.warn(
@@ -217,7 +213,7 @@ def runlatex(source, target):
     """
     target = Path(target)
     run(
-        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source} "
+        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source}"
     )
     run(f"biber --quiet build/{Path(target).stem}")
     run(
@@ -254,9 +250,8 @@ def download_template_files():
         with tempfile.TemporaryDirectory(dir=TEMPLATEDIR) as downloaddir:
             run(
                 f"git clone --quiet --single-branch --branch master --depth 100 {repo} {downloaddir}",
-                shell=True,
             )
-            run(f"git checkout --quiet {version}", cwd=downloaddir, shell=True)
+            run(f"git checkout --quiet {version}", cwd=downloaddir)
             shutil.copy(Path(downloaddir) / template, TEMPLATEDIR / template)
             print("Successfully downloaded", template)
 
