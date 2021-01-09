@@ -57,9 +57,6 @@ BIBFILE = Path("references.bib")
 
 APPENDIX = CONTENTDIR / "appendix.md"
 
-TARGET = HERE / "dissertation.pdf"
-
-
 ## Auxiliary files
 ## (Do not change!)
 TITLEPAGE = "titlepage.tex"
@@ -211,17 +208,21 @@ def runlatex(source, target):
     """
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
     """
+    # Important: the options -aux-directory is Miktex-only, so I'm not using it
+    # so that this script also supports TexLive. Also, confusingly, Texlive uses -jobname
+    # and Miktex uses -job-name. Therefore, not using either.
     target = Path(target)
     run(
-        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source}"
+        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -output-directory={BUILDDIR} {source}"
     )
     run(f"biber --quiet build/{Path(target).stem}")
     run(
-        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -aux-directory={BUILDDIR} -job-name={target.stem} {source}"
+        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -output-directory={BUILDDIR} {source}"
     )
     run(
-        f"{LATEX_ENGINE} -interaction=batchmode -aux-directory={BUILDDIR} -job-name={target.stem} -output-directory={target.parent} {source}"
+        f"{LATEX_ENGINE} -interaction=batchmode -output-directory={BUILDDIR} {source}"
     )
+    shutil.copy2(BUILDDIR / source.with_suffix(".pdf"), target)
 
 
 def build(options, target, sourcefiles, appendices=None):
@@ -279,18 +280,18 @@ def build_auxiliary(aux_options=AUX_OPTS):
         )
 
 
-def build_simple():
+def build_simple(target):
     """ Build the dissertation in the simple book style """
     build_auxiliary()
     build(
         options=OPTIONS,
-        target=TARGET,
+        target=target,
         sourcefiles=SRC,
         appendices=APPENDIX,
     )
 
 
-def build_cleanthesis():
+def build_cleanthesis(target):
     """ Build the dissertation in the Cleanthesis style """
     if not (TEMPLATEDIR / CLEANTHESIS_TEMPLATE).exists():
         download_template_files()
@@ -305,13 +306,13 @@ def build_cleanthesis():
 
     build(
         options=options,
-        target=TARGET,
+        target=target,
         sourcefiles=SRC,
         appendices=APPENDIX,
     )
 
 
-def build_eisvogel():
+def build_eisvogel(target):
     """ Build the dissertation in the Eisvogel style. """
     if not (TEMPLATEDIR / EISVOGEL_TEMPLATE).exists():
         download_template_files()
@@ -339,18 +340,10 @@ def build_eisvogel():
 
     build(
         options=options,
-        target=TARGET,
+        target=target,
         sourcefiles=SRC,
         appendices=APPENDIX,
     )
-
-
-def clean():
-    """ Clean generated files """
-    shutil.rmtree(BUILDDIR, ignore_errors=True)
-    with suppress(FileNotFoundError):
-        os.remove(TARGET)
-
 
 if __name__ == "__main__":
 
@@ -361,9 +354,9 @@ if __name__ == "__main__":
             "simple": build_simple,
             "eisvogel": build_eisvogel,
         }
-        multiplexor[arguments.style]()
+        multiplexor[arguments.style](target = HERE / "dissertation.pdf")
     elif arguments.command == "clean":
-        clean()
+        shutil.rmtree(BUILDDIR, ignore_errors=True)
     elif arguments.command == "download-templates":
         download_template_files()
     else:
