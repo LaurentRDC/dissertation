@@ -1,8 +1,14 @@
 """
 Create the title page for the Eisvogel template
+
+Usage:
+
+python mktitlepage.py TARGET
 """
 import random
 import math
+from pathlib import Path
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -26,6 +32,8 @@ mm_to_in = 0.03937008
 
 # CMAP "cool" also looks, uh, cool
 cmap = plt.get_cmap("inferno")
+
+TARGET = Path(sys.argv[1])
 
 
 def draw_hexagon(ax, center, color):
@@ -65,4 +73,4 @@ for offset_x, offset_y in [(0, 0), (WIDTH / 2, (3 / 2) * RADIUS)]:
 
 ax.axis("off")
 plt.subplots_adjust(top=1, bottom=0, left=0, right=1)
-plt.savefig("build/titlepage.pdf", dpi=600)
+plt.savefig(TARGET, dpi=600)

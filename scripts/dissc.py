@@ -13,7 +13,6 @@ import json
 import logging
 import multiprocessing as mp
 import os
-import runpy
 import shutil
 import subprocess
 import sys
@@ -30,7 +29,7 @@ import termcolor
 logging.basicConfig(encoding="utf-8", level=logging.INFO)
 
 HERE = Path(os.getcwd())
-BUILDDIR_PDF = HERE / "build-pdf"
+BUILDDIR_PDF = HERE / "build"
 BUILDDIR_PDF.mkdir(exist_ok=True)
 
 CONTENTDIR = HERE / "content"
@@ -323,7 +322,7 @@ def build_eisvogel(target):
     # because it's too hard to import other python scripts
     # into this one
     if not (BUILDDIR_PDF / "titlepage.pdf").exists():
-        runpy.run_path(HERE / "scripts" / "mktitlepage.py")
+        run(f"python scripts/mktitlepage.py {BUILDDIR_PDF / 'titlepage.pdf'}")
 
     aux_options = AUX_OPTS
     aux_options += ["-M eisvogel=true"]
@@ -337,7 +336,9 @@ def build_eisvogel(target):
     options += ["-V titlepage=true"]
     options += ["-V titlepage-text-color=FFFFFF"]
     options += ["-V titlepage-rule-height=0"]
-    options += ["-V titlepage-background=build/titlepage.pdf"]
+    # Note that the path separators absolutely needs to be '\'
+    titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
+    options += [f"-V titlepage-background={titlepage_path}"]
     options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
 
     buildpdf(
