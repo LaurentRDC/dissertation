@@ -30,11 +30,10 @@ import termcolor
 logging.basicConfig(encoding="utf-8", level=logging.INFO)
 
 HERE = Path(os.getcwd())
-BUILDDIR = HERE / "build"
-BUILDDIR.mkdir(exist_ok=True)
+BUILDDIR_PDF = HERE / "build-pdf"
+BUILDDIR_PDF.mkdir(exist_ok=True)
 
 CONTENTDIR = HERE / "content"
-PLOTSDIR = BUILDDIR / "plots"
 TEMPLATEDIR = HERE / "templates"
 
 PANDOC = "pandoc"
@@ -62,8 +61,8 @@ APPENDIX = CONTENTDIR / "appendix.md"
 TITLEPAGE = "titlepage.tex"
 FRONTMATTER = "frontmatter.tex"
 
-TMP1 = BUILDDIR / "__titlepage.filled.tex"
-TMP2 = BUILDDIR / "__frontmatter.filled.tex"
+TMP1 = BUILDDIR_PDF / "__titlepage.filled.tex"
+TMP2 = BUILDDIR_PDF / "__frontmatter.filled.tex"
 TMP = [TMP1, TMP2]
 
 AUX_OPTS = ["--wrap=preserve"]
@@ -207,13 +206,13 @@ def runlatex(source, target):
     # and Miktex uses -job-name. Therefore, not using either.
     target = Path(target)
     latex_options = (
-        f" -interaction=batchmode -halt-on-error -output-directory={BUILDDIR}"
+        f" -interaction=batchmode -halt-on-error -output-directory={BUILDDIR_PDF}"
     )
     run(f"{LATEX_ENGINE} {latex_options} -draftmode {source}").check_returncode()
     run(f"biber --quiet build/{Path(source).stem}").check_returncode()
     run(f"{LATEX_ENGINE} {latex_options} -draftmode {source}").check_returncode()
     run(f"{LATEX_ENGINE} {latex_options} {source}").check_returncode()
-    shutil.copy2(BUILDDIR / source.with_suffix(".pdf"), target)
+    shutil.copy2(BUILDDIR_PDF / source.with_suffix(".pdf"), target)
 
 
 def buildpdf(options, target, sourcefiles, appendices=None):
@@ -223,19 +222,19 @@ def buildpdf(options, target, sourcefiles, appendices=None):
     options += ["--biblatex"]
     runpandoc(
         options=options,
-        target=BUILDDIR / "temp.tex",
+        target=BUILDDIR_PDF / "temp.tex",
         sourcefiles=sourcefiles,
         appendices=appendices,
     )
 
-    todo_left = check_for_todo(BUILDDIR / "temp.tex")
+    todo_left = check_for_todo(BUILDDIR_PDF / "temp.tex")
 
     try:
-        runlatex(source=BUILDDIR / "temp.tex", target=target)
+        runlatex(source=BUILDDIR_PDF / "temp.tex", target=target)
     except subprocess.CalledProcessError:
         print("--------------------------------")
         print("Error encountered. See temp.log:")
-        with open(BUILDDIR / "temp.log", "rt") as f:
+        with open(BUILDDIR_PDF / "temp.log", "rt") as f:
             for line in f:
                 print(line)
         print("--------------------------------")
@@ -323,7 +322,7 @@ def build_eisvogel(target):
     # We use run-py as a kind of script-runner
     # because it's too hard to import other python scripts
     # into this one
-    if not (BUILDDIR / "titlepage.pdf").exists():
+    if not (BUILDDIR_PDF / "titlepage.pdf").exists():
         runpy.run_path(HERE / "scripts" / "mktitlepage.py")
 
     aux_options = AUX_OPTS
@@ -360,7 +359,7 @@ if __name__ == "__main__":
         }
         multiplexor[arguments.style](target=HERE / "dissertation.pdf")
     elif arguments.command == "clean":
-        shutil.rmtree(BUILDDIR, ignore_errors=True)
+        shutil.rmtree(BUILDDIR_PDF, ignore_errors=True)
     elif arguments.command == "download-templates":
         download_template_files()
     else:
