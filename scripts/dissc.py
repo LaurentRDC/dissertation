@@ -160,7 +160,7 @@ def check_for_todo(path):
 @wraps(subprocess.run)
 def run(cmd, *args, **kwargs):
     logging.info("Running " + cmd)
-    cwd=kwargs.pop('cwd', HERE)
+    cwd = kwargs.pop("cwd", HERE)
     return subprocess.run(cmd, *args, shell=True, cwd=cwd, **kwargs)
 
 
@@ -186,7 +186,7 @@ def runpandoc(options, target, sourcefiles, appendices=None):
         sourcefiles += [appendices]
     return run(
         f"pandoc +RTS -N -RTS {stringify(options)} -o {target} {stringify(sourcefiles)}",
-    )
+    ).check_returncode()
 
 
 def render_diagram(source, target):
@@ -212,16 +212,13 @@ def runlatex(source, target):
     # so that this script also supports TexLive. Also, confusingly, Texlive uses -jobname
     # and Miktex uses -job-name. Therefore, not using either.
     target = Path(target)
-    run(
-        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -output-directory={BUILDDIR} {source}"
+    latex_options = (
+        f" -interaction=batchmode -halt-on-error -output-directory={BUILDDIR}"
     )
-    run(f"biber --quiet build/{Path(target).stem}")
-    run(
-        f"{LATEX_ENGINE} -interaction=batchmode -draftmode -output-directory={BUILDDIR} {source}"
-    )
-    run(
-        f"{LATEX_ENGINE} -interaction=batchmode -output-directory={BUILDDIR} {source}"
-    )
+    run(f"{LATEX_ENGINE} {latex_options} -draftmode {source}").check_returncode()
+    run(f"biber --quiet build/{Path(source).stem}").check_returncode()
+    run(f"{LATEX_ENGINE} {latex_options} -draftmode {source}").check_returncode()
+    run(f"{LATEX_ENGINE} {latex_options} {source}").check_returncode()
     shutil.copy2(BUILDDIR / source.with_suffix(".pdf"), target)
 
 
@@ -235,7 +232,15 @@ def build(options, target, sourcefiles, appendices=None):
     )
 
     todo_left = check_for_todo(BUILDDIR / "temp.tex")
-    runlatex(source=BUILDDIR / "temp.tex", target=target)
+    try:
+        runlatex(source=BUILDDIR / "temp.tex", target=target)
+    except subprocess.CalledProcessError:
+        print("--------------------------------")
+        print("Error encountered. See temp.log:")
+        with open(BUILDDIR / "temp.log", "rt") as f:
+            for line in f:
+                print(line)
+        print("--------------------------------")
     if todo_left:
         print(termcolor.colored("WARNING: There are still TODOs remaining.", "red"))
 
@@ -345,6 +350,7 @@ def build_eisvogel(target):
         appendices=APPENDIX,
     )
 
+
 if __name__ == "__main__":
 
     arguments = parser.parse_args()
@@ -354,7 +360,7 @@ if __name__ == "__main__":
             "simple": build_simple,
             "eisvogel": build_eisvogel,
         }
-        multiplexor[arguments.style](target = HERE / "dissertation.pdf")
+        multiplexor[arguments.style](target=HERE / "dissertation.pdf")
     elif arguments.command == "clean":
         shutil.rmtree(BUILDDIR, ignore_errors=True)
     elif arguments.command == "download-templates":
