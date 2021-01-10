@@ -81,11 +81,6 @@ OPTIONS += ["--filter pandoc-crossref"]
 OPTIONS += ['-M figPrefix="Figure"']
 OPTIONS += ['-M secPrefix="Section"']
 
-# We purposefully bypass pandoc-citeproc because we want
-# to have references at the end of each chapter
-# This is much easier to do with biblatex.
-OPTIONS += ["--biblatex"]
-
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]
 
@@ -221,8 +216,11 @@ def runlatex(source, target):
     shutil.copy2(BUILDDIR / source.with_suffix(".pdf"), target)
 
 
-def build(options, target, sourcefiles, appendices=None):
-
+def buildpdf(options, target, sourcefiles, appendices=None):
+    # We purposefully bypass pandoc-citeproc because we want
+    # to have references at the end of each chapter
+    # This is much easier to do with biblatex.
+    options += ["--biblatex"]
     runpandoc(
         options=options,
         target=BUILDDIR / "temp.tex",
@@ -231,6 +229,7 @@ def build(options, target, sourcefiles, appendices=None):
     )
 
     todo_left = check_for_todo(BUILDDIR / "temp.tex")
+
     try:
         runlatex(source=BUILDDIR / "temp.tex", target=target)
     except subprocess.CalledProcessError:
@@ -287,7 +286,7 @@ def build_auxiliary(aux_options=AUX_OPTS):
 def build_simple(target):
     """ Build the dissertation in the simple book style """
     build_auxiliary()
-    build(
+    buildpdf(
         options=OPTIONS,
         target=target,
         sourcefiles=SRC,
@@ -308,7 +307,7 @@ def build_cleanthesis(target):
     options += [f"--include-in-header=cleanthesis-include.tex"]
     options += aux_options
 
-    build(
+    buildpdf(
         options=options,
         target=target,
         sourcefiles=SRC,
@@ -342,7 +341,7 @@ def build_eisvogel(target):
     options += ["-V titlepage-background=build/titlepage.pdf"]
     options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
 
-    build(
+    buildpdf(
         options=options,
         target=target,
         sourcefiles=SRC,

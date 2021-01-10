@@ -77,6 +77,9 @@ jobs:
       run: |
         export PATH=$GITHUB_WORKSPACE/bin:$PATH
         python scripts/dissc.py build --style eisvogel
+
+        ls $GITHUB_WORKSPACE
+        ls $GITHUB_WORKSPACE/build
     
     - name: Upload artifact
       uses: actions/upload-artifact@v2
