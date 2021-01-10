@@ -194,7 +194,6 @@ def render_diagram(source, target):
     try:
         run(
             f"inkscape --export-area-page --export-filename {target} {source}",
-            capture_output=True,
         ).check_returncode()
     except subprocess.CalledProcessError:
         warnings.warn(

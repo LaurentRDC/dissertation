@@ -18,6 +18,9 @@ jobs:
 
     - name: Install LaTeX dependencies
       run: |
+        sudo add-apt-repository universe
+        sudo add-apt-repository ppa:inkscape.dev/stable
+        
         sudo apt-get update
         sudo apt-get --quiet install --yes inkscape
         sudo apt-get --quiet install --yes texlive-full
@@ -65,6 +68,7 @@ jobs:
       run: |
         export PATH=$GITHUB_WORKSPACE/bin:$PATH
         echo "$(python --version)"
+        echo "$(inkscape --version)"
         echo "$(pandoc --version)"
         echo "$(pandoc-plot --version)"
         echo "$(pdflatex --version)"
