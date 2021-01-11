@@ -2,4 +2,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-.github/data-download linguist-vendored
+.github/data-download/*/** linguist-vendored
