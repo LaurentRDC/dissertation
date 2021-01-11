@@ -59,7 +59,7 @@ The real-space 6-fold rotational symmetry is mirrored in reciprocal space. The g
 
 TODO: electronic landscape (Dirac cones)
 
-### Phonon landscape
+### Phonon landscape {#sec:graphite-phonon-landscape}
 
 With four atoms per unit cell, the structure of graphite supports twelve distinct phonon modes. The layered nature of graphite results in a clear distinction between in-plane and out-of-plane phonon modes. These modes are longitudinal modes LA, LO1 - LO3, in-plane transverse modes TA, TO1 - TO3, and out-of-plane traverse modes ZA, ZO1 - ZO3. The phonon dispersion relation for in-plane modes was calculated as described further below in @sec:computational-details, and is shown in @fig:graphite-static-dispersion. The out-of-plane transverse modes are not taken into account as the experiments are not sensitive to them. 
 
@@ -69,6 +69,8 @@ TODO: talk about Kohn anomalies, not super visible
 
 ```{#fig:graphite-static-dispersion .matplotlib file="figures/graphite/static-dispersion.py" caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
 ```
+
+TODO: The temperature-dependence of the phonon spectrum needs to be addressed, as it will play a factor in the discussion of time-resolved measurements.
 
 ## The first hundred femtoseconds viewed by trARPES
 
@@ -82,9 +84,9 @@ Single-crystal flakes of natural graphite \SIrange{10}{90}{\nano\meter} thick we
 
 ![Characterization of the thickness of potential graphite samples. **Left** optical microscope image of exfoliated graphite. Translucent regions A and B are highlighted as potential samples. **Right** Atomic force microscope measurement shows a sample thickness of \SI{88}{\nano\meter}[^1].](diagrams/graphite_exfoliation.pdf){#fig:graphite-afm}
 
-### Data acquisition 
+### Data acquisition {#sec:graphite-data-acquisition}
 
-The UEDS experiments presented in this chapter made use of the experimental setup presented in @sec:experimental_setup. Ultrashort laser pulses of light  were shone at $t=t_0$ on a thin single-crystal specimen of graphite, oriented in the $\left[001\right]$ direction. Compressed electron bunches with 10^7^ electrons per bunch were transmitted through the sample at $t=t_0 + \tau$. The time-delay $\tau$ was scanned from \SI{-40}{\pico\second} to \SI{680}{\pico\second}.
+The UEDS experiments presented in this chapter made use of the experimental setup presented in @sec:experimental_setup. Ultrashort laser pulses of light were shone at $t=t_0$ on a thin single-crystal specimen of graphite, oriented in the $\left[001\right]$ direction. Compressed electron bunches with 10^7^ electrons per bunch were transmitted through the sample at $t=t_0 + \tau$. The time-delay $\tau$ was scanned from \SI{-40}{\pico\second} to \SI{680}{\pico\second}.
 
 The interrogated film were pumped with a pump spot of 1 × 1 \si{\square\milli\meter} full-width at half-maximum (FWHM), ensuring nearly uniform illumination of the probed volume. The film was pumped at a fluence of \SI{12}{\milli\joule\per\square\centi\meter}, resulting in an absorbed energy density of \SI{8}{\joule\per\cubic\meter}. The scattering patterns are collected with a Gatan Ultrascan 895 camera: a 2.54 × 2.54 \si{\square\cm} phosphor screen fiber coupled to a 2048 px × 2048 px charge-coupled detector (CCD) placed \SI{25}{\centi\meter} away from the sample. The experiment herein consists of time delays in the range of $\SIrange{-40}{680}{\pico\second}$. Per-pixel scattering intensity fluctuations over laboratory time reveals a transient dynamic range of 1 : 10^8^, allowing the acquisition of diffraction patterns and diffuse scattering patterns simultaneously. A static diffraction pattern is shown in @fig:graphite-static a).
 
@@ -212,7 +214,7 @@ With the weight definition of @eq:graphite-ueds-weight, the change in diffuse in
                               &= \left( n_j(\vec{q}, \tau) + \sfrac{1}{2} \right) W_j(\vec{q}, \tau) - \left( n_j(\vec{q}, \tau < 0) + \sfrac{1}{2} \right) W_j(\vec{q}, \tau < 0) \nonumber \\
                               &\approx \left[ n_j(\vec{q}, \tau) - n_j(\vec{q}, \tau < 0)\right] W_j(\vec{q}, \tau < 0)
 \end{align}
-where, in the last line, the quasi-static nature of the one-phonon structure factor $|F_{1j}(\vec{q}, \tau)|^2 \approx |F_{1j}(\vec{q}, \tau < 0)|^2$ was used as discussed in @sec:graphite-debye-waller.
+In the last line, the quasi-static nature of the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2 \approx |F_{1j}(\vec{q}, \tau < 0)|^2$ was used as discussed in @sec:graphite-debye-waller. The approximation $\omega_j(\vec{k}, \tau) \approx \omega_j(\vec{k}, \tau<0)$, valid for $\vec{k}$ away from $\vec{\Gamma}$, was also used; see @sec:graphite-phonon-landscape for a discussion.
 
 @fig:graphite-oneph-majority shows where, across the reciprocal space area equivalent to @fig:graphite-ueds, a single new phonon from a particular branch contributes more than 50\% or more than 75\% of the diffuse intensity increase. In other words, @fig:graphite-oneph-majority shows where *any* branch $j$, with associated weight $W_j(\vec{q}, \tau<0)$, contributes more than 50\% or 75\% of the total weight $\sum_j W_j(\vec{q}, \tau<0)$. The calculation presented in @fig:graphite-oneph-majority are categorical: dynamics in the transient diffuse intensity **cannot** be associated with the dynamics of a single phonon branch. Furthermore, @fig:graphite-oneph-majority shows that at in-plane high symmetry points $\vec{K}$ and $\vec{M}$, no phonon branch contributes to more than 50\% of the associated dynamics in the diffuse intensity.
 
@@ -221,9 +223,46 @@ In order to access the ultrafast phonon dynamics in a material with UEDS, a more
 ```{.matplotlib #fig:graphite-oneph-majority file="figures/graphite/oneph-majority.py" caption="Locations in reciprocal space where a single new phonon from a particular branch contributes to more than **a)** 50\% and **b)** 75\% of the associated increase in diffuse intensity."}
 ```
 
-## Phonon spectroscopy across the Brillouin zone.
+## Phonon spectroscopy across the Brillouin zone
+
+In this section, the calculation of the one-phonon structure factors will be used to endow UEDS with energy resolution. First, recall that the ultrafast change in diffuse intensity can be expressed as follows:
+$$
+    \frac{\Delta I(\vec{q}, \tau)}{N_c I_e} = \sum_j \frac{\Delta n_j(\vec{k}, \tau)}{\omega_j(\vec{k}, \tau<0)} \left| F_{1j}(\vec{q}, \tau<0)\right|^2
+$${#eq:graphite-ueds-change}
+@eq:graphite-ueds-change is approximately valid for $\vec{k}$ away from $\vec{\Gamma}$ (see @sec:graphite-phonon-landscape). Effectively, this restriction is trivial as diffraction peaks drown out the UEDS signals near $\vec{\Gamma}$. 
+
+The sum over all phonon branches $j$ encodes the lack of energy resolution in UEDS experiments. However, by expressing with enough data redundancy, the contribution of every mode $j$ to @eq:graphite-ueds-change can be extracted. Let $\left\{ \vec{H}_1, ..., \vec{H}_M \right\}$ be in-plane reflections. Then, the transient phonon population of mode $j$, $\Delta n_j(\vec{k}, \tau)$, solves the following linear system:
+$$
+    \vec{I}_{\vec{k}}(\tau) = \vec{F}_{\vec{k}} \vec{D}_{\vec{k}}(\tau)
+$$
+where
+\begin{align}
+ \vec{I}_{\vec{k}}(\tau) &= 
+ 	\frac{1}{N_c I_e}
+	\begin{bmatrix}
+    	\Delta I(\vec{k} + \vec{H}_1, t) & \dots & \Delta I(\vec{k} + \vec{H}_M, t)
+	\end{bmatrix}^T \\
+\vec{F}_{\vec{k}} &= 
+	\begin{bmatrix}
+		|F_{11}(\vec{k} + \vec{H}_1, \tau<0)|^2 & \dots  & |F_{1N}(\vec{k} + \vec{H}_1,\tau<0)|^2 \\
+		\vdots		   			 			 & \ddots & \vdots					            \\
+		|F_{11}(\vec{k} + \vec{H}_M, \tau<0)|^2 & \dots  & |F_{1N}(\vec{k} + \vec{H}_M,\tau<0)|^2
+	\end{bmatrix}
+\vec{D}_{\vec{k}}(\tau) &=
+	\begin{bmatrix}
+    	\Delta n_1(\vec{k}, \tau)/\omega_1(\vec{k}, \tau<0) & \dots & \Delta n_N(\vec{k}, \tau)/\omega_N(\vec{k}, \tau<0)
+	\end{bmatrix}^T \\
+\end{align}
+
+This linear system of equations can be solved numerically provided enough experimental data, i.e. diffuse intensity for at least $M \geq N$ distinct Brillouin zones. The choice to solve for $\vec{D}_{\vec{k}}(\tau)$ rather than $\Delta n_j(\vec{k}, \tau)$ directly, comes down to the degree of confidence that should be placed in the approximations that were made to get to @eq:graphite-ueds-change. Phonon polarization vectors are mostly determined by the symmetries of the crystal, which are fixed throughout the experiments in this chapter. On the other hand, phonon vibrational frequencies in general might be influenced by non-equilibrium carrier and phonon distributions as would be the case with strongly anharmonic crystals (e.g. SnSe, see @sec:snse). Solving for the ratio of phonon population to vibrational frequency is more robust against the weaknesses of this modeling because the one-phonon structure factors only take into account the polarization vectors.
+
+### Numerical solution
 
 
+
+## Conclusion and outlook
+
+TODO: We also note that the procedure presented can be easily extended to (equilibrium) thermal diffuse scattering measurements, where the phonon populations are known at constant  temperature, but the phonon vibrational spectrum is unknown. Therefore, using prephotoexcitation data of a timeresolved experiment, one could infer the phonon vibrational frequencies, which are then used to determine the change in populations using the measurements after photoexcitation. This scheme only relies on the determination of phonon polarization vectors.
 
 \FloatBarrier
 ## References {.unnumbered}
