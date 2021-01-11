@@ -219,19 +219,19 @@ def buildpdf(options, target, sourcefiles, appendices=None):
     options += ["--biblatex"]
     runpandoc(
         options=options,
-        target=BUILDDIR_PDF / target.with_suffix('.tex'),
+        target=BUILDDIR_PDF / target.with_suffix(".tex"),
         sourcefiles=sourcefiles,
         appendices=appendices,
     )
 
-    todo_left = check_for_todo(BUILDDIR_PDF / target.with_suffix('.tex'))
+    todo_left = check_for_todo(BUILDDIR_PDF / target.with_suffix(".tex"))
 
     try:
-        runlatex(source=BUILDDIR_PDF / target.with_suffix('.tex'))
+        runlatex(source=BUILDDIR_PDF / target.with_suffix(".tex"))
     except subprocess.CalledProcessError:
         print("--------------------------------")
         print("Error encountered. See log:")
-        with open(BUILDDIR_PDF / target.with_suffix('.log'), "rt") as f:
+        with open(BUILDDIR_PDF / target.with_suffix(".log"), "rt") as f:
             for line in f:
                 print(line)
         print("--------------------------------")

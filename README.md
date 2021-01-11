@@ -101,7 +101,7 @@ Because the section label for appendices should be a bit different, use a custom
 lorem ipsum (see [appendix @sec:appendix]) ...
 ```
 
-## Aknowledgement
+## Acknowledgement
 
 This repository is partly based on [`pandoc-thesis`](https://github.com/cagix/pandoc-thesis).
 
