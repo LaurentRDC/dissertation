@@ -132,14 +132,14 @@ ax75 = grid[1]
 majority, labels = threshold_oneph(threshold=0.5)
 above_75, _ = threshold_oneph(threshold=0.75)
 
-print(
-    "Area with no majority: ",
-    100 * np.sum(np.less(majority, 1)) / np.size(majority),
-)
-print(
-    "Area with no 75% majority: ",
-    100 * np.sum(np.less(above_75, 1)) / np.size(above_75),
-)
+# print(
+#     "Area with no majority: ",
+#     100 * np.sum(np.less(majority, 1)) / np.size(majority),
+# )
+# print(
+#     "Area with no 75% majority: ",
+#     100 * np.sum(np.less(above_75, 1)) / np.size(above_75),
+# )
 
 bounds = np.arange(0, stop=len(labels) + 1)
 
