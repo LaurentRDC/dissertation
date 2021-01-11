@@ -234,7 +234,7 @@ $${#eq:graphite-ueds-change}
 The sum over all phonon branches $j$ encodes the lack of energy resolution in UEDS experiments. However, by expressing with enough data redundancy, the contribution of every mode $j$ to @eq:graphite-ueds-change can be extracted. Let $\left\{ \vec{H}_1, ..., \vec{H}_M \right\}$ be in-plane reflections. Then, the transient phonon population of mode $j$, $\Delta n_j(\vec{k}, \tau)$, solves the following linear system:
 $$
     \vec{I}_{\vec{k}}(\tau) = \vec{F}_{\vec{k}} \vec{D}_{\vec{k}}(\tau)
-$$
+$${#eq:graphite-vectorized-ueds}
 where
 \begin{align}
  \vec{I}_{\vec{k}}(\tau) &= 
@@ -247,22 +247,28 @@ where
 		|F_{11}(\vec{k} + \vec{H}_1, \tau<0)|^2 & \dots  & |F_{1N}(\vec{k} + \vec{H}_1,\tau<0)|^2 \\
 		\vdots		   			 			 & \ddots & \vdots					            \\
 		|F_{11}(\vec{k} + \vec{H}_M, \tau<0)|^2 & \dots  & |F_{1N}(\vec{k} + \vec{H}_M,\tau<0)|^2
-	\end{bmatrix}
+	\end{bmatrix} \\
 \vec{D}_{\vec{k}}(\tau) &=
 	\begin{bmatrix}
     	\Delta n_1(\vec{k}, \tau)/\omega_1(\vec{k}, \tau<0) & \dots & \Delta n_N(\vec{k}, \tau)/\omega_N(\vec{k}, \tau<0)
-	\end{bmatrix}^T \\
+	\end{bmatrix}^T
 \end{align}
 
 This linear system of equations can be solved numerically provided enough experimental data, i.e. diffuse intensity for at least $M \geq N$ distinct Brillouin zones. The choice to solve for $\vec{D}_{\vec{k}}(\tau)$ rather than $\Delta n_j(\vec{k}, \tau)$ directly, comes down to the degree of confidence that should be placed in the approximations that were made to get to @eq:graphite-ueds-change. Phonon polarization vectors are mostly determined by the symmetries of the crystal, which are fixed throughout the experiments in this chapter. On the other hand, phonon vibrational frequencies in general might be influenced by non-equilibrium carrier and phonon distributions as would be the case with strongly anharmonic crystals (e.g. SnSe, see @sec:snse). Solving for the ratio of phonon population to vibrational frequency is more robust against the weaknesses of this modeling because the one-phonon structure factors only take into account the polarization vectors.
 
 ### Numerical solution
 
+The procedure used to numerically solve for $\vec{D}_{\vec{k}}(\tau)$ is described henceforth.
 
+All visible Brillouin zones in the measurement were used to generate $\vec{I}_{\vec{k}}(\tau)$. Since the scattering patterns have been symmetrized (@fig:graphite-static), one would expect that using the intensity data for reflections related by symmetry would be redundant; however, the following procedure worked better hwn using the entire area of the detector. This is no doubt due to minute misalignment of the scattering patterns and uncertainty in detector position, which are averaged out when using all available data. The Brillouin zones associated with all in-plane reflections $\left\{ \vec{H} \middle| |\vec{H}| \leq \SI{12}{\per\angstrom}\right\}$ were used, for a total of 44 Brillouin zones. Therefore, at every $\vec{k}$ point, $\vec{I}_{\vec{k}}(\tau)$ and $\vec{F}_{\vec{k}}$ have shapes of $(44, 1)$ and $(44, 8)$, respectively.
+
+The possible values for elements of $\vec{D}_{\vec{k}}(\tau)$ were constrained to be non-negative, implying that $\Delta n_j(\vec{k}, \tau) \geq 0 ~ \forall \tau$. In other words, it is assumed that the population of a phonon branch cannot drop below its equilibrium level. While not strictly necessary, it was found to lead to a more stable solution. This constraint allowed for the use of the non-negative approximate matrix inversion algorithm [@Lawson1995] to solve @eq:graphite-vectorized-ueds. This procedure was repeated for every reduced wavevector $\vec{k}$ and time-delay $\vec{\tau}$. Stable solutions were found for $|\vec{k}| \geq \SI{0.45}{\per\angstrom}$, away enough from $\vec{\Gamma}$ and elastic scattering signals.
+
+It must be emphasized that the numerical solution to $\vec{D}_{\vec{k}}(\tau)$ is not the result of fitting (iterative least-squares method), but rather a non-iterative approximate matrix inversion based on linear least-squares. The method described in this section admits no free parameter, other than the phonon vibrational frequencies and polarization vectors.
 
 ## Conclusion and outlook
 
-TODO: We also note that the procedure presented can be easily extended to (equilibrium) thermal diffuse scattering measurements, where the phonon populations are known at constant  temperature, but the phonon vibrational spectrum is unknown. Therefore, using prephotoexcitation data of a timeresolved experiment, one could infer the phonon vibrational frequencies, which are then used to determine the change in populations using the measurements after photoexcitation. This scheme only relies on the determination of phonon polarization vectors.
+TODO: We also note that the procedure presented can be easily extended to (equilibrium) thermal diffuse scattering measurements, where the phonon populations are known at constant  temperature, but the phonon vibrational spectrum is unknown. Therefore, using pre-photoexcitation data of a time-resolved experiment, one could infer the phonon vibrational frequencies, which are then used to determine the change in populations using the measurements after photoexcitation. This scheme only relies on the determination of phonon polarization vectors.
 
 \FloatBarrier
 ## References {.unnumbered}
