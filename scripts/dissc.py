@@ -76,8 +76,8 @@ OPTIONS += ["--filter pandoc-plot"]
 OPTIONS += ["-M plot-configuration=plot-config.yml"]
 
 OPTIONS += ["--filter pandoc-crossref"]
-OPTIONS += ['-M figPrefix="Figure"']
-OPTIONS += ['-M secPrefix="Section"']
+OPTIONS += ["-M cref:true"]
+OPTIONS += ["-M autoEqnLabels:true"]
 
 OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]

@@ -4,10 +4,6 @@ title: "Ultrafast energy flow across the Brillouin zone in two-dimensional mater
 author: "Laurent P. René de Cotret"
 keywords: [Markdown, Example]
 
-# http://lierdakil.github.io/pandoc-crossref/
-# Number all equations, even those without an explicit label.
-autoEqnLabels: true
-
 studentnumber: "260446509"
 date: "April 15, 2021"
 
