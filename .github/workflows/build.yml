@@ -70,7 +70,7 @@ jobs:
         echo "$(python --version)"
         echo "$(inkscape --version)"
         echo "$(pandoc --version)"
-        echo "$(pandoc-plot --version)"
+        echo "$(pandoc-plot --full-version)"
         echo "$(pdflatex --version)"
       
     - name: Build dissertation
