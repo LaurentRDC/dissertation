@@ -196,14 +196,13 @@ def render_diagram(source, target):
         )
 
 
-def runlatex(source, target):
+def runlatex(source):
     """
     Run a full build of latex (i.e. latex, bibtex, 2xlatex)
     """
     # Important: the options -aux-directory is Miktex-only, so I'm not using it
     # so that this script also supports TexLive. Also, confusingly, Texlive uses -jobname
     # and Miktex uses -job-name. Therefore, not using either.
-    target = Path(target)
     latex_options = (
         f" -interaction=batchmode -halt-on-error -output-directory={BUILDDIR_PDF}"
     )
@@ -211,7 +210,6 @@ def runlatex(source, target):
     run(f"biber --quiet build/{Path(source).stem}").check_returncode()
     run(f"{LATEX_ENGINE} {latex_options} -draftmode {source}").check_returncode()
     run(f"{LATEX_ENGINE} {latex_options} {source}").check_returncode()
-    shutil.copy2(BUILDDIR_PDF / source.with_suffix(".pdf"), target)
 
 
 def buildpdf(options, target, sourcefiles, appendices=None):
@@ -221,19 +219,19 @@ def buildpdf(options, target, sourcefiles, appendices=None):
     options += ["--biblatex"]
     runpandoc(
         options=options,
-        target=BUILDDIR_PDF / "temp.tex",
+        target=BUILDDIR_PDF / target.with_suffix('.tex'),
         sourcefiles=sourcefiles,
         appendices=appendices,
     )
 
-    todo_left = check_for_todo(BUILDDIR_PDF / "temp.tex")
+    todo_left = check_for_todo(BUILDDIR_PDF / target.with_suffix('.tex'))
 
     try:
-        runlatex(source=BUILDDIR_PDF / "temp.tex", target=target)
+        runlatex(source=BUILDDIR_PDF / target.with_suffix('.tex'))
     except subprocess.CalledProcessError:
         print("--------------------------------")
-        print("Error encountered. See temp.log:")
-        with open(BUILDDIR_PDF / "temp.log", "rt") as f:
+        print("Error encountered. See log:")
+        with open(BUILDDIR_PDF / target.with_suffix('.log'), "rt") as f:
             for line in f:
                 print(line)
         print("--------------------------------")
@@ -358,7 +356,7 @@ if __name__ == "__main__":
             "simple": build_simple,
             "eisvogel": build_eisvogel,
         }
-        multiplexor[arguments.style](target=HERE / "dissertation.pdf")
+        multiplexor[arguments.style](target=Path("dissertation.pdf"))
     elif arguments.command == "clean":
         shutil.rmtree(BUILDDIR_PDF, ignore_errors=True)
     elif arguments.command == "download-templates":

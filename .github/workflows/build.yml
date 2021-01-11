@@ -82,4 +82,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: dissertation
-        path: dissertation.pdf
+        path: build/dissertation.pdf
