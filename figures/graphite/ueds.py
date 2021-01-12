@@ -31,10 +31,10 @@ qx, qy, _ = detector_scattvectors(
     center=(yc, xc),
 )
 
-with DiffractionDataset(DATASET, mode='r') as source:
+with DiffractionDataset(DATASET, mode="r") as source:
     b4t0 = source.diff_eq()
     mask = source.valid_mask
-    
+
 
 # Determine the smallest center -> side distance, and crop around that
 side_length = floor(min([xc, abs(xc - 2048), yc, abs(yc - 2048)]))

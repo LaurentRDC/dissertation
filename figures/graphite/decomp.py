@@ -95,7 +95,7 @@ for time in TIMES:
     for mode_name in MODES:
         images[time][mode_name] = populations[mode_name][:, :, time_index(time)]
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, 0.8*FIGURE_WIDTH))
+fig = plt.figure(figsize=(FIGURE_WIDTH, 0.8 * FIGURE_WIDTH))
 grid = ImageGrid(
     fig, rect=111, nrows_ncols=(len(MODES), len(TIMES)), cbar_location="top"
 )
@@ -107,7 +107,7 @@ for ax, (mode_name, time) in zip(grid, it.product(MODES, TIMES)):
     m = ax.imshow(
         image,
         extent=[kx.min(), kx.max(), ky.min(), ky.max()],
-        cmap="hot",
+        cmap="inferno",
         vmin=0,
         vmax=1,
     )

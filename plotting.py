@@ -6,6 +6,8 @@ plt.rcParams["figure.figsize"] = (FIGURE_WIDTH, FIGURE_WIDTH)
 plt.rcParams["font.size"] = 10
 plt.rcParams["savefig.pad_inches"] = 0.0
 
-# iris-ued warnings -----------------------------------------------------------
+# WARNINGS --------------------------------------------------------------------
 import warnings
-warnings.filterwarnings("ignore", category=UserWarning)
+
+warnings.filterwarnings("ignore", category=UserWarning, module="iris*")
+warnings.filterwarnings("ignore", category=RuntimeWarning, module="npstreams*")
