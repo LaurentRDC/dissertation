@@ -18,7 +18,7 @@ from plotutils import (
 )
 from skimage.transform import rotate
 from skimage.filters import gaussian
-from skued import detector_scattvectors, indices_to_text, nfold, combine_masks
+from skued import detector_scattvectors, indices_to_text, nfold
 
 DATADIR = Path("data") / "graphite"
 DATASET = DATADIR / "graphite_time_corrected_iris5.hdf5"
@@ -32,18 +32,9 @@ qx, qy, _ = detector_scattvectors(
 )
 qq = np.sqrt(qx ** 2 + qy ** 2)
 
-
-beamblock = np.ones((2048, 2048), dtype=np.bool)
-beamblock[0:1260, 900:1130] = False
-
-artifact_mask = np.ones((2048, 2048), dtype=np.bool)
-artifact_mask[1084::, 437:482] = False
-artifact_mask[0:932, 1296:1324] = False
-
-mask = combine_masks(beamblock, artifact_mask)
-
 with DiffractionDataset(DATASET) as source:
     b4t0 = source.diff_eq()
+    mask = source.valid_mask
 
 # Find location of (100) and (200) BZs
 graphite = Crystal.from_pwscf(DATADIR / "output.out")

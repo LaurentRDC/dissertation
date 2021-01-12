@@ -17,25 +17,17 @@ from plotutils import (
     tag_axis,
 )
 from skimage.transform import rotate
-from skued import combine_masks, detector_scattvectors, nfold
+from skued import detector_scattvectors, nfold
 
 xc, yc = GRAPHITE_CENTER
 
 xx, yy = np.meshgrid(np.arange(0, 2048), np.arange(0, 2048))
 rr = np.sqrt(np.square(xx - xc) + np.square(yy - yc))
 
-beamblock = np.ones((2048, 2048), dtype=np.bool)
-beamblock[0:1260, 900:1130] = False
-
-artifact_mask = np.ones((2048, 2048), dtype=np.bool)
-artifact_mask[1084::, 437:482] = False
-artifact_mask[0:932, 1296:1324] = False
-
-mask = combine_masks(beamblock, artifact_mask)
-
 with DiffractionDataset(
     Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
 ) as source:
+    mask = source.valid_mask
     b4t0 = source.diff_eq()
 
 b4t0_symmetrized = np.array(b4t0, copy=True)

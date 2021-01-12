@@ -13,12 +13,9 @@ import scipy.optimize as opt
 from crystals import Crystal
 from skimage.filters import gaussian
 from skimage.transform import rotate
-from skued import nfold, detector_scattvectors, combine_masks
+from skued import nfold, detector_scattvectors
 from iris import DiffractionDataset
 from tqdm import tqdm
-import warnings
-
-warnings.filterwarnings("ignore", category=UserWarning)
 
 from mkoneph import (
     IN_PLANE_MODES,
@@ -36,10 +33,6 @@ OUTPUT.mkdir(exist_ok=True)
 
 DECIMATION = 15
 GAMMA_RADIUS = 0.45
-
-artifact_mask = np.ones((2048, 2048), dtype=np.bool)
-artifact_mask[1084::, 437:482] = False
-artifact_mask[0:932, 1296:1324] = False
 
 EXCLUDES = defaultdict(lambda: {"LO2"})
 EXCLUDES[0.5] = {"LO2", "LO3"}
@@ -122,7 +115,7 @@ def extract_scattering(time, q_points):
             dset.diff_data(time) - dset.diff_eq(),
             mod=6,
             center=GRAPHITE_CENTER,
-            mask=combine_masks(dset.valid_mask, artifact_mask),
+            mask=dset.valid_mask,
             fill_value=0,
         )
     image[QQ < 1.5] = 0

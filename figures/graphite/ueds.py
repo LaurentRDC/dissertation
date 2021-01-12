@@ -18,7 +18,7 @@ from plotutils import (
 )
 from skimage.transform import rotate
 from skimage.filters import gaussian
-from skued import detector_scattvectors, nfold, combine_masks
+from skued import detector_scattvectors, nfold
 
 DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
 
@@ -31,18 +31,10 @@ qx, qy, _ = detector_scattvectors(
     center=(yc, xc),
 )
 
-beamblock = np.ones((2048, 2048), dtype=np.bool)
-beamblock[0:1260, 900:1130] = False
-
-artifact_mask = np.ones((2048, 2048), dtype=np.bool)
-artifact_mask[1084::, 437:482] = False
-artifact_mask[0:932, 1296:1324] = False
-
-mask = combine_masks(beamblock, artifact_mask)
-
-
-with DiffractionDataset(DATASET) as source:
+with DiffractionDataset(DATASET, mode='r') as source:
     b4t0 = source.diff_eq()
+    mask = source.valid_mask
+    
 
 # Determine the smallest center -> side distance, and crop around that
 side_length = floor(min([xc, abs(xc - 2048), yc, abs(yc - 2048)]))
