@@ -9,7 +9,7 @@ The following tools are required to render this dissertation:
 * [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref);
 * [`pandoc-plot`](https://github.com/LaurentRDC/pandoc-plot);
 * [`inkscape`](https://inkscape.org/) 1.0+
-* A LaTeX toolchain, including pdflatex and [`biber`](https://sourceforge.net/projects/biblatex-biber/). I tested with `MikTex` (Windows) and `texlive-full` (Ubuntu)
+* A LaTeX toolchain, including `pdflatex` and [`biber`](https://sourceforge.net/projects/biblatex-biber/). I tested with `MikTex` (Windows) and `texlive-full` (Ubuntu)
 
 To install the Python dependencies required to render figures:
 

@@ -206,7 +206,7 @@ By examining @fig:graphite-weighted-dispersion, it appears that at certain locat
 
 In order to compare the contribution of a particular phonon mode $j$ on UEDS data, the following weight can be defined:
 $$
-    W_j(\vec{q}, \tau) \equiv \frac{\left| F_{1j}(\vec{q}, \tau)\right|}{\omega_j(\vec{k}, \tau)}
+    W_j(\vec{q}, \tau) \equiv \frac{\left| F_{1j}(\vec{q}, \tau)\right|^2}{\omega_j(\vec{k}, \tau)}
 $${#eq:graphite-ueds-weight}
 With the weight definition of @eq:graphite-ueds-weight, the change in diffuse intensity (TODO: ONEPH EQUATION) can be re-written as:
 \begin{align}

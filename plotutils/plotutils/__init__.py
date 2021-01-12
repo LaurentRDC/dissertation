@@ -15,7 +15,7 @@ FIGURE_WIDTH = 6 + 3 / 4  # inches
 
 # Diffraction patterns are rotated by 8 degrees clockwise from aligned
 GRAPHITE_ANGLE = 8  # degrees
-GRAPHITE_CAMERA_LENGTH = 0.25  # centi-meters
+GRAPHITE_CAMERA_LENGTH = 0.25  # centimeters
 _peak1 = np.array((754, 905))
 _peak2 = np.array((1265, 1318))
 GRAPHITE_CENTER = np.array(0.5 * (_peak1 + _peak2), dtype=np.int)

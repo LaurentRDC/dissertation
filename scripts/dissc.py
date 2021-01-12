@@ -231,7 +231,7 @@ def buildpdf(options, target, sourcefiles, appendices=None):
     except subprocess.CalledProcessError:
         print("--------------------------------")
         print("Error encountered. See log:")
-        with open(BUILDDIR_PDF / target.with_suffix(".log"), "rt") as f:
+        with open(BUILDDIR_PDF / target.with_suffix(".log"), "r") as f:
             for line in f:
                 print(line)
         print("--------------------------------")
