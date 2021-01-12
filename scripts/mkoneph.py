@@ -10,7 +10,7 @@ import sys
 from collections import defaultdict, namedtuple
 from functools import lru_cache, partial
 from itertools import chain, count, product, takewhile
-from json import load
+import json
 from math import isclose, sqrt
 from os import cpu_count
 from pathlib import Path
@@ -109,8 +109,8 @@ def extract_info_ordered(fname, crystal, **kwargs):
     #    )
     # )
 
-    with open(fname, "r") as f:
-        modes = load(f)
+    with open(fname, mode="r") as f:
+        modes = json.load(f)
 
     modes_op, modes_ac = modes["Optical"], modes["Acoustic"]
 

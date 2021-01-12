@@ -256,7 +256,7 @@ where
 
 This linear system of equations can be solved numerically provided enough experimental data, i.e. diffuse intensity for at least $M \geq N$ distinct Brillouin zones. The choice to solve for $\vec{D}_{\vec{k}}(\tau)$ rather than $\Delta n_j(\vec{k}, \tau)$ directly, comes down to the degree of confidence that should be placed in the approximations that were made to get to @eq:graphite-ueds-change. Phonon polarization vectors are mostly determined by the symmetries of the crystal, which are fixed throughout the experiments in this chapter. On the other hand, phonon vibrational frequencies in general might be influenced by non-equilibrium carrier and phonon distributions as would be the case with strongly anharmonic crystals (e.g. SnSe, see @sec:snse). Solving for the ratio of phonon population to vibrational frequency is more robust against the weaknesses of this modeling because the one-phonon structure factors only take into account the polarization vectors.
 
-### Numerical solution
+### Numerical procedure
 
 The procedure used to numerically solve for $\vec{D}_{\vec{k}}(\tau)$ is described henceforth.
 
@@ -265,6 +265,17 @@ All visible Brillouin zones in the measurement were used to generate $\vec{I}_{\
 The possible values for elements of $\vec{D}_{\vec{k}}(\tau)$ were constrained to be non-negative, implying that $\Delta n_j(\vec{k}, \tau) \geq 0 ~ \forall \tau$. In other words, it is assumed that the population of a phonon branch cannot drop below its equilibrium level. While not strictly necessary, it was found to lead to a more stable solution. This constraint allowed for the use of the non-negative approximate matrix inversion algorithm [@Lawson1995] to solve @eq:graphite-vectorized-ueds. This procedure was repeated for every reduced wavevector $\vec{k}$ and time-delay $\vec{\tau}$. Stable solutions were found for $|\vec{k}| \geq \SI{0.45}{\per\angstrom}$, away enough from $\vec{\Gamma}$ and elastic scattering signals.
 
 It must be emphasized that the numerical solution to $\vec{D}_{\vec{k}}(\tau)$ is not the result of fitting (iterative least-squares method), but rather a non-iterative approximate matrix inversion based on linear least-squares. The method described in this section admits no free parameter, other than the phonon vibrational frequencies and polarization vectors.
+
+### Numerical solution
+
+The numerical solution for @eq:graphite-vectorized-ueds is shown in @fig:graphite-ph-populations.
+
+```{.matplotlib #fig:graphite-ph-populations file="figures/graphite/decomp.py" caption="Measurement of the change in transient phonon population $\Delta n_j(\vec{k}, \tau)$ following photoexcitation for relevant in-plane modes of graphite across the Brillouin zone. The solution domain is bound by white circle at $|\vec{k}| \leq \SI{0.45}{\per\angstrom}$, and by a solid white hexagon at the Brillouin zone edge. The Brillouin zone midpoint is highlighted with a dashed white hexagon. The location of the $A_1'$ mode is shown on the top row."}
+```
+
+## Wavevector-dependent couplings constants
+
+
 
 ## Conclusion and outlook
 
