@@ -71,7 +71,9 @@ jobs:
         echo "$(inkscape --version)"
         echo "$(pandoc --version)"
         echo "$(pandoc-plot --full-version)"
+        echo "$(pandoc-crossref --version)"
         echo "$(pdflatex --version)"
+        echo "$(biber --version)"
       
     - name: Build dissertation
       run: |

@@ -1,11 +1,20 @@
-# PhD dissertation repository
+# Ultrafast energy flow across the Brillouin zone in two-dimensional materials
 
 ## Setting up environment
 
-To ensure that this dissertation content can be reused easily, I make use of conda environments:
+The following tools are required to render this dissertation:
+
+* `python` 3.7+;
+* [`pandoc`](https://pandoc.org) 2.11+;
+* [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref);
+* [`pandoc-plot`](https://github.com/LaurentRDC/pandoc-plot);
+* [`inkscape`](https://inkscape.org/) 1.0+
+* A LaTeX toolchain, including pdflatex and [`biber`](https://sourceforge.net/projects/biblatex-biber/). I tested with `MikTex` (Windows) and `texlive-full` (Ubuntu)
+
+To install the Python dependencies required to render figures:
 
 ```bash
-conda env create -f conda_env.yml
+python -m pip install -r requirements.txt
 ```
 
 ## Building the dissertation
@@ -41,7 +50,7 @@ optional arguments:
   -h, --help            show this help message and exit
   --style {simple,eisvogel,cleanthesis}
                         Style of dissertation to use. Default is        
-                        `cleanthesis`.
+                        `eisvogel`.
 (dissertation) PS C:\Users\Laurent\OneDrive\McGill\dissertation> 
 ```
 
@@ -90,7 +99,7 @@ For more complex equation forms (e.g. aligned equations), `\label`s can be used.
 \label{eq:myequation}
 \end{align}
 
-You can refer to the equation like so[@eq:myequation]
+You can refer to the equation like so @eq:myequation
 ````
 
 ### Appendices
@@ -104,4 +113,3 @@ lorem ipsum (see [appendix @sec:appendix]) ...
 ## Acknowledgement
 
 This repository is partly based on [`pandoc-thesis`](https://github.com/cagix/pandoc-thesis).
-
