@@ -291,7 +291,7 @@ The nonequilibrium flow of energy between excitations, both electronic and latti
 
 UEDS measurements allow to move beyond the two-temperature approximation as the energy distribution of phonons is known across the Brillouin zone. And yet, theory has not caught up with this opportunity; the best way to extract e-ph and ph-ph coupling values is still based on rate-equations. To this end, the formalism of the two-temperature model needs to be extended.
 
-### The non-thermal lattice model
+### The non-thermal lattice model {#sec:graphite-nlm}
 
 The non-thermal lattice model is an extension of the two-temperature model, with the added flexibility that lattice waves need not be thermalized[@Waldecker2016]. It assumes that the energy distribution of each phonon mode admits a thermal description; that is, the energy transfer between phonons of different branches is slower than the scattering of phonons from the same branch. This assumption is a reasonable one, in the light of the results presented in @sec:graphite-pop-dynamics. Within this framework, each phonon branch $j$ can be assigned its own molar heat capacity, $C_{ph, j}$, and temperature, $T_j$:
 $$
@@ -313,6 +313,57 @@ $$
     n_j(\vec{k}, \tau) \propto  \frac{k_B T_{ph, j}(\tau)}{\hbar \omega_j(\vec{k}, \tau<0)} - 1/2 + \mathcal{O}\left( T^{-1}_{ph, j}(\tau) \right)
 $$
 The above holds for appropriately-high mode temperatures. For the remainer of this section, it follows that $\Delta n_j \propto \Delta T_{ph,j}$, where the initial temperature is known to be \SI{300}{\kelvin}.
+
+### Experimental electron- and phonon-phonon coupling
+
+Based on the formalism presented in the @sec:graphite-nlm, the couplings to the $A_1^\prime$ phonon mode will be extracted from the TO2 population measurements. 
+
+Let the differential population be $\Delta n_{j=\text{TO2}}(\vec{k} = \vec{K}, \tau) \equiv \Delta n_{A_1^\prime}(\tau)$. $\Delta n_{A_1^\prime}(\tau)$ is obtained by integrating the population of the TO2 mode in a circular arc of radius \SI{0.3}{\per\angstrom} centered at $\vec{k} = \vec{K}$, as shown on @fig:graphite-ph-populations. The heat capacities of the electronic system and every relevant phonon mode must be parametrized. 
+
+#### Heat capacities
+
+The electronic heat capacity is extracted from measurements by Nihira an Iwata [@Nihira2003]:
+$$
+C_e(T_e) = 13.8 ~ T_e(\tau) + 1.16 \times 10^{-3} ~ T_e^2(\tau) + 2.6 \times 10^{-7}  ~ T_e^3(\tau)
+$$
+
+Extracting the lattice specific heat is simplified by the observation that thermal expansion has not occurred on the time-scale of the measurements ($\tau < \SI{680}{\pico\second}$). Bragg peak positions remain static throughout the measurement, as was also reported by Chatelain *et al*[@Chatelain2014a]. The specific heat capacity of each mode can therefore be taken as the heat capacity at constant volume[@Ziman1979]:
+$$
+C_{ph,j}(T_{ph,j}) = 
+k_B \int_0^{\omega_D} d\omega ~ D_j(\omega) 
+    \left( 
+        \frac{\hbar \omega}{k_B T_{ph,j}} 
+    \right)^2 
+    \frac{e^{\hbar \omega / k_B T_{ph,j}}}{\left( e^{\hbar \omega / k_B T_{ph,j}} - 1\right)^2}
+$$
+where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of states for phonon mode $j$. The momentum-resolution of UEDS allows for a simplification: a single frequency contributes to the density of states, so that $D_j(\omega) \equiv \delta(\omega)$.
+
+#### Reducing complexity with momentum-resolution
+
+The number of coupled equations in @eq:graphite-nlm-phonons can be reduced by aggregating lattice heat capacities into two categories: the heat capacity of $A_1^\prime$, $C_{A_1^\prime}$, and the total effective heat capacity of all other relevant modes, defined as $C_l$. The calculation of $C_l$ boils down to adding the contribution of mode that can scatter into $A_1^\prime$ or from it, based on conservation of energy and momentum, weighted by the decay probabilities reported by Bonini *et al* [@Bonini2007]. With this information:
+\begin{align}
+    C_l &= \frac{9}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{TA}} \right] \\
+        &+ \frac{36}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{LA}}\right] \nonumber \\
+        &+ \frac{55}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{LA}} + C_{ph,j=\text{LO}} + C_{ph,j=\text{LA}}\right] \nonumber
+\end{align}
+The system of equations from @sec:graphite-nlm can then be expressed as three equations: the flow of energy in and out of the electronic system, the $A_1^\prime$ mode, and all other modes coupled to the $A_1^\prime$ mode:
+\begin{align}
+	C_e(T_e) \frac{\partial T_e}{\partial \tau}
+		&= f(\tau) \\
+		&- G_{e,A_1'}  ~ \left[ T_e(\tau) - T_{A_1'}(\tau) \right] \nonumber \\
+		&- G_{e, l}    ~ \left[ T_e(\tau) - T_l(\tau) \right] \nonumber \\
+	C_{A_1'}(T_{A_1'}) \frac{\partial T_{A_1'}}{\partial \tau}
+		&= G_{e,A_1'}  ~ \left[ T_e(\tau) - T_{A_1'}(\tau) \right] \\
+		&- G_{A_1', l} ~ \left[ T_{A_1'}(\tau) - T_{l}(\tau) \right]  \nonumber\\
+	C_{l}(T_l) \frac{\partial T_l}{\partial \tau}
+		&= G_{e,l}     ~ \left[ T_e(\tau) - T_l(\tau) \right] \\
+		&+ G_{A_1', l} ~ \left[ T_{A_1'}(\tau) - T_{l}(\tau)\right] \nonumber
+\end{align}
+
+### Results
+
+```{.matplotlib #fig:graphite-eph-coupling file="figures/graphite/eph-coupling.py" caption=""}
+```
 
 ## Conclusion and outlook
 
