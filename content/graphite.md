@@ -72,7 +72,7 @@ TODO: talk about Kohn anomalies, not super visible
 
 TODO: The temperature-dependence of the phonon spectrum needs to be addressed, as it will play a factor in the discussion of time-resolved measurements.
 
-## The first hundred femtoseconds viewed by trARPES
+## The first hundred femtoseconds viewed by trARPES {#sec:graphite-100-fs}
 
 Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Although UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second} as observed by time- and angle-resolved photoemission spectroscopy (trARPES).
 
@@ -195,12 +195,12 @@ The one-phonon structure factors are display complex structure in reciprocal spa
 
 ### Weighted phonon dispersion
 
-An alternative visualization for one-phonon structure factors are weighted dispersion curves, as shown in @fig:graphite-weighted-dispersion. This way of looking at $|F_{1j}|^2$ clearly highlights the difference across Brillouin zones. For example, the difference $|F_{1,j}=\text{TA}|^2 - |F_{1,j}=\text{LA}|^2$ is either negative ($\vec{q} \approx \vec{\Gamma}_{(010)}$) or positive ($\vec{q} \approx \vec{\Gamma}_{(\bar{1}10)}$). The variation of $|F_{1j}|^2$ explains the diffuse intensity difference shown in @fig:graphite-ueds-zoomed.
+An alternative visualization for one-phonon structure factors are weighted dispersion curves, as shown in @fig:graphite-weighted-dispersion. This way of looking at $|F_{1j}|^2$ clearly highlights the difference across Brillouin zones. For example, the difference $|F_{1j=\text{TA}}|^2 - |F_{1j=\text{LA}}|^2$ is either negative ($\vec{q} \approx \vec{\Gamma}_{(010)}$) or positive ($\vec{q} \approx \vec{\Gamma}_{(\bar{1}10)}$). The variation of $|F_{1j}|^2$ explains the diffuse intensity difference shown in @fig:graphite-ueds-zoomed.
 
 ```{.matplotlib #fig:graphite-weighted-dispersion file="figures/graphite/weighted-dispersion.py" caption="Calculated one-phonon structure factors visualized as weighted dispersion curves for selected in-plane modes. The color saturation of dispersion curves is proportional to $|F_{1j}|^2$ of the associated mode. Equivalent paths in the Brillouin zone around two reflections are shown to highlight the high degree of reciprocal space structure: $(010)$ on the left and $(\bar{1}10)$ on the right. The geometry of the paths with respect to $(000)$ are shown in the inset on the lower left."}
 ```
 
-By examining @fig:graphite-weighted-dispersion, it appears that at certain locations, the one-phonon structure factor for one phonon mode dominates; for example, $|F_{1,j}=\text{LA}|^2$ near $\vec{q} \approx \vec{\Gamma}_{(010)}$). It might therefore be tempting to attribute the diffuse intensity dynamics at that location exclusively to one mode. If enough such locations in reciprocal space existed, it would be possible to bypass the energy-insensitivity of UEDS and extract mode-dependent phonon dynamics at special points in the Brillouin zone; this idea forms the basis of previous work on graphite [@Stern2018]. However, the information presented by @fig:graphite-weighted-dispersion is incomplete. 
+By examining @fig:graphite-weighted-dispersion, it appears that at certain locations, the one-phonon structure factor for one phonon mode dominates; for example, $|F_{1j=\text{LA}}|^2$ near $\vec{q} \approx \vec{\Gamma}_{(010)}$). It might therefore be tempting to attribute the diffuse intensity dynamics at that location exclusively to one mode. If enough such locations in reciprocal space existed, it would be possible to bypass the energy-insensitivity of UEDS and extract mode-dependent phonon dynamics at special points in the Brillouin zone; this idea forms the basis of previous work on graphite [@Stern2018]. However, the information presented by @fig:graphite-weighted-dispersion is incomplete. 
 
 ### Relative mode contributions
 
@@ -223,7 +223,7 @@ In order to access the ultrafast phonon dynamics in a material with UEDS, a more
 ```{.matplotlib #fig:graphite-oneph-majority file="figures/graphite/oneph-majority.py" caption="Locations in reciprocal space where a single new phonon from a particular branch contributes to more than **a)** 50\% and **b)** 75\% of the associated increase in diffuse intensity."}
 ```
 
-## Phonon spectroscopy across the Brillouin zone
+## Phonon spectroscopy across the Brillouin zone{#sec:graphite-ph-spectroscopy}
 
 In this section, the calculation of the one-phonon structure factors will be used to endow UEDS with energy resolution. First, recall that the ultrafast change in diffuse intensity can be expressed as follows:
 $$
@@ -266,16 +266,53 @@ The possible values for elements of $\vec{D}_{\vec{k}}(\tau)$ were constrained t
 
 It must be emphasized that the numerical solution to $\vec{D}_{\vec{k}}(\tau)$ is not the result of fitting (iterative least-squares method), but rather a non-iterative approximate matrix inversion based on linear least-squares. The method described in this section admits no free parameter, other than the phonon vibrational frequencies and polarization vectors.
 
-### Numerical solution
+### Population dynamics{#sec:graphite-pop-dynamics}
 
-The numerical solution for @eq:graphite-vectorized-ueds is shown in @fig:graphite-ph-populations.
+The numerical solution for @eq:graphite-vectorized-ueds is shown in @fig:graphite-ph-populations. The transient phonon populations $\left\{ \Delta n_j(\vec{k}, \tau)\right\}$ across the Brillouin zone are shown for three important modes: TO2, TA, and LA. 
 
 ```{.matplotlib #fig:graphite-ph-populations file="figures/graphite/decomp.py" caption="Measurement of the change in transient phonon population $\Delta n_j(\vec{k}, \tau)$ following photoexcitation for relevant in-plane modes of graphite across the Brillouin zone. The solution domain is bound by white circle at $|\vec{k}| \leq \SI{0.45}{\per\angstrom}$, and by a solid white hexagon at the Brillouin zone edge. The Brillouin zone midpoint is highlighted with a dashed white hexagon. The location of the $A_1'$ mode is shown on the top row."}
 ```
 
+While previous work by the author discussed the nonthermal phonon dynamics qualitatively[@Stern2018], @fig:graphite-ph-populations allows to quantitatively determine how the energy deposited in the electronic system flows and thermalizes. A discussion of the observed physical processes is discussed below.
+
+As discussed in @sec:graphite-100-fs, two optical phonons modes are strongly-coupled to the electronic system: $A_1^\prime$ located near the $\vec{K}$ point, and $E_{2g}$, near $\vec{\Gamma}$. $E_{2g}$ is obscured by the elastic signals near $\vec{\Gamma}$; however, its dynamics are accessible via ultrafast spectroscopy [@Kampfrath2005]. On the other hand, $A_1^\prime$ is clearly visible in @fig:graphite-ph-populations. It behaves as expected: a fast early increase in population is seen due to the transfer of energy from the electronic subsystem. By \SI{5}{\pico\second}, energy has already been transferred away through phonon-phonon coupling. 
+
+After a few picoseconds, the strongly-coupled optical modes decay into lower-energy lattice waves. Since one of the primary causes of phonon-phonon scattering is anharmonicity, the decay probabilities are usually computed via DFT [@Bonini2007]. UEDS shows an experimental determination of those decay pathways. The transfer of energy from high-energy optical phonons to lower-energy lattice waves must satisfy the conservation of momentum and energy. This restricts the number of possible decay pathways to mid-Brillouin zone phonons, either directly (from $E_{2g}$) or via Umklapp scattering (from $A_1^\prime$). Specifically, from \SIrange{1.5}{100}{\pico\second}, acoustic phonon population increase is observed along the $\vec{\Gamma}-\vec{M}$ line. This measurement is in accordance with predicted anharmonic decay probabilities from the $E_{2g}$ mode [@Bonini2007]. The small increase of population of the LA mode around \SI{500}{\femto\second} at $\tfrac{1}{2}\vec{K}$ is also a confirmation of predictions by Bonini *et al*[@Bonini2007].
+
+Over longer time-scales (\SI{25}{\pico\second}), the nonthermal TA population has significantly pooled at $\tfrac{1}{3}\vec{M}$ and $\vec{M}$. There are no three-phonon anharmonic decay processes that start in a transverse mode like TA. Allowed *in-plane* interband transitions are of the types $\text{L} \to \text{T} + \text{T}$ or $\text{L} \to \text{L} + \text{T}$, where L and T represent longitudinal and transverse modes respectively [@Lax1981; @Khitun2001]. It is therefore expected *a priori* that a nonthermal TA population remains until decay to out-of-plane phonon modes occur. Predicted decay probabilities also support this observation; both LA and TA modes will favor decay to out-of-plane modes[@Paulatto2013]  which are not visible to UEDS measurements. A special case is visible at $\tfrac{1}{2}\vec{M}$ and $\tfrac{1}{2}\vec{K}$, where predicted anharmonic lifetimes of TA and LA drop significantly due to the activation of Umklapp scattering to out-of-plane acoustic phonons[@Paulatto2013]. The measurements of @fig:graphite-ph-populations corroborate the predictions: energy flow away from TA and LA at the mid-Brillouin zone is fast enough that population never builds up. 
+
+It's worth noting that apart from certain special cases (TODO: multiph THz)
+
 ## Wavevector-dependent couplings constants
 
+Electron-phonon and phonon-phonon coupling constants describe the strength of the coupling between excitations in a material. A coupling constant $G_{i,j}$ describes the rate of energy transfer from excitation type $i$ to excitation type $j$, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. E-ph and ph-ph coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent e-ph and ph-ph coupling terms.
 
+The nonequilibrium flow of energy between excitations, both electronic and lattice in nature, has historically been crudely modelled using the *two-temperature model* [@Allen1987]. In summary, this model states that while the concept of temperature does not apply to nonequilibrium situations, the energy distribution of the electrons and lattice waves may be treated separately. In other words, the se[arate thermalization of the electronic and lattice subsystems is much faster than the energy transver between them. It is evident that such a description does not adequately model experimental results from @sec:graphite-ph-spectroscopy for two main reasons. First, the thermalization of decay of optical phonons to acoustic ones overlaps significantly in time with the transfer of energy from the photoexcited electrons to strongly-coupled optical modes. Second, the energy distribution of lattice waves is far from thermal, even at \SI{100}{\pico\second}.
+
+UEDS measurements allow to move beyond the two-temperature approximation as the energy distribution of phonons is known across the Brillouin zone. And yet, theory has not caught up with this opportunity; the best way to extract e-ph and ph-ph coupling values is still based on rate-equations. To this end, the formalism of the two-temperature model needs to be extended.
+
+### The non-thermal lattice model
+
+The non-thermal lattice model is an extension of the two-temperature model, with the added flexibility that lattice waves need not be thermalized[@Waldecker2016]. It assumes that the energy distribution of each phonon mode admits a thermal description; that is, the energy transfer between phonons of different branches is slower than the scattering of phonons from the same branch. This assumption is a reasonable one, in the light of the results presented in @sec:graphite-pop-dynamics. Within this framework, each phonon branch $j$ can be assigned its own molar heat capacity, $C_{ph, j}$, and temperature, $T_j$:
+$$
+C_e(T_e) \frac{\partial T_e}{\partial \tau} = \sum_i G_{ep, i}\left[ T_e(\tau) - T_{ph,i}(\tau) \right] + f(\tau)
+$${#eq:graphite-nlm-electrons}
+$$
+\Bigg\{ C_{ph,j}(T_{ph,j}) \frac{\partial T_{ph,j}}{\partial \tau} = 
+	\sum_{i\neq j} G_{ep, i} \left[ T_e(\tau)      - T_{ph,i}(\tau) \right] 
+				 + G_{pp,ij} \left[ T_{ph,j}(\tau) - T_{ph,i}(\tau) \right] 	\Bigg\}_{j=1}^{N}
+$${#eq:graphite-nlm-phonons}
+where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-100-fs, the use of an electronic temperature is acceptable for $\tau > \SI{150}{\femto\second}$. The coupling constants $G_{ep, i}$ describe the coupling between the electrons and phonon mode $i$, while coupling constants $G_{pp, ij}$ encode the coupling between phonon modes $i$ and $j$.
+
+Observations of transient phonon populations are more general than mode temperatures. However, in order to make use of the non-thermal lattice model, the mode temperature can be related to transient phonon mode populations via the Bose-Einstein distribution:
+$$
+    n_j(\vec{k}, \tau) \propto \left[ \exp{\left( \frac{\hbar \omega_j(\vec{k}, \tau<0)}{k_B T_{ph, j}(\tau)} \right)} - 1\right]^{-1}
+$$
+The above expression can be decomposed with a Laurent series [@Wunsch2005] to extract the quasi-linear relationship between mode population and temperature:
+$$
+    n_j(\vec{k}, \tau) \propto  \frac{k_B T_{ph, j}(\tau)}{\hbar \omega_j(\vec{k}, \tau<0)} - 1/2 + \mathcal{O}\left( T^{-1}_{ph, j}(\tau) \right)
+$$
+The above holds for appropriately-high mode temperatures. For the remainer of this section, it follows that $\Delta n_j \propto \Delta T_{ph,j}$, where the initial temperature is known to be \SI{300}{\kelvin}.
 
 ## Conclusion and outlook
 

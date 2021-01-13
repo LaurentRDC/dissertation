@@ -107,7 +107,7 @@ for ax, (mode_name, time) in zip(grid, it.product(MODES, TIMES)):
     m = ax.imshow(
         image,
         extent=[kx.min(), kx.max(), ky.min(), ky.max()],
-        cmap="inferno",
+        cmap="hot",
         vmin=0,
         vmax=1,
     )
