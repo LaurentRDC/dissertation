@@ -281,6 +281,10 @@ Over longer time-scales (\SI{25}{\pico\second}), the nonthermal TA population ha
 
 It's worth noting that apart from certain special cases (TODO: multiph THz)
 
+### Long-term decay
+
+TODO: long-term energy stored in each mode
+
 ## Mode-projected electron-phonon and phonon-phonon coupling
 
 TODO: make the distinction between G (heat rate?) and g (matrix element) clear
@@ -314,7 +318,7 @@ $$
 $${#eq:graphite-population-laurent}
 The above holds for appropriately-high mode temperatures. For the remainer of this section, it follows that $\Delta n_j \propto \Delta T_{ph,j}$, where the initial temperature is known to be \SI{300}{\kelvin}.
 
-### Experimental electron- and phonon-phonon coupling
+### The non-thermal lattice model applied to UEDS
 
 Based on the formalism presented in the @sec:graphite-nlm, the couplings to the $A_1^\prime$ phonon mode will be extracted from the TO2 population measurements. 
 
@@ -363,7 +367,7 @@ $$
 \right\}
 $${#eq:graphite-nlm-system}
 
-### Results {#sec:graphite-eph-solution}
+### Heat rates {#sec:graphite-eph-solution}
 
 The solution to @eq:graphite-nlm-system was computed using an iterative least-squares method[@Branch1999]. The resulting temperature traces $\left\{ T_e(\tau), T_{A_1^\prime}(\tau), T_{l}(\tau)\right\}$ are shown in [@fig:graphite-eph-coupling]. The coupling constants $\left\{ G_{e,l}, G_{e,A_1^\prime}, G_{A_1^\prime, l}\right\}$ are listed in @tbl:graphite-eph-coupling
 

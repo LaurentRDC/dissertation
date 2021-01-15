@@ -1,7 +1,7 @@
+# -*- coding: utf-8 -*-
 """
 Decompose diffraction patterns into mode populations and store them.
 """
-# -*- coding: utf-8 -*-
 import itertools as it
 from collections import defaultdict
 from pathlib import Path
@@ -252,7 +252,6 @@ if __name__ == "__main__":
         INPUT / "graphite_time_corrected_iris5.hdf5", mode="r"
     ) as dset:
         times = dset.time_points
-    times = (0.588, 1.588, 5, 100)
 
     # Roundabout way of getting k-points
     modes = prepare_modes(reflections=tuple([(0, 0, 0)]), decimate=DECIMATION)
@@ -280,5 +279,5 @@ if __name__ == "__main__":
 
         for time_index, time in enumerate(tqdm(times)):
             pop = population(kx=kx, ky=ky, time=time, exclude=EXCLUDES[round(time, 3)])
-            for mode_name in IN_PLANE_MODES:
+            for mode_name in tqdm(IN_PLANE_MODES):
                 f[mode_name][:, :, time_index] = pop.get(mode_name, np.zeros_like(kx))
