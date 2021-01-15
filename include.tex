@@ -1,10 +1,12 @@
 
-\usepackage{siunitx}
+\usepackage[separate-uncertainty=true, multi-part-units=single]{siunitx}
 \sisetup{detect-all,mode=text,range-phrase = {\text{~to~}}}
 % Rydbergs are not SI; need to define separately
 \DeclareSIUnit\rydberg{Ry}
 
 \usepackage[capitalise,noabbrev]{cleveref}
+
+\usepackage{multirow}
 
 \usepackage[
     backend=biber,

@@ -283,6 +283,8 @@ It's worth noting that apart from certain special cases (TODO: multiph THz)
 
 ## Mode-projected electron-phonon and phonon-phonon coupling
 
+TODO: make the distinction between G (heat rate?) and g (matrix element) clear
+
 Electron-phonon and phonon-phonon coupling constants describe the strength of the coupling between excitations in a material. A coupling constant $G_{i,j}$ describes the rate of energy transfer from excitation type $i$ to excitation type $j$, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. E-ph and ph-ph coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent e-ph and ph-ph coupling terms.
 
 The nonequilibrium flow of energy between excitations, both electronic and lattice in nature, has historically been crudely modelled using the *two-temperature model* [@Allen1987]. In summary, this model states that while the concept of temperature does not apply to nonequilibrium situations, the energy distribution of the electrons and lattice waves may be treated separately. In other words, the se[arate thermalization of the electronic and lattice subsystems is much faster than the energy transver between them. It is evident that such a description does not adequately model experimental results from @sec:graphite-ph-spectroscopy for two main reasons. First, the thermalization of decay of optical phonons to acoustic ones overlaps significantly in time with the transfer of energy from the photoexcited electrons to strongly-coupled optical modes. Second, the energy distribution of lattice waves is far from thermal, even at \SI{100}{\pico\second}.
@@ -336,7 +338,7 @@ k_B \int_0^{\omega_D} d\omega ~ D_j(\omega)
 $$
 where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of states for phonon mode $j$. The momentum-resolution of UEDS allows for a simplification: a single frequency contributes to the density of states, so that $D_j(\omega) \equiv \delta(\omega)$.
 
-#### Reducing complexity with momentum-resolution
+#### Reducing complexity with momentum-resolution {#sec:graphite-reducing-complexity}
 
 The number of coupled equations in @eq:graphite-nlm-phonons can be reduced by aggregating lattice heat capacities into two categories: the heat capacity of $A_1^\prime$, $C_{A_1^\prime}$, and the total effective heat capacity of all other relevant modes, defined as $C_l$. The calculation of $C_l$ boils down to adding the contribution of mode that can scatter into $A_1^\prime$ or from it, based on conservation of energy and momentum, weighted by the decay probabilities reported by Bonini *et al* [@Bonini2007]. With this information:
 \begin{align}
@@ -361,7 +363,7 @@ $$
 \right\}
 $${#eq:graphite-nlm-system}
 
-### Results
+### Results {#sec:graphite-eph-solution}
 
 The solution to @eq:graphite-nlm-system was computed using an iterative least-squares method[@Branch1999]. The resulting temperature traces $\left\{ T_e(\tau), T_{A_1^\prime}(\tau), T_{l}(\tau)\right\}$ are shown in [@fig:graphite-eph-coupling]. The coupling constants $\left\{ G_{e,l}, G_{e,A_1^\prime}, G_{A_1^\prime, l}\right\}$ are listed in @tbl:graphite-eph-coupling
 
@@ -372,17 +374,16 @@ The solution to @eq:graphite-nlm-system was computed using an iterative least-sq
 	\centering
 	\caption{Coupling strength between electronic system, the $A_1^\prime$ phonon, and the lattice system. Uncertainty is derived from fit covariances.}
 	\vspace{2mm}
-	\begin{tabular}{c c}
-		~ & Coupling strength [\si{\watt \per \meter \cubed \per \kelvin}] \\ 
-		\hline\\
-		$G_{e,A_1^\prime}$  & $(6.8 \pm 0.3) \times 10^{17}$ \\ 
-		$G_{A_1^\prime, l}$ & $(8.0 \pm 0.5) \times 10^{17}$ \\ 
-		$G_{e,l}$     & $(0.0 \pm 6.0) \times 10^{15}$ \\ 
+	\begin{tabular}{c | c}
+		~ & Coupling strength [\si{\watt \per \meter \cubed \per \kelvin}] \\ \hline\hline
+		$G_{e,A_1^\prime}$  & $(6.8 \pm 0.3) \times 10^{17}$ \\ \hline
+		$G_{A_1^\prime, l}$ & $(8.0 \pm 0.5) \times 10^{17}$ \\ \hline
+		$G_{e,l}$           & $(0.0 \pm 6.0) \times 10^{15}$ \\ \hline
 	\end{tabular} 
 	\label{tbl:graphite-eph-coupling}
 \end{table}
 
-### Mode-projected electron-phonon {#sec:graphite-coupling-constants}
+### Mode-projected electron-phonon coupling matrix elements {#sec:graphite-coupling-constants}
 
 In order to compare to theory and other experiments, the value of electron-phonon coupling matrix-element $g^2_{e, A_1^\prime}$ is calculated from the coupling constants determined from solving @eq:graphite-nlm-system.
 
@@ -398,9 +399,8 @@ where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is 
 
 The calculation for the electron-$A_1^\prime$ coupling matrix element $g^2_{e,A_1^\prime} \equiv g^2_{e,j=\text{TO2}}(\vec{k} \approx \vec{K})$ is demonstrated below. Consider the following sum of @eq:graphite-nlm-system:
 \begin{align}
-    & \frac{\partial T_e}{\partial \tau} - \sum_j \frac{\partial T_{ph,j}}{\partial \tau} = \\
+    & \frac{\partial T_e}{\partial \tau} - \sum_j \frac{\partial T_{ph,j}}{\partial \tau} = \label{eq:graphite-tau-1} \\
     & \sum_j \Bigg[ \frac{G_{ep,j}}{C_e} ~ (T_e - T_{ph,j}) \nonumber  -\sum_i \bigg( \frac{G_{ep,i}}{C_{ph,j}} ~ (T_e - T_{ph,i}) + \frac{G_{pp,ij}}{C_{ph,j}} ~ (T_{ph,i} - T_{ph,j}) \bigg) \Bigg] \nonumber
-\label{eq:graphite-tau-1}
 \end{align}
 At early times ($< \SI{5}{\pico\second}$), the $A_1^\prime$-phonon coupling $G_{A_1^\prime, l}$ is negligible compared to other coupling constants (@tbl:graphite-eph-coupling). Then, @eq:graphite-tau-1 can be simplified to:
 $$
@@ -418,19 +418,35 @@ The time dependence comes from the time-evolution of the individual temperatures
 $$
 \lambda(\tau) = \exp{\int d\tau \left[ a(\tau) \right]}.
 $$
-For a slow-varying integrand $a(\tau) \approx a$, then $a = 1/\tau$, where $\tau$ is a compound variable representing the relaxation of the system. This leads to the following form:
+For a slow-varying integrand $a(\tau) \approx a$, then $a = 1/\bar{\tau}$, where $\bar{\tau}$ is a compound variable representing the relaxation of the system. This leads to the following form:
 $$
-\frac{1}{\tau} \approx \sum_j \left( \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}\right).
+\frac{1}{\bar{\tau}} \approx \sum_j \left( \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}\right).
 \label{eq:graphite-tau-4}
 $$
 As a specific example, the above expression reduces nicely in the case of the two-temperature model, where all phonon modes are considered to be thermalized with each other, with isochoric heat capacity $C_{ph}$:
 $$
-\frac{1}{\tau} = G_{ep} \left( \frac{1}{C_e} - \frac{1}{C_{ph}}\right)
+\frac{1}{\bar{\tau}} = G_{ep} \left( \frac{1}{C_e} - \frac{1}{C_{ph}}\right)
 $$
-and we see that $\tau$ physically represents the relaxation time of the electronic system into the lattice. @eq:graphite-tau-4 can be thought of as a sum of relaxation times between the electronic subsystem and specific modes $\tau_{e,j}$:
+and we see that $\bar{\tau}$ physically represents the relaxation time of the electronic system into the lattice. @eq:graphite-tau-4 can be thought of as a sum of relaxation times between the electronic subsystem and specific modes $\tau_{e,j}$:
 $$
 \frac{1}{\tau_{e,j}} = \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}.
 $$
+
+Using the coupling constants and heat capacities from sec:graphite-eph-solution and @sec:graphite-reducing-complexity respectively, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$ and $\langle g^2_{e, A_1^\prime} \rangle = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
+
+\begin{table}
+	\centering
+	\caption{Comparison of measured and calculated values for the electron-phonon coupling matrix element $\langle g^2_{e, A_1^\prime}\rangle$}
+	\vspace{2mm}
+	\begin{tabular}{l | c | l}
+		Source & $\langle g^2_{e, A_1^\prime} \rangle$ [\si{\electronvolt\squared}] & Notes \\ \hline\hline
+        This work, René de Cotret \emph{et al}\autocite{RenedeCotret2019} & $0.035 \pm 0.001$ & Experiment \\ \hline
+        Johannsen \emph{et al}\autocite{Johannsen2013}                    & $0.033 \pm 0.007$ & Experiment (trARPES) on graphene \\ \hline
+        \multirow{2}{*}{Na \emph{et al}\autocite{Na2019}}                 & $0.050 \pm 0.011$ & Experiment (trARPES) \\ \cline{2-3} 
+                                                                          & $0.040$           & Theory \\ \hline
+	\end{tabular} 
+	\label{tbl:graphite-eph-coupling-comparison}
+\end{table}
 
 ## Conclusion and outlook
 
