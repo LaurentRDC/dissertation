@@ -440,7 +440,7 @@ ax_K.set_ylim([-0.25, 1.20])
 ax_T.set_ylim(intensity_to_temperature(np.array(ax_K.get_ylim())))
 
 ax_K.axvline(x=0, linestyle="--", linewidth=1, color="k")
-ax_K.set_ylabel("Change in population $\Delta n_{A_1'}(t)$ [a.u.]")
+ax_K.set_ylabel("Change in population $\Delta n_{A_1'}(\tau)$ [a.u.]")
 ax_T.set_ylabel("Temperature [K]")
 
 ax_K.set_xlabel("Delay time [ps]")
