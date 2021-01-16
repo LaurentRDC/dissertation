@@ -274,7 +274,13 @@ if __name__ == "__main__":
 
         for mode in modes:
             f.create_dataset(
-                mode, shape=(kx.shape[0], kx.shape[1], len(times)), dtype=np.float
+                mode,
+                shape=(kx.shape[0], kx.shape[1], len(times)),
+                dtype=np.float,
+                chunks=True,
+                shuffle=True,
+                compression="gzip",
+                compression_opts=9,
             )
 
         for time_index, time in enumerate(tqdm(times)):

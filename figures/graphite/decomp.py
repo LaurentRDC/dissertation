@@ -10,7 +10,6 @@ import numpy as np
 import scipy.interpolate as interpolate
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from plotutils import FIGURE_WIDTH, ImageGrid, draw_hexagon, tag_axis
-from skimage.filters import gaussian
 from skued import nfold
 from crystals import Crystal
 from crystals.affine import change_of_basis

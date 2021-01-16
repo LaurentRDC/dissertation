@@ -8,6 +8,7 @@ plt.rcParams["savefig.pad_inches"] = 0.0
 
 # WARNINGS --------------------------------------------------------------------
 import warnings
+import numpy
 
 warnings.filterwarnings("ignore", category=UserWarning, module="iris*")
-warnings.filterwarnings("ignore", category=RuntimeWarning, module="npstreams*")
+numpy.seterr(divide='ignore')
