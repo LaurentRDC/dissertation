@@ -3,18 +3,21 @@
 Decompose diffraction patterns into mode populations and store them.
 """
 import itertools as it
+import os
 from collections import defaultdict
 from pathlib import Path
 
 import h5py as h5
+import npstreams as ns
 import numpy as np
 import scipy.interpolate as interpolate
 import scipy.optimize as opt
 from crystals import Crystal
+from iris import DiffractionDataset
+from plotutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH, GRAPHITE_CENTER
 from skimage.filters import gaussian
 from skimage.transform import rotate
-from skued import nfold, detector_scattvectors
-from iris import DiffractionDataset
+from skued import detector_scattvectors, nfold
 from tqdm import tqdm
 
 from mkoneph import (
@@ -24,8 +27,6 @@ from mkoneph import (
     one_phonon_structure_factor,
     prepare_modes,
 )
-
-from plotutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH, GRAPHITE_CENTER
 
 INPUT = Path("data") / "graphite"
 OUTPUT = INPUT / "populations"
@@ -51,7 +52,7 @@ QX, QY, _ = detector_scattvectors(
 QQ = np.sqrt(QX ** 2 + QY ** 2)
 
 
-def gaussian_table(points, values, sigma=20):
+def gaussian_table(points, values, sigma=5):
     """
     Perform gaussian smoothing on a table of points
 
@@ -66,7 +67,7 @@ def gaussian_table(points, values, sigma=20):
     """
     makx = max([abs(points[:, 0].min()), abs(points[:, 0].max())])
     maxy = max([abs(points[:, 1].min()), abs(points[:, 1].max())])
-    kx, ky = np.meshgrid(np.linspace(-makx, makx, 2048), np.linspace(-maxy, maxy, 2048))
+    kx, ky = np.meshgrid(np.linspace(-makx, makx, 512), np.linspace(-maxy, maxy, 512))
 
     interpolated = np.squeeze(
         interpolate.griddata(
@@ -218,7 +219,7 @@ def population(kx, ky, time, exclude=tuple()):
 
         # Perform smoothing
         # this is very expensive...
-        weights = gaussian_table(mode.q_points, weights, sigma=20)
+        weights = gaussian_table(mode.q_points, weights, sigma=5)
 
         # Split quantities row-wise such that every quantity
         # is related to a single reflection
@@ -239,7 +240,7 @@ def population(kx, ky, time, exclude=tuple()):
             method="linear",  # fill_value has no effect if method = 'nearest'
             fill_value=0.0,
         )
-        image = gaussian(image, sigma=15)
+        image = gaussian(image, sigma=5)
         image = nfold(image, 6)
         image[kk < GAMMA_RADIUS] = 0
         result[mode_name] = image
@@ -248,6 +249,7 @@ def population(kx, ky, time, exclude=tuple()):
 
 
 if __name__ == "__main__":
+
     with DiffractionDataset(
         INPUT / "graphite_time_corrected_iris5.hdf5", mode="r"
     ) as dset:
@@ -263,7 +265,7 @@ if __name__ == "__main__":
         "LA"
     ].q_points  # This only works if the modes were calculated using (0,0,0) reflection only
     kmax = np.linalg.norm(kpoints, axis=1).max() + 0.25
-    kx, ky = np.meshgrid(np.linspace(-kmax, kmax, 1024), np.linspace(-kmax, kmax, 1024))
+    kx, ky = np.meshgrid(np.linspace(-kmax, kmax, 256), np.linspace(-kmax, kmax, 256))
     kk = np.sqrt(kx ** 2 + ky ** 2)
 
     with h5.File(OUTPUT / "population_timeseries.hdf5", mode="w") as f:
@@ -272,15 +274,29 @@ if __name__ == "__main__":
         f.create_dataset("kx", data=kx)
         f.create_dataset("ky", data=ky)
 
-        for mode in modes:
+        for mode_name, mode in modes.items():
             f.create_dataset(
-                mode,
+                mode_name,
                 shape=(kx.shape[0], kx.shape[1], len(times)),
                 dtype=np.float,
                 chunks=True,
                 shuffle=True,
                 compression="gzip",
                 compression_opts=9,
+            )
+
+            frequencies = interpolate.griddata(
+                points=kpoints[:, 0:2],
+                values=mode.frequencies,
+                xi=(kx, ky),
+                method="linear",  # fill_value has no effect if method = 'nearest'
+                fill_value=0.0,
+            )
+
+            f.create_dataset(
+                f"{mode_name}_frequencies",
+                data=frequencies,
+                dtype=np.float,
             )
 
         for time_index, time in enumerate(tqdm(times)):

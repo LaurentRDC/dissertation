@@ -76,9 +76,9 @@ where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. T
 ```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vec{k})$ for graphite."}
 ```
 
-The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. It is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. 
+The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. It is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. Photons at these energies (\SI{1.55}{\electronvolt}) can only drive vertical (zero-momentum) transitions near the Dirac cones. As the electron cloud thermalizes, two classes of momentum-conserving decay pathways involving phonons emerge. One such pathway allows for an electron to move across the Dirac cone, emitting an $E_{2g}$ phonon with small wavevector $\vec{k} \sim \vec{0}$. Another pathway allows for an electron to hop onto a neighboring Dirac cone, emitting an $A_1^\prime$ phonon with large wavevector $\vec{k} \sim \vec{K}$.
 
-```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption=""}
+```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption="Cut of the electronic dispersion $E(\vec{k})$ along the $\vec{K}$--$\vec{K}$ line shows the effects of photoexcitation with \SI{800}{\nano\meter} photons ($\gamma$). The momentum-conserving decay path are highlighted and explained in the text."}
 ```
 
 ### Phonon landscape {#sec:graphite-phonon-landscape}
@@ -306,7 +306,8 @@ It's worth noting that apart from certain special cases (TODO: multiph THz)
 
 ### Long-term decay
 
-TODO: long-term energy stored in each mode
+```{.matplotlib file="figures/graphite/energy.py" caption=""}
+```
 
 ## Mode-projected electron-phonon and phonon-phonon coupling
 

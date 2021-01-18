@@ -46,7 +46,8 @@ x = np.argmin(np.abs(Eminus + photon_energy / 2), axis=0)
 arrow_kwds = dict(
     length_includes_head=True,
     width=0.001,
-    head_width=0.04,)
+    head_width=0.04,
+)
 
 named_arrow(
     ax=ax1,
@@ -57,7 +58,7 @@ named_arrow(
     text=r"$\gamma$",
     color="r",
     fc="r",
-    tkwds=dict(ha="left", va="top", color='r', fontsize=16),
+    tkwds=dict(ha="left", va="top", color="r", fontsize=16),
     **arrow_kwds,
 )
 
@@ -65,7 +66,7 @@ named_arrow(
     ax=ax1,
     x=kx[x],
     y=np.abs(Eminus[x]),
-    dx=2*kx[len(kx) - x],
+    dx=2 * kx[len(kx) - x],
     dy=0,
     text=r"$A_1^\prime$",
     fc="k",
@@ -77,7 +78,7 @@ named_arrow(
     ax=ax1,
     x=kx[x],
     y=np.abs(Eminus[x]),
-    dx=2*(kx[np.argmax(Eminus)] - kx[x]),
+    dx=2 * (kx[np.argmax(Eminus)] - kx[x]),
     dy=0,
     text=r"$E_{2g}$",
     fc="k",
