@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import radians, sqrt
 from matplotlib.patches import Circle, RegularPolygon
+from plotutils import named_arrow
 
 
 def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):

@@ -56,7 +56,30 @@ The real-space 6-fold rotational symmetry is mirrored in reciprocal space. The g
 ```{#fig:graphite-bz .matplotlib file="figures/graphite/bz.py" caption="In-plane section of the Brillouin zone of graphite, spanned by reciprocal lattice vectors $\vec{b}_1$ and $\vec{b}_2$. The three classes of high-symmetry points are shown. $\vec{M}$ and $\vec{K}$ have symmetry equivalents on every edge and vertex respectively."}
 ```
 
-TODO: electronic landscape (Dirac cones)
+### Electronic structure
+
+The electronic structure of graphite has been the subject of much study. Graphite is a very close relative of the Dirac semi-metal graphene; its electronic dispersion is very similar from the point of view of experiments presented in this chapter. The electronic dispersion of graphite the $\pi$ and $\pi^{\star}$ bands can be calculated in the tight-binding framework [@Wallace1947]. Taking into account nearest-neighbor interactions only, the dispersion for both bonding and antibonding bands are given by:
+$$
+    E(\vec{k})_{\pi^{\star}} = t \sqrt{3 + f(\vec{k})}
+$$
+$$
+    E(\vec{k})_{\pi} = - t \sqrt{3 + f(\vec{k})}
+$$
+with
+\begin{align}
+    f(\vec{k}) &= 2  \cos\left[\sqrt{3} a ~ (\vec{k} \cdot \vec{b}_2) \right] \\
+               &+ 4  \cos\left[\tfrac{\sqrt{3} a}{2} ~ (\vec{k} \cdot \vec{b}_2) \right] 
+                    \cos\left[\tfrac{3 a}{2} ~ (\vec{k} \cdot \vec{b}_1) \right] \nonumber
+\end{align}
+where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. The in-plane dispersion for a tight-binding energy of $t=\SI{2.7}{\electronvolt}$ is shown on @fig:graphite-electronic-structure. More complete expressions that are not limited to nearest neighbor interactions are given elsewhere [@Neto2009].
+
+```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vec{k})$ for graphite."}
+```
+
+The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. It is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. 
+
+```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption=""}
+```
 
 ### Phonon landscape {#sec:graphite-phonon-landscape}
 

@@ -11,4 +11,4 @@ import warnings
 import numpy
 
 warnings.filterwarnings("ignore", category=UserWarning, module="iris*")
-numpy.seterr(divide='ignore')
+numpy.seterr(divide="ignore")
