@@ -58,8 +58,9 @@ with PopulationDatabase(INPUT / "population_timeseries.hdf5", mode="r") as dbase
     total_energy /= total_energy.max()
     mode_energy["total"] = total_energy
 
-
-    for mode, marker, color in zip(["TA", "TO2", "total"], ['x', 'o', "s"], ["orange", "blue", "red"]):
+    for mode, marker, color in zip(
+        ["TA", "TO2", "total"], ["x", "o", "s"], ["orange", "blue", "red"]
+    ):
         y = mode_energy[mode] / mode_energy[mode].max()
         fit_params, _ = curve_fit(
             biexp,
@@ -77,7 +78,9 @@ with PopulationDatabase(INPUT / "population_timeseries.hdf5", mode="r") as dbase
                 marker=marker,
                 label=mode,
             )
-            ax_.plot(dbase.times, biexp(dbase.times, *fit_params), color=color, linestyle='-')
+            ax_.plot(
+                dbase.times, biexp(dbase.times, *fit_params), color=color, linestyle="-"
+            )
 
 ax.legend(loc="center", ncol=3, bbox_to_anchor=(0.5, 1.05), bbox_transform=ax.transAxes)
 ax.set_ylabel("Energy change [a.u.]")
