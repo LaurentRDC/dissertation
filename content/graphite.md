@@ -73,12 +73,12 @@ with
 \end{align}
 where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. The in-plane dispersion for a tight-binding energy of $t=\SI{2.7}{\electronvolt}$ is shown on @fig:graphite-electronic-structure. More complete expressions that are not limited to nearest neighbor interactions are given elsewhere [@Neto2009].
 
-```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vec{k})$ for graphite."}
+```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vec{k})$ for graphite. The in-plane section of the Brillouin zone is shown below. The dotted black line represents the line-cut used for @fig:graphite-photoexcitation."}
 ```
 
-The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. It is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. Photons at these energies (\SI{1.55}{\electronvolt}) can only drive vertical (zero-momentum) transitions near the Dirac cones. As the electron cloud thermalizes, two classes of momentum-conserving decay pathways involving phonons emerge. One such pathway allows for an electron to move across the Dirac cone, emitting an $E_{2g}$ phonon with small wavevector $\vec{k} \sim \vec{0}$. Another pathway allows for an electron to hop onto a neighboring Dirac cone, emitting an $A_1^\prime$ phonon with large wavevector $\vec{k} \sim \vec{K}$.
+The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. It is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. Photons at these energies (\SI{1.55}{\electronvolt}) can only drive vertical (zero-momentum) transitions near the Dirac cones. As the electron cloud thermalizes, two classes of momentum-conserving decay pathways involving phonons emerge. One such pathway allows for an electron to move across the Dirac cone, emitting an $E_{2g}$ phonon with small wavevector $\vec{k} \sim \vec{0}$. Another pathway allows for an electron to hop onto a neighboring Dirac cone, emitting an $A_1^\prime$ phonon with large wavevector $\vec{k} \sim \vec{K}$. These pathways are shown diagramatically on @fig:graphite-photoexcitation.
 
-```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption="Cut of the electronic dispersion $E(\vec{k})$ along the $\vec{K}$--$\vec{K}$ line shows the effects of photoexcitation with \SI{800}{\nano\meter} photons ($\gamma$). The momentum-conserving decay path are highlighted and explained in the text."}
+```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption="Cut of the electronic dispersion $E(\vec{k})$ along the $\vec{K}$--$\vec{K}$ line (see @fig:graphite-electronic-structure) shows the effects of photoexcitation with \SI{800}{\nano\meter} photons ($\gamma$). The momentum-conserving decay path are highlighted and explained in the text."}
 ```
 
 ### Phonon landscape {#sec:graphite-phonon-landscape}
@@ -97,6 +97,8 @@ TODO: The temperature-dependence of the phonon spectrum needs to be addressed, a
 ## The first hundred femtoseconds viewed by trARPES {#sec:graphite-100-fs}
 
 Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Although UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second} as observed by time- and angle-resolved photoemission spectroscopy (trARPES).
+
+
 
 ## Experimental and computational methods
 
@@ -306,8 +308,16 @@ It's worth noting that apart from certain special cases (TODO: multiph THz)
 
 ### Long-term decay
 
-```{.matplotlib file="figures/graphite/energy.py" caption=""}
+It is possible to quantify how long does the non-equilibrium distribution of lattice waves last in graphite. The energy transferred to the sample from photoexcitation, stored in plane in a mode $j$, can be expressed as follows:
+$$
+    \Delta E(\tau) = \int_{\text{BZ}} d\vec{k} \frac{\Delta n_j(\vec{k}, \tau)}{\omega_j(\vec{k}, \tau)}
+$$
+where $\int_{\text{BZ}} d\vec{k}$ is understood to be the integral over the in-plane section of the Brillouin zone. Using the population measurements $\left\{ n_j(\vec{k}, \tau)\right\}$ presented in @fig:graphite-ph-populations, the mode-dependent relative change in stored energy (in-plane) can be calculated. The results are shown in @fig:graphite-long-term.
+
+```{.matplotlib #fig:graphite-long-term file="figures/graphite/energy.py" caption="Energy stored in-plane after photoexcitation. **inset** long-term trend shows that thermalization has not yet occurred by \SI{600}{\pico\second}."}
 ```
+
+The energy trends for modes TA and TO2 are commensurate with the description of @sec:graphite-pop-dynamics. The fascinating aspect of this analysis is revealed by looking at the total energy stored in-plane. Even by \SI{600}{\pico\second}, thermalization of the energy dumped into the sample by photoexcitation has not occurred at all. 
 
 ## Mode-projected electron-phonon and phonon-phonon coupling
 

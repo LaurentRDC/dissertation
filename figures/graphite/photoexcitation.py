@@ -29,13 +29,13 @@ def E(kx, ky):
 
 fig, ax1 = plt.subplots(1, 1, figsize=(4, 3))
 
-kx = np.linspace(-1.5, 1.5, num=1024)
-Eplus, Eminus = E(kx=1.5, ky=kx)
+ky = np.linspace(-1.5, 1.5, num=1024)
+Eplus, Eminus = E(kx=1.5, ky=ky)
 
 norm = Normalize(vmin=Eminus.min(), vmax=Eplus.max())
 scatter_kwargs = dict(cmap="plasma", norm=norm, s=2)
-ax1.scatter(kx, Eplus, c=Eplus, **scatter_kwargs)
-ax1.scatter(kx, Eminus, c=Eminus, **scatter_kwargs)
+ax1.scatter(ky, Eplus, c=Eplus, **scatter_kwargs)
+ax1.scatter(ky, Eminus, c=Eminus, **scatter_kwargs)
 ax1.xaxis.set_major_locator(FixedLocator([-1.7 / 2, 0, 1.7 / 2]))
 ax1.xaxis.set_major_formatter(
     FixedFormatter([r"$\mathbf{K}$", r"$\mathbf{M}$", r"$\mathbf{K}$"])
@@ -51,7 +51,7 @@ arrow_kwds = dict(
 
 named_arrow(
     ax=ax1,
-    x=kx[x],
+    x=ky[x],
     y=Eminus[x],
     dx=0,
     dy=photon_energy,
@@ -64,9 +64,9 @@ named_arrow(
 
 named_arrow(
     ax=ax1,
-    x=kx[x],
+    x=ky[x],
     y=np.abs(Eminus[x]),
-    dx=2 * kx[len(kx) - x],
+    dx=2 * ky[len(ky) - x],
     dy=0,
     text=r"$A_1^\prime$",
     fc="k",
@@ -76,9 +76,9 @@ named_arrow(
 
 named_arrow(
     ax=ax1,
-    x=kx[x],
+    x=ky[x],
     y=np.abs(Eminus[x]),
-    dx=2 * (kx[np.argmax(Eminus)] - kx[x]),
+    dx=2 * (ky[np.argmax(Eminus)] - ky[x]),
     dy=0,
     text=r"$E_{2g}$",
     fc="k",

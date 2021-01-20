@@ -33,42 +33,59 @@ def E(kx, ky):
 fig, ax1 = plt.subplots(
     1,
     1,
-    figsize=(FIGURE_WIDTH, 0.6 * FIGURE_WIDTH),
+    figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 1.5),
     # gridspec_kw=dict(width_ratios=[3, 1]),
     subplot_kw=dict(projection="3d", elev=10, azim=-45),
 )
 
-extent = np.linspace(-2, 2, num=512)
+extent = np.linspace(-1.7, 1.7, num=512)
 kx, ky = np.meshgrid(extent, extent)
 Eplus, Eminus = E(kx, ky)
 
-# # Draw Brillouin zone
-# TODO: mplot3d does not respect z-order
-# K = np.array([0, -1.7])
-# R60deg = np.array([[1 / 2, -sqrt(3) / 2], [sqrt(3) / 2, 1 / 2]])
-# vertices = np.empty((6, 3), dtype=np.float)
-# for i in range(0, 6):
-#     point = reduce(lambda m1, m2: m1 @ m2, i * [R60deg], R60deg) @ K
-#     vertices[i, :] = np.array([point[0], point[1], Eplus.min()])
-
-# for i in range(0, 6):
-#     x1 = vertices[i, 0]
-#     x2 = vertices[i - 1, 0]
-
-#     y1 = vertices[i, 1]
-#     y2 = vertices[i - 1, 1]
-#     ax1.plot3D([x1, x2], [y1, y2], zs=Eminus.max(), color="black", linewidth=1.5, zorder=0)
-
 surface_kwargs = dict(
-    rcount=128, ccount=128, vmin=Eminus.min(), vmax=Eplus.max(), cmap="plasma"
+    rcount=128,
+    ccount=128,
+    cmap="plasma",
+    vmin=Eminus.min(),
+    vmax=Eplus.max(),
+    alpha=0.9,
 )
 ax1.plot_surface(kx, ky, Eplus - Eplus.min(), **surface_kwargs)
 ax1.plot_surface(kx, ky, Eminus - Eplus.min(), **surface_kwargs)
+
+# Draw Brillouin zone
+# mplot3d does not respect z-order
+# Therefore, the only location to place the BZ is below the dispersion curve
+K = np.array([0, -1.7])
+R60deg = np.array([[1 / 2, -sqrt(3) / 2], [sqrt(3) / 2, 1 / 2]])
+vertices = np.empty((6, 3), dtype=np.float)
+for i in range(0, 6):
+    point = reduce(lambda m1, m2: m1 @ m2, i * [R60deg], R60deg) @ K
+    vertices[i, :] = np.array([point[0], point[1], Eplus.min()])
+
+for i in range(0, 6):
+    x1 = vertices[i, 0]
+    x2 = vertices[i - 1, 0]
+
+    y1 = vertices[i, 1]
+    y2 = vertices[i - 1, 1]
+    ax1.plot3D([x1, x2], [y1, y2], zs=Eminus.min() - 1 / 2, color="gray", linewidth=2)
+    ax1.plot3D(
+        [x1, x1],
+        [y1, y1],
+        zs=[Eminus.min() - 1 / 2, Eminus.max()],
+        color="gray",
+        linestyle="dashed",
+        linewidth=2,
+    )
+
+ax1.plot3D([1.5, 1.5], [-2, 2], zs=Eminus.min() - 1 / 2, color="k", linestyle=":")
+
 ax1.set_xticks([-2, -1, 0, 1, 2])
 ax1.set_yticks([-2, -1, 0, 1, 2])
+ax1.set_zlim([Eminus.min(), 0.9 * Eplus.max()])
 ax1.set_xlabel(r"$\mathbf{k} \cdot \mathbf{b}_1$ [$\AA^{-1}$]")
 ax1.set_ylabel(r"$\mathbf{k} \cdot \mathbf{b}_2$ [$\AA^{-1}$]")
 ax1.set_zlabel(r"$E(\mathbf{k})$ [eV]")
-
 
 plt.subplots_adjust(bottom=0.01, top=0.99)
