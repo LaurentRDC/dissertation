@@ -76,10 +76,7 @@ where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. T
 ```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vec{k})$ for graphite. The in-plane section of the Brillouin zone is shown below. The dotted black line represents the line-cut used for @fig:graphite-photoexcitation."}
 ```
 
-The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. It is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. Photons at these energies (\SI{1.55}{\electronvolt}) can only drive vertical (zero-momentum) transitions near the Dirac cones. As the electron cloud thermalizes, two classes of momentum-conserving decay pathways involving phonons emerge. One such pathway allows for an electron to move across the Dirac cone, emitting an $E_{2g}$ phonon with small wavevector $\vec{k} \sim \vec{0}$. Another pathway allows for an electron to hop onto a neighboring Dirac cone, emitting an $A_1^\prime$ phonon with large wavevector $\vec{k} \sim \vec{K}$. These pathways are shown diagramatically on @fig:graphite-photoexcitation.
-
-```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption="Cut of the electronic dispersion $E(\vec{k})$ along the $\vec{K}$--$\vec{K}$ line (see @fig:graphite-electronic-structure) shows the effects of photoexcitation with \SI{800}{\nano\meter} photons ($\gamma$). The momentum-conserving decay path are highlighted and explained in the text."}
-```
+The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. The impact of the geometry of Dirac cones is discussed in the next section.
 
 ### Phonon landscape {#sec:graphite-phonon-landscape}
 
@@ -87,18 +84,33 @@ With four atoms per unit cell, the structure of graphite supports twelve distinc
 
 @fig:graphite-static-dispersion reveals why graphite is the *perfect* benchmark material for UEDS. All of the lattice modes are so stiff (high-energy) that, at room temperature, thermally-occupied modes are concentrated at $\vec{\Gamma}$. Therefore, the contrast between static diffuse intensity and diffuse intensity after photoexcitation is bound to be maximal.
 
-TODO: talk about Kohn anomalies, not super visible
-
 ```{#fig:graphite-static-dispersion .matplotlib file="figures/graphite/static-dispersion.py" caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
 ```
 
-TODO: The temperature-dependence of the phonon spectrum needs to be addressed, as it will play a factor in the discussion of time-resolved measurements.
+Kinks in the phonon dispersion -- known as Kohn anomalies [@Kohn1959] -- appear for transverse optical modes at $\vec{\Gamma}$ (mode $E_{2g}$) and $\vec{K}$ (mode $A_1^\prime$). Theoretical work by Piscanec *et al* [@Piscanec2004] has shown that the slope of these kinks inform on the strength of the coupling between the electronic system and these specific modes. These are hard to see in @fig:graphite-static-dispersion as the amplitude of the drop is rather small (\SI{2}{\milli\electronvolt}).
 
-## The first hundred femtoseconds viewed by trARPES {#sec:graphite-100-fs}
+The geometric relationship between the electronic structure and the strongly-coupled modes is shown in @fig:graphite-photoexcitation. Specifically, it is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. Photons at these energies (\SI{1.55}{\electronvolt}) can only drive vertical (zero-momentum) transitions near the Dirac cones. As the electron cloud thermalizes, two classes of momentum-conserving decay pathways involving phonons emerge. One such pathway allows for an electron to move across the Dirac cone, emitting an $E_{2g}$ phonon with small wavevector $\vec{k} \sim \vec{0}$. Another pathway allows for an electron to hop onto a neighboring Dirac cone, emitting an $A_1^\prime$ phonon with large wavevector $\vec{k} \sim \vec{K}$. These pathways are shown diagramatically on @fig:graphite-photoexcitation.
 
-Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Although UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second} as observed by time- and angle-resolved photoemission spectroscopy (trARPES).
+```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption="Cut of the electronic dispersion $E(\vec{k})$ along the $\vec{K}$--$\vec{K}$ line (see @fig:graphite-electronic-structure) shows the effects of photoexcitation with \SI{800}{\nano\meter} photons ($\gamma$). The momentum-conserving decay path are highlighted and explained in the text."}
+```
 
+## The first hundred femtoseconds {#sec:graphite-100-fs}
 
+Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Although UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second}.
+
+### Initial electron thermalization
+
+Time- and angle-resolved photoemission spectroscopy (trARPES) is the definitive technique that allows for the observation of hot carrier dynamics in graphite and graphene. 
+
+Early work by Johannsen *et al*[@Johannsen2013] probed graphene photoexcited with \SI{1.5}{\electronvolt} light. This experiment showed that for all time-delay after photoexcitation, the energy distribution for electrons near the Dirac cones can be described by Fermi-Dirac statistics. This implies that by \SI{60}{\femto\second} after photoexcitation -- the effective time-resolution of the experiment --, the electrons have thermalized. The experiment by Stange *et al* [@Stange2015] on graphite is more comparable. With a time-resolution of \SI{32}{\femto\second}, it was found that the electronic energy distribution is not well-described by Fermi-Dirac statistics until about \SI{100}{\femto\second}, after which an effective electronic temperature can be defined.
+
+### Energy flow away to lattice waves
+
+Ultrafast spectroscopic work on graphite and graphene has a rich history dating back at least 15 years.
+
+Kohn Anomalies and Electron-Phonon Interactions in Graphite [@Piscanec2004]
+
+Strongly Coupled Optical Phonons in the Ultrafast Dynamics of the Electronic Energy and Current Relaxation in Graphite [@Kampfrath2005]
 
 ## Experimental and computational methods
 
@@ -405,7 +417,7 @@ $${#eq:graphite-nlm-system}
 
 The solution to @eq:graphite-nlm-system was computed using an iterative least-squares method[@Branch1999]. The resulting temperature traces $\left\{ T_e(\tau), T_{A_1^\prime}(\tau), T_{l}(\tau)\right\}$ are shown in [@fig:graphite-eph-coupling]. The coupling constants $\left\{ G_{e,l}, G_{e,A_1^\prime}, G_{A_1^\prime, l}\right\}$ are listed in @tbl:graphite-eph-coupling
 
-```{.matplotlib #fig:graphite-eph-coupling file="figures/graphite/eph-coupling.py" caption="Evolution of the $a_1^\prime$ mode population in graphite after ultrafast photoexcitation. Transient population $\Delta n_{A_1^\prime}(\tau)$ is shown in black (circles). Error bars represent the standard error in the population mean before photoexcitation $\tau < 0$. The biexponential fit to the transient population is shown in pink (solid). The effective temperature of the modes that $A_1^\prime$ can decay into is shown in orange (dotted). **Inset** Temperature dynamics at early times ($\tau < \SI{1}{\pico\second}$) show the thermalization between the electronic system (purple, dashed) and the $A_1^\prime$ mode is very fast, indicative of strong electron-phonon coupling. The traces from the main figure are shown in the inset as well."}
+```{.matplotlib #fig:graphite-eph-coupling file="figures/graphite/eph-coupling.py" caption="Evolution of the $A_1^\prime$ mode population in graphite after ultrafast photoexcitation. Transient population $\Delta n_{A_1^\prime}(\tau)$ is shown in black (circles). Error bars represent the standard error in the population mean before photoexcitation $\tau < 0$. The biexponential fit to the transient population is shown in pink (solid). The effective temperature of the modes that $A_1^\prime$ can decay into is shown in orange (dotted). **Inset** Temperature dynamics at early times ($\tau < \SI{1}{\pico\second}$) show the thermalization between the electronic system (purple, dashed) and the $A_1^\prime$ mode is very fast, indicative of strong electron-phonon coupling. The traces from the main figure are shown in the inset as well."}
 ```
 
 \begin{table}
