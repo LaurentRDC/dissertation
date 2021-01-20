@@ -11,18 +11,12 @@ from plotutils import (
     FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
-    GRAPHITE_CENTER,
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
 )
 from skimage.transform import rotate
-from skued import detector_scattvectors, nfold
-
-xc, yc = GRAPHITE_CENTER
-
-xx, yy = np.meshgrid(np.arange(0, 2048), np.arange(0, 2048))
-rr = np.sqrt(np.square(xx - xc) + np.square(yy - yc))
+from skued import detector_scattvectors, nfold, autocenter
 
 with DiffractionDataset(
     Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
@@ -30,13 +24,19 @@ with DiffractionDataset(
     mask = source.valid_mask
     b4t0 = source.diff_eq()
 
+r, c = autocenter(im=b4t0, mask=mask).astype(np.int)
+
+xx, yy = np.meshgrid(np.arange(0, 2048), np.arange(0, 2048))
+rr = np.sqrt(np.square(xx - c) + np.square(yy - r))
+
+
 b4t0_symmetrized = np.array(b4t0, copy=True)
-b4t0_symmetrized = nfold(b4t0, mod=6, center=GRAPHITE_CENTER, mask=mask)
+b4t0_symmetrized = nfold(b4t0, mod=6, center=(c, r), mask=mask)
 b4t0_symmetrized[rr < 125] = 0
 
-b4t0[:] = rotate(b4t0, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect")
+b4t0[:] = rotate(b4t0, angle=GRAPHITE_ANGLE, center=(c, r), mode="reflect")
 b4t0_symmetrized[:] = rotate(
-    b4t0_symmetrized, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect"
+    b4t0_symmetrized, angle=GRAPHITE_ANGLE, center=(c, r), mode="reflect"
 )
 
 qx, qy, _ = detector_scattvectors(
@@ -44,14 +44,14 @@ qx, qy, _ = detector_scattvectors(
     camera_length=GRAPHITE_CAMERA_LENGTH,
     shape=(2048, 2048),
     pixel_size=14e-6,
-    center=(yc, xc),
+    center=(r, c),
 )
 
 # Determine the smallest center -> side distance, and crop around that
-side_length = floor(min([xc, abs(xc - 2048), yc, abs(yc - 2048)]))
+side_length = floor(min([c, abs(c - 2048), r, abs(r - 2048)]))
 xs, ys = (
-    slice(yc - side_length, yc + side_length),
-    slice(xc - side_length, xc + side_length),
+    slice(r - side_length, r + side_length),
+    slice(c - side_length, c + side_length),
 )
 b4t0 = b4t0[xs, ys]
 b4t0_symmetrized = b4t0_symmetrized[xs, ys]

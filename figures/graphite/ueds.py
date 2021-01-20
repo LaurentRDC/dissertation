@@ -11,35 +11,36 @@ from plotutils import (
     FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
-    GRAPHITE_CENTER,
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
 )
 from skimage.transform import rotate
 from skimage.filters import gaussian
-from skued import detector_scattvectors, nfold
+from skued import detector_scattvectors, nfold, autocenter
 
 DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
 
-xc, yc = GRAPHITE_CENTER
-qx, qy, _ = detector_scattvectors(
-    keV=90,
-    camera_length=GRAPHITE_CAMERA_LENGTH,
-    shape=(2048, 2048),
-    pixel_size=14e-6,
-    center=(yc, xc),
-)
 
 with DiffractionDataset(DATASET, mode="r") as source:
     b4t0 = source.diff_eq()
     mask = source.valid_mask
 
+r, c = autocenter(im=b4t0, mask=mask).astype(np.int)
+
+qx, qy, _ = detector_scattvectors(
+    keV=90,
+    camera_length=GRAPHITE_CAMERA_LENGTH,
+    shape=(2048, 2048),
+    pixel_size=14e-6,
+    center=(r, c),
+)
+
 
 # Determine the smallest center -> side distance, and crop around that
-side_length = floor(min([xc, abs(xc - 2048), yc, abs(yc - 2048)]))
-xs = slice(yc - side_length, yc + side_length)
-ys = slice(xc - side_length, xc + side_length)
+side_length = floor(min([c, abs(c - 2048), r, abs(r - 2048)]))
+xs = slice(r - side_length, r + side_length)
+ys = slice(c - side_length, c + side_length)
 
 qx = qx[ys, xs]
 qy = qy[ys, xs]
@@ -54,14 +55,12 @@ with DiffractionDataset(DATASET) as dset:
         image = nfold(
             dset.diff_data(time) - b4t0,
             mod=6,
-            center=GRAPHITE_CENTER,
+            center=(c, r),
             mask=mask,
             fill_value=np.nan,
         )
         gaussian(image, sigma=4, output=image)
-        image[:] = rotate(
-            image, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect"
-        )
+        image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=(c, r), mode="reflect")
         image = image[xs, ys]
         image[qq < 1.5] = 0
         m = ax.imshow(

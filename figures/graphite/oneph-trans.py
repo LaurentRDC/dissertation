@@ -7,7 +7,6 @@ from plotutils import (
     FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
-    GRAPHITE_CENTER,
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
