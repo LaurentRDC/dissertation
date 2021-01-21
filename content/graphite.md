@@ -1,7 +1,11 @@
 
 # Momentum-resolved excitation couplings in graphite {#sec:graphite}
 
-Ultrafast electron diffuse scattering is an experimental technique pioneered over the past few years [@Chase2016; @Harb2016; @Waldecker2017]. The author also participated in the early development of the technique with work by M. Stern, L. P. René de Cotret *et al* [@Stern2018]. This early work on graphite was an experimental tour-de-force, but the observations remained qualitative rather than quantitative.
+The coupling between excitations such as lattice waves and charge carriers governs many exotic properties dear to condensed matter physicist. And yet, the ability to measure those couplings has remained limited. The research presented in this chapter is really an exploration of the capabilities of ultrafast structural probes in measuring such couplings.
+
+Graphite is the perfect system to benchmark ultrafast electron diffuse scattering (UEDS). On the one hand, graphite has a very stiff lattice in-plane due to inherently strong carbon-carbon bonds. For reasons that will be made clear later, the spectrum of lattice waves that results from this stiffness gives UEDS measurements a high dynamic range. On the other hand, much ultrafast work has been done on graphite and graphene. This presents an opportunity to compare and contrast results between spectroscopic probes such as terahertz spectroscopy or time- and angle-resolved photoemission spectroscopy and UEDS.
+
+
 
 TODO: important differentiator for UEDS vs X-ray is the amount of redundancy. The redundancy leads to the ability to invert the energy-integrated nature of UEDS.
 
@@ -87,30 +91,20 @@ With four atoms per unit cell, the structure of graphite supports twelve distinc
 ```{#fig:graphite-static-dispersion .matplotlib file="figures/graphite/static-dispersion.py" caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
 ```
 
-Kinks in the phonon dispersion -- known as Kohn anomalies [@Kohn1959] -- appear for transverse optical modes at $\vec{\Gamma}$ (mode $E_{2g}$) and $\vec{K}$ (mode $A_1^\prime$). Theoretical work by Piscanec *et al* [@Piscanec2004] has shown that the slope of these kinks inform on the strength of the coupling between the electronic system and these specific modes. These are hard to see in @fig:graphite-static-dispersion as the amplitude of the drop is rather small (\SI{2}{\milli\electronvolt}).
+An important feature of the phonon dispersion of graphite that is not replicated by the simple calculation of @fig:graphite-static-dispersion are Kohn anomalies [@Kohn1959]. Kohn anomalies are kinks in the phonon dispersion. These kinks have been shown to appear for transverse optical modes at $\vec{\Gamma}$ (mode $E_{2g}$) and $\vec{K}$ (mode $A_1^\prime$) by inelastic x-ray scattering measurements performed by Maultzsch *et al* [@Maultzsch2004]. Theoretical work by Piscanec *et al* [@Piscanec2004] has linked slope of these kinks to the strength of the coupling between the electronic system and these specific modes.
 
 The geometric relationship between the electronic structure and the strongly-coupled modes is shown in @fig:graphite-photoexcitation. Specifically, it is the Dirac cones that tell us the consequences of photoexcitation with \SI{800}{\nano\meter} light. Photons at these energies (\SI{1.55}{\electronvolt}) can only drive vertical (zero-momentum) transitions near the Dirac cones. As the electron cloud thermalizes, two classes of momentum-conserving decay pathways involving phonons emerge. One such pathway allows for an electron to move across the Dirac cone, emitting an $E_{2g}$ phonon with small wavevector $\vec{k} \sim \vec{0}$. Another pathway allows for an electron to hop onto a neighboring Dirac cone, emitting an $A_1^\prime$ phonon with large wavevector $\vec{k} \sim \vec{K}$. These pathways are shown diagramatically on @fig:graphite-photoexcitation.
 
 ```{.matplotlib #fig:graphite-photoexcitation file="figures/graphite/photoexcitation.py" caption="Cut of the electronic dispersion $E(\vec{k})$ along the $\vec{K}$--$\vec{K}$ line (see @fig:graphite-electronic-structure) shows the effects of photoexcitation with \SI{800}{\nano\meter} photons ($\gamma$). The momentum-conserving decay path are highlighted and explained in the text."}
 ```
 
-## The first hundred femtoseconds {#sec:graphite-100-fs}
+## Previous studies of nonequilibrium dynamics in graphite {#sec:graphite-prev-studies}
 
-Electron scattering measurements are not able to isolate to the dynamics of the electronic system. Although UED and UEDS are sensitive to the dynamics of electrons whizzing about in a material, understanding the electronic contribution to measured signals requires some prior knowledge. To understand the ultrafast electron diffuse scattering results presented further, it is important to understand the effect of photoexcitation during first \SI{100}{\femto\second}.
+Ultrafast studies of graphite conceptually start with the work by Kampfrath *et al* [@Kampfrath2005]. The strong coupling between charge carriers and optical phonons $A_1^\prime$ and $E_{2g}$ was demonstrated using time-resolved terahertz spectroscopy by tracking the transient in-plane dielectric function after pumping with short pulses of \SI{1.5}{\electronvolt} photons. The authors reveal that by \SI{500}{\femto\second} after photoexcitation, more than 90% of the absorbed pump energy has been transferred to the lattice. 
 
-### Initial electron thermalization
-
-Time- and angle-resolved photoemission spectroscopy (trARPES) is the definitive technique that allows for the observation of hot carrier dynamics in graphite and graphene. 
+The understanding of hot carrier dynamics in graphite lept forward significantly following the development of time- and angle-resolved photoemission spectroscopy (trARPES).
 
 Early work by Johannsen *et al*[@Johannsen2013] probed graphene photoexcited with \SI{1.5}{\electronvolt} light. This experiment showed that for all time-delay after photoexcitation, the energy distribution for electrons near the Dirac cones can be described by Fermi-Dirac statistics. This implies that by \SI{60}{\femto\second} after photoexcitation -- the effective time-resolution of the experiment --, the electrons have thermalized. The experiment by Stange *et al* [@Stange2015] on graphite is more comparable. With a time-resolution of \SI{32}{\femto\second}, it was found that the electronic energy distribution is not well-described by Fermi-Dirac statistics until about \SI{100}{\femto\second}, after which an effective electronic temperature can be defined.
-
-### Energy flow away to lattice waves
-
-Ultrafast spectroscopic work on graphite and graphene has a rich history dating back at least 15 years.
-
-Kohn Anomalies and Electron-Phonon Interactions in Graphite [@Piscanec2004]
-
-Strongly Coupled Optical Phonons in the Ultrafast Dynamics of the Electronic Energy and Current Relaxation in Graphite [@Kampfrath2005]
 
 ## Experimental and computational methods
 
@@ -310,7 +304,7 @@ The numerical solution for @eq:graphite-vectorized-ueds is shown in @fig:graphit
 
 While previous work by the author discussed the nonthermal phonon dynamics qualitatively[@Stern2018], @fig:graphite-ph-populations allows to quantitatively determine how the energy deposited in the electronic system flows and thermalizes. A discussion of the observed physical processes is discussed below.
 
-As discussed in @sec:graphite-100-fs, two optical phonons modes are strongly-coupled to the electronic system: $A_1^\prime$ located near the $\vec{K}$ point, and $E_{2g}$, near $\vec{\Gamma}$. $E_{2g}$ is obscured by the elastic signals near $\vec{\Gamma}$; however, its dynamics are accessible via ultrafast spectroscopy [@Kampfrath2005]. On the other hand, $A_1^\prime$ is clearly visible in @fig:graphite-ph-populations. It behaves as expected: a fast early increase in population is seen due to the transfer of energy from the electronic subsystem. By \SI{5}{\pico\second}, energy has already been transferred away through phonon-phonon coupling. 
+As discussed in @sec:graphite-prev-studies, two optical phonons modes are strongly-coupled to the electronic system: $A_1^\prime$ located near the $\vec{K}$ point, and $E_{2g}$, near $\vec{\Gamma}$. $E_{2g}$ is obscured by the elastic signals near $\vec{\Gamma}$; however, its dynamics are accessible via ultrafast spectroscopy [@Kampfrath2005]. On the other hand, $A_1^\prime$ is clearly visible in @fig:graphite-ph-populations. It behaves as expected: a fast early increase in population is seen due to the transfer of energy from the electronic subsystem. By \SI{5}{\pico\second}, energy has already been transferred away through phonon-phonon coupling. 
 
 After a few picoseconds, the strongly-coupled optical modes decay into lower-energy lattice waves. Since one of the primary causes of phonon-phonon scattering is anharmonicity, the decay probabilities are usually computed via DFT [@Bonini2007]. UEDS shows an experimental determination of those decay pathways. The transfer of energy from high-energy optical phonons to lower-energy lattice waves must satisfy the conservation of momentum and energy. This restricts the number of possible decay pathways to mid-Brillouin zone phonons, either directly (from $E_{2g}$) or via Umklapp scattering (from $A_1^\prime$). Specifically, from \SIrange{1.5}{100}{\pico\second}, acoustic phonon population increase is observed along the $\vec{\Gamma}-\vec{M}$ line. This measurement is in accordance with predicted anharmonic decay probabilities from the $E_{2g}$ mode [@Bonini2007]. The small increase of population of the LA mode around \SI{500}{\femto\second} at $\tfrac{1}{2}\vec{K}$ is also a confirmation of predictions by Bonini *et al*[@Bonini2007].
 
@@ -352,7 +346,7 @@ $$
 	\sum_{i\neq j} G_{ep, i} \left[ T_e(\tau)      - T_{ph,i}(\tau) \right] 
 				 + G_{pp,ij} \left[ T_{ph,j}(\tau) - T_{ph,i}(\tau) \right] 	\Bigg\}_{j=1}^{N}
 $${#eq:graphite-nlm-phonons}
-where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-100-fs, the use of an electronic temperature is acceptable for $\tau > \SI{150}{\femto\second}$. The coupling constants $G_{ep, i}$ describe the coupling between the electrons and phonon mode $i$, while coupling constants $G_{pp, ij}$ encode the coupling between phonon modes $i$ and $j$. The constants $G_{i,j}$ are related to electron-phonon and phonon-phonon coupling constants. Their relationship is described further below in @sec:graphite-coupling-constants.
+where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The coupling constants $G_{ep, i}$ describe the coupling between the electrons and phonon mode $i$, while coupling constants $G_{pp, ij}$ encode the coupling between phonon modes $i$ and $j$. The constants $G_{i,j}$ are related to electron-phonon and phonon-phonon coupling constants. Their relationship is described further below in @sec:graphite-coupling-constants.
 
 Observations of transient phonon populations are more general than mode temperatures. However, in order to make use of the non-thermal lattice model, the mode temperature can be related to transient phonon mode populations via the Bose-Einstein distribution:
 $$
