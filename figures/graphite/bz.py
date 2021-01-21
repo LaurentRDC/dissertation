@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from functools import reduce
 from math import radians, sqrt
-from matplotlib.patches import Circle, RegularPolygon
+from matplotlib.patches import Circle, RegularPolygon, Rectangle
 from plotutils import named_arrow
 
 
@@ -61,9 +62,8 @@ for point, label, sym_color in zip(
     [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"],
     ["k", "firebrick", "royalblue"],
 ):
-    point_ = point
-    for n in range(1, 7):
-        point_ = R60deg @ point_
+    for n in range(0, 6):
+        point_ = reduce(lambda m1, m2: m1 @ m2, n * [R60deg], R60deg) @ point
         ax.add_patch(
             Circle(xy=point_, radius=0.05, edgecolor="None", facecolor=sym_color)
         )
