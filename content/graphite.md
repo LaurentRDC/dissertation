@@ -339,16 +339,18 @@ UEDS measurements allow to move beyond the two-temperature approximation as the 
 
 The non-thermal lattice model is an extension of the two-temperature model, with the added flexibility that lattice waves need not be thermalized[@Waldecker2016]. It assumes that the energy distribution of each phonon mode admits a thermal description; that is, the energy transfer between phonons of different branches is slower than the scattering of phonons from the same branch. This assumption is a reasonable one, in the light of the results presented in @sec:graphite-pop-dynamics. Within this framework, each phonon branch $j$ can be assigned its own molar heat capacity, $C_{ph, j}$, and temperature, $T_j$:
 $$
-C_e(T_e) \frac{\partial T_e}{\partial \tau} = \sum_i G_{ep, i}\left[ T_e(\tau) - T_{ph,i}(\tau) \right] + f(\tau)
-$${#eq:graphite-nlm-electrons}
-$$
-\Bigg\{ C_{ph,j}(T_{ph,j}) \frac{\partial T_{ph,j}}{\partial \tau} = 
-	\sum_{i\neq j} G_{ep, i} \left[ T_e(\tau)      - T_{ph,i}(\tau) \right] 
-				 + G_{pp,ij} \left[ T_{ph,j}(\tau) - T_{ph,i}(\tau) \right] 	\Bigg\}_{j=1}^{N}
-$${#eq:graphite-nlm-phonons}
+\left\{
+    \begin{array}{rcl}
+        C_e(T_e) \frac{\partial T_e}{\partial \tau} & = & \sum_i G_{ep, i}\left[ T_e(\tau) - T_{ph,i}(\tau) \right] + f(\tau) \\
+                                                    & ~ & \\
+        C_{ph,j}(T_{ph,j}) \frac{\partial T_{ph,j}}{\partial \tau} & = &\sum_{i\neq j} G_{ep, i} \left[ T_e(\tau) - T_{ph,i}(\tau) \right] \\
+				                                                   & + & G_{pp,ij} \left[ T_{ph,j}(\tau) - T_{ph,i}(\tau) \right]
+    \end{array}
+\right\}_{j=1}^{N}
+$${#eq:graphite-nlm}
 where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The coupling constants $G_{ep, i}$ describe the coupling between the electrons and phonon mode $i$, while coupling constants $G_{pp, ij}$ encode the coupling between phonon modes $i$ and $j$. The constants $G_{i,j}$ are related to electron-phonon and phonon-phonon coupling constants. Their relationship is described further below in @sec:graphite-coupling-constants.
 
-Observations of transient phonon populations are more general than mode temperatures. However, in order to make use of the non-thermal lattice model, the mode temperature can be related to transient phonon mode populations via the Bose-Einstein distribution:
+Observations of transient phonon populations are more general than mode temperatures. However, in order to make use of the non-thermal lattice model, the mode temperature can be related to transient phonon mode populations via the Bose-Einstein distribution[@Bose1924]:
 $$
     n_j(\vec{k}, \tau) \propto \left[ \exp{\left( \frac{\hbar \omega_j(\vec{k}, \tau<0)}{k_B T_{ph, j}(\tau)} \right)} - 1\right]^{-1}
 $$
@@ -384,7 +386,7 @@ where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of sta
 
 #### Reducing complexity with momentum-resolution {#sec:graphite-reducing-complexity}
 
-The number of coupled equations in @eq:graphite-nlm-phonons can be reduced by aggregating lattice heat capacities into two categories: the heat capacity of $A_1^\prime$, $C_{A_1^\prime}$, and the total effective heat capacity of all other relevant modes, defined as $C_l$. The calculation of $C_l$ boils down to adding the contribution of mode that can scatter into $A_1^\prime$ or from it, based on conservation of energy and momentum, weighted by the decay probabilities reported by Bonini *et al* [@Bonini2007]. With this information:
+The number of coupled equations in @eq:graphite-nlm can be reduced by aggregating lattice heat capacities into two categories: the heat capacity of $A_1^\prime$, $C_{A_1^\prime}$, and the total effective heat capacity of all other relevant modes, defined as $C_l$. The calculation of $C_l$ boils down to adding the contribution of mode that can scatter into $A_1^\prime$ or from it, based on conservation of energy and momentum, weighted by the decay probabilities reported by Bonini *et al* [@Bonini2007]. With this information:
 \begin{align}
     C_l &= \frac{9}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{TA}} \right] \\
         &+ \frac{36}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{LA}}\right] \nonumber \\
