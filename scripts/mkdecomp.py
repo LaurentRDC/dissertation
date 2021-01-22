@@ -14,10 +14,10 @@ import scipy.interpolate as interpolate
 import scipy.optimize as opt
 from crystals import Crystal
 from iris import DiffractionDataset
-from plotutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH, GRAPHITE_CENTER
+from plotutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH
 from skimage.filters import gaussian
 from skimage.transform import rotate
-from skued import detector_scattvectors, nfold
+from skued import detector_scattvectors, nfold, autocenter
 from tqdm import tqdm
 
 from mkoneph import (
@@ -32,6 +32,9 @@ INPUT = Path("data") / "graphite"
 OUTPUT = INPUT / "populations"
 OUTPUT.mkdir(exist_ok=True)
 
+with DiffractionDataset(INPUT / "graphite_time_corrected_iris5.hdf5", mode="r") as dset:
+    r, c = autocenter(im=dset.diff_data(0), mask=dset.mask)
+
 DECIMATION = 15
 GAMMA_RADIUS = 0.45
 
@@ -41,13 +44,12 @@ EXCLUDES[0.588] = {"LO2", "LO3"}
 EXCLUDES[1.5] = {"LO2", "LO3"}
 EXCLUDES[1.588] = {"LO2", "LO3"}
 
-xc, yc = GRAPHITE_CENTER
 QX, QY, _ = detector_scattvectors(
     keV=90,
     camera_length=GRAPHITE_CAMERA_LENGTH,
     shape=(2048, 2048),
     pixel_size=14e-6,
-    center=GRAPHITE_CENTER,
+    center=(c, r),
 )
 QQ = np.sqrt(QX ** 2 + QY ** 2)
 
@@ -115,14 +117,12 @@ def extract_scattering(time, q_points):
         image = nfold(
             dset.diff_data(time) - dset.diff_eq(),
             mod=6,
-            center=GRAPHITE_CENTER,
+            center=(c, r),
             mask=dset.valid_mask,
             fill_value=0,
         )
     image[QQ < 1.5] = 0
-    image[:] = rotate(
-        image, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect"
-    )
+    image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=(c, r), mode="reflect")
 
     gaussian(image, sigma=10, output=image)
 

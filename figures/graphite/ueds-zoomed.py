@@ -11,30 +11,31 @@ from plotutils import (
     FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
-    GRAPHITE_CENTER,
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
 )
 from skimage.transform import rotate
 from skimage.filters import gaussian
-from skued import detector_scattvectors, indices_to_text, nfold
+from skued import detector_scattvectors, indices_to_text, nfold, autocenter
 
 DATADIR = Path("data") / "graphite"
 DATASET = DATADIR / "graphite_time_corrected_iris5.hdf5"
+
+with DiffractionDataset(DATASET) as source:
+    b4t0 = source.diff_eq()
+    mask = source.valid_mask
+
+r, c = autocenter(im=b4t0, mask=mask)
 
 qx, qy, _ = detector_scattvectors(
     keV=90,
     camera_length=GRAPHITE_CAMERA_LENGTH,
     shape=(2048, 2048),
     pixel_size=14e-6,
-    center=GRAPHITE_CENTER,
+    center=(c, r),
 )
 qq = np.sqrt(qx ** 2 + qy ** 2)
-
-with DiffractionDataset(DATASET) as source:
-    b4t0 = source.diff_eq()
-    mask = source.valid_mask
 
 # Find location of (100) and (200) BZs
 graphite = Crystal.from_pwscf(DATADIR / "output.out")
@@ -48,8 +49,8 @@ with DiffractionDataset(DATASET) as dset:
     image = dset.diff_data(100) - b4t0
 
 gaussian(image, sigma=4, output=image)
-image[:] = nfold(image, mod=6, center=GRAPHITE_CENTER, mask=mask, fill_value=np.nan)
-image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=GRAPHITE_CENTER, mode="reflect")
+image[:] = nfold(image, mod=6, center=(c, r), mask=mask, fill_value=np.nan)
+image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=(c, r), mode="reflect")
 image[qq < 1.5] = 0
 
 for ax, center, indices in zip([ax1, ax2], [q010, q020], [(0, 1, 0), (0, 2, 0)]):
