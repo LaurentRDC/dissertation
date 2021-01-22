@@ -233,17 +233,7 @@ def population(kx, ky, time, exclude=tuple()):
 
     result = dict()
     for index, mode_name in enumerate(mode_names):
-        image = interpolate.griddata(
-            points=kpoints[:, 0:2],
-            values=pop[:, index],
-            xi=(kx, ky),
-            method="linear",  # fill_value has no effect if method = 'nearest'
-            fill_value=0.0,
-        )
-        image = gaussian(image, sigma=5)
-        image = nfold(image, 6)
-        image[kk < GAMMA_RADIUS] = 0
-        result[mode_name] = image
+        result[mode_name] = pop[:, index]
 
     return result
 
@@ -264,9 +254,8 @@ if __name__ == "__main__":
     kpoints = modes[
         "LA"
     ].q_points  # This only works if the modes were calculated using (0,0,0) reflection only
-    kmax = np.linalg.norm(kpoints, axis=1).max() + 0.25
-    kx, ky = np.meshgrid(np.linspace(-kmax, kmax, 256), np.linspace(-kmax, kmax, 256))
-    kk = np.sqrt(kx ** 2 + ky ** 2)
+
+    kx, ky, _ = np.hsplit(kpoints, 3)
 
     with h5.File(OUTPUT / "population_timeseries.hdf5", mode="w") as f:
         f.attrs["times"] = times
@@ -277,7 +266,7 @@ if __name__ == "__main__":
         for mode_name, mode in modes.items():
             f.create_dataset(
                 mode_name,
-                shape=(kx.shape[0], kx.shape[1], len(times)),
+                shape=(len(kx), len(times)),
                 dtype=np.float,
                 chunks=True,
                 shuffle=True,
@@ -285,21 +274,14 @@ if __name__ == "__main__":
                 compression_opts=9,
             )
 
-            frequencies = interpolate.griddata(
-                points=kpoints[:, 0:2],
-                values=mode.frequencies,
-                xi=(kx, ky),
-                method="linear",  # fill_value has no effect if method = 'nearest'
-                fill_value=0.0,
-            )
-
             f.create_dataset(
                 f"{mode_name}_frequencies",
-                data=frequencies,
-                dtype=np.float,
+                data=mode.frequencies,
             )
 
         for time_index, time in enumerate(tqdm(times)):
             pop = population(kx=kx, ky=ky, time=time, exclude=EXCLUDES[round(time, 3)])
             for mode_name in tqdm(IN_PLANE_MODES):
-                f[mode_name][:, :, time_index] = pop.get(mode_name, np.zeros_like(kx))
+                f[mode_name][:, time_index] = np.squeeze(
+                    pop.get(mode_name, np.zeros_like(kx))
+                )

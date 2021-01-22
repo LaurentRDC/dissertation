@@ -76,11 +76,24 @@ def draw_a1prime_integration(ax):
 populations = dict()
 with h5py.File(INPUT / "population_timeseries.hdf5", mode="r") as f:
     times = f.attrs["times"]
-    kx = np.array(f["kx"])
-    ky = np.array(f["ky"])
+    kx_ = np.array(f["kx"])
+    ky_ = np.array(f["ky"])
+
+    kmax = np.linalg.norm(kx_, axis=1).max() + 0.25
+    kx, ky = np.meshgrid(np.linspace(-kmax, kmax, 256), np.linspace(-kmax, kmax, 256))
+    kk = np.sqrt(kx ** 2 + ky ** 2)
 
     for mode_name in MODES:
-        populations[mode_name] = np.array(f[mode_name])
+        image = interpolate.griddata(
+            points=np.hstack((kx_, ky_)),
+            values=np.array(f[mode_name]),
+            xi=(kx, ky),
+            method="linear",  # fill_value has no effect if method = 'nearest'
+            fill_value=0.0,
+        )
+        image = nfold(image, 6)
+        image[kk < 0.45] = 0
+        populations[mode_name] = image
 
 
 def time_index(time):

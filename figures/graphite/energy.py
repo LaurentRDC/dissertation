@@ -51,8 +51,8 @@ with PopulationDatabase(INPUT / "population_timeseries.hdf5", mode="r") as dbase
     mode_energy = dict()
     for mode in dbase.modes:
         population = np.array(dbase[mode])
-        total_energy = population * dbase.frequencies(mode)[:, :, None]
-        mode_energy[mode] = np.sum(total_energy, axis=(0, 1))
+        total_energy = population * dbase.frequencies(mode)[:, None]
+        mode_energy[mode] = np.sum(total_energy, axis=0)
 
     total_energy = sum(mode_energy[m] for m in mode_energy)
     total_energy /= total_energy.max()
