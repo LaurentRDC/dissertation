@@ -21,6 +21,7 @@ MODES = ["TO2", "TA", "LA"]
 GRAPHITE = Crystal.from_pwscf(Path("data") / "graphite" / "output.out")
 COLORMAP = "hot"
 
+
 def draw_high_sym_points(ax):
     """Draw the graphite in-plane high-symmetry point Gamma, M, and K
     on an axis."""
@@ -127,7 +128,14 @@ for ax, (mode_name, time) in zip(grid, it.product(MODES, TIMES)):
     ax.yaxis.set_visible(False)
 
     # The black hexagon is to make the edges of the BZ mode defined
-    draw_hexagon(ax, center=(0, 0), radius=1.7, orientation=np.deg2rad(30), linewidth=2, color=plt.get_cmap(COLORMAP)(0))
+    draw_hexagon(
+        ax,
+        center=(0, 0),
+        radius=1.7,
+        orientation=np.deg2rad(30),
+        linewidth=2,
+        color=plt.get_cmap(COLORMAP)(0),
+    )
     draw_hexagon(ax, center=(0, 0), radius=1.7, orientation=np.deg2rad(30))
     draw_hexagon(
         ax,

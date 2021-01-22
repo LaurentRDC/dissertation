@@ -368,11 +368,10 @@ Let the differential population be $\Delta n_{j=\text{TO2}}(\vec{k} = \vec{K}, \
 
 #### Heat capacities
 
-The electronic heat capacity is extracted from measurements by Nihira an Iwata [@Nihira2003]:
+The electronic heat capacity is extracted from measurements by Nihira and Iwata [@Nihira2003]:
 $$
 C_e(T_e) = 13.8 ~ T_e(\tau) + 1.16 \times 10^{-3} ~ T_e^2(\tau) + 2.6 \times 10^{-7}  ~ T_e^3(\tau)
 $$
-
 Extracting the lattice specific heat is simplified by the observation that thermal expansion has not occurred on the time-scale of the measurements ($\tau < \SI{680}{\pico\second}$). Bragg peak positions remain static throughout the measurement, as was also reported by Chatelain *et al*[@Chatelain2014a]. The specific heat capacity of each mode can therefore be taken as the heat capacity at constant volume[@Ziman1979]:
 $$
 C_{ph,j}(T_{ph,j}) = 
