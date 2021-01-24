@@ -10,6 +10,7 @@ from functools import reduce
 # Documentation for mplot3d:
 #   https://matplotlib.org/api/toolkits/mplot3d.html
 from mpl_toolkits.mplot3d import axes3d
+import matplotlib.tri as mtri
 import matplotlib.pyplot as plt
 
 from plotutils import FIGURE_WIDTH
@@ -38,20 +39,34 @@ fig, ax1 = plt.subplots(
     subplot_kw=dict(projection="3d", elev=10, azim=-45),
 )
 
-extent = np.linspace(-1.7, 1.7, num=512)
+extent = np.linspace(-1.7, 1.7, num=256)
 kx, ky = np.meshgrid(extent, extent)
+
+kx = kx.flatten()
+ky = ky.flatten()
 Eplus, Eminus = E(kx, ky)
 
+trim = mtri.Triangulation(kx, ky)  # inside masked
+tri = mtri.Triangulation(kx, ky)  # inside not masked
+rtri = np.sqrt(
+    kx[tri.triangles].mean(axis=1) ** 2 + ky[tri.triangles].mean(axis=1) ** 2
+)
+imask = rtri < 1.1
+omask = rtri > 1.9
+trim.set_mask(np.logical_or(imask, omask))
+tri.set_mask(omask)
+
+
 surface_kwargs = dict(
-    rcount=128,
-    ccount=128,
     cmap="plasma",
     vmin=Eminus.min(),
-    vmax=Eplus.max(),
+    vmax=6,
     alpha=0.9,
+    antialiased=True,
 )
-ax1.plot_surface(kx, ky, Eplus - Eplus.min(), **surface_kwargs)
-ax1.plot_surface(kx, ky, Eminus - Eplus.min(), **surface_kwargs)
+
+ax1.plot_trisurf(trim, Eplus - Eplus.min(), **surface_kwargs)
+ax1.plot_trisurf(tri, Eminus - Eplus.min(), **surface_kwargs)
 
 # Draw Brillouin zone
 # mplot3d does not respect z-order
@@ -73,7 +88,7 @@ for i in range(0, 6):
     ax1.plot3D(
         [x1, x1],
         [y1, y1],
-        zs=[Eminus.min() - 1 / 2, Eminus.max()],
+        zs=[Eminus.min() - 1 / 2, (Eminus - Eplus.min()).max()],
         color="gray",
         linestyle="dashed",
         linewidth=2,
@@ -83,7 +98,7 @@ ax1.plot3D([1.5, 1.5], [-2, 2], zs=Eminus.min() - 1 / 2, color="k", linestyle=":
 
 ax1.set_xticks([-2, -1, 0, 1, 2])
 ax1.set_yticks([-2, -1, 0, 1, 2])
-ax1.set_zlim([Eminus.min(), 0.9 * Eplus.max()])
+ax1.set_zlim([Eminus.min(), 6])
 ax1.set_xlabel(r"$\mathbf{k} \cdot \mathbf{b}_1$ [$\AA^{-1}$]")
 ax1.set_ylabel(r"$\mathbf{k} \cdot \mathbf{b}_2$ [$\AA^{-1}$]")
 ax1.set_zlabel(r"$E(\mathbf{k})$ [eV]")
