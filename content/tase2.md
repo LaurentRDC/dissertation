@@ -1,5 +1,5 @@
 
-# Metastable phase in charge-density wave material TaSe$_2$
+# Metastable phase in charge-density wave material tantalum diselenide
 
 \FloatBarrier
 ## References {.unnumbered}

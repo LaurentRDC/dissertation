@@ -9,8 +9,12 @@
 
 ### Sample preparation
 
+#### Ultramicrotomy
+
 ```{.matplotlib file="figures/snse/sample.py" caption="Stages of sample preparation via ultramicrotome. **a)** Prism of SnSe embedded in epoxy.  **b)** 4x magnification on the cut surface shown in a) shows large crystalline plateaus. **c)** Surface of embedded SnSe prism after trimming with a \ang{45} diamond knife. **d)** \SI{60}{\nano\meter} section of SnSe cut with a \ang{35} diamond knife."}
 ```
+
+#### Mechanical exfoliation
 
 ### Time-resolved terahertz spectroscopy
 
