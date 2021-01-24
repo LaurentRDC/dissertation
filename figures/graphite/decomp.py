@@ -46,7 +46,7 @@ def draw_high_sym_points(ax):
         )
 
 
-def draw_a1prime_integration(ax):
+def draw_a1prime_integration(ax, with_label=True):
     """Draw the zone where the population is
     integrated to determine hte a1prime population"""
     from_frac = change_of_basis(np.array(GRAPHITE.reciprocal_vectors), np.eye(3))
@@ -64,14 +64,15 @@ def draw_a1prime_integration(ax):
     )
     ax.add_patch(circ)
 
-    ax.annotate(
-        "$A^{\prime}_1$",
-        (pt[0], pt[1]),
-        xytext=pt[0:2] + np.array([0.1, 0]),
-        color="w",
-        verticalalignment="center",
-        horizontalalignment="left",
-    )
+    if with_label:
+        ax.annotate(
+            "$A^{\prime}_1$",
+            (pt[0], pt[1]),
+            xytext=pt[0:2] + np.array([0.1, 0]),
+            color="w",
+            verticalalignment="center",
+            horizontalalignment="left",
+        )
 
 
 populations = dict()
@@ -159,7 +160,7 @@ for ax, (mode_name, time) in zip(grid, it.product(MODES, TIMES)):
         draw_high_sym_points(ax)
 
     if mode_name == "TO2":
-        draw_a1prime_integration(ax)
+        draw_a1prime_integration(ax, with_label=(time == 0.5))
 
 
 for index, tag in enumerate(MODES):
