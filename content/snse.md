@@ -16,6 +16,9 @@
 
 #### Mechanical exfoliation
 
+```{.matplotlib file="figures/snse/diff-static.py" caption=""}
+```
+
 ### Time-resolved terahertz spectroscopy
 
 ![Experimental diagram of the THz time-domain spectroscopy experiments. BS1/2: Beamsplitter. L1/2: Focusing lens. BBO: $\beta$-Barium borate crystal. PM1/2/3/4: Parabolic mirror. APD: Avalanche photodiode.](diagrams/thz_setup.pdf)
