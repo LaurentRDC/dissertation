@@ -10,7 +10,7 @@ from functools import reduce
 # Documentation for mplot3d:
 #   https://matplotlib.org/api/toolkits/mplot3d.html
 from mpl_toolkits.mplot3d import axes3d
-import matplotlib.tri as mtri
+import matplotlib.colors as cl
 import matplotlib.pyplot as plt
 
 from plotutils import FIGURE_WIDTH
@@ -18,6 +18,16 @@ from plotutils import FIGURE_WIDTH
 # Hopping parameter
 t = 2.7  # eV
 tprime = -0.2 * t
+
+
+def colormap(base="plasma", alpha=0.9):
+    """ Modify the colormap `base` so the last color is completely transparent """
+    base_colors = plt.get_cmap(base).colors
+    colors = list()
+    for bc in base_colors:
+        colors.append(bc + [alpha])
+    colors[-1] = [0, 0, 0, 0]  # Make end color transparent
+    return cl.LinearSegmentedColormap.from_list(name="awesome", colors=colors)
 
 
 def E(kx, ky):
@@ -35,7 +45,6 @@ fig, ax1 = plt.subplots(
     1,
     1,
     figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 1.5),
-    # gridspec_kw=dict(width_ratios=[3, 1]),
     subplot_kw=dict(projection="3d", elev=10, azim=-45),
 )
 
@@ -44,12 +53,11 @@ kx, ky = np.meshgrid(extent, extent)
 Eplus, Eminus = E(kx, ky)
 
 surface_kwargs = dict(
-    rcount=128,
-    ccount=128,
-    cmap="plasma",
+    rcount=256,
+    ccount=256,
+    cmap=colormap(),
     vmin=Eminus.min(),
-    vmax=Eplus.max(),
-    alpha=0.9,
+    vmax=5,
 )
 ax1.plot_surface(kx, ky, Eplus - Eplus.min(), **surface_kwargs)
 ax1.plot_surface(kx, ky, Eminus - Eplus.min(), **surface_kwargs)
@@ -84,7 +92,7 @@ ax1.plot3D([1.5, 1.5], [-2, 2], zs=Eminus.min() - 1 / 2, color="k", linestyle=":
 
 ax1.set_xticks([-2, -1, 0, 1, 2])
 ax1.set_yticks([-2, -1, 0, 1, 2])
-# ax1.set_zlim([Eminus.min(), 6])
+ax1.set_zlim([Eminus.min(), 6])
 ax1.set_xlabel(r"$\mathbf{k} \cdot \mathbf{b}_1$ [$\AA^{-1}$]")
 ax1.set_ylabel(r"$\mathbf{k} \cdot \mathbf{b}_2$ [$\AA^{-1}$]")
 ax1.set_zlabel(r"$E(\mathbf{k})$ [eV]")
