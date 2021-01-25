@@ -604,8 +604,6 @@ def debye_waller_factors(modes, temperatures=None):
     q2 = np.linalg.norm(modes["LA"].q_points, axis=1) ** 2
     prefactor = lambda atm: q2 / (12 * atm.mass * AMU_TO_KG)
 
-    # TODO: should we filter modes out-of-planes?
-
     # Parallelizing this calculation is actually slower
     # The correction factor `nzones` accounts for the "double" counting
     # of multiple BZ in the sum

@@ -228,9 +228,6 @@ def fit_function(times, amp, g_ek, g_kl, g_el):
     )
     T = integrate.odeint(system, np.array([300, 301, 302]), times)
 
-    # TODO: convolve with electron pulse
-    #       Note that the normalization of a convolution is not straightforward
-    #       Isnt it about autocorrelation of the original signal?
     return amp * (T[:, 1] - 300)
 
 
