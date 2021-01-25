@@ -15,6 +15,9 @@ import matplotlib.pyplot as plt
 
 from plotutils import FIGURE_WIDTH
 
+
+ENERGY_CUTOFF = 5  # eV
+
 # Hopping parameter
 t = 2.7  # eV
 tprime = -0.2 * t
@@ -23,9 +26,7 @@ tprime = -0.2 * t
 def colormap(base="plasma", alpha=0.9):
     """ Modify the colormap `base` so the last color is completely transparent """
     base_colors = plt.get_cmap(base).colors
-    colors = list()
-    for bc in base_colors:
-        colors.append(bc + [alpha])
+    colors = [bc + [alpha] for bc in base_colors]
     colors[-1] = [0, 0, 0, 0]  # Make end color transparent
     return cl.LinearSegmentedColormap.from_list(name="awesome", colors=colors)
 
@@ -48,19 +49,26 @@ fig, ax1 = plt.subplots(
     subplot_kw=dict(projection="3d", elev=10, azim=-45),
 )
 
-extent = np.linspace(-1.7, 1.7, num=512)
+extent = np.linspace(-1.7, 1.7, num=256)
 kx, ky = np.meshgrid(extent, extent)
 Eplus, Eminus = E(kx, ky)
 
 surface_kwargs = dict(
-    rcount=256,
-    ccount=256,
     cmap=colormap(),
     vmin=Eminus.min(),
-    vmax=5,
+    vmax=ENERGY_CUTOFF,
+    antialiased=True,
 )
-ax1.plot_surface(kx, ky, Eplus - Eplus.min(), **surface_kwargs)
-ax1.plot_surface(kx, ky, Eminus - Eplus.min(), **surface_kwargs)
+ax1.plot_surface(
+    kx,
+    ky,
+    np.minimum(Eplus - Eplus.min(), ENERGY_CUTOFF),
+    rcount=256,
+    ccount=256,
+    **surface_kwargs
+)
+# The mesh for the bottom curve does not need to be as tight!
+ax1.plot_surface(kx, ky, Eminus - Eplus.min(), rcount=128, ccount=128, **surface_kwargs)
 
 # Draw Brillouin zone
 # mplot3d does not respect z-order
@@ -82,17 +90,17 @@ for i in range(0, 6):
     ax1.plot3D(
         [x1, x1],
         [y1, y1],
-        zs=[Eminus.min() - 1 / 2, (Eminus - Eplus.min()).max()],
+        zs=[Eminus.min() - 1 / 2, (Eminus - Eplus.min()).max() - 1 / 4],
         color="gray",
         linestyle="dashed",
-        linewidth=2,
+        linewidth=1,
     )
 
 ax1.plot3D([1.5, 1.5], [-2, 2], zs=Eminus.min() - 1 / 2, color="k", linestyle=":")
 
 ax1.set_xticks([-2, -1, 0, 1, 2])
 ax1.set_yticks([-2, -1, 0, 1, 2])
-ax1.set_zlim([Eminus.min(), 6])
+ax1.set_zlim([Eminus.min(), ENERGY_CUTOFF])
 ax1.set_xlabel(r"$\mathbf{k} \cdot \mathbf{b}_1$ [$\AA^{-1}$]")
 ax1.set_ylabel(r"$\mathbf{k} \cdot \mathbf{b}_2$ [$\AA^{-1}$]")
 ax1.set_zlabel(r"$E(\mathbf{k})$ [eV]")
