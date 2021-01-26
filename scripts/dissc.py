@@ -305,7 +305,6 @@ def build_cleanthesis(target):
     build_auxiliary(aux_options=aux_options)
 
     options = OPTIONS
-    options += [f"--include-in-header=cleanthesis-include.tex"]
     options += aux_options
 
     buildpdf(
