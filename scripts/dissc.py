@@ -126,6 +126,11 @@ subparsers = parser.add_subparsers(help="sub-command help", dest="command")
 parser_clean = subparsers.add_parser(
     "clean", help="Clean auxiliary files that are transiently generated during build."
 )
+parser_clean.add_argument(
+    "--full",
+    action='store_true',
+    help="Clean build directory and figure files",
+)
 parser_download_tempaltes = subparsers.add_parser(
     "download-templates", help="Download optional templates Eisvogel and Cleanthesis."
 )
@@ -347,6 +352,18 @@ def build_eisvogel(target):
     )
 
 
+def clean(full=False):
+    """ Clean the build directory. If `full`, delete also the figures cache. """
+    if full:
+        shutil.rmtree(BUILDDIR_PDF, ignore_errors=True)
+        logging.info(f'Removed {BUILDDIR_PDF}')
+
+    files = [entry.path for entry in os.scandir(path=BUILDDIR_PDF) if entry.is_file()]
+    for f in files:
+        os.remove(f)
+        logging.info(f'Removed {f}')
+
+
 if __name__ == "__main__":
 
     arguments = parser.parse_args()
@@ -358,7 +375,7 @@ if __name__ == "__main__":
         }
         multiplexor[arguments.style](target=Path("dissertation.pdf"))
     elif arguments.command == "clean":
-        shutil.rmtree(BUILDDIR_PDF, ignore_errors=True)
+        clean(full=arguments.full)
     elif arguments.command == "download-templates":
         download_template_files()
     else:

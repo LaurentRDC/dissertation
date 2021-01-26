@@ -78,10 +78,23 @@ jobs:
     - name: Build dissertation
       run: |
         export PATH=$GITHUB_WORKSPACE/bin:$PATH
+
         python scripts/dissc.py build --style eisvogel
+        mv build/dissertation.pdf dissertation-eisvogel.pdf
+
+        python scripts/dissc.py clean 
+
+        python scripts/dissc.py build --style cleanthesis
+        mv build/dissertation.pdf dissertation-cleanthesis.pdf
+        
+        python scripts/dissc.py clean 
+
+        python scripts/dissc.py build --style simple
+        mv build/dissertation.pdf dissertation-simple.pdf
     
     - name: Upload PDF
       uses: actions/upload-artifact@v2
       with:
         name: dissertation
-        path: build/dissertation.pdf
+        path: |
+          dissertation-*.pdf
