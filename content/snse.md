@@ -16,7 +16,7 @@
 
 #### Mechanical exfoliation
 
-```{.matplotlib file="figures/snse/diff-static.py" caption=""}
+```{.matplotlib file="figures/snse/diff-static.py" caption="Comparison of static diffraction patterns from samples prepared via two techniques. **a)** \SI{90}{\nano\meter}-thick sample prepared via ultramicrotome. **b)** \SI{30}{\nano\meter}-thick samples prepared via mechanical exfoliation."}
 ```
 
 ### Time-resolved terahertz spectroscopy

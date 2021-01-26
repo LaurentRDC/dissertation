@@ -2,6 +2,7 @@ from math import floor
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import numpy as np
 from iris import DiffractionDataset
 from matplotlib.ticker import FixedFormatter, FixedLocator
@@ -23,39 +24,72 @@ grid = ImageGrid(
     fig, 111, nrows_ncols=(1, 2), cbar_location="top", aspect=False, share_all=False
 )
 
-for ax, im, mask, vmax, crop, label in zip(
-    grid, [im_exf, im_umt], [mask_exf, mask_umt], [150, 4000], [300, 0], ["a)", "b)"]
-):
-
+# Determine the smallest image center - side distance
+# This way, we ensure that both diffraction patterns will appear to be
+# the same size.
+side_lengths = list()
+centers = list()
+for im, mask in zip([im_umt, im_exf], [mask_umt, mask_exf]):
     r, c = autocenter(im, mask).astype(np.int)
+    centers.append((r, c))
+    side_lengths.append(floor(min([c, abs(c - 2048), r, abs(r - 2048)])))
+side_length = min(side_lengths)
 
-    # Determine the smallest center -> side distance, and crop around that
-    side_length = floor(min([c, abs(c - 2048), r, abs(r - 2048)])) - crop
+for ax, (r, c), im, mask, vmax, crop, label in zip(
+    grid,
+    centers,
+    [im_umt, im_exf],
+    [mask_umt, mask_exf],
+    [4000, 150],
+    [
+        0,
+        150,
+    ],
+    ["a)", "b)"],
+):
     xs, ys = (
         slice(r - side_length, r + side_length),
         slice(c - side_length, c + side_length),
     )
     im = im[xs, ys]
+    mask = mask[xs, ys]
     im = np.maximum(im, 0)
 
     m = ax.imshow(
-        im,
-        vmin=0,
-        vmax=vmax,
-        cmap="magma",
-        extent=[
-            0,
-            2048,
-            2048,
-            0,
-        ],  # Important to be the same for images which are not the same size
+        im, vmin=0, vmax=vmax, cmap="magma", extent=[0, im.shape[1], im.shape[0], 0]
     )
     tag_axis(ax, text=label)
-    ax.axis("off")
+    ax.xaxis.set_visible(False)
+    ax.yaxis.set_visible(False)
+
+    width = 170
+    height = 1.2 * im.shape[0] / 2
+    x, y = im.shape[1] // 2 - width / 2, 0
+
+    beamblock_patch = mpatches.Rectangle(
+        xy=(x, y),
+        width=width,
+        height=height,
+        edgecolor="k",
+        facecolor="w",
+    )
+    move_in = 6  # needs to be pixel-perfect. Adjusted for 600 DPI
+    crossover_patch = mpatches.Rectangle(
+        xy=(x + move_in, y - 10),
+        width=width - 2 * move_in,
+        height=height + 10 - move_in,
+        fill=True,
+        color="w",
+        edgecolor="none",
+        zorder=10,
+        clip_on=False,
+    )
+    ax.add_patch(beamblock_patch)
+    ax.add_patch(crossover_patch)
 
 cbar = grid[0].cax.colorbar(
     m,
-    ticks=FixedLocator(locs=[0, 4000]),
+    ticks=FixedLocator(locs=[0, 150]),
     format=FixedFormatter(["0", "1"]),
 )
 cbar.ax.xaxis.set_label_position("top")

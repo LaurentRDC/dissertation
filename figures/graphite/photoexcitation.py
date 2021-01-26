@@ -27,7 +27,7 @@ def E(kx, ky):
     return E_plus, E_minus
 
 
-fig, ax1 = plt.subplots(1, 1, figsize=(4, 3))
+fig, ax1 = plt.subplots(1, 1, figsize=(4, 2.5))
 
 ky = np.linspace(-1.5, 1.5, num=1024)
 Eplus, Eminus = E(kx=1.5, ky=ky)
