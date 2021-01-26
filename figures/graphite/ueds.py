@@ -79,7 +79,7 @@ with DiffractionDataset(DATASET) as dset:
                 [-4, -3, -2, -1, 0], [-4, -3, -2, -1, 0, 1, 2, 3], [0]
             ),
             color="k",
-            linestyle=":",
+            alpha=0.5,
         )
 
         ax.xaxis.set_visible(False)

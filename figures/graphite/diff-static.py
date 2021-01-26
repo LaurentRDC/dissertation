@@ -73,10 +73,10 @@ for ax, im, label in zip(grid, [b4t0, b4t0_symmetrized], ["a)", "b)"]):
         ax,
         radius=1.7,
         crystal=Crystal.from_pwscf(Path("data") / "graphite" / "output.out"),
-        reflections=it.product(range(-4, 4), range(-4, 4), [0]),
+        reflections=it.product(range(-5, 5), range(-5, 5), [0]),
         color="w",
-        linewidth=0.5,
-        linestyle=":",
+        linewidth=0.3,
+        alpha=0.5,
     )
     tag_axis(ax, text=label)
 

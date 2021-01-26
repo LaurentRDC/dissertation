@@ -128,7 +128,7 @@ parser_clean = subparsers.add_parser(
 )
 parser_clean.add_argument(
     "--full",
-    action='store_true',
+    action="store_true",
     help="Clean build directory and figure files",
 )
 parser_download_tempaltes = subparsers.add_parser(
@@ -355,13 +355,13 @@ def clean(full=False):
     """ Clean the build directory. If `full`, delete also the figures cache. """
     if full:
         shutil.rmtree(BUILDDIR_PDF, ignore_errors=True)
-        logging.info(f'Removed {BUILDDIR_PDF}')
+        logging.info(f"Removed {BUILDDIR_PDF}")
         return
-    
+
     files = [entry.path for entry in os.scandir(path=BUILDDIR_PDF) if entry.is_file()]
     for f in files:
         os.remove(f)
-        logging.info(f'Removed {f}')
+        logging.info(f"Removed {f}")
 
 
 if __name__ == "__main__":

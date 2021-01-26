@@ -143,7 +143,10 @@ for ax, (mode_name, time) in zip(grid, it.product(MODES, TIMES)):
         center=(0, 0),
         radius=1.7 / 2.0,
         orientation=np.deg2rad(30),
-        linestyle="dashed",
+        linestyle=(
+            0,
+            (3, 3),
+        ),  # loosely dashed: https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html
     )
     ax.add_patch(
         mpatches.Circle(

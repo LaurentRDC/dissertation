@@ -80,7 +80,7 @@ for mode, ax in zip(modes, grid):
         radius=1.7,
         crystal=cryst,
         color=(0.7, 0.7, 0.7, 1),  # light gray
-        linestyle=":",
+        alpha=0.5,
         reflections=reflections,
     )
 

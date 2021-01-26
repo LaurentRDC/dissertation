@@ -66,7 +66,8 @@ draw_hexagon_field(
     crystal=graphite,
     reflections=reflections,
     color=(0.3, 0.3, 0.3, 1),
-    linestyle=":",
+    linewidth=0.5,
+    alpha=0.5,
 )
 draw_hexagon_field(
     ax=ax_cmp,
@@ -74,7 +75,8 @@ draw_hexagon_field(
     crystal=graphite,
     reflections=reflections,
     color=(0.7, 0.7, 0.7, 1),
-    linestyle=":",
+    linewidth=0.5,
+    alpha=0.5,
 )
 
 tag_axis(ax_rmt, "a)")
