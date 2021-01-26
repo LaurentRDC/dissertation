@@ -356,7 +356,8 @@ def clean(full=False):
     if full:
         shutil.rmtree(BUILDDIR_PDF, ignore_errors=True)
         logging.info(f'Removed {BUILDDIR_PDF}')
-
+        return
+    
     files = [entry.path for entry in os.scandir(path=BUILDDIR_PDF) if entry.is_file()]
     for f in files:
         os.remove(f)
