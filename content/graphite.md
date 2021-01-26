@@ -1,9 +1,13 @@
 
 # Momentum-resolved excitation couplings in graphite {#sec:graphite}
 
+TODO: introduction is a bit dense.
+
 The coupling between excitations such as lattice waves and charge carriers governs many exotic properties of interest to condensed matter physicist. The quintessential example of such couplings is conventional superconductivity[@Cooper1956; @Bardeen1957; @Schrieffer1963]. Specifically, work by Éliashberg[@Eliashberg1960] showed how phonons can mediate the attraction between electrons in order to form Cooper pairs. One other example of the effects of excitation couplings is the ability to control the resistivity of Pr$_{0.7}$Ca$_{0.3}$MnO$_3$ by directly populating an IR-active phonon mode [@Rini2007]. By photoexciting the sample with the right photons, resistivity in the near-infrared range (\SIrange{0.5}{1.9}{\electronvolt}) drops by 5 orders of magnitude. The authors attribute this change in electronic properties due to a phase transition to a metastable metallic state which cannot be accessed at equilibrium. As a final showcase of the effect of couplings on material properties, consider the work by Sie *et al*[@Sie2019] on the ultrafast switch of symmetry in the topological material WTe$_2$. In this work, the authors control the topological properties of the material with light, by directly coupling Terahertz pulses into a non-inversion-symmetric lattice. This in turn induces dynamical lattice stain which pushes the material into a "topologically-trivial metastable phase", which represents a first step in the manipulation of topological properties.
 
-And yet, the ability to measure couplings between material subsystems has remained limited. The research presented in this chapter is really an exploration of the capabilities of ultrafast structural probes in measuring such couplings. To this end, graphite is the perfect system to benchmark ultrafast electron diffuse scattering (UEDS). On the one hand, it has a very stiff lattice in-plane due to inherently strong carbon-carbon bonds and a hexagonal structure. The spectrum of lattice waves that results gives UEDS measurements incredible constrast. On the other hand, much ultrafast work has been done on graphite and graphene. This presents an opportunity to compare and contrast results between spectroscopic probes such as terahertz spectroscopy or time- and angle-resolved photoemission spectroscopy and UEDS.
+And yet, the ability to measure couplings between material subsystems has remained limited. (TODO: describe other techniques).
+
+The research presented in this chapter is really an exploration of the capabilities of ultrafast structural probes in measuring such couplings. To this end, graphite is the perfect system to benchmark ultrafast electron diffuse scattering (UEDS). On the one hand, it has a very stiff lattice in-plane due to inherently strong carbon-carbon bonds and a hexagonal structure. The spectrum of lattice waves that results gives UEDS measurements incredible constrast. On the other hand, much ultrafast work has been done on graphite and graphene. This presents an opportunity to compare and contrast results between spectroscopic probes such as terahertz spectroscopy or time- and angle-resolved photoemission spectroscopy and UEDS.
 
 This chapter will detail how to extract the quantitative information encoded in UEDS experiments. Large flakes of thin graphite are photoexcited with ultrafast laser pulses, and the resulting dynamics in the scattering intensity away from Bragg peaks is used to measure the mode-dependent phonon populations across the Brillouin zone. The redundancy present in UEDS measurements allows to overcome the energy-integration of electron scattering detectors, so that momentum-dependent phonon dynamics can be observed. As a final point, the modeling of dynamics at a high-symmetry point is shown to give access to electron-phonon and phonon-phonon coupling matrix elements, which are then compared to other experiments and calculations.
 
@@ -76,7 +80,7 @@ where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. T
 ```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vec{k})$ for graphite. The in-plane section of the Brillouin zone is shown below. The dotted black line represents the line-cut used for @fig:graphite-photoexcitation."}
 ```
 
-The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones. The impact of the geometry of Dirac cones is discussed in the next section.
+The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vec{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones.
 
 ### Phonon landscape {#sec:graphite-phonon-landscape}
 
@@ -143,9 +147,9 @@ Throughout the rest of this chapter, "scattering intensity" will imply discrete 
 
 This section contains the details of the calculations used throughout this chapter, including what is shown in @fig:graphite-static-dispersion. The aim of the computations was to extract the phonon mode frequencies $\left\{ \omega_j(\vec{k})\right\}$ and polarization vectors $\left\{ \vec{e}_{j, s}(\vec{k})\right\}$ that appear in TODO: ONEPH EQUATION.
 
-In order to calculate the force between atoms, the structure of graphite was computed via *structure relaxation*, performed using the plane-wave self-consistent field program `PWSCF` from the `QUANTUM ESPRESSO` software suite [@Giannozzi2017]. The structure was relaxed using a 18 × 18 × 10 $\vec{k}$ mesh centered at $\vec{\Gamma}$ -- selected using the Monkhorst-Pack method [@Monkhorst1976] -- and force and energy thresholds of \SI{1e-8}{\rydberg\per\bohr} and \SI{1e-15}{\rydberg} respectively, where \si{\bohr} is the Bohr radius.
+TODO: explain simply the procedure behind dynamical matrices
 
-The dynamical matrices were computed on a 5 × 5 × 3 $\vec{q}$ mesh using a self-consistency threshold of \SI{1e-18}{\rydberg}. The resulting graphite structure is equivalent to @eq:graphite-lattice, with $a=\SI{1.231}{\angstrom}$ and $c=\SI{6.837}{\angstrom}$.
+In order to calculate the force between atoms, the structure of graphite was computed via *structure relaxation*, performed using the plane-wave self-consistent field program `PWSCF` from the `QUANTUM ESPRESSO` software suite [@Giannozzi2017]. The structure was relaxed using a 18 × 18 × 10 $\vec{k}$ mesh centered at $\vec{\Gamma}$ -- selected using the Monkhorst-Pack method [@Monkhorst1976] -- and force and energy thresholds of \SI{1e-8}{\rydberg\per\bohr} and \SI{1e-15}{\rydberg} respectively, where \si{\bohr} is the Bohr radius. Based on the force constants determined from the relaxed structure, the dynamical matrices were computed on a 5 × 5 × 3 $\vec{q}$ mesh using a self-consistency threshold of \SI{1e-18}{\rydberg}. The resulting graphite structure is equivalent to @eq:graphite-lattice, with $a=\SI{1.231}{\angstrom}$ and $c=\SI{6.837}{\angstrom}$.
 
 The phonon mode frequencies $\left\{ \omega_j(\vec{k}) \right\}$ and polarization vectors $\left\{ \vec{e}_{j, s}(\vec{k})\right\}$ were computed using the `PHONON` program, again within the `QUANTUM ESPRESSO` software suite. This calculation made use of the B86b exchange-coupled Perdew-Burke-Ernzerhof generalized-gradient approximation [@Becke1986; @Perdew1996] and the projector augmented-wave method [@Blochl1994]. The cutoff energy of the wave function was set to \SI{100}{\rydberg}, while the cutoff energy for the charge density was set to \SI{1.2e3}{\rydberg}. A Fermi-Dirac smearing of \SI{0.06}{\rydberg} was also applied. To include the dispersion of energy along the stacking axis $\vec{a}_3$, the exchange-hole dipole moment method was used [@Becke2007]. 
 
@@ -172,9 +176,12 @@ The change in scattering intensity $\Delta I(\vec{q}, t=\tau) \equiv I(\vec{q}, 
 ```{#fig:graphite-ueds .matplotlib file="figures/graphite/ueds.py" caption="Change in scattering intensity $\Delta I(\vec{q}, t=\tau) \equiv I(\vec{q}, \tau) - I(\vec{q}, \tau < 0)$ of photoexcited graphite for a few representative time-delays $\tau$. Hexagonal Brillouin zones are shown on half of the reflections to guide the eye. Scattering patterns show diffuse dynamics in the range of $|\vec{q}| < \SI{12}{\per\angstrom}$. Negative going features (blue) are exclusively due to the transient Debye-Waller effect on the Bragg peaks. All positive changes (red) are dynamics of the diffuse scattering intensity."}
 ```
 
-First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall symmetry of the lattice, which in turn results in smaller Bragg peaks. This is analogous to the (static) thermal Debye-Waller effect [@Debye1913; @Waller1923]. This leaves only positive-going features everywhere away from Bragg peaks, which must be diffuse in nature.
+First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall symmetry of the lattice, which in turn results in smaller Bragg peaks. This is analogous to the (static) thermal Debye-Waller effect [@Debye1913; @Waller1923]. An example curve for the $(200)$ reflection is shown in @fig:graphite-dw-example. The dynamics associated with the Bragg peaks are discussed in detail elsewhere[@Chatelain2014; @Chatelain2014a]. This leaves only positive-going features everywhere away from Bragg peaks, which must be diffuse in nature.
 
-Second, the structure visible across the Brillouin zone is different for reflections that ought to represent the same physical lattice waves. For example, consider the $(010)$ and $(020)$ reflections, \SI{500}{\femto\second} after photoexcitation, shown in @fig:graphite-ueds-zoomed. Around $(010)$, diffuse intensity increases near two of the $\vec{K}$ points, while diffuse intensity is increasing along steaks between $\vec{\Gamma}$ and $\vec{K}$ near $(020)$. This drastic difference between two physically-equivalent reflections can be explained by the difference in the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2$.
+```{.matplotlib #fig:graphite-dw-example file="figures/graphite/dw-example.py" caption="Relative intensity change of the $(200)$ reflection examplifies the transient Debye-Waller effect."}
+```
+
+Second, the structure visible across the Brillouin zone is different for reflections that ought to represent the same physical lattice waves. For example, consider the $(010)$ and $(020)$ reflections, \SI{500}{\femto\second} after photoexcitation, shown in @fig:graphite-ueds-zoomed. Around $(010)$, diffuse intensity increases near two of the $\vec{K}$ points, while diffuse intensity is increasing between $\vec{\Gamma}$ and $\vec{K}$ near $(020)$. This drastic difference between two physically-equivalent reflections can be explained by the difference in the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2$.
 
 ```{#fig:graphite-ueds-zoomed .matplotlib file="figures/graphite/ueds-zoomed.py" caption="Comparison of the diffuse intensity change after \SI{100}{\pico\second} for two Brillouin zones, $(010)$ and $(020)$. The colormap scaling is identical to @fig:graphite-ueds. The difference between those two images can be explained by the difference in one-phonon structure factors $|F_{1j}(\vec{q}, \tau)^2|$."}
 ```
@@ -231,11 +238,11 @@ An alternative visualization for one-phonon structure factors are weighted dispe
 ```{.matplotlib #fig:graphite-weighted-dispersion file="figures/graphite/weighted-dispersion.py" caption="Calculated one-phonon structure factors visualized as weighted dispersion curves for selected in-plane modes. The color saturation of dispersion curves is proportional to $|F_{1j}|^2$ of the associated mode. Equivalent paths in the Brillouin zone around two reflections are shown to highlight the high degree of reciprocal space structure: $(010)$ on the left and $(\bar{1}10)$ on the right. The geometry of the paths with respect to $(000)$ are shown in the inset on the lower left."}
 ```
 
-By examining @fig:graphite-weighted-dispersion, it appears that at certain locations, the one-phonon structure factor for one phonon mode dominates; for example, $|F_{1j=\text{LA}}|^2$ near $\vec{q} \approx \vec{\Gamma}_{(010)}$). It might therefore be tempting to attribute the diffuse intensity dynamics at that location exclusively to one mode. If enough such locations in reciprocal space existed, it would be possible to bypass the energy-insensitivity of UEDS and extract mode-dependent phonon dynamics at special points in the Brillouin zone; this idea forms the basis of previous work on graphite [@Stern2018]. However, the information presented by @fig:graphite-weighted-dispersion is incomplete. 
+By examining @fig:graphite-weighted-dispersion, it appears that at certain locations, the one-phonon structure factor for one phonon mode dominates; for example, $|F_{1j=\text{LA}}|^2$ near $\vec{q} \approx \vec{\Gamma}_{(010)}$). It might therefore be tempting to attribute the diffuse intensity dynamics at that location exclusively to one mode. If enough such locations in reciprocal space existed, it would be possible to bypass the energy-insensitivity of UEDS and extract mode-dependent phonon dynamics at special points in the Brillouin zone; this idea forms the basis of previous work by the author[@Stern2018]. The next section describes how crude this intuition really is.
 
 ### Relative mode contributions
 
-In order to compare the contribution of a particular phonon mode $j$ on UEDS data, the following weight can be defined:
+Are there locations in reciprocal space where the contribution of a particular lattice wave dominates the diffuse intensity? In order to compare the contribution of a particular phonon mode $j$ on UEDS data, the following weight can be defined:
 $$
     W_j(\vec{q}, \tau) \equiv \frac{\left| F_{1j}(\vec{q}, \tau)\right|^2}{\omega_j(\vec{k}, \tau)}
 $${#eq:graphite-ueds-weight}
@@ -256,7 +263,7 @@ In order to access the ultrafast phonon dynamics in a material with UEDS, a more
  
 ## Phonon spectroscopy across the Brillouin zone{#sec:graphite-ph-spectroscopy}
 
-In this section, the calculation of the one-phonon structure factors will be used to endow UEDS with energy resolution. An important advantage of UEDS is implicit in the formulation of @eq:graphite-vectorized-ueds: a large number of reflections are visible to ultrafast electron scattering measurements due to the relative flatness of the Ewald sphere. Compared to ultrafast diffuse x-ray scattering[@Wall2018; @Teitelbaum2018], which is limited to the study of at most a few reflections, the shortcoming of ultrafast electron scattering can be overcome by the redundancy present in the measurements. 
+In this section, the calculation of the one-phonon structure factors will be used to endow UEDS with energy resolution. An important advantage of UEDS is is that a large number of reflections are simultaneously visible due to the relative flatness of the Ewald sphere. Compared to ultrafast diffuse x-ray scattering[@Wall2018; @Teitelbaum2018], which is limited to the study of at most a few reflections, the shortcoming of ultrafast electron scattering can be overcome by the redundancy present in the measurements. 
 
 Recall that the ultrafast change in diffuse intensity can be expressed as follows:
 $$
@@ -287,7 +294,7 @@ where
 	\end{bmatrix}^T
 \end{align}
 
-where $N$ runs over the 8 in-plane modes. This linear system of equations can be solved numerically provided enough experimental data, i.e. diffuse intensity for at least $M \geq N$ distinct Brillouin zones. The choice to solve for $\vec{D}_{\vec{k}}(\tau)$ rather than $\Delta n_j(\vec{k}, \tau)$ directly, comes down to the degree of confidence that should be placed in the approximations that were made to get to @eq:graphite-ueds-change. Phonon polarization vectors are mostly determined by the symmetries of the crystal, which are fixed throughout the experiments in this chapter. On the other hand, phonon vibrational frequencies in general might be influenced by non-equilibrium carrier and phonon distributions as would be the case with strongly anharmonic crystals (e.g. SnSe, see @sec:snse). Solving for the ratio of phonon population to vibrational frequency is more robust against the weaknesses of this modeling because the one-phonon structure factors only take into account the polarization vectors.
+where $N$ runs over the 8 in-plane modes. This linear system of equations can be solved numerically provided enough experimental data, i.e. diffuse intensity for at least $M \geq N$ distinct Brillouin zones. Again, this constraint highlights the advantage that UEDS has over other techniques. The choice to solve for $\vec{D}_{\vec{k}}(\tau)$ rather than $\Delta n_j(\vec{k}, \tau)$ directly, comes down to the degree of confidence that should be placed in the approximations that were made to get to @eq:graphite-ueds-change. Phonon polarization vectors are mostly determined by the symmetries of the crystal, which are fixed throughout the experiments in this chapter. On the other hand, phonon vibrational frequencies in general might be influenced by non-equilibrium carrier and phonon distributions as would be the case with strongly anharmonic crystals (e.g. SnSe, see @sec:snse). Solving for the ratio of phonon population to vibrational frequency is more robust against the weaknesses of this modeling because the one-phonon structure factors only take into account the polarization vectors.
 
 ### Numerical procedure
 
@@ -318,14 +325,14 @@ The energy flow that follows photoexcitation described in this section is exactl
 
 ### Long-term decay
 
+```{.matplotlib #fig:graphite-long-term file="figures/graphite/energy.py" caption="Energy stored in-plane after photoexcitation. **inset** long-term trend shows that thermalization has not yet occurred by \SI{600}{\pico\second}."}
+```
+
 It is possible to quantify how long does the non-equilibrium distribution of lattice waves last in graphite. The energy transferred to the sample from photoexcitation, stored in plane in a mode $j$, can be expressed as follows:
 $$
     \Delta E(\tau) = \int_{\text{BZ}} d\vec{k} \frac{\Delta n_j(\vec{k}, \tau)}{\omega_j(\vec{k}, \tau)}
 $$
 where $\int_{\text{BZ}} d\vec{k}$ is understood to be the integral over the in-plane section of the Brillouin zone. Using the population measurements $\left\{ n_j(\vec{k}, \tau)\right\}$ presented in @fig:graphite-ph-populations, the mode-dependent relative change in stored energy (in-plane) can be calculated. The results are shown in @fig:graphite-long-term.
-
-```{.matplotlib #fig:graphite-long-term file="figures/graphite/energy.py" caption="Energy stored in-plane after photoexcitation. **inset** long-term trend shows that thermalization has not yet occurred by \SI{600}{\pico\second}."}
-```
 
 The energy trends for modes TA and TO2 are commensurate with the description of @sec:graphite-pop-dynamics. The fascinating aspect of this analysis is revealed by looking at the total energy stored in-plane. Even by \SI{600}{\pico\second}, thermalization of the energy dumped into the sample by photoexcitation has not occurred at all. 
 
