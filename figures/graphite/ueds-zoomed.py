@@ -13,6 +13,7 @@ from plotutils import (
     GRAPHITE_CAMERA_LENGTH,
     ImageGrid,
     draw_hexagon_field,
+    draw_hexagon,
     tag_axis,
 )
 from skimage.transform import rotate
@@ -60,6 +61,14 @@ for ax, center, indices in zip([ax1, ax2], [q010, q020], [(0, 1, 0), (0, 2, 0)])
         vmin=-0.4,
         vmax=0.4,
         extent=[qx.min(), qx.max(), qy.max(), qy.min()],
+    )
+
+    draw_hexagon(
+        ax,
+        radius=1.7,
+        center=(0, 0),
+        color="w",
+        facecolor="w",
     )
 
     draw_hexagon_field(

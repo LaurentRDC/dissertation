@@ -13,6 +13,7 @@ from plotutils import (
     GRAPHITE_CAMERA_LENGTH,
     ImageGrid,
     draw_hexagon_field,
+    draw_hexagon,
     tag_axis,
 )
 from skimage.transform import rotate
@@ -22,7 +23,7 @@ with DiffractionDataset(
     Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
 ) as source:
     mask = source.valid_mask
-    b4t0 = source.diff_eq()
+    b4t0 = source.diff_data(source.time_points[0])
 
 r, c = autocenter(im=b4t0, mask=mask).astype(np.int)
 
@@ -79,6 +80,15 @@ for ax, im, label in zip(grid, [b4t0, b4t0_symmetrized], ["a)", "b)"]):
         alpha=0.5,
     )
     tag_axis(ax, text=label)
+
+
+draw_hexagon(
+    grid[-1],
+    radius=1.7,
+    center=(0, 0),
+    color="w",
+    facecolor="w",
+)
 
 for ax in grid:
     ax.xaxis.set_visible(False)

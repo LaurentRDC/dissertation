@@ -128,15 +128,6 @@ for ax, (mode_name, time) in zip(grid, it.product(MODES, TIMES)):
     ax.xaxis.set_visible(False)
     ax.yaxis.set_visible(False)
 
-    # The black hexagon is to make the edges of the BZ mode defined
-    draw_hexagon(
-        ax,
-        center=(0, 0),
-        radius=1.7,
-        orientation=np.deg2rad(30),
-        linewidth=2,
-        color=plt.get_cmap(COLORMAP)(0),
-    )
     draw_hexagon(ax, center=(0, 0), radius=1.7, orientation=np.deg2rad(30))
     draw_hexagon(
         ax,
@@ -152,9 +143,9 @@ for ax, (mode_name, time) in zip(grid, it.product(MODES, TIMES)):
         mpatches.Circle(
             xy=(0, 0),
             radius=GAMMA_RADIUS,
-            facecolor="none",
-            fill=False,
-            edgecolor="w",
+            facecolor="w",
+            fill=True,
+            edgecolor="k",
             linewidth=0.5,
         )
     )
