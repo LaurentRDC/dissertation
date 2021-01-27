@@ -202,6 +202,8 @@ def system_evolution(T, time, profile, g_ek, g_kl, g_el):
 
 
 with_irf(0.35)
+
+
 def fit_function(times, amp, g_ek, g_kl, g_el):
     """
     Time-trace representing the dynamics of the K-TO mode population.
@@ -401,7 +403,13 @@ temperature_to_intensity = lambda a: fit_amp * (a - 300)
 fig, ax_K = plt.subplots(1, 1, figsize=(4, 3))
 ax_T = ax_K.twinx()
 
-ax_K.plot(simulation_times, best_curve, linestyle="solid", color="blue", label='$A_1^{\prime}$ phonon')
+ax_K.plot(
+    simulation_times,
+    best_curve,
+    linestyle="solid",
+    color="blue",
+    label="$A_1^{\prime}$ phonon",
+)
 
 ax_K.plot(
     simulation_times,

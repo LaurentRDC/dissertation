@@ -3,6 +3,7 @@ from math import floor
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import numpy as np
 from crystals import Crystal
 from iris import DiffractionDataset
@@ -67,19 +68,48 @@ for ax, im, label in zip(grid, [b4t0, b4t0_symmetrized], ["a)", "b)"]):
         im,
         vmin=0,
         vmax=200,
-        cmap="magma",
+        cmap="inferno",
         extent=[qx.min(), qx.max(), qy.min(), qy.max()],
     )
-    draw_hexagon_field(
-        ax,
-        radius=1.7,
-        crystal=Crystal.from_pwscf(Path("data") / "graphite" / "output.out"),
-        reflections=it.product(range(-5, 5), range(-5, 5), [0]),
-        color="w",
-        linewidth=0.3,
-        alpha=0.5,
-    )
     tag_axis(ax, text=label)
+
+draw_hexagon_field(
+    grid[1],
+    radius=1.7,
+    crystal=Crystal.from_pwscf(Path("data") / "graphite" / "output.out"),
+    reflections=it.product(range(-5, 5), range(-5, 5), [0]),
+    color="w",
+    linewidth=0.3,
+    alpha=0.5,
+)
+
+# Beam block patch
+# assuming that the image is centered
+dk = abs(qx[1, 1] - qx[0, 0])
+width = dk * 250
+height = 1.5 * dk * b4t0.shape[0] / 2
+x, y = -width / 2, -1.2
+
+beamblock_patch = mpatches.Rectangle(
+    xy=(x, y),
+    width=width,
+    height=height,
+    edgecolor="k",
+    facecolor="w",
+)
+move_in = 6 * dk  # needs to be pixel-perfect. Adjusted for 600 DPI
+crossover_patch = mpatches.Rectangle(
+    xy=(x + move_in, y + move_in),
+    width=width - 2 * move_in,
+    height=height + 10 * dk - move_in,
+    fill=True,
+    color="w",
+    edgecolor="none",
+    zorder=10,
+    clip_on=False,
+)
+grid[0].add_patch(beamblock_patch)
+grid[0].add_patch(crossover_patch)
 
 
 draw_hexagon(
