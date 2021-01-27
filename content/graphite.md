@@ -176,9 +176,9 @@ The change in scattering intensity $\Delta I(\vec{q}, t=\tau) \equiv I(\vec{q}, 
 ```{#fig:graphite-ueds .matplotlib file="figures/graphite/ueds.py" caption="Change in scattering intensity $\Delta I(\vec{q}, t=\tau) \equiv I(\vec{q}, \tau) - I(\vec{q}, \tau < 0)$ of photoexcited graphite for a few representative time-delays $\tau$. Hexagonal Brillouin zones are shown on half of the reflections to guide the eye. Scattering patterns show diffuse dynamics in the range of $|\vec{q}| < \SI{12}{\per\angstrom}$. Negative going features (blue) are exclusively due to the transient Debye-Waller effect on the Bragg peaks. All positive changes (red) are dynamics of the diffuse scattering intensity."}
 ```
 
-First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall symmetry of the lattice, which in turn results in smaller Bragg peaks. This is analogous to the (static) thermal Debye-Waller effect [@Debye1913; @Waller1923]. An example curve for the $(200)$ reflection is shown in @fig:graphite-dw-example. The dynamics associated with the Bragg peaks are discussed in detail elsewhere[@Chatelain2014; @Chatelain2014a]. This leaves only positive-going features everywhere away from Bragg peaks, which must be diffuse in nature.
+First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall symmetry of the lattice, which in turn results in smaller Bragg peaks. This is analogous to the (static) thermal Debye-Waller effect [@Debye1913; @Waller1923]. An example curve for the $(200)$ reflection is shown in @fig:graphite-dw-example. The dynamics associated with the Bragg peaks in photoexcited graphite are discussed in detail elsewhere[@Chatelain2014; @Chatelain2014a]. This leaves only positive-going features everywhere away from Bragg peaks, which are diffuse in nature.
 
-```{.matplotlib #fig:graphite-dw-example file="figures/graphite/dw-example.py" caption="Relative intensity change of the $(200)$ reflection examplifies the transient Debye-Waller effect."}
+```{.matplotlib #fig:graphite-dw-example file="figures/graphite/dw-example.py" caption="Relative intensity change of the $(200)$ reflection after photoexcitation examplifies the transient Debye-Waller effect."}
 ```
 
 Second, the structure visible across the Brillouin zone is different for reflections that ought to represent the same physical lattice waves. For example, consider the $(010)$ and $(020)$ reflections, \SI{500}{\femto\second} after photoexcitation, shown in @fig:graphite-ueds-zoomed. Around $(010)$, diffuse intensity increases near two of the $\vec{K}$ points, while diffuse intensity is increasing between $\vec{\Gamma}$ and $\vec{K}$ near $(020)$. This drastic difference between two physically-equivalent reflections can be explained by the difference in the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2$.
@@ -340,15 +340,17 @@ The energy trends for modes TA and TO2 are commensurate with the description of 
 
 TODO: make the distinction between G (heat rate?) and g (matrix element) clear
 
-Electron-phonon and phonon-phonon coupling constants describe the strength of the coupling between excitations in a material. A coupling constant $G_{i,j}$ describes the rate of energy transfer from excitation type $i$ to excitation type $j$, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. E-ph and ph-ph coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent e-ph and ph-ph coupling terms.
+Electron-phonon and phonon-phonon coupling describe the strength of the coupling between excitations in a material. A coupling constant $G_{i,j}$ describes the rate of energy transfer from excitation type $i$ to excitation type $j$, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. E-ph and ph-ph coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent e-ph and ph-ph coupling terms.
 
-The nonequilibrium flow of energy between excitations, both electronic and lattice in nature, has historically been crudely modelled using the *two-temperature model* [@Allen1987]. In summary, this model states that while the concept of temperature does not apply to nonequilibrium situations, the energy distribution of the electrons and lattice waves may be treated separately. In other words, the se[arate thermalization of the electronic and lattice subsystems is much faster than the energy transver between them. It is evident that such a description does not adequately model experimental results from @sec:graphite-ph-spectroscopy for two main reasons. First, the thermalization of decay of optical phonons to acoustic ones overlaps significantly in time with the transfer of energy from the photoexcited electrons to strongly-coupled optical modes. Second, the energy distribution of lattice waves is far from thermal, even at \SI{100}{\pico\second}.
+The nonequilibrium flow of energy between excitations, both electronic and lattice in nature, has historically been crudely modelled using the *two-temperature model* [@Allen1987]. In summary, this model states that while the concept of temperature does not apply to nonequilibrium situations, the energy distribution of the electrons and lattice waves may be treated separately. In other words, the separate thermalization of the electronic and lattice subsystems is much faster than the energy transver between them. It is evident that such a description does not adequately model experimental results from @sec:graphite-ph-spectroscopy for two main reasons. First, the decay of optical phonons to acoustic ones overlaps significantly in time with the transfer of energy from the photoexcited electrons to strongly-coupled optical modes. Second, the energy distribution of lattice waves is far from thermal, even at \SI{100}{\pico\second}. Some authors have extended the two-temperature model based on the details of the system being studied[@Stange2015].
 
-UEDS measurements allow to move beyond the two-temperature approximation as the energy distribution of phonons is known across the Brillouin zone. And yet, theory has not caught up with this opportunity; the best way to extract e-ph and ph-ph coupling values is still based on rate-equations. To this end, the formalism of the two-temperature model needs to be extended.
+UEDS measurements allow to move beyond the two-temperature approximation as the energy distribution of phonons is known across the Brillouin zone. And yet, theory has not caught up with this opportunity. The best way to extract electron-phonon and phonon-phonon couplings is still based on rate-equations. In this section, the extraction of electron-phonon and phonon-phonon couplings from UEDS measurements will be performed at the $\vec{K}$ point, using an extension of the two-temperature model called the *non-thermal lattice model*. 
+
+The reader should keep in mind that the procedure presented in this section is a retrofit of the results presented in @sec:graphite-ph-spectroscopy into a more conventional framework. This is the best that can be done until theorist seize the opportunity provided by UEDS measurements.
 
 ### The non-thermal lattice model {#sec:graphite-nlm}
 
-The non-thermal lattice model is an extension of the two-temperature model, with the added flexibility that lattice waves need not be thermalized[@Waldecker2016]. It assumes that the energy distribution of each phonon mode admits a thermal description; that is, the energy transfer between phonons of different branches is slower than the scattering of phonons from the same branch. This assumption is a reasonable one, in the light of the results presented in @sec:graphite-pop-dynamics. Within this framework, each phonon branch $j$ can be assigned its own molar heat capacity, $C_{ph, j}$, and temperature, $T_j$:
+The non-thermal lattice model is an extension of the two-temperature model, with the added flexibility that lattice waves need not be thermalized[@Waldecker2016]. It assumes that the energy distribution of each phonon mode admits a thermal description; that is, the energy transfer between phonons of different branches is slower than the scattering of phonons from the same branch. Within this framework, each phonon branch $j$ can be assigned its own molar heat capacity, $C_{ph, j}$, and temperature, $T_j$:
 $$
 \left\{
     \begin{array}{rcl}
@@ -359,42 +361,24 @@ $$
     \end{array}
 \right\}_{j=1}^{N}
 $${#eq:graphite-nlm}
-where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The coupling constants $G_{ep, i}$ describe the coupling between the electrons and phonon mode $i$, while coupling constants $G_{pp, ij}$ encode the coupling between phonon modes $i$ and $j$. The constants $G_{i,j}$ are related to electron-phonon and phonon-phonon coupling constants. Their relationship is described further below in @sec:graphite-coupling-constants.
+where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The constants $G_{ep, i}$ describe the rate of energy flow between the electrons and phonon mode $i$, while constants $G_{pp, ij}$ encode the rate of energy flow between phonon modes $i$ and $j$. The constants $G_{i,j}$ are related to electron-phonon and phonon-phonon coupling matrix elements. Their relationship is developed further below in @sec:graphite-coupling-constants.
 
 Observations of transient phonon populations are more general than mode temperatures. However, in order to make use of the non-thermal lattice model, the mode temperature can be related to transient phonon mode populations via the Bose-Einstein distribution[@Bose1924]:
 $$
     n_j(\vec{k}, \tau) \propto \left[ \exp{\left( \frac{\hbar \omega_j(\vec{k}, \tau<0)}{k_B T_{ph, j}(\tau)} \right)} - 1\right]^{-1}
-$$
-The above expression can be decomposed with a Laurent series [@Wunsch2005] to extract the quasi-linear relationship between mode population and temperature:
+$${#eq:graphite-population-time-equiv}
+The expression for $n_j(\vec{k}, \tau)$ makes use of the approximation that phonon vibrational frequencies remain constant through the experiments ($\omega_j(\vec{k}, \tau) \approx \omega_j(\vec{k}, \tau<0) ~ \forall \tau$), as discussed in @sec:graphite-debye-waller, which is approximately true in the case of graphite away from $\vec{\Gamma}$. @eq:graphite-population-time-equiv can be decomposed with a Laurent series [@Wunsch2005] to extract the quasi-linear relationship between mode population and temperature:
 $$
     n_j(\vec{k}, \tau) \propto  \frac{k_B T_{ph, j}(\tau)}{\hbar \omega_j(\vec{k}, \tau<0)} - 1/2 + \mathcal{O}\left( T^{-1}_{ph, j}(\tau) \right)
 $${#eq:graphite-population-laurent}
-The above holds for appropriately-high mode temperatures. For the remainer of this section, it follows that $\Delta n_j \propto \Delta T_{ph,j}$, where the initial temperature is known to be \SI{300}{\kelvin}.
-
-### The non-thermal lattice model applied to UEDS
-
-Based on the formalism presented in the @sec:graphite-nlm, the couplings to the $A_1^\prime$ phonon mode will be extracted from the TO2 population measurements. 
-
-Let the differential population be $\Delta n_{j=\text{TO2}}(\vec{k} = \vec{K}, \tau) \equiv \Delta n_{A_1^\prime}(\tau)$. $\Delta n_{A_1^\prime}(\tau)$ is obtained by integrating the population of the TO2 mode in a circular arc of radius \SI{0.3}{\per\angstrom} centered at $\vec{k} = \vec{K}$, as shown in @fig:graphite-ph-populations. The heat capacities of the electronic system and every relevant phonon mode must be parametrized. 
-
-#### Heat capacities
-
-The electronic heat capacity is extracted from measurements by Nihira and Iwata [@Nihira2003]:
+The above holds for appropriately-high mode temperatures. It follows that $\Delta n_j \propto \Delta T_{ph,j}$:
 $$
-C_e(T_e) = 13.8 ~ T_e(\tau) + 1.16 \times 10^{-3} ~ T_e^2(\tau) + 2.6 \times 10^{-7}  ~ T_e^3(\tau)
+    \Delta n_j(\vec{k}, \tau) \propto \frac{k_B \Delta T_{ph, j}(\tau)}{\hbar \omega_j(\vec{k}, \tau<0)}
 $$
-Extracting the lattice specific heat is simplified by the observation that thermal expansion has not occurred on the time-scale of the measurements ($\tau < \SI{680}{\pico\second}$). Bragg peak positions remain static throughout the measurement, as was also reported by Chatelain *et al*[@Chatelain2014a]. The specific heat capacity of each mode can therefore be taken as the heat capacity at constant volume[@Ziman1979]:
-$$
-C_{ph,j}(T_{ph,j}) = 
-k_B \int_0^{\omega_D} d\omega ~ D_j(\omega) 
-    \left( 
-        \frac{\hbar \omega}{k_B T_{ph,j}} 
-    \right)^2 
-    \frac{e^{\hbar \omega / k_B T_{ph,j}}}{\left( e^{\hbar \omega / k_B T_{ph,j}} - 1\right)^2}
-$$
-where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of states for phonon mode $j$. The momentum-resolution of UEDS allows for a simplification: a single frequency contributes to the density of states, so that $D_j(\omega) \equiv \delta(\omega)$.
 
-#### Reducing complexity with momentum-resolution {#sec:graphite-reducing-complexity}
+### The non-thermal lattice model at the $\vec{K}$ point
+
+Based on the formalism presented in the @sec:graphite-nlm, the couplings to the $A_1^\prime$ phonon mode will be extracted from the TO2 population measurements. Let the differential population be $\Delta n_{j=\text{TO2}}(\vec{k} = \vec{K}, \tau) \equiv \Delta n_{A_1^\prime}(\tau)$. $\Delta n_{A_1^\prime}(\tau)$ is obtained by integrating the population of the TO2 mode in a circular arc of radius \SI{0.3}{\per\angstrom} centered at $\vec{k} = \vec{K}$, as shown in @fig:graphite-ph-populations. 
 
 The number of coupled equations in @eq:graphite-nlm can be reduced by aggregating lattice heat capacities into two categories: the heat capacity of $A_1^\prime$, $C_{A_1^\prime}$, and the total effective heat capacity of all other relevant modes, defined as $C_l$. The calculation of $C_l$ boils down to adding the contribution of mode that can scatter into $A_1^\prime$ or from it, based on conservation of energy and momentum, weighted by the decay probabilities reported by Bonini *et al* [@Bonini2007]. With this information:
 \begin{align}
@@ -419,9 +403,26 @@ $$
 \right\}
 $${#eq:graphite-nlm-system}
 
+#### Heat capacities
+
+Before @eq:graphite-nlm-system can be solved, the heat capacities of the electronic system and every relevant phonon mode must be parametrized. The electronic heat capacity is extracted from measurements by Nihira and Iwata [@Nihira2003]:
+$$
+C_e(T_e) = 13.8 ~ T_e(\tau) + 1.16 \times 10^{-3} ~ T_e^2(\tau) + 2.6 \times 10^{-7}  ~ T_e^3(\tau)
+$$
+Extracting the lattice specific heat is simplified by the observation that thermal expansion has not occurred on the time-scale of the measurements ($\tau < \SI{680}{\pico\second}$). Bragg peak positions remain static throughout the measurement, as was also reported by Chatelain *et al*[@Chatelain2014a]. The specific heat capacity of each mode can therefore be taken as the heat capacity at constant volume[@Ziman1979]:
+$$
+C_{ph,j}(T_{ph,j}) = 
+k_B \int_0^{\omega_D} d\omega ~ D_j(\omega) 
+    \left( 
+        \frac{\hbar \omega}{k_B T_{ph,j}} 
+    \right)^2 
+    \frac{e^{\hbar \omega / k_B T_{ph,j}}}{\left( e^{\hbar \omega / k_B T_{ph,j}} - 1\right)^2}
+$$
+where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of states for phonon mode $j$. The momentum-resolution of UEDS allows for a simplification: a single frequency contributes to the density of states, so that $D_j(\omega) \equiv \delta(\omega)$.
+
 ### Heat rates {#sec:graphite-eph-solution}
 
-The solution to @eq:graphite-nlm-system was computed using an iterative least-squares method[@Branch1999]. The resulting temperature traces $\left\{ T_e(\tau), T_{A_1^\prime}(\tau), T_{l}(\tau)\right\}$ are shown in [@fig:graphite-eph-coupling]. The coupling constants $\left\{ G_{e,l}, G_{e,A_1^\prime}, G_{A_1^\prime, l}\right\}$ are listed in @tbl:graphite-eph-coupling
+The solution to @eq:graphite-nlm-system using the measurements of the $A_1^\prime$ population was computed using an iterative least-squares method[@Branch1999]. The resulting temperature traces $\left\{ T_e(\tau), T_{A_1^\prime}(\tau), T_{l}(\tau)\right\}$ are shown in [@fig:graphite-eph-coupling]. The coupling constants $\left\{ G_{e,l}, G_{e,A_1^\prime}, G_{A_1^\prime, l}\right\}$ are listed in @tbl:graphite-eph-coupling
 
 ```{.matplotlib #fig:graphite-eph-coupling file="figures/graphite/eph-coupling.py" caption="Evolution of the $A_1^\prime$ mode population in graphite after ultrafast photoexcitation. Transient population $\Delta n_{A_1^\prime}(\tau)$ is shown in black (circles). Error bars represent the standard error in the population mean before photoexcitation $\tau < 0$. The biexponential fit to the transient population is shown in pink (solid). The effective temperature of the modes that $A_1^\prime$ can decay into is shown in orange (dotted). **Inset** Temperature dynamics at early times ($\tau < \SI{1}{\pico\second}$) show the thermalization between the electronic system (purple, dashed) and the $A_1^\prime$ mode is very fast, indicative of strong electron-phonon coupling. The traces from the main figure are shown in the inset as well."}
 ```
@@ -441,24 +442,28 @@ The solution to @eq:graphite-nlm-system was computed using an iterative least-sq
 
 ### Mode-projected electron-phonon coupling matrix elements {#sec:graphite-coupling-constants}
 
-In order to compare to theory and other experiments, the value of electron-phonon coupling matrix-element $g^2_{e, A_1^\prime}$ is calculated from the coupling constants determined from solving @eq:graphite-nlm-system.
+In order to compare to theory and other experiments, the value of electron-phonon coupling matrix-element $\langle g^2_{e, A_1^\prime} \rangle$ is calculated from the coupling constants determined from solving @eq:graphite-nlm-system.
 
-In general, the electron-phonon matrix element $g^2_{e,j}(\vec{k})$ between the electronic system and phonon mode $j$ at wavevector $\vec{k}$ is most simply related to the relaxation time $\tau_{e,j}(\vec{k})$ between the two subsystems[@Na2019]:
+In general, the electron-phonon matrix element $\langle g^2_{e,j}(\vec{k}) \rangle$ between the electronic system and phonon mode $j$ at wavevector $\vec{k}$ is most simply related to the relaxation time $\tau_{e,j}(\vec{k})$ between the two subsystems[@Na2019]:
 $$
 \frac{\hbar}{\tau_{e,j}(\vec{k})} = 2 \pi \langle g^2_{e,j}(\vec{k}) \rangle D_e(\hbar \omega_{\nu} - \hbar \omega_{j}(\vec{k}))
 $$
-where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\nu}$ is the optical excitation energy (\SI{1.55}{\electronvolt} in the case of \SI{800}{\nano\meter} light), and $\omega_j(\vec{k})$ is the vibrational frequency of phonon mode $j$ at wavevector $\vec{k}$, as defined previously. Given the nature of the experiments presented here, an approximation to the electronic density of states for graphene close to the Dirac point can be used[@Neto2009]:
+where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\nu}$ is the optical excitation energy (\SI{1.55}{\electronvolt} in the case of \SI{800}{\nano\meter} light), and $\omega_j(\vec{k})$ is the vibrational frequency of phonon mode $j$ at wavevector $\vec{k}$, as defined previously. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Neto2009]:
 $$
     D_e(\epsilon) = \frac{2 A}{\pi} \frac{|\epsilon|}{(\hbar v_{F})^2}
 $$
 where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^1]. It follows that the determination of the mode-dependent electron-phonon coupling matrix element $g^2_{e,j}(\vec{k})$ relies on the calculation of the mode-dependent relaxation time $\tau_{e,j}(\vec{k})$ based on UEDS measurements. 
 
-The calculation for the electron-$A_1^\prime$ coupling matrix element $g^2_{e,A_1^\prime} \equiv g^2_{e,j=\text{TO2}}(\vec{k} \approx \vec{K})$ is demonstrated below. Consider the following sum of @eq:graphite-nlm-system:
+The calculation for the electron-$A_1^\prime$ coupling matrix element $\langle g^2_{e,A_1^\prime} \rangle \equiv \langle g^2_{e,j=\text{TO2}}(\vec{k} \approx \vec{K}) \rangle$ is demonstrated below. Consider the following sum of terms from @eq:graphite-nlm:
+$$
+     C_e(T_e) \frac{\partial T_e}{\partial \tau} - \sum_j C_{ph,j}(T_{ph,j}) \frac{\partial T_{ph,j}}{\partial \tau} \nonumber
+$$
+which simplifies to:
 \begin{align}
     & \frac{\partial T_e}{\partial \tau} - \sum_j \frac{\partial T_{ph,j}}{\partial \tau} = \label{eq:graphite-tau-1} \\
     & \sum_j \Bigg[ \frac{G_{ep,j}}{C_e} ~ (T_e - T_{ph,j}) \nonumber  -\sum_i \bigg( \frac{G_{ep,i}}{C_{ph,j}} ~ (T_e - T_{ph,i}) + \frac{G_{pp,ij}}{C_{ph,j}} ~ (T_{ph,i} - T_{ph,j}) \bigg) \Bigg] \nonumber
 \end{align}
-At early times ($< \SI{5}{\pico\second}$), the $A_1^\prime$-phonon coupling $G_{A_1^\prime, l}$ is negligible compared to other coupling constants (@tbl:graphite-eph-coupling). Then, @eq:graphite-tau-1 can be simplified to:
+At early times ($< \SI{5}{\pico\second}$), the $A_1^\prime$-phonon rate of energy flow $G_{A_1^\prime, l}$ is negligible compared to other coupling constants (@tbl:graphite-eph-coupling). Then, @eq:graphite-tau-1 can be simplified to:
 $$
 	\frac{\partial T_e}{\partial \tau} - \sum_j \frac{\partial T_{ph,j}}{\partial \tau} = \sum_j \frac{G_{ep,j}}{C_e} (T_e - T_{ph,j}) - \sum_{i,j} \frac{G_{ep,i}}{C_{ph,j}}(T_e - T_{ph,i})
 $${#eq:graphite-tau-2}
@@ -468,9 +473,9 @@ $$
 $${#eq:graphite-tau-3}
 where
 $$
-    a(\tau) = \sum_j \left( \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}\right).
+    a(\tau) = \sum_j \left( \frac{G_{ep,j}}{C_e(T_e(\tau))} - \sum_i \frac{G_{ep,i}}{C_{ph,j}(T_{ph, j}(\tau))}\right).
 $$
-The time dependence comes from the time-evolution of the individual temperatures. In the case of phonon temperatures, the phonon population dynamics are directly related to temperature dynamics according to @eq:graphite-population-laurent. @eq:graphite-tau-3 is a separable equation with solution:
+@eq:graphite-tau-3 is a separable equation with solution:
 $$
 \lambda(\tau) = \exp{\int d\tau \left[ a(\tau) \right]}.
 $$
@@ -479,7 +484,7 @@ $$
 \frac{1}{\bar{\tau}} \approx \sum_j \left( \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}\right).
 \label{eq:graphite-tau-4}
 $$
-As a specific example, the above expression reduces nicely in the case of the two-temperature model, where all phonon modes are considered to be thermalized with each other, with isochoric heat capacity $C_{ph}$:
+As an aside, the above expression reduces nicely in the case of the two-temperature model, where all phonon modes are considered to be thermalized with each other, with isochoric heat capacity $C_{ph}$:
 $$
 \frac{1}{\bar{\tau}} = G_{ep} \left( \frac{1}{C_e} - \frac{1}{C_{ph}}\right)
 $$
@@ -487,8 +492,7 @@ and we see that $\bar{\tau}$ physically represents the relaxation time of the el
 $$
 \frac{1}{\tau_{e,j}} = \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}.
 $$
-
-Using the coupling constants and heat capacities from sec:graphite-eph-solution and @sec:graphite-reducing-complexity respectively, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$ and $\langle g^2_{e, A_1^\prime} \rangle = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
+Using the coupling constants and heat capacities from sec:graphite-eph-solution, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$ and $\langle g^2_{e, A_1^\prime} \rangle = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
 
 \begin{table}
 	\centering
