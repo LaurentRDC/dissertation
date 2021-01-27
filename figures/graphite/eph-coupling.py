@@ -12,14 +12,11 @@ from scipy import integrate
 from scipy.constants import physical_constants
 from scipy.optimize import curve_fit
 from scipy.stats import sem
-from skued import gaussian
+from skued import gaussian, with_irf
 
 filterwarnings(action="ignore", category=UserWarning)
 
 INPUT = Path("data") / "graphite"
-
-cmap = plt.get_cmap("plasma")
-COLORS = (cmap(0.0), cmap(0.5), cmap(0.8))
 
 graphite = Crystal.from_database("C")
 
@@ -204,6 +201,7 @@ def system_evolution(T, time, profile, g_ek, g_kl, g_el):
     )
 
 
+with_irf(0.35)
 def fit_function(times, amp, g_ek, g_kl, g_el):
     """
     Time-trace representing the dynamics of the K-TO mode population.
@@ -351,7 +349,7 @@ best_params, covariance = curve_fit(
 fit_amp, fit_ek_coupling, fit_kl_coupling, fit_el_coupling = best_params
 _, err_ek_coupling, err_kl_coupling, err_el_coupling = np.sqrt(np.diag(covariance))
 
-# Additional factor of 1e12 is to convert to W (J/s) from (J/ps)
+# # Additional factor of 1e12 is to convert to W (J/s) from (J/ps)
 # print(
 #     "Electron-K coupling: ",
 #     "({:.8e} ± {:.2e})".format(
@@ -395,29 +393,22 @@ electronic_temperature, k_to_temperature, k_to_drain_temperature = (
 )
 
 intensity_to_temperature = lambda a: 300 + a / fit_amp
+temperature_to_intensity = lambda a: fit_amp * (a - 300)
 
 # Create the figure
 # We report times in picoseconds
 # Colors are in cycle order (C0, C1, C2, ...)
-fig, ax_K = plt.subplots(1, 1, figsize=(5, 4))
+fig, ax_K = plt.subplots(1, 1, figsize=(4, 3))
 ax_T = ax_K.twinx()
 
-ax_K.plot(simulation_times, best_curve, linestyle="solid", color=COLORS[1])
-ax_T.plot(
-    simulation_times,
-    intensity_to_temperature(best_curve),
-    linestyle="solid",
-    color=COLORS[1],
-)
+ax_K.plot(simulation_times, best_curve, linestyle="solid", color="blue", label='$A_1^{\prime}$ phonon')
 
 ax_K.plot(
     simulation_times,
-    intensity_to_temperature(k_to_drain_temperature),
-    linestyle="solid",
-    color=COLORS[2],
-)
-ax_T.plot(
-    simulation_times, k_to_drain_temperature, linestyle=(0, (1, 1)), color=COLORS[2]
+    temperature_to_intensity(k_to_drain_temperature),
+    linestyle=(0, (1, 1)),
+    color="orange",
+    label="Lattice drain",
 )
 
 # Plot data last so it appears on top of the fit lines
@@ -433,43 +424,14 @@ ax_K.errorbar(
 
 ax_K.set_xlim([simulation_times.min(), simulation_times.max()])
 
-ax_K.set_ylim([-0.25, 1.20])
+ax_K.set_ylim([-0.25, 1.1])
 ax_T.set_ylim(intensity_to_temperature(np.array(ax_K.get_ylim())))
 
 ax_K.axvline(x=0, linestyle="--", linewidth=1, color="k")
-ax_K.set_ylabel("Change in population $\Delta n_{A_1'}(\tau)$ [a.u.]")
-ax_T.set_ylabel("Temperature [K]")
+ax_K.set_ylabel(r"$\Delta n_{A_1'}(\tau)$ [a.u.]")
+ax_T.set_ylabel(r"Temperature [K]")
 
 ax_K.set_xlabel("Delay time [ps]")
 
-# Temperatures
-# Plots for the inset have femtosecond times
-ax_E = inset_axes(ax_K, width="40%", height="35%", loc="upper right", borderpad=0.3)
-(e,) = ax_E.plot(
-    simulation_times * 1e3,  # femtoseconds
-    electronic_temperature,
-    color=COLORS[0],
-    linestyle="dashed",
-    label="Electronic system",
-)
-(k,) = ax_E.plot(
-    simulation_times * 1e3,
-    k_to_temperature,
-    color=COLORS[1],
-    linestyle="solid",
-    label="$A_1'$ phonon",
-)
-(l,) = ax_E.plot(
-    simulation_times * 1e3,
-    k_to_drain_temperature,
-    linestyle=(0, (1, 1)),
-    color=COLORS[2],
-    label="Lattice system",
-)
-
-ax_E.set_xlim([-0.25e3, 1.25e3])
-ax_E.set_ylabel("Temperature [K]")
-ax_E.set_xlabel("Delay time [fs]")
-
-ax_K.legend(handles=[e, k, l], loc="lower right")
+ax_K.legend(loc="upper right")
 plt.tight_layout()
