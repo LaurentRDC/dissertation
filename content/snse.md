@@ -3,7 +3,12 @@
 
 ## High-performance thermoelectric materials
 
-## Lattice instability in tin selenide
+## Tin selenide
+
+```{.matplotlib file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
+```
+
+### Lattice instability
 
 ## Experimental methods
 
