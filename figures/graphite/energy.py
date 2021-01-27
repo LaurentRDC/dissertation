@@ -59,7 +59,7 @@ with PopulationDatabase(INPUT / "population_timeseries.hdf5", mode="r") as dbase
     mode_energy["total"] = total_energy
 
     for mode, marker, color in zip(
-        ["TA", "TO2", "total"], ["^", "o", "s"], ["orange", "blue", "red"]
+        ["TA", "TO2", "total"], ["^", "o", "s"], ["goldenrod", "blue", "red"]
     ):
         y = mode_energy[mode] / mode_energy[mode].max()
         fit_params, _ = curve_fit(

@@ -98,7 +98,7 @@ ax.annotate(
     color="k",
 )
 
-color_T = "orange"
+color_T = "goldenrod"
 R90deg = np.array([[0, -1], [1, 0]])
 for n in range(0, 4):
     point_ = reduce(lambda m1, m2: m1 @ m2, n * [R90deg], R90deg) @ T

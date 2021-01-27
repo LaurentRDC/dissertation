@@ -415,7 +415,7 @@ ax_K.plot(
     simulation_times,
     temperature_to_intensity(k_to_drain_temperature),
     linestyle=(0, (1, 1)),
-    color="orange",
+    color="goldenrod",
     label="Lattice drain",
 )
 
