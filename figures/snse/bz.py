@@ -63,7 +63,7 @@ offset = np.array([0.06, 0.06])
 for point, label, sym_color in zip(
     [Y, Z],
     [r"$\mathbf{Y}$", r"$\mathbf{Z}$"],
-    ["royalblue", "firebrick"],
+    ["blue", "red"],
 ):
     for n in range(0, 2):
         point_ = reduce(lambda m1, m2: m1 @ m2, n * [-np.eye(2)], -np.eye(2)) @ point

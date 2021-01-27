@@ -60,7 +60,7 @@ offset = np.array([-0.06, 0.06])
 for point, label, sym_color in zip(
     [GAMMA, M, K],
     [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"],
-    ["k", "firebrick", "royalblue"],
+    ["k", "goldenrod", "blue"],
 ):
     for n in range(0, 6):
         point_ = reduce(lambda m1, m2: m1 @ m2, n * [R60deg], R60deg) @ point
