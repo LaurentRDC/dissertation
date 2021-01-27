@@ -325,7 +325,7 @@ The energy flow that follows photoexcitation described in this section is exactl
 
 ### Long-term decay
 
-```{.matplotlib #fig:graphite-long-term file="figures/graphite/energy.py" caption="Energy stored in-plane after photoexcitation. **inset** long-term trend shows that thermalization has not yet occurred by \SI{600}{\pico\second}."}
+```{.matplotlib #fig:graphite-long-term file="figures/graphite/energy.py" caption="Energy stored in-plane after photoexcitation. **Inset** long-term trend shows that thermalization has not yet occurred by \SI{600}{\pico\second}."}
 ```
 
 It is possible to quantify how long does the non-equilibrium distribution of lattice waves last in graphite. The energy transferred to the sample from photoexcitation, stored in plane in a mode $j$, can be expressed as follows:
@@ -338,7 +338,7 @@ The energy trends for modes TA and TO2 are commensurate with the description of 
 
 ## Mode-projected electron-phonon and phonon-phonon coupling
 
-TODO: make the distinction between G (heat rate?) and g (matrix element) clear
+TODO: better introduction with explanation of coupling matrix elements.
 
 Electron-phonon and phonon-phonon coupling describe the strength of the coupling between excitations in a material. A coupling constant $G_{i,j}$ describes the rate of energy transfer from excitation type $i$ to excitation type $j$, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. E-ph and ph-ph coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent e-ph and ph-ph coupling terms.
 
