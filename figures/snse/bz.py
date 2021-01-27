@@ -77,7 +77,7 @@ for point, label, sym_color in zip(
             )
         )
 
-    point = point * np.array([width/2, height/2])
+    point = point * np.array([width / 2, height / 2])
     ax.annotate(
         xy=point,
         ha="left",
@@ -117,6 +117,6 @@ ax.annotate(
     ha="left",
     va="bottom",
     text=r"$\mathbf{T}$",
-    xytext=np.array(T) * np.array([width/2, height/2]) + offset,
+    xytext=np.array(T) * np.array([width / 2, height / 2]) + offset,
     color=color_T,
 )

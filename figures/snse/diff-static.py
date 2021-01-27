@@ -20,9 +20,7 @@ with DiffractionDataset(INPUT / "overnight4.hdf5") as source:
     im_umt = source.diff_eq()
 
 fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 2))
-grid = ImageGrid(
-    fig, 111, nrows_ncols=(1, 2), cbar_location="top", aspect=False, share_all=False
-)
+grid = ImageGrid(fig, 111, nrows_ncols=(1, 2), cbar_location="top")
 
 # Determine the smallest image center - side distance
 # This way, we ensure that both diffraction patterns will appear to be
