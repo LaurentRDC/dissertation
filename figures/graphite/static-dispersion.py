@@ -16,9 +16,17 @@ fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 3))
 ax_thz = ax.twinx()
 
 for mode in modes:
-    f = np.load(Path("data") / "graphite" / "static-dispersion" / f"{mode}.npy")
-    ax.scatter(x=range(np.size(f)), y=f * HZ_TO_EV * 1000, s=2)  # meV
-    ax_thz.scatter(x=range(np.size(f)), y=f * 1e-12, s=0)  # THz,
+    f = np.load(Path("data") / "graphite" / "static-dispersion" / f"{mode}.npy")[::4]
+    # Artifact near K
+    k_index = 2 * np.size(f) // 3
+    near_k = slice(k_index - 7, k_index + 7)
+    f[near_k] = np.clip(
+        f[near_k],
+        a_min=f[near_k][np.nonzero(f[near_k])].min(),
+        a_max=np.inf,
+    )
+    ax.plot(range(np.size(f)), f * HZ_TO_EV * 1000)  # meV
+    ax_thz.plot(range(np.size(f)), f * 1e-12)  # THz,
 
 labels = [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$", r"$\mathbf{\Gamma}$"]
 nsteps = np.size(f) / 3
@@ -28,7 +36,6 @@ for i in range(1, len(labels)):
 ax.axhline(y=25, color="k", linestyle="--", linewidth=1)  # room temperature
 
 # Draw BZ
-# draw_hexagon(ax, center=(0,0), radius=100, color='k', transform=ax.transAxes)
 hex_radius = 0.4
 w, h = fig.get_size_inches()
 path_ax = fig.add_axes([0.45, 0.10, 0.15, (w / h) * 0.15])
@@ -76,3 +83,4 @@ ax.set_ylim([0, 210])
 
 ax_thz.set_ylabel("Frequency [THz]")
 ax_thz.yaxis.set_label_position("right")
+ax_thz.set_ylim(list(map(lambda i: i * 1e-12 / HZ_TO_EV / 1000, ax.get_ylim())))

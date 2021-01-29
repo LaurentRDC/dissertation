@@ -29,11 +29,12 @@ LABELS = [
     r"$\mathbf{M}$",
     r"$\mathbf{\Gamma}_{(\bar{1}10)}$",
 ]
-NSTEPS = 1000
+DOWNSAMPLING = 4
+NSTEPS = 1000 // DOWNSAMPLING
 
 for mode in ["LA", "TA"]:
-    frequencies = np.load(INPUT / f"{mode}_frequencies.npy")
-    weights = np.load(INPUT / f"{mode}_oneph.npy")
+    frequencies = np.load(INPUT / f"{mode}_frequencies.npy")[::DOWNSAMPLING]
+    weights = np.load(INPUT / f"{mode}_oneph.npy")[::DOWNSAMPLING]
 
     am = ax.scatter(
         x=range(np.size(frequencies)),
@@ -45,8 +46,8 @@ for mode in ["LA", "TA"]:
 
 
 for mode in ["LO2", "TO2"]:
-    frequencies = np.load(INPUT / f"{mode}_frequencies.npy")
-    weights = np.load(INPUT / f"{mode}_oneph.npy")
+    frequencies = np.load(INPUT / f"{mode}_frequencies.npy")[::DOWNSAMPLING]
+    weights = np.load(INPUT / f"{mode}_oneph.npy")[::DOWNSAMPLING]
 
     om = ax.scatter(
         x=range(np.size(frequencies)),
