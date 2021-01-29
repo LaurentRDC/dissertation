@@ -21,25 +21,25 @@ from skimage.filters import gaussian
 from skued import detector_scattvectors, nfold, autocenter
 
 DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
-
+DOWNSAMPLING = 4
 
 with DiffractionDataset(DATASET, mode="r") as source:
-    b4t0 = source.diff_eq()
-    mask = source.valid_mask
+    b4t0 = source.diff_eq()[::DOWNSAMPLING, ::DOWNSAMPLING]
+    mask = source.valid_mask[::DOWNSAMPLING, ::DOWNSAMPLING]
 
 r, c = autocenter(im=b4t0, mask=mask).astype(np.int)
 
 qx, qy, _ = detector_scattvectors(
     keV=90,
     camera_length=GRAPHITE_CAMERA_LENGTH,
-    shape=(2048, 2048),
-    pixel_size=14e-6,
+    shape=b4t0.shape,
+    pixel_size=DOWNSAMPLING * 14e-6,
     center=(r, c),
 )
 
 
 # Determine the smallest center -> side distance, and crop around that
-side_length = floor(min([c, abs(c - 2048), r, abs(r - 2048)]))
+side_length = floor(min([c, abs(c - b4t0.shape[1]), r, abs(r - b4t0.shape[0])]))
 xs = slice(r - side_length, r + side_length)
 ys = slice(c - side_length, c + side_length)
 
@@ -54,13 +54,13 @@ with DiffractionDataset(DATASET) as dset:
     for time, ax, letter in zip([0.5, 1.5, 5, 100], grid, "abcd"):
 
         image = nfold(
-            dset.diff_data(time) - b4t0,
+            dset.diff_data(time)[::DOWNSAMPLING, ::DOWNSAMPLING] - b4t0,
             mod=6,
             center=(c, r),
             mask=mask,
             fill_value=np.nan,
         )
-        gaussian(image, sigma=4, output=image)
+        gaussian(image, sigma=4 / DOWNSAMPLING, output=image)
         image[:] = rotate(image, angle=GRAPHITE_ANGLE, center=(c, r), mode="reflect")
         image = image[xs, ys]
         image[qq < 1.5] = 0
@@ -85,7 +85,7 @@ with DiffractionDataset(DATASET) as dset:
             radius=1.7,
             crystal=Crystal.from_pwscf(Path("data") / "graphite" / "output.out"),
             reflections=it.product(
-                [-4, -3, -2, -1, 0], [-4, -3, -2, -1, 0, 1, 2, 3], [0]
+                [-5, -4, -3, -2, -1, 0], [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], [0]
             ),
             color="k",
             alpha=0.5,

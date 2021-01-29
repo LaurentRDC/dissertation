@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
-import itertools as it
-import sys
 from pathlib import Path
 
 import matplotlib.colors as cm
 import matplotlib.pyplot as plt
-import npstreams as ns
 import numpy as np
-import scipy.interpolate as interpolate
 from crystals import Crystal
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from mpl_toolkits.axes_grid1 import inset_locator, make_axes_locatable
-from skimage.filters import gaussian
 
 from plotutils import (
     FIGURE_WIDTH,
@@ -38,12 +32,15 @@ MODES = sorted(MODE_ORDERING.keys())
 IN_PLANE_MODES = sorted(set(MODE_ORDERING.keys()) - {"ZA", "ZO1", "ZO2", "ZO3"})
 
 INPUT = Path("data") / "graphite"
+DOWNSAMPLING = 4
 
 
 def oneph_weighted(mode):
     """ |F_{1j}|^2 / \omega_{j, k} """
-    F1j = np.load(INPUT / "oneph" / f"{mode}_oneph.npy")
-    omega = np.load(INPUT / "oneph" / f"{mode}_freq.npy")
+    F1j = np.load(INPUT / "oneph" / f"{mode}_oneph.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
+    omega = np.load(INPUT / "oneph" / f"{mode}_freq.npy")[
+        ::DOWNSAMPLING, ::DOWNSAMPLING
+    ]
     return F1j / omega
 
 
@@ -132,15 +129,6 @@ ax75 = grid[1]
 majority, labels = threshold_oneph(threshold=0.5)
 above_75, _ = threshold_oneph(threshold=0.75)
 
-# print(
-#     "Area with no majority: ",
-#     100 * np.sum(np.less(majority, 1)) / np.size(majority),
-# )
-# print(
-#     "Area with no 75% majority: ",
-#     100 * np.sum(np.less(above_75, 1)) / np.size(above_75),
-# )
-
 bounds = np.arange(0, stop=len(labels) + 1)
 
 # Base color for no majority should be white
@@ -152,7 +140,8 @@ assert len(cmaplist) >= len(labels)
 cmap = cm.ListedColormap(name="Modes", colors=cmaplist)
 norm = cm.BoundaryNorm(bounds, cmap.N)
 
-qx, qy = np.load(INPUT / "oneph" / "qx.npy"), np.load(INPUT / "oneph" / "qy.npy")
+qx = np.load(INPUT / "oneph" / "qx.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
+qy = np.load(INPUT / "oneph" / "qy.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
 m = ax.imshow(
     majority, cmap=cmap, norm=norm, extent=[qx.min(), qx.max(), qy.min(), qy.max()]
 )

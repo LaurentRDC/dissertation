@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1.colorbar import colorbar
 from matplotlib.ticker import FixedLocator, FixedFormatter, PercentFormatter
 from pathlib import Path
 import numpy as np
@@ -14,6 +13,7 @@ from plotutils import (
 )
 
 INPUT = Path("data") / "graphite"
+DOWNSAMPLING = 4
 
 fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 1.8))
 (ax_rmt, ax_cmp) = ImageGrid(
@@ -24,10 +24,12 @@ for ax in (ax_rmt, ax_cmp):
     ax.xaxis.set_visible(False)
     ax.yaxis.set_visible(False)
 
-qx = np.load(INPUT / "debye-waller" / "qx.npy")
-qy = np.load(INPUT / "debye-waller" / "qy.npy")
-hot_dw = np.load(INPUT / "debye-waller" / "hot_dw.npy")
-room_temp_dw = np.load(INPUT / "debye-waller" / "room_temp_dw.npy")
+qx = np.load(INPUT / "debye-waller" / "qx.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
+qy = np.load(INPUT / "debye-waller" / "qy.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
+hot_dw = np.load(INPUT / "debye-waller" / "hot_dw.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
+room_temp_dw = np.load(INPUT / "debye-waller" / "room_temp_dw.npy")[
+    ::DOWNSAMPLING, ::DOWNSAMPLING
+]
 
 m_rmt = ax_rmt.imshow(
     np.nan_to_num(room_temp_dw / room_temp_dw.max()),

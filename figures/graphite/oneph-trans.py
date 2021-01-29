@@ -13,6 +13,7 @@ from plotutils import (
 )
 
 INPUT = Path("data") / "graphite"
+DOWNSAMPLING = 4
 
 # Mode ordering of graphite according to the file
 # Gra-C_XDM_mode_grid_new2.json
@@ -47,15 +48,17 @@ grid = ImageGrid(
     cbar_location="top",
 )
 
-qx = np.load(INPUT / "oneph" / "qx.npy")
-qy = np.load(INPUT / "oneph" / "qy.npy")
+qx = np.load(INPUT / "oneph" / "qx.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
+qy = np.load(INPUT / "oneph" / "qy.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
 bragg_peaks = np.load(INPUT / "oneph" / "bragg_peaks.npy")
 cryst = Crystal.from_pwscf(INPUT / "output.out")
 
 # Only Longitudinal modes here
 modes = filter(lambda s: s.startswith("T"), IN_PLANE_MODES)
 for mode, ax in zip(modes, grid):
-    image = np.load(INPUT / "oneph" / f"{mode}_oneph.npy")
+    image = np.load(INPUT / "oneph" / f"{mode}_oneph.npy")[
+        ::DOWNSAMPLING, ::DOWNSAMPLING
+    ]
 
     # Image is scaled so maximum is always 1
     m = ax.imshow(
