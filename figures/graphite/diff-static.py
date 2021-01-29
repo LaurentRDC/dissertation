@@ -20,21 +20,24 @@ from plotutils import (
 from skimage.transform import rotate
 from skued import detector_scattvectors, nfold, autocenter
 
+DOWNSAMPLING = 4
+
 with DiffractionDataset(
     Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
 ) as source:
-    mask = source.valid_mask
-    b4t0 = source.diff_data(source.time_points[0])
+    mask = source.valid_mask[::DOWNSAMPLING, ::DOWNSAMPLING]
+    b4t0 = source.diff_data(source.time_points[0])[::DOWNSAMPLING, ::DOWNSAMPLING]
+
 
 r, c = autocenter(im=b4t0, mask=mask).astype(np.int)
 
-xx, yy = np.meshgrid(np.arange(0, 2048), np.arange(0, 2048))
+xx, yy = np.meshgrid(np.arange(0, b4t0.shape[1]), np.arange(0, b4t0.shape[0]))
 rr = np.sqrt(np.square(xx - c) + np.square(yy - r))
 
 
 b4t0_symmetrized = np.array(b4t0, copy=True)
 b4t0_symmetrized = nfold(b4t0, mod=6, center=(c, r), mask=mask)
-b4t0_symmetrized[rr < 125] = 0
+b4t0_symmetrized[rr < 125 / DOWNSAMPLING] = 0
 
 b4t0[:] = rotate(b4t0, angle=GRAPHITE_ANGLE, center=(c, r), mode="reflect")
 b4t0_symmetrized[:] = rotate(
@@ -44,13 +47,13 @@ b4t0_symmetrized[:] = rotate(
 qx, qy, _ = detector_scattvectors(
     keV=90,
     camera_length=GRAPHITE_CAMERA_LENGTH,
-    shape=(2048, 2048),
-    pixel_size=14e-6,
+    shape=b4t0.shape,
+    pixel_size=DOWNSAMPLING * 14e-6,
     center=(r, c),
 )
 
 # Determine the smallest center -> side distance, and crop around that
-side_length = floor(min([c, abs(c - 2048), r, abs(r - 2048)]))
+side_length = floor(min([c, abs(c - b4t0.shape[1]), r, abs(r - b4t0.shape[0])]))
 xs, ys = (
     slice(r - side_length, r + side_length),
     slice(c - side_length, c + side_length),
@@ -86,7 +89,7 @@ draw_hexagon_field(
 # Beam block patch
 # assuming that the image is centered
 dk = abs(qx[1, 1] - qx[0, 0])
-width = dk * 250
+width = dk * 250 / DOWNSAMPLING
 height = 1.5 * dk * b4t0.shape[0] / 2
 x, y = -width / 2, -1.2
 
@@ -97,7 +100,7 @@ beamblock_patch = mpatches.Rectangle(
     edgecolor="k",
     facecolor="w",
 )
-move_in = 6 * dk  # needs to be pixel-perfect. Adjusted for 600 DPI
+move_in = 1 * dk  # needs to be pixel-perfect. Adjusted for 600 DPI
 crossover_patch = mpatches.Rectangle(
     xy=(x + move_in, y + move_in),
     width=width - 2 * move_in,
