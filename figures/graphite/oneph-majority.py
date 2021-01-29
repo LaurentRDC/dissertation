@@ -146,7 +146,7 @@ bounds = np.arange(0, stop=len(labels) + 1)
 # Base color for no majority should be white
 # Also, cmaplist[1] and cmaplist[2] are very similar
 # so we swap the unused cmaplist[0]
-cmaplist = ["w", "orangered", "mediumblue", "goldenrod"]
+cmaplist = ["w", "red", "blue", "goldenrod"]
 assert len(cmaplist) >= len(labels)
 
 cmap = cm.ListedColormap(name="Modes", colors=cmaplist)

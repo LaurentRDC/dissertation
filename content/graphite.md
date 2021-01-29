@@ -126,7 +126,7 @@ The UEDS experiments presented in this chapter made use of the experimental setu
 
 The interrogated film were pumped with a pump spot of 1 × 1 \si{\square\milli\meter} full-width at half-maximum (FWHM), ensuring nearly uniform illumination of the probed volume. The film was pumped at a fluence of \SI{12}{\milli\joule\per\square\centi\meter}, resulting in an absorbed energy density of \SI{8}{\joule\per\cubic\meter}. The scattering patterns are collected with a Gatan Ultrascan 895 camera: a 2.54 × 2.54 \si{\square\cm} phosphor screen fiber coupled to a 2048 px × 2048 px charge-coupled detector (CCD) placed \SI{25}{\centi\meter} away from the sample. Per-pixel scattering intensity fluctuations over laboratory time reveals a transient dynamic range of 1 : 10^8^, allowing the acquisition of diffraction patterns and diffuse scattering patterns simultaneously. A static diffraction pattern is shown in @fig:graphite-static a).
 
-Due to the flatness of the Ewald sphere for \SI{90}{\kilo\electronvolt} electrons, many symmetry-related reflections are visible within each pattern. The information contained in a set of symmetry-equivalent reflections is redundant due to the point-group symmetry of the scattering crystal. As long as the point-group symmetry is not broken by photoexcitation, it is possible to harness the redundancy to enhance the signal-to-noise ratio of a UEDS dataset. In the case of graphite, no observable symmetry-breaking phenomena is brought on by photoexcitation at \SI{1.55}{\electronvolt} when looking at the raw data. Moreover, trARPES experiments [@Stange2015] do not show the opening of a gap in the electronic band structure, albeit at much lower photoexcitation densities, which would be indicative of point-group symmetry breaking. The point-group of graphite is $6/mmm$, which encompasses 6-fold discrete rotational symmetry in the $\vec{a} \times \vec{b}$ plane. Therefore, specifically in the case of graphite oriented in the $\left[ 001 \right]$ direction, we can safely enhance the diffuse signals by a factor of $\sqrt{6}$ by the use of a six-fold discrete azimuthal average:
+Due to the flatness of the Ewald sphere for \SI{90}{\kilo\electronvolt} electrons, many symmetry-related reflections are visible within each pattern. The information contained in a set of symmetry-equivalent reflections is redundant due to the point-group symmetry of the scattering crystal. As long as the point-group symmetry is not broken by photoexcitation, it is possible to harness the redundancy to enhance the signal-to-noise ratio of a UEDS dataset. In the case of graphite, no observable symmetry-breaking phenomena is brought on by photoexcitation at \SI{1.55}{\electronvolt} when looking at the raw data. Moreover, trARPES experiments [@Stange2015] do not show the opening of a gap in the electronic band structure, albeit at much lower photoexcitation densities, which would be indicative of point-group symmetry breaking. The point-group of graphite is $6/mmm$, which encompasses 6-fold discrete rotational symmetry in the $\vec{a} \times \vec{b}$ plane. Therefore, specifically in the case of graphite oriented in the $\left[ 001 \right]$ direction, the diffuse signals can be safely enhanced by a factor of $\sqrt{6}$ by the use of a six-fold discrete azimuthal average:
 $$
     I(\vec{q}, \tau) \to \frac{1}{6} \sum_{n=1}^6 I( \vec{R}(\tfrac{\pi n}{3}) \cdot \vec{q}, \tau)
 $$
@@ -488,11 +488,11 @@ As an aside, the above expression reduces nicely in the case of the two-temperat
 $$
 \frac{1}{\bar{\tau}} = G_{ep} \left( \frac{1}{C_e} - \frac{1}{C_{ph}}\right)
 $$
-and we see that $\bar{\tau}$ physically represents the relaxation time of the electronic system into the lattice. @eq:graphite-tau-4 can be thought of as a sum of relaxation times between the electronic subsystem and specific modes $\tau_{e,j}$:
+and it is apparent that $\bar{\tau}$ physically represents the relaxation time of the electronic system into the lattice. @eq:graphite-tau-4 can be thought of as a sum of relaxation times between the electronic subsystem and specific modes $\tau_{e,j}$:
 $$
 \frac{1}{\tau_{e,j}} = \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}.
 $$
-Using the coupling constants and heat capacities from sec:graphite-eph-solution, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$ and $\langle g^2_{e, A_1^\prime} \rangle = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
+Using the coupling constants and heat capacities from @sec:graphite-eph-solution, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$ and $\langle g^2_{e, A_1^\prime} \rangle = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
 
 \begin{table}
 	\centering
@@ -501,19 +501,24 @@ Using the coupling constants and heat capacities from sec:graphite-eph-solution,
 	\begin{tabular}{l | c | l}
 		Source & $\langle g^2_{e, A_1^\prime} \rangle$ [\si{\electronvolt\squared}] & Notes \\ \hline\hline
         This work, René de Cotret \emph{et al}\autocite{RenedeCotret2019} & $0.035 \pm 0.001$ & Experiment \\ \hline
-        Johannsen \emph{et al}\autocite{Johannsen2013}                    & $0.033 \pm 0.007$ & Experiment (trARPES) on graphene \\ \hline
+        Piscanec \emph{et al}\autocite{Piscanec2004}                      & $< 0.0994$        & Theory (graphene, upper bound) \\ \hline
+        Johannsen \emph{et al}\autocite{Johannsen2013}                    & $0.033 \pm 0.007$ & Experiment (trARPES, graphene) \\ \hline
         \multirow{2}{*}{Na \emph{et al}\autocite{Na2019}}                 & $0.050 \pm 0.011$ & Experiment (trARPES) \\ \cline{2-3} 
                                                                           & $0.040$           & Theory \\ \hline
 	\end{tabular} 
 	\label{tbl:graphite-eph-coupling-comparison}
 \end{table}
 
-## Conclusion and outlook
+## Conclusion
 
-TODO: We also note that the procedure presented can be easily extended to (equilibrium) thermal diffuse scattering measurements, where the phonon populations are known at constant  temperature, but the phonon vibrational spectrum is unknown. Therefore, using pre-photoexcitation data of a time-resolved experiment, one could infer the phonon vibrational frequencies, which are then used to determine the change in populations using the measurements after photoexcitation. This scheme only relies on the determination of phonon polarization vectors.
+In this chapter, a clear demonstration of the power of ultrafast electron diffuse scattering was presented. Harnessing the inherent redundancy of electron scattering patterns and prior knowledge of the crystal symmetry, UEDS measurements were endowed with energy resolution, resulting in a time-, energy-, and momentum-resolved view of phonon dynamics. The measurements were used to understand nonthermal phonon population dynamics. Finally, the phonon population dynamics at the $\vec{K}$ point was retrofitted into the non-thermal lattice model in order to extract mode-dependent electron-phonon and phonon-phonon coupling matrix elements, which were in good agreement with other experiments and calculations.
+
+### Outlook
+
+The procedure to extract phonon populations in @sec:graphite-ph-spectroscopy can be easily extended to other situations. One such situation is the case of thermal diffuse scattering measurements. At constant temperature, the phonon populations are directly related to their vibrational frequency; hence, the phonon band structure could be extracted. Phonon dispersion relations has been extracted before from x-ray diffuse scattering experiments[@Holt1999; @Xu2005], but these schemes are based on iterative (and unstable) fitting procedures. Using electron diffuse scattering instead presents some advantages, namely the inherently stronger scattering cross-section of electrons and the relatice commodity of electron microscopes, and the ability to directly invert the measurements matrix without fitting. Another situation where the method presented here can be extended is for the case of non-thermal phonon renormalization. For very early time-delays (say, $\tau < \SI{300}{\femto\second}$), the phonon populations may be considered somewhat constant. The dynamics effect on ultrafast electron diffuse scattering signals may be attributed to phonon renormalization, i.e. a change in vibrational frequency. In this case, the change $\Delta \omega_j(\vec{k}, \tau)$ can be extracted while keeping the phonon populations fixed. This has been used by the author in the case of photoexcited titanium diselenide, where a change in electronic correlations can change the dielectric screening, thereby hardening a particular phonon mode [@Otto2020].
 
 \FloatBarrier
 ## References {.unnumbered}
 \printbibliography[heading=none]
 
-[^1]: Note that the factor of $\hbar$ has been erroneously ignored by Castro Neto *et al*[@Neto2009].
+[^1]: Note that the factor of $\hbar$ has been erroneously ignored by Castro Neto *et al*[@Neto2009]. 
