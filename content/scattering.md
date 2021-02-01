@@ -66,7 +66,7 @@ $$
 TODO: how to bridge to the end? Lippman-Schwinger equation
 
 $$
-    \braket{\vec{x} | \vec{k}_f} \propto \braket{\vec{x} | \vec{k}_i} + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_i, \vec{k}_f)
+    \braket{\vec{x} | \vec{k}_f} = \braket{\vec{x} | \vec{k}_i} + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_i, \vec{k}_f)
 $${#eq:scattering-amplitude}
 where $f(\vec{k}_i, \vec{k}_f)$ is called the *scattering amplitude*. The form of @eq:scattering-amplitude complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_i, \vec{k}_f)$.
 
@@ -74,7 +74,22 @@ The scattering amplitude can be computed most simply by making use of the so-cal
 $$
     f(\vec{k}_i, \vec{k}_f) = - \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{i (\vec{k}_i - \vec{k}_f) \cdot \vec{x}^\prime} V(\vec{x}^\prime)
 $$
-The astute reader will have recognized that the scattering amplitude $f(\vec{k}_i, \vec{k}_f)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*.
+The astute reader will have recognized that the scattering amplitude $f(\vec{k}_i, \vec{k}_f)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. Using the following definition for the Fourier transform functional operator:
+$$
+    \mathcal{F}\left[ f(\vec{x}) \right] = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime) \equiv \hat{f}(\vec{q})
+$$
+, we can re-express the scattering amplitude as follows:
+$$
+    f(\vec{q}=\vec{k}_i - \vec{k}_f) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
+$${#eq:scattering-amplitude-q}
+Inserting @eq:scattering-amplitude-q in @eq:scattering-amplitude, the scattered wavefunction is given by:
+$$
+    u_f(\vec{x}) = u_i(\vec{x}) + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_i - \vec{k}_f)
+$$
+and hence, by @eq:scattering-free-space:
+$$
+    \Psi_f(\vec{x}, t) = \Psi_i(\vec{x}, t) + \frac{e^{i |\vec{k}_f| |\vec{x}|}e^{ -i\omega_f t }}{|\vec{x}|}f(\vec{k}_i - \vec{k}_f)
+$$
 
 ## Single-electron scattering in a periodic potential
 
