@@ -32,10 +32,11 @@ ImageGrid = partial(
 )
 
 
-def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):
+def named_arrow(ax, x, y, dx, dy, text, toffset=(0, 0), tkwds=dict(), **kwargs):
     """ Draw an arrow annotated with some text """
+    ox, oy = toffset
     ax.arrow(x=x, y=y, dx=dx, dy=dy, **kwargs)
-    ax.text(x=x + dx / 2, y=y + dy / 2, s=text, **tkwds)
+    ax.text(x=x + ox + dx / 2, y=y + oy + dy / 2, s=text, **tkwds)
 
 
 def tag_axis(

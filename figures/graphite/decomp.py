@@ -33,14 +33,15 @@ def draw_high_sym_points(ax):
     labels = ["$\Gamma$", "M", "K"]
     offsets = [(-0.1, 0), (-0.1, -0.1), (-0.1, -0.1)]
     valignments = ["center", "top", "top"]
+    colors = ["k", "w", "w"]
 
     for index, vertex in enumerate(pts):
-        ax.scatter(vertex[0], vertex[1], s=5, c="w")
+        ax.scatter(vertex[0], vertex[1], s=5, c=colors[index], zorder=np.inf)
         ax.annotate(
             labels[index],
             (vertex[0], vertex[1]),
             xytext=vertex[0:2] + np.array(offsets[index]),
-            color="w",
+            color=colors[index],
             verticalalignment=valignments[index],
             horizontalalignment="right",
         )

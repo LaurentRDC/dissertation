@@ -6,12 +6,6 @@ from matplotlib.patches import Circle, Rectangle
 from plotutils import named_arrow
 
 
-def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):
-    """ Draw an arrow annotated with some text """
-    ax.arrow(x=x, y=y, dx=dx, dy=dy, **kwargs)
-    ax.text(x=x + dx / 2, y=y + dy / 2, s=text, **tkwds)
-
-
 fig, ax = plt.subplots(1, 1, figsize=(3, 2))
 ax.set_xlim([-1.1, 1.1])
 ax.set_ylim([-1.1, 1.1])
@@ -28,20 +22,23 @@ height = 1.5
 
 named_arrow(
     ax,
-    dx=width / 2,
-    dy=0,
-    text=r"$\mathbf{b}_3$",
-    tkwds=dict(ha="center", va="top"),
+    dx=0,
+    dy=height / 2,
+    text=r"$\mathbf{b}_2$",
+    toffset=(0.05, 0),
+    tkwds=dict(va="center", ha="left"),
     **arrow_kwds
 )
 named_arrow(
     ax,
-    dx=0,
-    dy=height / 2,
-    text=r"$\mathbf{b}_2$",
-    tkwds=dict(va="center", ha="left"),
+    dx=width / 2,
+    dy=0,
+    text=r"$\mathbf{b}_3$",
+    toffset=(0, -0.05),
+    tkwds=dict(ha="center", va="top"),
     **arrow_kwds
 )
+
 
 GAMMA = np.array((0, 0))
 Y = np.array((0, 1))
