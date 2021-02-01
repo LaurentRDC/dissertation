@@ -222,6 +222,8 @@ def buildpdf(options, target, sourcefiles, appendices=None):
     # to have references at the end of each chapter
     # This is much easier to do with biblatex.
     options += ["--biblatex"]
+    options += ["-V biblatexoptions=backend=biber,citestyle=numeric,bibstyle=numeric,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"]
+    options += ["-V bibliography=references.bib"]
     runpandoc(
         options=options,
         target=BUILDDIR_PDF / target.with_suffix(".tex"),
