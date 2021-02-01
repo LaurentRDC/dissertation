@@ -93,7 +93,13 @@ With four atoms per unit cell, the structure of graphite supports twelve distinc
 
 An important feature of the phonon dispersion of graphite that is not replicated by the simple calculation of @fig:graphite-static-dispersion are Kohn anomalies [@Kohn1959]. Kohn anomalies are kinks in the phonon dispersion. These kinks have been shown to appear for transverse optical modes at $\vec{\Gamma}$ (mode $E_{2g}$) and $\vec{K}$ (mode $A_1^\prime$) by inelastic x-ray scattering measurements performed by Maultzsch *et al* [@Maultzsch2004]. Theoretical work by Piscanec *et al* [@Piscanec2004] has linked slope of these kinks to the strength of the coupling between the electronic system and these specific modes. The calculated band structure including the two Kohn anomalies in graphite is presented in @fig:graphite-kohn-anomalies.
 
-![Phonon dispersion of graphene (GE) and graphite (GI), calculated at the experimental and equilibrium lattice spacings ($a_{exp}$ and $a_{th}$). The red straight lines at $\vec{\Gamma}$ and $\vec{K}$ show the slope of the Kohn anomalies. The two lower panels correspond to the dotted windows in the upper panel. The points are theoretical frequencies obtained by direct calculation. Reused with permission from Piscanec *et al* [@Piscanec2004].](images/kohn.pdf){#fig:graphite-kohn-anomalies}
+<!-- The figure below is raw latex because an alternate caption without citations needs to be use so that it looks OK in the list of figures-->
+\begin{figure}
+    \centering
+    \includegraphics{images/kohn.pdf}
+    \caption[Kohn anomalies in the phonon dispersion of graphene and graphite]{Phonon dispersion of graphene (GE) and graphite (GI), calculated at the experimental and equilibrium lattice spacings ($a_{exp}$ and $a_{th}$). The red straight lines at $\vec{\Gamma}$ and $\vec{K}$ show the slope of the Kohn anomalies. The two lower panels correspond to the dotted windows in the upper panel. The points are theoretical frequencies obtained by direct calculation. Reused with permission from Piscanec \emph{et al} \autocite{Piscanec2004}.}
+    \label{fig:graphite-kohn-anomalies}
+\end{figure}
 
 ### Previous studies of nonequilibrium dynamics in graphite {#sec:graphite-prev-studies}
 
@@ -118,7 +124,13 @@ Following the findings presented in the previous section, the effects of electro
 
 Single-crystal flakes of natural graphite \SIrange{10}{90}{\nano\meter} thick were prepared using a mechanical exfoliation procedure analogous to the work by Novoselov *et al* [@Novoselov2004], briefly described here. Thick flakes were embedded in Crystalbond glue on a \SI{3}{\milli\meter} copper TEM grid (200 lines per inch). The embedded flakes are then exfoliated using ordinary adhesive tape. The procedure was repeated until the embedded flakes were translucent when observed under an optical microscope. The glue is then delicately washed away with a solvent. The choice of the solvent is dependent on the glue used; in the present case, acetone was used. Sample thickness has been measured directly using atomic force microscopy characterization (see @fig:graphite-afm). Once a suitable sample has been identified, an aperture was made using aluminum foil to isolate a sample region with uniform thickness. The resulting sample used in this work covered 500 × 500 \si{\square\micro\meter}, with a thickness of \SI{70}{\nano\meter}.
 
-![Characterization of the thickness of potential graphite samples. **Left** optical microscope image of exfoliated graphite. Translucent regions A and B are highlighted as potential samples. **Right** Atomic force microscope measurement shows a sample thickness of \SI{88}{\nano\meter}. Modified from Chatelain [@Chatelain2014].](diagrams/graphite_exfoliation.pdf){#fig:graphite-afm}
+<!-- The figure below is raw latex because an alternate caption without citations needs to be use so that it looks OK in the list of figures-->
+\begin{figure}
+    \centering   
+    \includegraphics{diagrams/graphite_exfoliation.pdf}
+    \caption[Characterization of the thickness of potential graphite samples.]{Characterization of the thickness of potential graphite samples. \textbf{Left} optical microscope image of exfoliated graphite. Translucent regions A and B are highlighted as potential samples. \textbf{Right} Atomic force microscope measurement shows a sample thickness of \SI{88}{\nano\meter}. Modified from Chatelain \autocite{Chatelain2014}.}
+    \label{fig:graphite-afm}
+\end{figure}
 
 ### Data acquisition {#sec:graphite-data-acquisition}
 
