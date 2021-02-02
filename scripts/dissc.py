@@ -218,7 +218,9 @@ def buildpdf(options, target, sourcefiles, appendices=None):
     # to have references at the end of each chapter
     # This is much easier to do with biblatex.
     options += ["--biblatex"]
-    options += ["-V biblatexoptions=backend=biber,citestyle=numeric,bibstyle=numeric,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"]
+    options += [
+        "-V biblatexoptions=backend=biber,citestyle=numeric,bibstyle=numeric,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"
+    ]
     options += ["-V bibliography=references.bib"]
     runpandoc(
         options=options,
@@ -251,7 +253,9 @@ def download_template_files():
             f"git clone --quiet --single-branch --branch master --depth 100 {EISVOGEL_REPO} {downloaddir}",
         )
         run(f"git checkout --quiet {EISVOGEL_VERSION}", cwd=downloaddir)
-        shutil.copy(Path(downloaddir) / EISVOGEL_TEMPLATE, TEMPLATEDIR / EISVOGEL_TEMPLATE)
+        shutil.copy(
+            Path(downloaddir) / EISVOGEL_TEMPLATE, TEMPLATEDIR / EISVOGEL_TEMPLATE
+        )
         print("Successfully downloaded", EISVOGEL_TEMPLATE)
 
 
@@ -287,6 +291,7 @@ def build_simple(target):
         sourcefiles=SRC,
         appendices=APPENDIX,
     )
+
 
 def build_eisvogel(target):
     """ Build the dissertation in the Eisvogel style. """

@@ -70,18 +70,18 @@ $$
 $${#eq:scattering-amplitude}
 where $f(\vec{k}_f, \vec{k}_i)$ is called the *scattering amplitude*. The form of @eq:scattering-amplitude complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
 
-The scattering amplitude can be computed most simply by making use of the so-called *first Born approximation* [@Born1926]. In this approximation:
+The scattering amplitude can be computed most simply by making use of the so-called *first Born approximation* [@Born1926]. This approximation is valid if the scattering potential is weak enough that the electron scatters a single time[@Feynman1965]. In this approximation:
 $$
     f(\vec{k}_f, \vec{k}_i) = - \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{-i (\vec{k}_f - \vec{k}_i) \cdot \vec{x}^\prime} V(\vec{x}^\prime)
 $$
-The astute reader will have recognized that the scattering amplitude $f(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. Using the following definition for the Fourier transform functional operator:
-$$
-    \mathcal{F}\left[ f(\vec{x}) \right] = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{-i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime) \equiv \hat{f}(\vec{q})
-$$
-, we can re-express the scattering amplitude as follows:
+The astute reader will have recognized that the scattering amplitude $f(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. We can re-express the scattering amplitude as follows:
 $$
     f(\vec{q}=\vec{k}_f - \vec{k}_i) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
 $${#eq:scattering-amplitude-q}
+where the Fourier transform functional operator is defined as
+$$
+    \mathcal{F}\left[ f(\vec{x}) \right] = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{-i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime) \equiv \hat{f}(\vec{q}).
+$$
 Inserting @eq:scattering-amplitude-q in @eq:scattering-amplitude, the scattered wavefunction is given by:
 $$
     u_f(\vec{x}) = u_i(\vec{x}) + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_i - \vec{k}_f)
@@ -90,6 +90,23 @@ and hence, by @eq:scattering-free-space:
 $$
     \Psi_f(\vec{x}, t) = \Psi_i(\vec{x}, t) + \frac{e^{i |\vec{k}_f| |\vec{x}|}e^{ -i\omega_f t }}{|\vec{x}|}f(\vec{k}_i - \vec{k}_f)
 $$
+
+### Scattering potential of an atom
+
+The scattering of electrons by atoms will now be considered. The scattering potential of a single atom can be calculated from first principles using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010]. This is beyond the scope of the present work, and the final result is used here. To a reasonable degree of accuracy, the scattering potential of an atom can be written as:
+$$
+    V(\vec{x}) = 2 \pi^2 a_0 e \sum_{i=1}^3 \frac{a_i}{|\vec{x}|}e^{-2 \pi |\vec{x}|\sqrt{b_i}} + \frac{\sqrt{\pi}c_i}{d_i^{3/2}}e^{-\pi^2 |\vec{x}|^2/d_i}
+$$
+where $a_0$ is the Bohr radius, and the constants $\left\{ a_i, b_i, c_i, d_i \right\}$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated scattering amplitude, also known as the *atomic form factors for electron scattering*, are parametrized as: 
+$$
+    f(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
+$$
+according to @eq:scattering-amplitude-q. Examples of $V(\vec{x})$ and associated $f(\vec{q})$ are shown in @fig:scattering-potential for a few elements.
+
+```{.matplotlib #fig:scattering-potential file="figures/scattering/scatt-potential.py" caption="Demonstration of the electrostatic potential of atoms, which scatters electrons. **a)** Radial view of the electrostatic potential in real-space **b)** Radial view of the electrostatic potential in reciprocal space, also known as the *atomic form factor*."}
+```
+
+The (minimal) contribution of electronic orbitals to the atomic form factor for electrons, which breaks azimuthal symmetry, will be discussed in @sec:snse.
 
 ## Single-electron scattering in a periodic potential
 
