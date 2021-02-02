@@ -114,11 +114,11 @@ OPTIONS += ["-V colorlinks=true"]
 ## Template variables
 EISVOGEL_TEMPLATE = "eisvogel.tex"
 EISVOGEL_REPO = "https://github.com/Wandmalfarbe/pandoc-latex-template"
-EISVOGEL_VERSION = "27fb7e455536012aa7e92151ffad28ff70986f41"
+EISVOGEL_VERSION = "e437dbab45457944d8ba137635ab806ecee38201"
 
 CLEANTHESIS_TEMPLATE = "cleanthesis.sty"
 CLEANTHESIS_REPO = "https://github.com/derric/cleanthesis"
-CLEANTHESIS_VERSION = "d89b30e141d2c62ae26bc5e34fe3db515015f258"
+CLEANTHESIS_VERSION = "c5b2c2683166168980ff9f8e5649c052528a73a1"
 
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
 
