@@ -32,8 +32,7 @@ positional arguments:
                         sub-command help
     clean               Clean auxiliary files that are transiently      
                         generated during build.
-    download-templates  Download optional templates Eisvogel and        
-                        Cleanthesis.
+    download-templates  Download optional template Eisvogel
     build               Build dissertation.
 
 optional arguments:
@@ -44,11 +43,11 @@ The `build` subcommand has other options:
 
 ```bash
 > python dissc.py build --help
-usage: dissc build [-h] [--style {simple,eisvogel,cleanthesis}]
+usage: dissc build [-h] [--style {simple,eisvogel}]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --style {simple,eisvogel,cleanthesis}
+  --style {simple,eisvogel}
                         Style of dissertation to use. Default is        
                         `eisvogel`.
 (dissertation) PS C:\Users\Laurent\OneDrive\McGill\dissertation> 

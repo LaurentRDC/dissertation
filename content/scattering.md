@@ -66,21 +66,21 @@ $$
 TODO: how to bridge to the end? Lippman-Schwinger equation
 
 $$
-    \braket{\vec{x} | \vec{k}_f} = \braket{\vec{x} | \vec{k}_i} + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_i, \vec{k}_f)
+    \braket{\vec{x} | \vec{k}_f} = \braket{\vec{x} | \vec{k}_i} + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_f, \vec{k}_i)
 $${#eq:scattering-amplitude}
-where $f(\vec{k}_i, \vec{k}_f)$ is called the *scattering amplitude*. The form of @eq:scattering-amplitude complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_i, \vec{k}_f)$.
+where $f(\vec{k}_f, \vec{k}_i)$ is called the *scattering amplitude*. The form of @eq:scattering-amplitude complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
 
 The scattering amplitude can be computed most simply by making use of the so-called *first Born approximation* [@Born1926]. In this approximation:
 $$
-    f(\vec{k}_i, \vec{k}_f) = - \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{i (\vec{k}_i - \vec{k}_f) \cdot \vec{x}^\prime} V(\vec{x}^\prime)
+    f(\vec{k}_f, \vec{k}_i) = - \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{-i (\vec{k}_f - \vec{k}_i) \cdot \vec{x}^\prime} V(\vec{x}^\prime)
 $$
-The astute reader will have recognized that the scattering amplitude $f(\vec{k}_i, \vec{k}_f)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. Using the following definition for the Fourier transform functional operator:
+The astute reader will have recognized that the scattering amplitude $f(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. Using the following definition for the Fourier transform functional operator:
 $$
-    \mathcal{F}\left[ f(\vec{x}) \right] = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime) \equiv \hat{f}(\vec{q})
+    \mathcal{F}\left[ f(\vec{x}) \right] = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{-i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime) \equiv \hat{f}(\vec{q})
 $$
 , we can re-express the scattering amplitude as follows:
 $$
-    f(\vec{q}=\vec{k}_i - \vec{k}_f) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
+    f(\vec{q}=\vec{k}_f - \vec{k}_i) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
 $${#eq:scattering-amplitude-q}
 Inserting @eq:scattering-amplitude-q in @eq:scattering-amplitude, the scattered wavefunction is given by:
 $$

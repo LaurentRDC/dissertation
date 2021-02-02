@@ -116,10 +116,6 @@ EISVOGEL_TEMPLATE = "eisvogel.tex"
 EISVOGEL_REPO = "https://github.com/Wandmalfarbe/pandoc-latex-template"
 EISVOGEL_VERSION = "e437dbab45457944d8ba137635ab806ecee38201"
 
-CLEANTHESIS_TEMPLATE = "cleanthesis.sty"
-CLEANTHESIS_REPO = "https://github.com/derric/cleanthesis"
-CLEANTHESIS_VERSION = "c5b2c2683166168980ff9f8e5649c052528a73a1"
-
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
 
 subparsers = parser.add_subparsers(help="sub-command help", dest="command")
@@ -132,7 +128,7 @@ parser_clean.add_argument(
     help="Clean build directory and figure files",
 )
 parser_download_templates = subparsers.add_parser(
-    "download-templates", help="Download optional templates Eisvogel and Cleanthesis."
+    "download-templates", help="Download optional template Eisvogel."
 )
 
 parser_build = subparsers.add_parser("build", help="Build dissertation.")
@@ -140,7 +136,7 @@ parser_build.add_argument(
     "--style",
     action="store",
     help="Style of dissertation to use. Default is `eisvogel`.",
-    choices=["simple", "eisvogel", "cleanthesis"],
+    choices=["simple", "eisvogel"],
     default="eisvogel",
 )
 
@@ -249,19 +245,14 @@ def buildpdf(options, target, sourcefiles, appendices=None):
 
 def download_template_files():
     """ Download template files to download directory """
-    for repo, version, template in zip(
-        [EISVOGEL_REPO, CLEANTHESIS_REPO],
-        [EISVOGEL_VERSION, CLEANTHESIS_VERSION],
-        [EISVOGEL_TEMPLATE, CLEANTHESIS_TEMPLATE],
-    ):
-        TEMPLATEDIR.mkdir(exist_ok=True)
-        with tempfile.TemporaryDirectory(dir=TEMPLATEDIR) as downloaddir:
-            run(
-                f"git clone --quiet --single-branch --branch master --depth 100 {repo} {downloaddir}",
-            )
-            run(f"git checkout --quiet {version}", cwd=downloaddir)
-            shutil.copy(Path(downloaddir) / template, TEMPLATEDIR / template)
-            print("Successfully downloaded", template)
+    TEMPLATEDIR.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=TEMPLATEDIR) as downloaddir:
+        run(
+            f"git clone --quiet --single-branch --branch master --depth 100 {EISVOGEL_REPO} {downloaddir}",
+        )
+        run(f"git checkout --quiet {EISVOGEL_VERSION}", cwd=downloaddir)
+        shutil.copy(Path(downloaddir) / EISVOGEL_TEMPLATE, TEMPLATEDIR / EISVOGEL_TEMPLATE)
+        print("Successfully downloaded", EISVOGEL_TEMPLATE)
 
 
 def build_auxiliary(aux_options=AUX_OPTS):
@@ -296,27 +287,6 @@ def build_simple(target):
         sourcefiles=SRC,
         appendices=APPENDIX,
     )
-
-
-def build_cleanthesis(target):
-    """ Build the dissertation in the Cleanthesis style """
-    if not (TEMPLATEDIR / CLEANTHESIS_TEMPLATE).exists():
-        download_template_files()
-
-    aux_options = AUX_OPTS
-    aux_options += [f"-M cleanthesis=true -M cleanthesisbibfile={BIBFILE.stem}"]
-    build_auxiliary(aux_options=aux_options)
-
-    options = OPTIONS
-    options += aux_options
-
-    buildpdf(
-        options=options,
-        target=target,
-        sourcefiles=SRC,
-        appendices=APPENDIX,
-    )
-
 
 def build_eisvogel(target):
     """ Build the dissertation in the Eisvogel style. """
@@ -372,7 +342,6 @@ if __name__ == "__main__":
     arguments = parser.parse_args()
     if arguments.command == "build":
         multiplexor = {
-            "cleanthesis": build_cleanthesis,
             "simple": build_simple,
             "eisvogel": build_eisvogel,
         }
