@@ -127,11 +127,11 @@ parser_clean = subparsers.add_parser(
     "clean", help="Clean auxiliary files that are transiently generated during build."
 )
 parser_clean.add_argument(
-    "--full",
+    "--all",
     action="store_true",
     help="Clean build directory and figure files",
 )
-parser_download_tempaltes = subparsers.add_parser(
+parser_download_templates = subparsers.add_parser(
     "download-templates", help="Download optional templates Eisvogel and Cleanthesis."
 )
 
@@ -231,6 +231,7 @@ def buildpdf(options, target, sourcefiles, appendices=None):
         appendices=appendices,
     )
 
+    # TODO: also check for undefined references in the log file
     todo_left = check_for_todo(BUILDDIR_PDF / target.with_suffix(".tex"))
 
     try:
@@ -377,7 +378,7 @@ if __name__ == "__main__":
         }
         multiplexor[arguments.style](target=Path("dissertation.pdf"))
     elif arguments.command == "clean":
-        clean(full=arguments.full)
+        clean(full=arguments.all)
     elif arguments.command == "download-templates":
         download_template_files()
     else:
