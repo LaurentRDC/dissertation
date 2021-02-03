@@ -80,38 +80,110 @@ $$
 $${#eq:scattering-amplitude-q}
 where the Fourier transform functional operator is defined as
 $$
-    \mathcal{F}\left[ f(\vec{x}) \right] = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{-i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime) \equiv \hat{f}(\vec{q}).
+    \mathcal{F}\left[ f(\vec{x}) \right] \equiv \hat{f}(\vec{q}) = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{-i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime).
 $$
 Inserting @eq:scattering-amplitude-q in @eq:scattering-amplitude, the scattered wavefunction is given by:
 $$
-    u_f(\vec{x}) = u_i(\vec{x}) + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_i - \vec{k}_f)
+    u_f(\vec{x}) = u_i(\vec{x}) + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_f - \vec{k}_i)
 $$
 and hence, by @eq:scattering-free-space:
 $$
-    \Psi_f(\vec{x}, t) = \Psi_i(\vec{x}, t) + \frac{e^{i |\vec{k}_f| |\vec{x}|}e^{ -i\omega_f t }}{|\vec{x}|}f(\vec{k}_i - \vec{k}_f)
+    \Psi_f(\vec{x}, t) = \Psi_i(\vec{x}, t) + \frac{e^{i |\vec{k}_f| |\vec{x}|}e^{ -i\omega_f t }}{|\vec{x}|}f(\vec{k}_f - \vec{k}_i)
 $$
 
 ### Scattering potential of an atom
 
-The scattering of electrons by atoms will now be considered. The scattering potential of a single atom can be calculated from first principles using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010]. This is beyond the scope of the present work, and the final result is used here. To a reasonable degree of accuracy, the scattering potential of an atom can be written as:
-$$
-    V(\vec{x}) = 2 \pi^2 a_0 e \sum_{i=1}^3 \frac{a_i}{|\vec{x}|}e^{-2 \pi |\vec{x}|\sqrt{b_i}} + \frac{\sqrt{\pi}c_i}{d_i^{3/2}}e^{-\pi^2 |\vec{x}|^2/d_i}
-$$
-where $a_0$ is the Bohr radius, and the constants $\left\{ a_i, b_i, c_i, d_i \right\}$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated scattering amplitude, also known as the *atomic form factors for electron scattering*, are parametrized as: 
+The scattering of electrons by atoms will now be considered. The scattering potential of a single atom $V(\vec{x})$ can be calculated from first principles using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010]. This is beyond the scope of the present work, and the final result is used here. 
+
+When discussing electron scattering, the scattering amplitude is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factor for electrons are spherically symmetric. They can be parametrized of an atom can be parametrized as:
 $$
     f(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
 $$
-according to @eq:scattering-amplitude-q. Examples of $V(\vec{x})$ and associated $f(\vec{q})$ are shown in @fig:scattering-potential for a few elements.
+where the constants $\left\{ a_i, b_i, c_i, d_i \right\}$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f(\vec{q})$ and associated $V(\vec{x})$ are shown in @fig:scattering-potential for a few elements.
 
 ```{.matplotlib #fig:scattering-potential file="figures/scattering/scatt-potential.py" caption="Demonstration of the electrostatic potential of atoms, which scatters electrons. **a)** Radial view of the electrostatic potential in real-space **b)** Radial view of the electrostatic potential in reciprocal space, also known as the *atomic form factor*."}
 ```
 
-The (minimal) contribution of electronic orbitals to the atomic form factor for electrons, which breaks azimuthal symmetry, will be discussed in @sec:snse.
+The contribution of individual electronic orbitals to the atomic form factor for electrons[@Zheng2009] will be discussed in @sec:snse. 
 
-## Single-electron scattering in a periodic potential
+## Single-electron scattering in a crystal
+
+The main result of the previous section is that single-electron scattering is, to a reasonable approximation, a good measure of the Fourier transform of the scattering potential. It is therefore natural to consider the scattering of an electron by the periodic potential of a crystal. 
+
+The discussion starts with visual representation of the real-space scattering potential of a crystal. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
+
+```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for $\alpha$-polonium. **a)** Electrostatic potential $V(\vec{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are shown; lattice vector $\vec{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vec{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
+``` 
+
+### The reciprocal lattice
+
+The geometry of reciprocal space and the reciprocal lattice are foundational concepts that drive the understanding of ultrafast electron diffraction.
+
+A perfectly periodic structure in real-space that extends to infinity, with associated lattice vectors $\left\{ \vec{a}_i \right\}$, possesses a *dual* lattice in reciprocal space. The lattice vectors $\left\{ \vec{b}_i \right\}$ for this reciprocal lattice are defined by the relation
+$$
+    \vec{a}_i \cdot \vec{b}_j = 2 \pi \delta_ij
+$$
+which leads to the following reciprocal lattice vectors:
+$$
+    \left\{ \vec{b}_i = 2 \pi \frac{\vec{a}_j \times \vec{a}_k}{\vec{a_i} \cdot (\vec{a_j} \times \vec{a}_k)} ~ \middle| ~ (i,j,k) \in C \right\}
+$$
+where $C$ is the set of cyclic permutations. For the example of $\alpha$-Pu, where
+$$
+    \vec{a}_1 = 3.63 ~ \hat{\vec{x}}, ~ \vec{a}_2 = 3.63 ~ \hat{\vec{y}}, ~ \vec{a}_3 = 3.63 ~ \hat{\vec{z}}
+$${#eq:scattering-polonium-lattice}
+the associated reciprocal lattice vectors are
+$$
+    \vec{b}_1 = \frac{2\pi}{3.63} ~ \hat{\vec{x}}, ~ \vec{b}_2 = \frac{2\pi}{3.63} ~ \hat{\vec{y}}, ~ \vec{b}_3 = \frac{2\pi}{3.63} ~ \hat{\vec{z}}.
+$${#eq:scattering-polonium-recip}
+The geometry of vectors in @eq:scattering-polonium-lattice and @eq:scattering-polonium-recip are shown in @fig:scattering-polonium-example. 
+
+The position of *reciprocal points* $\vec{H}$ -- the location of the fundamental frequencies of the Fourier transform of @eq:scattering-amplitude-q -- is a linear combination of
+vectors reciprocal basis vectors $\left\{ \vec{b}_i \right\}$:
+$$
+    \vec{H} = h ~ \vec{b}_1 + k ~ \vec{b}_2 + l ~ \vec{b}_3
+$$
+Expressed in the reciprocal basis, reciprocal points are traditionally denoted as $\vec{H} = (hkl)$. The indices $h$, $k$, and $l$ are called *Miller indices*, named for W. H. Miller[@Miller1839]. 
+
+#### Geometrical interpretation of reciprocal space
+
+The reciprocal lattice is the *dual* of real-space lattice. The duality relationship encodes the idea of orthogonality, that is, reciprocal points are supposed to be in some sense perpendicular to the point on the real lattice. To understand what that means, consider the real-space points $\vec{a}_1/h$ and $\vec{a}_2/k$ defined on the real-space lattice, and the reciprocal point $\vec{H} = (hkl)$:
+$$
+    \left( \frac{\vec{a}_1}{h} - \frac{\vec{a}_2}{k} \right) \cdot \vec{H} = 0
+$$
+The vector $\vec{a}_1/h - \vec{a}_2/k$ lies in a plane, and the vector $\vec{H}=(hkl)$ is perpendicular to this plane for any $l$. This example illustrates that reciprocal points $(hkl)$ define planes in real-space. TODO: demonstrate that $|\vec{H}| = 1/d_{hkl}$
+
+### Bragg's law
+
+It is possible to *deduce* Bragg's law from @eq:scattering-amplitude-q and our definition of the reciprocal lattice.
+
+By definition, the reciprocal points of the crystal scattering potential, located at the spatial frequencies where the crystal potential strong, form a lattice with basis vectors $\left\{ \vec{b}_i \right\}$. Consider an electron with initial wavevector $\vec{k}_i$ that scatters elastically to a final wavevector $\vec{k}_f$. The scattering amplitude for this event, $f(\vec{k}_f, \vec{k}_i)$ is most intense where $\hat{V}(\vec{k}_f - \vec{k}_i)$ is strong; that is, the condition for strong scattering is:
+$$
+    \vec{k}_f - \vec{k}_i = h ~ \vec{b}_1 + k ~ \vec{b}_2 + l ~ \vec{b}_3 \quad \forall ~ h,k,l \in \mathbb{Z}
+$${#eq:scattering-bragg-vector}
+This is precisely the *vector* form of Bragg's law [@Warren1990Bragg]. To recover the canonical form of Bragg's law, consider that an electron state with wavevector $\vec{k}$ can be associated with a wavelength of $\lambda = \tfrac{1}{|\vec{k}|}$. Since for elastic scattering, $|\vec{k}_i| = |\vec{k}_f| = \tfrac{1}{\lambda}$, @eq:scattering-bragg-vector becomes:
+$$
+    \frac{1}{\lambda} \left( \hat{\vec{k}}_f - \hat{\vec{k}}_i\right) = \vec{H}
+$${#eq:scattering-bragg-1}
+where $\hat{\vec{k}}$ denotes a unit-length vector in the direction of $\vec{k}$. Given that the vectors on both sides of the equation have the same magnitude and direction, the direction of $\vec{H}$ must bisect the angle between $\vec{k}_f$ and $\vec{k}_i$, historically defined as $2\theta$. Taking the amplitude of @eq:scattering-bragg-1:
+$$
+     \frac{1}{\lambda} \left| \hat{\vec{k}}_f - \hat{\vec{k}}_i\right| = \frac{2 \sin{\theta}}{\lambda} 
+$$
+and
+$$
+|\vec{H}| = \frac{1}{d_{hkl}},
+$$
+which can be combined as
+$$
+    \frac{2 \sin{\theta}}{\lambda} = \frac{1}{d_{hkl}}.
+$${#eq:scattering-bragg-hist}
+@eq:scattering-bragg-hist is the historical form of Bragg's law as it relates to polycrystalline diffraction patterns[@Bragg1913]. Note that the vector form of @eq:scattering-bragg-vector is richer than the original form of Bragg's law as it places constraint on the full three-dimensional direction of the scattering vector $\vec{q} = \vec{k}_f - \vec{k}_i$.
+
+### The Ewald sphere
 
 ```{.matplotlib file="figures/scattering/ewald.py" caption=""}
 ```
+
+
 
 \FloatBarrier
 ## References {.unnumbered}

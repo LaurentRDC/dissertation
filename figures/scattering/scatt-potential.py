@@ -9,7 +9,7 @@ from plotutils import FIGURE_WIDTH, tag_axis
 simplefilter("ignore", category=RuntimeWarning)
 
 ELEMENTS = ["C", "Cu", "Sn", "Au"]
-COLORS = ["blue", "red", "forestgreen", "goldenrod"]
+COLORS = ["green", "red", "blue", "goldenrod"]
 
 
 def potential(element, r):
