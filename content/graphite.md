@@ -13,7 +13,7 @@ This chapter will detail how to extract the quantitative information encoded in 
 
 ## Single-crystal graphite
 
-Single-crystal graphite is a two-dimensional material made of a repeating layers of carbon atoms arranged in a hexagonal lattice. Its lattice vectors $\left\{ \vec{a}_i \right\}$ are:
+Single-crystal graphite is a two-dimensional material made of a repeating layers of carbon atoms arranged in a hexagonal lattice. Its lattice vectors $\set{ \vec{a}_i }$ are:
 $$
 \begin{pmatrix}
     \vec{a}_1 \\
@@ -32,7 +32,7 @@ $$
     \vec{e}_3
 \end{pmatrix}
 $${#eq:graphite-lattice}
-where $a=\SI{1.232}{\angstrom}$, $c=\SI{6.711}{\angstrom}$, and $\left\{ \vec{e}_i \right\}$ are understood to be the usual Euclidean vectors. Carbon atoms $\left\{ \vec{c}_i \right\}$ are positioned as follows:
+where $a=\SI{1.232}{\angstrom}$, $c=\SI{6.711}{\angstrom}$, and $\set{ \vec{e}_i }$ are understood to be the usual Euclidean vectors. Carbon atoms $\set{ \vec{c}_i }$ are positioned as follows:
 $$
 \begin{pmatrix}
     \vec{c}_1 \\
@@ -157,19 +157,19 @@ Throughout the rest of this chapter, "scattering intensity" will imply discrete 
 
 ### Computational details {#sec:computational-details}
 
-This section contains the details of the calculations used throughout this chapter, including what is shown in @fig:graphite-static-dispersion. The aim of the computations was to extract the phonon mode frequencies $\left\{ \omega_j(\vec{k})\right\}$ and polarization vectors $\left\{ \vec{e}_{j, s}(\vec{k})\right\}$ that appear in TODO: ONEPH EQUATION.
+This section contains the details of the calculations used throughout this chapter, including what is shown in @fig:graphite-static-dispersion. The aim of the computations was to extract the phonon mode frequencies $\set{ \omega_j(\vec{k})}$ and polarization vectors $\set{ \vec{e}_{j, s}(\vec{k})}$ that appear in TODO: ONEPH EQUATION.
 
 TODO: explain simply the procedure behind dynamical matrices
 
 In order to calculate the force between atoms, the structure of graphite was computed via *structure relaxation*, performed using the plane-wave self-consistent field program `PWSCF` from the `QUANTUM ESPRESSO` software suite [@Giannozzi2017]. The structure was relaxed using a 18 × 18 × 10 $\vec{k}$ mesh centered at $\vec{\Gamma}$ -- selected using the Monkhorst-Pack method [@Monkhorst1976] -- and force and energy thresholds of \SI{1e-8}{\rydberg\per\bohr} and \SI{1e-15}{\rydberg} respectively, where \si{\bohr} is the Bohr radius. Based on the force constants determined from the relaxed structure, the dynamical matrices were computed on a 5 × 5 × 3 $\vec{q}$ mesh using a self-consistency threshold of \SI{1e-18}{\rydberg}. The resulting graphite structure is equivalent to @eq:graphite-lattice, with $a=\SI{1.231}{\angstrom}$ and $c=\SI{6.837}{\angstrom}$.
 
-The phonon mode frequencies $\left\{ \omega_j(\vec{k}) \right\}$ and polarization vectors $\left\{ \vec{e}_{j, s}(\vec{k})\right\}$ were computed using the `PHONON` program, again within the `QUANTUM ESPRESSO` software suite. This calculation made use of the B86b exchange-coupled Perdew-Burke-Ernzerhof generalized-gradient approximation [@Becke1986; @Perdew1996] and the projector augmented-wave method [@Blochl1994]. The cutoff energy of the wave function was set to \SI{100}{\rydberg}, while the cutoff energy for the charge density was set to \SI{1.2e3}{\rydberg}. A Fermi-Dirac smearing of \SI{0.06}{\rydberg} was also applied. To include the dispersion of energy along the stacking axis $\vec{a}_3$, the exchange-hole dipole moment method was used [@Becke2007]. 
+The phonon mode frequencies $\set{ \omega_j(\vec{k}) }$ and polarization vectors $\set{ \vec{e}_{j, s}(\vec{k})}$ were computed using the `PHONON` program, again within the `QUANTUM ESPRESSO` software suite. This calculation made use of the B86b exchange-coupled Perdew-Burke-Ernzerhof generalized-gradient approximation [@Becke1986; @Perdew1996] and the projector augmented-wave method [@Blochl1994]. The cutoff energy of the wave function was set to \SI{100}{\rydberg}, while the cutoff energy for the charge density was set to \SI{1.2e3}{\rydberg}. A Fermi-Dirac smearing of \SI{0.06}{\rydberg} was also applied. To include the dispersion of energy along the stacking axis $\vec{a}_3$, the exchange-hole dipole moment method was used [@Becke2007]. 
 
 #### Clustering of phonon properties into physically-relevant branches
 
 The calculation of phonon properties relevant to his work involves diagonalizing the dynamical matrix. In practice, the force constants that make the dynamical matrix need to be evaluated for every irreducible $\vec{k}$ point, which means that a diagonalization procedure is repeated for every irreducible $\vec{k}$ point. As with most (all?) diagonalization procedures, the eigenvalues and eigenvectors (phonon frequencies and polarization vectors, in the present case) are returned in an order that is not physically-relevant. Therefore, in order to determine what are the phonon properties of a phonon mode $j$, the phonon properties calculated by `PHONON` need to be *clustered*.
 
-As of writing this, there is no component within the `QUANTUM ESPRESSO` software suite that can do this. The scheme described in this section was used instead. The general idea behind the procedure is that phonon properties are continuous. Let $P_{j, \vec{k}_i}$ be the abstract vector representing phonon properties of mode $j$ at one of the irreducible $\vec{k}$ points $\left\{\vec{k}_i\right\}$:
+As of writing this, there is no component within the `QUANTUM ESPRESSO` software suite that can do this. The scheme described in this section was used instead. The general idea behind the procedure is that phonon properties are continuous. Let $P_{j, \vec{k}_i}$ be the abstract vector representing phonon properties of mode $j$ at one of the irreducible $\vec{k}$ points $\set{\vec{k}_i}$:
 $$
     P_{j, \vec{k}_i} \equiv \begin{bmatrix} \omega_{j, \vec{k}_i} & \vec{e}_{s=1,j,\vec{k}_i} & ... & \vec{e}_{s=M,j,\vec{k}_i} \end{bmatrix}^T
 $$
@@ -177,7 +177,7 @@ where the index $s$ runs over all $M$ atoms of the unit cell. Define the metric 
 $$
     \left\Vert \vec{P}_{i, \vec{k}} - \vec{P}_{j, \vec{k}'} \right\Vert = |\omega_{i, \vec{k}} - \omega_{j, \vec{k}'}|^2 + \sum_s \left\Vert \vec{e}_{s,i,\vec{k}} - \vec{e}_{s,j,\vec{k}'}\right\Vert
 $$
-A one-dimensional path $\gamma$ connecting all irreducible points $\left\{\vec{k}_i\right\}$ was defined, starting at $\vec{\Gamma}$. At $\vec{\Gamma}$, polarization vectors are associated with a mode based on geometry. For example, a mode with negligible frequency and polarization vectors at that all point in the same direction physicall corresponds to a longitudinal acoustic mode. The manual assignment for high-frequency optical modes is a bit more arbitrary. Then, following the path $\gamma$, the assignment of phonon branches $i$ at $\gamma(\vec{k} + \vec{\Delta})$ minimizes the quantity $\left\Vert \vec{P}_{i, \vec{k}} - \vec{P}_{j, \vec{k} + \vec{\Delta}} \right\Vert$. 
+A one-dimensional path $\gamma$ connecting all irreducible points $\set{\vec{k}_i}$ was defined, starting at $\vec{\Gamma}$. At $\vec{\Gamma}$, polarization vectors are associated with a mode based on geometry. For example, a mode with negligible frequency and polarization vectors at that all point in the same direction physicall corresponds to a longitudinal acoustic mode. The manual assignment for high-frequency optical modes is a bit more arbitrary. Then, following the path $\gamma$, the assignment of phonon branches $i$ at $\gamma(\vec{k} + \vec{\Delta})$ minimizes the quantity $\left\Vert \vec{P}_{i, \vec{k}} - \vec{P}_{j, \vec{k} + \vec{\Delta}} \right\Vert$. 
 
 The procedure described above has been adapted for numerical evaluation and is now part of the `scikit-ued` software package [@RenedeCotret2018]. For the rest of this chapter, it will be assumed that the phonon properties are clustered such that the usual physical phonon branch labels (e.g. TA, LO) are meaningful.
 
@@ -208,11 +208,11 @@ and
 $$
     F_{1j}(\vec{q}, \tau) = \sum_s e^{-W_s(\vec{q}, \tau)} \frac{f_s(\vec{q})}{\sqrt{\mu_s}} \left( \vec{q} \cdot \vec{e}_{j,s}(\vec{k})\right) 
 $$
-where $N_c$ is the number of scattering unit cells, $I_e$ is the intensity of a single scattering event, $s$ are indices that label atoms in the unit cell, $W_s(\vec{q}, \tau)$ is the Debye-Waller factor associated with atom $s$, $f_s(\vec{q})$ are the atomic form factors, $j \in \left\{ 1, 2, ..., 3N\right\}$ runs over the phonon modes, $\left\{ n_j(\vec{k}, \tau)\right\}$ are the phonon populations, $\left\{ \vec{e}_{j,s}(\vec{k}) \right\}$ are the phonon polarization vectors, and $\left\{ \omega_j(\vec{k}, \tau)\right\}$ are the phonon frequencies.
+where $N_c$ is the number of scattering unit cells, $I_e$ is the intensity of a single scattering event, $s$ are indices that label atoms in the unit cell, $W_s(\vec{q}, \tau)$ is the Debye-Waller factor associated with atom $s$, $f_s(\vec{q})$ are the atomic form factors, $j \in \set{ 1, 2, ..., 3N}$ runs over the phonon modes, $\set{ n_j(\vec{k}, \tau)}$ are the phonon populations, $\set{ \vec{e}_{j,s}(\vec{k}) }$ are the phonon polarization vectors, and $\set{ \omega_j(\vec{k}, \tau)}$ are the phonon frequencies.
 
 As shown in @fig:graphite-ueds-zoomed, observed diffuse intensity is the combination of quantities that can be separated in two categories. Some quantities, like phonon frequencies, are *local* in reciprocal space (i.e. defined on $\vec{k}$). On the other hand, the one-phonon structure factor is nonlocal in reciprocal space (defined on $\vec{q}$). This results in measurable differences when comparing diffuse intensity at various reflections, which will be used to overcome the energy-integrative nature of UEDS experiments.
 
-In order to recover mode-dependent phonon populations, one-phonon structure factors need to be calculated for every relevant phonon mode. Most importantly, the phonon polarization vectors $\left\{ \vec{e}_{j, s}(\vec{k})\right\}$ need to be determined. These vectors describe the direction of movement for each atom due to a particular lattice wave. Fortunately, polarization vectors are a byproduct of the calculation of the phonon dispersion relation, shown in @fig:graphite-static-dispersion.
+In order to recover mode-dependent phonon populations, one-phonon structure factors need to be calculated for every relevant phonon mode. Most importantly, the phonon polarization vectors $\set{ \vec{e}_{j, s}(\vec{k})}$ need to be determined. These vectors describe the direction of movement for each atom due to a particular lattice wave. Fortunately, polarization vectors are a byproduct of the calculation of the phonon dispersion relation, shown in @fig:graphite-static-dispersion.
 
 ### Transient Debye-Waller factors {#sec:graphite-debye-waller}
 
@@ -241,7 +241,7 @@ The calculation for the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2$
 ```{.matplotlib #fig:graphite-oneph-transverse file="figures/graphite/oneph-trans.py" caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, \tau<0)|^2$ of in-plane transverse modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds. See @fig:graphite-oneph-longitudinal for the longitudinal modes equivalent."}
 ```
 
-The one-phonon structure factors display complex structure in reciprocal space. The structure for a particular mode can be thought of as selection rule: regions in $\vec{q}$ space where the one-phonon structure factor for mode $j$ is large are regions where phonon mode $j$ contributes importantly to diffuse intensity. The structure of $|F_{1j}|^2$ is most determined by the values of terms like $\left\{ \vec{q} \cdot \vec{e}_{j,s}(\vec{k}) \right\}$. For acoustic modes LA and TA, the structure of the one-phonon structure factor is easier to understand near $\vec{\Gamma}$. For example, $|F_{1j}|^2$ is highest for the LA mode in the radial $\vec{q}$ direction because the polarization vectors of those modes are parallel to $\vec{q}$; this fact defines longitudinal waves. For transverse waves, where atomic motion is perpendicular to the lattice wave propagation direction, $|F_{1j}|^2$ is higher in the azimuthal direction.
+The one-phonon structure factors display complex structure in reciprocal space. The structure for a particular mode can be thought of as selection rule: regions in $\vec{q}$ space where the one-phonon structure factor for mode $j$ is large are regions where phonon mode $j$ contributes importantly to diffuse intensity. The structure of $|F_{1j}|^2$ is most determined by the values of terms like $\set{ \vec{q} \cdot \vec{e}_{j,s}(\vec{k}) }$. For acoustic modes LA and TA, the structure of the one-phonon structure factor is easier to understand near $\vec{\Gamma}$. For example, $|F_{1j}|^2$ is highest for the LA mode in the radial $\vec{q}$ direction because the polarization vectors of those modes are parallel to $\vec{q}$; this fact defines longitudinal waves. For transverse waves, where atomic motion is perpendicular to the lattice wave propagation direction, $|F_{1j}|^2$ is higher in the azimuthal direction.
 
 ### Weighted phonon dispersion
 
@@ -283,7 +283,7 @@ $$
 $${#eq:graphite-ueds-change}
 @eq:graphite-ueds-change is approximately valid for $\vec{k}$ away from $\vec{\Gamma}$ (see @sec:graphite-phonon-landscape). Effectively, this restriction is trivial as diffraction peaks drown out the UEDS signals near $\vec{\Gamma}$. 
 
-The sum over all phonon branches $j$ encodes the lack of energy resolution in UEDS experiments. However, with enough data redundancy, the contribution of every mode $j$ to @eq:graphite-ueds-change can be extracted. Let $\left\{ \vec{H}_1, ..., \vec{H}_M \right\}$ be in-plane reflections that are visible in the experiments ($M=44$). Then, the transient phonon population of mode $j$, $\Delta n_j(\vec{k}, \tau)$, solves the following linear system:
+The sum over all phonon branches $j$ encodes the lack of energy resolution in UEDS experiments. However, with enough data redundancy, the contribution of every mode $j$ to @eq:graphite-ueds-change can be extracted. Let $\set{ \vec{H}_1, ..., \vec{H}_M }$ be in-plane reflections that are visible in the experiments ($M=44$). Then, the transient phonon population of mode $j$, $\Delta n_j(\vec{k}, \tau)$, solves the following linear system:
 $$
     \vec{I}_{\vec{k}}(\tau) = \vec{F}_{\vec{k}} \vec{D}_{\vec{k}}(\tau)
 $${#eq:graphite-vectorized-ueds}
@@ -312,7 +312,7 @@ where $N$ runs over the 8 in-plane modes. This linear system of equations can be
 
 The procedure used to numerically solve for $\vec{D}_{\vec{k}}(\tau)$ is described henceforth.
 
-All visible Brillouin zones in the measurement were used to generate $\vec{I}_{\vec{k}}(\tau)$. Since the scattering patterns have been symmetrized (@fig:graphite-static), one would expect that using the intensity data for reflections related by symmetry would be redundant; however, the following procedure worked better hwn using the entire area of the detector. This is no doubt due to minute misalignment of the scattering patterns and uncertainty in detector position, which are averaged out when using all available data. The Brillouin zones associated with all in-plane reflections $\left\{ \vec{H} \middle| |\vec{H}| \leq \SI{12}{\per\angstrom}\right\}$ were used, for a total of 44 Brillouin zones. Therefore, at every $\vec{k}$ point, $\vec{I}_{\vec{k}}(\tau)$ and $\vec{F}_{\vec{k}}$ have shapes of $(44, 1)$ and $(44, 8)$, respectively.
+All visible Brillouin zones in the measurement were used to generate $\vec{I}_{\vec{k}}(\tau)$. Since the scattering patterns have been symmetrized (@fig:graphite-static), one would expect that using the intensity data for reflections related by symmetry would be redundant; however, the following procedure worked better hwn using the entire area of the detector. This is no doubt due to minute misalignment of the scattering patterns and uncertainty in detector position, which are averaged out when using all available data. The Brillouin zones associated with all in-plane reflections $\set{ \vec{H} | |\vec{H}| \leq \SI{12}{\per\angstrom} }$ were used, for a total of 44 Brillouin zones. Therefore, at every $\vec{k}$ point, $\vec{I}_{\vec{k}}(\tau)$ and $\vec{F}_{\vec{k}}$ have shapes of $(44, 1)$ and $(44, 8)$, respectively.
 
 The possible values for elements of $\vec{D}_{\vec{k}}(\tau)$ were constrained to be non-negative, implying that $\Delta n_j(\vec{k}, \tau) \geq 0 ~ \forall \tau$. In other words, it is assumed that the population of a phonon branch cannot drop below its equilibrium level. While not strictly necessary, it was found to lead to a more stable solution. This constraint allowed for the use of the non-negative approximate matrix inversion algorithm [@Lawson1995] to solve @eq:graphite-vectorized-ueds. This procedure was repeated for every reduced wavevector $\vec{k}$ and time-delay $\vec{\tau}$. Stable solutions were found for $|\vec{k}| \geq \SI{0.45}{\per\angstrom}$, away from $\vec{\Gamma}$ and elastic scattering signals.
 
@@ -320,7 +320,7 @@ It must be emphasized that the numerical solution to $\vec{D}_{\vec{k}}(\tau)$ i
 
 ### Population dynamics{#sec:graphite-pop-dynamics}
 
-The numerical solution for @eq:graphite-vectorized-ueds is shown in @fig:graphite-ph-populations. The transient phonon populations $\left\{ \Delta n_j(\vec{k}, \tau)\right\}$ across the Brillouin zone are shown for three important modes: TO2, TA, and LA. 
+The numerical solution for @eq:graphite-vectorized-ueds is shown in @fig:graphite-ph-populations. The transient phonon populations $\set{ \Delta n_j(\vec{k}, \tau)}$ across the Brillouin zone are shown for three important modes: TO2, TA, and LA. 
 
 ```{.matplotlib #fig:graphite-ph-populations file="figures/graphite/decomp.py" caption="Measurement of the change in transient phonon population $\Delta n_j(\vec{k}, \tau)$ following photoexcitation for relevant in-plane modes of graphite across the Brillouin zone. The solution domain is bound by white circle at $|\vec{k}| \leq \SI{0.45}{\per\angstrom}$, and by a solid white hexagon at the Brillouin zone edge. The Brillouin zone midpoint is highlighted with a dashed white hexagon. The location of the $A_1^\prime$ mode is shown in the top row."}
 ```
@@ -344,7 +344,7 @@ It is possible to quantify how long does the non-equilibrium distribution of lat
 $$
     \Delta E(\tau) = \int_{\text{BZ}} d\vec{k} \frac{\Delta n_j(\vec{k}, \tau)}{\omega_j(\vec{k}, \tau)}
 $$
-where $\int_{\text{BZ}} d\vec{k}$ is understood to be the integral over the in-plane section of the Brillouin zone. Using the population measurements $\left\{ n_j(\vec{k}, \tau)\right\}$ presented in @fig:graphite-ph-populations, the mode-dependent relative change in stored energy (in-plane) can be calculated. The results are shown in @fig:graphite-long-term.
+where $\int_{\text{BZ}} d\vec{k}$ is understood to be the integral over the in-plane section of the Brillouin zone. Using the population measurements $\set{ n_j(\vec{k}, \tau)}$ presented in @fig:graphite-ph-populations, the mode-dependent relative change in stored energy (in-plane) can be calculated. The results are shown in @fig:graphite-long-term.
 
 The energy trends for modes TA and TO2 are commensurate with the description of @sec:graphite-pop-dynamics. The fascinating aspect of this analysis is revealed by looking at the total energy stored in-plane. Even by \SI{600}{\pico\second}, thermalization of the energy dumped into the sample by photoexcitation has not occurred at all. 
 
@@ -434,7 +434,7 @@ where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of sta
 
 ### Heat rates {#sec:graphite-eph-solution}
 
-The solution to @eq:graphite-nlm-system using the measurements of the $A_1^\prime$ population was computed using an iterative least-squares method[@Branch1999]. The resulting temperature traces $\left\{ T_e(\tau), T_{A_1^\prime}(\tau), T_{l}(\tau)\right\}$ are shown in [@fig:graphite-eph-coupling]. The coupling constants $\left\{ G_{e,l}, G_{e,A_1^\prime}, G_{A_1^\prime, l}\right\}$ are listed in @tbl:graphite-eph-coupling
+The solution to @eq:graphite-nlm-system using the measurements of the $A_1^\prime$ population was computed using an iterative least-squares method[@Branch1999]. The resulting temperature traces $\set{ T_e(\tau), T_{A_1^\prime}(\tau), T_{l}(\tau)}$ are shown in [@fig:graphite-eph-coupling]. The coupling constants $\set{ G_{e,l}, G_{e,A_1^\prime}, G_{A_1^\prime, l}}$ are listed in @tbl:graphite-eph-coupling
 
 ```{.matplotlib #fig:graphite-eph-coupling file="figures/graphite/eph-coupling.py" caption="Evolution of the $A_1^\prime$ mode population in graphite after ultrafast photoexcitation. Transient population $\Delta n_{A_1^\prime}(\tau)$ is shown in black (circles). Error bars represent the standard error in the population mean before photoexcitation $\tau < 0$. The biexponential fit to the transient population is shown in blue (solid). The effective temperature of the modes that $A_1^\prime$ can decay into is shown in orange (dotted)."}
 ```

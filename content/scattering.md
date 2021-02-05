@@ -26,7 +26,7 @@ In the case of free space ($V(\vec{x}, t) = 0$), [@eq:scattering-schroedinger] r
 $$
 i \hbar \frac{\partial}{\partial t} \Psi(\vec{x}, t) = \frac{- \hbar^2}{2 m_e} \nabla^2 \Psi(\vec{x}, t).
 $${#eq:scattering-free-electron}
-It is instructive to consider the energy eigenfunction satisfying [@eq:scattering-free-electron]. Suppose that we can label such solutions as $\left\{(\Psi_a(\vec{x}, t), \omega_a) \right\}$, where the associated energy eigenvalues are $\omega_a \equiv E_a/\hbar$. We could then factorize the energy eigenfunction as:
+It is instructive to consider the energy eigenfunction satisfying [@eq:scattering-free-electron]. Suppose that we can label such solutions as $\set{(\Psi_a(\vec{x}, t), \omega_a)}$, where the associated energy eigenvalues are $\omega_a \equiv E_a/\hbar$. We could then factorize the energy eigenfunction as:
 $$
 \Psi_a(\vec{x}, t) = u_a(\vec{x}) e^{-i \omega_a t}
 $${#eq:scattering-free-space}
@@ -99,7 +99,7 @@ When discussing electron scattering, the scattering amplitude is usually called 
 $$
     f(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
 $$
-where the constants $\left\{ a_i, b_i, c_i, d_i \right\}$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f(\vec{q})$ and associated $V(\vec{x})$ are shown in @fig:scattering-potential for a few elements.
+where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f(\vec{q})$ and associated $V(\vec{x})$ are shown in @fig:scattering-potential for a few elements.
 
 ```{.matplotlib #fig:scattering-potential file="figures/scattering/scatt-potential.py" caption="Demonstration of the electrostatic potential of atoms, which scatters electrons. **a)** Radial view of the electrostatic potential in real-space **b)** Radial view of the electrostatic potential in reciprocal space, also known as the *atomic form factor*."}
 ```
@@ -119,7 +119,7 @@ The discussion starts with visual representation of the real-space scattering po
 
 The geometry of reciprocal space and the reciprocal lattice are foundational concepts that drive the understanding of ultrafast electron diffraction.
 
-A perfectly periodic structure in real-space that extends to infinity, with associated lattice vectors $\left\{ \vec{a}_i \right\}$, possesses a *dual* lattice in reciprocal space. The lattice vectors $\left\{ \vec{b}_i \right\}$ for this reciprocal lattice are defined by the relation
+A perfectly periodic structure in real-space that extends to infinity, with associated lattice vectors $\set{ \vec{a}_i }$, possesses a *dual* lattice in reciprocal space. The lattice vectors $\set{ \vec{b}_i }$ for this reciprocal lattice are defined by the relation
 $$
     \vec{a}_i \cdot \vec{b}_j = 2 \pi \delta_ij
 $$
@@ -138,7 +138,7 @@ $${#eq:scattering-polonium-recip}
 The geometry of vectors in @eq:scattering-polonium-lattice and @eq:scattering-polonium-recip are shown in @fig:scattering-polonium-example. 
 
 The position of *reciprocal points* $\vec{H}$ -- the location of the fundamental frequencies of the Fourier transform of @eq:scattering-amplitude-q -- is a linear combination of
-vectors reciprocal basis vectors $\left\{ \vec{b}_i \right\}$:
+vectors reciprocal basis vectors $\set{ \vec{b}_i }$:
 $$
     \vec{H} = h ~ \vec{b}_1 + k ~ \vec{b}_2 + l ~ \vec{b}_3
 $$
@@ -156,7 +156,7 @@ The vector $\vec{a}_1/h - \vec{a}_2/k$ lies in a plane, and the vector $\vec{H}=
 
 It is possible to *deduce* Bragg's law from @eq:scattering-amplitude-q and our definition of the reciprocal lattice.
 
-By definition, the reciprocal points of the crystal scattering potential, located at the spatial frequencies where the crystal potential strong, form a lattice with basis vectors $\left\{ \vec{b}_i \right\}$. Consider an electron with initial wavevector $\vec{k}_i$ that scatters elastically to a final wavevector $\vec{k}_f$. The scattering amplitude for this event, $f(\vec{k}_f, \vec{k}_i)$ is most intense where $\hat{V}(\vec{k}_f - \vec{k}_i)$ is strong; that is, the condition for strong scattering is:
+By definition, the reciprocal points of the crystal scattering potential, located at the spatial frequencies where the crystal potential strong, form a lattice with basis vectors $\set{ \vec{b}_i }$. Consider an electron with initial wavevector $\vec{k}_i$ that scatters elastically to a final wavevector $\vec{k}_f$. The scattering amplitude for this event, $f(\vec{k}_f, \vec{k}_i)$ is most intense where $\hat{V}(\vec{k}_f - \vec{k}_i)$ is strong; that is, the condition for strong scattering is:
 $$
     \vec{k}_f - \vec{k}_i = h ~ \vec{b}_1 + k ~ \vec{b}_2 + l ~ \vec{b}_3 \quad \forall ~ h,k,l \in \mathbb{Z}
 $${#eq:scattering-bragg-vector}
@@ -186,6 +186,11 @@ Elastic electron scattering, or *electron diffraction*, can be discussed more co
 ```
 
 The Ewald sphere is a great mental model of the information contained in diffraction patterns. Because diffracting electrons can only sample scattering vectors on the Ewald sphere, any particular measurement of a scattering potential $V(\vec{x})$ is effectively a two-dimensional *slice* of the three-dimensional Fourier transform of $V(\vec{x})$, $\hat{V}(\vec{q})$. This is represented in @fig:scattering-ewald-sphere. In this figure, the potential $\hat{V}(\vec{q})$ for an idealized simple cubic crystal with side-length \SI{5}{\angstrom} is shown in the plane spanned by $\vec{b}_2$ and $\vec{b}_3$. The Ewald spheres associated with \SI{100}{\kilo\electronvolt} electrons (large $|\vec{q}|$) and \SI{13}{\kilo\electronvolt} x-rays (smaller $|\vec{q}|$) are also shown. This electron energy is typical of the work presented in this thesis, while the x-ray energy an upper bound on the available energies at the Linac Coherent Light Source as of 2021[@Bostedt2013]. The reciprocal points that intersect the Ewald sphere appear in measurements as diffraction peaks, or Bragg peaks. @fig:scattering-ewald-sphere shows the advantage of electron scattering to study two-dimensional materials: given the proper orientation of the electron beam, a large range of wavevectors can be studied in the plane of interest.
+
+## Multiple scattering of electrons
+
+
+## Electron-phonon interactions in the context of scattering
 
 
 \FloatBarrier
