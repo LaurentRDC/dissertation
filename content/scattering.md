@@ -180,9 +180,12 @@ $${#eq:scattering-bragg-hist}
 
 ### The Ewald sphere
 
-```{.matplotlib file="figures/scattering/ewald.py" caption=""}
+Elastic electron scattering, or *electron diffraction*, can be discussed more concretely. Consider an electron initially propagating in the $\hat{\vec{z}}$ with wavevector $\vec{k}_i$ direction that interacts with a scattering potential $\hat{V}(\vec{q})$, and scatters to a final wavevector $\vec{k}_f$. The elastic scattering condition $|\vec{k}_i| = |\vec{k}_f|$ constrains the observation of $\hat{V}(\vec{q})$ to scattering vectors $\vec{q}$ that lie on a sphere of radius $|\vec{q}|=\tfrac{1}{\lambda}$. This sphere is called the *Ewald sphere*[@Ewald1921].
+
+```{.matplotlib #fig:scattering-ewald-sphere file="figures/scattering/ewald.py" caption="Demonstration of the Ewald sphere, a visual representation of the conservation of energy in diffraction. The Fourier transform of the scattering potential from an abstract cubic lattice of side length \SI{5}{\angstrom}, $\hat{V}(\vec{q})$, is shown in the background, with the associated reciprocal lattice vectors $\set{\vec{b}_i}$. The Ewald sphere of radius $\vec{q}$ is shown for two scatterers: electrons (solid) and hard x-ray (dashed)."}
 ```
 
+The Ewald sphere is a great mental model of the information contained in diffraction patterns. Because diffracting electrons can only sample scattering vectors on the Ewald sphere, any particular measurement of a scattering potential $V(\vec{x})$ is effectively a two-dimensional *slice* of the three-dimensional Fourier transform of $V(\vec{x})$, $\hat{V}(\vec{q})$. This is represented in @fig:scattering-ewald-sphere. In this figure, the potential $\hat{V}(\vec{q})$ for an idealized simple cubic crystal with side-length \SI{5}{\angstrom} is shown in the plane spanned by $\vec{b}_2$ and $\vec{b}_3$. The Ewald spheres associated with \SI{100}{\kilo\electronvolt} electrons (large $|\vec{q}|$) and \SI{13}{\kilo\electronvolt} x-rays (smaller $|\vec{q}|$) are also shown. This electron energy is typical of the work presented in this thesis, while the x-ray energy an upper bound on the available energies at the Linac Coherent Light Source as of 2021[@Bostedt2013]. The reciprocal points that intersect the Ewald sphere appear in measurements as diffraction peaks, or Bragg peaks. @fig:scattering-ewald-sphere shows the advantage of electron scattering to study two-dimensional materials: given the proper orientation of the electron beam, a large range of wavevectors can be studied in the plane of interest.
 
 
 \FloatBarrier
