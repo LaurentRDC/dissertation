@@ -7,7 +7,7 @@ This chapter will consider the special case of *electron scattering*. In crystal
 
 Specifically, the type of scattering relevant to this work involves the probing of periodic structures, crystals. Thanks to advances in data acquisition and data analysis attributable to the author (see [appendix @sec:appendix]), as well as improvements to instrument stability[@Otto2017], the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
 
-## Single-electron scattering in an arbitrary potential
+## Elastic electron scattering in an arbitrary potential
 
 TODO: make it clear that the time-variation of the potential happens on a different scale than the scattering time
 
@@ -21,6 +21,8 @@ $$
     V = \frac{Z e^2}{4 \pi \epsilon_0 |\vec{x}|}
 $$
 where $\epsilon_0$ is the vacuum dielectric constant, $Z$ the atomic number, $e$ is the unit of charge. For the simple example of graphite ($Z=12$, $|\vec{x}|\approx \SI{1}{\angstrom}$), the potential energy associated with the Coulomb interaction is less than \SI{10}{\electronvolt}. Therefore, the potential $V(\vec{x}, t)$ shall be treated as a perturbation.
+
+### Electrons propagating in free space
 
 In the case of free space ($V(\vec{x}, t) = 0$), [@eq:scattering-schroedinger] reduces to the following equation:
 $$
@@ -46,7 +48,7 @@ $$
 $$
 \sum_{i\in\{x,y,z\}}\frac{1}{u_{a,i}(\vec{x} \cdot \hat{\vec{i}})} \frac{d^2 u_{a,i}}{di^2}(\vec{x} \cdot \hat{\vec{i}}) + |\vec{k} \cdot \hat{\vec{i}}| = 0
 $$
-and the solution can be synthetized as a product of one-dimensional plane wave:
+and the solution can be synthesized as a product of one-dimensional plane wave:
 \begin{align}
 u_a(\vec{x}) &= \prod_{j \in \{x,y,z\}} A_j e^{i (\vec{k}_a \cdot \hat{\vec{j}}) (\vec{x} \cdot \hat{\vec{j}})} \nonumber\\
              &= A e^{i \vec{k}_a \cdot \vec{x}}
@@ -58,25 +60,55 @@ $$
 $$
 with associated energy eigenvalue $E_a = \hbar^2 \vec{k}_a^2 / 2 m_e=\hbar \omega_a$
 
-The arbitrary potential $V(\vec{x}, t)$ allows for electrons to scatter from an initial state $\ket{\vec{k}_i}$ to a final state $\ket{\vec{k}_f}$, where
-$$
-    \braket{\vec{x} | \vec{k}_a} \propto u_a(\vec{x}) \propto e^{i\vec{k}_a \cdot \vec{x}}
-$$
+### The Lippmann-Schwinger equation
 
-TODO: how to bridge to the end? Lippman-Schwinger equation
-
+The problem of scattering with a non-trivial potential will now be considered. This is a fundamental problem in quantum mechanics; approximations appropriate for the research presented in this dissertation will be made to simplify and clarify the presentation. In particular, the following derivations assume that the scattering potential $V(\vec{x})$ is *local*, that is:
 $$
-    \braket{\vec{x} | \vec{k}_f} = \braket{\vec{x} | \vec{k}_i} + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_f, \vec{k}_i)
+    \bra{\vec{x}^\prime} V \ket{\vec{x}^{\prime \prime}} = V(\vec{x}^\prime) \delta(\vec{x}^\prime - \vec{x}^{\prime \prime})
+$$
+In this approximation, the scattered wave $\bra{\vec{x} | \Psi}$ is given by the *Lippmann-Schwinger* equation[@Lippmann1950]:
+$$
+    \braket{\vec{x} | \Psi} = \braket{\vec{x} | \vec{k}_i} - \frac{2 m_e}{\hbar^2} \int d^3 x^\prime \frac{e^{ik|\vec{x}-\vec{x}^\prime|}}{4 \pi |\vec{x}-\vec{x}^\prime|} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi}
+$${#eq:scattering-lippmann-schwinger}
+A further simplification can be made provided that the scattered wavefunction $\braket{\vec{x} | \Psi}$ is measured far from where the scattering potential is localized. In this case:
+$$
+    e^{i|\vec{k}_i||\vec{x}-\vec{x}^\prime|} \approx e^{ikr}e^{-i\vec{k} \cdot \vec{x}^\prime}
+$$
+where $r \equiv |\vec{x}-\vec{x}^\prime|$ and $k \equiv |\vec{k}_i|$. @eq:scattering-lippmann-schwinger can then be simplified as:
+$$
+    \braket{\vec{x} | \Psi} = \braket{\vec{x} | \vec{k}_i} - \frac{m_e}{2 \pi \hbar^2} \frac{e^{ikr}}{r}\int d^3 x^\prime e^{-i \vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi}
+$${#eq:scattering-lippmann-schwinger-rad}
+The canonical description of the Lippmann-Schwinger equation usually implies an additional substitution. In order to discretize the available momentum states $\ket{\vec{k}}$ by considering only states in a cube of (large) side-length $L$. This leads to the following normalization:
+$$
+    \braket{\vec{x} | \vec{k}} \equiv \frac{1}{L^{3/2}}e^{i \vec{k}\cdot\vec{x}}
+$$
+Then, @eq:scattering-lippmann-schwinger-rad can be further reduced to:
+$$
+    \braket{\vec{x} | \Psi} = \frac{1}{L^{3/2}} \left[ e^{i \vec{k} \cdot \vec{x}} + \frac{e^{ikr}}{r} f(\vec{k}_f, \vec{k})\right]
+$${#eq:scattering-lippmann-schwinger-general}
+where
+$$
+f(\vec{k}_f, \vec{k}_i) \equiv -\frac{m_e L^3}{2 \pi \hbar^2} \int d^3x^\prime \frac{e^{-i \vec{k}_f \cdot \vec{x}^\prime}}{L^{3/2}} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi} =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f}V\ket{\Psi}
 $${#eq:scattering-amplitude}
-where $f(\vec{k}_f, \vec{k}_i)$ is called the *scattering amplitude*. The form of @eq:scattering-amplitude complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
+$f(\vec{k}_f, \vec{k})$ is called the *scattering amplitude*. The form of @eq:scattering-lippmann-schwinger-general complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
+
+The calculation of the scattered wavefunction $\braket{\vec{x}|\Psi}$ has been reduced to the calculation of $\bra{\vec{k}_f}V\ket{\Psi}$. The derivation of an expression for this is beyond the scope of this work, and the final result is stated[^tmatrix]:
+$$
+    \bra{\vec{k}_f}V\ket{\Psi} = \bra{\vec{k}_f} \left[ \sum_j V \left( \frac{1}{E_i - H_0 + i \epsilon} V\right)^j \right] \ket{\vec{k}_i}
+$$
+where $H_0$ is the free-space Hamiltonian with eigenvalue $E_i=\hbar^2 \vec{k}_i^2/2 m_e$, and $\epsilon$ is a vanishingly small real number.
+
+[^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014]
+
+### Single-electron elastic scattering
 
 The scattering amplitude can be computed most simply by making use of the so-called *first Born approximation* [@Born1926]. This approximation is valid if the scattering potential is weak enough that the electron scatters a single time[@Feynman1965]. In this approximation:
 $$
-    f(\vec{k}_f, \vec{k}_i) = - \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{-i (\vec{k}_f - \vec{k}_i) \cdot \vec{x}^\prime} V(\vec{x}^\prime)
+    f^{(1)}(\vec{k}_f, \vec{k}_i) = - \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{-i (\vec{k}_f - \vec{k}_i) \cdot \vec{x}^\prime} V(\vec{x}^\prime)
 $$
-The astute reader will have recognized that the scattering amplitude $f(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. We can re-express the scattering amplitude as follows:
+The reader may recognize that the scattering amplitude $f^{(1)}(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. We can re-express the scattering amplitude as follows:
 $$
-    f(\vec{q}=\vec{k}_f - \vec{k}_i) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
+    f^{(1)}(\vec{q}=\vec{k}_f - \vec{k}_i) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
 $${#eq:scattering-amplitude-q}
 where the Fourier transform functional operator is defined as
 $$
@@ -188,6 +220,8 @@ Elastic electron scattering, or *electron diffraction*, can be discussed more co
 The Ewald sphere is a great mental model of the information contained in diffraction patterns. Because diffracting electrons can only sample scattering vectors on the Ewald sphere, any particular measurement of a scattering potential $V(\vec{x})$ is effectively a two-dimensional *slice* of the three-dimensional Fourier transform of $V(\vec{x})$, $\hat{V}(\vec{q})$. This is represented in @fig:scattering-ewald-sphere. In this figure, the potential $\hat{V}(\vec{q})$ for an idealized simple cubic crystal with side-length \SI{5}{\angstrom} is shown in the plane spanned by $\vec{b}_2$ and $\vec{b}_3$. The Ewald spheres associated with \SI{100}{\kilo\electronvolt} electrons (large $|\vec{q}|$) and \SI{13}{\kilo\electronvolt} x-rays (smaller $|\vec{q}|$) are also shown. This electron energy is typical of the work presented in this thesis, while the x-ray energy an upper bound on the available energies at the Linac Coherent Light Source as of 2021[@Bostedt2013]. The reciprocal points that intersect the Ewald sphere appear in measurements as diffraction peaks, or Bragg peaks. @fig:scattering-ewald-sphere shows the advantage of electron scattering to study two-dimensional materials: given the proper orientation of the electron beam, a large range of wavevectors can be studied in the plane of interest.
 
 ## Multiple scattering of electrons
+
+Electrons interact quite strongly with matter through the Coulomb interaction. 
 
 
 ## Electron-phonon interactions in the context of scattering
