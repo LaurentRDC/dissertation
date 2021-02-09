@@ -9,8 +9,8 @@ from matplotlib.ticker import FixedFormatter, FixedLocator
 from plotutils import FIGURE_WIDTH, ImageGrid, named_arrow
 from skued import lorentzian, indices_to_text, electron_wavelength
 
-EWALD_RADIUS = 2*np.pi / electron_wavelength(keV=100)
-EWALD_RADIUS_XRAY = 2*np.pi/0.95 # 13 keV x-rays
+EWALD_RADIUS = 2 * np.pi / electron_wavelength(keV=100)
+EWALD_RADIUS_XRAY = 2 * np.pi / 0.95  # 13 keV x-rays
 
 ELECTRONS_COLOR = "k"
 XRAY_COLOR = "indigo"
@@ -25,7 +25,7 @@ ky, kz = np.meshgrid(np.linspace(-6, 6, 256), np.linspace(-4, 7, 256))
 im = np.zeros_like(ky)
 
 for k, l in it.product([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5], repeat=2):
-    _, qy, qz = CRYSTAL.scattering_vector((0,k,l))
+    _, qy, qz = CRYSTAL.scattering_vector((0, k, l))
     im += lorentzian(coordinates=[ky, kz], center=[qy, qz], fwhm=0.15)
 
 m = ax.imshow(
@@ -68,7 +68,7 @@ for (h, k, l) in [(0, 0, 0)]:
     )
 
 # Lattice vectors
-_, _y, _z = CRYSTAL.scattering_vector((0,-4,-2))
+_, _y, _z = CRYSTAL.scattering_vector((0, -4, -2))
 arrow_kwds = dict(
     x=_y, y=_z, length_includes_head=True, width=0.001, head_width=0.1, fc="k"
 )
@@ -94,7 +94,12 @@ named_arrow(
 
 
 electron_handle = mlines.Line2D(
-    [], [], color=ELECTRONS_COLOR, marker=None, linestyle="solid", label="Electrons (100 keV)"
+    [],
+    [],
+    color=ELECTRONS_COLOR,
+    marker=None,
+    linestyle="solid",
+    label="Electrons (100 keV)",
 )
 xray_handle = mlines.Line2D(
     [], [], color=XRAY_COLOR, marker=None, linestyle="dashed", label="X-rays (13 keV)"

@@ -7,7 +7,7 @@ This chapter will consider the special case of *electron scattering*. In crystal
 
 Specifically, the type of scattering relevant to this work involves the probing of periodic structures, crystals. Thanks to advances in data acquisition and data analysis attributable to the author (see [appendix @sec:appendix]), as well as improvements to instrument stability[@Otto2017], the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
 
-## Elastic electron scattering in an arbitrary potential
+## Elastic electron scattering and the Lippmann-Schwinger formalism
 
 TODO: make it clear that the time-variation of the potential happens on a different scale than the scattering time
 
@@ -66,11 +66,16 @@ The problem of scattering with a non-trivial potential will now be considered. T
 $$
     \bra{\vec{x}^\prime} V \ket{\vec{x}^{\prime \prime}} = V(\vec{x}^\prime) \delta(\vec{x}^\prime - \vec{x}^{\prime \prime})
 $$
+Further simplifications can be made allowed momentum states are assumed to be defined in a (large) cube of size-length $L$, such that
+$$
+    \braket{\vec{x} | \vec{k}} = \frac{1}{L^{3/2}} e^{i \vec{k} \cdot \vec{x}}
+$${#eq:scattering-norm}
+and $\vec{k}$ takes discrete values. The calculations will become physical after taking the limit $L \to \infty$.
 In this approximation, the scattered wave $\bra{\vec{x} | \Psi}$ is given by the *Lippmann-Schwinger* equation[@Lippmann1950]:
 $$
     \braket{\vec{x} | \Psi} = \braket{\vec{x} | \vec{k}_i} - \frac{2 m_e}{\hbar^2} \int d^3 x^\prime \frac{e^{ik|\vec{x}-\vec{x}^\prime|}}{4 \pi |\vec{x}-\vec{x}^\prime|} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi}
 $${#eq:scattering-lippmann-schwinger}
-A further simplification can be made provided that the scattered wavefunction $\braket{\vec{x} | \Psi}$ is measured far from where the scattering potential is localized. In this case:
+Provided that the scattered wavefunction $\braket{\vec{x} | \Psi}$ is measured far from where the scattering potential is localized:
 $$
     e^{i|\vec{k}_i||\vec{x}-\vec{x}^\prime|} \approx e^{ikr}e^{-i\vec{k} \cdot \vec{x}^\prime}
 $$
@@ -78,71 +83,67 @@ where $r \equiv |\vec{x}-\vec{x}^\prime|$ and $k \equiv |\vec{k}_i|$. @eq:scatte
 $$
     \braket{\vec{x} | \Psi} = \braket{\vec{x} | \vec{k}_i} - \frac{m_e}{2 \pi \hbar^2} \frac{e^{ikr}}{r}\int d^3 x^\prime e^{-i \vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi}
 $${#eq:scattering-lippmann-schwinger-rad}
-The canonical description of the Lippmann-Schwinger equation usually implies an additional substitution. In order to discretize the available momentum states $\ket{\vec{k}}$ by considering only states in a cube of (large) side-length $L$. This leads to the following normalization:
+The canonical description of the Lippmann-Schwinger equation is usually reduced to:
 $$
-    \braket{\vec{x} | \vec{k}} \equiv \frac{1}{L^{3/2}}e^{i \vec{k}\cdot\vec{x}}
-$$
-Then, @eq:scattering-lippmann-schwinger-rad can be further reduced to:
-$$
-    \braket{\vec{x} | \Psi} = \frac{1}{L^{3/2}} \left[ e^{i \vec{k} \cdot \vec{x}} + \frac{e^{ikr}}{r} f(\vec{k}_f, \vec{k})\right]
+    \braket{\vec{x} | \Psi} = \frac{1}{L^{3/2}} \left[ e^{i \vec{k} \cdot \vec{x}} + \frac{e^{ikr}}{r} f(\vec{k}_f, \vec{k}_i)\right]
 $${#eq:scattering-lippmann-schwinger-general}
 where
 $$
-f(\vec{k}_f, \vec{k}_i) \equiv -\frac{m_e L^3}{2 \pi \hbar^2} \int d^3x^\prime \frac{e^{-i \vec{k}_f \cdot \vec{x}^\prime}}{L^{3/2}} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi} =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f}V\ket{\Psi}
+f(\vec{k}_f, \vec{k}_i) \equiv -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vec{x}^\prime \frac{e^{-i \vec{k}_f \cdot \vec{x}^\prime}}{L^{3/2}} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi} =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f}V\ket{\Psi}
 $${#eq:scattering-amplitude}
 $f(\vec{k}_f, \vec{k})$ is called the *scattering amplitude*. The form of @eq:scattering-lippmann-schwinger-general complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
 
 The calculation of the scattered wavefunction $\braket{\vec{x}|\Psi}$ has been reduced to the calculation of $\bra{\vec{k}_f}V\ket{\Psi}$. The derivation of an expression for this is beyond the scope of this work, and the final result is stated[^tmatrix]:
 $$
-    \bra{\vec{k}_f}V\ket{\Psi} = \bra{\vec{k}_f} \left[ \sum_j V \left( \frac{1}{E_i - H_0 + i \epsilon} V\right)^j \right] \ket{\vec{k}_i}
-$$
-where $H_0$ is the free-space Hamiltonian with eigenvalue $E_i=\hbar^2 \vec{k}_i^2/2 m_e$, and $\epsilon$ is a vanishingly small real number.
+    \bra{\vec{k}_f}V\ket{\Psi} = \bra{\vec{k}_f} \left[ \sum_{j=0}^{\infty} V \left( \frac{1}{E_i - H_0 + i \epsilon} V\right)^j \right] \ket{\vec{k}_i}
+$${#eq:scattering-potential-decomp}
+where $H_0$ is the free-space Hamiltonian with eigenvalue $E_i=\hbar^2 \vec{k}_i^2/2 m_e$, and $\epsilon$ is a vanishingly small real number. In particular, each term with index $j$ in the sum of @eq:scattering-potential-decomp corresponds to the electron scattering $j$ times[@Feynman1965].
 
-[^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014]
+## Elastic scattering in a crystal
 
-### Single-electron elastic scattering
-
-The scattering amplitude can be computed most simply by making use of the so-called *first Born approximation* [@Born1926]. This approximation is valid if the scattering potential is weak enough that the electron scatters a single time[@Feynman1965]. In this approximation:
-$$
-    f^{(1)}(\vec{k}_f, \vec{k}_i) = - \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{-i (\vec{k}_f - \vec{k}_i) \cdot \vec{x}^\prime} V(\vec{x}^\prime)
-$$
-The reader may recognize that the scattering amplitude $f^{(1)}(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. We can re-express the scattering amplitude as follows:
-$$
-    f^{(1)}(\vec{q}=\vec{k}_f - \vec{k}_i) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
-$${#eq:scattering-amplitude-q}
-where the Fourier transform functional operator is defined as
+In this section, the consequences of an electron scattering *once* in crystalline solid will be explored. In this approximation, historically called the *first Born approximation* [@Born1926], only the first term in @eq:scattering-potential-decomp ($j=0$) is considered:
+\begin{align}
+    f^{(1)}(\vec{k}_f, \vec{k}_i) & = -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f} V \ket{\vec{k}_i} \nonumber \\
+                                  & = -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vec{x}^\prime \bra{\vec{k}_f} V(\vec{x}^\prime) \ket{\vec{x}^\prime}\braket{\vec{x}^\prime | \vec{k}_i} \nonumber \\
+                                  & = -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vec{x}^\prime \frac{e^{i(\vec{k}_i - \vec{k}_f)\cdot \vec{x}^\prime}}{L^3} V(\vec{x}^\prime) \nonumber \\
+                                  & = -\frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime e^{i(\vec{k}_i - \vec{k}_f)\cdot \vec{x}^\prime} V(\vec{x}^\prime)
+    \label{eq:scattering-first-born-approx}
+\end{align}
+where the normalization of @eq:scattering-norm was used. The reader may recognize that the scattering amplitude $f^{(1)}(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. If the Fourier trnasform functional operator is defined as:
 $$
     \mathcal{F}\left[ f(\vec{x}) \right] \equiv \hat{f}(\vec{q}) = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{-i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime).
 $$
-Inserting @eq:scattering-amplitude-q in @eq:scattering-amplitude, the scattered wavefunction is given by:
+then @eq:scattering-first-born-approx can be simplified to:
 $$
-    u_f(\vec{x}) = u_i(\vec{x}) + \frac{e^{i |\vec{k}_f| |\vec{x}| }}{|\vec{x}|}f(\vec{k}_f - \vec{k}_i)
-$$
-and hence, by @eq:scattering-free-space:
-$$
-    \Psi_f(\vec{x}, t) = \Psi_i(\vec{x}, t) + \frac{e^{i |\vec{k}_f| |\vec{x}|}e^{ -i\omega_f t }}{|\vec{x}|}f(\vec{k}_f - \vec{k}_i)
-$$
+    f^{(1)}(\vec{q}=\vec{k}_f - \vec{k}_i) = -\frac{m_e}{\hbar^2} \hat{V}(\vec{q})
+$${#eq:scattering-amplitude-q}
 
-### Scattering potential of an atom
+### Scattering potential of a single atom{#sec:affe}
 
-The scattering of electrons by atoms will now be considered. The scattering potential of a single atom $V(\vec{x})$ can be calculated from first principles using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010]. This is beyond the scope of the present work, and the final result is used here. 
-
-When discussing electron scattering, the scattering amplitude is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factor for electrons are spherically symmetric. They can be parametrized of an atom can be parametrized as:
+The scattering potential of a single atom is given by:
 $$
-    f(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
+    V_a(\vec{x}) = -\frac{Z e^2}{|\vec{x}|} + \sum_{i=1}^{Z} \frac{e^2}{|\vec{x} - \vec{x}_i|}
+$${#eq:scattering-atom-potential}
+where Z is the atomic weight, and $\vec{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010]. This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factor for electrons are spherically symmetric. They can be parametrized of an atom can be parametrized as:
 $$
-where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f(\vec{q})$ and associated $V(\vec{x})$ are shown in @fig:scattering-potential for a few elements.
+    f_e(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
+$${#eq:scattering-affe}
+where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f_e(\vec{q})$ and associated $V(\vec{x})$ are shown in @fig:scattering-potential for a few elements.
 
 ```{.matplotlib #fig:scattering-potential file="figures/scattering/scatt-potential.py" caption="Demonstration of the electrostatic potential of atoms, which scatters electrons. **a)** Radial view of the electrostatic potential in real-space **b)** Radial view of the electrostatic potential in reciprocal space, also known as the *atomic form factor*."}
 ```
 
 The contribution of individual electronic orbitals to the atomic form factor for electrons[@Zheng2009] will be discussed in @sec:snse. 
 
-## Single-electron scattering in a crystal
+### Scattering potential of a crystal
 
-The main result of the previous section is that single-electron scattering is, to a reasonable approximation, a good measure of the Fourier transform of the scattering potential. It is therefore natural to consider the scattering of an electron by the periodic potential of a crystal. 
+With the knowledge of the scattering potential of a single atom, the scattering potential of a crystalline lattice can be calculated:
+$$
+    V_c(\vec{x}) = \sum_i V_a(\vec{x} - \vec{r}_i)
+$$
+where the sum index $i$ runs over atoms in the crystal with positions $\vec{r}_i$, and $V_a$ is given by @eq:scattering-atom-potential.
 
-The discussion starts with visual representation of the real-space scattering potential of a crystal. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
+A visual representation of the real-space scattering potential of a crystal is helpful. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
 
 ```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for $\alpha$-polonium. **a)** Electrostatic potential $V(\vec{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are shown; lattice vector $\vec{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vec{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
 ``` 
@@ -221,11 +222,76 @@ The Ewald sphere is a great mental model of the information contained in diffrac
 
 ## Multiple scattering of electrons
 
-Electrons interact quite strongly with matter through the Coulomb interaction. 
+Electrons interact quite strongly with matter through the Coulomb interaction. TODO: introduce this more. also talk about how this is not the same as two-beam diffraction because UED bunches are not dense; interference from two separate electrons in less likely than double-scattering by the same electron. 
+
+In this section, the scattering of an electron *twice* will be considered. In this case, the second term in @eq:scattering-potential-decomp ($j=1$) is considered:
+$$
+    f^{(2)}(\vec{k}_f, \vec{k}_i) = -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f} V \frac{1}{E_i - H_0 + i \epsilon}V \ket{\vec{k}_i}
+$$
+The calculation of $f^{(2)}(\vec{k}_f, \vec{k}_i)$ involves the insertion of two complete sets of basis states:
+\begin{multline}
+    \bra{\vec{k}_f} V \frac{1}{E_i - H_0 + i \epsilon}V \ket{\vec{k}_i} = \\ 
+        \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
+            \braket{\vec{k}_f | \vec{x}^\prime} V(\vec{x}^\prime) \bra{\vec{x}^\prime} \frac{1}{E_i - H_0 + i \epsilon} \ket{\vec{x}^{\prime\prime}}V(\vec{x}^{\prime\prime}) \braket{\vec{x}^{\prime\prime} | \vec{k}_i}
+\end{multline}
+The evaluation of the term $\bra{\vec{x}^\prime} \frac{1}{E_i - H_0 + i \epsilon} \ket{\vec{x}^{\prime\prime}}$ naturally happens in the derivation of @eq:scattering-lippmann-schwinger, and so the result is simply stated here:
+$$
+    \bra{\vec{x}^\prime} \frac{1}{E_i - H_0 + i \epsilon} \ket{\vec{x}^{\prime\prime}} = -\frac{m_e}{2 \pi \hbar^2} \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|}
+$$
+It follows that the scattering amplitude for the double-scattering of an electron is given by:
+$$
+    f^{(2)}(\vec{k}_f, \vec{k}_i) =
+        \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
+            e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \left( \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime})
+$${#eq:scattering-amplitude-mult}
+The structure of @eq:scattering-amplitude-mult informs on the following physical interpretation. Double scattering involves a first scattering at $\vec{x}^{\prime\prime}$ ($V(\vec{x}^{\prime\prime})$), which "radiates" as a spherical wave moving from $\vec{x}^{\prime\prime}$ to $\vec{x}^{\prime}$ ($e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}/|\vec{x}^\prime - \vec{x}^{\prime\prime}|$), followed by a second scattering at $\vec{x}^\prime$ ($V(\vec{x}^{\prime})$).
+
+### Comparing cross-sections
+
+The computation of the differential scattering cross section for two elastic scattering events is given by:
+\begin{align}
+    \frac{d\sigma_2}{d\Omega} & = |f^{(2)}(\vec{k}_f, \vec{k}_i)|^2 \nonumber \\
+             & = \left| \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
+            e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \left( \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2
+    \label{eq:scattering-cross-sec-2}
+\end{align}
+The evaluation of @eq:scattering-cross-sec-2 for a realistic potential $V(\vec{x})$ is arduous. However, given that this type of scattering is *undesirable*, getting an upper bound on its scattering cross-section is a worthwhile exercise. 
+
+In electron scattering experiments, the elastic scattering cross section is small enough that an electron is unlikely to scatter twice from the same atom. This means that the integral is 0 when $|\vec{x}^\prime - \vec{x}^{\prime\prime}|$ is small. Assuming a crystal with minimum inter-atomic distance of $a$, a weight function $W(\vec{x}^\prime, \vec{x}^{\prime\prime})$ is defined as:
+$$
+W(\vec{x}^\prime, \vec{x}^{\prime\prime})=
+    \begin{cases}
+          1 \quad &\text{if} \, |\vec{x}^\prime - \vec{x}^{\prime\prime}| \geq a \\
+          0 \quad &\text{if} \, |\vec{x}^\prime - \vec{x}^{\prime\prime}| < a \\
+     \end{cases}
+$$
+Then, 
+$$
+    \frac{d\sigma_2}{d\Omega} < \left| \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
+            e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) W(\vec{x}^\prime, \vec{x}^{\prime\prime}) \left( \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2
+$$
+Note that
+$$
+    \left| W(\vec{x}^\prime, \vec{x}^{\prime\prime}) \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right| < \frac{1}{a}
+$$
+which in turn implies
+\begin{align}
+    \frac{d\sigma_2}{d\Omega} & < \frac{1}{a} \left| \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
+            e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2 \nonumber \\
+            & < \frac{1}{a} \left| \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime  
+            e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \int d\vec{x}^{\prime\prime} e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2 \nonumber \\
+            & < \frac{1}{a} \left| \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^\prime  
+            e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \right|^2 \left| \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^{\prime\prime} e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2 \nonumber \\
+            & < \frac{1}{a} \left( \frac{d\sigma_1}{d\Omega}\right)^2
+\end{align}
+where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj].
 
 
 ## Electron-phonon interactions in the context of scattering
 
+
+[^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014].
+[^conj]: Note that because $V(\vec{x})$ is real, $\int d\vec{x}^\prime e^{-i\vec{k} \cdot \vec{x}^\prime} V(\vec{x}) = \int d\vec{x}^\prime e^{i\vec{k} \cdot \vec{x}^\prime} V(\vec{x})$.
 
 \FloatBarrier
 ## References {.unnumbered}
