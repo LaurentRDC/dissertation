@@ -111,7 +111,7 @@ In this section, the consequences of an electron scattering *once* in crystallin
 \end{align}
 where the normalization of @eq:scattering-norm was used. The reader may recognize that the scattering amplitude $f^{(1)}(\vec{k}_f, \vec{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vec{k}_i - \vec{k}_f \equiv \vec{q}$, the *scattering vector*. If the Fourier trnasform functional operator is defined as:
 $$
-    \mathcal{F}\left[ f(\vec{x}) \right] \equiv \hat{f}(\vec{q}) = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{-i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime).
+    \mathcal{F}\left[ f(\vec{x}) \right] \equiv \hat{f}(\vec{q}) = \frac{1}{2 \pi} \int d\vec{x}^\prime e^{i \vec{q} \cdot \vec{x}^\prime}f(\vec{x}^\prime).
 $$
 then @eq:scattering-first-born-approx can be simplified to:
 $$
@@ -128,7 +128,7 @@ where Z is the atomic weight, and $\vec{x}_i$ is the position of the $i^{\text{t
 $$
     f_e(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
 $${#eq:scattering-affe}
-where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f_e(\vec{q})$ and associated $V(\vec{x})$ are shown in @fig:scattering-potential for a few elements.
+where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f_e(\vec{q})$ and associated $V_a(\vec{x})$ are shown in @fig:scattering-potential for a few elements.
 
 ```{.matplotlib #fig:scattering-potential file="figures/scattering/scatt-potential.py" caption="Demonstration of the electrostatic potential of atoms, which scatters electrons. **a)** Radial view of the electrostatic potential in real-space **b)** Radial view of the electrostatic potential in reciprocal space, also known as the *atomic form factor*."}
 ```
@@ -141,12 +141,36 @@ With the knowledge of the scattering potential of a single atom, the scattering 
 $$
     V_c(\vec{x}) = \sum_i V_a(\vec{x} - \vec{r}_i)
 $$
-where the sum index $i$ runs over atoms in the crystal with positions $\vec{r}_i$, and $V_a$ is given by @eq:scattering-atom-potential.
-
-A visual representation of the real-space scattering potential of a crystal is helpful. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
+where  the sum index $i$ runs over atoms in the crystal with positions $\vec{r}_i$, and $V_a$ is given by @eq:scattering-atom-potential. Note that for any function $h(\vec{x})$: 
+\begin{align}
+    \mathcal{F}\left[ h(\vec{x} + \vec{y}) \right] & = \frac{1}{2\pi} \int d\vec{x}^\prime e^{i\vec{q}\cdot(\vec{x}^\prime + \vec{y})} h(\vec{x}^\prime) \nonumber \\
+                                                   & = \frac{e^{i \vec{q} \cdot \vec{y}}}{2 \pi} \int d\vec{x}^\prime e^{i\vec{q} \vec{x}^\prime} h(\vec{x}^\prime) \nonumber \\
+                                                   & = e^{i \vec{q} \cdot \vec{y}} \mathcal{F}\left[ h(\vec{x}) \right]
+\end{align}
+where $\vec{y}$ is some arbitrary translation vector. Therefore, the Fourier transform of the scattering potential of the entire crystal is related to the Fourier transform of its constituent atoms (@eq:scattering-affe) as:
+\begin{align}
+    \hat{V}_c(\vec{q}) & = \mathcal{F}\left[ \sum_i V_a(\vec{x} - \vec{r}_i) \right] \nonumber \\
+                       & = \sum_i \mathcal{F}\left[ V_a(\vec{x} - \vec{r}_i) \right] \nonumber \\
+                       & = \sum_i \mathcal{F}\left[ V_a(\vec{x}) \right] e^{-i \vec{q} \cdot \vec{r}_i} \nonumber \\
+                       & = \sum_i f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i}
+    \label{eq:scattering-potential-crystal}
+\end{align}
 
 ```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for $\alpha$-polonium. **a)** Electrostatic potential $V(\vec{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are shown; lattice vector $\vec{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vec{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
 ``` 
+
+A visual representation of the scattering potential of a crystal is helpful. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
+
+#### Effect of finite temperatures
+
+At finite temperatures, the atoms are vibrating about their equilibrium positions $\set{\vec{r}_i}$. Let $\set{\vec{u}_i}$ be the *displacement vectors* due to temperature. Then, the atomic positions can be expressed as $\set{\vec{r}_i \to \vec{r}_i + \vec{u}_i}$, where $\set{\vec{r}_i}$ are the atomic positions as defined by the lattice. Then:
+\begin{align}
+    \hat{V}_c(\vec{q}) & = \mathcal{F}\left[ \sum_i V_a(\vec{x} - \vec{r}_i - \vec{u}_i) \right] \nonumber \\
+                       & = \sum_i f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} e^{-i \vec{q} \cdot \vec{u}_i}
+\end{align}
+The factors $\set{e^{-i \vec{q} \cdot \vec{u}_i}}$, when time-averaged, are called the Debye-Waller factors[@Waller1923; @Waller1928].
+
+### Measurements
 
 ### The reciprocal lattice
 
@@ -246,6 +270,8 @@ $$
 $${#eq:scattering-amplitude-mult}
 The structure of @eq:scattering-amplitude-mult informs on the following physical interpretation. Double scattering involves a first scattering at $\vec{x}^{\prime\prime}$ ($V(\vec{x}^{\prime\prime})$), which "radiates" as a spherical wave moving from $\vec{x}^{\prime\prime}$ to $\vec{x}^{\prime}$ ($e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}/|\vec{x}^\prime - \vec{x}^{\prime\prime}|$), followed by a second scattering at $\vec{x}^\prime$ ($V(\vec{x}^{\prime})$).
 
+TODO: plot a comparison
+
 ### Comparing cross-sections
 
 The computation of the differential scattering cross section for two elastic scattering events is given by:
@@ -274,7 +300,7 @@ Note that
 $$
     \left| W(\vec{x}^\prime, \vec{x}^{\prime\prime}) \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right| < \frac{1}{a}
 $$
-which in turn implies
+which in turn implies[^conj]
 \begin{align}
     \frac{d\sigma_2}{d\Omega} & < \frac{1}{a} \left| \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
             e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2 \nonumber \\
@@ -284,7 +310,7 @@ which in turn implies
             e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \right|^2 \left| \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^{\prime\prime} e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2 \nonumber \\
             & < \frac{1}{a} \left( \frac{d\sigma_1}{d\Omega}\right)^2
 \end{align}
-where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj].
+where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event.
 
 
 ## Electron-phonon interactions in the context of scattering

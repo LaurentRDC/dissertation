@@ -51,8 +51,8 @@ ax_r.set_xlim([q.min(), q.max()])
 ax_r.yaxis.tick_right()
 ax_r.yaxis.set_label_position("right")
 
-for ax_, tag in zip([ax, ax_r], ["a)", "b)"]):
-    tag_axis(ax_, text="a)", x=0.95, horizontalalignment="right")
+for ax_, tag in zip([ax, ax_r], ["a) $V_a(\mathbf{x})$", "b) $f_e(\mathbf{q})$"]):
+    tag_axis(ax_, text=tag, x=0.95, horizontalalignment="right")
 
 plt.tight_layout()
 plt.subplots_adjust(top=0.85)
