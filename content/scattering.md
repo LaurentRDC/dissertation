@@ -58,7 +58,7 @@ for some scalars $\{A_x, A_y, A_z, A\}$. Combining [@eq:scattering-free-space] [
 $$
 \Psi_a(\vec{x}, t) = A e^{i (\vec{k}_a \cdot \vec{x} - \omega_a t)}
 $$
-with associated energy eigenvalue $E_a = \hbar^2 \vec{k}_a^2 / 2 m_e=\hbar \omega_a$
+with associated energy eigenvalue $E_a = \hbar^2 \vec{k}_a^2 / 2 m_e=\hbar \omega_a$.
 
 ### The Lippmann-Schwinger equation
 
@@ -85,12 +85,14 @@ $$
 $${#eq:scattering-lippmann-schwinger-rad}
 The canonical description of the Lippmann-Schwinger equation is usually reduced to:
 $$
-    \braket{\vec{x} | \Psi} = \frac{1}{L^{3/2}} \left[ e^{i \vec{k} \cdot \vec{x}} + \frac{e^{ikr}}{r} f(\vec{k}_f, \vec{k}_i)\right]
+    \braket{\vec{x} | \Psi} = \frac{1}{L^{3/2}} \left[ e^{i \vec{k}_i \cdot \vec{x}} + \frac{e^{ikr}}{r} f(\vec{k}_f, \vec{k}_i)\right]
 $${#eq:scattering-lippmann-schwinger-general}
 where
-$$
-f(\vec{k}_f, \vec{k}_i) \equiv -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vec{x}^\prime \frac{e^{-i \vec{k}_f \cdot \vec{x}^\prime}}{L^{3/2}} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi} =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f}V\ket{\Psi}
-$${#eq:scattering-amplitude}
+\begin{align}
+    f(\vec{k}_f, \vec{k}_i) & \equiv -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vec{x}^\prime \frac{e^{-i \vec{k}_f \cdot \vec{x}^\prime}}{L^{3/2}} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi} \nonumber \\
+                            & =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f}V\ket{\Psi}
+    \label{eq:scattering-amplitude}
+\end{align}
 $f(\vec{k}_f, \vec{k})$ is called the *scattering amplitude*. The form of @eq:scattering-lippmann-schwinger-general complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
 
 The calculation of the scattered wavefunction $\braket{\vec{x}|\Psi}$ has been reduced to the calculation of $\bra{\vec{k}_f}V\ket{\Psi}$. The derivation of an expression for this is beyond the scope of this work, and the final result is stated[^tmatrix]:
@@ -98,6 +100,24 @@ $$
     \bra{\vec{k}_f}V\ket{\Psi} = \bra{\vec{k}_f} \left[ \sum_{j=0}^{\infty} V \left( \frac{1}{E_i - H_0 + i \epsilon} V\right)^j \right] \ket{\vec{k}_i}
 $${#eq:scattering-potential-decomp}
 where $H_0$ is the free-space Hamiltonian with eigenvalue $E_i=\hbar^2 \vec{k}_i^2/2 m_e$, and $\epsilon$ is a vanishingly small real number. In particular, each term with index $j$ in the sum of @eq:scattering-potential-decomp corresponds to the electron scattering $j$ times[@Feynman1965].
+
+### Measuring the scattered wavefunction
+
+Electron cameras measure the intensity of the wavefunction. In the case of bright-field electron microscopy, where the wavefunction is imaged directly, the intensity on the detector is given by:
+$$
+    I(\vec{x}) \equiv \left| \braket{\vec{x} | \Psi} \right|^2
+$$
+In order to sample the scattered wavefunction in reciprocal space, an electron lens can be used to focus the scattered electrons onto the detector. Given that electrons are prepared with definite momentum $\vec{k}_i$, it is trivial to ignore the unscattered part of the wavefunction -- the first term in @eq:scattering-lippmann-schwinger-general -- which is found only at $|\vec{q}| = 0$. Therefore, the intensity away from $|\vec{q}| = 0$ is related only to the scattered wavefunction, $\Psi_s$:
+\begin{align}
+I(\vec{q}) 
+    & = \left| \braket{\vec{x} | \Psi_s} \right|^2 \nonumber \\
+    & = \left| \frac{e^{ikr}}{r} f(\vec{k}_f, \vec{k}_i) \right|^2 \nonumber \\
+    & = \frac{1}{r^2} |f(\vec{k}_f, \vec{k}_i)|^2
+\label{eq:scattering-intensity}
+\end{align}
+Therefore, the diffracted intensity $I(\vec{q})$ is proportional to the square of the scattering amplitude. 
+
+Note that the factor of $1/r^2$ is generally ignored[@Fultz2002r2]. For the instrument configuration presented in @sec:experimental_setup, $1/r^2$ varies from \SIrange{15.92}{16}{\per\square\meter}, from the corner to the center of the detector respectively. While not an insignificant variation, the experiments presented herein generally measure the relative change in intensity, in which case factors are not important.
 
 ## Elastic scattering in a crystal
 
@@ -156,10 +176,16 @@ where $\vec{y}$ is some arbitrary translation vector. Therefore, the Fourier tra
     \label{eq:scattering-potential-crystal}
 \end{align}
 
+@eq:scattering-potential-crystal has historically been called the *static structure factor*, named thus in contrast with the *dynamic structure factor* discussed in TODO:ONEPH. A visual representation of the scattering potential of a crystal is helpful. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
+
+From @eq:scattering-intensity and @eq:scattering-amplitude-q, the measured diffracted intensity is:
+$$
+    I(\vec{q}) = \frac{m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_i f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} \right|^2
+$$
+which is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity; @Kittel1996intensity; @Fultz2002intensity; @Kirkland2010intensity].
+
 ```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for $\alpha$-polonium. **a)** Electrostatic potential $V(\vec{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are shown; lattice vector $\vec{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vec{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
 ``` 
-
-A visual representation of the scattering potential of a crystal is helpful. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
 
 #### Effect of finite temperatures
 
@@ -169,8 +195,6 @@ At finite temperatures, the atoms are vibrating about their equilibrium position
                        & = \sum_i f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} e^{-i \vec{q} \cdot \vec{u}_i}
 \end{align}
 The factors $\set{e^{-i \vec{q} \cdot \vec{u}_i}}$, when time-averaged, are called the Debye-Waller factors[@Waller1923; @Waller1928].
-
-### Measurements
 
 ### The reciprocal lattice
 
