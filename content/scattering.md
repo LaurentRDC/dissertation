@@ -307,24 +307,11 @@ The computation of the differential scattering cross section for two elastic sca
 \end{align}
 The evaluation of @eq:scattering-cross-sec-2 for a realistic potential $V(\vec{x})$ is arduous. However, given that this type of scattering is *undesirable*, getting an upper bound on its scattering cross-section is a worthwhile exercise. 
 
-In electron scattering experiments, the elastic scattering cross section is small enough that an electron is unlikely to scatter twice from the same atom. This means that the integral is 0 when $|\vec{x}^\prime - \vec{x}^{\prime\prime}|$ is small. Assuming a crystal with minimum inter-atomic distance of $a$, a weight function $W(\vec{x}^\prime, \vec{x}^{\prime\prime})$ is defined as:
+In electron scattering experiments, the elastic scattering cross section is small enough that an electron is unlikely to scatter twice from the same atom. This means that the integral is 0 when $|\vec{x}^\prime - \vec{x}^{\prime\prime}|$ is small. The inner integral over $\vec{x}^{\prime\prime}$ in @eq:scattering-cross-sec-2 can be split:
 $$
-W(\vec{x}^\prime, \vec{x}^{\prime\prime})=
-    \begin{cases}
-          1 \quad &\text{if} \, |\vec{x}^\prime - \vec{x}^{\prime\prime}| \geq a \\
-          0 \quad &\text{if} \, |\vec{x}^\prime - \vec{x}^{\prime\prime}| < a \\
-     \end{cases}
+    \int d\vec{x}^{\prime} \int d\vec{x}^{\prime\prime} \to \int d\vec{x}^{\prime} \left[ \int_{|\vec{x}^\prime - \vec{x}^{\prime\prime}| \leq a} d\vec{x}^{\prime\prime} + \int_{|\vec{x}^\prime - \vec{x}^{\prime\prime}| > a} d\vec{x}^{\prime\prime} \right]
 $$
-Then, 
-$$
-    \frac{d\sigma_2}{d\Omega} < \left| \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
-            e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) W(\vec{x}^\prime, \vec{x}^{\prime\prime}) \left( \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2
-$$
-Note that
-$$
-    \left| W(\vec{x}^\prime, \vec{x}^{\prime\prime}) \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right| < \frac{1}{a}
-$$
-which in turn implies[^conj]
+where $a$ is the inter-atomic distance of the crystal. In the approximation described above, where double-scattering is only possible for $|\vec{x}^\prime - \vec{x}^{\prime\prime}| > a$ the first integral over $\vec{x}^{\prime\prime}$ vanishes. Moreover, $|e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}|/|\vec{x}^\prime - \vec{x}^{\prime\prime}| < 1/a$ for $|\vec{x}^\prime - \vec{x}^{\prime\prime}| > a$. Then:
 \begin{align}
     \frac{d\sigma_2}{d\Omega} & < \frac{1}{a} \left| \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vec{x}^\prime \int d\vec{x}^{\prime\prime} 
             e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2 \nonumber \\
@@ -334,7 +321,7 @@ which in turn implies[^conj]
             e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \right|^2 \left| \frac{m_e}{2 \pi \hbar^2} \int d\vec{x}^{\prime\prime} e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime}) \right|^2 \nonumber \\
             & < \frac{1}{a} \left( \frac{d\sigma_1}{d\Omega}\right)^2
 \end{align}
-where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event.
+where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj].
 
 
 ## Electron-phonon interactions in the context of scattering
