@@ -6,8 +6,8 @@ from mpl_toolkits.axes_grid1 import ImageGrid
 import matplotlib.patches as mpatches
 import numpy as np
 from functools import partial
-
 from crystals.affine import change_of_basis
+from .snse_datasets import DatasetInfo, DatasetInfo200
 
 # CONSTANTS -------------------------------------------------------------------
 
@@ -124,3 +124,6 @@ def draw_hexagon(
         **kwargs,
     )
     ax.add_patch(hexagon)
+
+
+# -----------------------------------------------------------------------------

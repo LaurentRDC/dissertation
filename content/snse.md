@@ -33,6 +33,12 @@
 ```{.matplotlib file="figures/snse/diffuse.py" caption=""}
 ```
 
+```{.matplotlib file="figures/snse/highsym.py" caption=""}
+```
+
+```{.matplotlib file="figures/snse/widths.py" caption=""}
+```
+
 ### Diffuse scattering measurements
 
 ### Effect of charge-transfer on diffracted intensity
