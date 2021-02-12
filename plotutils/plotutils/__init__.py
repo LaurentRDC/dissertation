@@ -12,10 +12,13 @@ from crystals.affine import change_of_basis
 # CONSTANTS -------------------------------------------------------------------
 
 FIGURE_WIDTH = 6 + 3 / 4  # inches
+FONTSIZE = 10
 
 # Diffraction patterns are rotated by 8 degrees clockwise from aligned
 GRAPHITE_ANGLE = 8  # degrees
-GRAPHITE_CAMERA_LENGTH = 0.25  # centimeters
+GRAPHITE_CAMERA_LENGTH = 0.25  # meters
+
+SNSE_CAMERA_LENGTH = 0.2939  # meters
 
 # -----------------------------------------------------------------------------
 

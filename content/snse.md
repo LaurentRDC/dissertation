@@ -30,6 +30,9 @@
 
 ## Ultrafast electron scattering measurements
 
+```{.matplotlib file="figures/snse/diffuse.py" caption=""}
+```
+
 ### Diffuse scattering measurements
 
 ### Effect of charge-transfer on diffracted intensity

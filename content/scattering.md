@@ -144,7 +144,7 @@ The scattering potential of a single atom is given by:
 $$
     V_a(\vec{x}) = -\frac{Z e^2}{|\vec{x}|} + \sum_{i=1}^{Z} \frac{e^2}{|\vec{x} - \vec{x}_i|}
 $${#eq:scattering-atom-potential}
-where Z is the atomic weight, and $\vec{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010]. This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factor for electrons are spherically symmetric. They can be parametrized of an atom can be parametrized as:
+where Z is the atomic weight, and $\vec{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles, using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010] to get the real-space electron density (i.e. determining the possible set $\set{\vec{x}_i}$). This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factor for electrons are spherically symmetric. They can be parametrized of an atom can be parametrized as:
 $$
     f_e(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
 $${#eq:scattering-affe}
@@ -167,7 +167,7 @@ where  the sum index $i$ runs over atoms in the crystal with positions $\vec{r}_
                                                    & = \frac{e^{i \vec{q} \cdot \vec{y}}}{2 \pi} \int d\vec{x}^\prime e^{i\vec{q} \vec{x}^\prime} h(\vec{x}^\prime) \nonumber \\
                                                    & = e^{i \vec{q} \cdot \vec{y}} \mathcal{F}\left[ h(\vec{x}) \right]
 \end{align}
-where $\vec{y}$ is some arbitrary translation vector. Therefore, the Fourier transform of the scattering potential of the entire crystal is related to the Fourier transform of its constituent atoms (@eq:scattering-affe) as:
+where $\vec{y}$ is some arbitrary translation vector. Therefore, the Fourier transform of the scattering potential of the entire crystal is related to the Fourier transform  the potential its constituent atoms (@eq:scattering-affe) as:
 \begin{align}
     \hat{V}_c(\vec{q}) & = \mathcal{F}\left[ \sum_i V_a(\vec{x} - \vec{r}_i) \right] \nonumber \\
                        & = \sum_i \mathcal{F}\left[ V_a(\vec{x} - \vec{r}_i) \right] \nonumber \\
