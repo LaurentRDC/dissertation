@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize as opt
@@ -18,7 +17,9 @@ CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
 INDICES_DIFFUSE = [(0, 0, 2), (0, 2, 0), (0, 1, -3), (0, 0, 4)]
 
 
-figure, ax_widths = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 0.5 * FIGURE_WIDTH))
+figure, (ax_widths, ax_centers) = plt.subplots(
+    2, 1, sharex=True, figsize=(FIGURE_WIDTH, FIGURE_WIDTH)
+)
 
 # Fit to extract width
 def peak(f, A, c, fwhm, o):
@@ -43,10 +44,11 @@ for refl in INDICES_DIFFUSE:
             yi_ - width : yi_ + width,
             :,
         ]
-        cube = cube[:,:,np.less_equal(timedelays, 5)]
+        cube = cube[:, :, np.less_equal(timedelays, 5)]
         timedelays = timedelays[np.less_equal(timedelays, 5)]
 
     ws = list()
+    centers = list()
     errs = list()
 
     for index, time in enumerate(timedelays):
@@ -74,14 +76,20 @@ for refl in INDICES_DIFFUSE:
 
             interp = interpolate.UnivariateSpline(k, peak_cut - peak_cut.max() / 2)
             r1, r2 = interp.roots()
-            peak_fwhm = abs(r1 - r2)
 
-        ws.append(peak_fwhm)
+        ws.append(abs(r1 - r2))
+        centers.append((r1 + r2) / 2)
         errs.append(err_fwhm)
 
-    fwhms[refl] = (ws, errs)
+    fwhms[refl] = (ws, centers, errs)
 
-for (refl, (ws, errs)), marker, color in zip(fwhms.items(), [".", "D", "^", "*"], skued.spectrum_colors(len(INDICES_DIFFUSE))):
+for index, ((refl, (ws, centers, errs)), marker, color) in enumerate(
+    zip(
+        fwhms.items(), [".", "D", "^", "*"], skued.spectrum_colors(len(INDICES_DIFFUSE))
+    )
+):
+
+    ws = np.asarray(ws)
     ax_widths.errorbar(
         timedelays,
         ws,
@@ -92,7 +100,21 @@ for (refl, (ws, errs)), marker, color in zip(fwhms.items(), [".", "D", "^", "*"]
         label=skued.indices_to_text(*refl),
     )
 
-ax_widths.axvline(x=0, linestyle="--", linewidth=0.5, color="k")
+    centers = np.asarray(centers)
+    centers -= np.mean(centers[timedelays < 0])
+    ax_centers.axhline(y=index * 0.01, linestyle="dashed", color="k", linewidth=0.5)
+    ax_centers.plot(
+        timedelays,
+        index * 0.01 + (centers - np.mean(centers[timedelays < 0])),
+        linestyle="none",
+        marker=marker,
+        color=color,
+        label=skued.indices_to_text(*refl),
+    )
+
+for ax in [ax_widths, ax_centers]:
+    ax.axvline(x=0, linestyle="--", linewidth=0.5, color="k")
+
 ax_widths.legend(
     loc="center",
     ncol=len(INDICES_DIFFUSE),
@@ -102,7 +124,9 @@ ax_widths.legend(
     edgecolor="none",
 )
 ax_widths.set_xlim([-1, 5])
-ax_widths.set_xlabel("time-delay [ps]")
+ax_widths.xaxis.set_visible(False)
+ax_centers.set_xlabel("time-delay [ps]")
 ax_widths.set_ylabel("FWHM [$\AA^{-1}$]")
+ax_centers.set_ylabel("Center shift [$\AA^{-1}$]")
 
 plt.tight_layout()

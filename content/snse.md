@@ -33,10 +33,10 @@
 ```{.matplotlib file="figures/snse/diffuse.py" caption=""}
 ```
 
-```{.matplotlib file="figures/snse/highsym.py" caption=""}
+```{.matplotlib file="figures/snse/highsym.py" caption="Comparison of the diffuse intensity dynamics at various in-plane high-symmetry points."}
 ```
 
-```{.matplotlib file="figures/snse/widths.py" caption=""}
+```{.matplotlib file="figures/snse/widths.py" caption="Dynamics of the width of various Bragg peaks. For every time-delay, Bragg peaks were fit with a Gaussian function. The full-width at half-maximum is shown over time on the y-axis. The error bars represent the covariance of fit parameter. This figure shows that the dynamics at $\Gamma$ are not due to peak broadening."}
 ```
 
 ### Diffuse scattering measurements
