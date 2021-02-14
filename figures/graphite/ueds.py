@@ -18,7 +18,7 @@ from plotutils import (
 )
 from skimage.transform import rotate
 from skimage.filters import gaussian
-from skued import detector_scattvectors, nfold, autocenter
+from skued import detector_scattvectors, nfold
 
 DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
 DOWNSAMPLING = 4
@@ -26,8 +26,7 @@ DOWNSAMPLING = 4
 with DiffractionDataset(DATASET, mode="r") as source:
     b4t0 = source.diff_eq()[::DOWNSAMPLING, ::DOWNSAMPLING]
     mask = source.valid_mask[::DOWNSAMPLING, ::DOWNSAMPLING]
-
-r, c = autocenter(im=b4t0, mask=mask).astype(np.int)
+    c, r = (np.asarray(source.center) / DOWNSAMPLING).astype(int)
 
 qx, qy, _ = detector_scattvectors(
     keV=90,

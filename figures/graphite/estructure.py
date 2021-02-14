@@ -75,7 +75,7 @@ ax1.plot_surface(kx, ky, Eminus - Eplus.min(), rcount=128, ccount=128, **surface
 # Therefore, the only location to place the BZ is below the dispersion curve
 K = np.array([0, -1.7])
 R60deg = np.array([[1 / 2, -sqrt(3) / 2], [sqrt(3) / 2, 1 / 2]])
-vertices = np.empty((6, 3), dtype=np.float)
+vertices = np.empty((6, 3), dtype=float)
 for i in range(0, 6):
     point = reduce(lambda m1, m2: m1 @ m2, i * [R60deg], R60deg) @ K
     vertices[i, :] = np.array([point[0], point[1], Eplus.min()])

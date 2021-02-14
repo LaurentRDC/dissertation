@@ -17,7 +17,7 @@ from iris import DiffractionDataset
 from plotutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH
 from skimage.filters import gaussian
 from skimage.transform import rotate
-from skued import detector_scattvectors, nfold, autocenter
+from skued import detector_scattvectors, nfold
 from tqdm import tqdm
 
 from mkoneph import (
@@ -33,7 +33,7 @@ OUTPUT = INPUT / "populations"
 OUTPUT.mkdir(exist_ok=True)
 
 with DiffractionDataset(INPUT / "graphite_time_corrected_iris5.hdf5", mode="r") as dset:
-    r, c = autocenter(im=dset.diff_data(0), mask=dset.mask)
+    c, r = np.asarray(dset.center).astype(int)
 
 DECIMATION = 15
 GAMMA_RADIUS = 0.45
@@ -149,7 +149,7 @@ def optimize(factors, intensities, **kwargs):
     nk, _, nmodes = factors.shape
 
     final_shape = (nk, nmodes)
-    solution = np.empty(shape=final_shape, dtype=np.float)
+    solution = np.empty(shape=final_shape, dtype=float)
     errors = np.empty_like(solution)
 
     for k_index in range(nk):
@@ -208,8 +208,8 @@ def population(kx, ky, time, exclude=tuple()):
     # There is one system of equation per reduced wavevector k
     # Therefore, axes 1 and 2 are along modes and reflections
     # while axis 0 is along wavevectors
-    system = np.zeros(shape=(nk, nbz, nmodes), dtype=np.float)
-    intensities = np.zeros(shape=(nk, nbz), dtype=np.float)
+    system = np.zeros(shape=(nk, nbz, nmodes), dtype=float)
+    intensities = np.zeros(shape=(nk, nbz), dtype=float)
 
     for mode_index, mode_name in enumerate(mode_names):
 
@@ -267,7 +267,7 @@ if __name__ == "__main__":
             f.create_dataset(
                 mode_name,
                 shape=(len(kx), len(times)),
-                dtype=np.float,
+                dtype=float,
                 chunks=True,
                 shuffle=True,
                 compression="gzip",

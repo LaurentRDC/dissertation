@@ -18,7 +18,7 @@ from plotutils import (
 )
 from skimage.transform import rotate
 from skimage.filters import gaussian
-from skued import detector_scattvectors, indices_to_text, nfold, autocenter
+from skued import detector_scattvectors, indices_to_text, nfold
 
 DATADIR = Path("data") / "graphite"
 DATASET = DATADIR / "graphite_time_corrected_iris5.hdf5"
@@ -26,8 +26,7 @@ DATASET = DATADIR / "graphite_time_corrected_iris5.hdf5"
 with DiffractionDataset(DATASET) as source:
     b4t0 = source.diff_eq()
     mask = source.valid_mask
-
-r, c = autocenter(im=b4t0, mask=mask)
+    c, r = np.asarray(source.center).astype(int)
 
 qx, qy, _ = detector_scattvectors(
     keV=90,

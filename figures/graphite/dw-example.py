@@ -3,7 +3,6 @@ Time-trace of the transient Debye-Waller effect in graphite.
 """
 import numpy as np
 import matplotlib.pyplot as plt
-from skued import autocenter
 from iris import DiffractionDataset
 from pathlib import Path
 from plotutils import FIGURE_WIDTH

@@ -18,7 +18,7 @@ from plotutils import (
     tag_axis,
 )
 from skimage.transform import rotate
-from skued import detector_scattvectors, nfold, autocenter
+from skued import detector_scattvectors, nfold
 
 DOWNSAMPLING = 4
 
@@ -27,9 +27,7 @@ with DiffractionDataset(
 ) as source:
     mask = source.valid_mask[::DOWNSAMPLING, ::DOWNSAMPLING]
     b4t0 = source.diff_data(source.time_points[0])[::DOWNSAMPLING, ::DOWNSAMPLING]
-
-
-r, c = autocenter(im=b4t0, mask=mask).astype(np.int)
+    c, r = (np.asarray(source.center) / DOWNSAMPLING).astype(int)
 
 xx, yy = np.meshgrid(np.arange(0, b4t0.shape[1]), np.arange(0, b4t0.shape[0]))
 rr = np.sqrt(np.square(xx - c) + np.square(yy - r))

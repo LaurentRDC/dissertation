@@ -8,32 +8,39 @@ from iris import DiffractionDataset
 from skimage.filters import gaussian
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from plotutils import FIGURE_WIDTH, ImageGrid, tag_axis
-from skued import autocenter
 
 INPUT = Path("data") / "snse"
 DOWNSAMPLING = 4
 
-with DiffractionDataset(INPUT / "static.hdf5") as source:
-    mask_exf = source.valid_mask[::DOWNSAMPLING, ::DOWNSAMPLING]
-    im_exf = source.diff_data(0)[::DOWNSAMPLING, ::DOWNSAMPLING]
+side_lengths = list()
+centers = list()
 
 with DiffractionDataset(INPUT / "overnight4.hdf5") as source:
     mask_umt = source.valid_mask[::DOWNSAMPLING, ::DOWNSAMPLING]
     im_umt = source.diff_eq()[::DOWNSAMPLING, ::DOWNSAMPLING]
+    c, r = (np.asarray(source.center) / DOWNSAMPLING).astype(int)
+    centers.append((r, c))
+    side_lengths.append(
+        floor(min([c, abs(c - im_umt.shape[1]), r, abs(r - im_umt.shape[0])]))
+    )
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 2))
-grid = ImageGrid(fig, 111, nrows_ncols=(1, 2), cbar_location="top")
+with DiffractionDataset(INPUT / "static.hdf5") as source:
+    mask_exf = source.valid_mask[::DOWNSAMPLING, ::DOWNSAMPLING]
+    im_exf = source.diff_data(0)[::DOWNSAMPLING, ::DOWNSAMPLING]
+    c, r = (np.asarray(source.center) / DOWNSAMPLING).astype(int)
+    centers.append((r, c))
+    side_lengths.append(
+        floor(min([c, abs(c - im_exf.shape[1]), r, abs(r - im_exf.shape[0])]))
+    )
+
 
 # Determine the smallest image center - side distance
 # This way, we ensure that both diffraction patterns will appear to be
 # the same size.
-side_lengths = list()
-centers = list()
-for im, mask in zip([im_umt, im_exf], [mask_umt, mask_exf]):
-    r, c = autocenter(im, mask).astype(np.int)
-    centers.append((r, c))
-    side_lengths.append(floor(min([c, abs(c - im.shape[1]), r, abs(r - im.shape[0])])))
 side_length = min(side_lengths)
+
+fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 2))
+grid = ImageGrid(fig, 111, nrows_ncols=(1, 2), cbar_location="top")
 
 for ax, (r, c), im, mask, vmax, crop, label in zip(
     grid,

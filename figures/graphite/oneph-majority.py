@@ -81,7 +81,7 @@ def threshold_oneph(threshold):
     values = sorted(np.unique(majority.ravel()))
     replacement = dict(enumerate(values))
 
-    compact = np.zeros_like(majority, dtype=np.int)
+    compact = np.zeros_like(majority, dtype=int)
     for i, v in replacement.items():
         compact[np.equal(majority, v)] = i
 

@@ -58,7 +58,7 @@ AMU_TO_KG = 1.6605e-27  # atomic mass units to Kg
 HZ_TO_EV = HBAR * 2 * np.pi
 
 NCORES = cpu_count() - 1
-EPS = np.finfo(np.float).eps
+EPS = np.finfo(float).eps
 
 
 def ncells(crystal):
@@ -407,9 +407,7 @@ def extend_bragg(mode, reflections):
         over_reflections.append(q_points + H[None, :])
 
         # Quick way to copy a chunk of h, k, l row-wise
-        hkls.append(
-            np.zeros_like(q_points) + np.array([h, k, l], dtype=np.int)[None, :]
-        )
+        hkls.append(np.zeros_like(q_points) + np.array([h, k, l], dtype=int)[None, :])
 
     # Important to distinguish
     q_points = np.vstack(over_reflections)
