@@ -6,7 +6,7 @@ import scipy.signal as signal
 import scipy.interpolate as interpolate
 from pathlib import Path
 from crystals import Crystal
-from plotutils import FIGURE_WIDTH
+from plotutils import FIGURE_WIDTH, tag_axis
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset
@@ -128,5 +128,15 @@ ax_widths.xaxis.set_visible(False)
 ax_centers.set_xlabel("time-delay [ps]")
 ax_widths.set_ylabel("FWHM [$\AA^{-1}$]")
 ax_centers.set_ylabel("Center shift [$\AA^{-1}$]")
+
+ax_widths.set_ylim([0.15, 0.21])
+ax_centers.set_ylim([-0.005, 0.040])
+
+tag_axis(ax_widths, "a)", x=0.025)
+tag_axis(
+    ax_centers,
+    "b)",
+    x=0.025,
+)
 
 plt.tight_layout()
