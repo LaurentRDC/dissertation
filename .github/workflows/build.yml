@@ -93,3 +93,4 @@ jobs:
         name: dissertation
         path: |
           dissertation-*.pdf
+        retention-days: 7
