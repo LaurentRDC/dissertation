@@ -3,13 +3,18 @@ import numpy as np
 from crystals import Crystal, Element, Atom
 from skued import electrostatic, affe
 from warnings import simplefilter
-from plotutils import FIGURE_WIDTH, tag_axis
+from plotutils import FIGURE_WIDTH, tag_axis, discrete_colors
 
 # For division by zero warnings
 simplefilter("ignore", category=RuntimeWarning)
 
-ELEMENTS = ["C", "Cu", "Sn", "Au"]
-COLORS = ["green", "red", "blue", "goldenrod"]
+ELEMENTS = [
+    "C",
+    "Au",
+    "Cu",
+    "Sn",
+]
+COLORS = ["green"] + discrete_colors(len(ELEMENTS) - 1)
 
 
 def potential(element, r):

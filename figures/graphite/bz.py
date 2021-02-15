@@ -3,7 +3,7 @@ import numpy as np
 from functools import reduce
 from math import radians, sqrt
 from matplotlib.patches import Circle, RegularPolygon, Rectangle
-from plotutils import named_arrow
+from plotutils import named_arrow, discrete_colors
 
 
 def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):
@@ -60,7 +60,7 @@ offset = np.array([-0.06, 0.06])
 for point, label, sym_color in zip(
     [GAMMA, M, K],
     [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"],
-    ["k", "goldenrod", "blue"],
+    discrete_colors(3),
 ):
     for n in range(0, 6):
         point_ = reduce(lambda m1, m2: m1 @ m2, n * [R60deg], R60deg) @ point

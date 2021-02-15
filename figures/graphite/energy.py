@@ -7,7 +7,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from skued import biexponential, with_irf
 from scipy.optimize import curve_fit
 import numpy as np
-from plotutils import FIGURE_WIDTH
+from plotutils import FIGURE_WIDTH, discrete_colors
 
 INPUT = Path("data") / "graphite" / "populations"
 
@@ -59,7 +59,7 @@ with PopulationDatabase(INPUT / "population_timeseries.hdf5", mode="r") as dbase
     mode_energy["total"] = total_energy
 
     for mode, marker, color in zip(
-        ["TA", "TO2", "total"], ["^", "o", "s"], ["goldenrod", "blue", "red"]
+        ["TA", "TO2", "total"], ["^", "o", "s"], discrete_colors(3)
     ):
         y = mode_energy[mode] / mode_energy[mode].max()
         fit_params, _ = curve_fit(

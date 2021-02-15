@@ -12,6 +12,7 @@ from plotutils import (
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
+    discrete_colors,
 )
 
 MODE_ORDERING = {
@@ -134,7 +135,7 @@ bounds = np.arange(0, stop=len(labels) + 1)
 # Base color for no majority should be white
 # Also, cmaplist[1] and cmaplist[2] are very similar
 # so we swap the unused cmaplist[0]
-cmaplist = ["w", "red", "blue", "goldenrod"]
+cmaplist = ["w"] + discrete_colors(3)
 assert len(cmaplist) >= len(labels)
 
 cmap = cm.ListedColormap(name="Modes", colors=cmaplist)

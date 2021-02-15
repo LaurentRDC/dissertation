@@ -13,6 +13,7 @@ from scipy.constants import physical_constants
 from scipy.optimize import curve_fit
 from scipy.stats import sem
 from skued import gaussian, with_irf
+from plotutils import discrete_colors
 
 filterwarnings(action="ignore", category=UserWarning)
 
@@ -403,11 +404,12 @@ temperature_to_intensity = lambda a: fit_amp * (a - 300)
 fig, ax_K = plt.subplots(1, 1, figsize=(4, 3))
 ax_T = ax_K.twinx()
 
+colors = discrete_colors(2)
 ax_K.plot(
     simulation_times,
     best_curve,
     linestyle="solid",
-    color="blue",
+    color=colors[0],
     label="$A_1^{\prime}$ phonon",
 )
 
@@ -415,7 +417,7 @@ ax_K.plot(
     simulation_times,
     temperature_to_intensity(k_to_drain_temperature),
     linestyle=(0, (1, 1)),
-    color="goldenrod",
+    color=colors[1],
     label="Lattice drain",
 )
 

@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
 import matplotlib.patches as mpatches
 import numpy as np
+from itertools import islice
 from functools import partial
 from crystals.affine import change_of_basis
 from .snse_datasets import DatasetInfo, DatasetInfo200
@@ -126,4 +127,6 @@ def draw_hexagon(
     ax.add_patch(hexagon)
 
 
-# -----------------------------------------------------------------------------
+def discrete_colors(num):
+    """ Returns a list of discrete colors to plot, for example, various time-traces. """
+    return ["goldenrod", "red", "blue", "indigo"][0:num]
