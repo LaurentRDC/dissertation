@@ -46,7 +46,7 @@ SRC = [
     CONTENTDIR / "introduction.md",
     CONTENTDIR / "scattering.md",
     CONTENTDIR / "graphite.md",
-    #CONTENTDIR / "tase2.md",
+    # CONTENTDIR / "tase2.md",
     CONTENTDIR / "snse.md",
     CONTENTDIR / "conclusion.md",
 ]

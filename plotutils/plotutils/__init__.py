@@ -1,13 +1,17 @@
 """
 Package with utilities required to render figures
 """
-import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1 import ImageGrid
-import matplotlib.patches as mpatches
-import numpy as np
-from itertools import islice
 from functools import partial
+from itertools import islice
+
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+import numpy as np
 from crystals.affine import change_of_basis
+from matplotlib.collections import PatchCollection
+from matplotlib.patches import Rectangle
+from mpl_toolkits.axes_grid1 import ImageGrid
+
 from .snse_datasets import DatasetInfo, DatasetInfo200
 
 # CONSTANTS -------------------------------------------------------------------
@@ -130,3 +134,27 @@ def draw_hexagon(
 def discrete_colors(num):
     """ Returns a list of discrete colors to plot, for example, various time-traces. """
     return ["goldenrod", "red", "blue", "indigo"][0:num]
+
+
+def box_errorbars(ax, xdata, ydata, xerr, yerr, colors):
+    """
+    Create error boxes instead of error bars
+    """
+    # Create list for all the error patches
+    errorboxes = []
+    # Loop over data points; create box from errors at each point
+    for x, y in zip(xdata, ydata):
+        rect = Rectangle((x - xerr, y - yerr), 2 * xerr, 2 * yerr)
+        errorboxes.append(rect)
+
+    # Create patch collection with specified colour/alpha
+    pc = PatchCollection(errorboxes, edgecolor=colors, facecolor=colors, alpha=0.7)
+
+    # Add collection to axes
+    ax.add_collection(pc)
+
+    # Plot invisible scatter points to get automatic plot bounds that
+    # make sense
+    artists = ax.scatter(xdata, ydata, s=0, c=colors)
+
+    return artists
