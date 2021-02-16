@@ -152,7 +152,7 @@ $$
 $$
 Throughout the rest of this chapter, "scattering intensity" will imply discrete azimuthal average unless otherwise noted. An example of six-fold averaged diffraction pattern is shown in @fig:graphite-static b).
 
-```{#fig:graphite-static .matplotlib file="figures/graphite/diff-static.py" caption="Static diffraction pattern of graphite. **a)** static, unprocessed diffraction pattern. **b)** Six-fold discrete azimuthal average of the diffraction pattern in a) results in $\sqrt{6}$ increase in signal-to-noise ratio. Brillouin zones are shown around each reflection to guide the eye. "}
+```{.matplotlib #fig:graphite-static file="figures/graphite/diff-static.py" caption="Static diffraction pattern of graphite. **a)** static, unprocessed diffraction pattern. **b)** Six-fold discrete azimuthal average of the diffraction pattern in a) results in $\sqrt{6}$ increase in signal-to-noise ratio. Brillouin zones are shown around each reflection to guide the eye. "}
 ```
 
 ### Computational details {#sec:computational-details}
