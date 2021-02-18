@@ -7,7 +7,7 @@ import scipy.signal as signal
 import scipy.interpolate as interpolate
 from pathlib import Path
 from crystals import Crystal
-from plotutils import FIGURE_WIDTH, tag_axis
+from plotutils import FIGURE_WIDTH, tag_axis, discrete_colors
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset
@@ -91,7 +91,7 @@ for refl in INDICES_DIFFUSE:
 handles = list()
 for index, ((refl, (ws, centers, err_fwhm, err_center)), marker, color) in enumerate(
     zip(
-        fwhms.items(), [".", "D", "^", "*"], skued.spectrum_colors(len(INDICES_DIFFUSE))
+        fwhms.items(), [".", "D", "^", "*"], discrete_colors(len(INDICES_DIFFUSE))
     )
 ):
 

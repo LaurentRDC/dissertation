@@ -11,6 +11,7 @@ from crystals.affine import change_of_basis
 from matplotlib.collections import PatchCollection
 from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1 import ImageGrid
+from skued import spectrum_colors
 
 from .snse_datasets import DatasetInfo, DatasetInfo200
 
@@ -133,7 +134,10 @@ def draw_hexagon(
 
 def discrete_colors(num):
     """ Returns a list of discrete colors to plot, for example, various time-traces. """
-    return ["goldenrod", "red", "blue", "indigo"][0:num]
+    if num in {2, 3}:
+        return list(spectrum_colors(num_colors=num+1))[1:num+1]
+
+    return list(spectrum_colors(num_colors=num))
 
 
 def box_errorbars(ax, xdata, ydata, xerr, yerr, colors):

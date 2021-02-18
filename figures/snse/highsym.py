@@ -4,7 +4,7 @@ import scipy.optimize as opt
 import scipy.stats
 from skimage.filters import gaussian
 from pathlib import Path
-from plotutils import FIGURE_WIDTH
+from plotutils import FIGURE_WIDTH, discrete_colors
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset
@@ -66,7 +66,7 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
 for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
-colors = skued.spectrum_colors(len(timeseries))
+colors = discrete_colors(len(timeseries))
 for index, (ts_name, color, marker) in enumerate(
     zip(["background", "Y", "Z", "T"], colors, ["D", "*", "o", "^"])
 ):

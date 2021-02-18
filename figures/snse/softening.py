@@ -209,9 +209,7 @@ def delta_msd_2mjcm2():
     return timedelays, delta_msd / 15  # thicker sample
 
 
-figure, ax_softening = plt.subplots(
-    1, 1, figsize=(5, 4)
-)
+figure, ax_softening = plt.subplots(1, 1, figsize=(5, 4))
 ax_displacement = ax_softening.inset_axes([0.6, 0.6, 0.38, 0.38])
 
 ax_density = ax_softening.twiny()

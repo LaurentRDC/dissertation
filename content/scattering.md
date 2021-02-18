@@ -187,15 +187,6 @@ which is the standard result for the diffracted intensity being proportional to 
 ```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for $\alpha$-polonium. **a)** Electrostatic potential $V(\vec{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are shown; lattice vector $\vec{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vec{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
 ``` 
 
-#### Effect of finite temperatures
-
-At finite temperatures, the atoms are vibrating about their equilibrium positions $\set{\vec{r}_i}$. Let $\set{\vec{u}_i}$ be the *displacement vectors* due to temperature. Then, the atomic positions can be expressed as $\set{\vec{r}_i \to \vec{r}_i + \vec{u}_i}$, where $\set{\vec{r}_i}$ are the atomic positions as defined by the lattice. Then:
-\begin{align}
-    \hat{V}_c(\vec{q}) & = \mathcal{F}\left[ \sum_i V_a(\vec{x} - \vec{r}_i - \vec{u}_i) \right] \nonumber \\
-                       & = \sum_i f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} e^{-i \vec{q} \cdot \vec{u}_i}
-\end{align}
-The factors $\set{e^{-i \vec{q} \cdot \vec{u}_i}}$, when time-averaged, are called the Debye-Waller factors[@Waller1923; @Waller1928].
-
 ### The reciprocal lattice
 
 The geometry of reciprocal space and the reciprocal lattice are foundational concepts that drive the understanding of ultrafast electron diffraction.
@@ -324,7 +315,104 @@ where $a$ is the inter-atomic distance of the crystal. In the approximation desc
 where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj].
 
 
-## Electron-phonon interactions in the context of scattering
+## The effect of lattice waves on ultrafast electron scattering
+
+TODO: explain that we only consider single-phonon scattering
+
+In this section, the effect of lattice waves on electron diffraction measurements will be considered, ending in the derivation of what is known as *diffuse scattering*. 
+
+Due to the presence of lattice waves, the atoms are vibrating about their equilibrium positions $\set{\vec{r}_i}$. Let $\set{\vec{u}_i}$ be the *displacement vectors* due to these lattice waves. Then, the atomic positions can be expressed as $\set{\vec{r}_i \to \vec{r}_i + \vec{u}_i}$, where $\set{\vec{r}_i}$ are the atomic positions as defined by the lattice. Then:
+\begin{align}
+    \hat{V}_c(\vec{q}) & = \mathcal{F}\left[ \sum_i V_a(\vec{x} - \vec{r}_i - \vec{u}_i) \right] \nonumber \\
+                       & = \sum_i f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} e^{-i \vec{q} \cdot \vec{u}_i}
+    \label{eq:scattering-potential-temp}
+\end{align}
+Recall from eq:scattering-intensity that the measurable quantity $|f^{(1)}(\vec{q})|^2$ is proportional to $|\hat{V}(\vec{q})|$:
+\begin{align}
+    |f^{(1)}(\vec{q})|^2 
+        & = \left| -\frac{m_e}{\hbar^2} \hat{V}(\vec{q}) \right|^2 \nonumber \\
+        & = \frac{m_e^2}{\hbar^4} \hat{V}(\vec{q}) \hat{V}^{\star}(\vec{q}) \nonumber \\
+        & = \frac{m_e^2}{\hbar^4}  
+            \left(\sum_{s} f_{e,s}(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_s} e^{-i \vec{q} \cdot \vec{u}_s} \right)  
+            \left(\sum_{s^{\prime}} f_{e,s^{\prime}}(\vec{q}) e^{i \vec{q} \cdot \vec{r}_{s^{\prime}}} e^{i \vec{q} \cdot \vec{u}_{s^{\prime}}} \right) \nonumber \\
+        & = \frac{m_e^2}{\hbar^4} \sum_{s} \sum_{s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q})  
+            e^{-i \vec{q} \cdot (\vec{r}_s - \vec{r}_{s^{\prime}})}   
+            e^{-i \vec{q} \cdot \vec{u}_s} e^{ -i \vec{q} \cdot \vec{u}_{s^{\prime}}}
+    \label{eq:scattering-average}
+\end{align}
+Note that the term $e^{-i \vec{q} \cdot \vec{u}_s} e^{ -i \vec{q} \cdot \vec{u}_{s^{\prime}}}$ cannot always be simplified because $\set{\vec{u}_s}$ are quantum-mechanical operators, as will be explicitly stated below. The evaluation of the sum in @eq:scattering-average requires some thought. First, note that the base atomic positions $\set{\vec{r}_s}$ are independent of the particular unit cell where atom $s$ is located. The same is not true of the displacement vectors $\set{\vec{u}_s}$, where $\vec{u}_s$ and $\vec{u}_{s^{\prime}}$ are essentially uncorrelated provided that atoms $s$ and $s^{\prime}$ are far away from each other. For a large enough crystal, the sum over $s$ and $s^{\prime}$ is equivalent to a thermal average over time[@Sinha2001]. It follows that:
+$$
+    |f^{(1)}(\vec{q})|^2 = \frac{m_e^2}{\hbar^4} \sum_{s} \sum_{s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q}) e^{-i \vec{q} \cdot (\vec{r}_s - \vec{r}_{s^{\prime}})}   
+            \langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle
+$$
+where the problem is reduced to the evaluation of $\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle$. Consider now the description of the displacement vectors as a superposition of phonons. In this case, every displacement vector $\vec{u}_s$ can be expressed as:
+$$
+    \vec{u}_s = \sum_{\lambda} \sum_{\set{\vec{k}}} \sqrt{\frac{\hbar}{2 \mu_s N \omega_{\lambda}(\vec{k})}} \left( a_{\lambda}(\vec{k}) + a_{\lambda}^{\dagger}(\vec{k})\right) \vec{e}_{s,\lambda}(\vec{k}) 
+$${#eq:scattering-displacement}
+where $\set{\lambda}$ label phonon branches, $\mu_s$ is the reduced mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vec{k}$, $a_{\lambda}(\vec{k})$ and $a_{\lambda}^{\dagger}(\vec{k})$ are the creation and annihilation operators for phonon mode $\lambda$, and $\vec{e}_{s,\lambda}(\vec{k})$ is the polarization vector of mode $\lambda$. The expression for $\vec{u}_s$ is the combined effect of all possible phonon modes. 
+
+The Baker-Campbell-Hausdorff lemma can be used to compute the average[@Hausdorff1906]. It states that for two operators $A$ and $B$ with commutator $[A,B]$:
+$$
+e^A e^B = e^{A + B + \frac{1}{2}[A,B]}
+$$
+This allows to simplify the average as:
+$$
+\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ -i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\vec{u}_s - \vec{u}_{s^\prime}) + \frac{1}{2}[\vec{q} \cdot \vec{u}_s, \vec{q} \cdot \vec{u}_{s^{\prime}}]} \rangle
+$$
+Furthermore, note that $[a_{\lambda}(\vec{k}), a_{\lambda}^{\dagger}(\vec{k})] = 1$ so that the following simplification is valid:
+$$
+\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ -i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\vec{u}_s - \vec{u}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vec{q} \cdot \vec{u}_s, \vec{q} \cdot \vec{u}_{s^{\prime}}]} \rangle
+$$
+Finally, for operators $A$ which are a linear combination of position and momentum operators of a harmonic system, $\langle e^A \rangle = e^{\frac{1}{2}\langle A^2 \rangle}$[@Born1941]. This leads to:
+$$
+\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ -i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle} e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_{s^{\prime}})^2\rangle} e^{\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle}
+$$
+The terms $e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle}$ and $e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_{s^{\prime}})^2\rangle}$ are equal, only differing in their labeling. They are known as the Debye-Waller factors[@Waller1923; @Waller1928], historically defined as:
+$$
+e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle} = e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_{s^{\prime}})^2\rangle} \equiv e^{-W}
+$$
+which means that
+$$
+\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ -i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = e^{-2W} e^{\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle}
+$$
+For small displacement vectors $\vec{u}$, $\vec{q} \cdot \vec{u} \leq |\vec{q}| |\vec{u}|$ is also small, and so:
+\begin{align}
+    e^{\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle} 
+        & = 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle + \mathcal{O}\left(|\vec{u}_s|^2 |\vec{u}_{s^{\prime}}|^2 \right) \nonumber \\
+        & \approx 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle
+\end{align}
+Using @eq:scattering-displacement:
+\begin{multline}
+\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle
+    = \sum_{\lambda,\lambda^{\prime}} 
+      \sum_{s,s^{\prime} }
+      \sum_{\vec{k}, \vec{k}^\prime}
+      \frac{(\vec{q} \cdot \vec{e}_{s,\lambda}(\vec{k})) (\vec{q} \cdot \vec{e}_{s^{\prime},\lambda^{\prime}}(\vec{k}^{\prime}))}{2 \sqrt{\mu_s \mu_{s^{\prime}}} \omega_{\lambda}(\vec{k})} 
+      \left( a_{\lambda}(\vec{k}) + a^{\dagger}_{\lambda}(\vec{k}) \right) \left( a_{\lambda^{\prime}}(\vec{k}^{\prime}) + a^{\dagger}_{\lambda^{\prime}}(\vec{k}^{\prime}) \right)
+\end{multline}
+Using that $[a_{\lambda}(\vec{k}), a^{\dagger}_{\lambda^{\prime}}(\vec{k}^{\prime})] = \delta_{\lambda,\lambda^{\prime}}\delta_{\vec{k},\vec{k}^{\prime}}$:
+$$
+\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle 
+    = \frac{\hbar}{2 N_c}
+      \sum_{\lambda}
+      \sum_{\vec{k}}  
+      \sum_{s, s^{\prime}}
+      \frac{n_{\lambda}(\vec{k}) + 1/2}{\sqrt{\mu_s \mu_s^{\prime}} \omega_{\lambda}(\vec{k})}
+      (\vec{q} \cdot \vec{e}_{s,\lambda}(\vec{k})) 
+      (\vec{q} \cdot \vec{e}_{s^{\prime},\lambda^{\prime}}(\vec{k}^{\prime}))
+$$
+which can also be re-written as:
+$$
+\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle 
+    = \frac{\hbar}{2 N_c}
+      \sum_{\lambda}
+      \sum_{\vec{k}}
+      \left|  
+        \sum_{s}
+        \frac{n_{\lambda}(\vec{k}) + 1/2}{\sqrt{\mu_s} \omega_{\lambda}(\vec{k})}
+        (\vec{q} \cdot \vec{e}_{s,\lambda}(\vec{k})) 
+      \right|^2
+$$
 
 
 [^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014].

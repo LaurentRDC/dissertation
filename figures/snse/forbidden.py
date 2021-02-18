@@ -4,7 +4,7 @@ import scipy.stats
 from matplotlib.lines import Line2D
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
-from plotutils import FIGURE_WIDTH, FONTSIZE, tag_axis
+from plotutils import FIGURE_WIDTH, FONTSIZE, tag_axis, discrete_colors
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset
@@ -40,7 +40,7 @@ for ax in (allowed_ax, forbidden_ax):
 
 for indices, color, marker, ax in zip(
     ALLOWED_PEAKS + FORBIDDEN_PEAKS,
-    skued.spectrum_colors(len(ALLOWED_PEAKS) + len(FORBIDDEN_PEAKS)),
+    discrete_colors(len(ALLOWED_PEAKS) + len(FORBIDDEN_PEAKS)),
     Line2D.filled_markers,
     [allowed_ax] * len(ALLOWED_PEAKS) + [forbidden_ax] * len(FORBIDDEN_PEAKS),
 ):

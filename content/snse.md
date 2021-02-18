@@ -77,6 +77,31 @@ Contrary to the symmetrization procedure described in @sec:graphite-data-acquisi
 
 ### Ultrafast phonon softening from Bragg intensity
 
+
+The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression:
+\begin{align}
+    \frac{I_0(\vec{q},t) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
+        &\equiv \Delta I_0(\vec{q},t) \nonumber \\
+        &= \frac{N_c I_e |F|^2}{N_c I_e |F|^2}\frac{\left[e^{-2M(\vec{q},t)} - e^{-2M(\vec{q},0)}\right]}{e^{-2M(\vec{q},0)}} \nonumber \\
+        &=e^{-2[M(\vec{q},t) - M(\vec{q},0)]} - 1
+\end{align}
+Rearranging terms:
+$$
+    - \frac{1}{2} \ln \left[1 + \Delta I_0(\vec{q},t) \right] = 2 \pi^2 |\vec{q}|^2 \Delta \langle u^2\rangle
+$$
+The change in root-mean-square vibration $\langle u^2(t)\rangle$ can be used to infer a change in vibrational frequency $\omega_{TO}(t)$ by considering the amount of energy stored in the mode $E_{TO}$, in the classical limit. Provided that the energy is conserved\cite{Kittel1976}:
+
+\begin{align}
+    E_{TO} &= 8 \pi^2 m \omega_{TO}^2(t) \langle u^2(t)\rangle \nonumber \\
+           &= 8 \pi^2 m \omega_{TO}^2(0) \langle u^2(0)\rangle \nonumber
+\end{align}
+
+We can rearrange terms to use our experimental time-series for $\Delta \langle u^2\rangle$:
+
+\begin{equation}
+    \frac{\omega_{TO}^2(0)}{\omega_{TO}^2(t)} =  \frac{ \Delta \langle u^2(t)\rangle}{ \langle u^2(0)\rangle} - 1
+\end{equation}
+
 ```{.matplotlib file="figures/snse/softening.py" caption="Measurement of the softening of the TO$_c$ mode, extracted directly from the transient Debye-Waller dynamics, assuming that atomic vibrational amplitude only changes based on TO$_c$ renormalization at early times ($\tau < \SI{1}{\pico\second}$). Color bar shows associated absorbed energy per cell $E_c$. \textbf{Inset} Increase in isotropic mean-square-displacement of all atoms, due to the change in vibrational frequency of the TO$_c$ mode exclusively. Boxes are used to represent error bars along both axes."}
 ```
 
