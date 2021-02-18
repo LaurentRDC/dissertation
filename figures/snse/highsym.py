@@ -4,7 +4,7 @@ import scipy.optimize as opt
 import scipy.stats
 from skimage.filters import gaussian
 from pathlib import Path
-from plotutils import FIGURE_WIDTH, discrete_colors
+from plotutils import FIGURE_WIDTH, discrete_colors, tag_axis
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset
@@ -23,15 +23,11 @@ def exponential(time, *args, **kwargs):
     return skued.exponential(time, *args, **kwargs)
 
 
-figure, ax_ts = plt.subplots(1, 1, figsize=(4.25, 4))
-
-ax_ts.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
-
 timeseries = dict()
 with DiffractionDataset(overnight4.path, mode="r") as dset:
     timedelays = dset.time_points
 
-    timeseries["background"] = dset.time_series_selection(
+    timeseries["bg"] = dset.time_series_selection(
         skued.RectSelection(dset.resolution, 680, 739, 1085, 1153)
     )
 
@@ -66,25 +62,29 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
 for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
+
+figure, axes = plt.subplots(
+    4, 1, sharex=True, sharey=True, figsize=(4.25, FIGURE_WIDTH)
+)
+
 colors = discrete_colors(len(timeseries))
-for index, (ts_name, color, marker) in enumerate(
-    zip(["background", "Y", "Z", "T"], colors, ["D", "*", "o", "^"])
+for ax, ts_name, color in zip(
+    axes.flat,
+    ["bg", "Y", "Z", "T"],
+    colors,
 ):
     plot_params = dict(
-        marker=marker,
-        markersize=3,
+        marker="o",
+        markersize=2,
         color=color,
         label=ts_name,
         linestyle="None",
         elinewidth=0.5,
     )
 
-    vertical_offset = index * 0.015
-    ax_ts.axhline(y=1 + vertical_offset, linestyle="dashed", color="k", linewidth=0.5)
-
-    ax_ts.errorbar(
+    ax.errorbar(
         x=timedelays,
-        y=vertical_offset + timeseries[ts_name],
+        y=timeseries[ts_name],
         yerr=scipy.stats.sem(timeseries[ts_name][timedelays < 0]),
         **plot_params,
     )
@@ -97,25 +97,21 @@ for index, (ts_name, color, marker) in enumerate(
         p0=(0, -0.02, 3, 1),
     )
     avperr = np.sqrt(np.diag(avpcov))
-    ax_ts.plot(
+    ax.plot(
         timedelays,
-        vertical_offset + exponential(timedelays, *avparams),
+        exponential(timedelays, *avparams),
         linewidth=1,
         color=color,
     )
 
-ax_ts.legend(
-    loc="center",
-    ncol=len(timeseries),
-    bbox_to_anchor=(0.5, 1.05),
-    bbox_transform=ax_ts.transAxes,
-    framealpha=1,
-    edgecolor="none",
+    ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
+    ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
+    ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
+    tag_axis(ax, ts_name, y=0.9, x=0.05)
+
+axes[-1].set_xlim([-1.6, 12])
+axes[-1].set_xlabel("Time-delay [ps]")
+
+plt.subplots_adjust(
+    top=0.975, bottom=0.11, left=0.17, right=0.955, hspace=0.05, wspace=0.025
 )
-
-ax_ts.set_yticks([])
-ax_ts.set_xlim([-1.6, 12])
-ax_ts.set_xlabel("Time-delay [ps]")
-ax_ts.set_ylabel("Scattering intensity change [a.u.]")
-
-plt.tight_layout()

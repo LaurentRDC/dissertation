@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats
-from matplotlib.lines import Line2D
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 from plotutils import FIGURE_WIDTH, FONTSIZE, tag_axis, discrete_colors
 from plotutils.snse_datasets import overnight4
@@ -28,21 +26,25 @@ FORBIDDEN_PEAKS = [
     # (0,2,-1)
 ]
 
+# To create a clearer distinction between allowed and forbidden reflections,
+# let's remove the middle colors
+COLORS = discrete_colors(10)
+COLORS.pop(4)
+COLORS.pop(4)
 
-figure, (allowed_ax, forbidden_ax) = plt.subplots(
-    1, 2, sharey=True, figsize=(FIGURE_WIDTH, 3.5)
+figure, axes = plt.subplots(
+    4,
+    2,
+    sharex=True,
+    sharey=True,
+    figsize=(FIGURE_WIDTH, FIGURE_WIDTH),
+    gridspec_kw=dict(hspace=0.05, wspace=0.025),
 )
 
-for ax in (allowed_ax, forbidden_ax):
-    ax.axhline(y=1, linestyle="dashed", color="k", linewidth=1)
-    ax.axvline(x=0, linestyle="dashed", color="k", linewidth=1)
-
-
-for indices, color, marker, ax in zip(
+for indices, color, ax in zip(
     ALLOWED_PEAKS + FORBIDDEN_PEAKS,
-    discrete_colors(len(ALLOWED_PEAKS) + len(FORBIDDEN_PEAKS)),
-    Line2D.filled_markers,
-    [allowed_ax] * len(ALLOWED_PEAKS) + [forbidden_ax] * len(FORBIDDEN_PEAKS),
+    COLORS,
+    axes[:, 0].tolist() + axes[:, 1].tolist(),
 ):
     h, k, l = indices
     yi, xi = overnight4.miller_to_arrindex(*indices)
@@ -66,32 +68,28 @@ for indices, color, marker, ax in zip(
         y=timeseries,
         yerr=error,
         linestyle="None",
-        marker=marker,
         color=color,
-        markersize=3,
+        marker="o",
+        markersize=2,
         label=skued.indices_to_text(*indices),
     )
 
-for ax in (allowed_ax, forbidden_ax):
+    ax.axhline(y=1, linestyle="dashed", color="k", linewidth=1)
+    ax.axvline(x=0, linestyle="dashed", color="k", linewidth=1)
+    tag_axis(
+        ax, skued.indices_to_text(*indices), x=0.95, y=0.9, horizontalalignment="right"
+    )
+
+for ax in axes[-1, :]:
     ax.set_xlim([-1.5, 15])
     ax.set_xlabel("Time-delay [ps]")
 
-tag_axis(allowed_ax, "a)")
-tag_axis(forbidden_ax, "b)")
+for ax in axes[:, 0]:
+    ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
 
-allowed_ax.legend(
-    ncol=2,
-    loc="lower right",
-    framealpha=1,
-    edgecolor="none",
+axes[0, 0].set_title("Allowed reflections")
+axes[0, 1].set_title("Forbidden reflections")
+
+plt.subplots_adjust(
+    top=0.96, bottom=0.09, left=0.11, right=0.95, hspace=0.2, wspace=0.2
 )
-forbidden_ax.legend(
-    ncol=2,
-    loc="upper right",
-    framealpha=1,
-    edgecolor="none",
-)
-
-allowed_ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
-
-plt.tight_layout()

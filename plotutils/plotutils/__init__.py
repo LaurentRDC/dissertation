@@ -62,7 +62,7 @@ def tag_axis(
         y=y,
         s=text,
         color="k",
-        bbox={"facecolor": "w", "alpha": 1, "boxstyle": "round"},
+        bbox={"facecolor": "w", "alpha": 1, "boxstyle": "round", "edgecolor": "w"},
         horizontalalignment=horizontalalignment,
         verticalalignment=verticalalignment,
         transform=ax.transAxes,
@@ -135,7 +135,7 @@ def draw_hexagon(
 def discrete_colors(num):
     """ Returns a list of discrete colors to plot, for example, various time-traces. """
     if num in {2, 3}:
-        return list(spectrum_colors(num_colors=num+1))[1:num+1]
+        return list(spectrum_colors(num_colors=num + 1))[1 : num + 1]
 
     return list(spectrum_colors(num_colors=num))
 

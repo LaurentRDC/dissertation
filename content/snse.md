@@ -68,7 +68,7 @@ Contrary to the symmetrization procedure described in @sec:graphite-data-acquisi
 
 ### Diffuse scattering measurements
 
-```{.matplotlib file="figures/snse/forbidden.py" caption="Comparison of the relative intensity change $\Delta I / I_0$ at $\Gamma$, for the integration geometry described in @fig:snse-diffuse. **a)** Diffuse intensity dynamics near reflections allowed by the $Pnma$ space group. **b)** Diffuse intensity dynamics near reflections that are forbidden by the $Pnma$ space group. These reflections probably arise from the double scattering of allowed reflections."}
+```{.matplotlib file="figures/snse/forbidden.py" caption="Comparison of the relative intensity change $\Delta I / I_0$ at $\Gamma$ near reflections that are either allowed (left column) or forbidden (right column) by the $Pnma$ space group. The integration geometry shown in @fig:snse-diffuse is used."}
 ```
 
 ### Effect of charge-transfer on diffracted intensity

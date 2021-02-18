@@ -88,11 +88,8 @@ for refl in INDICES_DIFFUSE:
 
     fwhms[refl] = (ws, centers, errs_fwhm, errs_center)
 
-handles = list()
-for index, ((refl, (ws, centers, err_fwhm, err_center)), marker, color) in enumerate(
-    zip(
-        fwhms.items(), [".", "D", "^", "*"], discrete_colors(len(INDICES_DIFFUSE))
-    )
+for index, ((refl, (ws, centers, err_fwhm, err_center)), color) in enumerate(
+    zip(fwhms.items(), discrete_colors(len(INDICES_DIFFUSE)))
 ):
 
     ax_width = axes[index, 0]
@@ -104,9 +101,9 @@ for index, ((refl, (ws, centers, err_fwhm, err_center)), marker, color) in enume
         ws - np.mean(ws[timedelays < 0]),
         yerr=err_fwhm,
         linestyle="none",
-        marker=marker,
+        markersize=2,
+        marker="o",
         color=color,
-        label=skued.indices_to_text(*refl),
     )
     ax_width.axhline(y=0, linestyle="dashed", color="k", linewidth=0.5, zorder=np.inf)
     ax_width.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5, zorder=np.inf)
@@ -115,16 +112,15 @@ for index, ((refl, (ws, centers, err_fwhm, err_center)), marker, color) in enume
     centers -= np.mean(centers[timedelays < 0])
     centers /= np.mean(ws)
 
-    h = ax_center.errorbar(
+    ax_center.errorbar(
         timedelays,
         centers,
         yerr=err_center,
         linestyle="none",
-        marker=marker,
+        markersize=2,
+        marker="o",
         color=color,
-        label=skued.indices_to_text(*refl),
     )
-    handles.append(h)
     ax_center.axhline(y=0, linestyle="dashed", color="k", linewidth=0.5, zorder=np.inf)
     ax_center.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5, zorder=np.inf)
 
@@ -141,21 +137,18 @@ for index, ((refl, (ws, centers, err_fwhm, err_center)), marker, color) in enume
     ax_center.set_ylim([-0.035, 0.035])
     ax_center.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
 
-figure.legend(
-    handles=handles,
-    loc="center",
-    ncol=len(INDICES_DIFFUSE),
-    bbox_to_anchor=(0.5, 0.97),
-    bbox_transform=figure.transFigure,
-    framealpha=1,
-    edgecolor="none",
-)
-axes[0, 0].set_xlim([-1.3, 5])
+    tag_axis(
+        ax_width,
+        skued.indices_to_text(*refl),
+        y=0.9,
+    )
+
+axes[0, 0].set_xlim([-1.5, 5])
 
 
-axes[-1, 0].set_xlabel("time-delay [ps]")
-axes[-1, 1].set_xlabel("time-delay [ps]")
+axes[-1, 0].set_xlabel("Time-delay [ps]")
+axes[-1, 1].set_xlabel("Time-delay [ps]")
 
 plt.subplots_adjust(
-    top=0.935, bottom=0.11, left=0.125, right=0.9, hspace=0.2, wspace=0.2
+    top=0.975, bottom=0.085, left=0.125, right=0.9, hspace=0.2, wspace=0.2
 )
