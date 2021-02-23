@@ -157,7 +157,7 @@ Contrary to the symmetrization procedure described in @sec:graphite-data-acquisi
 
 ## Ultrafast electron scattering measurements
 
-```{.matplotlib #fig:snse-diffuse file="figures/snse/diffuse.py" caption="Ultrafast electron scattering pattern of SnSe and associated time traces for a sample photoexcited with photoexcitation density of \SI{25}{\milli\electronvolt} per unit cell. **a)** Equilibrium scattering pattern of SnSe oriented along the [100] direction. **b)** Integration geometry used to extract time-traces in panels d), differentiating between diffracted intensity (inner disk) and diffuse intensity near $\Gamma$ (outer torus). **c)** Line cut across the horizontal line shown in panel b). The Bragg peak is fit with a Voigt profile (solid black line) with a full-width at half-max of \SI{0.158}{\per\angstrom}, much smaller than the diameter of the inner disk (\SI{0.228}{\per\angstrom}). (\textbf{D}) Transient ultrafast electron scattering intensity at various points in the Brillouin zone are discussed in the text."}
+```{.matplotlib #fig:snse-diffuse file="figures/snse/diffuse.py" caption="Ultrafast electron scattering pattern of SnSe and associated time traces for a sample photoexcited with photoexcitation density of \SI{25}{\milli\electronvolt} per unit cell. **a)** Equilibrium scattering pattern of SnSe oriented along the [100] direction. **b)** Integration geometry used to extract time-traces in panels d), differentiating between diffracted intensity (inner disk) and diffuse intensity near $\Gamma$ (outer torus). **c)** Line cut across the horizontal line shown in panel b). The Bragg peak is fit with a Voigt profile (solid black line) with a full-width at half-max of \SI{0.158}{\per\angstrom}, much smaller than the diameter of the inner disk (\SI{0.228}{\per\angstrom}). **d)** Transient ultrafast electron scattering intensity at various points in the Brillouin zone."}
 ```
 
 ```{.matplotlib file="figures/snse/highsym.py" caption="Comparison of the diffuse intensity dynamics at various in-plane high-symmetry points."}
@@ -172,6 +172,9 @@ Contrary to the symmetrization procedure described in @sec:graphite-data-acquisi
 ```
 
 ### Effect of charge-transfer on diffracted intensity
+
+```{.matplotlib file="figures/snse/chargetransfer.py" caption="Expected intensity change $\Delta I_{(hkl)}$, in proportion to the experimental error $\sigma_e$, for the transfer of a single $p$ electron from Se to Sn. $\Delta I_{(hkl)} / \sigma_e > 1$ implies an intensity change that can be measured, indicating that no in-plane reflection is expected to display signals related to charge-transfer. In-plane reflections up to $|\vec{q}| < \SI{10}{\per\angstrom}$ were considered. The experimental error $\sigma_e$ represents the standard error of the variation in diffraction intensity before photoexcitation."}
+```
 
 ### Evolution of Bragg peak profile
 
