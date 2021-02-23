@@ -23,7 +23,9 @@ jobs:
         
         sudo apt-get update
         sudo apt-get --quiet install --yes inkscape
-        sudo apt-get --quiet install --yes texlive-full
+        sudo apt-get --quiet install --yes texlive-science
+        sudo apt-get --quiet install --yes texlive-latex-extra
+        sudo apt-get --quiet install --yes texlive-fonts-extra
         sudo apt-get --quiet install --yes biber
     
     - uses: xpol/setup-lua@master
