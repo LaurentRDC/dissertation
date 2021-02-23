@@ -107,7 +107,7 @@ for ax, ts_name, color in zip(
     ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
     ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
     ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
-    tag_axis(ax, ts_name, y=0.9, x=0.05)
+    tag_axis(ax, ts_name, y=0.9, x=0.05, edgecolor="w")
 
 axes[-1].set_xlim([-1.6, 12])
 axes[-1].set_xlabel("Time-delay [ps]")

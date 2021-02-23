@@ -443,5 +443,8 @@ ax_T.set_ylabel(r"Temperature [K]")
 
 ax_K.set_xlabel("Delay time [ps]")
 
-ax_K.legend(loc="upper right")
+ax_K.legend(
+    loc="upper right",
+    edgecolor="none",
+)
 plt.tight_layout()

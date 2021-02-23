@@ -24,13 +24,15 @@ In order to obtain ultrathin samples suitable for ultrafast electron scattering 
 
 Six samples were prepared via ultramicrotomy, a sample preparation technique which involves the cutting of samples using a diamond blade. While this technique has mostly been used to prepare organic samples for cryo-electron microscopy, it has been successfully used in the past decade to prepare samples of two-dimensional materials such as 4H-TaSe$_2$[@Erasmus2012], 1T-TaS$_2$[@Eichberger2013]. The author initially tried ultramicrotomy to prepare samples of 1T-TiSe$_2$[@Otto2020].
 
-
-The stages of sample preparation via ultramicrotomy are shown in @fig:snse-ultramicrotomy. First, a bulk crystal of SnSe is embedded in epoxy, with the cutting plane parallel to the material layers. The surface of the bulk crystal is trimmed with a \ang{45} diamond blade to reveal fresh cutting surface. Sections are then cut with a sharper, \ang{35} diamond blade which then fall in a small water container. Floating sections are then fished out with a carbon-coated TEM grid. 
-
-```{.matplotlib #fig:snse-ultramicrotomy file="figures/snse/sample.py" caption="Stages of sample preparation via ultramicrotome. **a)** Prism of SnSe embedded in epoxy.  **b)** 4x magnification on the cut surface shown in a) shows large crystalline plateaus. **c)** Surface of embedded SnSe prism after trimming with a \ang{45} diamond knife. **d)** \SI{60}{\nano\meter} section of SnSe cut with a \ang{35} diamond knife. "}
+```{.matplotlib #fig:snse-ultramicrotomy-femr file="figures/snse/ultramicrotome.py" caption="Ultramicrotome setup used to prepare SnSe samples, from two different angles. Crystals embedded in epoxy are mounted, and a diamond knife is used to shave a section. Sections slide down into a boat filled with water, where they are lated fished out. The images were provided by S. K. Sears from McGill University's Facility for Electron Microscopy Research."}
 ```
 
-The images in @fig:snse-ultramicrotomy were provided by H. Gnaegi from Diatome, Ltd, who initially tried to prepare samples for the author. The samples used in this work were prepared by J. Mui from the Facility for Electron Microscopy Research at McGill University. In the end, six samples were produced: three with a thickness of \SI{70}{\nano\meter} and three with a thickness of \SI{90}{\nano\meter}, each with an area of approximately \SI{200 x 200}{\micro\meter}.
+First, a bulk crystal of SnSe is embedded in epoxy, with the cutting plane parallel to the material layers. The surface of the bulk crystal is trimmed with a \ang{45} diamond blade to reveal fresh cutting surface. Sections are then cut with a sharper, \ang{35} diamond blade which then fall in a small water container. Floating sections are then fished out with a carbon-coated TEM grid. The assembly is shown in @fig:snse-ultramicrotomy-femr. The effect of cutting on the embedded crystals is shown in @fig:snse-ultramicrotomy. 
+
+```{.matplotlib #fig:snse-ultramicrotomy file="figures/snse/sample.py" caption="Stages of sample preparation via ultramicrotome. **a)** Prism of SnSe embedded in epoxy.  **b)** 4x magnification on the cut surface shown in a) shows large crystalline plateaus. **c)** Surface of embedded SnSe prism after trimming with a \ang{45} diamond knife. **d)** \SI{60}{\nano\meter} section of SnSe cut with a \ang{35} diamond knife. The images were provided by H. Gnaegi from Diatome, Ltd."}
+```
+
+The samples used in this work were prepared by J. Mui from the Facility for Electron Microscopy Research (FEMR) at McGill University. In the end, six samples were produced: three with a thickness of \SI{70}{\nano\meter} and three with a thickness of \SI{90}{\nano\meter}, each with an area of approximately \SI{200 x 200}{\micro\meter}. 
 
 #### Mechanical exfoliation
 

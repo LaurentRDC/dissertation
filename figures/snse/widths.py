@@ -137,11 +137,7 @@ for index, ((refl, (ws, centers, err_fwhm, err_center)), color) in enumerate(
     ax_center.set_ylim([-0.035, 0.035])
     ax_center.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
 
-    tag_axis(
-        ax_width,
-        skued.indices_to_text(*refl),
-        y=0.9,
-    )
+    tag_axis(ax_width, skued.indices_to_text(*refl), y=0.9, edgecolor="w")
 
 axes[0, 0].set_xlim([-1.5, 5])
 

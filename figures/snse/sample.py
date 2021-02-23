@@ -2,7 +2,6 @@ from skimage.io import imread
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from pathlib import Path
-from skued import diffshow
 
 from plotutils import FIGURE_WIDTH, ImageGrid, tag_axis
 

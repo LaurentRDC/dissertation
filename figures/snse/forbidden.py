@@ -77,7 +77,12 @@ for indices, color, ax in zip(
     ax.axhline(y=1, linestyle="dashed", color="k", linewidth=1)
     ax.axvline(x=0, linestyle="dashed", color="k", linewidth=1)
     tag_axis(
-        ax, skued.indices_to_text(*indices), x=0.95, y=0.9, horizontalalignment="right"
+        ax,
+        skued.indices_to_text(*indices),
+        x=0.95,
+        y=0.9,
+        horizontalalignment="right",
+        edgecolor="w",
     )
 
 for ax in axes[-1, :]:

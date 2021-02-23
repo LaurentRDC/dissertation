@@ -55,6 +55,7 @@ def tag_axis(
     y=0.95,
     horizontalalignment="left",
     verticalalignment="top",
+    edgecolor="k",
 ):
     """ Tag an axis with some text, e.g. "a)" """
     ax.text(
@@ -62,7 +63,12 @@ def tag_axis(
         y=y,
         s=text,
         color="k",
-        bbox={"facecolor": "w", "alpha": 1, "boxstyle": "round", "edgecolor": "w"},
+        bbox={
+            "facecolor": "w",
+            "alpha": 1,
+            "boxstyle": "round",
+            "edgecolor": edgecolor,
+        },
         horizontalalignment=horizontalalignment,
         verticalalignment=verticalalignment,
         transform=ax.transAxes,
