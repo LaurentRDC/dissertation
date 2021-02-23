@@ -31,7 +31,7 @@ CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
 ABSORBANCE = 0.075  # at 800nm
 
 SAMPLE_AREA = (50e-6) * (50e-6)  # meters^2
-THICKNESS = 30e-9  # meters
+THICKNESS = 45e-9  # meters
 
 
 def round_sigfig(x, u):
@@ -39,7 +39,7 @@ def round_sigfig(x, u):
     return round_(x), round_(u)
 
 
-def energy_per_cell(fluence, thickness=30e-9):
+def energy_per_cell(fluence):
     """
     Calculate the energy deposited per unit cell.
 
@@ -47,8 +47,6 @@ def energy_per_cell(fluence, thickness=30e-9):
     ----------
     fluence : float
         Photoexcitation fluence [mJ/cm2]
-    thickness : float, optional
-        Sample thickness [m]
 
     Returns
     -------
@@ -61,7 +59,7 @@ def energy_per_cell(fluence, thickness=30e-9):
     # since the sample is so small
     total_energy = ABSORBANCE * fluence_mjm2 * SAMPLE_AREA  # mJ
 
-    ncells = int(SAMPLE_AREA * thickness / (CRYSTAL.volume * 10 ** (-30)))
+    ncells = int(SAMPLE_AREA * THICKNESS / (CRYSTAL.volume * 10 ** (-30)))
 
     # Conversion to eV deposited
     mJ_per_eV = 1e-3 / constants.electron_volt
@@ -224,9 +222,7 @@ rms = []
 softenings = []
 for fluence in fluences:
     timedelays, delta_msd = delta_msd_fluence(fluence)
-    energies_per_cell.append(
-        energy_per_cell(fluence=fluence, thickness=30e-9) * 1e3
-    )  # eV to meV
+    energies_per_cell.append(energy_per_cell(fluence=fluence) * 1e3)  # eV to meV
     rms_val = np.mean(delta_msd[np.logical_and(timedelays > 5, timedelays < 9)])
     rms.append(rms_val)
     softenings.append(to_frequency(rms_val))

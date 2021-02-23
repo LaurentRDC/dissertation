@@ -5,6 +5,104 @@
 
 ## Tin selenide
 
+Single-crystal tin selenide at ambient pressure is found in two phases, both of which are layered[@Chattopadhyay1986]. The low-temperature $Pnma$ phase is defined on the following lattice vectors:
+$$
+\begin{pmatrix}
+    \vec{a}_1 \\
+    \vec{a}_2 \\
+    \vec{a}_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \SI{11.42}{\angstrom} & 0                    & 0 \\
+    0                     & \SI{4.19}{\angstrom} & 0 \\
+    0                     &  0                   & \SI{4.46}{\angstrom} 
+\end{pmatrix}
+\begin{pmatrix}
+    \vec{e}_1 \\
+    \vec{e}_2 \\
+    \vec{e}_3
+\end{pmatrix}
+$$
+where $\set{ \vec{e}_i }$ are understood to be the usual Euclidean vectors. The atomic positions are for the $Pnma$ phase are:
+$$
+\begin{pmatrix}
+    \vec{\text{Se}}_1 \\
+    \vec{\text{Se}}_2 \\
+    \vec{\text{Se}}_3 \\
+    \vec{\text{Se}}_4 \\
+    \vec{\text{Sn}}_1 \\
+    \vec{\text{Sn}}_2 \\
+    \vec{\text{Sn}}_3 \\
+    \vec{\text{Sn}}_4 
+\end{pmatrix}
+=
+\begin{pmatrix}
+    0.14 & \sfrac{3}{4} & 0.52\\
+    0.36 & \sfrac{1}{4} & 0.02\\
+    0.64 & \sfrac{3}{4} & 0.98\\
+    0.86 & \sfrac{1}{4} & 0.48\\
+    0.12 & \sfrac{1}{4} & 0.09\\
+    0.38 & \sfrac{3}{4} & 0.59\\
+    0.62 & \sfrac{1}{4} & 0.41\\
+    0.88 & \sfrac{3}{4} & 0.91
+\end{pmatrix}
+\begin{pmatrix}
+    \vec{a}_1 \\
+    \vec{a}_2 \\
+    \vec{a}_3
+\end{pmatrix}
+$$
+The lattice vectors for the *conventional cell* of high-temperature phase, $Cmcm$, are given by:
+$$
+\begin{pmatrix}
+    \vec{a}_1 \\
+    \vec{a}_2 \\
+    \vec{a}_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \SI{11.71}{\angstrom} & 0                    & 0 \\
+    0                     & \SI{4.31}{\angstrom} & 0 \\
+    0                     &  0                   & \SI{4.32}{\angstrom} 
+\end{pmatrix}
+\begin{pmatrix}
+    \vec{e}_1 \\
+    \vec{e}_2 \\
+    \vec{e}_3
+\end{pmatrix}
+$$
+and the following atomic positions:
+$$
+\begin{pmatrix}
+    \vec{\text{Se}}_1 \\
+    \vec{\text{Se}}_2 \\
+    \vec{\text{Se}}_3 \\
+    \vec{\text{Se}}_4 \\
+    \vec{\text{Sn}}_1 \\
+    \vec{\text{Sn}}_2 \\
+    \vec{\text{Sn}}_3 \\
+    \vec{\text{Sn}}_4 
+\end{pmatrix}
+=
+\begin{pmatrix}
+    0.14 & \sfrac{1}{2}  & \sfrac{3}{4}\\
+    0.36 & 0             & \sfrac{1}{4}\\
+    0.64 & 0             & \sfrac{3}{4}\\
+    0.86 & \sfrac{1}{2}  & \sfrac{1}{4}\\
+    0.12 & 0             & \sfrac{1}{4}\\
+    0.88 & 0             & \sfrac{3}{4}\\
+    0.38 & \sfrac{1}{2}  & \sfrac{3}{4}\\
+    0.62 & \sfrac{1}{2}  & \sfrac{1}{4}
+\end{pmatrix}
+\begin{pmatrix}
+    \vec{a}_1 \\
+    \vec{a}_2 \\
+    \vec{a}_3
+\end{pmatrix}
+$$
+The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase.
+
 ```{.matplotlib file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
 ```
 
@@ -59,7 +157,7 @@ Contrary to the symmetrization procedure described in @sec:graphite-data-acquisi
 
 ## Ultrafast electron scattering measurements
 
-```{.matplotlib #fig:snse-diffuse file="figures/snse/diffuse.py" caption=""}
+```{.matplotlib #fig:snse-diffuse file="figures/snse/diffuse.py" caption="Ultrafast electron scattering pattern of SnSe and associated time traces for a sample photoexcited with photoexcitation density of \SI{25}{\milli\electronvolt} per unit cell. **a)** Equilibrium scattering pattern of SnSe oriented along the [100] direction. **b)** Integration geometry used to extract time-traces in panels d), differentiating between diffracted intensity (inner disk) and diffuse intensity near $\Gamma$ (outer torus). **c)** Line cut across the horizontal line shown in panel b). The Bragg peak is fit with a Voigt profile (solid black line) with a full-width at half-max of \SI{0.158}{\per\angstrom}, much smaller than the diameter of the inner disk (\SI{0.228}{\per\angstrom}). (\textbf{D}) Transient ultrafast electron scattering intensity at various points in the Brillouin zone are discussed in the text."}
 ```
 
 ```{.matplotlib file="figures/snse/highsym.py" caption="Comparison of the diffuse intensity dynamics at various in-plane high-symmetry points."}
