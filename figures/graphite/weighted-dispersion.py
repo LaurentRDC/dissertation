@@ -114,6 +114,7 @@ ax.legend(
     ncol=2,
     bbox_to_anchor=(0.5, 1.07),
     loc="center",
+    edgecolor="none",
 )
 
 # Annotate the modes

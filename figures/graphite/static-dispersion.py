@@ -4,7 +4,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
-from plotutils import FIGURE_WIDTH, draw_hexagon
+from plotutils import FIGURE_WIDTH, draw_hexagon, discrete_colors
 from scipy.constants import physical_constants
 
 HBAR = physical_constants["Planck constant over 2 pi in eV s"][0]
@@ -15,7 +15,7 @@ modes = ["LA", "LO2", "TA", "TO2"]
 fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 3))
 ax_thz = ax.twinx()
 
-for mode in modes:
+for mode, color in zip(modes, discrete_colors(len(modes))):
     f = np.load(Path("data") / "graphite" / "static-dispersion" / f"{mode}.npy")[::4]
     # Artifact near K
     k_index = 2 * np.size(f) // 3
@@ -25,8 +25,8 @@ for mode in modes:
         a_min=f[near_k][np.nonzero(f[near_k])].min(),
         a_max=np.inf,
     )
-    ax.plot(range(np.size(f)), f * HZ_TO_EV * 1000)  # meV
-    ax_thz.plot(range(np.size(f)), f * 1e-12)  # THz,
+    ax.plot(range(np.size(f)), f * HZ_TO_EV * 1000, color=color)  # meV
+    ax_thz.plot(range(np.size(f)), f * 1e-12, color=color)  # THz,
 
 labels = [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$", r"$\mathbf{\Gamma}$"]
 nsteps = np.size(f) / 3
