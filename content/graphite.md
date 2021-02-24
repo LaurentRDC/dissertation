@@ -157,7 +157,7 @@ Throughout the rest of this chapter, "scattering intensity" will imply discrete 
 
 ### Computational details {#sec:computational-details}
 
-This section contains the details of the calculations used throughout this chapter, including what is shown in @fig:graphite-static-dispersion. The aim of the computations was to extract the phonon mode frequencies $\set{ \omega_j(\vec{k})}$ and polarization vectors $\set{ \vec{e}_{j, s}(\vec{k})}$ that appear in TODO: ONEPH EQUATION.
+This section contains the details of the calculations used throughout this chapter, including what is shown in @fig:graphite-static-dispersion. The aim of the computations was to extract the phonon mode frequencies $\set{ \omega_j(\vec{k})}$ and polarization vectors $\set{ \vec{e}_{j, s}(\vec{k})}$ that appear in @eq:scattering-one-phonon-structure-factor.
 
 TODO: explain simply the procedure behind dynamical matrices
 
@@ -200,7 +200,7 @@ Second, the structure visible across the Brillouin zone is different for reflect
 
 ## The one-phonon structure factors
 
-Recall the definition of diffuse intensity from TODO: ONEPH EQUATION:
+Recall the definition of diffuse intensity from @eq:scattering-one-phonon-structure-factor:
 $$
     I_1(\vec{q}, \tau) = N_c I_e \sum_j \frac{n_j(\vec{k}, \tau) + \sfrac{1}{2}}{\omega_j(\vec{k}, \tau)} \left| F_{1j}(\vec{q}, \tau)\right|^2
 $$
@@ -233,7 +233,7 @@ The potential time-dependence of the Debye-Waller factors was investigated, via 
 
 ### One-phonon structure factor calculations
 
-The calculation for the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2$ was carried out from (TODO: ONEPH EQUATION). As discussed in the previous section, the dynamics in one-phonon structure factors due to photoexcitation via the change in Debye-Waller factors can be neglected in this work. Therefore, the calculations of this section assume room-temperature thermal distribution of lattice waves; this is implied by time-delay $\tau<0$ (pre-photoexcitation). The one-phonon structure factors for longitudinal modes LA, LO1 - LO3 are shown @fig:graphite-oneph-longitudinal. The one-phonon structure factors for transverse modes TA, TO1 - TO3 are shown @fig:graphite-oneph-transverse. Out-of-plane modes yield trivial one-phonon structure factors because $\vec{q} \cdot \vec{e}_{j,s}(\vec{k}) = 0$ for all scattering vectors $\vec{q}$ probed by the experiments presented herein.
+The calculation for the one-phonon structure factors $|F_{1j}(\vec{q}, \tau)|^2$ was carried out from @eq:scattering-one-phonon-structure-factor. As discussed in the previous section, the dynamics in one-phonon structure factors due to photoexcitation via the change in Debye-Waller factors can be neglected in this work. Therefore, the calculations of this section assume room-temperature thermal distribution of lattice waves; this is implied by time-delay $\tau<0$ (pre-photoexcitation). The one-phonon structure factors for longitudinal modes LA, LO1 - LO3 are shown @fig:graphite-oneph-longitudinal. The one-phonon structure factors for transverse modes TA, TO1 - TO3 are shown @fig:graphite-oneph-transverse. Out-of-plane modes yield trivial one-phonon structure factors because $\vec{q} \cdot \vec{e}_{j,s}(\vec{k}) = 0$ for all scattering vectors $\vec{q}$ probed by the experiments presented herein.
 
 ```{.matplotlib #fig:graphite-oneph-longitudinal file="figures/graphite/oneph-long.py" caption="Calculated one-phonon structure factors $|F_{1j}(\vec{q}, \tau<0)|^2$ of in-plane longitudinal modes at \SI{300}{\kelvin}, for scattering vectors $\vec{q}$ equivalents to the detector area shown in @fig:graphite-ueds. See @fig:graphite-oneph-transverse for the transverse modes equivalent."}
 ```
@@ -258,7 +258,7 @@ Are there locations in reciprocal space where the contribution of a particular l
 $$
     W_j(\vec{q}, \tau) \equiv \frac{\left| F_{1j}(\vec{q}, \tau)\right|^2}{\omega_j(\vec{k}, \tau)}
 $${#eq:graphite-ueds-weight}
-With the weight definition of @eq:graphite-ueds-weight, the change in diffuse intensity (TODO: ONEPH EQUATION) can be re-written as:
+With the weight definition of @eq:graphite-ueds-weight, the change in diffuse intensity (@eq:scattering-diffuse-intensity) can be re-written as:
 \begin{align}
     \Delta I_1(\vec{q}, \tau) &\equiv I_1(\vec{q}, \tau) - I_1(\vec{q}, \tau < 0) \\
                               &= \left( n_j(\vec{q}, \tau) + \sfrac{1}{2} \right) W_j(\vec{q}, \tau) - \left( n_j(\vec{q}, \tau < 0) + \sfrac{1}{2} \right) W_j(\vec{q}, \tau < 0) \nonumber \\

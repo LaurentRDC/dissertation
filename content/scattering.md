@@ -447,9 +447,18 @@ $$
 $$
 is known as *first order diffuse scattering*, described in the next section. The diffracted intensity at finite temperature is equivalent to @eq:scattering-diffracted-intensity-zero-temp, with the substitution $f_{e,s}(\vec{q}) \to f_{e,s}(\vec{q}) e^{-W_s}$. The physical meaning of this substitution is that atomic vibrations due to temperature decreases the periodicity of the lattice, which results in a suppression of the atomic form factor in reciprocal space.
 
-
-
 ### Diffuse scattering {#sec:diffuse-scattering}
+
+The diffuse intensity can be expressed as:
+$$
+    I_1(\vec{q}) = \frac{N_c^2 I_e}{r^2} \sum_{\lambda} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} |F_{1\lambda}(\vec{q})|^2
+$${#eq:scattering-diffuse-intensity}
+where $F_{1\lambda}(\vec{q})$ is known as the *one-phonon structure factor*:
+$$
+|F_{1\lambda}(\vec{q})|^2 = \left| \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})\right)\right|^2
+$${#eq:scattering-one-phonon-structure-factor}
+named thus in contrast to the static structure factor of @eq:scattering-potential-crystal.
+
 
 [^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014].
 [^conj]: Note that because $V(\vec{x})$ is real, $\int d\vec{x}^\prime e^{-i\vec{k} \cdot \vec{x}^\prime} V(\vec{x}) = \int d\vec{x}^\prime e^{i\vec{k} \cdot \vec{x}^\prime} V(\vec{x})$.
