@@ -37,7 +37,7 @@ DOWNSAMPLING = 4
 
 
 def oneph_weighted(mode):
-    """ |F_{1j}|^2 / \omega_{j, k} """
+    """ |F_{1\lambda}|^2 / \omega_{j, k} """
     F1j = np.load(INPUT / "oneph" / f"{mode}_oneph.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
     omega = np.load(INPUT / "oneph" / f"{mode}_freq.npy")[
         ::DOWNSAMPLING, ::DOWNSAMPLING
