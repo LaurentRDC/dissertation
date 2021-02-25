@@ -433,26 +433,29 @@ ax_im.set_ylim([width, -width])
 # NOTE: the following dimensions are for the static dataset ONLY, are
 #       need to be pixel perfect with respect to the DPI
 beamblock_indices = np.argwhere(static_mask > 0)
-x, y = (903, 0)
-width = 173
-height = 1135
+width = 0.15
+height = 0.6
+x, y = 0.5 - width / 2, 1
+
 
 beamblock_patch = mpatches.Rectangle(
     xy=(x, y),
     width=width,
-    height=height,
+    height=-height,
     edgecolor="k",
     facecolor="w",
+    transform=ax_im.transAxes,
 )
-move_in = 7
+move_in = 0.005
 crossover_patch = mpatches.Rectangle(
-    xy=(x + move_in, y - 10),
+    xy=(x + move_in, y + move_in),
     width=width - 2 * move_in,
-    height=height + 10 - move_in,
+    height=-height + 2 * move_in,
     fill=True,
     color="w",
-    zorder=10,
+    zorder=np.inf,
     clip_on=False,
+    transform=ax_im.transAxes,
 )
 ax_im.add_patch(beamblock_patch)
 ax_im.add_patch(crossover_patch)

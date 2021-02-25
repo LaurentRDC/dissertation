@@ -175,7 +175,7 @@ $$
 $$
 where the index $s$ runs over all $M$ atoms of the unit cell. Define the metric between two such abstract vectors $\vec{P}_{i, \vec{k}}$ and $\vec{P}_{\lambda, \vec{k}'}$ as:
 $$
-    \left\Vert \vec{P}_{i, \vec{k}} - \vec{P}_{\lambda, \vec{k}'} \right\Vert = |\omega_{i, \vec{k}} - \omega_{\lambda, \vec{k}'}|^2 + \sum_s \left\Vert \vec{e}_{s,i,\vec{k}} - \vec{e}_{s,j,\vec{k}'}\right\Vert
+    \left\Vert \vec{P}_{\lambda^\prime, \vec{k}} - \vec{P}_{\lambda, \vec{k}'} \right\Vert = |\omega_{\lambda^{\prime}, \vec{k}} - \omega_{\lambda, \vec{k}'}|^2 + \sum_s \left\Vert \vec{e}_{\lambda^{\prime},s,\vec{k}} - \vec{e}_{\lambda,s,\vec{k}'}\right\Vert
 $$
 A one-dimensional path $\gamma$ connecting all irreducible points $\set{\vec{k}_i}$ was defined, starting at $\vec{\Gamma}$. At $\vec{\Gamma}$, polarization vectors are associated with a mode based on geometry. For example, a mode with negligible frequency and polarization vectors at that all point in the same direction physically corresponds to a longitudinal acoustic mode. The manual assignment for high-frequency optical modes is a bit more arbitrary. Then, following the path $\gamma$, the assignment of phonon branches $\lambda^\prime$ at $\gamma(\vec{k} + \vec{\Delta})$ minimizes the quantity $\left\Vert \vec{P}_{\lambda^{\prime}, \vec{k}} - \vec{P}_{\lambda, \vec{k} + \vec{\Delta}} \right\Vert$. 
 
