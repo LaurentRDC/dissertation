@@ -61,7 +61,7 @@ offset = np.array([0.06, 0.06])
 for point, label, sym_color in zip(
     [Y, Z],
     [r"$\mathbf{Y}$", r"$\mathbf{Z}$"],
-    COLORS[0:2],
+    COLORS[1:3],
 ):
     for n in range(0, 2):
         point_ = reduce(lambda m1, m2: m1 @ m2, n * [-np.eye(2)], -np.eye(2)) @ point
@@ -96,7 +96,7 @@ ax.annotate(
     color="k",
 )
 
-color_T = COLORS[3]
+color_T = COLORS[-1]
 R90deg = np.array([[0, -1], [1, 0]])
 for n in range(0, 4):
     point_ = reduce(lambda m1, m2: m1 @ m2, n * [R90deg], R90deg) @ T

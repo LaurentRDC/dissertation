@@ -171,9 +171,9 @@ The calculation of phonon properties relevant to his work involves diagonalizing
 
 As of writing this, there is no component within the `QUANTUM ESPRESSO` software suite that can do this. The scheme described in this section was used instead. The general idea behind the procedure is that phonon properties are continuous. Let $P_{\lambda, \vec{k}_i}$ be the abstract vector representing phonon properties of mode $\lambda$ at one of the irreducible $\vec{k}$ points $\set{\vec{k}_i}$:
 $$
-    P_{\lambda, \vec{k}_i} \equiv \begin{bmatrix} \omega_{\lambda, \vec{k}_i} & \vec{e}_{s=1,j,\vec{k}_i} & ... & \vec{e}_{s=M,j,\vec{k}_i} \end{bmatrix}^T
+    P_{\lambda, \vec{k}_i} \equiv \begin{bmatrix} \omega_{\lambda, \vec{k}_i} & \vec{e}_{s=1,\lambda,\vec{k}_i} & ... & \vec{e}_{s=M,\lambda,\vec{k}_i} \end{bmatrix}^T
 $$
-where the index $s$ runs over all $M$ atoms of the unit cell. Define the metric between two such abstract vectors $\vec{P}_{i, \vec{k}}$ and $\vec{P}_{\lambda, \vec{k}'}$ as:
+where the index $s$ runs over all $M$ atoms of the unit cell. Define the metric between two such abstract vectors $\vec{P}_{\lambda^{\prime}, \vec{k}}$ and $\vec{P}_{\lambda, \vec{k}'}$ as:
 $$
     \left\Vert \vec{P}_{\lambda^\prime, \vec{k}} - \vec{P}_{\lambda, \vec{k}'} \right\Vert = |\omega_{\lambda^{\prime}, \vec{k}} - \omega_{\lambda, \vec{k}'}|^2 + \sum_s \left\Vert \vec{e}_{\lambda^{\prime},s,\vec{k}} - \vec{e}_{\lambda,s,\vec{k}'}\right\Vert
 $$
@@ -352,7 +352,7 @@ The energy trends for modes TA and TO2 are commensurate with the description of 
 
 TODO: better introduction with explanation of coupling matrix elements.
 
-Electron-phonon and phonon-phonon coupling describe the strength of the coupling between excitations in a material. A coupling constant $G_{i,j}$ describes the rate of energy transfer from excitation type $i$ to excitation type $j$, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. E-ph and ph-ph coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent e-ph and ph-ph coupling terms.
+Electron-phonon and phonon-phonon coupling describe the strength of the coupling between excitations in a material. A coupling constant $G$ describes the rate of energy transfer from one excitation type to another, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. E-ph and ph-ph coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent e-ph and ph-ph coupling terms.
 
 The nonequilibrium flow of energy between excitations, both electronic and lattice in nature, has historically been crudely modelled using the *two-temperature model* [@Allen1987]. In summary, this model states that while the concept of temperature does not apply to nonequilibrium situations, the energy distribution of the electrons and lattice waves may be treated separately. In other words, the separate thermalization of the electronic and lattice subsystems is much faster than the energy transver between them. It is evident that such a description does not adequately model experimental results from @sec:graphite-ph-spectroscopy for two main reasons. First, the decay of optical phonons to acoustic ones overlaps significantly in time with the transfer of energy from the photoexcited electrons to strongly-coupled optical modes. Second, the energy distribution of lattice waves is far from thermal, even at \SI{100}{\pico\second}. Some authors have extended the two-temperature model based on the details of the system being studied[@Stange2015].
 
@@ -362,41 +362,41 @@ The reader should keep in mind that the procedure presented in this section is a
 
 ### The non-thermal lattice model {#sec:graphite-nlm}
 
-The non-thermal lattice model is an extension of the two-temperature model, with the added flexibility that lattice waves need not be thermalized[@Waldecker2016]. It assumes that the energy distribution of each phonon mode admits a thermal description; that is, the energy transfer between phonons of different branches is slower than the scattering of phonons from the same branch. Within this framework, each phonon branch $j$ can be assigned its own molar heat capacity, $C_{ph, j}$, and temperature, $T_j$:
+The non-thermal lattice model is an extension of the two-temperature model, with the added flexibility that lattice waves need not be thermalized[@Waldecker2016]. It assumes that the energy distribution of each phonon mode admits a thermal description; that is, the energy transfer between phonons of different branches is slower than the scattering of phonons from the same branch. Within this framework, each phonon branch $\lambda$ can be assigned its own molar heat capacity, $C_{ph, \lambda}$, and temperature, $T_{ph,\lambda}$:
 $$
 \left\{
     \begin{array}{rcl}
-        C_e(T_e) \frac{\partial T_e}{\partial \tau} & = & \sum_i G_{ep, i}\left[ T_e(\tau) - T_{ph,i}(\tau) \right] + f(\tau) \\
+        C_e(T_e) \frac{\partial T_e}{\partial \tau} & = & \sum_{\lambda} G_{ep, \lambda}\left[ T_e(\tau) - T_{ph,\lambda}(\tau) \right] + f(\tau) \\
                                                     & ~ & \\
-        C_{ph,j}(T_{ph,j}) \frac{\partial T_{ph,j}}{\partial \tau} & = &\sum_{i\neq j} G_{ep, i} \left[ T_e(\tau) - T_{ph,i}(\tau) \right] \\
-				                                                   & + & G_{pp,ij} \left[ T_{ph,j}(\tau) - T_{ph,i}(\tau) \right]
+        C_{ph,\lambda}(T_{ph,\lambda}) \frac{\partial T_{ph,\lambda}}{\partial \tau} & = &\sum_{\lambda^\prime\neq \lambda} G_{ep, \lambda^\prime} \left[ T_e(\tau) - T_{ph,\lambda^\prime}(\tau) \right] \\
+				                                                   & + & G_{pp,\lambda \lambda^\prime} \left[ T_{ph,\lambda}(\tau) - T_{ph,\lambda^\prime}(\tau) \right]
     \end{array}
-\right\}_{j=1}^{N}
+\right\}_{\lambda=1}^{N}
 $${#eq:graphite-nlm}
-where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The constants $G_{ep, i}$ describe the rate of energy flow between the electrons and phonon mode $i$, while constants $G_{pp, ij}$ encode the rate of energy flow between phonon modes $i$ and $j$. The constants $G_{i,j}$ are related to electron-phonon and phonon-phonon coupling matrix elements. Their relationship is developed further below in @sec:graphite-coupling-constants.
+where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The constants $G_{ep, \lambda}$ describe the rate of energy flow between the electrons and phonon mode $\lambda$, while constants $G_{pp, \lambda \lambda^\prime}$ encode the rate of energy flow between phonon modes $\lambda$ and $\lambda^\prime$. The constants $G$ are related to electron-phonon and phonon-phonon coupling matrix elements. Their relationship is developed further below in @sec:graphite-coupling-constants.
 
 Observations of transient phonon populations are more general than mode temperatures. However, in order to make use of the non-thermal lattice model, the mode temperature can be related to transient phonon mode populations via the Bose-Einstein distribution[@Bose1924]:
 $$
-    n_{\lambda}(\vec{k}, \tau) \propto \left[ \exp{\left( \frac{\hbar \omega_{\lambda}(\vec{k}, \tau<0)}{k_B T_{ph, j}(\tau)} \right)} - 1\right]^{-1}
+    n_{\lambda}(\vec{k}, \tau) \propto \left[ \exp{\left( \frac{\hbar \omega_{\lambda}(\vec{k}, \tau<0)}{k_B T_{ph, \lambda}(\tau)} \right)} - 1\right]^{-1}
 $${#eq:graphite-population-time-equiv}
 The expression for $n_{\lambda}(\vec{k}, \tau)$ makes use of the approximation that phonon vibrational frequencies remain constant through the experiments ($\omega_{\lambda}(\vec{k}, \tau) \approx \omega_{\lambda}(\vec{k}, \tau<0) ~ \forall \tau$), as discussed in @sec:graphite-debye-waller, which is approximately true in the case of graphite away from $\vec{\Gamma}$. @eq:graphite-population-time-equiv can be decomposed with a Laurent series [@Wunsch2005] to extract the quasi-linear relationship between mode population and temperature:
 $$
-    n_{\lambda}(\vec{k}, \tau) \propto  \frac{k_B T_{ph, j}(\tau)}{\hbar \omega_{\lambda}(\vec{k}, \tau<0)} - 1/2 + \mathcal{O}\left( T^{-1}_{ph, j}(\tau) \right)
+    n_{\lambda}(\vec{k}, \tau) \propto  \frac{k_B T_{ph, \lambda}(\tau)}{\hbar \omega_{\lambda}(\vec{k}, \tau<0)} - 1/2 + \mathcal{O}\left( T^{-1}_{ph, \lambda}(\tau) \right)
 $${#eq:graphite-population-laurent}
-The above holds for appropriately-high mode temperatures. It follows that $\Delta n_{\lambda} \propto \Delta T_{ph,j}$:
+The above holds for appropriately-high mode temperatures. It follows that $\Delta n_{\lambda} \propto \Delta T_{ph,\lambda}$:
 $$
-    \Delta n_{\lambda}(\vec{k}, \tau) \propto \frac{k_B \Delta T_{ph, j}(\tau)}{\hbar \omega_{\lambda}(\vec{k}, \tau<0)}
+    \Delta n_{\lambda}(\vec{k}, \tau) \propto \frac{k_B \Delta T_{ph, \lambda}(\tau)}{\hbar \omega_{\lambda}(\vec{k}, \tau<0)}
 $$
 
 ### The non-thermal lattice model at the $\vec{K}$ point
 
-Based on the formalism presented in the @sec:graphite-nlm, the couplings to the $A_1^\prime$ phonon mode will be extracted from the TO2 population measurements. Let the differential population be $\Delta n_{j=\text{TO2}}(\vec{k} = \vec{K}, \tau) \equiv \Delta n_{A_1^\prime}(\tau)$. $\Delta n_{A_1^\prime}(\tau)$ is obtained by integrating the population of the TO2 mode in a circular arc of radius \SI{0.3}{\per\angstrom} centered at $\vec{k} = \vec{K}$, as shown in @fig:graphite-ph-populations. 
+Based on the formalism presented in the @sec:graphite-nlm, the couplings to the $A_1^\prime$ phonon mode will be extracted from the TO2 population measurements. Let the differential population be $\Delta n_{\lambda=\text{TO2}}(\vec{k} = \vec{K}, \tau) \equiv \Delta n_{A_1^\prime}(\tau)$. $\Delta n_{A_1^\prime}(\tau)$ is obtained by integrating the population of the TO2 mode in a circular arc of radius \SI{0.3}{\per\angstrom} centered at $\vec{k} = \vec{K}$, as shown in @fig:graphite-ph-populations. 
 
 The number of coupled equations in @eq:graphite-nlm can be reduced by aggregating lattice heat capacities into two categories: the heat capacity of $A_1^\prime$, $C_{A_1^\prime}$, and the total effective heat capacity of all other relevant modes, defined as $C_l$. The calculation of $C_l$ boils down to adding the contribution of mode that can scatter into $A_1^\prime$ or from it, based on conservation of energy and momentum, weighted by the decay probabilities reported by Bonini *et al* [@Bonini2007]. With this information:
 \begin{align}
-    C_l &= \frac{9}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{TA}} \right] \\
-        &+ \frac{36}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{LA}}\right] \nonumber \\
-        &+ \frac{55}{100} \left[ C_{ph,j=\text{TA}} + C_{ph,j=\text{LA}} + C_{ph,j=\text{LO}} + C_{ph,j=\text{LA}}\right] \nonumber
+    C_l &= \frac{9}{100} \left[ C_{ph,\lambda=\text{TA}} + C_{ph,\lambda=\text{TA}} \right] \\
+        &+ \frac{36}{100} \left[ C_{ph,\lambda=\text{TA}} + C_{ph,\lambda=\text{LA}}\right] \nonumber \\
+        &+ \frac{55}{100} \left[ C_{ph,\lambda=\text{TA}} + C_{ph,\lambda=\text{LA}} + C_{ph,\lambda=\text{LO}} + C_{ph,\lambda=\text{LA}}\right] \nonumber
 \end{align}
 The system of equations from @sec:graphite-nlm can then be expressed as three equations: the flow of energy in and out of the electronic system, the $A_1^\prime$ mode, and all other modes coupled to the $A_1^\prime$ mode:
 $$
@@ -423,14 +423,14 @@ C_e(T_e) = 13.8 ~ T_e(\tau) + 1.16 \times 10^{-3} ~ T_e^2(\tau) + 2.6 \times 10^
 $$
 Extracting the lattice specific heat is simplified by the observation that thermal expansion has not occurred on the time-scale of the measurements ($\tau < \SI{680}{\pico\second}$). Bragg peak positions remain static throughout the measurement, as was also reported by Chatelain *et al*[@Chatelain2014a]. The specific heat capacity of each mode can therefore be taken as the heat capacity at constant volume[@Ziman1979]:
 $$
-C_{ph,j}(T_{ph,j}) = 
+C_{ph,\lambda}(T_{ph,\lambda}) = 
 k_B \int_0^{\omega_D} d\omega ~ D_j(\omega) 
     \left( 
-        \frac{\hbar \omega}{k_B T_{ph,j}} 
+        \frac{\hbar \omega}{k_B T_{ph,\lambda}} 
     \right)^2 
-    \frac{e^{\hbar \omega / k_B T_{ph,j}}}{\left( e^{\hbar \omega / k_B T_{ph,j}} - 1\right)^2}
+    \frac{e^{\hbar \omega / k_B T_{ph,\lambda}}}{\left( e^{\hbar \omega / k_B T_{ph,\lambda}} - 1\right)^2}
 $$
-where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of states for phonon mode $j$. The momentum-resolution of UEDS allows for a simplification: a single frequency contributes to the density of states, so that $D_j(\omega) \equiv \delta(\omega)$.
+where $\omega_D$ is the Debye frequency, and $D_j(\omega)$ is the density of states for phonon mode $\lambda$. The momentum-resolution of UEDS allows for a simplification: a single frequency contributes to the density of states, so that $D_j(\omega) \equiv \delta(\omega)$.
 
 ### Heat rates {#sec:graphite-eph-solution}
 
@@ -456,36 +456,36 @@ The solution to @eq:graphite-nlm-system using the measurements of the $A_1^\prim
 
 In order to compare to theory and other experiments, the value of electron-phonon coupling matrix-element $\langle g^2_{e, A_1^\prime} \rangle$ is calculated from the coupling constants determined from solving @eq:graphite-nlm-system.
 
-In general, the electron-phonon matrix element $\langle g^2_{e,j}(\vec{k}) \rangle$ between the electronic system and phonon mode $j$ at wavevector $\vec{k}$ is most simply related to the relaxation time $\tau_{e,j}(\vec{k})$ between the two subsystems[@Na2019]:
+In general, the electron-phonon matrix element $\langle g^2_{e,\lambda}(\vec{k}) \rangle$ between the electronic system and phonon mode $\lambda$ at wavevector $\vec{k}$ is most simply related to the relaxation time $\tau_{e,\lambda}(\vec{k})$ between the two subsystems[@Na2019]:
 $$
-\frac{\hbar}{\tau_{e,j}(\vec{k})} = 2 \pi \langle g^2_{e,j}(\vec{k}) \rangle D_e(\hbar \omega_{\nu} - \hbar \omega_{j}(\vec{k}))
+\frac{\hbar}{\tau_{e,\lambda}(\vec{k})} = 2 \pi \langle g^2_{e,\lambda}(\vec{k}) \rangle D_e(\hbar \omega_{\nu} - \hbar \omega_{j}(\vec{k}))
 $$
-where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\nu}$ is the optical excitation energy (\SI{1.55}{\electronvolt} in the case of \SI{800}{\nano\meter} light), and $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of phonon mode $j$ at wavevector $\vec{k}$, as defined previously. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Neto2009]:
+where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\nu}$ is the optical excitation energy (\SI{1.55}{\electronvolt} in the case of \SI{800}{\nano\meter} light), and $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of phonon mode $\lambda$ at wavevector $\vec{k}$, as defined previously. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Neto2009]:
 $$
     D_e(\epsilon) = \frac{2 A}{\pi} \frac{|\epsilon|}{(\hbar v_{F})^2}
 $$
-where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^1]. It follows that the determination of the mode-dependent electron-phonon coupling matrix element $g^2_{e,j}(\vec{k})$ relies on the calculation of the mode-dependent relaxation time $\tau_{e,j}(\vec{k})$ based on UEDS measurements. 
+where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^1]. It follows that the determination of the mode-dependent electron-phonon coupling matrix element $g^2_{e,\lambda}(\vec{k})$ relies on the calculation of the mode-dependent relaxation time $\tau_{e,\lambda}(\vec{k})$ based on UEDS measurements. 
 
-The calculation for the electron-$A_1^\prime$ coupling matrix element $\langle g^2_{e,A_1^\prime} \rangle \equiv \langle g^2_{e,j=\text{TO2}}(\vec{k} \approx \vec{K}) \rangle$ is demonstrated below. Consider the following sum of terms from @eq:graphite-nlm:
+The calculation for the electron-$A_1^\prime$ coupling matrix element $\langle g^2_{e,A_1^\prime} \rangle \equiv \langle g^2_{e,\lambda=\text{TO2}}(\vec{k} \approx \vec{K}) \rangle$ is demonstrated below. Consider the following sum of terms from @eq:graphite-nlm:
 $$
-     C_e(T_e) \frac{\partial T_e}{\partial \tau} - \sum_{\lambda} C_{ph,j}(T_{ph,j}) \frac{\partial T_{ph,j}}{\partial \tau} \nonumber
+     C_e(T_e) \frac{\partial T_e}{\partial \tau} - \sum_{\lambda} C_{ph,\lambda}(T_{ph,\lambda}) \frac{\partial T_{ph,\lambda}}{\partial \tau} \nonumber
 $$
 which simplifies to:
 \begin{align}
-    & \frac{\partial T_e}{\partial \tau} - \sum_{\lambda} \frac{\partial T_{ph,j}}{\partial \tau} = \label{eq:graphite-tau-1} \\
-    & \sum_{\lambda} \Bigg[ \frac{G_{ep,j}}{C_e} ~ (T_e - T_{ph,j}) \nonumber  -\sum_i \bigg( \frac{G_{ep,i}}{C_{ph,j}} ~ (T_e - T_{ph,i}) + \frac{G_{pp,ij}}{C_{ph,j}} ~ (T_{ph,i} - T_{ph,j}) \bigg) \Bigg] \nonumber
+    & \frac{\partial T_e}{\partial \tau} - \sum_{\lambda} \frac{\partial T_{ph,\lambda}}{\partial \tau} = \label{eq:graphite-tau-1} \\
+    & \sum_{\lambda} \Bigg[ \frac{G_{ep,\lambda}}{C_e} ~ (T_e - T_{ph,\lambda}) \nonumber  -\sum_{\lambda^\prime} \bigg( \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}} ~ (T_e - T_{ph,\lambda^\prime}) + \frac{G_{pp,\lambda \lambda^\prime}}{C_{ph,\lambda}} ~ (T_{ph,\lambda^\prime} - T_{ph,\lambda}) \bigg) \Bigg] \nonumber
 \end{align}
 At early times ($< \SI{5}{\pico\second}$), the $A_1^\prime$-phonon rate of energy flow $G_{A_1^\prime, l}$ is negligible compared to other coupling constants (@tbl:graphite-eph-coupling). Then, @eq:graphite-tau-1 can be simplified to:
 $$
-	\frac{\partial T_e}{\partial \tau} - \sum_{\lambda} \frac{\partial T_{ph,j}}{\partial \tau} = \sum_{\lambda} \frac{G_{ep,j}}{C_e} (T_e - T_{ph,j}) - \sum_{i,j} \frac{G_{ep,i}}{C_{ph,j}}(T_e - T_{ph,i})
+	\frac{\partial T_e}{\partial \tau} - \sum_{\lambda} \frac{\partial T_{ph,\lambda}}{\partial \tau} = \sum_{\lambda} \frac{G_{ep,\lambda}}{C_e} (T_e - T_{ph,\lambda}) - \sum_{\lambda, \lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}(T_e - T_{ph,\lambda^\prime})
 $${#eq:graphite-tau-2}
-By performing a substitution $\lambda = T_e - \sum_{\lambda} T_{ph,j}$, the equation above simplifies to a familiar situation:
+By performing a substitution $\lambda = T_e - \sum_{\lambda} T_{ph,\lambda}$, the equation above simplifies to a familiar situation:
 $$
     \dot{\lambda}(\tau) - a(\tau) \lambda(\tau) = 0
 $${#eq:graphite-tau-3}
 where
 $$
-    a(\tau) = \sum_{\lambda} \left( \frac{G_{ep,j}}{C_e(T_e(\tau))} - \sum_i \frac{G_{ep,i}}{C_{ph,j}(T_{ph, j}(\tau))}\right).
+    a(\tau) = \sum_{\lambda} \left( \frac{G_{ep,\lambda}}{C_e(T_e(\tau))} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}(T_{ph, \lambda}(\tau))}\right).
 $$
 @eq:graphite-tau-3 is a separable equation with solution:
 $$
@@ -493,16 +493,16 @@ $$
 $$
 For a slow-varying integrand $a(\tau) \approx a$, then $a = 1/\bar{\tau}$, where $\bar{\tau}$ is a compound variable representing the relaxation of the system. This leads to the following form:
 $$
-\frac{1}{\bar{\tau}} \approx \sum_{\lambda} \left( \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}\right).
+\frac{1}{\bar{\tau}} \approx \sum_{\lambda} \left( \frac{G_{ep,\lambda}}{C_e} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}\right).
 \label{eq:graphite-tau-4}
 $$
 As an aside, the above expression reduces nicely in the case of the two-temperature model, where all phonon modes are considered to be thermalized with each other, with isochoric heat capacity $C_{ph}$:
 $$
 \frac{1}{\bar{\tau}} = G_{ep} \left( \frac{1}{C_e} - \frac{1}{C_{ph}}\right)
 $$
-and it is apparent that $\bar{\tau}$ physically represents the relaxation time of the electronic system into the lattice. @eq:graphite-tau-4 can be thought of as a sum of relaxation times between the electronic subsystem and specific modes $\tau_{e,j}$:
+and it is apparent that $\bar{\tau}$ physically represents the relaxation time of the electronic system into the lattice. @eq:graphite-tau-4 can be thought of as a sum of relaxation times between the electronic subsystem and specific modes $\tau_{e,\lambda}$:
 $$
-\frac{1}{\tau_{e,j}} = \frac{G_{ep,j}}{C_e} - \sum_i \frac{G_{ep,i}}{C_{ph,j}}.
+\frac{1}{\tau_{e,\lambda}} = \frac{G_{ep,\lambda}}{C_e} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}.
 $$
 Using the coupling constants and heat capacities from @sec:graphite-eph-solution, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$ and $\langle g^2_{e, A_1^\prime} \rangle = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
 
