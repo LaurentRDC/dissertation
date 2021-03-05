@@ -66,7 +66,21 @@ Due to the Wiedemann-Franz law, ...
 
 ## Tin selenide
 
-Single-crystal tin selenide at ambient pressure is found in two phases, both of which are layered[@Chattopadhyay1986]. The low-temperature $Pnma$ phase is defined by the lattice vectors $\vec{a}_1 = a ~ \vec{e}_1$, $\vec{a}_2 = b ~ \vec{e}_2$, and $\vec{a}_3 = c ~ \vec{e}_3$ where $a=\SI{11.42}{\angstrom}$, $b=\SI{4.19}{\angstrom}$, and $c=\SI{4.46}{\angstrom}$. The vectors $\set{ \vec{e}_i }$ are understood to be the usual Euclidean vectors. The atomic positions are for the $Pnma$ phase are:
+Tin selenide (SnSe) is a layered mono-chalcogen which has attracted attention in the past few years because of its very high thermoelectric figure of merit $ZT$, especially at high temperature, as reported by Zhao *et al* [@Zhao2014; @Zhao2016a; @Zhao2016b]. Although the exact value of this figure of merit is debated [@Wei2016], SnSe remains one of the most promising bulk thermoelectric materials. SnSe is interesting not only from a scientific standpoint but also from a practical one because, most importantly because it is lead-free (non-toxic) and composed of earth-abundant elements.
+
+SnSe's high thermoelectric efficiency is primarily due to an anomalously-low lattice thermal conductivity, especially in-plane. At room temperature, $\kappa_l \sim \SI{1}{\watt\per\meter\per\kelvin}$ and it decreases further at higher temperatures [@Zhao2014]. The quasi-two-dimensional nature of SnSe is also a natural 2D confinement of the charge carriers and provides a mechanism through which phonons are scattered, in line with the proposals by Hicks and Dresselhaus [@Hicks1993a]. Single-crystal tin selenide at ambient pressure is found in two phases, both of which are layered[@Chattopadhyay1986]: the low-temperature $Pnma$ phase (space group number 62) and the high-temperature $Cmcm$ phase (space group number 63). The in-plane thermoelectric figure-of-merit increases dramatically near the transition temperature $T_c$, and is maximized in the high-temperature $Cmcm$ phase. The $Cmcm$ phase is a better thermoelectric for a two reasons. First, it has a smaller band gap (\SI{0.4}{\electronvolt}) compared to the $Pnma$ phase (\SI{0.6}{\electronvolt}) which results in an increased carrier concentration. Second, $Cmcm$ exhibits higher carrier mobilities than the $Pnma$ phase [@Zhao2014]. Together, these properties make $Cmcm$ the better thermoelectric form of SnSe.
+
+```{.matplotlib #fig:snse-bz file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
+```
+
+The $Pnma \to Cmcm$ phase transition is displacive second-order transition that is associated with the freezing of an optical $A_g$ mode at zone-center [@Chattopadhyay1986; @Dove1997]. Above $T_c$, the mode splits into two modes: an optical mode at $\Gamma$ polarized along the stacking axis $a$ and an acoustic mode polarized in the $b$--$c$ plane at $Y$. The in-plane section of the Brillouin zone is shown in @fig:snse-bz for context. Note that crystallographic directions are all given with respect to the low-temperature $Pnma$ phase. The $Cmcm$ phase is stabilized by strong anharmonicity between those two phonon modes[@Skelton2016; @Hong2019]. The softening of the $A_g$ mode in the $Pnma$ phase is thought to be due to an electronic instability. Simulations by Li *et al* [@Li2015] show that the strength of a particular Sn-Se bond along the $c$ axis is especially sensitive to temperature, which is a concrete example of the coupling between lattice and electronic degrees-of-freedom in efficient thermoelectric materials.
+
+The electronic structure of SnSe is also of interest. The valence band of SnSe is primarily composed of Se-$4p$ orbitals, while the conduction band is primarily composed of Sn-$5p$ orbitals[@Li2015; @Cuong2015; @Kutorasinski2015; @Hong2019]. Moreover, different valence and conduction pockets in momentum space correspond to particular $p$-orbital polarizations [@Cuong2015]. SnSe is a p-type semiconductor (i.e. the top of the valence band is much closer to the Fermi energy than the bottom of the conduction band) with a indirect band gap in the $Pnma$ phase, and a direct band gap in the $Cmcm$. Interestingly, the *nature* of the band gap is strongly-dependent on the in-plane lattice parameters. Towards $T_c$, the $a$ and $b$ axes expand, while the $c$ axis contracts towards the length of the $b$ axis [@Chattopadhyay1986]. At \SI{300}{\kelvin}, the conduction band minimum is located at $\frac{2}{3}Y$ and is composed of Sn-$5p_y$ orbitals. At \SI{600}{\kelvin}, the conduction band minimum switches to a pocket of Sn-$5p_x$ at $\Gamma$. The valence band maximum for the $Pnma$ phase remains near $\frac{2}{3}Z$ across the temperature range and is composed of Se-$4p_z$ orbitals[^cuong].
+
+
+### Structural parameters
+
+The low-temperature $Pnma$ phase is defined by the lattice vectors $\vec{a}_1 = a ~ \vec{e}_1$, $\vec{a}_2 = b ~ \vec{e}_2$, and $\vec{a}_3 = c ~ \vec{e}_3$ where $a=\SI{11.42}{\angstrom}$, $b=\SI{4.19}{\angstrom}$, and $c=\SI{4.46}{\angstrom}$. The vectors $\set{ \vec{e}_i }$ are understood to be the usual Euclidean vectors. The atomic positions are for the $Pnma$ phase are:
 $$
 \begin{pmatrix}
     \vec{\text{Se}}_1 \\
@@ -95,7 +109,7 @@ $$
     \vec{a}_3
 \end{pmatrix}
 $$
-The lattice vectors for the *conventional cell* of high-temperature phase, $Cmcm$, are given by $\vec{a}_1 = a ~ \vec{e}_1$, $\vec{a}_2 = b ~ \vec{e}_2$, and $\vec{a}_3 = b ~ \vec{e}_3$ where $a=\SI{11.71}{\angstrom}$ and $b=\SI{4.31}{\angstrom}$. The atomic positions in fractional coordinates are:
+The lattice vectors for the *conventional cell* of high-temperature phase $Cmcm$ are given by $\vec{a}_1 = a ~ \vec{e}_1$, $\vec{a}_2 = b ~ \vec{e}_2$, and $\vec{a}_3 = b ~ \vec{e}_3$ where $a=\SI{11.71}{\angstrom}$ and $b=\SI{4.31}{\angstrom}$. The atomic positions in fractional coordinates are:
 $$
 \begin{pmatrix}
     \vec{\text{Se}}_1 \\
@@ -124,14 +138,7 @@ $$
     \vec{a}_3
 \end{pmatrix}
 $$
-The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase.
-
-```{.matplotlib #fig:snse-bz file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
-```
-
-Experiments presented in this chapter explore the dynamics of SnSe in the $\vec{a}_2$ -- $\vec{a}_3$ plane. The in-plane section of the Brillouin zone is shown in @fig:snse-bz.
-
-### Lattice instability
+The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase. For convenience, the conventional cells are used throughout this chapter. 
 
 ## Experimental methods
 
@@ -167,7 +174,7 @@ The sample thickness was determined by taking the ratio of various reflections a
 
 ![Experimental diagram of the THz time-domain spectroscopy experiments. BS1/2: Beamsplitter. L1/2: Focusing lens. BBO: $\beta$-Barium borate crystal. PM1/2/3/4: Parabolic mirror. APD: Avalanche photodiode.](diagrams/thz_setup.pdf)
 
-### Data acquisition
+### Ultrafast electron scattering  
 
 The experiments presented in this chapter used the same experimental geometry that is presented in @sec:experimental_setup. Ultrashort laser pulses of \SI{1.55}{\electronvolt} light were shone on the sample surface, with an incident angle of \ang{10}, at $t=t_0$, on SnSe samples oriented in the $[100]$ direction. To ensure that the samples had enough time to cool down after every laser shot, the repetition rate of experiments were varied from \SIrange{50}{1000}{\hertz}, but no changes were measured beyond the degradation of signal-to-noise. Therefore, a \SI{1000}{\hertz} repetition rate was used. 
 
@@ -246,6 +253,8 @@ We can rearrange terms to use our experimental time-series for $\Delta \langle u
 ```
 
 ## Spectroscopic measurements
+
+[^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 
 \FloatBarrier
 ## References {.unnumbered}
