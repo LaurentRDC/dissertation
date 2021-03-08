@@ -42,7 +42,11 @@ for e, c in zip(ELEMENTS, COLORS):
     handles.append(l)
 
 fig.legend(
-    handles=handles, loc="center", ncol=len(ELEMENTS), bbox_to_anchor=(0.5, 0.925), edgecolor='none'
+    handles=handles,
+    loc="center",
+    ncol=len(ELEMENTS),
+    bbox_to_anchor=(0.5, 0.925),
+    edgecolor="none",
 )
 
 ax.set_xlabel("Radius [$\AA$]")
