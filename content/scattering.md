@@ -195,7 +195,7 @@ The geometry of reciprocal space and the reciprocal lattice are foundational con
 
 A perfectly periodic structure in real-space that extends to infinity, with associated lattice vectors $\set{ \vec{a}_i }$, possesses a *dual* lattice in reciprocal space. The lattice vectors $\set{ \vec{b}_i }$ for this reciprocal lattice are defined by the relation
 $$
-    \vec{a}_i \cdot \vec{b}_j = 2 \pi \delta_ij
+    \vec{a}_i \cdot \vec{b}_j = 2 \pi \delta_{ij}
 $$
 which leads to the following reciprocal lattice vectors:
 $$
@@ -330,7 +330,7 @@ Due to the presence of lattice waves, the atoms are vibrating about their equili
                        & = \sum_m \sum_s f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_{m,s}} e^{-i \vec{q} \cdot \vec{u}_{m,s}}
     \label{eq:scattering-potential-temp}
 \end{align}
-Recall from eq:scattering-intensity that the measurable quantity $|f^{(1)}(\vec{q})|^2$ is proportional to $|\hat{V}(\vec{q})|$:
+Recall from @eq:scattering-intensity that the measurable quantity $|f^{(1)}(\vec{q})|^2$ is proportional to $|\hat{V}(\vec{q})|$:
 \begin{align}
     |f^{(1)}(\vec{q})|^2 
         & = \left| -\frac{m_e}{\hbar^2} \hat{V}(\vec{q}) \right|^2 \nonumber \\
@@ -349,13 +349,17 @@ $$
             \langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle
     \label{eq:scattering-amplitude-average}
 $$
-where the problem is reduced to the evaluation of $\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle$. Consider now the description of the displacement vectors as a superposition of phonons. In this case, every displacement vector $\vec{u}_s$ can be expressed as:
+where the problem is reduced to the evaluation of $\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle$. 
+
+### Quantizing lattice waves
+
+Consider now the description of the displacement vectors as a superposition of lattice waves, or phonons. In this case, every displacement vector $\vec{u}_s$ can be expressed as:
 $$
     \vec{u}_{m,s} = \sum_{\lambda} \sum_{\set{\vec{k}}} \sqrt{\frac{\hbar}{2 \mu_s N \omega_{\lambda}(\vec{k})}} \left( a_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + a_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right) \vec{e}_{s,\lambda}(\vec{k}) 
 $${#eq:scattering-displacement}
 where $\set{\lambda}$ label phonon branches, $\mu_s$ is the reduced mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vec{k}$, $a_{\lambda}(\vec{k})$ and $a_{\lambda}^{\dagger}(\vec{k})$ are the creation and annihilation operators for phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vec{k})$ is the phase of a lattice wave, and $\vec{e}_{s,\lambda}(\vec{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\vec{u}_{m,s}$ is the combined effect of all possible phonon modes at the $\vec{r}_{m,s}$ lattice site. 
 
-The Baker-Campbell-Hausdorff lemma can be used to compute the average[@Hausdorff1906]. It states that for two operators $A$ and $B$ with commutator $[A,B]$:
+The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle$ [@Hausdorff1906]. It states that for two operators $A$ and $B$ with commutator $[A,B]$:
 $$
 e^A e^B = e^{A + B + \frac{1}{2}[A,B]}
 $$
@@ -411,6 +415,9 @@ where $n_{\lambda}(\vec{k}) \equiv a_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\v
 $$
 \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})}\frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}}
 $$
+
+### Scattering amplitude
+
 @eq:scattering-amplitude-average can then be expressed as:
 \begin{align}
     |f^{(1)}(\vec{q})|^2 = & N_c^2 \frac{m_e^2}{\hbar^4} \sum_{m, m^\prime} \sum_{s,s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q}) e^{-i \vec{q} \cdot (\vec{r}_{m,s} - \vec{r}_{m^\prime, s^{\prime}})} e^{-W_s} e^{-W_{s^\prime}}\left[ 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle  \right] \nonumber \\

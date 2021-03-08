@@ -10,11 +10,11 @@ simplefilter("ignore", category=RuntimeWarning)
 
 ELEMENTS = [
     "C",
-    "Au",
     "Cu",
     "Sn",
+    "Au",
 ]
-COLORS = ["green"] + discrete_colors(len(ELEMENTS) - 1)
+COLORS = discrete_colors(len(ELEMENTS))
 
 
 def potential(element, r):
@@ -42,7 +42,7 @@ for e, c in zip(ELEMENTS, COLORS):
     handles.append(l)
 
 fig.legend(
-    handles=handles, loc="center", ncol=len(ELEMENTS), bbox_to_anchor=(0.5, 0.925)
+    handles=handles, loc="center", ncol=len(ELEMENTS), bbox_to_anchor=(0.5, 0.925), edgecolor='none'
 )
 
 ax.set_xlabel("Radius [$\AA$]")

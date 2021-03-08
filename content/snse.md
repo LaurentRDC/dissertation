@@ -245,8 +245,9 @@ where the prefactors in @eq:scattering-diffuse-intensity have all been collected
 $$
     I_1(\tau) - I_1(0) = I_e \left| F_{1 A_g}\right|^2 (n_{A_g}(0) + 1/2) \left( \frac{1}{\omega_{A_g}(\tau)} - \frac{1}{\omega_{A_g}(0)}\right)
 $$.
-Therefore, determining the $A_g$ mode softening from the diffuse intensity dynamics requires the calculation of the one-phonon structure factors. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead.
+Therefore, determining the $A_g$ mode softening from the diffuse intensity dynamics requires the calculation of the one-phonon structure factors. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead. 
 
+Given that the softening of a phonon mode manifests itself
 
 The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
 \begin{align}
