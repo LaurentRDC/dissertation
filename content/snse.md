@@ -80,6 +80,9 @@ The electronic structure of SnSe is also of interest. The valence band of SnSe i
 
 ### Structural parameters
 
+```{.matplotlib #fig:snse-structure file="figures/snse/structure.py" caption="Atomic structure for two phases of SnSe. **a)** $Pnma$ (low-temperature) phase. **b)** $Cmcm$ (high-temperature) phase."}
+```
+
 The low-temperature $Pnma$ phase is defined by the lattice vectors $\vec{a}_1 = a ~ \vec{e}_1$, $\vec{a}_2 = b ~ \vec{e}_2$, and $\vec{a}_3 = c ~ \vec{e}_3$ where $a=\SI{11.42}{\angstrom}$, $b=\SI{4.19}{\angstrom}$, and $c=\SI{4.46}{\angstrom}$. The vectors $\set{ \vec{e}_i }$ are understood to be the usual Euclidean vectors. The atomic positions are for the $Pnma$ phase are:
 $$
 \begin{pmatrix}
@@ -138,7 +141,10 @@ $$
     \vec{a}_3
 \end{pmatrix}
 $$
-The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase. For convenience, the conventional cells are used throughout this chapter. 
+The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase. For convenience, the conventional cells are used throughout this chapter. The atomic structures are shown in @fig:snse-structure. The polarization of the $A_g$ mode in the $Pnma$ phase is shown in @fig:snse-agmode [@Aseginolaza2019].
+
+```{.matplotlib #fig:snse-agmode file="figures/snse/agmode.py" caption="Polarization of the soft $A_g$ mode involved in the $Pnma \to Cmcm$ phase transition."}
+```
 
 ## Experimental methods
 
@@ -146,7 +152,7 @@ The primitive cell for the $Pnma$ phase is twice the size of the primitice cell 
 
 Sample preparation involves two steps. Bulk crystals of SnSe were first synthesized, followed by processed by which ultrathin samples were produced.
 
-Bulk SnSe crystals (\SI{20}{\gram}) were synthesized by mixing appropriate ratios of high purity starting materials (Sn chunk, 99.999\%, American Elements, USA and Se shot, 99.999\%, 5N Plus, Canada) in \SI{13}{\milli\meter} diameter quartz tube. The tube was flame-sealed at a residual pressure of $\SI{1e-4}{\mmHg}$, then slowly heated to \SI{1223}{\kelvin} over \SI{10}{\hour}, soaked at this temperature for 6h and subsequently furnace cooled to room temperature. The obtained ingot was crushed into powder and flame-sealed in a quartz tube, which was placed into another, bigger, flame-sealed quartz tube. A crystal with dimensions of $\sim$\SI{13}{\milli\meter} (diameter) $\times$ \SI{20}{\milli\meter} (length) was obtained.
+Bulk SnSe crystals (\SI{20}{\gram}) were synthesized by mixing appropriate ratios of high purity starting materials (Sn chunk, 99.999\%, American Elements, USA and Se shot, 99.999\%, 5N Plus, Canada) in \SI{13}{\milli\meter} diameter quartz tube. The tube was flame-sealed at a residual pressure of $\SI{1e-4}{\mmHg}$, then slowly heated to \SI{1223}{\kelvin} over \SI{10}{\hour}, soaked at this temperature for 6h and subsequently furnace cooled to room temperature. The obtained ingot was crushed into powder and flame-sealed in a quartz tube, which was placed into another, bigger, flame-sealed quartz tube. A crystal with dimensions of $\sim$\SI{13}{\milli\meter} (diameter) $\times$ \SI{20}{\milli\meter} (length) was obtained. The bulk SnSe crystals were prepared for the author by Zhongzhen Luo of Northwestern University.
 
 In order to obtain ultrathin samples suitable for ultrafast electron scattering experiments, two methods were tried. Ultramicrotomy yielded suitable samples, but the author wanted to rule out the effect of strain induced by the sample preparation. To this end, a sample was also prepared via mechanical exfoliation.
 
@@ -217,26 +223,43 @@ The observation of forbidden reflections in the thicker samples allows to confir
 
 ### Effect of charge-transfer on diffracted intensity
 
-```{.matplotlib file="figures/snse/chargetransfer.py" caption="Expected intensity change $\Delta I_{(hkl)}$, in proportion to the experimental error $\sigma_e$, for the transfer of a single $p$ electron from Se to Sn. $\Delta I_{(hkl)} / \sigma_e > 1$ implies an intensity change that can be measured, indicating that no in-plane reflection is expected to display signals related to charge-transfer. In-plane reflections up to $|\vec{q}| < \SI{10}{\per\angstrom}$ were considered. The experimental error $\sigma_e$ represents the standard error of the variation in diffraction intensity before photoexcitation."}
+Recall from @eq:scattering-diffracted-intensity-finite-temp that the expression for elastic scattering of electrons:
+$$
+    I_0(\vec{q}) \propto \left| \sum_m \sum_s f_{e,s}(\vec{q}) e^{-W_s} e^{-i \vec{q} \cdot \vec{r}_{m,s}} \right|^2
+$$
+where $\vec{q}$ is the scattering vector, $m$ labels unit cells, $s$ are indices associated with atoms in the crystal unit cell, $r_{m,s}$ is the real-space atomic position of atom $s$, $W_s$ is the Debye-Waller factor of atom $s$, and $f_{e,s}$ is the atomic form factor of atom $s$. Initially described in @sec:affe, the atomic form factor $f_{e,s}$ represents the scattering potential of a single atom, in reciprocal space. As such, it intuitively should reflect the orbitals of a particular atom. Zheng *et al* [@Zheng2009] has calculated and parametrized the orbital-projected (or *aspherical*) atomic form factors for electron scattering. Using this parametrization, it is possible to calculate the expected change in atomic form factors brought by an in-plane charge transfer, and its effect on the diffracted intensity $I_0$. 
+
+Sn and Se have 2 and 4 $p$ electrons, respectively. The electronic transition resulting from photoexcitation can be modelled as a single $p$ electron leaving Sn to the neighboring Se, in accordance with simulations of Li *et al* [@Li2015]. The results of this analysis are presented in @fig:snse-charge-transfer. For the effective energy deposited investigated (less than \SI{300}{\milli\electronvolt} per unit cell, or 0.2 electronic transition per unit cell), this modelling reveals that all in-plane reflections show fractional change below the experimental uncertainties derived from the jitter in pre-photoexcitation intensity variations. Therefore, the absence of a charge-transfer signature in the diffraction dynamics is expected.
+
+```{.matplotlib #fig:snse-charge-transfer file="figures/snse/chargetransfer.py" caption="Expected intensity change $\Delta I_{(hkl)}$, in proportion to the experimental error $\sigma_e$, for the transfer of a single $p$ electron from Se to Sn. $\Delta I_{(hkl)} / \sigma_e > 1$ implies an intensity change that can be measured, indicating that no in-plane reflection is expected to display signals related to charge-transfer. In-plane reflections up to $|\vec{q}| < \SI{10}{\per\angstrom}$ were considered. The experimental error $\sigma_e$ represents the standard error of the variation in diffraction intensity before photoexcitation."}
 ```
 
-### Evolution of Bragg peak profile
+### Ultrafast phonon softening from intensity dynamics
 
-### Ultrafast phonon softening from Bragg intensity
-
-
-The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression:
+Extracting the change in the $A_g$ phonon frequency $\omega(\vec{k}=\vec{\Gamma}, \tau)$ from the diffuse intensity is technically possible. Consider the change in diffuse intensity at $\vec{k} \approx \vec{0}$:
 \begin{align}
-    \frac{I_0(\vec{q},t) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
-        &\equiv \Delta I_0(\vec{q},t) \nonumber \\
-        &= \frac{N_c I_e |F|^2}{N_c I_e |F|^2}\frac{\left[e^{-2M(\vec{q},t)} - e^{-2M(\vec{q},0)}\right]}{e^{-2M(\vec{q},0)}} \nonumber \\
+    I_1(\tau) - I_1(0) & = I_e \sum_{\lambda} \frac{n_{\lambda}(\tau) + 1/2}{\omega_{\lambda}(\tau)} \left| F_{1\lambda}\right|^2 - I_e \sum_{\lambda} \frac{n_{\lambda}(0) + 1/2}{\omega_{\lambda}(0)} \left| F_{1\lambda}\right|^2 \nonumber \\
+                      & =  I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left( \frac{n_{\lambda}(\tau) + 1/2}{\omega_{\lambda}(\tau)} - \frac{n_{\lambda}(0) + 1/2}{\omega_{\lambda}(0)} \right)
+\end{align}
+where the prefactors in @eq:scattering-diffuse-intensity have all been collected in the quantity $I_e$. Photoexcitation results in a single mode $\lambda=A_g$ softening, so that $n_{\lambda}(0) = n_{\lambda}(\tau) \forall \lambda$ and $\omega_{\lambda}(0) = \omega_{\lambda}(\tau) \forall \lambda \setminus \left\{ A_g \right\}$. Then:
+$$
+    I_1(\tau) - I_1(0) = I_e \left| F_{1 A_g}\right|^2 (n_{A_g}(0) + 1/2) \left( \frac{1}{\omega_{A_g}(\tau)} - \frac{1}{\omega_{A_g}(0)}\right)
+$$.
+Therefore, determining the $A_g$ mode softening from the diffuse intensity dynamics requires the calculation of the one-phonon structure factors. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead.
+
+
+The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
+\begin{align}
+    \frac{I_0(\vec{q},\tau) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
+        &\equiv \Delta I_0(\vec{q},\tau) \nonumber \\
+        &= \frac{\left[e^{-2M(\vec{q},t)} - e^{-2M(\vec{q},0)}\right]}{e^{-2M(\vec{q},0)}} \nonumber \\
         &=e^{-2[M(\vec{q},t) - M(\vec{q},0)]} - 1
 \end{align}
 Rearranging terms:
 $$
     - \frac{1}{2} \ln \left[1 + \Delta I_0(\vec{q},t) \right] = 2 \pi^2 |\vec{q}|^2 \Delta \langle u^2\rangle
 $$
-The change in root-mean-square vibration $\langle u^2(t)\rangle$ can be used to infer a change in vibrational frequency $\omega_{TO}(t)$ by considering the amount of energy stored in the mode $E_{TO}$, in the classical limit. Provided that the energy is conserved\cite{Kittel1976}:
+The change in root-mean-square vibration $\langle u^2(t)\rangle$ can be used to infer a change in vibrational frequency $\omega_{TO}(t)$ by considering the amount of energy stored in the mode $E_{TO}$, in the classical limit. Provided that the energy is conserved [@Kittel1976]:
 
 \begin{align}
     E_{TO} &= 8 \pi^2 m \omega_{TO}^2(t) \langle u^2(t)\rangle \nonumber \\

@@ -316,7 +316,6 @@ where $a$ is the inter-atomic distance of the crystal. In the approximation desc
 \end{align}
 where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj].
 
-
 ## The effect of lattice waves on ultrafast electron scattering
 
 TODO: explain that we only consider single-phonon scattering
@@ -439,12 +438,12 @@ $$
 where
 $$
     I_0(\vec{q}) = \frac{N_c^2 m_e^2}{r^2\hbar^4} \left| \sum_m \sum_s f_{e,s}(\vec{q}) e^{-W_s} e^{-i \vec{q} \cdot \vec{r}_{m,s}} \right|^2
-$$
+$${#eq:scattering-diffracted-intensity-finite-temp}
 is the diffracted intensity, and where
 $$
     I_1(\vec{q}) = \frac{N_c^2 I_e}{r^2} \sum_{\lambda} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} 
                             \left| \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})\right)\right|^2
-$$
+$${#eq:scattering-diffuse-intensity}
 is known as *first order diffuse scattering*, described in the next section. The diffracted intensity at finite temperature is equivalent to @eq:scattering-diffracted-intensity-zero-temp, with the substitution $f_{e,s}(\vec{q}) \to f_{e,s}(\vec{q}) e^{-W_s}$. The physical meaning of this substitution is that atomic vibrations due to temperature decreases the periodicity of the lattice, which results in a suppression of the atomic form factor in reciprocal space.
 
 ### Diffuse scattering {#sec:diffuse-scattering}

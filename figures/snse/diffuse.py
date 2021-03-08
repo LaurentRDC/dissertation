@@ -102,13 +102,16 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
     timeseries["debye-waller"] = np.zeros_like(timedelays)
     for h, k, l in INDICES_BRAGG:
         yj, xj = overnight4.miller_to_arrindex(h, k, l)
-        timeseries["debye-waller"] += dset.time_series_selection(
-            skued.RingSelection(
-                shape=dset.resolution,
-                center=(xj, yj),
-                inner_radius=INNER_RADIUS,
-                outer_radius=OUTER_RADIUS,
+        q2 = np.linalg.norm(CRYSTAL.scattering_vector((h, k, l))) ** 2
+        timeseries["debye-waller"] += (
+            dset.time_series_selection(
+                skued.DiskSelection(
+                    shape=dset.resolution,
+                    center=(xj, yj),
+                    radius=INNER_RADIUS,
+                )
             )
+            / q2
         )
 
     for indices in INDICES_DIFFUSE:
@@ -120,33 +123,6 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
             outer_radius=OUTER_RADIUS,
         )
         timeseries[indices] = dset.time_series_selection(diffuse_selection)
-
-    timeseries["Y"] = np.zeros_like(timedelays)
-    timeseries["Z"] = np.zeros_like(timedelays)
-    timeseries["T"] = np.zeros_like(timedelays)
-    for indices in INDICES_DIFFUSE:
-        h, k, l = indices
-        for sign in [1, -1]:
-            yi_Y, xi_Y = overnight4.miller_to_arrindex(h, k + sign * (1 / 2), l)
-            yi_Z, xi_Z = overnight4.miller_to_arrindex(h, k, l + sign * (1 / 2))
-            yi_T, xi_T = overnight4.miller_to_arrindex(
-                h, k + sign * (1 / 2), l + sign * (1 / 2)
-            )
-            timeseries["Y"] += dset.time_series_selection(
-                skued.DiskSelection(
-                    dset.resolution, center=(xi_Y, yi_Y), radius=OUTER_RADIUS
-                )
-            )
-            timeseries["Z"] += dset.time_series_selection(
-                skued.DiskSelection(
-                    dset.resolution, center=(xi_Z, yi_Z), radius=OUTER_RADIUS
-                )
-            )
-            timeseries["T"] += dset.time_series_selection(
-                skued.DiskSelection(
-                    dset.resolution, center=(xi_T, yi_T), radius=OUTER_RADIUS
-                )
-            )
 
 # Normalize all time-series to pre-time-zero
 for k, ts in timeseries.items():
@@ -208,16 +184,6 @@ plot_params = dict(
 )
 diffuse_ax.plot(timedelays, dwfit_curve, linewidth=1, color=DWCOLOR)
 
-# dwerr = np.std(timeseries["debye-waller"][timedelays < 0])
-# diffuse_ax.fill_between(
-#     timedelays,
-#     timeseries["debye-waller"] - dwerr,
-#     timeseries["debye-waller"] + dwerr,
-#     where=timedelays > 0,
-#     color=DWCOLOR,
-#     alpha=0.2,
-# )
-
 diffuse_ax.errorbar(
     x=timedelays,
     y=timeseries["debye-waller"],
@@ -245,18 +211,13 @@ params, pcov = opt.curve_fit(
     p0=(0, -0.01, 0.01, 0.1, 3.7, 1),
 )
 perr = np.sqrt(np.diag(pcov))
+print(params)
+print(pcov)
 
 diffuse_ax.plot(
     timedelays, biexponential(timedelays, *params), linewidth=1, color=GAMMA_COLOR
 )
-# diffuse_ax.fill_between(
-#     timedelays,
-#     biexponential(timedelays, *(params - perr)),
-#     biexponential(timedelays, *(params + perr)),
-#     where=timedelays > 0,
-#     color=GAMMA_COLOR,
-#     alpha=0.2,
-# )
+
 diffuse_ax.errorbar(
     x=timedelays,
     y=gamma_timeseries,
@@ -407,7 +368,7 @@ ax_linecut.yaxis.set_visible(False)
 
 
 diffuse_ax.set_xlim([-1, 12])
-diffuse_ax.set_ylim([0.984, 1.02])
+diffuse_ax.set_ylim([0.967, 1.035])
 
 diffuse_ax.legend(
     loc="center",
@@ -420,7 +381,7 @@ diffuse_ax.legend(
 
 diffuse_ax.set_xlabel("Time-delay [ps]")
 diffuse_ax.set_ylabel("Scattered intensity change [a.u.]")
-diffuse_ax.yaxis.set_ticks([0.99, 1.00, 1.01, 1.02])
+diffuse_ax.yaxis.set_ticks([0.97, 0.98, 0.99, 1.00, 1.01, 1.02, 1.03])
 
 yc, xc = static.center
 width = dk * (yc - CROP)
