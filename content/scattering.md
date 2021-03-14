@@ -418,6 +418,9 @@ $$
 
 ### Scattering amplitude
 
+```{.matplotlib #fig:scattering-vector-geometry file="figures/scattering/vector-geometry.py" caption="Diffraction pattern of SnSe (discussed in @sec:snse) showing the geometrical relationship between the scattering vector $\vec{q}$, reciprocal point $\vec{H}$, and wavevector $\vec{k}_0$. The in-plane section of the Brillouin, where $\vec{k}_0$ is confined, is shown as well."}
+```
+
 @eq:scattering-amplitude-average can then be expressed as:
 \begin{align}
     |f^{(1)}(\vec{q})|^2 = & N_c^2 \frac{m_e^2}{\hbar^4} \sum_{m, m^\prime} \sum_{s,s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q}) e^{-i \vec{q} \cdot (\vec{r}_{m,s} - \vec{r}_{m^\prime, s^{\prime}})} e^{-W_s} e^{-W_{s^\prime}}\left[ 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle  \right] \nonumber \\
@@ -436,7 +439,7 @@ where $L$ is some very large length used to discretize the allowed values of $\v
                             \left| \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}_0)\right)\right|^2
     \label{eq:scattering-amplitude-reduced}
 \end{align}
-where $\vec{k}_0$ is understood to be the smallest wavevector such that $\vec{q} = \vec{H} + \vec{k}_0$ for some reciprocal point $\vec{H}$, i.e. $\vec{k}_0$ is constrained to lie in the first Brillouin zone. This implicit condition is equivalent to the sum $\sum_{\set{\vec{H}}}$.
+where $\vec{k}_0$ is understood to be the smallest wavevector such that $\vec{q} = \vec{H} + \vec{k}_0$ for some reciprocal point $\vec{H}$, i.e. $\vec{k}_0$ is constrained to lie in the first Brillouin zone. This implicit condition is equivalent to the sum $\sum_{\set{\vec{H}}}$. A visual representation of the vectors is shown in @fig:scattering-vector-geometry.
 
 Combining @eq:scattering-amplitude-reduced and @eq:scattering-intensity, the measured intensity is therefore:
 $$
@@ -463,7 +466,15 @@ where $F_{1\lambda}(\vec{q})$ is known as the *one-phonon structure factor*:
 $$
 |F_{1\lambda}(\vec{q})|^2 = \left| \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})\right)\right|^2
 $${#eq:scattering-one-phonon-structure-factor}
-named thus in contrast to the static structure factor of @eq:scattering-potential-crystal.
+named thus in contrast to the static structure factor of @eq:scattering-potential-crystal. 
+
+A few clarifications can be made about diffuse intensity. The diffuse intensity at any scattering vector $\vec{q}$ involves the contribution of all phonon modes $\lambda$. The contribution of each mode can be conceptually separated into two parts: 
+
+1. The vibrational amplitude of each mode is proportional to $(n_{\lambda}(\vec{k}) + 1/2)(\omega_{\lambda}(\vec{k}))$, by analogy with the expression of @eq:scattering-displacement. A higher population ($\uparrow n_{\lambda}$) results in a larger vibrational amplitude because the displacement of atoms is linear in the number of phonons that participate. A lower vibrational frequency ($\downarrow \omega_{\lambda}$) implies a smaller restoring force (in the harmonic oscillator sense), which also intuitively results in a wider vibrational amplitude.
+
+2. A geometrical weight ($|F_{1\lambda}(\vec{q})|^2$) which determines if the atomic motion associated with a phonon mode can be captured on the detector. The most important term to consider are terms of the form $\set{\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})}$. For a phonon polarization which is parallel to the propagation of the scattering electrons, the projection of the polarization onto the detector plane is $0$, and hence the associated diffuse intensity will not contribute.
+
+Diffuse scattering and the effect of one-phonon structure factors is further explained in #sec:graphite.
 
 
 [^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014].

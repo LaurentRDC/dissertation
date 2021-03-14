@@ -79,7 +79,9 @@ diffuse_ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
 with DiffractionDataset(static.path, mode="r") as dset:
     static_pattern = dset.diff_data(0)
     static_mask = dset.invalid_mask
-    static_pattern[static_mask] = 0
+
+static_pattern[:, 1024::] += 6  # Difference in bias between the two halves of the CCD
+static_pattern[static_mask] = 0
 static_pattern[:] = gaussian(static_pattern, 4)
 # Removing some hot pixels
 static_pattern = np.maximum(static_pattern, 0)
