@@ -289,8 +289,6 @@ We can rearrange terms to use our experimental time-series for $\Delta \langle u
 ```{.matplotlib file="figures/snse/softening.py" caption="Measurement of the softening of the TO$_c$ mode, extracted directly from the transient Debye-Waller dynamics, assuming that atomic vibrational amplitude only changes based on TO$_c$ renormalization at early times ($\tau < \SI{1}{\pico\second}$). Color bar shows associated absorbed energy per cell $E_c$. \textbf{Inset} Increase in isotropic mean-square-displacement of all atoms, due to the change in vibrational frequency of the TO$_c$ mode exclusively. Boxes are used to represent error bars along both axes."}
 ```
 
-## Spectroscopic measurements
-
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 
 \FloatBarrier
