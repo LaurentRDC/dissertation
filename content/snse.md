@@ -66,7 +66,7 @@ Due to the Wiedemann-Franz law, ...
 
 ## Tin selenide
 
-Tin selenide (SnSe) is a layered mono-chalcogen which has attracted attention in the past few years because of its very high thermoelectric figure of merit $ZT$, especially at high temperature, as reported by Zhao *et al.* [@Zhao2014; @Zhao2016a; @Zhao2016b]. Although the exact value of this figure of merit is debated [@Wei2016], SnSe remains one of the most promising bulk thermoelectric materials. The axis-projected $ZT$ based on the work by Zhao *et al.* [@Zhao2014] is shown in @fig:snse-zt. SnSe is interesting not only from a scientific standpoint but also from a practical one because, most importantly because it is lead-free (non-toxic) and composed of earth-abundant elements.
+Tin selenide (SnSe) is a layered mono-chalcogen which has attracted attention in the past few years because of its very high thermoelectric figure of merit $ZT$, especially at high temperature, as reported by Zhao *et al.* [@Zhao2014; @Zhao2016a; @Zhao2016b]. While the exact value of this figure of merit is debated [@Wei2016], SnSe remains one of the most promising bulk thermoelectric materials[^zt-fully-dense]. The axis-projected $ZT$ based on the work by Zhao *et al.* [@Zhao2014] is shown in @fig:snse-zt. SnSe is interesting not only from a scientific standpoint but also from a practical one because, most importantly because it is lead-free (non-toxic) and composed of earth-abundant elements.
 
 ```{.matplotlib #fig:snse-zt file="figures/snse/zt.py" caption="Thermoelectric figure-of-merit $ZT$ along the crystallographic axes of SnSe."}
 ```
@@ -191,10 +191,6 @@ An ultrathin flake of SnSe was prepared via mechanical exfoliation, a procedure 
 
 The sample thickness was determined by taking the ratio of various reflections at thicknesses of \SI{70}{\nano\meter} and \SI{90}{\nano\meter} -- correcting for sample volume and electron flux -- and extrapolating to the intensity of the reflections in the exfoliated sample. Using this procedure, the thickness of the exfoliated sample was estimeted to be $\SI{30 \pm 5}{\nano\meter}$.
 
-### Time-resolved terahertz spectroscopy
-
-![Experimental diagram of the THz time-domain spectroscopy experiments. BS1/2: Beamsplitter. L1/2: Focusing lens. BBO: $\beta$-Barium borate crystal. PM1/2/3/4: Parabolic mirror. APD: Avalanche photodiode.](diagrams/thz_setup.pdf)
-
 ### Ultrafast electron scattering  
 
 The experiments presented in this chapter used the same experimental geometry that is presented in @sec:experimental_setup. Ultrashort laser pulses of \SI{1.55}{\electronvolt} light were shone on the sample surface, with an incident angle of \ang{10}, at $t=t_0$, on SnSe samples oriented in the $[100]$ direction. To ensure that the samples had enough time to cool down after every laser shot, the repetition rate of experiments were varied from \SIrange{50}{1000}{\hertz}, but no changes were measured beyond the degradation of signal-to-noise. Therefore, a \SI{1000}{\hertz} repetition rate was used. 
@@ -290,6 +286,7 @@ We can rearrange terms to use our experimental time-series for $\Delta \langle u
 ```
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
+[6zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
 
 \FloatBarrier
 ## References {.unnumbered}

@@ -110,6 +110,7 @@ fig.legend(
     loc="center",
     ncol=2,
     bbox_to_anchor=(0.5, 0.05),
+    edgecolor="none",
 )
 
 ax.set_xlim([ky.min(), ky.max()])

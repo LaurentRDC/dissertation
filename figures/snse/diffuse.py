@@ -76,9 +76,9 @@ diffuse_ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
 diffuse_ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
 
 # Static diffraction pattern
-with DiffractionDataset(static.path, mode="r") as dset:
-    static_pattern = dset.diff_data(0)
-    static_mask = dset.invalid_mask
+with DiffractionDataset(static.path, mode="r") as static_dset:
+    static_pattern = static_dset.diff_data(0)
+    static_mask = static_dset.invalid_mask
 
 static_pattern[:, 1024::] += 6  # Difference in bias between the two halves of the CCD
 static_pattern[static_mask] = 0

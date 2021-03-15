@@ -81,7 +81,13 @@ with PopulationDatabase(INPUT / "population_timeseries.hdf5", mode="r") as dbase
             t = np.linspace(dbase.times.min(), dbase.times.max(), num=8192)
             ax_.plot(t, biexp(t, *fit_params), color=color, linestyle="-")
 
-ax.legend(loc="center", ncol=3, bbox_to_anchor=(0.5, 1.05), bbox_transform=ax.transAxes)
+ax.legend(
+    loc="center",
+    ncol=3,
+    bbox_to_anchor=(0.5, 1.05),
+    edgecolor="none",
+    bbox_transform=ax.transAxes,
+)
 ax.set_ylabel("Energy change [a.u.]")
 ax.set_xlim([-5, 30])
 ax.set_xlabel("Time-delay [ps]")

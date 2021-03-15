@@ -7,6 +7,8 @@ This chapter will consider the special case of *electron scattering*. In crystal
 
 Specifically, the type of scattering relevant to this work involves the probing of periodic structures, crystals. Thanks to advances in data acquisition and data analysis attributable to the author (see [appendix @sec:appendix]), as well as improvements to instrument stability[@Otto2017], the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
 
+In writing this chapter, the author has tried original derivations that emphasize concepts that are important for the remainder of this dissertation. The derivation of ultrafast diffuse scattering intensity is of particular interest, because it is the only full quantum-mechanical treatment relevant to ultrafast electron scattering specifically.
+
 ## Elastic electron scattering and the Lippmann-Schwinger formalism
 
 TODO: make it clear that the time-variation of the potential happens on a different scale than the scattering time
