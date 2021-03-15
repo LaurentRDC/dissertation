@@ -65,6 +65,16 @@ It is precisely because the correlation is so strong that a solution can be devi
 
 ![Timeline of the compression of an electron pulse as it propagates to the sample. In the top row, the electron pulse is shown in real-space as it propagates through the compression cavity towards the sample. In the bottom row, the phase-space representation of the bunch is shown like in @fig:introduction-bunch-correlation.](diagrams/rf-compression.pdf){#fig:introduction-rf-compression}
 
+### The landscape today
+
+At the time of writing, there are many research groups across the world using ultrafast electron scattering techniques with great success. This section is a non-exhaustive enumeration of the field as of the first half of 2021.
+
+First, the most traditional approach of ultrafast electron diffraction in the compact geometry is still alive today. One of the most successful research groups using this tool is led by R. Ernstorfer at the Fritz-Haber Institute in Berlin which has been studying multiple solid-state systems[@Waldecker2016; @Waldecker2017; @Zahn2020]. 
+
+There are also multiple RF-compressed ultrafast electron diffraction instruments in use today. Such an instrument is used in the author's research group led by B. Siwick at McGill University[@Chatelain2014a; @Morrison2014; @Stern2018; @RenedeCotret2019; @Otto2020]. Several instruments are located at the University of Toronto, in the group led by R. J. D. Miller[@Ernstorfer2009; @Gao2013; @Jiang2017; @Jiang2020]. Another instrument based on the design by van Oudheusden *et al.*[@Van2007] has been in use at the University of Nebraska, in the research group led by M. Centurion, with special emphasis on gas-phase electron diffraction[@Yang2015].
+
+Finally, there are a few high-energy (\si{\mega\electronvolt}) accelerator-based ultrafast electron diffraction instruments in operation today. The most well-known is located at the Stanford Linear Accelerator Center (SLAC), part of a group led by X. Wang. Several research groups have been using this instrument as it has turned into a user-facility[@Mo2018; @Sie2019; @Kogar2020]. Another high-energy instrument is located at the University of California, Los Angeles, in a research group led by P. Musumeci[@Maxson2017] which focuses on instrument development.
+
 ## Experimental apparatus {#sec:experimental_setup}
 
 All ultrafast electron scattering experiments presented in this dissertation were performed with the same experimental apparatus, presented in @fig:apparatus.
