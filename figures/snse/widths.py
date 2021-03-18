@@ -35,14 +35,15 @@ fwhms = dict()
 with DiffractionDataset(overnight4.path, mode="r") as dset:
     timedelays = dset.time_points
 
-for refl in INDICES_DIFFUSE:
+    for refl in INDICES_DIFFUSE:
 
-    yi_, xi_ = overnight4.miller_to_arrindex(*refl)
-    width = 40
-    kx, _ = overnight4.kgrid()
-    dk = kx[0, 1] - kx[0, 0]
-    k = dk * (np.arange(start=yi_ - width, stop=yi_ + width) - yi_)  # inverse angstroms
-    with DiffractionDataset(overnight4.path, mode="r") as dset:
+        yi_, xi_ = overnight4.miller_to_arrindex(*refl)
+        width = 40
+        kx, _ = overnight4.kgrid()
+        dk = kx[0, 1] - kx[0, 0]
+        k = dk * (
+            np.arange(start=yi_ - width, stop=yi_ + width) - yi_
+        )  # inverse angstroms
         timedelays = dset.time_points
         cube = dset.diffraction_group["intensity"][
             xi_ - width : xi_ + width,
@@ -52,41 +53,41 @@ for refl in INDICES_DIFFUSE:
         cube = cube[:, :, np.less_equal(timedelays, 5)]
         timedelays = timedelays[np.less_equal(timedelays, 5)]
 
-    ws = list()
-    centers = list()
-    errs_fwhm = list()
-    errs_center = list()
+        ws = list()
+        centers = list()
+        errs_fwhm = list()
+        errs_center = list()
 
-    for index, time in enumerate(timedelays):
-        if time > 5:
-            continue
+        for index, time in enumerate(timedelays):
+            if time > 5:
+                continue
 
-        linecut = cube[width, 0 : 2 * width, index]
-        linecut -= linecut.min()
+            linecut = cube[width, 0 : 2 * width, index]
+            linecut -= linecut.min()
 
-        try:
-            params, pcov = opt.curve_fit(
-                peak,
-                k,
-                linecut,
-                p0=(3e3, -1.6e-2, 4, 7),
-            )
-        except RuntimeError:
-            peak_fwhm = 0
-        else:
-            _, err_center, err_fwhm, _ = np.sqrt(np.diag(pcov))
-            peak_cut = peak(k, *params)
-            peak_cut -= peak_cut.min()
+            try:
+                params, pcov = opt.curve_fit(
+                    peak,
+                    k,
+                    linecut,
+                    p0=(3e3, -1.6e-2, 4, 7),
+                )
+            except RuntimeError:
+                peak_fwhm = 0
+            else:
+                _, err_center, err_fwhm, _ = np.sqrt(np.diag(pcov))
+                peak_cut = peak(k, *params)
+                peak_cut -= peak_cut.min()
 
-            interp = interpolate.UnivariateSpline(k, peak_cut - peak_cut.max() / 2)
-            r1, r2 = interp.roots()
+                interp = interpolate.UnivariateSpline(k, peak_cut - peak_cut.max() / 2)
+                r1, r2 = interp.roots()
 
-        ws.append(abs(r1 - r2))
-        centers.append((r1 + r2) / 2)
-        errs_fwhm.append(err_fwhm)
-        errs_center.append(err_center)
+            ws.append(abs(r1 - r2))
+            centers.append((r1 + r2) / 2)
+            errs_fwhm.append(err_fwhm)
+            errs_center.append(err_center)
 
-    fwhms[refl] = (ws, centers, errs_fwhm, errs_center)
+        fwhms[refl] = (ws, centers, errs_fwhm, errs_center)
 
 for index, ((refl, (ws, centers, err_fwhm, err_center)), color) in enumerate(
     zip(fwhms.items(), discrete_colors(len(INDICES_DIFFUSE)))

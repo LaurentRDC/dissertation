@@ -232,6 +232,9 @@ This equation implies that an increase in one or more of the $(n_{\lambda}+1/2) 
 
 The observation of forbidden reflections in the thicker samples allows to confirm that the dynamics in region (2) are due to changes in diffuse intensity. Normally, only in-plane reflections of the form $\set{ (0kl) \mid k+l \in 2\mathbb{Z}}$ are allowed by the $Pnma$ space group, where $2\mathbb{Z}$ is understood to be the set of even integers. However, forbidden reflections can be observed in thicker samples where double-diffraction can occur. The comparison of the scattering dynamics in region (2) in a thick sample, around reflections that are allowed or forbidden by $Pnma$, are shown in @fig:snse-forbidden. The cross-section for double-diffraction is much higher than the cross-section for a diffraction event *plus* diffuse scattering (see @sec:scattering-multiple). Therefore, the fact that the dynamics in region (2) are not seen around forbidden reflections indicates that those dynamics are due to changes in the diffuse intensity near the $\Gamma$ point.
 
+```{.matplotlib #fig:snse-diffuse-direction file="figures/snse/diffuse-direction.py" caption=""}
+```
+
 ### Effect of charge-transfer on diffracted intensity
 
 Recall from @eq:scattering-diffracted-intensity-finite-temp that the expression for elastic scattering of electrons:
