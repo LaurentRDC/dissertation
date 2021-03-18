@@ -33,7 +33,15 @@ OUTER_RADIUS = 30
 
 
 # Determine the peak position and the time-series integration bounding box
-INDICES_DIFFUSE = [(0, -1, 3), (0, 0, 4), (0, -2, 4), (0, -1, 5)]
+INDICES_DIFFUSE = [
+    (0, -1, 3),
+    (0, 0, 4),
+    (0, -2, 4),
+    (0, -1, 5),
+    (0, -1, 7),
+    (0, -3, 5),
+    (0, -5, 3),
+]
 INDICES_BRAGG = [(0, 1, 2), (0, -1, -2), (0, 0, 1), (0, 0, -1), (0, 1, 0), (0, -1, 0)]
 inferno = plt.get_cmap("inferno")
 DWCOLOR, GAMMA_COLOR, AVERAGE_COLOR = inferno(30), inferno(100), inferno(200)
@@ -97,26 +105,26 @@ timeseries = dict()
 with DiffractionDataset(overnight4.path, mode="r") as dset:
     timedelays = dset.time_points
 
-    timeseries["average"] = dset.time_series_selection(
-        skued.RectSelection(dset.resolution, 680, 739, 1085, 1153)
-    )
-
     timeseries["debye-waller"] = np.zeros_like(timedelays)
     for h, k, l in INDICES_BRAGG:
-        yj, xj = overnight4.miller_to_arrindex(h, k, l)
         q2 = np.linalg.norm(CRYSTAL.scattering_vector((h, k, l))) ** 2
+        yj, xj = overnight4.miller_to_arrindex(h, k, l)
         timeseries["debye-waller"] += (
             dset.time_series_selection(
                 skued.DiskSelection(
                     shape=dset.resolution,
                     center=(xj, yj),
-                    radius=INNER_RADIUS,
+                    radius=OUTER_RADIUS,
                 )
             )
             / q2
         )
 
+    timeseries["average"] = np.zeros_like(timedelays)
+    timeseries["gamma"] = np.zeros_like(timedelays)
     for indices in INDICES_DIFFUSE:
+        q2 = np.linalg.norm(CRYSTAL.scattering_vector(indices)) ** 2
+
         yi, xi = overnight4.miller_to_arrindex(*indices)
         diffuse_selection = skued.RingSelection(
             shape=dset.resolution,
@@ -124,16 +132,27 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
             inner_radius=INNER_RADIUS,
             outer_radius=OUTER_RADIUS,
         )
-        timeseries[indices] = dset.time_series_selection(diffuse_selection)
+        timeseries["gamma"] += dset.time_series_selection(diffuse_selection) / q2
+
+        bg_selection = skued.RingSelection(
+            shape=dset.resolution,
+            center=(xi, yi),
+            inner_radius=int(2.5 * OUTER_RADIUS),
+            outer_radius=int(4 * OUTER_RADIUS),
+        )
+        timeseries["average"] += dset.time_series_selection(bg_selection) / q2
 
 # Normalize all time-series to pre-time-zero
 for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
 # Diffuse rises still contain nearby Bragg dynamics
-for indices in INDICES_DIFFUSE:
-    timeseries[indices] -= timeseries["debye-waller"]
-    timeseries[indices] += 1
+timeseries["gamma"] -= timeseries["debye-waller"]
+timeseries["gamma"] += 1
+
+# -----------------------------------------------------------------------------
+# Static diffraction pattern
+# -----------------------------------------------------------------------------
 
 kx, ky = static.kgrid()
 m = ax_im.imshow(
@@ -143,19 +162,6 @@ m = ax_im.imshow(
     cmap=COLORMAP,
     extent=[kx.min(), kx.max(), ky.max(), ky.min()],
 )
-
-# Index pattern
-for (h, k, l), offset in zip([(0, -2, 0), (0, 1, -1), (0, 0, 2)], [25, 25, 75]):
-    rj, cj = static.miller_to_arrindex(h, k, l)
-    ax_im.text(
-        s=skued.indices_to_text(h, k, l),
-        x=rj,
-        y=cj + offset,
-        fontsize=FONTSIZE - 2,
-        transform=ax_im.transData,
-        verticalalignment="top",
-        horizontalalignment="center",
-    )
 
 plt.colorbar(mappable=m, cax=cbar_ax, orientation="horizontal")
 cbar_ax.set_xlabel("Scattered intensity [a.u.]")
@@ -195,26 +201,19 @@ diffuse_ax.errorbar(
 
 
 # -----------------------------------------------------------------------------
-# Combining all Gamma points
+# Gamma points
 # -----------------------------------------------------------------------------
-
-gamma_timeseries = np.zeros_like(timedelays)
-for indices in INDICES_DIFFUSE:
-    # The amplitude of increase should scale like q^2
-    q2 = np.linalg.norm(CRYSTAL.scattering_vector(indices)) ** 2
-    gamma_timeseries += timeseries[indices] / q2
-gamma_timeseries /= np.mean(gamma_timeseries[timedelays < 0])
 
 # Fit the renormalization to rise + fall
 params, pcov = opt.curve_fit(
     biexponential,
     timedelays[timedelays < 15],
-    gamma_timeseries[timedelays < 15],
+    timeseries["gamma"][timedelays < 15],
     p0=(0, -0.01, 0.01, 0.1, 3.7, 1),
 )
 perr = np.sqrt(np.diag(pcov))
-print(params)
-print(pcov)
+# print(params)
+# print(pcov)
 
 diffuse_ax.plot(
     timedelays, biexponential(timedelays, *params), linewidth=1, color=GAMMA_COLOR
@@ -222,8 +221,8 @@ diffuse_ax.plot(
 
 diffuse_ax.errorbar(
     x=timedelays,
-    y=gamma_timeseries,
-    yerr=scipy.stats.sem(gamma_timeseries[timedelays < 0]),
+    y=timeseries["gamma"],
+    yerr=scipy.stats.sem(timeseries["gamma"][timedelays < 0]),
     marker="o",
     markersize=2,
     color=GAMMA_COLOR,
@@ -311,7 +310,7 @@ for index, label in enumerate(["(1)", "(2)", "(3)"]):
         color="w" if not index else "k",
         x=kx_ + index * step * dk * INNER_RADIUS,
         y=ky_ + index * step * dk * INNER_RADIUS,
-        fontsize=FONTSIZE - 2,
+        fontsize=FONTSIZE - 1,
         horizontalalignment="center",
         verticalalignment="center",
     )
@@ -369,21 +368,20 @@ ax_linecut.yaxis.set_visible(False)
 # -----------------------------------------------------------------------------
 
 
-diffuse_ax.set_xlim([-1, 12])
-diffuse_ax.set_ylim([0.967, 1.035])
+diffuse_ax.set_xlim([-1.6, 15])
+diffuse_ax.set_ylim([0.98, 1.022])
 
 diffuse_ax.legend(
     loc="center",
     ncol=1,
     bbox_to_anchor=(0.75, 0.3),
     bbox_transform=diffuse_ax.transAxes,
-    fontsize=FONTSIZE - 2,
     edgecolor="none",
 )
 
 diffuse_ax.set_xlabel("Time-delay [ps]")
 diffuse_ax.set_ylabel("Scattered intensity change [a.u.]")
-diffuse_ax.yaxis.set_ticks([0.97, 0.98, 0.99, 1.00, 1.01, 1.02, 1.03])
+diffuse_ax.yaxis.set_ticks([0.98, 0.99, 1.00, 1.01, 1.02])
 
 yc, xc = static.center
 width = dk * (yc - CROP)

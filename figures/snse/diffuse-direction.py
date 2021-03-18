@@ -7,7 +7,7 @@ import skued
 from crystals import Crystal
 from iris import DiffractionDataset
 
-from plotutils import FIGURE_WIDTH, discrete_colors
+from plotutils import FIGURE_WIDTH, discrete_colors, tag_axis
 from plotutils.snse_datasets import overnight4
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
@@ -65,9 +65,10 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
 for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
-figure, ax = plt.subplots(1, 1, figsize=(4, 3))
+figure, (ax_b, ax_c) = plt.subplots(2, 1, sharex=True, figsize=(4.25, 4))
 
-for ts, color, label in zip(
+for ax, ts, color, label in zip(
+    [ax_b, ax_c],
     ["gamma-b", "gamma-c"],
     discrete_colors(2),
     [
@@ -84,17 +85,18 @@ for ts, color, label in zip(
         marker="o",
         markersize=2,
         color=color,
-        label=label,
         linestyle="None",
         elinewidth=0.5,
     )
 
+    tag_axis(
+        ax, text=label, y=0.95, x=0.975, horizontalalignment="right", edgecolor="w"
+    )
+    ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
 
-ax.legend(ncol=2, loc="center", edgecolor="none", bbox_to_anchor=(0.5, 1.1))
-ax.set_xlim([-1, 10])
-ax.set_ylim([0.985, 1.01])
+ax_b.set_xlim([-1.6, 12])
 
-ax.set_xlabel("Time-delay [ps]")
-ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
+ax_b.xaxis.set_visible(False)
+ax_c.set_xlabel("Time-delay [ps]")
 
 plt.tight_layout()

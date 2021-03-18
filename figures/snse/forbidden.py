@@ -20,10 +20,9 @@ ALLOWED_PEAKS = [
 
 FORBIDDEN_PEAKS = [
     (0, 0, 1),
-    (0, 5, 2),
+    (0, -2, 5),
     (0, 1, 2),
     (0, -1, 6),
-    # (0,2,-1)
 ]
 
 # To create a clearer distinction between allowed and forbidden reflections,
