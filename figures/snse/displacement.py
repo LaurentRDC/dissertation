@@ -1,0 +1,181 @@
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib as mpl
+import numpy as np
+import scipy.optimize as opt
+from crystals import Crystal
+from scipy.constants import physical_constants
+import scipy.constants as constants
+
+from plotutils.snse_datasets import overnight4
+from plotutils import box_errorbars
+import skued
+
+DATADIR = Path("data") / "snse"
+CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
+
+SAMPLE_AREA = (50e-6) * (50e-6)  # m^2
+SAMPLE_THICKNESS = 45e-9  # m
+SAMPLE_VOLUME = SAMPLE_AREA * SAMPLE_THICKNESS  # m^3
+BANDGAP = 0.9  # eV, Direct
+MOLAR_MASS = 197.67  # g / mol
+DENSITY = 6.179  # g / cm^3
+
+
+def absorbed_energy(fluence):
+    """
+    Total amount of absorbed energy
+
+    Parameters
+    ----------
+    fluence : float
+        Photoexcitation fluence [mJ/cm2]
+
+    Returns
+    -------
+    abs : float
+        Absorbed energy [J]
+
+    References
+    ----------
+    L. Makinistian and E. A. Albanesi: On the band gap location and core spectra
+    """
+    penetration_depth = 100e-9  # m, from reference
+    absorbed_ratio = 1 - np.exp(-SAMPLE_THICKNESS / penetration_depth)
+
+    percm2_to_perm2 = 1e4
+    mJ_to_J = 1e-3
+    radiant_energy = fluence * mJ_to_J * percm2_to_perm2 * SAMPLE_AREA  # J
+    return radiant_energy * absorbed_ratio
+
+
+def photocarrier_density(fluence):
+    """
+    Calculate the photocarrier density deposited in sample, at 800nm.
+
+    Parameters
+    ----------
+    fluence : float
+        Photoexcitation fluence [mJ/cm2]
+
+    Returns
+    -------
+    carrier_density : float
+        Injected photocarrier density [cm^-3]
+    """
+    energy = absorbed_energy(fluence)  # J
+    total_carriers = energy / (1.55 * constants.eV)
+    m3_to_cm3 = 1e6
+    return total_carriers / (SAMPLE_VOLUME * m3_to_cm3)  # 1/cm^3
+
+
+def transient_u2(timedelays, intensity, q):
+    """
+    Determine the change in MSD from intensity changes
+
+    Parameters
+    ----------
+    timedelays : ndarray
+        Time-delays [ps]
+    intensity : ndarray
+        Diffraction intensity, unnormalized [counts]
+    q : float
+        Amplitude of the scattering vector |q| where `intensity` was generated [Angstroms^-1]
+
+    Returns
+    -------
+    delta_u2_rms : ndarray
+        Transient mean-square-displacement Delta <U^2> [Angstroms^2]
+    """
+    # TODO: is this the right expression?
+    normalized = np.array(intensity, copy=True)
+    normalized /= np.mean(intensity[timedelays < 0])
+    return -3 * np.log(normalized) / (q ** (1 / 2))
+
+
+def delta_msd_fluence(fluence):
+    filenames = {
+        6.6: DATADIR / "debyewaller_6p6mjcm2_022.csv",
+        7.9: DATADIR / "debyewaller_7p9mjcm2_022.csv",
+        9.5: DATADIR / "debyewaller_9p5mjcm2_022.csv",
+        10.7: DATADIR / "debyewaller_10p7mjcm2_022.csv",
+        12: DATADIR / "debyewaller_12mjcm2_022.csv",
+        13.2: DATADIR / "debyewaller_13p2mjcm2_022.csv",
+    }
+
+    filepath = filenames[fluence]
+    timedelays, timeseries = np.loadtxt(
+        filenames[fluence], skiprows=1, delimiter=",", unpack=True
+    )
+    # It is assumed that debye-waller curves are taken from the (022) reflection
+    q = np.linalg.norm(CRYSTAL.scattering_vector((0, 2, 2)))
+    return timedelays, transient_u2(timedelays, timeseries, q)
+
+
+figure, ax_displacement = plt.subplots(1, 1, figsize=(4.25, 3))
+
+
+fluences = np.array([6.6, 7.9, 9.5, 10.7, 12, 13.2])
+rms = []
+for fluence in fluences:
+    timedelays, delta_msd = delta_msd_fluence(fluence)
+    rms.append(np.mean(delta_msd[np.logical_and(timedelays > 5, timedelays < 9)]))
+
+rms = np.asarray(rms) * 1e2  # 10^-2 AA^2
+
+# Fit displacement values with linear
+sparams, spcov = opt.curve_fit(lambda x, a, b: a * x + b, xdata=fluences, ydata=rms)
+slope, intercept = sparams[0], sparams[1]
+slope, slope_err = sparams[0], np.sqrt(spcov[0, 0])
+intercept, intercept_err = sparams[1], np.sqrt(spcov[1, 1])
+
+
+cmap = plt.get_cmap("inferno")
+colors = [cmap(35 * val + 20) for val in range(len(fluences))]
+
+es = np.linspace(fluences.min() - 0.6, fluences.max() + 0.6, num=1024)
+fit_curve = slope * es + intercept
+ax_displacement.plot(es, fit_curve, linewidth=1, color="gray", zorder=0)
+ax_displacement.fill_between(
+    es,
+    (slope - slope_err) * es + (intercept - intercept_err),
+    (slope + slope_err) * es + (intercept + intercept_err),
+    facecolor="gray",
+    edgecolor="k",
+    linestyle="dashed",
+    linewidth=1,
+    alpha=0.2,
+)
+
+box_errorbars(
+    ax_displacement,
+    fluences,
+    np.array(rms),  # 10^-2 AA^2
+    xerr=0.2,  # mj / cm2
+    yerr=0.005 * 1e2,  # to 10^-2 AA^2
+    colors=colors,
+)
+
+# Add colorbar to show fluences
+# Note that to match the color of the points,
+cax = ax_displacement.inset_axes([0.32, 0.03, 0.66, 0.03])
+ph_density = photocarrier_density(fluences) * 1e-21  # [10^21 cm^-3]
+cb = mpl.colorbar.ColorbarBase(
+    cax,
+    cmap=mpl.colors.ListedColormap(colors),
+    orientation="horizontal",
+    ticklocation="top",
+    alpha=0.7,
+    ticks=[i + 0.5 for i, _ in enumerate(colors)],
+    format=ticker.FixedFormatter([f"{p:.1f}" for p in ph_density]),
+    norm=mpl.colors.Normalize(vmin=0, vmax=len(ph_density)),
+)
+cb.set_label("$N_{\gamma}$ [$10^{21}$ cm$^{-3}$]")
+
+ax_displacement.set_xlim([es.min(), es.max()])
+ax_displacement.set_ylabel("$\\Delta \\langle u^2 \\rangle$ [$10^{-2} \AA^2$]")
+ax_displacement.set_xlabel("Fluence [mJ cm$^{-2}$]")
+
+plt.tight_layout()

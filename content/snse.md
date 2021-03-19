@@ -75,12 +75,12 @@ SnSe's high thermoelectric efficiency is primarily due to an anomalously-low lat
 
 The $Cmcm$ phase is a better thermoelectric for three reasons. First, it has a smaller band gap (\SI{0.4}{\electronvolt}) compared to the $Pnma$ phase (\SI{0.6}{\electronvolt}) which results in an increased carrier concentration. Second, $Cmcm$ exhibits higher carrier mobilities than the $Pnma$ phase [@Zhao2014]. Finally, the lattice thermal conductivity is also low in the $Cmcm$ phase. Together, these properties make $Cmcm$ the better thermoelectric form of SnSe.
 
-```{.matplotlib #fig:snse-bz file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
-```
-
 ### Lattice instability and the $A_g$ soft mode
 
 The $Pnma \to Cmcm$ phase transition is displacive second-order transition that is associated with the freezing of an optical $A_g$ mode at zone-center [@Chattopadhyay1986; @Dove1997]. Above $T_c$, the mode splits into two modes: an optical mode at $\Gamma$ polarized along the stacking axis $a$ and an acoustic mode polarized in the $b$--$c$ plane at $Y$. The in-plane section of the Brillouin zone is shown in @fig:snse-bz for context. Note that crystallographic directions are all given with respect to the low-temperature $Pnma$ phase. The $Cmcm$ phase is stabilized by strong anharmonicity between those two phonon modes[@Skelton2016; @Hong2019]. The softening of the $A_g$ mode in the $Pnma$ phase is thought to be due to an electronic instability. Simulations by Li *et al.* [@Li2015] show that the strength of a particular Sn-Se bond along the $c$ axis is especially sensitive to temperature, which is a concrete example of the coupling between lattice and electronic degrees-of-freedom in efficient thermoelectric materials.
+
+```{.matplotlib #fig:snse-bz file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
+```
 
 In fact, there are many soft-modes with similar characteristics that soften towards the phase transition; $A_g$ simply happens to be the lowest-energy one, and therefore freezes at the phase transition. Work by Gong *et al.*[@Gong2020] and others[@Liu2018] has shown the temperature-dependence of multiple modes. Of interest is the $B_g$ mode (\SI{14}{\milli\electronvolt} at \SI{300}{\kelvin}), which is also polarized along the $Pnma$ lattice distortion just like the $A_g$ mode, but displays one of the most pronounced temperature-dependence across multiple two-dimensional systems such as black phosphorus, monolayer and few-layers MoS_2_, and graphene. This $B_g$ mode is of interest because it has been shown to be strongly coupled to the electronic system via simulations[@Caruso2019].
 
@@ -210,7 +210,7 @@ Contrary to the symmetrization procedure described in @sec:graphite-data-acquisi
 
 The experimental results are presented in this section. The description will start with a presentation of the diffraction results, followed by the diffuse intensity dynamics.
 
-### Bragg peak profile analysis
+### Bragg peak profile analysis{#sec:snse-bragg-peak-profile}
 
 An important point which will anchor the discussion below is that the lattice dimensions are not affected by photoexcitation in the range of time-delay explored herein. All Bragg peaks were fit with a Gaussian profile at each time-delay, and the changes to their positions and profile were tracked. The results are presented in @fig:snse-peak-profiles for a few representative reflections. It is clear that no lattice expansion occurred in the measurements, which would have manifested itself as a change in Bragg peak position. Moreover, no lattice strain was measured, which would appear as a change in Bragg peak width. These checks are important given the strong dependence of SnSe's electronic bands on lattice dimensions[@Wei2019] and strain[@Cuong2015].
 
@@ -224,7 +224,7 @@ An important point which will anchor the discussion below is that the lattice di
 
 The overall Bragg peak profiles were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect. All in-plane reflections show the same transient Debye-Waller dynamics: a biexponential decay with time constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. A differential time-series combining a few reflections is shown in @fig:snse-dwaller. 
 
-The two time-constants indicate that two physical processes follow photoexcitation. Recall from (TODO: find equation) that the Debye-Waller factor reports on the average mean-square-displacement of atoms $\langle |\vec{u}|^2 \rangle$. This increase in mean-square-displacement should be reflected in the diffuse intensity across the Brillouin zone.
+The two time-constants indicate that two physical processes follow photoexcitation. Recall from @eq:scattering-debye-waller that the Debye-Waller factor reports on the average mean-square-displacement of atoms $\langle |\vec{u}|^2 \rangle$. This increase in mean-square-displacement should be reflected in the diffuse intensity across the Brillouin zone.
 
 ### Large-wavevector phonons
 
@@ -254,28 +254,51 @@ In this section, the initial findings presented in @sec:snse-small-wavevectors w
 ```{.matplotlib #fig:snse-forbidden-location file="figures/snse/static-forbidden.py" caption="Location of reflections which are forbidden in the $Pnma$ phase. These reflections are visible due to double diffraction."}
 ```
 
-The intensity dynamics shown in @fig:snse-diffuse-direction can be confirmed to be due to dynamics in the diffuse intensity by performing experiments on a thick sample. Note that the thicker SnSe sample prepared by ultramicrotome show some degree of double diffraction, in the form of *forbidden reflections*. The $Pnma$ space group has a non-zero structure factor (TODO: equation) for following in-plane reflections:
+The intensity dynamics shown in @fig:snse-diffuse-direction can be confirmed to be due to dynamics in the diffuse intensity by performing experiments on a thick sample. Note that the thicker SnSe sample prepared by ultramicrotome show some degree of double diffraction, in the form of *forbidden reflections*. The $Pnma$ space group has a non-zero structure factor (@eq:scattering-potential-crystal) for following in-plane reflections:
 $$
     \set{ (0kl) \mid k + l \in 2\mathbb{Z} }
 $$
 where $2\mathbb{Z}$ is understood to be the set of even integers. Forbidden reflections present in the thicker SnSe samples are indicated in @fig:snse-forbidden-location. While double diffraction is visible, the cross-section of a scattering event composed of a diffraction and diffuse scattering event is much less likely (see @sec:scattering-multiple). A comparison of the differential intensity dynamics near allowed and forbidden reflections is shown in @fig:snse-forbidden. For both allowed and forbidden reflections, only those which are roughly parallel to the $\vec{c}^\star$ axis were used. It is clear that the fast intensity increase is not present near the zone-center of reflections which result from double diffraction, which confirms that the ultrafast rise in intensity initially shown in @sec:snse-small-wavevectors is diffuse in nature.
 
-```{.matplotlib #fig:snse-forbidden file="figures/snse/forbidden.py" caption="Differential intensity dynamics in a ring near the Bragg peak of allowed and forbidden reflections. The ring is defined as wavevectors $\vec{k}$ such that $\SI{0.114}{\per\angstrom} \leq |\vec{k}| \leq \SI{0.228}{\per\angstrom}$."}
+```{.matplotlib #fig:snse-forbidden file="figures/snse/forbidden.py" caption="Differential intensity dynamics in a ring near the Bragg peak of allowed and forbidden reflections. See @sec:snse-regions for a discussion on the geometry of the integration region."}
 ```
 
-### Separation of diffuse dynamics from Brgg peaks
+### Separation of diffuse dynamics from Bragg peaks{#sec:snse-regions}
 
+In order to be more quantitative about the diffuse intensity dynamics at zone center, the intensity dynamics of the Bragg peaks need to be removed. Directly on the Bragg peaks, the absolute intensity change observed in fig:snse-dwaller is 10^5^ times larger than the diffuse rise observed in @fig:snse-diffuse-direction. The transient Debye-Waller effect suppresses diffracted intensity, but does not change the peak profile. Therefore, there must be a region in reciprocal space -- far enough away from the peak location -- where the absolute change in peak intensity due to the transient Debye-Waller effect is on the same order as the diffuse rise.
 
-
-
-
-```{.matplotlib #fig:snse-diffuse file="figures/snse/diffuse.py" caption="Ultrafast electron scattering pattern of SnSe and associated time traces for a sample photoexcited with photoexcitation density of \SI{2}{\milli\joule\per\square\centi\meter}. **a)** Equilibrium scattering pattern of SnSe oriented along the [100] direction. **b)** Integration geometry used to extract time-traces in panels d), differentiating between diffracted intensity (inner disk) and diffuse intensity near $\Gamma$ (outer torus). **c)** Line cut across the horizontal line shown in panel b). The Bragg peak is fit with a Voigt profile (solid black line) with a full-width at half-max of \SI{0.158}{\per\angstrom}, much smaller than the diameter of the inner disk (\SI{0.228}{\per\angstrom}). **d)** Transient ultrafast electron scattering intensity at various points in the Brillouin zone."}
+```{.matplotlib #fig:snse-geometry file="figures/snse/geometry.py" caption="Intensity integration geometry which allows to distinguish between physical processes. **a)** Static diffraction patterh of SnSe. **b)** Zoom on the $(002)$ reflection showing three integration regions: the Debye-Waller dynamics (region 1), the small-wavevector diffuse dynamics (region 2), and the large wavevector diffuse dynamics (region 3). **c)** Linecut of the static intensity along the solid horizontal line in panel b), showing the diffraction peak profile."}
 ```
 
-Diffuse intensity dynamics for a SnSe sample photoexcited with \SI{1.55}{\electronvolt} light with an excitation density of \SI{2}{\milli\joule\per\square\centi\meter} is shown in @fig:snse-diffuse. The time-resolved dynamics can be separated into three main components that are spatially-separated in reciprocal space. First, on every Bragg peak ($|\vec{k}| < \SI{0.114}{\per\angstrom}$, region (1)), the transient Debye-Waller effect is observed as a decrease in diffracted intensity. The observed change in scattering intensity can be modelled with a biexponential function with a fast time-constant of \SI{300 \pm 100}{\femto\second} and a slow time-constant of \SI{3.7 \pm 0.6}{\pico\second}. In a torus defined by $\SI{0.114}{\per\angstrom} < |\vec{k}| < \SI{0.228}{\per\angstrom}$ (region (2)), the scattering intensity shows completely different dynamics. There, an initial increase is observed with associated time-constant of \SI{300 \pm 100}{\femto\second}, followed by an exponential recovery with time-constant \SI{3.7 \pm 0.6}{\pico\second}. Finally, everywhere else across the Brillouin zone ($|\vec{k}| \geq \SI{0.228}{\per\angstrom}$, region (3)), only a slow increase in scattering intensity is observed, with an associated time-constant of \SI{3.7 \pm 0.6}{\pico\second}. The dynamics across all three regions are identical for every interrogated reflection, with a scaling of the dynamics amplitude with $|\vec{q}|^2$ which is expected from the scaling of the one-phonon structure factors.
+By looking in a *ring* around Bragg peaks, the intensity dynamics can be separated between Debye-Waller (inner disk) and diffuse intensity near zone-center (outer torus) defined by:
+\begin{align}
+    \Omega_{\text{region 1}} &= \left\{ \vec{k} \mid |\vec{k}| < r \right\} \\
+    \Omega_{\text{region 2}} &= \left\{ \vec{k} \mid r \leq |\vec{k}| \leq 2 r \right\} \label{eq:snse-region-2}\\
+    \Omega_{\text{region 3}} &= \left\{ \vec{k} \mid 2 r < |\vec{k}| \right\}
+\end{align}{#eq:}
+The amplitude of the diffuse rise at zone-center is affected by the parameter $r$,but the time-constants are not. @fig:snse-size-comparison shows the intensity dynamics when integrating in region 2, for various parameters of $r$. In all cases, the differential intensity dynamics are well-described by a biexponential function. The relative amplitudes of the two exponentials determines the overall shape of the curves, as all the time-constants are comparable. The fitting results are summarized in @tbl:snse-size-comparison. The optimal sizes of the inner and outer radii, as defined by the dimensions which maximize the amplitude of the diffuse rise has $r = \SI{0.114}{\per\angstrom}$; this geometry is shown in @fig:snse-geometry. Region 1 and 2 are fairly small, considering that the in-plane Brillouin zone is \SI{1.49 x 1.41}{\per\angstrom} in size.
 
-Effects of photoinduced strain or lattice expansion can be ruled out from the dynamics in region (2). All Bragg peaks were fit with a Gaussian profile at each time-delay, and the changes to their positions and widths were tracked. The results are presented in @fig:snse-peak-profiles for a few representative reflections. This analysis demonstrates that the dynamics associated with region (2) are not due to a modification of the Bragg peak profile, but suggest that the signal might related to diffuse intensity dynamics. 
+```{.matplotlib #fig:snse-size-comparison file="figures/snse/size-comparison.py" caption="Comparison of intensity dynamics integrated in a region defined by @eq:snse-region-2 for multiple values of $r$. The dynamics are all well-described by a biexponential trace with a fast rise and slow decay. The fitting results are summarized in @tbl:snse-size-comparison."}
+```
+<!-- Note that raw latex references need to be used in latex tables, which includes a manual label (e.g. Equation \ref{...}) -->
+\begin{table}
+	\centering
+	\caption{Comparison of the time-constants determined from the diffuse intensity dynamics for various dimensions of region 2 in Figure \ref{fig:snse-size-comparison}. The parameter $r$ defines the integration region with Equation \ref{eq:snse-region-2}.}
+	\vspace{2mm}
+	\begin{tabular}{c | c | c}
+		r [\si{\per\angstrom}] & $\tau_1$ [\si{\femto\second}] & $\tau_2$ [\si{\pico\second}] \\ \hline\hline
+        0.076 & $475 \pm 120$ & $3.5 \pm 0.4$ \\ \hline
+        0.114 & $300 \pm 100$ & $2.9 \pm 0.5$ \\ \hline
+        0.152 & $600 \pm 220$ & $2.9 \pm 0.8$ \\ \hline
+        0.190 & $600 \pm 270$ & $2.9 \pm 1.3$ \\ \hline
+	\end{tabular} 
+	\label{tbl:snse-size-comparison}
+\end{table}
 
+### Effect on mean-square-displacement
+
+```{.matplotlib file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the soft zone-center optical modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
+```
 
 
 Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
@@ -303,28 +326,14 @@ Given that the softening of a phonon mode manifests itself as an increase vibrat
 \begin{align}
     \frac{I_0(\vec{q},\tau) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
         &\equiv \Delta I_0(\vec{q},\tau) \nonumber \\
-        &= \frac{\left[e^{-2M(\vec{q},t)} - e^{-2M(\vec{q},0)}\right]}{e^{-2M(\vec{q},0)}} \nonumber \\
-        &=e^{-2[M(\vec{q},t) - M(\vec{q},0)]} - 1
+        &= \frac{\left[e^{-2M(\vec{q},\tau)} - e^{-2M(\vec{q},0)}\right]}{e^{-2M(\vec{q},0)}} \nonumber \\
+        &=e^{-2[M(\vec{q},\tau) - M(\vec{q},0)]} - 1
 \end{align}
 Rearranging terms:
 $$
     - \frac{1}{2} \ln \left[1 + \Delta I_0(\vec{q},t) \right] = 2 \pi^2 |\vec{q}|^2 \Delta \langle u^2\rangle
 $$
-The change in root-mean-square vibration $\langle u^2(t)\rangle$ can be used to infer a change in vibrational frequency $\omega_{TO}(t)$ by considering the amount of energy stored in the mode $E_{TO}$, in the classical limit. Provided that the energy is conserved [@Kittel1976]:
 
-\begin{align}
-    E_{TO} &= 8 \pi^2 m \omega_{TO}^2(t) \langle u^2(t)\rangle \nonumber \\
-           &= 8 \pi^2 m \omega_{TO}^2(0) \langle u^2(0)\rangle \nonumber
-\end{align}
-
-We can rearrange terms to use our experimental time-series for $\Delta \langle u^2\rangle$:
-
-\begin{equation}
-    \frac{\omega_{TO}^2(0)}{\omega_{TO}^2(t)} =  \frac{ \Delta \langle u^2(t)\rangle}{ \langle u^2(0)\rangle} - 1
-\end{equation}
-
-```{.matplotlib file="figures/snse/softening.py" caption="Measurement of the softening of the TO$_c$ mode, extracted directly from the transient Debye-Waller dynamics, assuming that atomic vibrational amplitude only changes based on TO$_c$ renormalization at early times ($\tau < \SI{1}{\pico\second}$). Color bar shows associated absorbed energy per cell $E_c$. \textbf{Inset} Increase in isotropic mean-square-displacement of all atoms, due to the change in vibrational frequency of the TO$_c$ mode exclusively. Boxes are used to represent error bars along both axes."}
-```
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 [6zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
