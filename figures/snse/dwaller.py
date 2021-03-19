@@ -63,6 +63,7 @@ diffuse_ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
 dwfit_curve = biexponential(timedelays, *dwparams)
 plot_params = dict(
     color=DWCOLOR,
+    marker="o",
     markersize=2,
     linestyle="None",
     elinewidth=0.5,

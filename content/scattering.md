@@ -380,7 +380,7 @@ $$
 The terms $e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle}$ and $e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_{s^{\prime}})^2\rangle}$ are known as the Debye-Waller factors[@Waller1923; @Waller1928], historically defined as:
 $$
 e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle} \equiv e^{-W_s}
-$$
+$${#eq:scattering-debye-waller}
 which means that
 $$
 \langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ -i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = e^{-W_s} e^{-W_{s^\prime}} e^{\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle}

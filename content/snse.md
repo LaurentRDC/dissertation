@@ -263,11 +263,11 @@ where $2\mathbb{Z}$ is understood to be the set of even integers. Forbidden refl
 ```{.matplotlib #fig:snse-forbidden file="figures/snse/forbidden.py" caption="Differential intensity dynamics in a ring near the Bragg peak of allowed and forbidden reflections. See @sec:snse-regions for a discussion on the geometry of the integration region."}
 ```
 
-### Separation of diffuse dynamics from Bragg peaks{#sec:snse-regions}
+### Partitioning of the Brillouin zone{#sec:snse-regions}
 
 In order to be more quantitative about the diffuse intensity dynamics at zone center, the intensity dynamics of the Bragg peaks need to be removed. Directly on the Bragg peaks, the absolute intensity change observed in fig:snse-dwaller is 10^5^ times larger than the diffuse rise observed in @fig:snse-diffuse-direction. The transient Debye-Waller effect suppresses diffracted intensity, but does not change the peak profile. Therefore, there must be a region in reciprocal space -- far enough away from the peak location -- where the absolute change in peak intensity due to the transient Debye-Waller effect is on the same order as the diffuse rise.
 
-```{.matplotlib #fig:snse-geometry file="figures/snse/geometry.py" caption="Intensity integration geometry which allows to distinguish between physical processes. **a)** Static diffraction patterh of SnSe. **b)** Zoom on the $(002)$ reflection showing three integration regions: the Debye-Waller dynamics (region 1), the small-wavevector diffuse dynamics (region 2), and the large wavevector diffuse dynamics (region 3). **c)** Linecut of the static intensity along the solid horizontal line in panel b), showing the diffraction peak profile."}
+```{.matplotlib #fig:snse-geometry file="figures/snse/geometry.py" caption="Intensity integration geometry which allows to distinguish between physical processes. **a)** Static diffraction patterh of SnSe. **b)** Zoom on the $(002)$ reflection showing three integration regions: the Debye-Waller dynamics (region 1), the small-wavevector diffuse dynamics (region 2), and the large wavevector diffuse dynamics (region 3). **c)** Linecut of the static intensity along the solid horizontal line in panel b), showing the diffraction peak profile. The Bragg peak is fit with a Voigt profile (solid black line) with a full-width at half-max of \SI{0.158}{\per\angstrom}."}
 ```
 
 By looking in a *ring* around Bragg peaks, the intensity dynamics can be separated between Debye-Waller (inner disk) and diffuse intensity near zone-center (outer torus) defined by:
@@ -295,10 +295,21 @@ The amplitude of the diffuse rise at zone-center is affected by the parameter $r
 	\label{tbl:snse-size-comparison}
 \end{table}
 
+### Momentum-resolved intensity dynamics
+
+With the appropriate partitioning of the Brillouin zone, it is possible to separate the dynamics of the Bragg peak from the diffuse intensity at zone-center. The diffuse dynamics at zone-center presented in the previous section are definitely affected to some degree by the dynamics of the nearby Bragg peak. However, because it has been shown that the Bragg peak profiles are constant, the Debye-Waller dynamics from region 1 can be subtracted. The results are presented in @fig:snse-clean-traces. Most importantly, this reveals that the slow diffuse intensity decrease near zone-center is *not due* to the nearby Bragg peak, but is rather intrinsic to the diffuse dynamics.
+
+```{.matplotlib #fig:snse-clean-traces file="figures/snse/clean-traces.py" caption="Transient ultrafast electron scattering intensity at various points in the Brillouin zone. The integration geometry is shown in @fig:snse-geometry. The decrease of intensity directly on the Bragg peak shows the expected transient Debye-Waller effect with fast and slow components. Average transient diffuse intensity across region 3 is shown for context. Error bars represent the standard error in the mean of intensity before time-zero, but are generally smaller than the markers."}
+```
+
+## Discussion
+
 ### Effect on mean-square-displacement
 
 ```{.matplotlib file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the soft zone-center optical modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
 ```
+
+
 
 
 Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):

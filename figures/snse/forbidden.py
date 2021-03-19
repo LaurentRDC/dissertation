@@ -36,7 +36,7 @@ figure, axes = plt.subplots(
     2,
     sharex=True,
     sharey=True,
-    figsize=(FIGURE_WIDTH, FIGURE_WIDTH),
+    figsize=(FIGURE_WIDTH, 5.5),
     gridspec_kw=dict(hspace=0.05, wspace=0.025),
 )
 

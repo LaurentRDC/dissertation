@@ -39,9 +39,6 @@ timeseries = dict()
 with DiffractionDataset(overnight4.path, mode="r") as dset:
     timedelays = dset.time_points
 
-    timeseries["bg"] = dset.time_series_selection(
-        skued.RectSelection(dset.resolution, 680, 739, 1085, 1153)
-    )
     timeseries["bg"] = np.zeros_like(timedelays)
     timeseries["Y"] = np.zeros_like(timedelays)
     timeseries["Z"] = np.zeros_like(timedelays)
