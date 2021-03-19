@@ -21,7 +21,7 @@ $$
 $$
 where $\frac{T_H - T_C}{T_H}$ is understood to be the Carnot efficiency[@Zhang2014]. The value of $\eta$ for an abstract device is shown in @fig:snse-efficiency. This figure illustrates that good efficiency at reasonable temperatures ($<$\SI{450}{\kelvin}) requires a high $ZT$.
 
-```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_C$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$."}
+```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_H$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$."}
 ```
 
 ### The Seebeck coefficient
@@ -245,7 +245,7 @@ Diffuse intensity dynamics correlated with the fast part of the Debye-Waller dyn
 
 These signals will be isolated appropriately and discussed in the next section.
 
-## Dynamics of soft transverse optical modes
+## Diffuse dynamics of soft transverse optical modes
 
 In this section, the initial findings presented in @sec:snse-small-wavevectors will be developed further. There are two tasks at hand: confirm that the dynamics at zone-center are due to diffuse scattering, and separate isolate this trace from the nearby Bragg peak dynamics.
 
@@ -295,16 +295,32 @@ The amplitude of the diffuse rise at zone-center is affected by the parameter $r
 	\label{tbl:snse-size-comparison}
 \end{table}
 
-### Momentum-resolved intensity dynamics
+## Discussion
 
 With the appropriate partitioning of the Brillouin zone, it is possible to separate the dynamics of the Bragg peak from the diffuse intensity at zone-center. The diffuse dynamics at zone-center presented in the previous section are definitely affected to some degree by the dynamics of the nearby Bragg peak. However, because it has been shown that the Bragg peak profiles are constant, the Debye-Waller dynamics from region 1 can be subtracted. The results are presented in @fig:snse-clean-traces. Most importantly, this reveals that the slow diffuse intensity decrease near zone-center is *not due* to the nearby Bragg peak, but is rather intrinsic to the diffuse dynamics.
 
 ```{.matplotlib #fig:snse-clean-traces file="figures/snse/clean-traces.py" caption="Transient ultrafast electron scattering intensity at various points in the Brillouin zone. The integration geometry is shown in @fig:snse-geometry. The decrease of intensity directly on the Bragg peak shows the expected transient Debye-Waller effect with fast and slow components. Average transient diffuse intensity across region 3 is shown for context. Error bars represent the standard error in the mean of intensity before time-zero, but are generally smaller than the markers."}
 ```
 
-## Discussion
+Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
+$$
+    I_1(\vec{q}) \propto \sum_{\lambda} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} |F_{1\lambda}(\vec{q})|^2
+$$
+This equation implies an increase of diffuse intensity at zone center is due to an increase in $(n_{\lambda}+1/2) / \omega_{\lambda}$ for one or more transverse optical modes at $\vec{k}=\vec{0}$. UEDS measurements do not contain enough information to deconvolve the effects of selective mode-heating ($\uparrow n_{\lambda}$) and/or softening ($\downarrow \omega_{\lambda}$). In fact, there are indications at equilibrium that both terms may be involved in the diffuse intensity rise at zone center, given that calculations show that some zone-center optical modes like $B_g$ are strongly-coupled to the electronic system [@Caruso2019]. Intuitively, the author expected that strong electron-phonon coupling might reduce the thermoelectric figure-of-merit by strongly modulating electron mobilities. However, work by Fan *et al.* [@Fan2018] has shown that the onset of strong electron-phonon coupling may reduce the lattice thermal conductivity in a way that increases the $ZT$ figure-of-merit overall. Therefore, it is not possible to rule out selective mode-heating as a potential explanation for the diffuse intensity rise at $\Gamma$.
 
-### Effect on mean-square-displacement
+In analogy to @eq:scattering-displacement, the factors $n_{\lambda} + 1/2 / \omega_{\lambda}$ are related to vibrational amplitude. Therefore, the discussion will continue in terms of mode-projected vibrational amplitudes:
+$$
+    I_1(\vec{q}) \propto \sum_{\lambda} \left| a_{\lambda}(\vec{k})\right|^2 |F_{1\lambda}(\vec{q})|^2
+$$
+where
+$$
+    \left|a_{\lambda}(\vec{k}) \right|^2 = \frac{n_{\lambda}(\vec{k})+1/2}{\omega_{\lambda}(\vec{k})}
+$$
+In this formulation, the fast diffuse intensity rise at $\Gamma$ is due to an increase in vibrational amplitude of one or more transverse optical modes polarized in the direction of the $Pnma$ phase distortion.
+
+### Fluence-dependence
+
+The fluence-dependence on the increase in vibrational amplitude of zone-center transverse optical modes was investigated.
 
 ```{.matplotlib file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the soft zone-center optical modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
 ```
@@ -312,11 +328,7 @@ With the appropriate partitioning of the Brillouin zone, it is possible to separ
 
 
 
-Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
-$$
-    I_1(\vec{q}) \propto \sum_{\lambda} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} |F_{1\lambda}(\vec{q})|^2
-$$
-This equation implies that an increase in one or more of the $(n_{\lambda}+1/2) / \omega_{\lambda}$ terms at $\vec{k}=\vec{0}$. Contrary to previous work on graphite in @sec:graphite, deconvolving the contribution from all phonon modes is not possible in SnSe because all phonon branches are thermally-occupied at room temperature[@Skelton2016]. The rapidity of the diffuse increase in region (2) suggests impulsive softening of a particular mode ($\downarrow \omega_{\lambda}$), rather than energy transfer via electron-phonon coupling ($\uparrow n_{\lambda}$).
+
 
 
 
@@ -347,7 +359,7 @@ $$
 
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
-[6zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
+[^zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
 
 \FloatBarrier
 ## References {.unnumbered}

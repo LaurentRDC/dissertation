@@ -16,17 +16,23 @@ def eta(ZT, TH):
     return ((TH - TC) / TH) * (np.sqrt(1 + ZT) - 1) / (np.sqrt(1 + ZT) + TC / TH)
 
 
-zt = np.linspace(0, 3, num=128)
+zt = np.linspace(0, 4, num=128)
 th = np.linspace(800, 300, num=128)
 
 zz, tt = np.meshgrid(zt, th)
 im = eta(zz, tt)
 
 
-figure, ax = plt.subplots(1, 1, figsize=(4, 2))
-m = ax.imshow(
-    im, cmap="hot", aspect="auto", extent=[zt.min(), zt.max(), tt.min(), tt.max()]
+figure, ax = plt.subplots(1, 1, figsize=(4.25, 3))
+m = ax.contourf(
+    zz,
+    tt,
+    im,
+    cmap="inferno",
+    levels=15,
+    extent=[zt.min(), zt.max(), tt.min(), tt.max()],
 )
+ax.contour(m, colors="dimgray", linestyles="dashed", linewidths=0.4)
 ax.set_xlabel("$ZT$ [a.u.]")
 ax.set_ylabel("$T_H$ [K]")
 
@@ -34,6 +40,6 @@ divider = make_axes_locatable(ax)
 cax = divider.append_axes("right", size=CBAR_SIZE, pad=0.03)
 plt.colorbar(mappable=m, ax=ax, cax=cax, orientation="vertical")
 cax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
-cax.set_ylabel("Efficiency $\eta$")
+cax.set_ylabel("Efficiency")
 
 plt.tight_layout()
