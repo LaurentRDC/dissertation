@@ -85,11 +85,22 @@ The visualization in @fig:introduction-rf-compression also shows the importance 
 
 The general idea of phase-space rotation may be realized in multiple ways. Some design considerations that explain the particularities of the RF cavity used in this work are addressed here.
 
+![Machining diagram of the RF compression cavity used in this work.](diagrams/cavity.pdf){#fig:intro-cavity-design}
+
 Consider the choice of the wavelength of the compression electric field. The main requirement here is that the electron bunch experiences a field that varies linearly as it travels through the cavity. Waves in the \SIrange{0.5}{6}{\giga\hertz} range are required given that uncompressed electron bunch with $10^6$ electrons may be $\sim$\SI{100}{\pico\second} long. The choice of \SI{3}{\giga\hertz} was ultimately chosen because of previous work in synchronizing \SI{3}{\giga\hertz} RF cavities to \SI{800}{\nano\meter} laser pulse trains[@Kiewiet2002].
 
 The shape of the cavity is also important. In its simplest form, a "pillbox" cavity (hollow cylinder) of appropriate dimensions would support the right RF compression wave. However, pillbox cavities are rather inefficient in terms of field-strength per Watt of input power. The final lobe design reduced input power requirements by 90\% compared to the pillbox geometry[@Van2007]. The design of the cavity as manufactured is shown in @fig:intro-cavity-design, modified from Chatelain[@Chatelain2014].
 
-![Machining diagram of the RF compression cavity used in this work.](diagrams/cavity.pdf){#fig:intro-cavity-design}
+#### RF Cavity characterization
+
+The cavity was characterized in December 2019 with an Agilent Technologies N5247A vector network analyzer.
+
+```{.matplotlib file="figures/introduction/cavity-full-spectrum.py" caption="Characterization of the cavity spectrum at \SI{13}{\celsius}. **a)** Transmitted amplitude near \SI{3}{\giga\hertz}. **b)** Phase of the transmitted signal near \SI{3}{\giga\hertz}. **c)** Amplitude spectrum in a wide band shows multiple resonances up to \SI{12}{\giga\hertz}."}
+```
+
+```{.matplotlib file="figures/introduction/cavity-temp-sweep.py" caption="Effect of cavity temperature on resonant frequency near \SI{3}{\giga\hertz}. **a)** Resonance amplitude from \SIrange{11}{32}{\celsius} in steps of \SI{1}{\celsius}. Traces are offset for display purposes only. **b)** Temperature dependence of the resonant frequency shows a linear dependence."}
+```
+
 
 ### Driving field generation and timing considerations{#sec:intro-cavity-timing}
 

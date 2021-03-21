@@ -21,7 +21,7 @@ time_points = time_points[time_points < 20]
 
 fig, ax = plt.subplots(1, 1, figsize=(4, 2))
 
-ax.plot(time_points, intensity, '.', color=discrete_colors(1)[0])
+ax.plot(time_points, intensity, ".", color=discrete_colors(1)[0])
 ax.axvline(x=0, linestyle="dashed", linewidth=1, color="k")
 ax.axhline(y=1, linestyle="dashed", linewidth=1, color="k")
 

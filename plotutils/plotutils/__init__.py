@@ -147,8 +147,8 @@ def discrete_colors(num):
         return [cmap(mi)]
     elif num == 2:
         return [cmap(mi), cmap(ma)]
-    
-    step = (ma - mi)/(num - 1)
+
+    step = (ma - mi) / (num - 1)
     return [cmap(mi + i * step) for i in range(num)]
 
 
