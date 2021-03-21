@@ -10,17 +10,7 @@ import skued
 from plotutils import FIGURE_WIDTH, discrete_colors, tag_axis
 
 DATADIR = Path("data") / "introduction" / "VNA measurements"
-
-
-def csv_to_kvstore(fname):
-    """Parse CSV file into key-value store where keys are
-    always filepaths, and values are tuples of
-    (bath temperature, cavity temperature)"""
-    with open(fname, mode="r") as f:
-        reader = csv.reader(f)
-        for i in range(3):
-            next(reader, None)  # skip rows of headers
-        return {Path(row[0]): (float(row[1]), float(row[2])) for row in reader}
+MAXPOINTS = 1024  # Maximum number of points for each amplitude trace
 
 
 def load_spectrum(fname):
@@ -53,6 +43,7 @@ def load_spectrum(fname):
 
     amplitude = to_db(np.abs(real1 + 1j * imag1))
     phase = np.arctan2(imag1, real1)
+
     return freq, amplitude, phase
 
 
@@ -63,7 +54,11 @@ colors = discrete_colors(len(temps))
 
 # Build a key-value store of the bath and cavity temperatures
 # based on filenames
-temperatures = csv_to_kvstore(DATADIR / "temperatures.csv")
+with open(DATADIR / "temperatures.csv", mode="r") as f:
+    reader = csv.reader(f)
+    for i in range(3):
+        next(reader, None)  # skip rows of headers
+    temperatures = {Path(row[0]): (float(row[1]), float(row[2])) for row in reader}
 
 # We accumulate the resonance across temperatures
 # in order to determine the variation in kHz / deg C
@@ -81,7 +76,6 @@ for row, (temp, color) in enumerate(zip(temps, colors)):
     bath_temp, cav_temp = temperatures[fname.relative_to(DATADIR)]
     freq, amp, phase = load_spectrum(fname)
     center = freq[np.argmax(amp)]
-    # print(f'temp: {temp}, freq: {center}, maxamp: {np.max(amp)}')
 
     sweep[row, 0] = cav_temp
     sweep[row, 1] = center
@@ -90,8 +84,14 @@ for row, (temp, color) in enumerate(zip(temps, colors)):
     f_max = min([f_max, center + 0.004])
 
     offset = row * (amp.max() - amp.min()) / 5
+    downsampling = len(freq) // MAXPOINTS  # Traces have between 16k and 32k points!
     ax_amp.plot(
-        freq, amp + offset, marker=".", markersize=2, linestyle="none", color=color
+        freq[::downsampling],
+        amp[::downsampling] + offset,
+        marker=".",
+        markersize=2,
+        linestyle="none",
+        color=color,
     )
     ax_center.errorbar(
         cav_temp, center, marker=".", markersize=10, xerr=0.1, color=color
@@ -103,7 +103,7 @@ for row, (temp, color) in enumerate(zip(temps, colors)):
 for temp in {min(temps), max(temps)}:
     freq, amp, _ = load_spectrum(DATADIR / f"{temp}.csv")
     center = freq[np.argmax(amp)]
-    ax_amp.axvline(x=center, color="k", linestyle="solid", linewidth=1)
+    ax_amp.axvline(x=center, color="k", linestyle="dashed", linewidth=1)
 
 ax_amp.text(
     x=0.98,
