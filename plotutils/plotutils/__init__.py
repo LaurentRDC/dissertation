@@ -140,10 +140,16 @@ def draw_hexagon(
 
 def discrete_colors(num):
     """ Returns a list of discrete colors to plot, for example, various time-traces. """
-    if num in {2, 3}:
-        return list(spectrum_colors(num_colors=num + 1))[1 : num + 1]
+    cmap = plt.get_cmap("inferno")
+    mi, ma = 0.11, 0.8
 
-    return list(spectrum_colors(num_colors=num))
+    if num == 1:
+        return [cmap(mi)]
+    elif num == 2:
+        return [cmap(mi), cmap(ma)]
+    
+    step = (ma - mi)/(num - 1)
+    return [cmap(mi + i * step) for i in range(num)]
 
 
 def box_errorbars(ax, xdata, ydata, xerr, yerr, colors):

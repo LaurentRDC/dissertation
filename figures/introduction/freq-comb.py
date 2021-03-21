@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
-from plotutils import FIGURE_WIDTH, tag_axis
+from plotutils import FIGURE_WIDTH, tag_axis, discrete_colors
 
-COLOR = plt.get_cmap("inferno")(0.11)
+COLOR = discrete_colors(1)[0]
 
 frequencies_fullbw = np.linspace(50e6, 6e9, num=10401) / 1e9  # [GHz]
 power_fullbw = np.loadtxt(

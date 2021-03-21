@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from iris import DiffractionDataset
 from pathlib import Path
-from plotutils import FIGURE_WIDTH
+from plotutils import FIGURE_WIDTH, discrete_colors
 
 row, col = 1167, 155
 DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"
@@ -21,7 +21,7 @@ time_points = time_points[time_points < 20]
 
 fig, ax = plt.subplots(1, 1, figsize=(4, 2))
 
-ax.plot(time_points, intensity, ".k")
+ax.plot(time_points, intensity, '.', color=discrete_colors(1)[0])
 ax.axvline(x=0, linestyle="dashed", linewidth=1, color="k")
 ax.axhline(y=1, linestyle="dashed", linewidth=1, color="k")
 
