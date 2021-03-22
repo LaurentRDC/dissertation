@@ -1,5 +1,5 @@
 
-# Electron scattering
+# Ultrafast electron scattering{#sec:scattering}
 
 The scattering of light or particles by a sample is used by a large class of experimental techniques, dating back a hundred years. Scattering can be broadly defined as the modification of an incoming wave by a potential into outgoing wave, a process which imprints the outgoing wave with some characteristic of the potential. The outgoing wave may lose or gain energy, and its momentum might be changed. When multiple incoming waves are simultaneously used -- forming an incoming wavefront --, the outgoing waves may interfere constructively or destructively. This effect is particularly intense for periodic scattering potentials, for example in crystals.
 
@@ -476,7 +476,7 @@ A few clarifications can be made about diffuse intensity. The diffuse intensity 
 
 2. A geometrical weight ($|F_{1\lambda}(\vec{q})|^2$) which determines if the atomic motion associated with a phonon mode can be captured on the detector. The most important term to consider are terms of the form $\set{\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})}$. For a phonon polarization which is parallel to the propagation of the scattering electrons, the projection of the polarization onto the detector plane is $0$, and hence the associated diffuse intensity will not contribute.
 
-Diffuse scattering and the effect of one-phonon structure factors is further explained in #sec:graphite.
+Diffuse scattering and the effect of one-phonon structure factors is further explained in @sec:graphite.
 
 
 [^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014].

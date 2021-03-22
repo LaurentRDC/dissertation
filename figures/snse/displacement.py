@@ -6,6 +6,7 @@ import matplotlib as mpl
 import numpy as np
 import scipy.optimize as opt
 from crystals import Crystal
+import scipy.stats as stats
 from scipy.constants import physical_constants
 import scipy.constants as constants
 
@@ -89,10 +90,15 @@ def transient_u2(timedelays, intensity, q):
     delta_u2_rms : ndarray
         Transient mean-square-displacement Delta <U^2> [Angstroms^2]
     """
-    # TODO: is this the right expression?
-    normalized = np.array(intensity, copy=True)
-    normalized /= np.mean(intensity[timedelays < 0])
-    return -3 * np.log(normalized) / (q ** (1 / 2))
+    I = np.array(intensity, copy=True)
+    I0 = np.mean(intensity[timedelays < 0])
+    deltaI0 = (I - I0) / I0
+    u2 = -np.log(1 + deltaI0) / q ** 2
+
+    # Propagation of errors : error in [A ln(1 + x)] is [A x_err/x]
+    sigma_I0 = np.max(deltaI0[timedelays < 0]) - np.min(deltaI0[timedelays < 0])
+    err = -sigma_I0 / ((q ** 2) * (1 + deltaI0))
+    return u2, err
 
 
 def delta_msd_fluence(fluence):
@@ -111,7 +117,8 @@ def delta_msd_fluence(fluence):
     )
     # It is assumed that debye-waller curves are taken from the (022) reflection
     q = np.linalg.norm(CRYSTAL.scattering_vector((0, 2, 2)))
-    return timedelays, transient_u2(timedelays, timeseries, q)
+    u2, u2err = transient_u2(timedelays, timeseries, q)
+    return timedelays, u2, u2err
 
 
 figure, ax_displacement = plt.subplots(1, 1, figsize=(4.25, 3))
@@ -119,11 +126,14 @@ figure, ax_displacement = plt.subplots(1, 1, figsize=(4.25, 3))
 
 fluences = np.array([6.6, 7.9, 9.5, 10.7, 12, 13.2])
 rms = []
+errs = []
 for fluence in fluences:
-    timedelays, delta_msd = delta_msd_fluence(fluence)
+    timedelays, delta_msd, delta_msd_err = delta_msd_fluence(fluence)
     rms.append(np.mean(delta_msd[np.logical_and(timedelays > 5, timedelays < 9)]))
+    errs.append(np.mean(delta_msd_err[np.logical_and(timedelays > 5, timedelays < 9)]))
 
 rms = np.asarray(rms) * 1e2  # 10^-2 AA^2
+errs = np.asarray(errs) * 1e2  # 10^-2 AA^2
 
 # Fit displacement values with linear
 sparams, spcov = opt.curve_fit(lambda x, a, b: a * x + b, xdata=fluences, ydata=rms)
@@ -152,22 +162,21 @@ ax_displacement.fill_between(
 box_errorbars(
     ax_displacement,
     fluences,
-    np.array(rms),  # 10^-2 AA^2
-    xerr=0.2,  # mj / cm2
-    yerr=0.005 * 1e2,  # to 10^-2 AA^2
+    rms,  # 10^-2 AA^2
+    xerr=np.full_like(rms, fill_value=0.2),  # mj / cm2
+    yerr=errs,  # 10^-2 AA^2
     colors=colors,
 )
 
 # Add colorbar to show fluences
 # Note that to match the color of the points,
-cax = ax_displacement.inset_axes([0.32, 0.03, 0.66, 0.03])
+cax = ax_displacement.inset_axes([0.28, 0.03, 0.7, 0.03])
 ph_density = photocarrier_density(fluences) * 1e-21  # [10^21 cm^-3]
 cb = mpl.colorbar.ColorbarBase(
     cax,
     cmap=mpl.colors.ListedColormap(colors),
     orientation="horizontal",
     ticklocation="top",
-    alpha=0.7,
     ticks=[i + 0.5 for i, _ in enumerate(colors)],
     format=ticker.FixedFormatter([f"{p:.1f}" for p in ph_density]),
     norm=mpl.colors.Normalize(vmin=0, vmax=len(ph_density)),

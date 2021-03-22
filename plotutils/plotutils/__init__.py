@@ -159,12 +159,12 @@ def box_errorbars(ax, xdata, ydata, xerr, yerr, colors):
     # Create list for all the error patches
     errorboxes = []
     # Loop over data points; create box from errors at each point
-    for x, y in zip(xdata, ydata):
-        rect = Rectangle((x - xerr, y - yerr), 2 * xerr, 2 * yerr)
+    for x, y, xe, ye in zip(xdata, ydata, xerr, yerr):
+        rect = Rectangle((x - xe, y - ye / 2), 2 * xe, ye)
         errorboxes.append(rect)
 
     # Create patch collection with specified colour/alpha
-    pc = PatchCollection(errorboxes, edgecolor=colors, facecolor=colors, alpha=0.7)
+    pc = PatchCollection(errorboxes, edgecolor=colors, facecolor=colors)
 
     # Add collection to axes
     ax.add_collection(pc)

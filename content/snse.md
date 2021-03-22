@@ -245,7 +245,7 @@ Diffuse intensity dynamics correlated with the fast part of the Debye-Waller dyn
 
 These signals will be isolated appropriately and discussed in the next section.
 
-## Diffuse dynamics of soft transverse optical modes
+## Dynamics of soft transverse optical modes
 
 In this section, the initial findings presented in @sec:snse-small-wavevectors will be developed further. There are two tasks at hand: confirm that the dynamics at zone-center are due to diffuse scattering, and separate isolate this trace from the nearby Bragg peak dynamics.
 
@@ -265,17 +265,17 @@ where $2\mathbb{Z}$ is understood to be the set of even integers. Forbidden refl
 
 ### Partitioning of the Brillouin zone{#sec:snse-regions}
 
-In order to be more quantitative about the diffuse intensity dynamics at zone center, the intensity dynamics of the Bragg peaks need to be removed. Directly on the Bragg peaks, the absolute intensity change observed in fig:snse-dwaller is 10^5^ times larger than the diffuse rise observed in @fig:snse-diffuse-direction. The transient Debye-Waller effect suppresses diffracted intensity, but does not change the peak profile. Therefore, there must be a region in reciprocal space -- far enough away from the peak location -- where the absolute change in peak intensity due to the transient Debye-Waller effect is on the same order as the diffuse rise.
-
 ```{.matplotlib #fig:snse-geometry file="figures/snse/geometry.py" caption="Intensity integration geometry which allows to distinguish between physical processes. **a)** Static diffraction patterh of SnSe. **b)** Zoom on the $(002)$ reflection showing three integration regions: the Debye-Waller dynamics (region 1), the small-wavevector diffuse dynamics (region 2), and the large wavevector diffuse dynamics (region 3). **c)** Linecut of the static intensity along the solid horizontal line in panel b), showing the diffraction peak profile. The Bragg peak is fit with a Voigt profile (solid black line) with a full-width at half-max of \SI{0.158}{\per\angstrom}."}
 ```
 
-By looking in a *ring* around Bragg peaks, the intensity dynamics can be separated between Debye-Waller (inner disk) and diffuse intensity near zone-center (outer torus) defined by:
+In order to be more quantitative about the diffuse intensity dynamics at zone center, the intensity dynamics of the Bragg peaks need to be removed. Directly on the Bragg peaks, the absolute intensity change observed in fig:snse-dwaller is 10^5^ times larger than the diffuse rise observed in @fig:snse-diffuse-direction. The transient Debye-Waller effect suppresses diffracted intensity, but does not change the peak profile. Therefore, there must be a region in reciprocal space -- far enough away from the peak location -- where the absolute change in peak intensity due to the transient Debye-Waller effect is on the same order as the diffuse rise.
+
+By looking in a *ring* around Bragg peaks, the intensity dynamics can be separated between Debye-Waller (inner disk) and diffuse intensity near zone-center (outer torus) parametrized by:
 \begin{align}
     \Omega_{\text{region 1}} &= \left\{ \vec{k} \mid |\vec{k}| < r \right\} \\
     \Omega_{\text{region 2}} &= \left\{ \vec{k} \mid r \leq |\vec{k}| \leq 2 r \right\} \label{eq:snse-region-2}\\
     \Omega_{\text{region 3}} &= \left\{ \vec{k} \mid 2 r < |\vec{k}| \right\}
-\end{align}{#eq:}
+\end{align}
 The amplitude of the diffuse rise at zone-center is affected by the parameter $r$,but the time-constants are not. @fig:snse-size-comparison shows the intensity dynamics when integrating in region 2, for various parameters of $r$. In all cases, the differential intensity dynamics are well-described by a biexponential function. The relative amplitudes of the two exponentials determines the overall shape of the curves, as all the time-constants are comparable. The fitting results are summarized in @tbl:snse-size-comparison. The optimal sizes of the inner and outer radii, as defined by the dimensions which maximize the amplitude of the diffuse rise has $r = \SI{0.114}{\per\angstrom}$; this geometry is shown in @fig:snse-geometry. Region 1 and 2 are fairly small, considering that the in-plane Brillouin zone is \SI{1.49 x 1.41}{\per\angstrom} in size.
 
 ```{.matplotlib #fig:snse-size-comparison file="figures/snse/size-comparison.py" caption="Comparison of intensity dynamics integrated in a region defined by @eq:snse-region-2 for multiple values of $r$. The dynamics are all well-described by a biexponential trace with a fast rise and slow decay. The fitting results are summarized in @tbl:snse-size-comparison."}
@@ -295,12 +295,52 @@ The amplitude of the diffuse rise at zone-center is affected by the parameter $r
 	\label{tbl:snse-size-comparison}
 \end{table}
 
-## Discussion
 
-With the appropriate partitioning of the Brillouin zone, it is possible to separate the dynamics of the Bragg peak from the diffuse intensity at zone-center. The diffuse dynamics at zone-center presented in the previous section are definitely affected to some degree by the dynamics of the nearby Bragg peak. However, because it has been shown that the Bragg peak profiles are constant, the Debye-Waller dynamics from region 1 can be subtracted. The results are presented in @fig:snse-clean-traces. Most importantly, this reveals that the slow diffuse intensity decrease near zone-center is *not due* to the nearby Bragg peak, but is rather intrinsic to the diffuse dynamics.
+With the appropriate partitioning of the Brillouin zone (@fig:snse-geometry), it is possible to separate the dynamics of the Bragg peak from the diffuse intensity at zone-center. The diffuse dynamics at zone-center presented in the previous section are definitely affected to some degree by the dynamics of the nearby Bragg peak. However, because it has been shown that the Bragg peak profiles are constant, the Debye-Waller dynamics from region 1 can be subtracted. The results are presented in @fig:snse-clean-traces. Most importantly, this reveals that the slow diffuse intensity decrease near zone-center is *not due* to the nearby Bragg peak, but is rather intrinsic to the diffuse dynamics.
 
 ```{.matplotlib #fig:snse-clean-traces file="figures/snse/clean-traces.py" caption="Transient ultrafast electron scattering intensity at various points in the Brillouin zone. The integration geometry is shown in @fig:snse-geometry. The decrease of intensity directly on the Bragg peak shows the expected transient Debye-Waller effect with fast and slow components. Average transient diffuse intensity across region 3 is shown for context. Error bars represent the standard error in the mean of intensity before time-zero, but are generally smaller than the markers."}
 ```
+
+### Transient mean-square-displacement due to soft-modes
+
+The extraction of the transient mean-square-displacement due to zone-center soft modes is presented in this section. The transient mean-square-displacement from diffuse scattering is first considered. From @eq:snse-diffuse-amplitude:
+\begin{align}
+    I_1(\vec{q}, \tau) - I_1(\vec{q},0) 
+        & = I_e \sum_{\lambda} \left| a_{\lambda}(\vec{k}, \tau)\right|^2 \left| F_{1\lambda}\right|^2 
+          - I_e \sum_{\lambda}\left| a_{\lambda}(\vec{k}, 0)\right|^2 \left| F_{1\lambda}\right|^2 \nonumber \\
+        & = I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left( \left| a_{\lambda}(\vec{k}, \tau)\right|^2 - \left| a_{\lambda}(\vec{k}, 0)\right|^2 \right)
+\end{align}
+where the prefactors in @eq:scattering-diffuse-intensity have all been collected in the quantity $I_e$. As expected, the change in vibrational amplitude is weighted by the one-phonon structure factors. Therefore, to precisely know the transient vibrational amplitude would require to know which modes are involved, as well as the values of the one-phonon structure factors at zone-center. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso[@QuantumEspresso2009; @QuantumEspresso2017] or VASP[@Kresse1999]. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead. 
+
+The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the soft optical modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
+\begin{align}
+    \frac{I_0(\vec{q},\tau) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
+        &\equiv \Delta I_0(\vec{q},\tau) \nonumber \\
+        &= \frac{e^{-2M(\vec{q},\tau)} - e^{-2M(\vec{q},0)}}{e^{-2M(\vec{q},0)}} \nonumber \\
+        &=e^{-2[M(\vec{q},\tau) - M(\vec{q},0)]} - 1
+\end{align}
+Rearranging terms:
+$$
+    - \frac{1}{2} \ln \left[1 + \Delta I_0(\vec{q},t) \right] = M(\vec{q}, \tau) - M(\vec{q}, 0)
+$$
+In this formulation, $M$ is the appropriate average of all atom-specific $W_s$ suppression factors from @eq:scattering-debye-waller[@Warren1990DebyeWaller]. There is no general expression for the quantity $M$ for diatomic crystals such as SnSe[@Warren1990DebyeWaller]. Instead, the isotropic approximation can be used, which states that if atoms are vibrating in a harmonic potential[@Warren1990Harmonic], the Debye-Waller factor $M$ is given by:
+$$
+    M(\vec{q}, \tau) = \frac{1}{2} |\vec{q}|^2 \langle |\bar{\vec{u}}|^2 \rangle
+$$
+where the symbol $\bar{\vec{u}}$ signifies the atomic displacement averaged over the unit cell. Then, the mean-square-displacement is related to the Bragg intensity at zone center as:
+$$
+    \Delta \langle |\bar{\vec{u}}|^2 \rangle = -\frac{\ln \left[1 + \Delta I_0(\vec{q},t) \right]}{|\vec{q}|^2}
+$$
+The associated error $\sigma_u$ as a function of the pre-photoexcitation transient intensity error $\sigma_I$ is given by:
+$$
+    \sigma_u = \frac{\partial \Delta \langle |\bar{\vec{u}}|^2 \rangle}{\partial I} \sigma_I\ = \frac{-\sigma_I}{|\vec{q}|^2 \left[1 + \Delta I_0(\vec{q},t) \right]}
+$$
+The extracted change in atomic displacement due to transverse optical modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
+
+```{.matplotlib #fig:snse-displacement-fluence file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the soft zone-center optical modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
+```
+
+## Discussion
 
 Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
 $$
@@ -308,54 +348,27 @@ $$
 $$
 This equation implies an increase of diffuse intensity at zone center is due to an increase in $(n_{\lambda}+1/2) / \omega_{\lambda}$ for one or more transverse optical modes at $\vec{k}=\vec{0}$. UEDS measurements do not contain enough information to deconvolve the effects of selective mode-heating ($\uparrow n_{\lambda}$) and/or softening ($\downarrow \omega_{\lambda}$). In fact, there are indications at equilibrium that both terms may be involved in the diffuse intensity rise at zone center, given that calculations show that some zone-center optical modes like $B_g$ are strongly-coupled to the electronic system [@Caruso2019]. Intuitively, the author expected that strong electron-phonon coupling might reduce the thermoelectric figure-of-merit by strongly modulating electron mobilities. However, work by Fan *et al.* [@Fan2018] has shown that the onset of strong electron-phonon coupling may reduce the lattice thermal conductivity in a way that increases the $ZT$ figure-of-merit overall. Therefore, it is not possible to rule out selective mode-heating as a potential explanation for the diffuse intensity rise at $\Gamma$.
 
-In analogy to @eq:scattering-displacement, the factors $n_{\lambda} + 1/2 / \omega_{\lambda}$ are related to vibrational amplitude. Therefore, the discussion will continue in terms of mode-projected vibrational amplitudes:
+In analogy to @eq:scattering-displacement, the factors $n_{\lambda} + 1/2 / \omega_{\lambda}$ are related to vibrational amplitude. Therefore, the discussion will continue in terms of mode-projected vibrational amplitudes $a_{\lambda}(\vec{k})$:
 $$
-    I_1(\vec{q}) \propto \sum_{\lambda} \left| a_{\lambda}(\vec{k})\right|^2 |F_{1\lambda}(\vec{q})|^2
-$$
+    I_1(\vec{q}, \tau) \propto \sum_{\lambda} \left| a_{\lambda}(\vec{k}, \tau)\right|^2 |F_{1\lambda}(\vec{q})|^2
+$${#eq:snse-diffuse-amplitude}
 where
 $$
     \left|a_{\lambda}(\vec{k}) \right|^2 = \frac{n_{\lambda}(\vec{k})+1/2}{\omega_{\lambda}(\vec{k})}
 $$
-In this formulation, the fast diffuse intensity rise at $\Gamma$ is due to an increase in vibrational amplitude of one or more transverse optical modes polarized in the direction of the $Pnma$ phase distortion.
+In this formulation, the fast diffuse intensity rise at $\Gamma$ is due to an increase in vibrational amplitude of one or more transverse optical modes polarized in the direction of the $Pnma$ phase distortion. 
 
-### Fluence-dependence
+### Electron-phonon coupling and phonon renormalization
 
-The fluence-dependence on the increase in vibrational amplitude of zone-center transverse optical modes was investigated.
-
-```{.matplotlib file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the soft zone-center optical modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
-```
-
-
-
-
-
-
-
-
-### Ultrafast phonon softening from intensity dynamics
-
-Extracting the change in the $A_g$ phonon frequency $\omega(\vec{k}=\vec{\Gamma}, \tau)$ from the diffuse intensity is technically possible. Consider the change in diffuse intensity at $\vec{k} \approx \vec{0}$:
-\begin{align}
-    I_1(\tau) - I_1(0) & = I_e \sum_{\lambda} \frac{n_{\lambda}(\tau) + 1/2}{\omega_{\lambda}(\tau)} \left| F_{1\lambda}\right|^2 - I_e \sum_{\lambda} \frac{n_{\lambda}(0) + 1/2}{\omega_{\lambda}(0)} \left| F_{1\lambda}\right|^2 \nonumber \\
-                      & =  I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left( \frac{n_{\lambda}(\tau) + 1/2}{\omega_{\lambda}(\tau)} - \frac{n_{\lambda}(0) + 1/2}{\omega_{\lambda}(0)} \right)
-\end{align}
-where the prefactors in @eq:scattering-diffuse-intensity have all been collected in the quantity $I_e$. Photoexcitation results in a single mode $\lambda=A_g$ softening, so that $n_{\lambda}(0) = n_{\lambda}(\tau) \forall \lambda$ and $\omega_{\lambda}(0) = \omega_{\lambda}(\tau) \forall \lambda \setminus \left\{ A_g \right\}$. Then:
+The renormalization of a phonon frequency $\omega$ due to the coupling between electrons and phonons is determined by following equation[@Ando2006; @Mahan2000]:
 $$
-    I_1(\tau) - I_1(0) = I_e \left| F_{1 A_g}\right|^2 (n_{A_g}(0) + 1/2) \left( \frac{1}{\omega_{A_g}(\tau)} - \frac{1}{\omega_{A_g}(0)}\right)
-$$.
-Therefore, determining the $A_g$ mode softening from the diffuse intensity dynamics requires the calculation of the one-phonon structure factors. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead. 
-
-Given that the softening of a phonon mode manifests itself as an increase vibrational amplitude, it is possible to extract the softening of the $A_g$ mode by looking at the fast component of the transient Debye-Waller dynamics on the Bragg peak. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
-\begin{align}
-    \frac{I_0(\vec{q},\tau) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
-        &\equiv \Delta I_0(\vec{q},\tau) \nonumber \\
-        &= \frac{\left[e^{-2M(\vec{q},\tau)} - e^{-2M(\vec{q},0)}\right]}{e^{-2M(\vec{q},0)}} \nonumber \\
-        &=e^{-2[M(\vec{q},\tau) - M(\vec{q},0)]} - 1
-\end{align}
-Rearranging terms:
+    \frac{\omega^2}{\omega_0^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left\{ \Sigma(\vec{q}, \omega)\right\}
 $$
-    - \frac{1}{2} \ln \left[1 + \Delta I_0(\vec{q},t) \right] = 2 \pi^2 |\vec{q}|^2 \Delta \langle u^2\rangle
+where $\omega_0$ is the bare phonon frequency in the absence of coupling, and the phonon self-energy $\Sigma(\vec{q}, \omega)$ encodes electron-phonon interactions:
 $$
+    \Sigma(\vec{q}, \omega) \propto \sum_{a, b} \int \frac{d\vec{k}}{(2\pi)^3} \langle g_{\vec{q}, ab} \rangle^2 \frac{f[\epsilon_a(\vec{k})] - f[\epsilon_b(\vec{k} - \vec{q})]}{\hbar \omega - \left[\epsilon_a(\vec{k}) - \epsilon_b(\vec{k} - \vec{q}) \right]}
+$${#eq:snse-phonon-self-energy}
+where $a$ and $b$ label electron bands, $\vec{k}$ is the electronic wavevector, and $f[\epsilon]$ is the (possibly non-thermal) electronic energy distribution. The electron-phonon coupling vertex, $g_{\vec{q},ab}$, describes the rate of inelastic single electron scattering between states of energies $\epsilon_a(\vec{k})$ and $\epsilon_b(\vec{k})$ in bands $a$ and $b$ (respectively) through the creation or annihilation of a phonon with wavevector $\vec{q}$. The magnitude of this vertex (or the rate of scattering) depends on the strength of the potential energy modulation experienced by the electron due to lattice displacements associated with phonons of wavector $\vec{q}$; i.e. phonon coordinates associated with a large energy modulation have an enhanced $g_{\vec{q}}$.
 
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
