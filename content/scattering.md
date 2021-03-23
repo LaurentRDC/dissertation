@@ -3,15 +3,13 @@
 
 The scattering of light or particles by a sample is used by a large class of experimental techniques, dating back a hundred years. Scattering can be broadly defined as the modification of an incoming wave by a potential into outgoing wave, a process which imprints the outgoing wave with some characteristic of the potential. The outgoing wave may lose or gain energy, and its momentum might be changed. When multiple incoming waves are simultaneously used -- forming an incoming wavefront --, the outgoing waves may interfere constructively or destructively. This effect is particularly intense for periodic scattering potentials, for example in crystals.
 
-This chapter will consider the special case of *electron scattering*. In crystals, electrons are scattered by the electrostatic potential due to their charge. The description of X-ray scattering, for example, would be identical provided that the total electron charge-density be considered as the scattering potential, instead of the electrostatic potential.
+This chapter will consider the special case of *electron scattering*. In crystals, electrons are scattered by the electrostatic potential due to their charge. The description of X-ray scattering, for example, would be similar provided that the total electron charge-density be considered as the scattering potential, instead of the electrostatic potential.
 
 Specifically, the type of scattering relevant to this work involves the probing of periodic structures, crystals. Thanks to advances in data acquisition and data analysis attributable to the author (see [appendix @sec:appendix]), as well as improvements to instrument stability[@Otto2017], the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
 
-In writing this chapter, the author has tried original derivations that emphasize concepts that are important for the remainder of this dissertation. The derivation of ultrafast diffuse scattering intensity is of particular interest, because it is the only full quantum-mechanical treatment relevant to ultrafast electron scattering specifically.
+In writing this chapter, the author has tried original derivations that emphasize concepts that are important for the remainder of this dissertation. The derivation of ultrafast diffuse scattering intensity is of particular interest, because it is the only full quantum-mechanical treatment relevant to ultrafast electron scattering specifically in the literature today.
 
 ## Elastic electron scattering and the Lippmann-Schwinger formalism
-
-TODO: make it clear that the time-variation of the potential happens on a different scale than the scattering time
 
 Consider an electron wavefunction $\Psi(\vec{x}, t)$. The scattering of $\Psi(\vec{x}, t)$ by an arbitrary potential $V(\vec{x},t)$ is described by the Schrödinger equation:
 $$
@@ -265,9 +263,7 @@ The Ewald sphere is a great mental model of the information contained in diffrac
 
 ## Multiple scattering of electrons {#sec:scattering-multiple}
 
-Electrons interact quite strongly with matter through the Coulomb interaction. TODO: introduce this more. also talk about how this is not the same as two-beam diffraction because UED bunches are not dense; interference from two separate electrons in less likely than double-scattering by the same electron. 
-
-In this section, the scattering of an electron *twice* will be considered. In this case, the second term in @eq:scattering-potential-decomp ($j=1$) is considered:
+Electrons interact quite strongly with matter through the Coulomb interaction. For scattering targets which are thick enough, an electron may scatter more than once before exiting the scattering potential volume. In this section, the scattering of an electron *twice* will be considered. In this case, the second term in @eq:scattering-potential-decomp ($j=1$) is considered:
 $$
     f^{(2)}(\vec{k}_f, \vec{k}_i) = -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f} V \frac{1}{E_i - H_0 + i \epsilon}V \ket{\vec{k}_i}
 $$
@@ -288,8 +284,6 @@ $$
             e^{-i\vec{k}_f \cdot \vec{x}^\prime} V(\vec{x}^\prime) \left( \frac{e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}}{|\vec{x}^\prime - \vec{x}^{\prime\prime}|} \right) e^{i\vec{k}_i \cdot \vec{x}^{\prime\prime}} V(\vec{x}^{\prime\prime})
 $${#eq:scattering-amplitude-mult}
 The structure of @eq:scattering-amplitude-mult informs on the following physical interpretation. Double scattering involves a first scattering at $\vec{x}^{\prime\prime}$ ($V(\vec{x}^{\prime\prime})$), which "radiates" as a spherical wave moving from $\vec{x}^{\prime\prime}$ to $\vec{x}^{\prime}$ ($e^{i |\vec{k}_i| |\vec{x}^\prime - \vec{x}^{\prime\prime}|}/|\vec{x}^\prime - \vec{x}^{\prime\prime}|$), followed by a second scattering at $\vec{x}^\prime$ ($V(\vec{x}^{\prime})$).
-
-TODO: plot a comparison
 
 ### Comparing cross-sections
 
@@ -320,13 +314,11 @@ where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic
 
 ## The effect of lattice waves on ultrafast electron scattering
 
-TODO: explain that we only consider single-phonon scattering
+In this section, the effect of lattice waves on ultrafast electron diffraction measurements will be considered, ending in the derivation of what is known as *diffuse scattering*. 
 
-In this section, the effect of lattice waves on electron diffraction measurements will be considered, ending in the derivation of what is known as *diffuse scattering*. 
+This section will only consider single-scattering events. A discussion of dynamical diffuse scattering is not necessary to understand the experiments presented in this dissertation, as the samples are not thick enough to display a key signature of multiple diffuse scattering events known as *Kikuchi lines*[@Fultz2013KikuchiLines]. A complete discussion of all orders of thermal diffuse scattering is presented in Wang [@Wang1995].
 
-It is helpful to distinguish between atoms of separate unit cells. Consider then the position $\vec{r}_{m,s}$ to be the position of atom $s$ in the unit cell $m$. In this scheme, the indices $s$ run over the size of the unit cell (e.g. $1 \leq s \leq 4$ for graphite), while the indices $m$ run over the number of unit cells: $1 \leq m \leq N_c$. 
-
-Due to the presence of lattice waves, the atoms are vibrating about their equilibrium positions $\set{\vec{r}_{m,s}}$. Let $\set{\vec{u}_{m,s}}$ be the *displacement vectors* due to lattice waves. Then, the atomic positions can be expressed as $\set{\vec{r}_{m,s} \to \vec{r}_{m,s} + \vec{u}_{m,s}}$, where $\set{\vec{r}_{m,s}}$ are the atomic positions as defined by the lattice at zero temperature.Then:
+Consider then the position $\vec{r}_{m,s}$ to be the position of atom $s$ in the unit cell $m$. In this scheme, the indices $s$ run over the size of the unit cell (e.g. $1 \leq s \leq 4$ for graphite), while the indices $m$ run over the number of unit cells: $1 \leq m \leq N_c$. Due to the presence of lattice waves, the atoms are vibrating about their equilibrium positions $\set{\vec{r}_{m,s}}$. Let $\set{\vec{u}_{m,s}}$ be the *displacement vectors* due to lattice waves. Then, the atomic positions can be expressed as $\set{\vec{r}_{m,s} \to \vec{r}_{m,s} + \vec{u}_{m,s}}$, where $\set{\vec{r}_{m,s}}$ are the atomic positions as defined by the lattice at zero temperature.Then:
 \begin{align}
     \hat{V}_c(\vec{q}) & = \mathcal{F}\left[ \sum_m \sum_s V_a(\vec{x} - \vec{r}_{m,s} - \vec{u}_{m,s}) \right] \nonumber \\
                        & = \sum_m \sum_s f_e(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_{m,s}} e^{-i \vec{q} \cdot \vec{u}_{m,s}}

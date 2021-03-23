@@ -212,19 +212,19 @@ The experimental results are presented in this section. The description will sta
 
 ### Bragg peak profile analysis{#sec:snse-bragg-peak-profile}
 
-An important point which will anchor the discussion below is that the lattice dimensions are not affected by photoexcitation in the range of time-delay explored herein. All Bragg peaks were fit with a Gaussian profile at each time-delay, and the changes to their positions and profile were tracked. The results are presented in @fig:snse-peak-profiles for a few representative reflections. It is clear that no lattice expansion occurred in the measurements, which would have manifested itself as a change in Bragg peak position. Moreover, no lattice strain was measured, which would appear as a change in Bragg peak width. These checks are important given the strong dependence of SnSe's electronic bands on lattice dimensions[@Wei2019] and strain[@Cuong2015].
+An important point which will anchor the discussion below is that the lattice dimensions are not affected by photoexcitation in the range of time-delay explored herein. All Bragg peaks were fit with a Gaussian profile at each time-delay, and the changes to their positions and profile were tracked. The results are presented in @fig:snse-peak-profiles for a few representative reflections. It is clear that no lattice expansion occurred in the measurements, which would have manifested itself as a change in Bragg peak position. Moreover, no lattice strain was measured, which would appear as a change in Bragg peak width[@Fultz2013Lineshapes]. These checks are important given the strong dependence of SnSe's electronic bands on lattice dimensions[@Wei2019] and strain[@Cuong2015].
 
 ```{.matplotlib #fig:snse-peak-profiles file="figures/snse/widths.py" caption="Dynamics of the width and position of various Bragg peaks following photoexcitation. For every time-delay, Bragg peaks were fit with a Gaussian function. In the right column, the change in full-width at half-maximum $\Delta \sigma$ is shown over time. In the left column, the absolute shift in the center position of the peak $\Delta x_c$ is shown, as a percentage of the average full-width at half-maximum $\bar{\sigma}$. For all plots, the error bars represent the covariance of fit parameter."}
 ```
 
 ### Debye-Waller dynamics
 
-```{.matplotlib #fig:snse-dwaller file="figures/snse/dwaller.py" caption="Differential intensity dynamics on Bragg peaks shows the transient Debye-Waller effect with two time-constants: \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. Error bars represent the fluctuations before photoexcitation ($\tau < 0$) but are too small to see."}
+```{.matplotlib #fig:snse-dwaller file="figures/snse/dwaller.py" caption="Differential intensity dynamics on Bragg peaks for reflections either parallel to $\vec{b}^\star$ or $\vec{c}^\star$. Reflections parallel to $\vec{b}^\star$ are well-described by a single exponential with time-constant \SI{4 \pm 1}{\pico\second}. However, reflections parallel to $\vec{c}^\star$ have a biexponential character the with time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. Error bars represent the fluctuations before photoexcitation ($\tau < 0$) but are too small to see."}
 ```
 
-The overall Bragg peak profiles were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect. All in-plane reflections show the same transient Debye-Waller dynamics: a biexponential decay with time constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. A differential time-series combining a few reflections is shown in @fig:snse-dwaller. 
+The overall Bragg peak profiles were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect. In-plane reflections can be separated into two categories: the reflections which are nearly parallel to the $\vec{c}^\star$ axis, and the reflections which are not. For the reflections which are within $\sim\ang{45}$ degrees of the $\vec{c}^\star$ axis, the amplitude of the Bragg peak follows a Debye-Waller suppression with two time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. For reflections which are not nearly parallel to $\vec{c}^\star$, only the slower time-constant is present. @fig:snse-dwaller shows the comparison between the amplitude suppression for reflections which are exactly parallel to $\vec{b}^\star$ ($\set{ (020), (040), ...}$) and reflections which are exactly parallel to $\vec{c}^\star$ ($\set{ (002), (004), ...}$). 
 
-The two time-constants indicate that two physical processes follow photoexcitation. Recall from @eq:scattering-debye-waller that the Debye-Waller factor reports on the average mean-square-displacement of atoms $\langle |\vec{u}|^2 \rangle$. This increase in mean-square-displacement should be reflected in the diffuse intensity across the Brillouin zone.
+Recall from @eq:scattering-debye-waller that the Debye-Waller factor reports on the average mean-square-displacement of atoms $\langle |\vec{u}|^2 \rangle$ along the direction of the scattering vector $\vec{q}$. The fact that there is a fast component of the transient Debye-Waller dynamics in Bragg peaks nearly parallel to $\vec{c}^\star$ indicates that the mean-square-displacement of atoms along the $c$ axis -- i.e. the $Pnma$ lattice distortion -- is particularly affected by photoexcitation. The increase in mean-square-displacement should be reflected in the diffuse intensity across the Brillouin zone, which is presented next.
 
 ### Large-wavevector phonons
 
@@ -232,7 +232,6 @@ The two time-constants indicate that two physical processes follow photoexcitati
 ```
 
 The slow dynamics (\SI{4 \pm 1}{\pico\second}) in the Debye-Waller dynamics are correlated with the uniform rise of diffuse intensity away from zone-center. @fig:snse-highsym shows the differential intensity changes at three high-symmetry points in the Brillouin zone: $Y$, $Z$, and $T$. See @fig:snse-bz for the geometry of the in-plane section of the Brillouin zone. The diffuse intensity from the Brillouin zone near multiple reflection was averaged to increase signal-to-noise. The three in-plane points show the exact same dependence: a single exponential rise with time-constant $\SI{3.6 \pm 0.6}{\pico\second}$. For reference, the average across the Brillouin zone away from the zone-center ($|\vec{k}| > \SI{0.285}{\per\angstrom}$) is shown.
-
 
 ### Small wavevectors phonons{#sec:snse-small-wavevectors}
 
@@ -254,7 +253,7 @@ In this section, the initial findings presented in @sec:snse-small-wavevectors w
 ```{.matplotlib #fig:snse-forbidden-location file="figures/snse/static-forbidden.py" caption="Location of reflections which are forbidden in the $Pnma$ phase. These reflections are visible due to double diffraction."}
 ```
 
-The intensity dynamics shown in @fig:snse-diffuse-direction can be confirmed to be due to dynamics in the diffuse intensity by performing experiments on a thick sample. Note that the thicker SnSe sample prepared by ultramicrotome show some degree of double diffraction, in the form of *forbidden reflections*. The $Pnma$ space group has a non-zero structure factor (@eq:scattering-potential-crystal) for following in-plane reflections:
+The intensity dynamics shown in @fig:snse-diffuse-direction can be confirmed to be due to dynamics in the diffuse intensity by performing experiments on a thick sample. Note that the thicker SnSe sample prepared by ultramicrotome show some degree of double diffraction, in the form of *forbidden reflections*[@Fultz2013ForbiddenReflections]. The $Pnma$ space group has a non-zero structure factor (@eq:scattering-potential-crystal) for following in-plane reflections:
 $$
     \set{ (0kl) \mid k + l \in 2\mathbb{Z} }
 $$
@@ -323,21 +322,33 @@ Rearranging terms:
 $$
     - \frac{1}{2} \ln \left[1 + \Delta I_0(\vec{q},t) \right] = M(\vec{q}, \tau) - M(\vec{q}, 0)
 $$
-In this formulation, $M$ is the appropriate average of all atom-specific $W_s$ suppression factors from @eq:scattering-debye-waller[@Warren1990DebyeWaller]. There is no general expression for the quantity $M$ for diatomic crystals such as SnSe[@Warren1990DebyeWaller]. Instead, the isotropic approximation can be used, which states that if atoms are vibrating in a harmonic potential[@Warren1990Harmonic], the Debye-Waller factor $M$ is given by:
+In this formulation, $M$ is the appropriate average of all atom-specific $W_s$ suppression factors from @eq:scattering-debye-waller[@Warren1990DebyeWaller]. There is no general expression for the quantity $M$ for diatomic crystals such as SnSe[@Warren1990DebyeWaller]. 
+The fast component of the transient Debye-Waller dynamics are only visible for reflections nearly parallel to $\vec{c}^\star$, which informs on the atomic displacement in the $c$ direction. The harmonic approximation can be used, which states that if atoms are vibrating in a harmonic potential[@Warren1990Harmonic], the Debye-Waller factor $M$ is given by:
 $$
-    M(\vec{q}, \tau) = \frac{1}{2} |\vec{q}|^2 \langle |\bar{\vec{u}}|^2 \rangle
+    M(\vec{q}, \tau) = \frac{1}{2} |\vec{q}|^2 \langle |\bar{\vec{u}} \cdot \vec{e}_3|^2 \rangle
 $$
-where the symbol $\bar{\vec{u}}$ signifies the atomic displacement averaged over the unit cell. Then, the mean-square-displacement is related to the Bragg intensity at zone center as:
+where the symbol $\bar{\vec{u}}$ signifies the atomic displacement averaged over the atoms in the unit cell, and $\vec{e}_3$ is the unit vector in the $c$ direction. Then, the transient mean-square-displacement in the $c$ direction, $\Delta \langle |\bar{\vec{u}} \cdot \vec{e}_3|^2 \rangle \equiv \Delta \langle u_c^2 \rangle$, is related to the Bragg intensity at zone center as:
 $$
-    \Delta \langle |\bar{\vec{u}}|^2 \rangle = -\frac{\ln \left[1 + \Delta I_0(\vec{q},t) \right]}{|\vec{q}|^2}
+    \Delta \langle u_c^2 \rangle = -\frac{\ln \left[1 + \Delta I_0(\vec{q},t) \right]}{|\vec{q}|^2}
 $$
-The associated error $\sigma_u$ as a function of the pre-photoexcitation transient intensity error $\sigma_I$ is given by:
+for $\vec{q}$ nearly parallel to $\vec{c}^\star$. The associated error $\sigma_u$ as a function of the pre-photoexcitation transient intensity error $\sigma_I$ is given by:
 $$
-    \sigma_u = \frac{\partial \Delta \langle |\bar{\vec{u}}|^2 \rangle}{\partial I} \sigma_I\ = \frac{-\sigma_I}{|\vec{q}|^2 \left[1 + \Delta I_0(\vec{q},t) \right]}
+    \sigma_u = \frac{\partial \Delta \langle u_c^2 \rangle}{\partial I} \sigma_I\ = \frac{-\sigma_I}{|\vec{q}|^2 \left[1 + \Delta I_0(\vec{q},t) \right]}
 $$
-The extracted change in atomic displacement due to transverse optical modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
+The extracted change in atomic displacement along the $c$ axis due to transverse optical modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
 
 ```{.matplotlib #fig:snse-displacement-fluence file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the soft zone-center optical modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
+```
+
+#### Comparison with photocarrier density
+
+It is instructive to compare the fluence-dependence of the vibrational amplitude in @fig:snse-displacement-fluence with photocarrier density generated in the sample. The total energy deposited for a particular fluence $f$,  $E(f)$, is given by
+$$
+	E(f) = A f \left( 1 - e^{-\frac{t}{\delta}}\right)
+$$
+where $t$ is the sample thickness, $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{800}{\nano\meter} [@Makinistian2009; @Barrios2014], and $A$ is the sample area. For reference, roughly 37% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. Assuming that the efficiency of generating charge carriers from photo absorption is 100%, the photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
+
+```{.matplotlib #fig:snse-photodoping file="figures/snse/photodoping.py" caption="Photocarrier density generated in SnSe for \SI{800}{\nano\meter} pump fluences on a \SI{50 x 50 x 0.045}{\micro\meter} sample. The lower and upper limits are shown as grey dashed lines, based on the uncertainty of \SI{\pm 5}{\nano\meter} in the thickness of the sample."}
 ```
 
 ## Discussion

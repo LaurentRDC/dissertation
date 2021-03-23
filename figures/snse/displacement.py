@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from math import sin, pi
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import matplotlib as mpl
@@ -118,7 +119,10 @@ def delta_msd_fluence(fluence):
     # It is assumed that debye-waller curves are taken from the (022) reflection
     q = np.linalg.norm(CRYSTAL.scattering_vector((0, 2, 2)))
     u2, u2err = transient_u2(timedelays, timeseries, q)
-    return timedelays, u2, u2err
+
+    # Factor of 1/sin(45deg) because reflection (022) is not
+    # parallel to (001), but 45deg from it.
+    return timedelays, u2 / sin(pi / 4), u2err / sin(pi / 4)
 
 
 figure, ax_displacement = plt.subplots(1, 1, figsize=(4.25, 3))
@@ -184,7 +188,7 @@ cb = mpl.colorbar.ColorbarBase(
 cb.set_label("$N_{\gamma}$ [$10^{21}$ cm$^{-3}$]")
 
 ax_displacement.set_xlim([es.min(), es.max()])
-ax_displacement.set_ylabel("$\\Delta \\langle u^2 \\rangle$ [$10^{-2} \AA^2$]")
+ax_displacement.set_ylabel("$\\Delta \\langle u_c^2 \\rangle$ [$10^{-2} \AA^2$]")
 ax_displacement.set_xlabel("Fluence [mJ cm$^{-2}$]")
 
 plt.tight_layout()

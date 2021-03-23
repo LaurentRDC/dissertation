@@ -141,7 +141,7 @@ def draw_hexagon(
 def discrete_colors(num):
     """ Returns a list of discrete colors to plot, for example, various time-traces. """
     cmap = plt.get_cmap("inferno")
-    mi, ma = 0.11, 0.8
+    mi, ma = 0.11, 0.75
 
     if num == 1:
         return [cmap(mi)]
