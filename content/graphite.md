@@ -97,7 +97,7 @@ An important feature of the phonon dispersion of graphite that is not replicated
 \begin{figure}
     \centering
     \includegraphics{images/kohn.pdf}
-    \caption[Kohn anomalies in the phonon dispersion of graphene and graphite]{Phonon dispersion of graphene (GE) and graphite (GI), calculated at the experimental and equilibrium lattice spacings ($a_{exp}$ and $a_{th}$). The red straight lines at $\vec{\Gamma}$ and $\vec{K}$ show the slope of the Kohn anomalies. The two lower panels correspond to the dotted windows in the upper panel. The points are theoretical frequencies obtained by direct calculation. Reused with permission from Piscanec \emph{et al} \autocite{Piscanec2004}.}
+    \caption[Kohn anomalies in the phonon dispersion of graphene and graphite]{Phonon dispersion of graphene (GE) and graphite (GI), calculated at the experimental and equilibrium lattice spacings ($a_{exp}$ and $a_{th}$). The red straight lines at $\vec{\Gamma}$ and $\vec{K}$ show the slope of the Kohn anomalies. The two lower panels correspond to the dotted windows in the upper panel. The points are theoretical frequencies obtained by direct calculation. Reused with permission from Piscanec \emph{et al.} \autocite{Piscanec2004}.}
     \label{fig:graphite-kohn-anomalies}
 \end{figure}
 

@@ -93,15 +93,15 @@ The modern form of pump-probe ultrafast electron scattering was brought by Ahmed
 
 It was not until Siwick *et al.*[@Siwick2003; @Siwick2004], however, that the ideas of Mourou and Williamson were applied with sub-picosecond sensitivity (\SI{600}{\femto\second}) to the solid state. This work reached a time-resolution sufficient to address whether or not the ultrafast phase transition from solid to liquid-like was analogous to the thermal phase transition[@Guo2000].
 
-By 2005, the development of the field was booming. At the time, the prevalent sentiment was that the space-charge problem formulated by Mourou and Williamson limited the applicability of ultrafast electron scattering. King *et al.*[@King2005] identify three paths to control space-charge effects:
+By 2005, the prevalent sentiment was that the space-charge problem formulated by Mourou and Williamson limited the applicability of ultrafast electron scattering. King *et al.*[@King2005] identify three paths to control space-charge effects:
 
-1. Reduce the electron-emission -- sample distance. By reducing this distance, the space-charge-driven expansion of the electron bunch remains limited[@Siwick2002].
+1. Reducing the electron-emission -- sample distance. By reducing this distance, the space-charge-driven expansion of the electron bunch remains limited[@Siwick2002].
 
-2. Use higher electron energies. For \si{\mega\electronvolt} electrons, the space-charge explosion is reduced significantly[@Gian2002].
+2. Using higher electron energies. For \si{\mega\electronvolt} electrons, the space-charge explosion is reduced significantly[@Gian2002].
 
 3. Reducing space-charge pulse expansion by limiting the energy spread in the electron bunch[@Gallant2000].
 
-The solution to space-charge grew from the insight of Siwick *et al.* [@Siwick2002], who showed that the electrons in a bunch develop a strong correlation in phase space as the bunch propagates. Space-charge effects effectively slow down the front electrons with respect to the center of charge, while it accelerates the electrons at the front of the bunch. After some propagation time, a linear correlation is established between the relative axial position within the bunch and the relative velocity within the bunch. It is precisely because the correlation is so strong that a solution can be devised. Siwick, Luiten, and collaborators[@Van2007] showed with advanced charge-particles simulations how an electromagnetic cavity operating in the radio-frequency (RF) regime could be used to reverse the correlation between the axial position and velocity of electrons within the bunch. The particular implementation in the Siwick research group is presented below in @sec:intro-cavity. The design of a RF compression cavity was validated by Chatelain *et al.*[@Chatelain2012] in 2012.
+The solution to space-charge came from the insight of Siwick *et al.* [@Siwick2002], who showed that the electrons in a bunch develop a strong correlation in phase space as the bunch propagates. Space-charge effects effectively slow down the front electrons with respect to the center of charge, while it accelerates the electrons at the front of the bunch. After some propagation time, a linear correlation is established between the relative axial position within the bunch and the relative velocity within the bunch. It is precisely because the correlation is so strong that a solution can be devised. Siwick, Luiten, and collaborators[@Van2007] showed with advanced charge-particles simulations how an electromagnetic cavity operating in the radio-frequency (RF) regime could be used to reverse the correlation between the axial position and velocity of electrons within the bunch. The particular implementation in the Siwick research group is presented below in @sec:intro-cavity. The design of a RF compression cavity was validated by Chatelain *et al.*[@Chatelain2012] in 2012.
 
 ### The landscape today
 
@@ -119,7 +119,13 @@ The electron bunch compression that was used for the experiments presented herei
 
 ### Bunch correlations
 
-![Relative axial velocity vs axial position ($Z$) for all electrons in the pulse at four times ($T$) during its propagation. The pulse is composed of 10 000 electrons at \SI{30}{\kilo\electronvolt}, with an initial bunch length equivalent to \SI{150}{\femto\second}, an initial radius ut \SI{75}{\micro\meter}, and initial beam divergence of \SI{1.5}{\milli\radian}. The width of the velocity distribution becomes larger as the pulse lengthens. The spatial distribution of velocities also evolves. As electrons redistribute themselves inside the packet a linear velocity chirp develops on the electron pulse. For \SI{30}{\kilo\electronvolt} electrons, a propagation time of \SI{2}{\nano\second} is equivalent to a propagation distance of roughly \SI{20}{\centi\meter}. Reproduced with permission from the Americal Institute of Physics.](images/siwick2002_fig6.png){#fig:introduction-bunch-correlation}
+<!-- The figure below is raw latex because an alternate caption without citations needs to be use so that it looks OK in the list of figures-->
+\begin{figure}
+    \centering
+    \includegraphics{images/siwick2002_fig6.png}
+    \caption[Electron bunch phase space as it propagates.]{Relative axial velocity vs axial position ($Z$) for all electrons in the pulse at four times ($T$) during its propagation. The pulse is composed of 10 000 electrons at \SI{30}{\kilo\electronvolt}, with an initial bunch length equivalent to \SI{150}{\femto\second}, an initial radius ut \SI{75}{\micro\meter}, and initial beam divergence of \SI{1.5}{\milli\radian}. The width of the velocity distribution becomes larger as the pulse lengthens. The spatial distribution of velocities also evolves. As electrons redistribute themselves inside the packet a linear velocity chirp develops on the electron pulse. For \SI{30}{\kilo\electronvolt} electrons, a propagation time of \SI{2}{\nano\second} is equivalent to a propagation distance of roughly \SI{20}{\centi\meter}. Reused with permission from Siwick \emph{et al.} \autocite{Siwick2002}}
+    \label{fig:introduction-bunch-correlation}
+\end{figure}
 
 The idea of an electron bunch compressor is to control the electron bunch in phase space. As stated previously, a landmark paper by Siwick *et al.*[@Siwick2002] showed that as the electron bunch propagates, electrons in develop a linear correlation between their position within the bunch and their velocity with respect to the average bunch velocity. This is shown in @fig:introduction-bunch-correlation. The idea behind the RF compressor is to reverse this correlation using a standing radio-frequency wave to slow down the electrons at the front of the bunch, and accelerate the electrons at the back of the bunch, so that there is a single point downstream where the electron bunch is very short. This can be done by using an electromagnetic wave, oriented with the electric field along the propagation axis $z$ (TM$_{010}$ mode), and timed such that the amplitude of the electric field is 0 when the bunch center-of-charge is located in the center of the cavity. This procedure is effectively a rotation in phase-space. The procedure and its effect on the phase-space representation of electron bunches is shown in @fig:introduction-rf-compression. 
 
@@ -204,7 +210,11 @@ On the probe line, two barium borate (BBO) crystals are used to generate the thi
 
 These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to 53% of the speed of light. After acceleration, a solenoid lens loosely focuses the electron bunches through the \SI{3}{\milli\meter} aperture of the RF compression cavity described in @sec:intro-cavity, ensuring that electron bunches do not lose much charge before compression. After the RF compression cavity, another solenoid lens focuses the transverse profile of the electron bunches onto the detector, so that the diffraction pattern is imaged clearly. Electron bunches are transmitted through the sample at normal incidence. The scattering pattern is collected by an electron camera (Gatan Ultrascan 895), on a cooled charge-coupled detector. The transmitted, unscattered beam is collected by a Faraday cup. A Keithley 6514 electrometer measures the charge on the Faraday cup at a rate of \SI{1}{\kilo\hertz}, giving a rough estimation of the bunch-to-bunch charge fluctuations.
 
-## Interactive data exploration software
+### Interactive data exploration software
+
+The pursuit of science is accompanied by serious software development in most fields, often in the forms of instrument control, data acquisition, data analysis, and data presentation. One project spearheaded by the author, a graphical program for the interactive exploration of ultrafast electron scattering data (@fig:introduction-iris-screen), has had such a profound impact on the research within the Siwick research group that it deserves its own brief section. Interested readers are encouraged to read more in the @sec:appendix-software and René de Cotret *et al.*[@RenedeCotret2018]
+
+![Graphical user interface of `iris`. **Background** Interactive exploration of a dataset of photoexcited TiSe$_2$. **Foreground** Interactive exploration of a dataset of photoexcited polycrystalline VO$_2$](images/iris_screen.png){#fig:introduction-iris-screen}
 
 ## Overview of the dissertation {#sec:overview}
 
