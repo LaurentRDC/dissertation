@@ -41,12 +41,10 @@ LATEX_ENGINE = "pdflatex"
 META = HERE / "metadata.yaml"
 
 SRC = [
-    CONTENTDIR / "listoffigures.md",
     CONTENTDIR / "preface.md",
     CONTENTDIR / "introduction.md",
     CONTENTDIR / "scattering.md",
     CONTENTDIR / "graphite.md",
-    # CONTENTDIR / "tase2.md",
     CONTENTDIR / "snse.md",
     CONTENTDIR / "conclusion.md",
 ]

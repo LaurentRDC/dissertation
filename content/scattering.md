@@ -71,7 +71,7 @@ $$
     \braket{\vec{x} | \vec{k}} = \frac{1}{L^{3/2}} e^{i \vec{k} \cdot \vec{x}}
 $${#eq:scattering-norm}
 and $\vec{k}$ takes discrete values. The calculations will become physical after taking the limit $L \to \infty$.
-In this approximation, the scattered wave $\bra{\vec{x} | \Psi}$ is given by the *Lippmann-Schwinger* equation[@Lippmann1950]:
+In this approximation, the scattered wave $\braket{\vec{x} | \Psi}$ is given by the *Lippmann-Schwinger* equation[@Lippmann1950]:
 $$
     \braket{\vec{x} | \Psi} = \braket{\vec{x} | \vec{k}_i} - \frac{2 m_e}{\hbar^2} \int d^3 x^\prime \frac{e^{ik|\vec{x}-\vec{x}^\prime|}}{4 \pi |\vec{x}-\vec{x}^\prime|} V(\vec{x}^\prime) \braket{\vec{x}^\prime | \Psi}
 $${#eq:scattering-lippmann-schwinger}
@@ -93,7 +93,7 @@ where
                             & =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vec{k}_f}V\ket{\Psi}
     \label{eq:scattering-amplitude}
 \end{align}
-$f(\vec{k}_f, \vec{k})$ is called the *scattering amplitude*. The form of @eq:scattering-lippmann-schwinger-general complies with intuition: the incoming state $\ket{\vec{k}_i}$ wave is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
+$f(\vec{k}_f, \vec{k})$ is called the *scattering amplitude*. The form of @eq:scattering-lippmann-schwinger-general complies with intuition: the final scattered wavefunction is composed of an unscattered part ($\braket{\vec{x} | \vec{k}_i}$) as well as an outgoing spherical wave with amplitude $f(\vec{k}_f, \vec{k}_i)$.
 
 The calculation of the scattered wavefunction $\braket{\vec{x}|\Psi}$ has been reduced to the calculation of $\bra{\vec{k}_f}V\ket{\Psi}$. The derivation of an expression for this is beyond the scope of this work, and the final result is stated[^tmatrix]:
 $$
@@ -144,7 +144,7 @@ The scattering potential of a single atom is given by:
 $$
     V_a(\vec{x}) = -\frac{Z e^2}{|\vec{x}|} + \sum_{i=1}^{Z} \frac{e^2}{|\vec{x} - \vec{x}_i|}
 $${#eq:scattering-atom-potential}
-where Z is the atomic weight, and $\vec{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles, using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010] to get the real-space electron density (i.e. determining the possible set $\set{\vec{x}_i}$). This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factor for electrons are spherically symmetric. They can be parametrized of an atom can be parametrized as:
+where Z is the atomic weight, and $\vec{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles, using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010] to get the real-space electron density (i.e. determining the possible set $\set{\vec{x}_i}$). This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factor for electrons for light atoms are spherically symmetric[@Zheng2009]. They can be parametrized as:
 $$
     f_e(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
 $${#eq:scattering-affe}
@@ -153,7 +153,7 @@ where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting pa
 ```{.matplotlib #fig:scattering-potential file="figures/scattering/scatt-potential.py" caption="Demonstration of the electrostatic potential of atoms, which scatters electrons. **a)** Radial view of the electrostatic potential in real-space **b)** Radial view of the electrostatic potential in reciprocal space, also known as the *atomic form factor*."}
 ```
 
-The contribution of individual electronic orbitals to the atomic form factor for electrons[@Zheng2009] will be discussed in @sec:snse. 
+The contribution of individual electronic orbitals to the atomic form factor for electrons is discussed in Zheng *et al.*[@Zheng2009]. 
 
 ### Scattering potential of a crystal
 
@@ -176,7 +176,10 @@ where $\vec{y}$ is some arbitrary translation vector. Therefore, the Fourier tra
     \label{eq:scattering-potential-crystal}
 \end{align}
 
-@eq:scattering-potential-crystal has historically been called the *static structure factor*, named thus in contrast with the *dynamic structure factor* discussed in @sec:diffuse-scattering. A visual representation of the scattering potential of a crystal is helpful. Consider for moment $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the base of a cube is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
+```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for $\alpha$-polonium. **a)** Electrostatic potential $V(\vec{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are shown; lattice vector $\vec{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vec{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
+``` 
+
+@eq:scattering-potential-crystal has historically been called the *static structure factor*, named thus in contrast with the *dynamic structure factor* discussed in @sec:diffuse-scattering. A visual representation of the scattering potential of a crystal is helpful. Consider the example of $\alpha$-polonium ($\alpha$-Pu), one of the simplest crystal structures[@Curie1898], which crystals consists in a Pu atom at the every vertex of a cube with side-length of \SI{3.63}{\angstrom}. The calculated electrostatic potential of this arrangement along the unit cell base is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f_e(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
 
 From @eq:scattering-intensity and @eq:scattering-amplitude-q, the measured diffracted intensity is:
 \begin{align}
@@ -184,10 +187,7 @@ From @eq:scattering-intensity and @eq:scattering-amplitude-q, the measured diffr
                & = \frac{N_c^2 m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_s f_{e,s}(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_s} \right|^2
     \label{eq:scattering-diffracted-intensity-zero-temp}
 \end{align}
-which is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity; @Kittel1996intensity; @Fultz2002intensity; @Kirkland2010intensity]. Note that the sum $\sum_i$ has been replaced with the sum over the unit cell, $N_c \sum_s$.
-
-```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for $\alpha$-polonium. **a)** Electrostatic potential $V(\vec{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are shown; lattice vector $\vec{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vec{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
-``` 
+where the sum over all atoms $\sum_i$ has been replaced with the sum over the unit cell, $N_c \sum_s$. This is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity; @Kittel1996intensity; @Fultz2002intensity; @Kirkland2010intensity]. 
 
 ### The reciprocal lattice
 

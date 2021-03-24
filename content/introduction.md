@@ -7,29 +7,9 @@ The fields of condensed matter physics and material science tackle a variety of 
 
 In highly-ordered systems (i.e. crystals), where electronic correlation effects are most likely to matter, the time scales associated with fundamental actions are determined by the energy scale around room temperature. Phonons populated at room temperature (\SI{300}{\kelvin} = \SI{25}{\milli\electronvolt}) might have a period shorter than \SI{1}{\pico\second} ($10^{-12}$ \si{\second}).
 
-## Ultrafast laser systems {#sec:laser_sources}
+## Outrunning temperature to resolve atomic dynamics
 
-Digital measurement devices are generally limited to nanosecond resolution, and are therefore too slow to observe dynamics in the femtosecond range. Therefore, at the heart of most ultrafast experiment lies an ultrafast laser system. An ultrafast laser system consists of a pulsed source of highly-coherent radiation. 
-
-Two things are required from the laser system: that its pulses be short, and that its pulses have high peak power. The length of laser pulses produced by such systems typically determine the time-resolution of experiments. The high peak power allows for the use of non-linear optical techniques, such as frequency-doubling.
-
-Ultrafast laser systems like those used herein are composed of two optical assemblies. Ultrashort (\SI{<100}{\femto\second}) laser pulses are produced by a mode-locked laser system. These short pulses lack the high peak power, and are amplified via chirped pulse amplification. in a regenerative laser amplifier The resulting pulses are short (\SI{<100}{\femto\second}), while also reaching peak powers of up to \SI{1}{\peta\watt}.
-
-In the following two subsections, a brief description of the two components of the laser system is given. These sections only highlight the basic functionality, while overlooking numerous details for brevity. All bust the most avid reader is encouraged to skip ahead to @sec:spectroscopy.
-
-### Femtosecond mode-locked oscillators
-
-The core working principle of mode-locked oscillators is to fix the phase relationship between allowed amplitude modes within a laser cavity. This phase relationship enforces that constructive interference happen regularly, producing a train of ultrashort pulses. These systems typically use titanium-doped sapphire as the gain medium (Ti-sapphire), because the gain bandwidth of this medium accomodates the intrinsically large bandwidth of short laser pulses (\SI{>45}{\nano\meter}, or \SI{>3}{\tera\hertz}).
-
-@fig:mode-locking shows an example of the first 30 longitudinal modes of a cavity coming together to form a strong pulse. In reality, pulses may combine $10^6$ modes to maximize peak power [@Siegman1986].
-
-```{.python #fig:mode-locking .matplotlib file="figures/introduction/mode-locking.py" caption="Demonstration of how phase relationship between amplitude modes in a laser cavity can lead to a strong pulse. **a)** The first few longitudinal modes of a laser cavity. **b)** Combination of the first 45 modes of the cavity creates a very strong pulse in the center of the cavity."}
-```
-
-### Regenerative laser amplifiers
-
-
-## Ultrafast spectroscopic techniques and their limitations {#sec:spectroscopy}
+### Ultrafast spectroscopic techniques and their limitations {#sec:spectroscopy}
 
 
 
@@ -159,6 +139,8 @@ The attenuation and focus of the beam are adjusted to achieve the desired photoe
 On the probe line, two barium borate (BBO) crystals are used to generate the third harmonic of \SI{800}{\nano\meter}: a first conversion to \SI{400}{\nano\meter}, and then a second conversion to \SI{266}{\nano\meter}. A calcite crystal is placed between the two BBO crystals to compensate for the wavelength-dependent dispersion in the BBO crystals. This non-linear light conversion is possible because the pulses are extremely energy-dense, resulting in a conversion efficiency of 1%. The ultraviolet (UV) photons are then routed into the electron gun assembly, where they are focused on a copper hemispherical cathode. The work function of copper (\SI{4.5}{\electronvolt}[@Anderson1949]) is slightly lower than the UV photon energy (\SI{4.65}{\electronvolt}), resulting in electrons being freed from the copper cathode with little extra energy. 
 
 These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to 53% of the speed of light. After acceleration, a solenoid lens loosely focuses the electron bunches through the \SI{3}{\milli\meter} aperture of the RF compression cavity described in @sec:intro-cavity, ensuring that electron bunches do not lose much charge before compression. After the RF compression cavity, another solenoid lens focuses the transverse profile of the electron bunches onto the detector, so that the diffraction pattern is imaged clearly. Electron bunches are transmitted through the sample at normal incidence. The scattering pattern is collected by an electron camera (Gatan Ultrascan 895), on a cooled charge-coupled detector. The transmitted, unscattered beam is collected by a Faraday cup. A Keithley 6514 electrometer measures the charge on the Faraday cup at a rate of \SI{1}{\kilo\hertz}, giving a rough estimation of the bunch-to-bunch charge fluctuations.
+
+## Interactive data exploration software
 
 ## Overview of the dissertation {#sec:overview}
 
