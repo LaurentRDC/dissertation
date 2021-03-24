@@ -3,15 +3,79 @@
 
 The basic physical principles of low-energy quantum mechanics are understood reasonably-well, and yet the emergence of new phenomena from the fundamental laws of Physics continues to surprise.
 
-The fields of condensed matter physics and material science tackle a variety of intertwined questions, from fundamental physics to concrete applications.  Given that condensed matter systems are complex, many experimental dimensions are used to distinguish between phenomena. Electron microscopy comes to mind as an example of a technique which can selectively observe physical systems in real-space (via imaging) or in momentum (via diffraction).
+The field of condensed matter physics tackles a variety of intertwined questions, from fundamental physics to concrete applications. Given that condensed matter systems are complex, many experimental dimensions are used to distinguish between phenomena. Electron microscopy comes to mind as an example of a technique which can selectively observe physical systems in real-space (via imaging) or in momentum (via diffraction).
 
-In highly-ordered systems (i.e. crystals), where electronic correlation effects are most likely to matter, the time scales associated with fundamental actions are determined by the energy scale around room temperature. Phonons populated at room temperature (\SI{300}{\kelvin} = \SI{25}{\milli\electronvolt}) might have a period shorter than \SI{1}{\pico\second} ($10^{-12}$ \si{\second}).
+TODO: expand here
 
 ## Outrunning temperature to resolve atomic dynamics
 
-### Ultrafast spectroscopic techniques and their limitations {#sec:spectroscopy}
+In highly-ordered systems (i.e. crystals), where electronic correlation effects are most likely to matter, the time scales associated with fundamental actions are determined by the energy scale around room temperature. Phonons populated at room temperature (\SI{300}{\kelvin}) might have a period shorter than \SI{1}{\pico\second} ($10^{-12}$ \si{\second}), as $\omega = k_B T / \hbar = \SI{25}{\milli\electronvolt} / \hbar = \SI{6}{\tera\hertz}$. 
 
+But more important than the absolute energy scale is the energy flow across degrees of freedom. The canonical example of this is conventional superconductivity[@Cooper1956; @Bardeen1957; @Schrieffer1963]. Energy exchange near the Angstrom length scale (\SI{1}{\angstrom} = \SI{1e-10}{\meter}) governs the onset of superconductivity as a coupling between lattice waves and electrons[@Eliashberg1960].
 
+In general, the competition between correlation effects in a condensed matter system may be revealed as phase transitions. Some of these phases are metastable, hinting at complex networks of energy flow that gives rise to the systems traditionally studied at equilibrium. One such example is an insulator-to-metal phase transition in Pr$_{0.7}$Ca$_{0.3}$MnO$_3$, triggered by directly populating an IR-active phonon mode [@Rini2007]. By photoexciting the sample with the right photons, resistivity in the near-infrared range (\SIrange{0.5}{1.9}{\electronvolt}) drops by 5 orders of magnitude. This state lives for quite a long time in microscopic terms (nanoseconds), and therefore hints at a competition which might also be present at equilibrium. The observation of insulator-to-metal metastable phases was also the subject of some of the author's previous work on vanadium dioxide[@Otto2019].
+
+The power of ultrafast methodologies lies in their ability to deconvolve interactions in the time-domain. By definition, measurements at equilibrium are unable to determine energy flow and resulting couplings, as equilibrium is defined by the balanced flow of energy throughout a system. 
+
+### An analogy with Green's functions
+
+Ultrafast methodologies are a way to lift the veil and peer at an aspect of the system's impulse response. In this sense, an analogy with Green's function.
+
+Consider the simple harmonic oscillator, with is represented by a position $x$. The behavior of the oscillator is determined by the following differential equation:
+$$
+    \frac{\partial^2 x}{\partial t ^2} + \omega^2 x = F(t)
+$${#eq:introduction-sho}
+where $\omega$ is the natural oscillation frequency and is $F(t)$ is an arbitrary driving force. The response of the system $x(t)$ will depend on the driving force $F(t)$, and so it might be hopeless to try and understand this system directly.
+
+Now consider the response of the system to a very specific driving force: the impulse $\delta(t - t_0)$. $\delta( t - t_0)$ is the Dirac delta distribution, defined in one-dimension by:
+$$
+    \int dt ~ \delta(t-t_0) f(t) = f(t_0)
+$$
+for any function $f(t)$. The impulse is effectively an infinite impulse at $t = t_0$, and vanishing everywhere else.
+
+The response of the system in @eq:introduction-sho to an impulse is special. Assume that the solution to 
+$$
+    \frac{\partial^2 x}{\partial t ^2} + \omega^2 x = \delta(t - t_0)
+$$
+is known to be $G(t)$. Then, it can be shown that the solution to an arbitrary driving force $F(t)$, $x_F(t)$, is given by:
+$$
+    x_F(t) = \int_{t_0=-\infty}^{t_0=t}dt_0 ~ F(t_0)G(t - t_0)
+$${#eq:introduction-green-sho}
+
+In the general case, consider a physical system whose state is represented by the phase-space vector $\vec{x}$, and its behavior is governed by the linear differential operator $L$:
+$$
+    L \vec{x}(t) = F(\vec{x}, t)
+$${#eq:introduction-l-system}
+where the function $F(\vec{x}, t)$ is a source term. The system is completely determined
+by the Green's function $G(\vec{x}, t)$ which solves:
+$$
+    L ~ G(\vec{x}, t) = \delta
+$$
+because the solution $\vec{x}_F(t)$ to @eq:introduction-l-system is given by
+$$
+    \vec{x}_F(t) = \int dt_0 d\vec{x}_0 ~ G(\vec{x} - \vec{x}_0, t - t_0) F(\vec{x}, t)
+$$
+
+Real physical systems at energies relevant to condensed matter physics are governed by a linear differential operator, the Schrödinger operator:
+$$
+    L = i \hbar \frac{d}{dt} - \hat{H}
+$$
+where $\hat{H}$ is the Hamiltonian of the (non-driven) system. The response of the total wavefunction $\Psi$ under some external potential $\hat{V}_0$ becomes:
+$$
+    L \Psi = \hat{V}_0 \Psi
+$$
+which is equivalent to the usual Schrödinger equation $i \hbar \frac{d\Psi}{dt} = (\hat{H} + \hat{V}_0)\Psi$. Of course, the total wavefunction $\Psi$ is intractable, with more than $10^{23}$ degrees of freedom at the macroscopic scale. Nonetheless, this system is *completely determined* by the response to an energy impulse, i.e. the Green's function of $L$. In fact, the Green's function formalism is at the heart of many-body theory[@Fetter1971GreensFunction]. Ultrafast measurements allow us to measure an approximation of this impulse response. Distinct excitation conditions and probing techniques explore separate parts of the Hilbert space of possibilities. With the right probes, a shadow of the true impulse response may be assemble to understand important physics which -- while not experimentally-accessible at equilibrium -- still govern macroscopic phenomena. 
+
+### The reversible pump-probe scheme
+
+The time-resolution with gives experimentalists a glimpse of the impulse response of physical systems is derived from ultrafast laser pulses. These pulses provide the impulse of energy which perturbs the system. However, digital measurement devices are generally limited to nanosecond resolution, and are therefore too slow to observe dynamics in the femtosecond range.
+
+The pump-probe scheme is used to achieve high time-resolution in experiments where detectors are slow. This scheme involves two pulses. One pulse, the *pump pulse*, is an ultrashort laser pulse which impulsively dumps energy in a sample. The sample is pump with a period $T$, which is generally fixed by the laser source. The period $T$ must be great enough to allow the sample to recover. A *probe pulse* is made to interact with the sample after some time-delay $\tau$. This probe pulse might be another ultrashort pulse of light, or electrons in the case of ultrafast electron scattering. The delay can usually be adjusted with great precision by changing the path length of the light used to generate the probe pulse. The probe pulse will encode the state of the sample at time-delay $\tau$ within the width of the probe pulse.
+
+The process will be repeated $n$ times, where $nT$ is a long-enough delay that the detector of the probe pulse can resolve (e.g. \SI{1}{\second}). Then, the time-delay will be adjusted to a new value, and the process is repeated. By scanning over values of $\tau$ in this way, a complete view of the dynamics of the sample following the pump can be assembled. This process is represented in @fig:introduction-pumpprobe.
+
+```{.matplotlib #fig:introduction-pumpprobe file="figures/introduction/pumpprobe.py" caption="Representation of the pump-probe scheme in laboratory time. Dynamics are initiated with a period $T$, and the system is allowed to relax back to its initial state. After a time-delay $\tau$, the system is probed with a separate probe pulse. The process is repeated multiple times while the detector is recording. By scanning the time-delay, a complete picture of sample response can be assembled."}
+```
 
 ## Brief history of ultrafast electron scattering {#sec:ues}
 
