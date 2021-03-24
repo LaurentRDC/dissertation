@@ -212,7 +212,7 @@ These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to
 
 ### Interactive data exploration software
 
-The pursuit of science is accompanied by serious software development in most fields, often in the forms of instrument control, data acquisition, data analysis, and data presentation. One project spearheaded by the author, a graphical program for the interactive exploration of ultrafast electron scattering data (@fig:introduction-iris-screen), has had such a profound impact on the research within the Siwick research group that it deserves its own brief section. Interested readers are encouraged to read more in the @sec:appendix-software and René de Cotret *et al.*[@RenedeCotret2018]
+Scans of the time-delay $\tau$ are repeated multiple times to increase the signal-to-noise ratio. The author has created a software suite (@fig:introduction-iris-screen) that performs data reduction and allows for the interactive exploration of the reduced data. While this software suite has had a profound impact on the research presented in this work, the details are not necessary to appreciate the results presented in @sec:graphite and @sec:snse. Interested readers are encouraged to read more in the @sec:appendix-software and René de Cotret *et al.*[@RenedeCotret2018]
 
 ![Graphical user interface of `iris`. **Background** Interactive exploration of a dataset of photoexcited TiSe$_2$. **Foreground** Interactive exploration of a dataset of photoexcited polycrystalline VO$_2$](images/iris_screen.png){#fig:introduction-iris-screen}
 
