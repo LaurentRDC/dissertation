@@ -27,44 +27,39 @@ $$
 $${#eq:introduction-sho}
 where $\omega$ is the natural oscillation frequency and is $F(t)$ is an arbitrary driving force. The response of the system $x(t)$ will depend on the driving force $F(t)$, and so it might be hopeless to try and understand this system directly.
 
-Now consider the response of the system to a very specific driving force: the impulse $\delta(t - t_0)$. $\delta( t - t_0)$ is the Dirac delta distribution, defined in one-dimension by:
-$$
-    \int dt ~ \delta(t-t_0) f(t) = f(t_0)
-$$
-for any function $f(t)$. The impulse is effectively an infinite impulse at $t = t_0$, and vanishing everywhere else.
-
-The response of the system in @eq:introduction-sho to an impulse is special. Assume that the solution to 
+Now consider the response of the system to a very specific driving force: the impulse $\delta(t - t_0)$. $\delta( t - t_0)$ is the Dirac delta distribution, the infinite impulse at $t_0$. The response of the system in @eq:introduction-sho to an impulse is special. Assume that the solution to 
 $$
     \frac{\partial^2 x}{\partial t ^2} + \omega^2 x = \delta(t - t_0)
 $$
 is known to be $G(t)$. Then, it can be shown that the solution to an arbitrary driving force $F(t)$, $x_F(t)$, is given by:
 $$
-    x_F(t) = \int_{t_0=-\infty}^{t_0=t}dt_0 ~ F(t_0)G(t - t_0)
+    x_F(t) = \int_{-\infty}^{t}dt_0 ~ G(t - t_0) F(t_0)
 $${#eq:introduction-green-sho}
 
-In the general case, consider a physical system whose state is represented by the phase-space vector $\vec{x}$, and its behavior is governed by the linear differential operator $L$:
+In the general case, consider a physical system whose state is represented by the phase-space vector $\vec{x}$, and its behavior is governed by the linear differential operator $\hat{L}$:
 $$
-    L \vec{x}(t) = F(\vec{x}, t)
+    \hat{L} \vec{x}(t) = F(\vec{x}, t)
 $${#eq:introduction-l-system}
-where the function $F(\vec{x}, t)$ is a source term. The system is completely determined
-by the Green's function $G(\vec{x}, t)$ which solves:
+where the function $F(\vec{x}, t)$ is a source term. The system is *completely determined* by the Green's function $G(\vec{x}, t)$ which solves:
 $$
-    L ~ G(\vec{x}, t) = \delta
+    \hat{L} ~ G(\vec{x}, t) = \delta(\vec{x} - \vec{x}_0, t - t_0)
 $$
 because the solution $\vec{x}_F(t)$ to @eq:introduction-l-system is given by
 $$
     \vec{x}_F(t) = \int dt_0 d\vec{x}_0 ~ G(\vec{x} - \vec{x}_0, t - t_0) F(\vec{x}, t)
 $$
 
-Real physical systems at energies relevant to condensed matter physics are governed by a linear differential operator, the Schrödinger operator:
+This is relevant because real, physical systems in condensed matter physics are governed by a linear differential operator, the Schrödinger operator:
 $$
-    L = i \hbar \frac{d}{dt} - \hat{H}
+    \hat{L} = i \hbar \frac{d}{dt} - \hat{H}
 $$
 where $\hat{H}$ is the Hamiltonian of the (non-driven) system. The response of the total wavefunction $\Psi$ under some external potential $\hat{V}_0$ becomes:
 $$
-    L \Psi = \hat{V}_0 \Psi
+    \hat{L} \Psi = \hat{V}_0 \Psi
 $$
-which is equivalent to the usual Schrödinger equation $i \hbar \frac{d\Psi}{dt} = (\hat{H} + \hat{V}_0)\Psi$. Of course, the total wavefunction $\Psi$ is intractable, with more than $10^{23}$ degrees of freedom at the macroscopic scale. Nonetheless, this system is *completely determined* by the response to an energy impulse, i.e. the Green's function of $L$. In fact, the Green's function formalism is at the heart of many-body theory[@Fetter1971GreensFunction]. Ultrafast measurements allow us to measure an approximation of this impulse response. Distinct excitation conditions and probing techniques explore separate parts of the Hilbert space of possibilities. With the right probes, a shadow of the true impulse response may be assemble to understand important physics which -- while not experimentally-accessible at equilibrium -- still govern macroscopic phenomena. 
+which is equivalent to the usual Schrödinger equation $i \hbar \frac{d\Psi}{dt} = (\hat{H} + \hat{V}_0)\Psi$. Of course, the total wavefunction $\Psi$ is intractable, with more than $10^{23}$ degrees of freedom at the macroscopic scale. Nonetheless, this system is completely determined by the response to an energy impulse, i.e. the Green's function of $\hat{L}$. In fact, the Green's function formalism is at the heart of many-body theory[@Fetter1971GreensFunction]. 
+
+Ultrafast measurements allow us to measure an approximation of this impulse response. Distinct excitation conditions and probing techniques explore separate parts of the Hilbert space of possibilities. With the right probes, a shadow of the true impulse response may be assembled to understand important physics which -- while not experimentally-accessible at equilibrium -- still govern macroscopic phenomena. The knowledge of the impulse response of materials can then inform on the behavior of systems under a variety of external conditions $\hat{V}_0$ such as thermal gradients, external electric and magnetic fields, stoichiometric doping, and pressure.
 
 ### The reversible pump-probe scheme
 
@@ -74,8 +69,16 @@ The pump-probe scheme is used to achieve high time-resolution in experiments whe
 
 The process will be repeated $n$ times, where $nT$ is a long-enough delay that the detector of the probe pulse can resolve (e.g. \SI{1}{\second}). Then, the time-delay will be adjusted to a new value, and the process is repeated. By scanning over values of $\tau$ in this way, a complete view of the dynamics of the sample following the pump can be assembled. This process is represented in @fig:introduction-pumpprobe.
 
-```{.matplotlib #fig:introduction-pumpprobe file="figures/introduction/pumpprobe.py" caption="Representation of the pump-probe scheme in laboratory time. Dynamics are initiated with a period $T$, and the system is allowed to relax back to its initial state. After a time-delay $\tau$, the system is probed with a separate probe pulse. The process is repeated multiple times while the detector is recording. By scanning the time-delay, a complete picture of sample response can be assembled."}
+```{.matplotlib #fig:introduction-pumpprobe file="figures/introduction/pumpprobe.py" caption="Representation of the pump-probe scheme in laboratory time. Dynamics are initiated with a period $T$, and the system is allowed to relax back to its initial state. After a time-delay, the system is probed with a separate probe pulse. The process is repeated multiple times while the detector is recording. By scanning the time-delay ($\tau_1$, $\tau_2$, $\tau_3$, ...), a complete picture of sample response can be assembled."}
 ```
+
+### Exploring the lattice impulse response with ultrafast electron scattering
+
+The impulse response of a macroscopic system is an intractable quantity with more than with $10^{23}$ dimensions. Even in the case of non-interacting systems of electrons and ions, the impulse responses of each subsystem is too large to characterize completely. The problem is greatly reduced by studying highly periodic crystalline systems, where instead the response in the spatial-frequency domain is studied. The spatial-frequency-domain impulse response is reduced in that the degrees-of-freedom which are related by symmetry are equivalent.
+
+The description of the impulse response of ordered systems like crystals is fundamentally-different. The relevant physics of $10^{23}$ particles, $10^{22}$ of which are related by symmetry, is better described using *collective modes* such as lattice waves, also known as phonons. The instantaneous geometry of the crystal lattice determines the allowed phonon modes, and the energy distribution among modes represent a generalization of the idea of temperature at equilibrium. 
+
+While the lattice impulse response in terms of lattice modes represent a large part of the total impulse response of a crystalline system, few techniques are capable of resolving such lattice waves. This is due to two main reasons. First, lattice waves are a mostly low-energy phenomena ($<\SI{200}{\milli\electronvolt}$). Second, lattice waves may not induce a dipole moment, which makes some of the modes optically-dark. At equilibrium, multiple techniques are either sensitive to some modes (e.g. Raman[@Long1977] and Brillouin[@Bai2018] spectroscopies) or all modes (x-ray[@Holt1999; @Xu2005] and neutron[@Bee1988] thermal diffuse scattering). But at ultrafast time-scales, where modes can be effectively be populated at any wavevector, the choices are much more restrictive. Signal-to-noise in ultrafast electron scattering experiments is now sufficient to measure the effects of lattice waves following impulsive photoexcitation[@Harb2016; @Chase2016; @Waldecker2017; @Stern2018;@RenedeCotret2019; @Otto2020]. 
 
 ## Brief history of ultrafast electron scattering {#sec:ues}
 
@@ -115,7 +118,7 @@ Finally, there are a few high-energy (\si{\mega\electronvolt}) accelerator-based
 
 ## Electron bunch compressor{#sec:intro-cavity}
 
-The electron bunch compression that was used for the experiments presented herein has been the subject of much work in the past decade. Its function is briefly described in this section, with a particular emphasis on recent developments regarding laser-RF synchronization.
+The compression of electron bunches has been the key technological advancement that has allowed the work presented here. It has allowed for high time-resolution while preserving a high bunch charge, which is required to observe the small diffuse signals presented in @sec:graphite and @sec:snse. The electron bunch compression that was used for the experiments presented herein has been the subject of much work and refinement in the past decade. Its function is briefly described in this section, with a particular emphasis on recent developments regarding laser-RF synchronization.
 
 ### Bunch correlations
 
