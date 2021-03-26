@@ -73,7 +73,7 @@ def get_eigenvector_frequency(data):
     eigenvector = []
 
     for key in data:
-        eigenvectors = np.zeros((3, 1), dtype=np.complex_)
+        eigenvectors = np.zeros((3, 1), dtype=np.complex128)
         if key == "freq":
             frequency = float(data[key])
         else:
@@ -642,12 +642,12 @@ def one_phonon_structure_factor(mode, dw_factors):
 
     # We loop through atoms in order that they are visible in the PWSCF file
     atoms = sorted(crystal, key=lambda a: a.tag)
-    accumulator = np.zeros(shape=(qpoints.shape[0], 1), dtype=np.complex)
+    accumulator = np.zeros(shape=(qpoints.shape[0], 1), dtype=complex)
     for atm_index, atm in enumerate(atoms):
         # Accumulator is built in pieces
         # because all of these arrays are pretty big
         arg = np.ones_like(
-            accumulator, dtype=np.complex
+            accumulator, dtype=complex
         )  # because polarization are complex vectors
 
         arg *= np.exp(-1 * dw_factors[atm_index].reshape(-1, 1))

@@ -76,6 +76,16 @@ jobs:
         echo "$(pandoc-crossref --version)"
         echo "$(pdflatex --version)"
         echo "$(biber --version)"
+    
+    # The following calculations are intermediate stages
+    # between raw data and data that can be plotted.
+    - name: Precompute prerequisites
+      run: |
+        python scripts/mkdecomp.py
+        python scripts/mkdispersion.py
+        python scripts/mkdwaller.py
+        python scripts/mknpstreams-bench.py
+        python scripts/mkoneph.py
       
     - name: Build dissertation
       run: |
