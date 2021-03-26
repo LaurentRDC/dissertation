@@ -45,10 +45,10 @@ ax.add_patch(FancyArrowPatch(posA=(0, 0), posB=(1, 1), **arrow_kwds))
 ax.add_patch(FancyArrowPatch(posA=(0, 0), posB=(kx, ky), **arrow_kwds))
 ax.add_patch(FancyArrowPatch(posA=(1, 1), posB=(kx, ky), **arrow_kwds))
 
-ax.text(x=1 / 2, y=1 / 2 + 0.1, s="$\mathbf{H}$", ha="right", va="bottom")
+ax.text(x=1 / 2, y=1 / 2 + 0.1, s="$\mathbf{H}_{\mathbf{q}}$", ha="right", va="bottom")
 ax.text(x=kx / 2, y=ky / 2 - 0.1, s="$\mathbf{q}$", ha="left", va="top")
 ax.text(
     x=1 + (kx - 1) / 2, y=1 + (ky - 1) / 2, s="$\mathbf{k}_0$", ha="left", va="bottom"
 )
 ax.text(x=0, y=-0.1, s="$(000)$", ha="center", va="top")
-ax.text(x=1, y=1.1, s="$(011)$", ha="center", va="bottom")
+ax.text(x=1, y=1.1, s="$(110)$", ha="center", va="bottom")
