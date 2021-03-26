@@ -8,14 +8,11 @@ import matplotlib.gridspec as gridspec
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.optimize as opt
-import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 from plotutils import FIGURE_WIDTH, FONTSIZE, SNSE_CAMERA_LENGTH, ImageGrid, tag_axis
 from plotutils.snse_datasets import overnight4, static
 from skimage.filters import gaussian
@@ -37,19 +34,6 @@ INDICES_DIFFUSE = [(0, -1, 3), (0, 0, 4), (0, -2, 4), (0, -1, 5)]
 INDICES_BRAGG = [(0, 1, 2), (0, -1, -2), (0, 0, 1), (0, 0, -1), (0, 1, 0), (0, -1, 0)]
 inferno = plt.get_cmap("inferno")
 DWCOLOR, GAMMA_COLOR, AVERAGE_COLOR = inferno(30), inferno(100), inferno(200)
-
-# FWHM of the gaussian IRF
-IRF = 130  # femtoseconds
-
-
-@skued.with_irf(IRF / 1e3)
-def exponential(time, *args, **kwargs):
-    return skued.exponential(time, *args, **kwargs)
-
-
-@skued.with_irf(IRF / 1e3)
-def biexponential(time, *args, **kwargs):
-    return skued.biexponential(time, *args, **kwargs)
 
 
 figure, ax_im = plt.subplots(1, 1, figsize=(4, 4))

@@ -14,7 +14,7 @@ $$
 i \hbar \frac{d}{d t} \Psi(\vec{x}, t) = \left[ \frac{- \hbar^2}{2 m_e} \nabla^2 + V(\vec{x}, t) \right]\Psi(\vec{x}, t).
 $${#eq:scattering-schroedinger}
 
-The scattering electrons have an enormous amount of kinetic energy (\SI{90}{\kilo\electronvolt}). The potential energy from the atomic Coulomb interaction, on the other hand, is much smaller: 
+The scattering electrons used in this work have an enormous amount of kinetic energy (\SI{90}{\kilo\electronvolt}). The potential energy from the atomic Coulomb interaction, on the other hand, is much smaller: 
 $$
     V = \frac{Z e^2}{4 \pi \epsilon_0 |\vec{x}|}
 $${#eq:scattering-electrostatic-potential}
@@ -26,7 +26,7 @@ In the case of free space ($V(\vec{x}, t) = 0$), [@eq:scattering-schroedinger] r
 $$
 i \hbar \frac{d}{d t} \Psi(\vec{x}, t) = \frac{- \hbar^2}{2 m_e} \nabla^2 \Psi(\vec{x}, t).
 $${#eq:scattering-free-electron}
-It is instructive to consider the energy eigenfunction satisfying [@eq:scattering-free-electron]. Let the solutions be labeled as $\set{(\Psi_a(\vec{x}, t), \omega_a)}$, where the associated energy eigenvalues are $\omega_a \equiv E_a/\hbar$. The energy eigenfunction can be factorized as:
+It is instructive to consider the energy eigenfunction satisfying [@eq:scattering-free-electron]. Let the solutions be labeled as $\set{(\Psi_a(\vec{x}, t), \omega_a)}$, where the associated energy eigenvalues are $\omega_a \equiv E_a/\hbar$. The energy eigenfunction can be factorized into spatial and temporal parts as:
 $$
 \Psi_a(\vec{x}, t) = u_a(\vec{x}) e^{-i \omega_a t}
 $${#eq:scattering-free-space}
@@ -311,7 +311,7 @@ where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic
 
 In this section, the effect of lattice waves on ultrafast electron diffraction measurements will be considered, ending in the derivation of what is known as *diffuse scattering*. 
 
-This section will only consider single-scattering events. A discussion of dynamical diffuse scattering is not necessary to understand the experiments presented in this dissertation, as the samples are not thick enough to display a key signature of multiple diffuse scattering events known as *Kikuchi lines*[@Fultz2013KikuchiLines]. A complete discussion of all orders of thermal diffuse scattering is presented in Wang [@Wang1995].
+This section will only consider single-scattering events. A discussion of dynamical diffuse scattering is not necessary to understand the experiments presented in this dissertation, as the samples are not thick enough to display a key signature of multiple diffuse scattering events known as *Kikuchi lines*[@Fultz2013KikuchiLines]. A complete discussion of all orders of *thermal* diffuse scattering is presented in Wang [@Wang1995].
 
 Consider then the position $\vec{r}_{m,s}$ to be the position of atom $s$ in the unit cell $m$. In this scheme, the indices $s$ run over the size of the unit cell (e.g. $1 \leq s \leq 4$ for graphite), while the indices $m$ run over the number of unit cells: $1 \leq m \leq N_c$. Due to the presence of lattice waves, the atoms are vibrating about their equilibrium positions $\set{\vec{r}_{m,s}}$. Let $\set{\vec{u}_{m,s}}$ be the *displacement vectors* due to lattice waves. Then, the atomic positions can be expressed as $\set{\vec{r}_{m,s} \to \vec{r}_{m,s} + \vec{u}_{m,s}}$, where $\set{\vec{r}_{m,s}}$. The scattering potential of the crystal (@eq:scattering-potential-crystal) becomes::
 \begin{align}
@@ -462,6 +462,11 @@ A few clarifications can be made about diffuse intensity. The diffuse intensity 
 1. The vibrational amplitude of each mode is proportional to $(n_{\lambda}(\vec{k}) + 1/2)(\omega_{\lambda}(\vec{k}))$, by analogy with the expression of @eq:scattering-displacement. A higher population ($\uparrow n_{\lambda}$) results in a larger vibrational amplitude because the displacement of atoms is linear in the number of phonons that participate. A lower vibrational frequency ($\downarrow \omega_{\lambda}$) implies a smaller restoring force (in the harmonic oscillator sense), which also intuitively results in a wider vibrational amplitude.
 
 2. A geometrical weight ($|F_{1\lambda}(\vec{q})|^2$) which determines if the atomic motion associated with a phonon mode can be captured on the detector. The most important term to consider are terms of the form $\set{\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})}$. For a phonon polarization which is parallel to the propagation of the scattering electrons, the projection of the polarization onto the detector plane is $0$, and hence the associated diffuse intensity will not contribute.
+
+### One-phonon structure factors
+
+```{.matplotlib file="figures/scattering/oneph.py" caption=""}
+```
 
 Diffuse scattering and the effect of one-phonon structure factors is further explained in @sec:graphite.
 
