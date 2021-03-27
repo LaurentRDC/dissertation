@@ -58,8 +58,8 @@ hexagon = RegularPolygon(
 ax.add_patch(hexagon)
 offset = np.array([-0.06, 0.06])
 for point, label, sym_color in zip(
-    [GAMMA, M, K],
-    [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$"],
+    [M, GAMMA, K],
+    [r"$\mathbf{M}$", r"$\mathbf{\Gamma}$", r"$\mathbf{K}$"],
     discrete_colors(3),
 ):
     for n in range(0, 6):
