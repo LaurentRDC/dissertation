@@ -1,11 +1,7 @@
-"""
-Observation of time-series
-"""
 from math import sqrt
 from pathlib import Path
 
 import matplotlib.gridspec as gridspec
-import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize as opt
@@ -13,11 +9,8 @@ import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
-from matplotlib.ticker import FixedFormatter, FixedLocator
-from mpl_toolkits.axes_grid1 import make_axes_locatable
-from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 from plotutils import discrete_colors, tag_axis
-from plotutils.snse_datasets import overnight4, static
+from plotutils.snse_datasets import overnight4
 from skimage.filters import gaussian
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
@@ -69,7 +62,7 @@ for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
 
-kx, _ = static.kgrid()
+kx, _ = overnight4.kgrid()
 dk = kx[0, 1] - kx[0, 0]
 
 for ax, (r, ts), color in zip(

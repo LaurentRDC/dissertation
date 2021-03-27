@@ -8,12 +8,10 @@ import numpy as np
 import scipy.optimize as opt
 from crystals import Crystal
 import scipy.stats as stats
-from scipy.constants import physical_constants
 import scipy.constants as constants
 
 from plotutils.snse_datasets import overnight4
 from plotutils import box_errorbars
-import skued
 
 DATADIR = Path("data") / "snse"
 CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")

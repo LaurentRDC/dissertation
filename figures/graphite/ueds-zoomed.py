@@ -1,17 +1,14 @@
 import itertools as it
-from math import floor, sqrt
+from math import sqrt
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 from crystals import Crystal
 from iris import DiffractionDataset
-from matplotlib.ticker import FixedFormatter, FixedLocator
 from plotutils import (
-    FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
-    ImageGrid,
     draw_hexagon_field,
     draw_hexagon,
     tag_axis,

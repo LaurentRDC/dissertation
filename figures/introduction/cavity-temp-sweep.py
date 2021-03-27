@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import LinearLocator
 import numpy as np
 
-import skued
 from plotutils import FIGURE_WIDTH, discrete_colors, tag_axis
 
 DATADIR = Path("data") / "introduction" / "VNA measurements"

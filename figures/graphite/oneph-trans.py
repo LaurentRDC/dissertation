@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from plotutils import (
     FIGURE_WIDTH,
-    GRAPHITE_ANGLE,
-    GRAPHITE_CAMERA_LENGTH,
     ImageGrid,
     draw_hexagon_field,
     tag_axis,

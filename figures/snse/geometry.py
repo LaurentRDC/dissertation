@@ -10,7 +10,7 @@ from iris import DiffractionDataset
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
-from plotutils import FONTSIZE, tag_axis
+from plotutils import FONTSIZE, CBAR_SIZE, tag_axis
 from plotutils.snse_datasets import static
 from skimage.filters import gaussian
 
@@ -35,7 +35,7 @@ diff_context_ax = figure.add_subplot(gs00[0])
 ax_linecut = figure.add_subplot(gs00[1], sharex=diff_context_ax)
 
 divider = make_axes_locatable(ax_im)
-cbar_ax = divider.append_axes("top", size=0.07, pad=0.05)
+cbar_ax = divider.append_axes("top", size=CBAR_SIZE, pad=0.05)
 
 ax_im.xaxis.set_visible(False)
 ax_im.yaxis.set_visible(False)

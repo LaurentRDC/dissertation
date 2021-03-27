@@ -1,11 +1,8 @@
-"""
-Time-trace of the transient Debye-Waller effect in graphite.
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 from iris import DiffractionDataset
 from pathlib import Path
-from plotutils import FIGURE_WIDTH, discrete_colors
+from plotutils import discrete_colors
 
 row, col = 1167, 155
 DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"

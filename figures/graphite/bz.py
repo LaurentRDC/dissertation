@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from functools import reduce
 from math import radians, sqrt
-from matplotlib.patches import Circle, RegularPolygon, Rectangle
+from matplotlib.patches import Circle, RegularPolygon
 from plotutils import named_arrow, discrete_colors
 
 

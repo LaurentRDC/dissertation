@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats
 
-from plotutils import FIGURE_WIDTH, FONTSIZE, tag_axis, discrete_colors
+from plotutils import FIGURE_WIDTH, tag_axis, discrete_colors
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset

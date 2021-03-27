@@ -8,8 +8,6 @@ from plotutils import (
     FIGURE_WIDTH,
     tag_axis,
     draw_hexagon_field,
-    draw_hexagon,
-    set_height_auto,
 )
 
 INPUT = Path("data") / "graphite"

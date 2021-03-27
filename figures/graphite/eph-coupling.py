@@ -1,13 +1,10 @@
 from functools import lru_cache, partial
-from math import sqrt
+from math import sqrt, pi
 from pathlib import Path
-from warnings import filterwarnings
 
 import matplotlib.pyplot as plt
 import numpy as np
 from crystals import Crystal
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-from numpy import pi
 from scipy import integrate
 from scipy.constants import physical_constants
 from scipy.optimize import curve_fit
@@ -15,7 +12,6 @@ from scipy.stats import sem
 from skued import gaussian, with_irf
 from plotutils import discrete_colors
 
-filterwarnings(action="ignore", category=UserWarning)
 
 INPUT = Path("data") / "graphite"
 

@@ -1,7 +1,6 @@
 """
 Observation of time-series
 """
-from math import sqrt
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -11,7 +10,6 @@ import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
-from matplotlib.ticker import FixedFormatter, FixedLocator
 from plotutils.snse_datasets import overnight4
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")

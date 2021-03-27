@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from functools import reduce
-from math import radians, sqrt
 from matplotlib.patches import Circle, Rectangle
 from plotutils import named_arrow, discrete_colors
 

@@ -1,5 +1,5 @@
 """
-Visualization of the electronic structure of graphene
+Visualization of the effect of photoexcitation on the electronic structure of graphite
 
 Based on Castro-Neto et al, The electronic properties of graphene, Rev Mod Phys (2009)
 """
@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import Normalize
 from matplotlib.ticker import FixedFormatter, FixedLocator
 
-from plotutils import FIGURE_WIDTH, named_arrow
+from plotutils import named_arrow
 
 # Hopping parameter
 t = 2.7  # eV
@@ -27,7 +27,7 @@ def E(kx, ky):
     return E_plus, E_minus
 
 
-fig, ax1 = plt.subplots(1, 1, figsize=(4, 2.5))
+fig, ax1 = plt.subplots(1, 1, figsize=(4.25, 2.5))
 
 ky = np.linspace(-1.5, 1.5, num=1024)
 Eplus, Eminus = E(kx=1.5, ky=ky)

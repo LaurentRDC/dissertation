@@ -3,7 +3,7 @@ Calculation based on:
 Hao Zhang and Dmitri V. Talapin, Thermoelectric Tin Selenide: The Beauty of Simplicity
 Angew. Chem. Int. Ed. 2014, 53, 2–4
 """
-from plotutils import FIGURE_WIDTH, FONTSIZE, CBAR_SIZE, tag_axis, discrete_colors
+from plotutils import FIGURE_WIDTH, FONTSIZE, CBAR_SIZE, tag_axis
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -36,8 +36,7 @@ ax.contour(m, colors="dimgray", linestyles="dashed", linewidths=0.4)
 ax.set_xlabel("$ZT$ [a.u.]")
 ax.set_ylabel("$T_H$ [K]")
 
-divider = make_axes_locatable(ax)
-cax = divider.append_axes("right", size=CBAR_SIZE, pad=0.03)
+cax = make_axes_locatable(ax).append_axes("right", size=CBAR_SIZE, pad=0.03)
 plt.colorbar(mappable=m, ax=ax, cax=cax, orientation="vertical")
 cax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
 cax.set_ylabel("Efficiency")
