@@ -80,6 +80,33 @@ The description of the impulse response of ordered systems like crystals is fund
 
 While the lattice impulse response in terms of lattice modes represent a large part of the total impulse response of a crystalline system, few techniques are capable of resolving such lattice waves. This is due to two main reasons. First, lattice waves are a mostly low-energy phenomena ($<\SI{200}{\milli\electronvolt}$). Second, lattice waves may not induce a dipole moment, which makes some of the modes optically-dark. At equilibrium, multiple techniques are either sensitive to some modes (e.g. Raman[@Long1977] and Brillouin[@Bai2018] spectroscopies) or all modes (x-ray[@Holt1999; @Xu2005] and neutron[@Bee1988] thermal diffuse scattering). But at ultrafast time-scales, where modes can be effectively be populated at any wavevector, the choices are much more restrictive. Signal-to-noise in ultrafast electron scattering experiments is now sufficient to measure the effects of lattice waves following impulsive photoexcitation[@Harb2016; @Chase2016; @Waldecker2017; @Stern2018;@RenedeCotret2019; @Otto2020]. 
 
+### Electron-phonon interactions
+
+Electron-phonon interactions play an important role in impulse response of the lattice to light given that most of the pump optical energy is absorbed by electrons. In this section, a basic description of electron phonon interactions is given, and more details are presented when needed in @sec:graphite and @sec:snse. The Hamiltonian which describes such a system of electrons and ions at zero-temperature is given by:
+$$
+    \hat{H} = \hat{H}_{ph} + \hat{H}_e + \hat{H}_i
+$$
+where $\hat{H}_{ph}$ is the Hamiltonian of the phonon subsystem, $\hat{H}_e$ is the Hamiltonian of the electronic subsystem, and $\hat{H}_i$ represents the interaction between ions and electrons[@Mahan2000EPInteractions]. The interaction Hamiltonian can be conceptually-expressed as:
+$$
+    \hat{H}_i = \sum_{j, j^\prime} \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime})
+$$
+where $\vec{r}^e_j$ and $\vec{r}^i_{j^\prime}$ are the positions of electron $j$ and ion $j^\prime$, respectively. The interaction potential $\hat{V}_i$ is kept general for this discussion. Now consider that the atomic positions $\vec{r}^i_{j^\prime}$ are perturbed by phonons, which results in a (small) displacement $\vec{u}_{j^\prime}$ such that $\vec{r}^i_{j^\prime} \to \vec{r}^i_{j^\prime} + \vec{u}_{j^\prime}$. In this scheme, $\vec{r}^i_{j^\prime}$ is now the position of ions at zero-temperature. To first order, the change in interaction strength is given by the gradient of the interaction potential:
+$$
+    \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime} - \vec{u}_{j^\prime}) \approx
+        \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime}) - \vec{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime})
+$$
+The first term is the interaction of electrons with ions at their ground-state positions. The second term may be intuitively named the *electron-phonon interaction*:
+$$
+    \hat{V}_{ep}(\vec{r}) \equiv \sum_{j^\prime} \vec{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vec{r} - \vec{r}^i_{j^\prime})
+$$
+The associated interaction Hamiltonian is given by:
+$$
+    \hat{H}_{ep}(\vec{r}) = \int d\vec{r} \hat{\rho}(\vec{r}) V_{ep}(\vec{r})
+$$
+where $\hat{\rho}(\vec{r})$ is the electron density operator.
+
+TODO: what lessons can we pull out of this? E-ph interaction is changed by screening, wihch is induced by photoexcitation.
+
 ## Brief history of ultrafast electron scattering {#sec:ues}
 
 The extension of electron microscopy into time-domain studies is not new. This section will be limited to ultrafast electron scattering in the form of diffraction; see the review by King *et al.*[@King2005] for a historical perspective on ultrafast electron microscopy in general. As early as 1982, Gerard Mourou and Steve Williamson [@Mourou1982] followed the picosecond-scale transformation of an aluminum film following photoexcitation. In this work, the authors prepare \SI{100}{\pico\second} electron bunches using a streak camera. They note that the temporal resolution of the experiment is ultimately limited by the length of the electron bunch:

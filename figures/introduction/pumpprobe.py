@@ -8,6 +8,9 @@ import numpy as np
 TAU = [0.75, 1.7, 2.5]
 PUMPTIMES = [0, 3, 6, 9]
 
+PUMPIRF = 0.1  # "IRF"-equivalent of the pump pulse
+PROBEIRF = 0.2
+
 
 def sample_response(times, tau):
     return np.heaviside(times - tau, 1 / 2) * np.exp(-(times - tau) / 0.8)
@@ -33,11 +36,11 @@ probe3 = np.zeros_like(times)
 detector = np.zeros_like(times)
 
 for t in PUMPTIMES:
-    pump += gaussian(times, center=t, fwhm=0.1)
-    sample += sample_response(times, t)
-    probe1 += gaussian(times, center=t + TAU[0], fwhm=0.2)
-    probe2 += gaussian(times, center=t + TAU[1], fwhm=0.2)
-    probe3 += gaussian(times, center=t + TAU[2], fwhm=0.2)
+    pump += gaussian(times, center=t, fwhm=PUMPIRF)
+    sample += with_irf(PUMPIRF)(sample_response)(times, t)
+    probe1 += gaussian(times, center=t + TAU[0], fwhm=PROBEIRF)
+    probe2 += gaussian(times, center=t + TAU[1], fwhm=PROBEIRF)
+    probe3 += gaussian(times, center=t + TAU[2], fwhm=PROBEIRF)
 
 
 for i, (ax, ax_dyn, probe, tau) in enumerate(
@@ -66,13 +69,13 @@ for i, (ax, ax_dyn, probe, tau) in enumerate(
 
     ax_dyn.plot(
         times / 3,
-        sample_response(times, 0),
+        with_irf(PUMPIRF)(sample_response)(times, 0),
         "-",
         color=discrete_colors(3)[0],
     )
     ax_dyn.plot(
         dyn_times / 3,
-        with_irf(0.2)(sample_response)(dyn_times, 0),
+        with_irf(PROBEIRF)(sample_response)(dyn_times, 0),
         marker="o",
         markersize=7,
         c="dimgray",
