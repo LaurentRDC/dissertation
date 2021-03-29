@@ -443,7 +443,11 @@ The sum $\sum_{\set{\vec{H}}}$ is implicitly contained in the constraints on the
                          + &  \frac{m_e^2}{N \hbar^3} \sum_{\lambda} \frac{n_{\lambda}(\vec{k}_0) + 1/2}{\omega_{\lambda}(\vec{k}_0)} 
                             \left| \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}_0)\right) e^{-i \vec{H}_{\vec{q}} \cdot \vec{x}_{s}} \right|^2 
 \end{align}
-The phase factor $e^{-i \vec{H}_{\vec{q}} \cdot \vec{x}_{s}}$ can be cancelled using the properties of phonon polarization vectors[@Xu2005]. In particular, $\vec{e}_{\lambda,s}(\vec{k}_0) e^{-i \vec{H}_{\vec{q}} \cdot \vec{x}_{s}} = \vec{e}_{\lambda,s}(\vec{k}_0 - \vec{H}_{\vec{q}}) = \vec{e}_{\lambda,s}(\vec{k}_0)$, where the last step follows because $\vec{H}_{\vec{q}}$ is a reciprocal point. Therefore:
+The phase factor $e^{-i \vec{H}_{\vec{q}} \cdot \vec{x}_{s}}$ is a matter of convention[@Xu2005]. In the expression for the displacement vectors in @eq:scattering-displacement, it was assumed that the phonon eigenvectors were not periodic in general, that is:
+$$
+    \vec{e}_{\lambda,s}(\vec{k} + \vec{k}^\prime) = \vec{e}_{\lambda,s}(\vec{k}) e^{-i \vec{k{^\prime}\cdot \vec{x}_s}}
+$$
+Henceforth, the phonon eigenvectors are assumed to be periodic, that is, $\vec{e}_{\lambda,s}(\vec{k} + \vec{H}) \equiv \vec{e}_{\lambda,s}(\vec{k})$ for a reciprocal point $\vec{H}$. Then $\vec{e}_{\lambda,s}(\vec{k}_0) e^{-i \vec{H}_{\vec{q}} \cdot \vec{x}_{s}} = \vec{e}_{\lambda,s}(\vec{k}_0 - \vec{H}_{\vec{q}}) = \vec{e}_{\lambda,s}(\vec{k}_0)$. It follows that:
 \begin{align}
     |f^{(1)}(\vec{q})|^2 = & \frac{m_e^2}{\hbar^4} \left| \sum_{\set{\vec{H}}} \sum_s f_{e,s}(\vec{q}) e^{-W_s} e^{-i \vec{q} \cdot \vec{x}_{s}} \delta(\vec{q} - \vec{H}) \right|^2 \nonumber \\
                          + &  \frac{m_e^2}{N \hbar^3} \sum_{\lambda} \frac{n_{\lambda}(\vec{k}_0) + 1/2}{\omega_{\lambda}(\vec{k}_0)} 
