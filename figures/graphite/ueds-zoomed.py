@@ -9,6 +9,7 @@ from iris import DiffractionDataset
 from plotutils import (
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
+    MEDIUM_FIGURE_WIDTH,
     draw_hexagon_field,
     draw_hexagon,
     tag_axis,
@@ -40,7 +41,7 @@ q010 = graphite.scattering_vector((0, 1, 0))
 q020 = graphite.scattering_vector((0, 2, 0))
 hex_radius = sqrt(3) * np.linalg.norm(q020 - q010) / 2.7
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(4, 2))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(MEDIUM_FIGURE_WIDTH, 2))
 
 with DiffractionDataset(DATASET) as dset:
     image = dset.diff_data(100) - b4t0

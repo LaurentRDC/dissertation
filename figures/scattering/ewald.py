@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from crystals import Crystal, Atom
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from plotutils import FIGURE_WIDTH, ImageGrid, named_arrow
+from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, named_arrow
 from skued import lorentzian, indices_to_text, electron_wavelength
 
 EWALD_RADIUS = 2 * np.pi / electron_wavelength(keV=100)
@@ -18,7 +18,7 @@ XRAY_COLOR = "indigo"
 # Abstract simple cubic crystal with 3Angs sides
 CRYSTAL = Crystal(unitcell=[Atom("C", (0, 0, 0))], lattice_vectors=5 * np.eye(3))
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 1.5))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 1.5))
 (ax,) = ImageGrid(fig, rect=111, nrows_ncols=(1, 1), cbar_location="top")
 
 ky, kz = np.meshgrid(np.linspace(-6, 6, 256), np.linspace(-4, 7, 256))

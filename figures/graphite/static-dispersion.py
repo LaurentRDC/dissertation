@@ -4,7 +4,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
-from plotutils import FIGURE_WIDTH, draw_hexagon, discrete_colors
+from plotutils import LARGE_FIGURE_WIDTH, draw_hexagon, discrete_colors
 from scipy.constants import physical_constants
 
 HBAR = physical_constants["Planck constant over 2 pi in eV s"][0]
@@ -12,7 +12,7 @@ HZ_TO_EV = HBAR * 2 * np.pi
 
 modes = ["LA", "LO2", "TA", "TO2"]
 
-fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 3))
+fig, ax = plt.subplots(1, 1, figsize=(LARGE_FIGURE_WIDTH, 3))
 ax_thz = ax.twinx()
 
 for mode, color in zip(modes, discrete_colors(len(modes))):

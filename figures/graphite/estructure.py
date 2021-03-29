@@ -13,7 +13,7 @@ from mpl_toolkits.mplot3d import axes3d
 import matplotlib.colors as cl
 import matplotlib.pyplot as plt
 
-from plotutils import FIGURE_WIDTH
+from plotutils import LARGE_FIGURE_WIDTH
 
 
 ENERGY_CUTOFF = 5  # eV
@@ -45,7 +45,7 @@ def E(kx, ky):
 fig, ax1 = plt.subplots(
     1,
     1,
-    figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 1.5),
+    figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 1.5),
     subplot_kw=dict(projection="3d", elev=10, azim=-45),
 )
 

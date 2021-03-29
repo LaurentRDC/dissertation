@@ -10,6 +10,7 @@ import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
+from plotutils import MEDIUM_FIGURE_WIDTH
 from plotutils.snse_datasets import overnight4
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
@@ -47,7 +48,7 @@ def biexponential(time, *args, **kwargs):
     return skued.biexponential(time, *args, **kwargs)
 
 
-figure, diffuse_ax = plt.subplots(1, 1, figsize=(4.25, 3))
+figure, diffuse_ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3))
 
 diffuse_ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
 diffuse_ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)

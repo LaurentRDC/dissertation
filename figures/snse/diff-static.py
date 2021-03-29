@@ -7,7 +7,7 @@ import numpy as np
 from iris import DiffractionDataset
 from skimage.filters import gaussian
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from plotutils import FIGURE_WIDTH, ImageGrid, tag_axis
+from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 INPUT = Path("data") / "snse"
 DOWNSAMPLING = 4
@@ -39,7 +39,7 @@ with DiffractionDataset(INPUT / "static.hdf5") as source:
 # the same size.
 side_length = min(side_lengths)
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 2))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 2))
 grid = ImageGrid(fig, 111, nrows_ncols=(1, 2), cbar_location="top")
 
 for ax, (r, c), im, mask, vmax, crop, label in zip(

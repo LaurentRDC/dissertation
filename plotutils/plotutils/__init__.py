@@ -17,7 +17,8 @@ from .snse_datasets import DatasetInfo, DatasetInfo200
 
 # CONSTANTS -------------------------------------------------------------------
 
-FIGURE_WIDTH = 6 + 3 / 4  # inches
+LARGE_FIGURE_WIDTH = 6 + 3 / 4  # inches
+MEDIUM_FIGURE_WIDTH = 4 + 1 / 4  # inches
 FONTSIZE = 10
 
 # Diffraction patterns are rotated by 8 degrees clockwise from aligned

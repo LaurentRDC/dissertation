@@ -8,7 +8,7 @@ from math import sqrt
 import numpy as np
 import scipy.interpolate as interpolate
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from plotutils import FIGURE_WIDTH, ImageGrid, draw_hexagon
+from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, draw_hexagon
 from skued import nfold
 from crystals import Crystal
 from crystals.affine import change_of_basis
@@ -109,7 +109,7 @@ for time in TIMES:
     for mode_name in MODES:
         images[time][mode_name] = populations[mode_name][:, :, time_index(time)]
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, 0.8 * FIGURE_WIDTH))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 0.8 * LARGE_FIGURE_WIDTH))
 grid = ImageGrid(
     fig, rect=111, nrows_ncols=(len(MODES), len(TIMES)), cbar_location="top"
 )

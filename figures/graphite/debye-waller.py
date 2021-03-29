@@ -5,7 +5,7 @@ import numpy as np
 from crystals import Crystal
 from plotutils import (
     ImageGrid,
-    FIGURE_WIDTH,
+    LARGE_FIGURE_WIDTH,
     tag_axis,
     draw_hexagon_field,
 )
@@ -13,7 +13,7 @@ from plotutils import (
 INPUT = Path("data") / "graphite"
 DOWNSAMPLING = 4
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 1.8))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 1.8))
 (ax_rmt, ax_cmp) = ImageGrid(
     fig, 111, nrows_ncols=(1, 2), cbar_mode="each", cbar_location="top"
 )

@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
-from plotutils import tag_axis, named_arrow
+from plotutils import MEDIUM_FIGURE_WIDTH, tag_axis, named_arrow
 from pathlib import Path
 from skimage.io import imread
 
 IMAGES = Path("images")
 
-fig, (ax_pnma, ax_cmcm) = plt.subplots(1, 2, figsize=(4, 4))
+fig, (ax_pnma, ax_cmcm) = plt.subplots(1, 2, figsize=(MEDIUM_FIGURE_WIDTH, MEDIUM_FIGURE_WIDTH))
 
 for ax in [ax_pnma, ax_cmcm]:
     ax.axis("off")

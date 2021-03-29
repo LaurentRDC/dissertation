@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from plotutils import discrete_colors
+from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors
 from pathlib import Path
 
 DATADIR = Path("data") / "snse"
 
-fig, ax = plt.subplots(1, 1, figsize=(4, 3))
+fig, ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3))
 
 T, c, b, a = np.loadtxt(DATADIR / "zt.csv", delimiter=",", comments="#", unpack=True)
 

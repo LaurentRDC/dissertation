@@ -2,12 +2,12 @@ from skimage.io import imread
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-from plotutils import FIGURE_WIDTH, ImageGrid, tag_axis
+from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DATADIR = Path("images")
 DOWNSAMPLING = 2
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, 0.4 * FIGURE_WIDTH))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 0.4 * LARGE_FIGURE_WIDTH))
 axes = ImageGrid(fig, 111, nrows_ncols=(1, 2), cbar_mode="none")
 
 for (ax, fname, tag) in zip(axes, ["diamond_knife_1.jpg", "diamond_knife_2.jpg"], "ab"):

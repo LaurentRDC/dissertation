@@ -10,7 +10,7 @@ from scipy.constants import physical_constants
 from scipy.optimize import curve_fit
 from scipy.stats import sem
 from skued import gaussian, with_irf
-from plotutils import discrete_colors
+from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors
 
 
 INPUT = Path("data") / "graphite"
@@ -397,7 +397,7 @@ temperature_to_intensity = lambda a: fit_amp * (a - 300)
 # Create the figure
 # We report times in picoseconds
 # Colors are in cycle order (C0, C1, C2, ...)
-fig, ax_K = plt.subplots(1, 1, figsize=(4, 3))
+fig, ax_K = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3))
 ax_T = ax_K.twinx()
 
 colors = discrete_colors(2)

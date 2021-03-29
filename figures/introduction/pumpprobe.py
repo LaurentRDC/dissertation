@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch
-from plotutils import FIGURE_WIDTH, discrete_colors
+from plotutils import LARGE_FIGURE_WIDTH, discrete_colors
 from matplotlib.ticker import FixedLocator, FixedFormatter
 from skued import gaussian, with_irf
 import numpy as np
@@ -21,7 +21,7 @@ fig, ((ax1, ax_dyn1), (ax2, ax_dyn2), (ax3, ax_dyn3)) = plt.subplots(
     2,
     sharex="col",
     sharey="col",
-    figsize=(FIGURE_WIDTH, 5),
+    figsize=(LARGE_FIGURE_WIDTH, 5),
     gridspec_kw=dict(width_ratios=[3, 1]),
 )
 

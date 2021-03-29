@@ -4,7 +4,7 @@ from crystals import Crystal
 import matplotlib.pyplot as plt
 import numpy as np
 from plotutils import (
-    FIGURE_WIDTH,
+    LARGE_FIGURE_WIDTH,
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
@@ -38,7 +38,7 @@ in_plane_refls = filter(
 
 reflections = tuple(in_plane_refls)
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, 1.1 * FIGURE_WIDTH))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 1.1 * LARGE_FIGURE_WIDTH))
 grid = ImageGrid(
     fig,
     111,

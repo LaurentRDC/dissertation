@@ -11,7 +11,7 @@ import scipy.stats as stats
 import scipy.constants as constants
 
 from plotutils.snse_datasets import overnight4
-from plotutils import box_errorbars
+from plotutils import MEDIUM_FIGURE_WIDTH, box_errorbars
 
 DATADIR = Path("data") / "snse"
 CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
@@ -123,7 +123,7 @@ def delta_msd_fluence(fluence):
     return timedelays, u2 / sin(pi / 4), u2err / sin(pi / 4)
 
 
-figure, ax_displacement = plt.subplots(1, 1, figsize=(4.25, 3))
+figure, ax_displacement = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3))
 
 
 fluences = np.array([6.6, 7.9, 9.5, 10.7, 12, 13.2])

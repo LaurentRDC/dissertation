@@ -4,6 +4,7 @@ import matplotlib.ticker as ticker
 import matplotlib.cm as cm
 import matplotlib as mpl
 import matplotlib.colors as colors
+from plotutils import MEDIUM_FIGURE_WIDTH
 
 
 def cb1(k, T):
@@ -39,7 +40,7 @@ def gm(k, T):
 figure, ax = plt.subplots(
     1,
     1,
-    figsize=(4, 2),
+    figsize=(MEDIUM_FIGURE_WIDTH, 2),
 )
 k = np.linspace(-1, 1, 256)
 cmap = plt.get_cmap("hot")

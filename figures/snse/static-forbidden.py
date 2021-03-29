@@ -8,7 +8,7 @@ from matplotlib.ticker import FixedLocator, FixedFormatter
 import numpy as np
 from iris import DiffractionDataset
 from skimage.filters import gaussian
-from plotutils import FIGURE_WIDTH, ImageGrid
+from plotutils import LARGE_FIGURE_WIDTH, ImageGrid
 from plotutils.snse_datasets import overnight4
 
 INPUT = Path("data") / "snse"
@@ -34,7 +34,7 @@ with DiffractionDataset(INPUT / "overnight4.hdf5") as source:
     side_length = floor(min([c, abs(c - im.shape[1]), r, abs(r - im.shape[0])]))
 
 
-fig = plt.figure(figsize=(FIGURE_WIDTH / 2, FIGURE_WIDTH / 2))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH / 2, LARGE_FIGURE_WIDTH / 2))
 grid = ImageGrid(fig, 111, nrows_ncols=(1, 1), cbar_location="top")
 ax = grid[0]
 

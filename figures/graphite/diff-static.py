@@ -9,7 +9,7 @@ from crystals import Crystal
 from iris import DiffractionDataset
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from plotutils import (
-    FIGURE_WIDTH,
+    LARGE_FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
     ImageGrid,
@@ -61,7 +61,7 @@ b4t0_symmetrized = b4t0_symmetrized[xs, ys]
 qx = qx[ys, xs]
 qy = qy[ys, xs]
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 2))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 2))
 grid = ImageGrid(fig, 111, nrows_ncols=(1, 2), cbar_location="top")
 
 for ax, im, label in zip(grid, [b4t0, b4t0_symmetrized], ["a)", "b)"]):

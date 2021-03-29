@@ -75,14 +75,14 @@ SnSe's high thermoelectric efficiency is primarily due to an anomalously-low lat
 
 The $Cmcm$ phase is a better thermoelectric for three reasons. First, it has a smaller band gap (\SI{0.4}{\electronvolt}) compared to the $Pnma$ phase (\SI{0.6}{\electronvolt}) which results in an increased carrier concentration. Second, $Cmcm$ exhibits higher carrier mobilities than the $Pnma$ phase [@Zhao2014]. Finally, the lattice thermal conductivity is also low in the $Cmcm$ phase. Together, these properties make $Cmcm$ the better thermoelectric form of SnSe.
 
-### Lattice instability and the $A_g$ soft mode
+### Lattice instability and zone-center soft modes
 
-The $Pnma \to Cmcm$ phase transition is displacive second-order transition that is associated with the freezing of an optical $A_g$ mode at zone-center [@Chattopadhyay1986; @Dove1997]. Above $T_c$, the mode splits into two modes: an optical mode at $\Gamma$ polarized along the stacking axis $a$ and an acoustic mode polarized in the $b$--$c$ plane at $Y$. The in-plane section of the Brillouin zone is shown in @fig:snse-bz for context. Note that crystallographic directions are all given with respect to the low-temperature $Pnma$ phase. The $Cmcm$ phase is stabilized by strong anharmonicity between those two phonon modes[@Skelton2016; @Hong2019]. The softening of the $A_g$ mode in the $Pnma$ phase is thought to be due to an electronic instability. Simulations by Li *et al.* [@Li2015] show that the strength of a particular Sn-Se bond along the $c$ axis is especially sensitive to temperature, which is a concrete example of the coupling between lattice and electronic degrees-of-freedom in efficient thermoelectric materials.
+In the high-temperature $Cmcm$ phase, the lattice is stabilized by two soft, anharmonically-coupled phonon modes: an optical mode at $\Gamma$ polarized along the stacking axis $a$ and an acoustic mode polarized in the $b$--$c$ plane at $Y$[@Skelton2016; @Hong2019]. The in-plane section of the Brillouin zone is shown in @fig:snse-bz for context. When cooling towards the phase transition temperature $T_c$, both modes freeze, which reduces the Brillouin zone volume as every $Y$ point in the $Cmcm$ phase becomes zone-center in the $Pnma$ phase. Below $T_c$, the two anharmonically-coupled modes of the $Cmcm$ phase combine into a single soft mode called $A_g$, which is polarized mostly along the $c$ axis with a small component along the stacking axis $a$. This $A_g$ soft mode in the $Pnma$ phase hardens when cooling away from $T_c$ [@Chattopadhyay1986; @Dove1997].
 
 ```{.matplotlib #fig:snse-bz file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
 ```
 
-In fact, there are many soft-modes with similar characteristics that soften towards the phase transition; $A_g$ simply happens to be the lowest-energy one, and therefore freezes at the phase transition. Work by Gong *et al.*[@Gong2020] and others[@Liu2018] has shown the temperature-dependence of multiple modes. Of interest is the $B_g$ mode (\SI{14}{\milli\electronvolt} at \SI{300}{\kelvin}), which is also polarized along the $Pnma$ lattice distortion just like the $A_g$ mode, but displays one of the most pronounced temperature-dependence across multiple two-dimensional systems such as black phosphorus, monolayer and few-layers MoS$_2$, and graphene. This $B_g$ mode is of interest because it has been shown to be strongly coupled to the electronic system via simulations[@Caruso2019].
+There are actually many soft-modes with characteristics similar to the lowest energy $A_g$ mode that soften towards the phase transition; $A_g$ simply happens to be the lowest-energy one, and therefore freezes at the phase transition. Work by Gong *et al.*[@Gong2020] and others[@Liu2018] has shown the temperature-dependence of multiple modes. Of interest is the $B_g$ mode (\SI{14}{\milli\electronvolt} at \SI{300}{\kelvin}), which is also polarized along the $Pnma$ lattice distortion just like the $A_g$ mode, but displays one of the most pronounced temperature-dependence across multiple two-dimensional systems such as black phosphorus, monolayer and few-layers MoS$_2$, and graphene.
 
 ### Electronic instability
 
@@ -156,10 +156,12 @@ $$
     \vec{a}_3
 \end{pmatrix}
 $$
-The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase. For convenience, the conventional cells are used throughout this chapter. The atomic structures are shown in @fig:snse-structure. The polarization of the $A_g$ mode in the $Pnma$ phase is shown in @fig:snse-agmode [@Aseginolaza2019].
+The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase. For convenience, the conventional cells are used throughout this chapter. The atomic structures are shown in @fig:snse-structure. 
+
+<!-- The polarization of the $A_g$ mode in the $Pnma$ phase is shown in @fig:snse-agmode [@Aseginolaza2019].
 
 ```{.matplotlib #fig:snse-agmode file="figures/snse/agmode.py" caption="Polarization of the soft $A_g$ mode involved in the $Pnma \to Cmcm$ phase transition."}
-```
+``` -->
 
 ## Experimental methods
 
@@ -191,7 +193,7 @@ The samples used in this work were prepared by J. Mui from the Facility for Elec
 
 An ultrathin flake of SnSe was prepared via mechanical exfoliation, a procedure that is analogous to the work by Novoselov *et al.*[@Novoselov2004]. A small chunk of SnSe was embedded in CrystalBond glue, on a standard \SI{3}{\milli\meter} copper TEM grid with a line spacing of 200 lines per inch. The embedded chunk was then exfoliated repeatedly using ordinary adhesive tape, until the embedded flake was translucent when observed with an optical microscope. The glue was washed away with acetone. This procedure resulted in a sample with an area of approximately \SI{50 x 50}{\micro\meter}.
 
-The sample thickness was determined by taking the ratio of various reflections at thicknesses of \SI{70}{\nano\meter} and \SI{90}{\nano\meter} -- correcting for sample volume and electron flux -- and extrapolating to the intensity of the reflections in the exfoliated sample. Using this procedure, the thickness of the exfoliated sample was estimeted to be $\SI{30 \pm 5}{\nano\meter}$.
+The sample thickness was determined by taking the ratio of various reflections at thicknesses of \SI{70}{\nano\meter} and \SI{90}{\nano\meter} -- correcting for sample volume and electron flux -- and extrapolating to the intensity of the reflections in the exfoliated sample. Using this procedure, the thickness of the exfoliated sample was estimeted to be $\SI{45 \pm 5}{\nano\meter}$.
 
 ### Experimental parameters
 
@@ -201,7 +203,7 @@ Compressed electron bunches of $10^6$ electrons per bunch were transmitted throu
 
 The samples were photoexcited with a pump spot with a full-width at half-maximum that was at least twice the width of the sample, ensuring nearly-uniform illumination of the sample. The samples were photoexcited with photoexcitation densities ranging from \SIrange{6.6}{13.2}{\milli\joule\per\square\centi\meter}. The absorbed energy will be discussed further in this chapter. The scattering patterns were collected with a Gatan Ultrascan 895 camera, consisting of a 2.54 × 2.54 \si{\square\cm} phosphor screen fiber coupled to a 2048 px × 2048 px charge-coupled detector (CCD) placed \SI{29.39}{\centi\meter} away from the sample. Example static diffraction patterns are shown in 
 
-```{.matplotlib #fig:snse-diff-static file="figures/snse/diff-static.py" caption="Comparison of static diffraction patterns from samples prepared via two techniques. **a)** \SI{90}{\nano\meter}-thick sample prepared via ultramicrotome. **b)** \SI{30}{\nano\meter}-thick samples prepared via mechanical exfoliation."}
+```{.matplotlib #fig:snse-diff-static file="figures/snse/diff-static.py" caption="Comparison of static diffraction patterns from samples prepared via two techniques. **a)** \SI{90}{\nano\meter}-thick sample prepared via ultramicrotome. **b)** \SI{45}{\nano\meter}-thick samples prepared via mechanical exfoliation."}
 ```
 
 Contrary to the symmetrization procedure described in @sec:graphite-data-acquisition and shown in @fig:graphite-static, SnSe only has a two-fold symmetry in-plane. Therefore, the data presented in this chapter was *not* symmetrized.

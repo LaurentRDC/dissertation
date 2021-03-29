@@ -3,7 +3,7 @@ from crystals import Crystal
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
 import numpy as np
-from plotutils import CBAR_SIZE, draw_hexagon_field
+from plotutils import MEDIUM_FIGURE_WIDTH, CBAR_SIZE, draw_hexagon_field
 
 INPUT = Path("data") / "graphite"
 DOWNSAMPLING = 4
@@ -13,7 +13,7 @@ in_plane_refls = filter(
 )
 reflections = tuple(in_plane_refls)
 
-figure, ax = plt.subplots(1, 1, figsize=(4, 4))
+figure, ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 4))
 
 divider = make_axes_locatable(ax)
 cbar_ax = divider.append_axes("top", size=CBAR_SIZE, pad=0.05)

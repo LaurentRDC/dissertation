@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
-from plotutils import FIGURE_WIDTH, tag_axis, discrete_colors
+from plotutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
 
 COLOR = discrete_colors(1)[0]
 
@@ -18,7 +18,7 @@ power_3ghz = np.loadtxt(
 )  # [dBm]
 
 figure, (ax_full, ax_3ghz) = plt.subplots(
-    1, 2, figsize=(FIGURE_WIDTH, 3), gridspec_kw=dict(width_ratios=[2, 1])
+    1, 2, figsize=(LARGE_FIGURE_WIDTH, 3), gridspec_kw=dict(width_ratios=[2, 1])
 )
 
 for ax in (ax_full, ax_3ghz):

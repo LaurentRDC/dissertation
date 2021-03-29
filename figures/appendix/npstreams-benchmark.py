@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
-from plotutils import discrete_colors, tag_axis, FIGURE_WIDTH
+from plotutils import discrete_colors, tag_axis, LARGE_FIGURE_WIDTH
 
 NS_COLOR, NP_COLOR = discrete_colors(2)
 
@@ -11,7 +11,9 @@ sizes, np_times, ns_times = np.hsplit(np.load(INPUT / "times.npy"), 3)
 _, np_memories, ns_memories = np.hsplit(np.load(INPUT / "memory.npy"), 3)
 seqsizes, np_seq_times, ns_seq_times = np.hsplit(np.load(INPUT / "seqtimes.npy"), 3)
 
-fig, (ax1, ax3) = plt.subplots(1, 2, figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 2))
+fig, (ax1, ax3) = plt.subplots(
+    1, 2, figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 2)
+)
 ax2 = ax1.twinx()
 
 ax1.axvline(x=2048, linestyle="dashed", color="k", linewidth=1)

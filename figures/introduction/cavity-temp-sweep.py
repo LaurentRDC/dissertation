@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import LinearLocator
 import numpy as np
 
-from plotutils import FIGURE_WIDTH, discrete_colors, tag_axis
+from plotutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 
 DATADIR = Path("data") / "introduction" / "VNA measurements"
 MAXPOINTS = 1024  # Maximum number of points for each amplitude trace
@@ -46,7 +46,7 @@ def load_spectrum(fname):
     return freq, amplitude, phase
 
 
-fig, (ax_amp, ax_center) = plt.subplots(1, 2, figsize=(FIGURE_WIDTH, 3))
+fig, (ax_amp, ax_center) = plt.subplots(1, 2, figsize=(LARGE_FIGURE_WIDTH, 3))
 
 temps = list(range(11, 32 + 1))
 colors = discrete_colors(len(temps))

@@ -3,7 +3,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
 from crystals import Crystal, Atom
 from skued import electrostatic, affe
-from plotutils import FIGURE_WIDTH, CBAR_SIZE, named_arrow, tag_axis
+from plotutils import LARGE_FIGURE_WIDTH, CBAR_SIZE, named_arrow, tag_axis
 
 from scipy.constants import hbar, m_e
 
@@ -29,7 +29,9 @@ f *= affe("Pu", 0) / f.max()
 kx = 2 * np.pi * np.fft.fftfreq(f.shape[0], d=abs(xx[1, 1, 1] - xx[0, 0, 0]))
 ky = 2 * np.pi * np.fft.fftfreq(f.shape[1], d=abs(yy[1, 1, 1] - yy[0, 0, 0]))
 
-fig, (ax_r, ax_f) = plt.subplots(1, 2, figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 1.5))
+fig, (ax_r, ax_f) = plt.subplots(
+    1, 2, figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 1.5)
+)
 cbar_ax_r = make_axes_locatable(ax_r).append_axes("top", size=CBAR_SIZE, pad=0.05)
 cbar_ax_f = make_axes_locatable(ax_f).append_axes("top", size=CBAR_SIZE, pad=0.05)
 

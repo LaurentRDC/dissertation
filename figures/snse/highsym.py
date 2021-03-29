@@ -4,7 +4,7 @@ import scipy.optimize as opt
 import scipy.stats
 from skimage.filters import gaussian
 from pathlib import Path
-from plotutils import discrete_colors, tag_axis
+from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset
@@ -83,7 +83,9 @@ for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
 
-figure, axes = plt.subplots(3, 1, sharex=True, sharey=True, figsize=(4.25, 5))
+figure, axes = plt.subplots(
+    3, 1, sharex=True, sharey=True, figsize=(MEDIUM_FIGURE_WIDTH, 5)
+)
 
 # background fit
 bgparams, _ = opt.curve_fit(

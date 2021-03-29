@@ -7,7 +7,7 @@ import scipy.signal as signal
 import scipy.interpolate as interpolate
 from pathlib import Path
 from crystals import Crystal
-from plotutils import FIGURE_WIDTH, tag_axis, discrete_colors
+from plotutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
 from plotutils.snse_datasets import overnight4
 import skued
 from iris import DiffractionDataset
@@ -22,7 +22,7 @@ figure, axes = plt.subplots(
     4,
     2,
     sharex=True,
-    figsize=(FIGURE_WIDTH, FIGURE_WIDTH),
+    figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH),
     gridspec_kw=dict(hspace=0.05, wspace=0.025),
 )
 

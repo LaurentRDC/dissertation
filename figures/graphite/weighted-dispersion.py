@@ -6,7 +6,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
 from matplotlib.lines import Line2D
 import numpy as np
-from plotutils import FIGURE_WIDTH, draw_hexagon
+from plotutils import LARGE_FIGURE_WIDTH, draw_hexagon
 from scipy.constants import physical_constants
 from plotutils import CBAR_SIZE
 
@@ -18,7 +18,7 @@ HZ_TO_EV = HBAR * 2 * np.pi
 ACOUSTIC_CMAP = "Reds"
 OPTICAL_CMAP = "Blues"
 
-fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 0.5 * FIGURE_WIDTH))
+fig, ax = plt.subplots(1, 1, figsize=(LARGE_FIGURE_WIDTH, 0.5 * LARGE_FIGURE_WIDTH))
 
 LABELS = [
     r"$\mathbf{\Gamma}_{(010)}$",

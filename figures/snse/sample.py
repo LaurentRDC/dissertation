@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from pathlib import Path
 
-from plotutils import FIGURE_WIDTH, ImageGrid, tag_axis
+from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DATADIR = Path("images")
 DOWNSAMPLING = 5
@@ -17,7 +17,7 @@ images = [sample_tape_lowmag, sample_tape_highmag, sample_cut_lowmag, sample_on_
 scale_bar_left = 3 * [2017] + [1813]
 scales_um = [100, 25, 100, 100]
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, 0.6 * FIGURE_WIDTH))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 0.6 * LARGE_FIGURE_WIDTH))
 axes = ImageGrid(fig, 111, nrows_ncols=(2, 2), cbar_mode="none")
 
 for (ax, fname, left, scale, tag) in zip(

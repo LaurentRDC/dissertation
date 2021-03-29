@@ -7,7 +7,7 @@ from crystals import Crystal
 from matplotlib.ticker import FixedFormatter, FixedLocator
 
 from plotutils import (
-    FIGURE_WIDTH,
+    LARGE_FIGURE_WIDTH,
     ImageGrid,
     draw_hexagon_field,
     tag_axis,
@@ -115,7 +115,7 @@ reflections = list(
     filter(lambda tup: tup[2] == 0, Crystal.from_database("C").bounded_reflections(12))
 )
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH / 2))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 2))
 grid = ImageGrid(
     fig,
     111,

@@ -7,7 +7,7 @@ import skued
 from crystals import Crystal
 from iris import DiffractionDataset
 
-from plotutils import discrete_colors, tag_axis
+from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 from plotutils.snse_datasets import overnight4
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
@@ -65,7 +65,7 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
 for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
-figure, (ax_b, ax_c) = plt.subplots(2, 1, sharex=True, figsize=(4.25, 4))
+figure, (ax_b, ax_c) = plt.subplots(2, 1, sharex=True, figsize=(MEDIUM_FIGURE_WIDTH, 4))
 
 for ax, ts, color, label in zip(
     [ax_b, ax_c],

@@ -9,7 +9,7 @@ import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
-from plotutils import discrete_colors, tag_axis
+from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 from plotutils.snse_datasets import overnight4
 from skimage.filters import gaussian
 
@@ -34,7 +34,9 @@ def biexponential(time, *args, **kwargs):
     return skued.biexponential(time, *args, **kwargs)
 
 
-figure, axes = plt.subplots(4, 1, sharex=True, sharey=True, figsize=(4.25, 5))
+figure, axes = plt.subplots(
+    4, 1, sharex=True, sharey=True, figsize=(MEDIUM_FIGURE_WIDTH, 5)
+)
 
 
 timeseries = dict()

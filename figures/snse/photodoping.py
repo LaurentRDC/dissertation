@@ -5,7 +5,7 @@ import numpy as np
 from crystals import Crystal
 import scipy.constants as constants
 
-from plotutils import discrete_colors
+from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
 
@@ -61,7 +61,7 @@ def photocarrier_density(fluence, thickness):
     return total_carriers / (SAMPLE_VOLUME * m3_to_cm3) / 1e21  # 1/cm^3
 
 
-figure, carrier_ax = plt.subplots(1, 1, figsize=(4.25, 2.5))
+figure, carrier_ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 2.5))
 
 fluences = np.linspace(0, 14, 1024)
 densities = photocarrier_density(fluences, thickness=SAMPLE_THICKNESS)  # 10^21 / cm^3

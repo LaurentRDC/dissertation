@@ -1,8 +1,8 @@
 # STYLE -----------------------------------------------------------------------
 import matplotlib.pyplot as plt
-from plotutils import FIGURE_WIDTH, FONTSIZE
+from plotutils import LARGE_FIGURE_WIDTH, FONTSIZE
 
-plt.rcParams["figure.figsize"] = (FIGURE_WIDTH, FIGURE_WIDTH)
+plt.rcParams["figure.figsize"] = (LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH)
 plt.rcParams["font.size"] = FONTSIZE
 plt.rcParams["savefig.pad_inches"] = 0.0
 plt.rcParams["mpl_toolkits.legacy_colorbar"] = False

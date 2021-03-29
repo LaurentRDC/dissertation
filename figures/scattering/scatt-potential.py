@@ -3,7 +3,7 @@ import numpy as np
 from crystals import Crystal, Element, Atom
 from skued import electrostatic, affe
 from warnings import simplefilter
-from plotutils import FIGURE_WIDTH, tag_axis, discrete_colors
+from plotutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
 
 # For division by zero warnings
 simplefilter("ignore", category=RuntimeWarning)
@@ -30,7 +30,7 @@ def potential(element, r):
     )
 
 
-fig, (ax, ax_r) = plt.subplots(1, 2, figsize=(FIGURE_WIDTH, 3))
+fig, (ax, ax_r) = plt.subplots(1, 2, figsize=(LARGE_FIGURE_WIDTH, 3))
 
 r = np.linspace(0.0, 0.5, num=128)
 q = np.linspace(0, 12, num=128) / 4 * np.pi

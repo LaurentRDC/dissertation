@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from pathlib import Path
-from plotutils import FIGURE_WIDTH, discrete_colors, tag_axis
+from plotutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 
 DATADIR = Path("data") / "introduction" / "VNA measurements"
 COLOR = discrete_colors(1)[0]
@@ -27,7 +27,7 @@ phase += np.pi
 phase[phase > np.pi] -= 2 * np.pi
 
 
-figure = plt.figure(figsize=(FIGURE_WIDTH, 4))
+figure = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 4))
 gs = gridspec.GridSpec(2, 2, figure=figure)
 
 ax_amp = figure.add_subplot(gs[0, 0])

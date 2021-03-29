@@ -3,7 +3,7 @@ Calculation based on:
 Hao Zhang and Dmitri V. Talapin, Thermoelectric Tin Selenide: The Beauty of Simplicity
 Angew. Chem. Int. Ed. 2014, 53, 2–4
 """
-from plotutils import FIGURE_WIDTH, FONTSIZE, CBAR_SIZE, tag_axis
+from plotutils import MEDIUM_FIGURE_WIDTH, FONTSIZE, CBAR_SIZE, tag_axis
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -23,7 +23,7 @@ zz, tt = np.meshgrid(zt, th)
 im = eta(zz, tt)
 
 
-figure, ax = plt.subplots(1, 1, figsize=(4.25, 3))
+figure, ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3))
 m = ax.contourf(
     zz,
     tt,

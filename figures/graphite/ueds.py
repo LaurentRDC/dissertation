@@ -8,7 +8,7 @@ from crystals import Crystal
 from iris import DiffractionDataset
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from plotutils import (
-    FIGURE_WIDTH,
+    LARGE_FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
     ImageGrid,
@@ -46,7 +46,7 @@ qx = qx[ys, xs]
 qy = qy[ys, xs]
 qq = np.sqrt(qx ** 2 + qy ** 2)
 
-fig = plt.figure(figsize=(FIGURE_WIDTH, FIGURE_WIDTH))
+fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH))
 grid = ImageGrid(fig, 111, nrows_ncols=(2, 2), cbar_location="top")
 
 with DiffractionDataset(DATASET) as dset:

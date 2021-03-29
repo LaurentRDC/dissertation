@@ -6,7 +6,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from skued import biexponential, with_irf
 from scipy.optimize import curve_fit
 import numpy as np
-from plotutils import FIGURE_WIDTH, discrete_colors
+from plotutils import LARGE_FIGURE_WIDTH, discrete_colors
 
 INPUT = Path("data") / "graphite" / "populations"
 
@@ -28,7 +28,7 @@ class PopulationDatabase(h5.File):
         return np.array(self[f"{mode}_frequencies"])
 
 
-fig, ax = plt.subplots(1, 1, figsize=(FIGURE_WIDTH, 0.75 * FIGURE_WIDTH))
+fig, ax = plt.subplots(1, 1, figsize=(LARGE_FIGURE_WIDTH, 0.75 * LARGE_FIGURE_WIDTH))
 ax_long = inset_axes(ax, width="60%", height="35%", loc="lower right", borderpad=1)
 
 
