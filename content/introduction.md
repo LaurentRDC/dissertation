@@ -19,37 +19,38 @@ The power of ultrafast methodologies lies in their ability to deconvolve interac
 
 ### An analogy with Green's functions
 
-Ultrafast methodologies are a way to lift the veil and peer at an aspect of the system's impulse response. In this sense, an analogy with Green's function.
+Ultrafast methodologies are a way to lift the veil and peer at an aspect of the system's impulse response. In this sense, an analogy with Green's functions is appropriate.
 
-Consider the simple harmonic oscillator, with is represented by a position $x$. The behavior of the oscillator is determined by the following differential equation:
+Consider a simple harmonic oscillator, with its position represented by $x$. The behavior of the oscillator is determined by the following differential equation:
 $$
     \frac{\partial^2 x}{\partial t ^2} + \omega^2 x = F(t)
 $${#eq:introduction-sho}
-where $\omega$ is the natural oscillation frequency and is $F(t)$ is an arbitrary driving force. The response of the system $x(t)$ will depend on the driving force $F(t)$, and so it might be hopeless to try and understand this system directly.
+where $\omega$ is the natural oscillation frequency and is $F(t)$ is an arbitrary driving force. The response of the system $x(t)$ will depend on the driving force $F(t)$; trying to understand this particular system is futile because the intuition might not be transferable to a system with a different driving force $F^\prime(t)$.
 
 Now consider the response of the system to a very specific driving force: the impulse $\delta(t - t_0)$. $\delta( t - t_0)$ is the Dirac delta distribution, the infinite impulse at $t_0$. The response of the system in @eq:introduction-sho to an impulse is special. Assume that the solution to 
 $$
     \frac{\partial^2 x}{\partial t ^2} + \omega^2 x = \delta(t - t_0)
 $$
-is known to be $G(t)$. Then, it can be shown that the solution to an arbitrary driving force $F(t)$, $x_F(t)$, is given by:
+is known to be $G(t, t_0)$. Then, it can be shown that the solution to an arbitrary driving force $F(t)$, $x_F(t)$, is given by:
 $$
-    x_F(t) = \int_{-\infty}^{t}dt_0 ~ G(t - t_0) F(t_0)
+    x_F(t) = \int_{-\infty}^{t}dt_0 ~ G(t, t_0) F(t_0)
 $${#eq:introduction-green-sho}
 
 In the general case, consider a physical system whose state is represented by the phase-space vector $\vec{x}$, and its behavior is governed by the linear differential operator $\hat{L}$:
 $$
     \hat{L} \vec{x}(t) = F(\vec{x}, t)
 $${#eq:introduction-l-system}
-where the function $F(\vec{x}, t)$ is a source term. The system is *completely determined* by the Green's function $G(\vec{x}, t)$ which solves:
+where the function $F(\vec{x}, t)$ is a driving force, or *source term*. Given the impulse response of the system, $G(\vec{x}, \vec{x}_0, t, t_0)$, which solves
 $$
-    \hat{L} ~ G(\vec{x}, t) = \delta(\vec{x} - \vec{x}_0, t - t_0)
+    \hat{L} ~ G(\vec{x}, \vec{x}_0, t, t_0) = \delta(\vec{x} - \vec{x}_0, t - t_0),
 $$
-because the solution $\vec{x}_F(t)$ to @eq:introduction-l-system is given by
+the solution $\vec{x}_F(t)$ can be expressed as a function of $G(\vec{x}, \vec{x}_0, t, t_0)$:
 $$
-    \vec{x}_F(t) = \int dt_0 d\vec{x}_0 ~ G(\vec{x} - \vec{x}_0, t - t_0) F(\vec{x}, t)
+    \vec{x}_F(t) = \int dt_0 d\vec{x}_0 ~ G(\vec{x}, \vec{x}_0, t, t_0) F(\vec{x}_0, t_0)
 $$
+The impulse response $G$ is called the Green's function. Here's the lesson: the response to the system to any perturbation is *completely determined* by the Green's function.
 
-This is relevant because real, physical systems in condensed matter physics are governed by a linear differential operator, the Schrödinger operator:
+Why is this relevant? Real physical systems in condensed matter physics are governed by a linear differential operator, the Schrödinger operator:
 $$
     \hat{L} = i \hbar \frac{d}{dt} - \hat{H}
 $$
@@ -57,7 +58,7 @@ where $\hat{H}$ is the Hamiltonian of the (non-driven) system. The response of t
 $$
     \hat{L} \Psi = \hat{V}_0 \Psi
 $$
-which is equivalent to the usual Schrödinger equation $i \hbar \frac{d\Psi}{dt} = (\hat{H} + \hat{V}_0)\Psi$. Of course, the total wavefunction $\Psi$ is intractable, with more than $10^{23}$ degrees of freedom at the macroscopic scale. Nonetheless, this system is completely determined by the response to an energy impulse, i.e. the Green's function of $\hat{L}$. In fact, the Green's function formalism is at the heart of many-body theory[@Fetter1971GreensFunction]. 
+which is equivalent to the usual Schrödinger equation $i \hbar \frac{d\Psi}{dt} = (\hat{H} + \hat{V}_0)\Psi$. The Green's function of the Schrödinger operator is sometimes called the propagator[@Sakurai2014Propagators]. In practice, the total wavefunction $\Psi$ is intractable, with more than $10^{23}$ degrees of freedom at the macroscopic scale. Nonetheless, this system is completely determined by the response to an energy impulse, i.e. the Green's function of $\hat{L}$. In fact, the Green's function formalism is at the heart of many-body theory[@Fetter1971GreensFunction]. 
 
 Ultrafast measurements allow us to measure an approximation of this impulse response. Distinct excitation conditions and probing techniques explore separate parts of the Hilbert space of possibilities. With the right probes, a shadow of the true impulse response may be assembled to understand important physics which -- while not experimentally-accessible at equilibrium -- still govern macroscopic phenomena. The knowledge of the impulse response of materials can then inform on the behavior of systems under a variety of external conditions $\hat{V}_0$ such as thermal gradients, external electric and magnetic fields, stoichiometric doping, and pressure.
 

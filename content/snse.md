@@ -373,19 +373,34 @@ In this formulation, the fast diffuse intensity rise at $\Gamma$ is due to an in
 
 ### Electron-phonon coupling and phonon renormalization
 
-The renormalization of a phonon frequency $\omega$ due to the coupling between electrons and phonons is determined by following equation[@Ando2006; @Mahan2000]:
+The description of electron-phonon coupling is encoded in the phonon self-energy $\Sigma(\lambda, \vec{k}_p)$[@Noffsinger2010]:
+$$
+    \Sigma(\lambda, \vec{k}_p) \propto \sum_{a, b} \int \frac{d\vec{k}_e}{(2\pi)^3} \langle g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) \rangle^2 \frac{f[\epsilon_a(\vec{k}_e)] - f[\epsilon_b(\vec{k}_e - \vec{k}_p)]}{\hbar \omega_{\lambda}(\vec{k}_p) - \left[\epsilon_a(\vec{k}_e) - \epsilon_b(\vec{k}_e - \vec{k}_p) \right]}
+$${#eq:snse-phonon-self-energy}
+where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, and $f[\epsilon]$ is the (possibly non-thermal) electronic energy distribution. The electron-phonon coupling vertex, $g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)$, describes the rate of inelastic single electron scattering between states of energies $\epsilon_a(\vec{k}_e)$ and $\epsilon_b(\vec{k}_e)$ in bands $a$ and $b$ (respectively) through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vec{k}_p)$.
+
+Modulation of the electron-phonon coupling vertex can have multiple effects. The imaginary part of the self-energy determines the electron-phonon scattering rates[@Noffsinger2010]:
+$$
+    \frac{1}{\tau_{\lambda\vec{k}_p, epc}} = \frac{2\pi}{\hbar} \sum_{a,b,\vec{k}_e} |g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)|^2 \left[ f(\epsilon_{a,\vec{k}_e}) - f(\epsilon_{b, \vec{k}_e + \vec{k}_p}) \right] ~ \delta(\epsilon_{a,\vec{k}_e} - \epsilon_{b, \vec{k}_e + \vec{k}_p} - \hbar \omega_{\lambda\vec{k}_p})
+$$
+On the other hand, the real part of the phonon self-energy describes the renormalization of a phonon frequency $\omega$ due to the coupling between electrons and phonons[@Ando2006; @Mahan2000]:
 $$
     \frac{\omega^2}{\omega_0^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left\{ \Sigma(\vec{q}, \omega)\right\}
 $$
-where $\omega_0$ is the bare phonon frequency in the absence of coupling, and the phonon self-energy $\Sigma(\vec{q}, \omega)$ encodes electron-phonon interactions:
-$$
-    \Sigma(\vec{q}, \omega) \propto \sum_{a, b} \int \frac{d\vec{k}}{(2\pi)^3} \langle g_{\vec{q}, ab} \rangle^2 \frac{f[\epsilon_a(\vec{k})] - f[\epsilon_b(\vec{k} - \vec{q})]}{\hbar \omega - \left[\epsilon_a(\vec{k}) - \epsilon_b(\vec{k} - \vec{q}) \right]}
-$${#eq:snse-phonon-self-energy}
-where $a$ and $b$ label electron bands, $\vec{k}$ is the electronic wavevector, and $f[\epsilon]$ is the (possibly non-thermal) electronic energy distribution. The electron-phonon coupling vertex, $g_{\vec{q},ab}$, describes the rate of inelastic single electron scattering between states of energies $\epsilon_a(\vec{k})$ and $\epsilon_b(\vec{k})$ in bands $a$ and $b$ (respectively) through the creation or annihilation of a phonon with wavevector $\vec{q}$. The magnitude of this vertex (or the rate of scattering) depends on the strength of the potential energy modulation experienced by the electron due to lattice displacements associated with phonons of wavector $\vec{q}$; i.e. phonon coordinates associated with a large energy modulation have an enhanced $g_{\vec{q}}$.
+where $\omega_0$ is the bare phonon frequency in the absence of coupling. 
+
+### Mott-Ioffe-Regel limit of thermal transport
+
+[@Ioffe1960; @Mott1974; @Gurvitch1981; @Zhang2019]
+
+```{.matplotlib file="figures/snse/klat.py" caption="Lattice thermal conductivity $\kappa_{lat}$ along the crystallographic axes of SnSe."}
+```
+
 
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 [^zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
+
 
 \FloatBarrier
 ## References {.unnumbered}

@@ -5,7 +5,9 @@ from skimage.io import imread
 
 IMAGES = Path("images")
 
-fig, (ax_pnma, ax_cmcm) = plt.subplots(1, 2, figsize=(MEDIUM_FIGURE_WIDTH, MEDIUM_FIGURE_WIDTH))
+fig, (ax_pnma, ax_cmcm) = plt.subplots(
+    1, 2, figsize=(MEDIUM_FIGURE_WIDTH, MEDIUM_FIGURE_WIDTH)
+)
 
 for ax in [ax_pnma, ax_cmcm]:
     ax.axis("off")
