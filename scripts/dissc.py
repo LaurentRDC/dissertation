@@ -9,19 +9,15 @@ python -m dissc --help
 """
 import argparse
 import contextlib
-import json
 import logging
 import multiprocessing as mp
 import os
 import shutil
 import subprocess
-import sys
 import tempfile
 import time
 import warnings
-from contextlib import suppress
 from functools import wraps
-from itertools import chain
 from pathlib import Path
 
 import termcolor

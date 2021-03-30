@@ -3,7 +3,6 @@
 Decompose diffraction patterns into mode populations and store them.
 """
 import itertools as it
-import os
 from collections import defaultdict
 from pathlib import Path
 
@@ -12,7 +11,6 @@ import npstreams as ns
 import numpy as np
 import scipy.interpolate as interpolate
 import scipy.optimize as opt
-from crystals import Crystal
 from iris import DiffractionDataset
 from plotutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH
 from skimage.filters import gaussian

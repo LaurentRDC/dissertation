@@ -7,9 +7,8 @@ from pathlib import Path
 
 import npstreams as ns
 import numpy as np
-from crystals import Atom, Crystal, Element
+from crystals import Crystal
 from crystals.affine import change_of_basis
-from crystals.parsers import PWSCFParser
 from scipy.interpolate import griddata
 from tqdm import tqdm
 

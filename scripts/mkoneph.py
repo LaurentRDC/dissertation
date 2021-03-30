@@ -4,29 +4,23 @@ Calculate the in-plane one-phonon structure factors for Graphite.
 
 The calculation of those is required for multiple plots. 
 """
-import itertools as it
 import multiprocessing as mp
-import sys
-from collections import defaultdict, namedtuple
 from functools import lru_cache, partial
-from itertools import chain, count, product, takewhile
 import json
-from math import isclose, sqrt
+from math import isclose
 from os import cpu_count
 from pathlib import Path
-from pprint import pformat, pprint
-from warnings import warn
 
 import npstreams as ns
 import numpy as np
-from crystals import Atom, Crystal, Element
+from crystals import Crystal
 from crystals.affine import change_of_basis
 from crystals.parsers import PWSCFParser
 from scipy.constants import physical_constants
 from scipy.interpolate import griddata
 from skimage.filters import gaussian
-from skued import affe, detector_scattvectors, electron_wavelength, nfold
-from tqdm import tqdm, trange
+from skued import affe, detector_scattvectors
+from tqdm import tqdm
 
 INPUT = Path(__file__).parent.parent / "data" / "graphite"
 OUTPUT = INPUT / "oneph"
@@ -50,12 +44,6 @@ MODE_ORDERING = {
 }
 MODES = sorted(MODE_ORDERING.keys())
 IN_PLANE_MODES = sorted(set(MODE_ORDERING.keys()) - {"ZA", "ZO1", "ZO2", "ZO3"})
-
-HBAR = physical_constants["Planck constant over 2 pi in eV s"][0]
-BOLTZMANN = physical_constants["Boltzmann constant in eV/K"][0]
-SPEED_OF_LIGHT_CM = physical_constants["speed of light in vacuum"][0] * 100  # in cm/s
-AMU_TO_KG = 1.6605e-27  # atomic mass units to Kg
-HZ_TO_EV = HBAR * 2 * np.pi
 
 NCORES = cpu_count() - 1
 EPS = np.finfo(float).eps
@@ -99,15 +87,6 @@ def extract_info_ordered(fname, crystal, **kwargs):
     # so that the output q-points are indeed in "fractional coordinates"
     p = PWSCFParser(crystal.source)
     transf = np.linalg.inv(np.array(p.reciprocal_vectors_alat()))
-    # transf = np.linalg.inv(
-    #    np.array(
-    #        [
-    #            [1.000939, 0.577897, 0.000000],
-    #            [0.000000, 1.155787, 0.000000],
-    #            [0.000000, 0.000000, 0.360397],
-    #        ]
-    #    )
-    # )
 
     with open(fname, mode="r") as f:
         modes = json.load(f)
@@ -155,7 +134,8 @@ def extract_info_ordered(fname, crystal, **kwargs):
 
     q_points = np.asarray(q_points)
     eig_vector = np.squeeze(np.asarray(eig_vector))
-    freq = np.asarray(freq) * SPEED_OF_LIGHT_CM  # frequencies in Hz
+    speed_of_light_cm = physical_constants["speed of light in vacuum"][0] * 100  # in cm/s
+    freq = np.asarray(freq) * speed_of_light_cm  # frequencies in Hz
 
     # Certain acoustic modes may have slightly negative frequencies
     # We shift frequencies up so that the minimum is always 0
@@ -532,8 +512,10 @@ def phonon_amplitude(frequencies, temperature):
     Xu and Chiang (2005) Eq. 23
     """
     # Factor of 1/N is calculated in the parent caller
-    return (HBAR / frequencies) * coth(
-        HBAR * frequencies / (2 * BOLTZMANN * temperature)
+    hbar = physical_constants["Planck constant over 2 pi in eV s"][0]
+    kB = physical_constants["Boltzmann constant in eV/K"][0]
+    return (hbar / frequencies) * coth(
+        hbar * frequencies / (2 * kB * temperature)
     )
 
 
@@ -593,6 +575,8 @@ def debye_waller_factors(modes, temperatures=None):
     ----------
     Xu and Chiang (2005) Eq. 19 (anisotropic) and Eq. 20 (isotropic)
     """
+    amu_to_kg = 1.6605e-27  # atomic mass units to Kg
+
     if temperatures is None:
         temperatures = {m: 300 for m in modes.keys()}
 
@@ -600,7 +584,7 @@ def debye_waller_factors(modes, temperatures=None):
     # That's the tag properties on Atom objects
     atoms = sorted(modes["LA"].crystal, key=lambda a: a.tag)
     q2 = np.linalg.norm(modes["LA"].q_points, axis=1) ** 2
-    prefactor = lambda atm: q2 / (12 * atm.mass * AMU_TO_KG)
+    prefactor = lambda atm: q2 / (12 * atm.mass * amu_to_kg)
 
     # Parallelizing this calculation is actually slower
     # The correction factor `nzones` accounts for the "double" counting
