@@ -19,5 +19,14 @@ The performance comparison between `npstreams` and `numpy` at averaging sequence
 
 ## Functions and data structure for ultrafast electron scattering
 
+### Image alignment
+
+```{.matplotlib file="figures/appendix/mnxc.py" caption=""}
+```
+
+```{.matplotlib file="figures/appendix/autocenter.py" caption=""}
+```
+
+\FloatBarrier
 ## References {.unnumbered}
 \printbibliography[heading=none]
