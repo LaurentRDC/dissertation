@@ -355,39 +355,52 @@ where $t$ is the sample thickness, $\delta=\SI{100}{\nano\meter}$ is the penetra
 
 ## Discussion
 
-Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
+In this section, the link between the observations presented previously and the origin of SnSe's high thermoelectric performance are discussed.
+
+Consider first the ultrafast diffuse increase at zone-center. Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
 $$
     I_1(\vec{q}) \propto \sum_{\lambda} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} |F_{1\lambda}(\vec{q})|^2
 $$
-This equation implies an increase of diffuse intensity at zone center is due to an increase in $(n_{\lambda}+1/2) / \omega_{\lambda}$ for one or more transverse optical modes at $\vec{k}=\vec{0}$. UEDS measurements do not contain enough information to deconvolve the effects of selective mode-heating ($\uparrow n_{\lambda}$) and/or softening ($\downarrow \omega_{\lambda}$). In fact, there are indications at equilibrium that both terms may be involved in the diffuse intensity rise at zone center, given that calculations show that some zone-center optical modes like $B_g$ are strongly-coupled to the electronic system [@Caruso2019]. Intuitively, the author expected that strong electron-phonon coupling might reduce the thermoelectric figure-of-merit by strongly modulating electron mobilities. However, work by Fan *et al.* [@Fan2018] has shown that the onset of strong electron-phonon coupling may reduce the lattice thermal conductivity in a way that increases the $ZT$ figure-of-merit overall. Therefore, it is not possible to rule out selective mode-heating as a potential explanation for the diffuse intensity rise at $\Gamma$.
+This equation implies an increase of diffuse intensity is due to an increase in $(n_{\lambda}+1/2) / \omega_{\lambda}$ for one or more modes. Two potential causes of a rise are identified:
 
-In analogy to @eq:scattering-displacement, the factors $n_{\lambda} + 1/2 / \omega_{\lambda}$ are related to vibrational amplitude. Therefore, the discussion will continue in terms of mode-projected vibrational amplitudes $a_{\lambda}(\vec{k})$:
-$$
-    I_1(\vec{q}, \tau) \propto \sum_{\lambda} \left| a_{\lambda}(\vec{k}, \tau)\right|^2 |F_{1\lambda}(\vec{q})|^2
-$${#eq:snse-diffuse-amplitude}
-where
-$$
-    \left|a_{\lambda}(\vec{k}) \right|^2 = \frac{n_{\lambda}(\vec{k})+1/2}{\omega_{\lambda}(\vec{k})}
-$$
-In this formulation, the fast diffuse intensity rise at $\Gamma$ is due to an increase in vibrational amplitude of one or more transverse optical modes polarized in the direction of the $Pnma$ phase distortion. 
+1. Selective mode-heating ($\uparrow n_{\lambda}$). Phonon modes may be populated selectively as the electronic system thermalizes. This is similar to the physics that was described in @sec:graphite.
+2. Frequency renormalization ($\downarrow \omega_{\lambda}$). There are multiple zone-center phonon modes polarized in the $c$ direction which are known to soften towards the phase transition. The opposite has been observed by the author in TiSe$_2$ in Otto *et al.*[@Otto2020], where the photodoping of carriers selectively stiffened a soft zone-boundary phonon.
+
+In analogy to @eq:scattering-displacement, terms of the form $n_{\lambda} + 1/2 / \omega_{\lambda}$ are directly proportional to vibrational amplitude. In this formulation, the fast diffuse intensity rise at $\Gamma$ is due to an increase in vibrational amplitude of one or more phonon modes polarized in the direction of the $Pnma$ lattice distortion. 
 
 ### Electron-phonon coupling and phonon renormalization
 
-The description of electron-phonon coupling is encoded in the phonon self-energy $\Sigma(\lambda, \vec{k}_p)$[@Noffsinger2010]:
+Given that the energy contained in pump pulses are absorbed by electrons, and that UEDS measures the subsequent lattice response, it is natural to ask how electron-phonon coupling can explain the experiments. The electron-phonon scattering rate $1/ \tau_{\lambda\vec{k}_p, epc}$, or rate of energy transfer between electrons at all wavevectors and phonons at wavevector $\vec{k}_p$, is given by[@Fan2018]:
 $$
-    \Sigma(\lambda, \vec{k}_p) \propto \sum_{a, b} \int \frac{d\vec{k}_e}{(2\pi)^3} \langle g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) \rangle^2 \frac{f[\epsilon_a(\vec{k}_e)] - f[\epsilon_b(\vec{k}_e - \vec{k}_p)]}{\hbar \omega_{\lambda}(\vec{k}_p) - \left[\epsilon_a(\vec{k}_e) - \epsilon_b(\vec{k}_e - \vec{k}_p) \right]}
+   1/ \tau_{\lambda\vec{k}_p, epc} = -\frac{2 \pi}{\hbar} \text{Im}\left[ \Sigma_{\lambda}(\vec{k}_p) \right]
+$${#eq:snse-ep-scattering-rate}
+where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, and $\Sigma_{\lambda}(\vec{k}_p)$ is the self-energy for the phonon with quantum numbers $(\lambda, \vec{k}_p)$. The phonon self-energy also defines how vibrational frequencies are renormalized from $\omega^0_{\lambda}$ to $\omega_{\lambda}$ due to electron-phonon interactions[@Ando2006]: 
+$$
+    \frac{\omega_{\lambda}(\vec{k}_p)^2}{\omega^0_{\lambda}(\vec{k}_p)^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left[ \Sigma_{\lambda}(\vec{k}_p)\right]
+$${#eq:snse-ep-renormalization}
+Both a large electron-phonon scattering rate (i.e. selective mode-heating) and phonon frequency renormalization leads to the increased vibrational amplitude measured in SnSe ((@eq:scattering-displacement). Regardless of the physical cause of the increased vibrational amplitude (mode-heating or phonon renormalization), the consequences boil down to an ultrafast modification of the phonon self-energy. Computing the phonon self-energy for particular situations is arduous[@Mahan2000; @Giustino2017], but in the Migdal approximation[@Migdal1958; @Noffsinger2010]: 
+$$
+    \Sigma_{\lambda}(\vec{k}_p) = 
+        \sum_{a, b} \int \frac{d\vec{k}_e}{(2\pi)^3} ~ | g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) |^2 ~ \frac{f\left[\epsilon_{a}(\vec{k}_e)\right] - f\left[\epsilon_b(\vec{k}_e + \vec{k}_p)\right]}{\epsilon_a(\vec{k}_e) - \epsilon_b(\vec{k}_e + \vec{k}_p) - \hbar \omega_{\lambda}(\vec{k}_p) + i\eta}
 $${#eq:snse-phonon-self-energy}
-where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, and $f[\epsilon]$ is the (possibly non-thermal) electronic energy distribution. The electron-phonon coupling vertex, $g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)$, describes the rate of inelastic single electron scattering between states of energies $\epsilon_a(\vec{k}_e)$ and $\epsilon_b(\vec{k}_e)$ in bands $a$ and $b$ (respectively) through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vec{k}_p)$.
+where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, $f(\epsilon)$ is the electronic energy distribution (which might be non-thermal), and $\eta$ is an infinitesimally-small number. The electron-phonon coupling vertex, $g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)$, describes the rate of inelastic single electron scattering between bands $a$ and $b$ through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vec{k}_p)$. The electron-phonon coupling vertex $g$ was encountered in @sec:graphite-coupling-constants.
 
-Modulation of the electron-phonon coupling vertex can have multiple effects. The imaginary part of the self-energy determines the electron-phonon scattering rates[@Noffsinger2010]:
-$$
-    \frac{1}{\tau_{\lambda\vec{k}_p, epc}} = \frac{2\pi}{\hbar} \sum_{a,b,\vec{k}_e} |g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)|^2 \left[ f(\epsilon_{a,\vec{k}_e}) - f(\epsilon_{b, \vec{k}_e + \vec{k}_p}) \right] ~ \delta(\epsilon_{a,\vec{k}_e} - \epsilon_{b, \vec{k}_e + \vec{k}_p} - \hbar \omega_{\lambda\vec{k}_p})
-$$
-On the other hand, the real part of the phonon self-energy describes the renormalization of a phonon frequency $\omega$ due to the coupling between electrons and phonons[@Ando2006; @Mahan2000]:
-$$
-    \frac{\omega^2}{\omega_0^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left\{ \Sigma(\vec{q}, \omega)\right\}
-$$
-where $\omega_0$ is the bare phonon frequency in the absence of coupling. 
+The electron-phonon scattering rate (@eq:snse-ep-scattering-rate) and phonon renormalization (@eq:snse-ep-renormalization) are therefore proportional to the $\vec{k}_e$-integrated electron-phonon coupling vertex via @eq:snse-phonon-self-energy. Photoexcitation perturbs the electronic energy distribution ($f$), and this non-thermal energy distribution will scatter to phonons $(\lambda, \vec{k}_p)$ based on the strength of $g$. Therefore, whether the diffuse intensity rise at zone-center is due to selective mode heating, phonon renormalization, or both, is not an important distinction. The diffuse intensity rise at zone-center can be associated with strong electron-phonon coupling to zone-center modes polarized in the $c$ direction and at least an order-of-magnitude lower coupling everywhere else in the plane.
+
+This is not entirely unexpected. Calculations by Caruso *et al.*[@Caruso2019] have reported strong electron-phonon coupling to zone-center modes polarized in the $c$ direction, most importantly the $B_u$ (\SI{8}{\milli\electronvolt}) and the $B_g$ (\SI{20}{\milli\electronvolt}) modes. The results corroborate these findings, at least qualitatively. 
+
+### Relaxation dynamics
+
+The experimental results show a relaxation of the intensity at zone-center after the initial fast rise, which is correlated to the rise of diffuse intensity across the Brillouin zone (\SI{3.5}{\pico\second}). The energy stored in the strongly-coupled modes at zone-center can relax in two ways: anharmonic decay or electron intervalley scattering
+
+The anharmonic decay relaxation mechanism sees one zone-center phonon generate two lower energy phonons in a process that conserves energy and momentum. There are reveral reports on the strong bonding anharmonicity in SnSe[@Zhao2014; @Li2015; @Zhao2016a; @Hong2019;@Lanigan2020]. However, the phonon lifetimes are estimated to be longer (\SIrange{15}{30}{\pico\second})[@Chandrasekhar1977; @Li2015; @Lanigan2020] than what has been observed via UEDS (\SI{3.5}{\pico\second}). The results presented here are *not compatible* with an anharmonic decay picture for a different reason: the lack of structure in the diffuse intensity dynamics. The measurements in graphite (@sec:graphite) have shown that the anharmonic decay of phonons measured in the time-domain is highly representative of the phonon dispersion due to energy- and momentum-conservation rules. However, the diffuse rise in intensity away from zone-center is completely uniform. This is shown in @fig:snse-relaxation-amplitude, where the average relative diffuse intensity increase in the \SIrange{5}{15}{\pico\second} range shows no structure beyond the partitioning of the Brillouin zone described in @sec:snse-regions. Most importantly, the diffuse rise everywhere is found to happen with the same characteristic time-scale (@fig:snse-highsym).
+
+```{.matplotlib #fig:snse-relaxation-amplitude file="figures/snse/relaxation-bz.py" caption="Relative diffuse intensity change in the \SIrange{5}{15}{\pico\second} shows no structure representative of anharmonic decay of zone-center modes."}
+```
+
+The relaxation mechanism which is compatible with the UEDS measurements involves conduction electrons scattering across valleys as they thermalize, which emits large-wavevector phonons[@Sjakste2018]. 
+
+
 
 ### Mott-Ioffe-Regel limit of thermal transport
 
@@ -400,7 +413,6 @@ where $\omega_0$ is the bare phonon frequency in the absence of coupling.
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 [^zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
-
 
 \FloatBarrier
 ## References {.unnumbered}

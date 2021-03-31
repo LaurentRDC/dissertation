@@ -134,7 +134,9 @@ def extract_info_ordered(fname, crystal, **kwargs):
 
     q_points = np.asarray(q_points)
     eig_vector = np.squeeze(np.asarray(eig_vector))
-    speed_of_light_cm = physical_constants["speed of light in vacuum"][0] * 100  # in cm/s
+    speed_of_light_cm = (
+        physical_constants["speed of light in vacuum"][0] * 100
+    )  # in cm/s
     freq = np.asarray(freq) * speed_of_light_cm  # frequencies in Hz
 
     # Certain acoustic modes may have slightly negative frequencies
@@ -514,9 +516,7 @@ def phonon_amplitude(frequencies, temperature):
     # Factor of 1/N is calculated in the parent caller
     hbar = physical_constants["Planck constant over 2 pi in eV s"][0]
     kB = physical_constants["Boltzmann constant in eV/K"][0]
-    return (hbar / frequencies) * coth(
-        hbar * frequencies / (2 * kB * temperature)
-    )
+    return (hbar / frequencies) * coth(hbar * frequencies / (2 * kB * temperature))
 
 
 def _debye_waller_factor(modes, temperatures, atm_index):
