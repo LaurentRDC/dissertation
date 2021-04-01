@@ -1,12 +1,23 @@
 \appendix
 # Interactive ultrafast electron scattering data exploration {#sec:appendix-software label="Appendix"}
 
-The pursuit of science is accompanied by serious software development in most fields, often in the forms of instrument control, data acquisition, data analysis, and data presentation. One project spearheaded by the author, a graphical program for the interactive exploration of ultrafast electron scattering data (@fig:introduction-iris-screen), has had such a profound impact on the research within the Siwick research group that it deserves its own brief section. 
+The pursuit of science is accompanied by serious software development in most fields, often in the forms of instrument control, data acquisition, data analysis, and data presentation. One project spearheaded by the author, a graphical program for the interactive exploration of ultrafast electron scattering data [@RenedeCotret2018], has had such a profound impact on the research within the Siwick research group that it deserves its own brief section. 
 
 ## Graphical user-interface
 
+Ultrafast electron scattering datasets contain a lot of information, even compared to other time-resolved techniques like optical spectroscopies. The research presented in this dissertation, as well as other research projects within the Siwick group[@Stern2018; @Otto2020], have benefitted from the ability to interactively explore the data. A program was designed and implemented by the author for this very purpose, named `iris`. `iris` solves two problems:
 
-## Streaming data reduction
+1. The reduction of redundant raw data into a processed dataset;
+
+2. The interactive exploration of the reduced, processed dataset in real-time.
+
+### Flexible data reduction
+
+Ultrafast electron scattering experiments within the Siwick research group have always had a similar structure. The experiment is divided into subexperiments called *scans*. One scan involves the acquisition of scattering patterns for all desired time-delays. The scan is then repeated until either some desired number of scans, or until some time has passed. For example, the longest 
+
+### Interactive exploration
+
+## Streaming data reduction{#sec:appendix-stream-data-reduction}
 
 Raw ultrafast electron scattering datasets can reach sizes hundreds of gigabytes. The data reduction operations such as averaging of equivalent scattering patterns is a slow process. Before the author joined the Siwick research group, it used to take multiple hours to finally look at scattering patterns following the end of an experiment.
 

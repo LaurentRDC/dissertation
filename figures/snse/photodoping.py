@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from math import sqrt
 import matplotlib.pyplot as plt
 import numpy as np
 from crystals import Crystal
@@ -35,10 +35,17 @@ def absorbed_energy(fluence, thickness):
     penetration_depth = 100e-9  # m, from reference
     absorbed_ratio = 1 - np.exp(-thickness / penetration_depth)
 
+    # Reflectivity from the reference:
+    eps1, eps2 = 40, 10  # Complex dielectric function (eps1 + i eps2)
+    norm_eps = sqrt(eps1 ** 2 + eps2 ** 2)
+    R = (1 - sqrt(2) * sqrt(norm_eps + eps1) + norm_eps) / (
+        1 + sqrt(2) * sqrt(norm_eps + eps1) + norm_eps
+    )
+
     percm2_to_perm2 = 1e4
     mJ_to_J = 1e-3
     radiant_energy = fluence * mJ_to_J * percm2_to_perm2 * SAMPLE_AREA  # J
-    return radiant_energy * absorbed_ratio
+    return (1 - R) * radiant_energy * absorbed_ratio
 
 
 def photocarrier_density(fluence, thickness):

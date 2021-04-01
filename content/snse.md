@@ -237,16 +237,16 @@ The slow dynamics (\SI{4 \pm 1}{\pico\second}) in the Debye-Waller dynamics are 
 
 ### Small wavevectors phonons{#sec:snse-small-wavevectors}
 
-The rapid increase in mean-square-displacement following excitation is not due to large wavevector phonons. Recall that the $Pnma \to Cmcm$ phase transition involves the softening of many zone-center transverse optical modes polarized in the direction of the lattice distortion. 
+The rapid increase in mean-square-displacement following excitation is not due to large wavevector phonons, as this rapid increase is not seen in the diffuse intensity away from zone-center. Recall that the $Pnma \to Cmcm$ phase transition involves the softening of many zone-center transverse optical modes polarized in the direction of the lattice distortion. 
 
 ```{.matplotlib #fig:snse-diffuse-direction file="figures/snse/diffuse-direction.py" caption="Comparison of the differential intensity dynamics near reflections that are either almost parallel to $\vec{b}^\star$ or $\vec{c}^\star$. Near reflections almost parallel to $\vec{c}^\star$ (e.g. $(004)$, $(01\bar{7})$, etc.), a fast initial rise in intensity is observed which is not measured close to reflections almost parallel to $\vec{b}^\star$ (e.g. $(040)$, $(051)$, etc.)"}
 ```
 
-Diffuse intensity dynamics correlated with the fast part of the Debye-Waller dynamics are indeed observed near zone-center. The one-phonon structure factors are expected to be large for the transverse optical modes polarized in the $c$ direction near reflections that are almost parallel to the $\vec{c}^\star$ axis. @fig:snse-diffuse-direction shows the integration of the total scattering intensity in a *ring* around reflections that are either nearly parallel to $\vec{b}^\star$ or $\vec{c}^\star$. 
+Diffuse intensity dynamics correlated with the fast part of the Debye-Waller dynamics are indeed observed near zone-center. The one-phonon structure factors are expected to be large for the transverse modes polarized in the $c$ direction near reflections that are almost parallel to the $\vec{c}^\star$ axis. @fig:snse-diffuse-direction shows the integration of the total scattering intensity in a *ring* around reflections that are either nearly parallel to $\vec{b}^\star$ or $\vec{c}^\star$. 
 
 These signals will be isolated appropriately and discussed in the next section.
 
-## Dynamics of soft transverse optical modes
+## Dynamics of $c$-polarized transverse modes
 
 In this section, the initial findings presented in @sec:snse-small-wavevectors will be developed further. There are two tasks at hand: confirm that the dynamics at zone-center are due to diffuse scattering, and separate isolate this trace from the nearby Bragg peak dynamics.
 
@@ -313,7 +313,7 @@ The extraction of the transient mean-square-displacement due to zone-center soft
 \end{align}
 where the prefactors in @eq:scattering-diffuse-intensity have all been collected in the quantity $I_e$. As expected, the change in vibrational amplitude is weighted by the one-phonon structure factors. Therefore, to precisely know the transient vibrational amplitude would require to know which modes are involved, as well as the values of the one-phonon structure factors at zone-center. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso[@QuantumEspresso2009; @QuantumEspresso2017] or VASP[@Kresse1999]. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead. 
 
-The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the soft optical modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
+The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
 \begin{align}
     \frac{I_0(\vec{q},\tau) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
         &\equiv \Delta I_0(\vec{q},\tau) \nonumber \\
@@ -337,18 +337,18 @@ for $\vec{q}$ nearly parallel to $\vec{c}^\star$. The associated error $\sigma_u
 $$
     \sigma_u = \frac{\partial \Delta \langle u_c^2 \rangle}{\partial I} \sigma_I\ = \frac{-\sigma_I}{|\vec{q}|^2 \left[1 + \Delta I_0(\vec{q},t) \right]}
 $$
-The extracted change in atomic displacement along the $c$ axis due to transverse optical modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
+The extracted change in atomic displacement along the $c$ axis due to $c$-polarized transverse modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
 
-```{.matplotlib #fig:snse-displacement-fluence file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the soft zone-center optical modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
+```{.matplotlib #fig:snse-displacement-fluence file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the zone-center $c$-polarized transverse modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
 ```
 
 #### Comparison with photocarrier density
 
 It is instructive to compare the fluence-dependence of the vibrational amplitude in @fig:snse-displacement-fluence with photocarrier density generated in the sample. The total energy deposited for a particular fluence $f$,  $E(f)$, is given by
 $$
-	E(f) = A f \left( 1 - e^{-\frac{t}{\delta}}\right)
+	E(f) = (1-R) A f \left( 1 - e^{-\frac{t}{\delta}}\right)
 $$
-where $t$ is the sample thickness, $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{800}{\nano\meter} [@Makinistian2009; @Barrios2014], and $A$ is the sample area. For reference, roughly 37% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. Assuming that the efficiency of generating charge carriers from photo absorption is 100%, the photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
+where $R=0.54$ is the reflectivity at \SI{1.55}{\electronvolt}[@Makinistian2009], $t$ is the sample thickness, $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{1.55}{\electronvolt}[@Makinistian2009; @Barrios2014], and $A$ is the sample area. For reference, roughly 17% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. Assuming that the efficiency of generating charge carriers from photo absorption is 100%, the photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
 
 ```{.matplotlib #fig:snse-photodoping file="figures/snse/photodoping.py" caption="Photocarrier density generated in SnSe for \SI{800}{\nano\meter} pump fluences on a \SI{50 x 50 x 0.045}{\micro\meter} sample. The lower and upper limits are shown as grey dashed lines, based on the uncertainty of \SI{\pm 5}{\nano\meter} in the thickness of the sample."}
 ```
@@ -387,28 +387,49 @@ where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electro
 
 The electron-phonon scattering rate (@eq:snse-ep-scattering-rate) and phonon renormalization (@eq:snse-ep-renormalization) are therefore proportional to the $\vec{k}_e$-integrated electron-phonon coupling vertex via @eq:snse-phonon-self-energy. Photoexcitation perturbs the electronic energy distribution ($f$), and this non-thermal energy distribution will scatter to phonons $(\lambda, \vec{k}_p)$ based on the strength of $g$. Therefore, whether the diffuse intensity rise at zone-center is due to selective mode heating, phonon renormalization, or both, is not an important distinction. The diffuse intensity rise at zone-center can be associated with strong electron-phonon coupling to zone-center modes polarized in the $c$ direction and at least an order-of-magnitude lower coupling everywhere else in the plane.
 
-This is not entirely unexpected. Calculations by Caruso *et al.*[@Caruso2019] have reported strong electron-phonon coupling to zone-center modes polarized in the $c$ direction, most importantly the $B_u$ (\SI{8}{\milli\electronvolt}) and the $B_g$ (\SI{20}{\milli\electronvolt}) modes. The results corroborate these findings, at least qualitatively. 
+This is not entirely unexpected. Calculations by Caruso *et al.*[@Caruso2019] have reported strong electron-phonon coupling to zone-center optical modes polarized in the $c$ direction, most importantly the $B_u$ (\SI{8}{\milli\electronvolt}) and the $B_g$ (\SI{20}{\milli\electronvolt}) modes. The results corroborate these findings, at least qualitatively. 
 
 ### Relaxation dynamics
 
 The experimental results show a relaxation of the intensity at zone-center after the initial fast rise, which is correlated to the rise of diffuse intensity across the Brillouin zone (\SI{3.5}{\pico\second}). The energy stored in the strongly-coupled modes at zone-center can relax in two ways: anharmonic decay or electron intervalley scattering
 
-The anharmonic decay relaxation mechanism sees one zone-center phonon generate two lower energy phonons in a process that conserves energy and momentum. There are reveral reports on the strong bonding anharmonicity in SnSe[@Zhao2014; @Li2015; @Zhao2016a; @Hong2019;@Lanigan2020]. However, the phonon lifetimes are estimated to be longer (\SIrange{15}{30}{\pico\second})[@Chandrasekhar1977; @Li2015; @Lanigan2020] than what has been observed via UEDS (\SI{3.5}{\pico\second}). The results presented here are *not compatible* with an anharmonic decay picture for a different reason: the lack of structure in the diffuse intensity dynamics. The measurements in graphite (@sec:graphite) have shown that the anharmonic decay of phonons measured in the time-domain is highly representative of the phonon dispersion due to energy- and momentum-conservation rules. However, the diffuse rise in intensity away from zone-center is completely uniform. This is shown in @fig:snse-relaxation-amplitude, where the average relative diffuse intensity increase in the \SIrange{5}{15}{\pico\second} range shows no structure beyond the partitioning of the Brillouin zone described in @sec:snse-regions. Most importantly, the diffuse rise everywhere is found to happen with the same characteristic time-scale (@fig:snse-highsym).
+The anharmonic decay relaxation mechanism sees one zone-center phonon generate two lower energy phonons in a process that conserves energy and momentum. There are reveral reports on the strong bonding anharmonicity in SnSe[@Zhao2014; @Li2015; @Zhao2016a; @Hong2019;@Lanigan2020]. However, the phonon lifetimes are estimated to be longer (\SIrange{15}{30}{\pico\second})[@Chandrasekhar1977; @Li2015; @Lanigan2020] than what has been observed via UEDS (\SI{3.5}{\pico\second}). The results presented here are *not compatible* with an anharmonic decay picture for a different reason: the lack of structure in the diffuse intensity dynamics. The measurements in graphite (@sec:graphite) have shown that the anharmonic decay of phonons measured in the time-domain is highly representative of the phonon dispersion due to energy- and momentum-conservation rules. However, the diffuse rise in intensity away from zone-center is completely uniform. This is shown in @fig:snse-relaxation-amplitude, where the average relative diffuse intensity increase at \SI{5}{\pico\second} shows no structure beyond the partitioning of the Brillouin zone described in @sec:snse-regions. Most importantly, the diffuse rise everywhere is found to happen with the same characteristic time-scale (@fig:snse-highsym).
 
-```{.matplotlib #fig:snse-relaxation-amplitude file="figures/snse/relaxation-bz.py" caption="Relative diffuse intensity change in the \SIrange{5}{15}{\pico\second} shows no structure representative of anharmonic decay of zone-center modes."}
+```{.matplotlib #fig:snse-relaxation-amplitude file="figures/snse/relaxation-bz.py" caption="Relative diffuse intensity change at \SI{5}{\pico\second} shows no structure representative of anharmonic decay of zone-center modes."}
 ```
 
-The relaxation mechanism which is compatible with the UEDS measurements involves conduction electrons scattering across valleys as they thermalize, which emits large-wavevector phonons[@Sjakste2018]. 
+The relaxation mechanism which is compatible with the UEDS measurements involves intra- and inter-valley electrons scattering[@Sjakste2018]. Electrons undergo vertical transitions when absorbing \SI{1.55}{\electronvolt} photons. Given that the direct, optical band gap of SnSe is less than the photon energy at \SI{1.3}{\electronvolt}[@Shi2018], the electrons have some excess energy above the local conduction band minimum. There are multiple local conduction band minima which could accept vertical transitions at \SI{1.55}{\electronvolt}: $\Gamma$, $\frac{2}{3} Z$, $P$ (out-of-plane), and the global minimum $\frac{2}{3} Y$[@Cuong2015; @Wei2019]. The electrons first scatter with zone-center strongly-coupled phonons, which thermalizes both subsystems together. This is called *intravalley scattering*, as the electrons are losing energy towards the local band minimum. This is possible because this initial fast scattering ($<$\SI{300}{\femto\second}) involves small wavevectors due to the electrons' proximity to the local conduction minimum, and it is fast because of the strength of the coupling discussed in the previous section. Then, on a longer time-scale (\SI{3.5}{\pico\second}), the electrons relax from the local conduction band minimum to the global conduction band minimum, which is separated in reciprocal space. This second relaxation, called *intervalley scattering*, emits phonons with larger wavevectors. The process is represented in @fig:snse-valley-scattering. This relaxation mechanism also explains why the diffuse intensity at zone-center dissipates with the same characteristic time as the large wavevector phonons are created. As electrons scatter away from their initial valley, the energy contained in the bath which is strongly-coupled to the zone-center modes is diminished.
 
+```{.matplotlib #fig:snse-valley-scattering file="figures/snse/valley-scattering.py" caption="Demonstration of the electron relaxation process. Photons $\gamma$ drive vertical transitions, represented at $\Gamma$ as an example only. The electrons first relax to the local conduction band minimum (intravalley) in a characteristic time $\tau_1 <\SI{300}{\femto\second}$ by coupling to zone-center phonons. Then, electrons scatter with large wavevector phonons to relax to the global conduction band minimum (intervalley) in a characteristic time $\tau_2 = \SI{3.5}{\pico\second}$."}
+```
 
+### Origin of ultralow thermal conductivity or phase transition?
 
-### Mott-Ioffe-Regel limit of thermal transport
+The UEDS measurements and the discussion of the previous sections demonstrates that strong electron-phonon coupling to one or more $c$-polarized zone-center phonons is very strong. However, the impacts of this strong coupling depends on which specific phonon branches are involved.
 
-[@Ioffe1960; @Mott1974; @Gurvitch1981; @Zhang2019]
+There are two major, competing effects. The modes might involve the acoustic branches which are responsible for most of the thermal transport at equilibrium. On the other hand, ff the strongly-coupled modes are the soft transverse modes involved in the $Pnma \to Cmcm$ phase transition, then the strong electron-phonon coupling may explain the origin of the $Cmcm$ phase.
+
+#### Ultralow thermal transport
+
+Consider that the strong electron-phonon interactions increase the scattering rate of zone-center acoustic modes. This would in stark contrast to the consensus today about the low lattice thermal conductivity $\kappa_{lat}$ being suppressed by anharmonic interactions.
+
+The case for anharmonic phonon-phonon scattering is made in one of two ways. First, the thermal lattice expansion is a measure of anharmonicity through the *Grüneisen* parameter[@Gruneisen1912]. Calculations suggest that anharmonicity along all crystal axes is strong, and strongest along the stacking axis $a$[@Zhao2014]. However, the $ZT$ figure-of-merit remains low along the $a$ axis because the electrical conductivity is also low in this direction[@Zhao2014]. Calculations by Li *et al.*[@Li2015] could only reproduce the low lattice thermal conductivity when taking into account long-range bonding anharmonicity, although these results fail to reproduce the Grüneisen parameter calculations of Zhao *et al.*[@Zhao2014]. The explicit contribution of electron-phonon coupling to SnSe's ultralow thermal conductivity has not been addressed to date.
+
+The behavior of $\kappa$ with increasing temperature exhibits an asymptotic behavior above \SI{600}{\kelvin} which is reminiscent of the Mott-Ioffe-Regel (MIR) limit on the resistivity in so-called "bad metals" [@Ioffe1960; @Mott1974; @Gurvitch1981].
 
 ```{.matplotlib file="figures/snse/klat.py" caption="Lattice thermal conductivity $\kappa_{lat}$ along the crystallographic axes of SnSe."}
 ```
 
+The MIR limit expresses that the transport properties of quasiparticles saturate once their mean-free-path has fallen below the lattice dimensions[@Zhang2019]. Our measurements suggest that the phonon mean-free-path in SnSe might be close to the MIR limit above \SI{600}{\kelvin} due to strong EPC. This happens at equilibrium due to the thermal enhancement of the electron-phonon scattering rate (Eq. \ref{EQ:epc-scattering-rate}), and ultrafast PDS reveals a similar behavior via impulsive photodoping. 
+
+#### Phase transition mechanism
+
+
+## Conclusion
+
+
+
+### Outlook
 
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.

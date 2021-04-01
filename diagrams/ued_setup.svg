@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    sodipodi:docname="ued_setup.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
    id="svg8"
    version="1.1"
    viewBox="0 0 197 108"
@@ -914,7 +914,7 @@
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
      inkscape:cy="286.00123"
-     inkscape:cx="363.09008"
+     inkscape:cx="263.09008"
      inkscape:zoom="2.0000001"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -1105,15 +1105,15 @@
        x="14.861442"
        y="0"
        transform="matrix(1.1577234,0,0,1.1577234,105.55143,-3.8461368)"><tspan
-         x="47.690522"
+         x="47.692589"
          y="51.100188"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">Ti:Sapphire
 </tspan></tspan><tspan
-         x="40.243609"
+         x="40.254633"
          y="54.660631"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">Mode-locked oscillator
 </tspan></tspan><tspan
-         x="38.686427"
+         x="38.685738"
          y="58.221075"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">15</tspan><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle"> fs pulses, 5 nJ, 75 MHz</tspan></tspan></text>
@@ -1161,11 +1161,11 @@
          x="14.861442"
          y="0"
          transform="matrix(1.1577234,0,0,1.1577234,24.883053,0.83676398)"><tspan
-           x="45.504955"
+           x="45.509778"
            y="51.100188"><tspan
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">RF generation 
 </tspan></tspan><tspan
-           x="42.040569"
+           x="42.051594"
            y="54.660631"><tspan
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">and synchronization</tspan></tspan></text>
     </g>
@@ -1183,15 +1183,15 @@
        style="font-style:normal;font-weight:normal;font-size:2.82222px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1751);fill:#000000;fill-opacity:1;stroke:none;"
        id="text1749"
        xml:space="preserve"><tspan
-         x="47.690522"
+         x="47.692589"
          y="51.100188"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">Ti:Sapphire
 </tspan></tspan><tspan
-         x="40.634971"
+         x="40.641862"
          y="54.660631"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">Regenerative amplifier
 </tspan></tspan><tspan
-         x="39.595931"
+         x="39.595242"
          y="58.221075"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">35 fs pulses, 3 mJ, 1 kHz</tspan></tspan></text>
     <rect
@@ -1395,7 +1395,7 @@
        x="14.861442"
        y="0"
        transform="matrix(1.1577234,0,0,1.1577234,-28.436581,-4.2793983)"><tspan
-         x="47.169624"
+         x="47.177203"
          y="51.100188"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">Delay-stage</tspan></tspan></text>
     <text
@@ -1405,7 +1405,7 @@
        style="font-style:normal;font-weight:normal;font-size:2.82222px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1751-1-3-0);fill:#000000;fill-opacity:1;stroke:none;"
        id="text1749-4-6-1"
        xml:space="preserve"><tspan
-         x="51.890779"
+         x="51.893535"
          y="51.100188"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">BBO
 </tspan></tspan></text>
@@ -1416,7 +1416,7 @@
        x="14.861442"
        y="0"
        transform="matrix(1.1577234,0,0,1.1577234,-55.122359,19.783369)"><tspan
-         x="51.890779"
+         x="51.893535"
          y="51.100188"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">BBO
 </tspan></tspan></text>
@@ -1427,7 +1427,7 @@
        x="14.861442"
        y="0"
        transform="matrix(1.1577234,0,0,1.1577234,-56.834208,14.159988)"><tspan
-         x="50.427303"
+         x="50.432127"
          y="51.100188"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">Calcite
 </tspan></tspan></text>
@@ -1438,7 +1438,7 @@
        style="font-style:normal;font-weight:normal;font-size:2.82222px;line-height:1.25;font-family:sans-serif;text-align:center;white-space:pre;shape-inside:url(#rect1751-1-4-12-6-4-5-7-1);fill:#000000;fill-opacity:1;stroke:none;"
        id="text1749-4-5-8-7-1-87-5-1"
        xml:space="preserve"><tspan
-         x="52.295922"
+         x="52.298678"
          y="51.100188"><tspan>DM</tspan></tspan></text>
     <path
        id="path1141-0-8-0"
@@ -1565,13 +1565,6 @@
        cy="58.602165"
        rx="0.87464124"
        ry="4.7953229" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:0.138132;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect1127-8-1-5"
-       width="105.54002"
-       height="5.4666252"
-       x="2.0314419"
-       y="100.39902" />
     <rect
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.11;stroke-miterlimit:3.52;stroke-dasharray:none"
        id="rect1655"
@@ -2510,7 +2503,7 @@
          x="14.861442"
          y="0"
          transform="matrix(1.1577234,0,0,1.1577234,22.852002,45.162609)"><tspan
-           x="48.933511"
+           x="48.936956"
            y="51.100188"><tspan
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';text-align:center;text-anchor:middle">Electrons
 </tspan></tspan><tspan

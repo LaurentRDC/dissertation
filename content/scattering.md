@@ -180,12 +180,10 @@ where $\vec{y}$ is some arbitrary translation vector. Therefore, the Fourier tra
 @eq:scattering-potential-crystal has historically been called the *static structure factor*, named thus because the atomic positions are assumed to be fixed. This stands in contrast to the *dynamic structure factor* discussed below in @sec:diffuse-scattering. A visual representation of the scattering potential of a crystal is helpful. Consider the example of a crystal of Polonium, consists in a Pu atom at the every vertex of a rectangular prism of dimensions \SI{5 x 3 x 3}{\angstrom}. The calculated electrostatic potential of this arrangement along the unit cell base is shown in @fig:scattering-polonium-example a). The lattice vectors $\vec{a}_1$ and $\vec{a}_2$ are indicated, with $\vec{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f_e(\vec{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
 
 From @eq:scattering-intensity and @eq:scattering-amplitude-q, the measured diffracted intensity is:
-\begin{align}
-    I(\vec{q}) & = \frac{m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_i f_{e,i}(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} \right|^2 \nonumber \\
-               & = \frac{N_c^2 m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_s f_{e,s}(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_s} \right|^2
-    \label{eq:scattering-diffracted-intensity-zero-temp}
-\end{align}
-where the sum over all atoms $\sum_i$ has been replaced with the sum over the unit cell, $N_c \sum_s$. This is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity; @Kittel1996intensity; @Fultz2002intensity; @Kirkland2010intensity]. 
+$$
+    I(\vec{q}) = \frac{m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_i f_{e,i}(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} \right|^2
+$${#eq:scattering-diffracted-intensity-zero-temp}
+This is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity; @Kittel1996intensity; @Fultz2002intensity; @Kirkland2010intensity]. 
 
 ### The reciprocal lattice
 
@@ -207,12 +205,11 @@ the associated reciprocal lattice vectors are
 $$
     \vec{b}_1 = \frac{2\pi}{3.63} ~ \hat{\vec{x}}, ~ \vec{b}_2 = \frac{2\pi}{3.63} ~ \hat{\vec{y}}, ~ \vec{b}_3 = \frac{2\pi}{3.63} ~ \hat{\vec{z}}.
 $${#eq:scattering-polonium-recip}
-The geometry of vectors in @eq:scattering-polonium-lattice and @eq:scattering-polonium-recip are shown in @fig:scattering-polonium-example. The position of *reciprocal points* $\vec{H}$ -- the location of the fundamental frequencies of the Fourier transform of @eq:scattering-amplitude-q -- is a linear combination of
-vectors reciprocal basis vectors $\set{ \vec{b}_i }$:
+The geometry of vectors in @eq:scattering-polonium-lattice and @eq:scattering-polonium-recip are shown in @fig:scattering-polonium-example. The position of *reciprocal points* $\vec{H}$ -- the location of the fundamental frequencies of the Fourier transform of @eq:scattering-amplitude-q -- is a linear combination of vectors reciprocal basis vectors $\set{ \vec{b}_i }$:
 $$
-    \vec{H} = h ~ \vec{b}_1 + k ~ \vec{b}_2 + l ~ \vec{b}_3
+    \vec{H} = h ~ \vec{b}_1 + k ~ \vec{b}_2 + l ~ \vec{b}_3 
 $$
-Expressed in the reciprocal basis, reciprocal points are traditionally denoted as $\vec{H} = (hkl)$. The indices $h$, $k$, and $l$ are called *Miller indices*, named for W. H. Miller[@Miller1839]. 
+where $h$, $k$, and $l$ are all integers. Expressed in the reciprocal basis, reciprocal points are traditionally denoted as $\vec{H} = (hkl)$. The indices $h$, $k$, and $l$ are called *Miller indices*, named for W. H. Miller[@Miller1839]. 
 
 <!-- #### Geometrical interpretation of reciprocal space
 
@@ -221,6 +218,28 @@ $$
     \left( \frac{\vec{a}_1}{h} - \frac{\vec{a}_2}{k} \right) \cdot \vec{H} = 0
 $$
 The vector $\vec{a}_1/h - \vec{a}_2/k$ lies in a plane, and the vector $\vec{H}=(hkl)$ is perpendicular to this plane for any $l$. This example illustrates that reciprocal points $(hkl)$ define planes in real-space. TODO: demonstrate that $|\vec{H}| = 1/d_{hkl}$ -->
+
+#### Diffraction for large crystals
+
+Now that the reciprocal points $\set{\vec{H}}$ have been introduced, an alternative form of @eq:scattering-diffracted-intensity-zero-temp for large crystals can be written down. Consider the counting of atoms to change from label $i$ to labels $(m, s)$, where $m$ labels unit cells and $s$ labels unit cell atoms. In this case, the atomic positions can be written as:
+$$
+    \vec{r}_i \equiv \vec{r}_{m,s} = \vec{R}_m + \vec{x}_s
+$$
+where $\vec{R}_m$ is the position of unit cell $m$, and $\vec{x}_s$ is the position of atom $s$ with respect to the unit cell origin. Then, @eq:scattering-diffracted-intensity-zero-temp becomes:
+\begin{align}
+    I(\vec{q}) & = \frac{m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_i f_{e,i}(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} \right|^2 \nonumber \\
+               & = \frac{m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_{m,s} f_{e,s}(\vec{q}) e^{-i \vec{q} \cdot (\vec{R}_m + \vec{x}_s)} \right|^2
+\end{align}
+
+Finally, note that because the vectors $\set{ \vec{R}_m }$ are integer multiples of lattice vectors:
+$$
+    \sum_{m=1}^{N_c} e^{-i \vec{q} \cdot \vec{R}_m} \xrightarrow[]{N_c \to \infty} N_c \sum_{\set{\vec{H}}} \delta(\vec{q} - \vec{H})
+$${#eq:scattering-discrete-fourier}
+Therefore, for large $N_c$ (large crystals):
+$$
+    I(\vec{q}) = \frac{N_c^2 m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_{\set{\vec{H}}}\sum_{s} f_{e,s}(\vec{q}) e^{-i \vec{q} \cdot \vec{x}_s} \delta(\vec{q} - \vec{H})\right|^2
+$$
+This form of @eq:scattering-diffracted-intensity-zero-temp makes it more obvious why, for large periodic structures, the scattering pattern is composed of Bragg peaks at reciprocal points (@fig:scattering-polonium-example).
 
 ### Bragg's law
 
@@ -423,11 +442,11 @@ It is now convenient to express the atomic positions $\vec{r}_{m,s}=\vec{R}_m + 
                          + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} 
                             \left| \sum_m \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})\right) e^{-i (\vec{q} - \vec{k}) \cdot \vec{R}_{m}} e^{-i (\vec{q} - \vec{k}) \cdot \vec{x}_{s}} \right|^2
 \end{align}
-Because all vectors $\vec{R}_{m}$ are sums of lattice vectors:
+The discrete Fourier transform can be used (@eq:scattering-discrete-fourier):
 $$
-    \sum_m e^{-i \vec{q} \cdot \vec{R}_{m}} = N_c \sum_{\set{\vec{H}}} \delta(\vec{q} - \vec{H})
+    \sum_{m=1}^{N_c} e^{-i \vec{q} \cdot \vec{R}_m} \xrightarrow[]{N_c \to \infty} N_c \sum_{\set{\vec{H}}} \delta(\vec{q} - \vec{H})
 $$
-This is equivalent to a discrete Fourier transform. The equation for the scattering amplitude becomes:
+The equation for the scattering amplitude becomes:
 \begin{align}
     |f^{(1)}(\vec{q})|^2 = & \frac{m_e^2}{\hbar^4} \left| \sum_{\set{\vec{H}}} \sum_s f_{e,s}(\vec{q}) e^{-W_s} e^{-i \vec{q} \cdot \vec{x}_{s}} \delta(\vec{q} - \vec{H}) \right|^2 \nonumber \\
                          + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} 

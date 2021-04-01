@@ -20,9 +20,7 @@ OUTER_RADIUS = 30
 # Determine the peak position and the time-series integration bounding box
 INDICES_DIFFUSE = [
     (0, -1, 3),
-    (0, 0, 2),
     (0, 2, 0),
-    (0, 0, -2),
     (0, -2, 0),
     (0, 0, 4),
     (0, -2, 4),
@@ -35,8 +33,8 @@ EXTENT = np.linspace(start=-1 / 2, stop=1 / 2, num=64, endpoint=True)
 with DiffractionDataset(overnight4.path, mode="r") as dset:
     timedelays = dset.time_points
     eq = dset.diff_eq()
-    t1 = np.argmin(np.abs(timedelays - 5))
-    t2 = np.argmin(np.abs(timedelays - 15))
+    t1 = np.argmin(np.abs(timedelays - 4))
+    t2 = np.argmin(np.abs(timedelays - 6))
     IMAGE = np.mean(dset.diffraction_group["intensity"][:, :, t1:t2], axis=2)
 IMAGE -= eq
 IMAGE /= eq
@@ -46,14 +44,18 @@ def diffuse_amplitude(h, k, l):
 
     result = np.zeros(shape=(len(EXTENT), len(EXTENT)), dtype=float)
 
+    # Reflections are not perfectly aligned
+    xoffset = -5
+    yoffset = -5
+
     for y, z in it.product(EXTENT, repeat=2):
 
         yi, xi = overnight4.miller_to_arrindex(h, k + y, l + z)
 
         result[np.argmin(np.abs(EXTENT - y)), np.argmin(np.abs(EXTENT - z))] = np.mean(
             IMAGE[
-                xi - INNER_RADIUS : xi + INNER_RADIUS,
-                yi - INNER_RADIUS : yi + INNER_RADIUS,
+                xi - INNER_RADIUS + xoffset : xi + INNER_RADIUS + xoffset,
+                yi - INNER_RADIUS + yoffset : yi + INNER_RADIUS + yoffset,
             ]
         )
 
