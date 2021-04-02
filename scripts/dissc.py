@@ -104,12 +104,6 @@ OPTIONS += ["--top-level-division=chapter"]
 
 OPTIONS += ["-V colorlinks=true"]
 
-
-## Template variables
-EISVOGEL_TEMPLATE = "eisvogel.tex"
-EISVOGEL_REPO = "https://github.com/Wandmalfarbe/pandoc-latex-template"
-EISVOGEL_VERSION = "e437dbab45457944d8ba137635ab806ecee38201"
-
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
 
 subparsers = parser.add_subparsers(help="sub-command help", dest="command")
@@ -120,9 +114,6 @@ parser_clean.add_argument(
     "--all",
     action="store_true",
     help="Clean build directory and figure files",
-)
-parser_download_templates = subparsers.add_parser(
-    "download-templates", help="Download optional template Eisvogel."
 )
 
 parser_build = subparsers.add_parser("build", help="Build dissertation.")
@@ -239,20 +230,6 @@ def buildpdf(options, target, sourcefiles, appendices=None):
         print(termcolor.colored("WARNING: There are still TODOs remaining.", "red"))
 
 
-def download_template_files():
-    """ Download template files to download directory """
-    TEMPLATEDIR.mkdir(exist_ok=True)
-    with tempfile.TemporaryDirectory(dir=TEMPLATEDIR) as downloaddir:
-        run(
-            f"git clone --quiet --single-branch --branch master --depth 100 {EISVOGEL_REPO} {downloaddir}",
-        )
-        run(f"git checkout --quiet {EISVOGEL_VERSION}", cwd=downloaddir)
-        shutil.copy(
-            Path(downloaddir) / EISVOGEL_TEMPLATE, TEMPLATEDIR / EISVOGEL_TEMPLATE
-        )
-        print("Successfully downloaded", EISVOGEL_TEMPLATE)
-
-
 def build_auxiliary(aux_options=AUX_OPTS):
     """
     Build auxiliary files required by other builds.
@@ -289,8 +266,6 @@ def build_simple(target):
 
 def build_eisvogel(target):
     """ Build the dissertation in the Eisvogel style. """
-    if not (TEMPLATEDIR / EISVOGEL_TEMPLATE).exists():
-        download_template_files()
 
     # We use run-py as a kind of script-runner
     # because it's too hard to import other python scripts
@@ -313,7 +288,7 @@ def build_eisvogel(target):
     # Note that the path separators absolutely needs to be '\'
     titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
     options += [f"-V titlepage-background={titlepage_path}"]
-    options += [f"--template={TEMPLATEDIR / EISVOGEL_TEMPLATE}"]
+    options += [f"--template={TEMPLATEDIR / 'eisvogel.tex'}"]
 
     buildpdf(
         options=options,
@@ -347,7 +322,5 @@ if __name__ == "__main__":
         multiplexor[arguments.style](target=Path("dissertation.pdf"))
     elif arguments.command == "clean":
         clean(full=arguments.all)
-    elif arguments.command == "download-templates":
-        download_template_files()
     else:
         parser.print_help()
