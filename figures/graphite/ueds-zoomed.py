@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from crystals import Crystal
 from iris import DiffractionDataset
-from plotutils import (
+from dissutils import (
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
     MEDIUM_FIGURE_WIDTH,

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import LinearLocator
 import numpy as np
 
-from plotutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 
 DATADIR = Path("data") / "introduction" / "VNA measurements"
 MAXPOINTS = 1024  # Maximum number of points for each amplitude trace

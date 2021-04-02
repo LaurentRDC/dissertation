@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from plotutils import MEDIUM_FIGURE_WIDTH, tag_axis, named_arrow
+from dissutils import MEDIUM_FIGURE_WIDTH, tag_axis, named_arrow
 from pathlib import Path
 from skimage.io import imread
 

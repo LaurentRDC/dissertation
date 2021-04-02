@@ -3,7 +3,7 @@ Calculation based on:
 Hao Zhang and Dmitri V. Talapin, Thermoelectric Tin Selenide: The Beauty of Simplicity
 Angew. Chem. Int. Ed. 2014, 53, 2–4
 """
-from plotutils import MEDIUM_FIGURE_WIDTH, FONTSIZE, CBAR_SIZE, tag_axis
+from dissutils import MEDIUM_FIGURE_WIDTH, FONTSIZE, CBAR_SIZE, tag_axis
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from mpl_toolkits.axes_grid1 import make_axes_locatable

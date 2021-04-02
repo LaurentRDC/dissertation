@@ -3,7 +3,7 @@ from matplotlib.ticker import FixedLocator, FixedFormatter, PercentFormatter
 from pathlib import Path
 import numpy as np
 from crystals import Crystal
-from plotutils import (
+from dissutils import (
     ImageGrid,
     LARGE_FIGURE_WIDTH,
     tag_axis,

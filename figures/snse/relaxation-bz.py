@@ -5,8 +5,8 @@ from matplotlib.ticker import PercentFormatter
 from matplotlib.patches import Ellipse
 from pathlib import Path
 from iris import DiffractionDataset
-from plotutils import MEDIUM_FIGURE_WIDTH, ImageGrid
-from plotutils.snse_datasets import overnight4
+from dissutils import MEDIUM_FIGURE_WIDTH, ImageGrid
+from dissutils.snse import overnight4
 from crystals import Crystal
 
 # To perform analysis on another dataset, simply change the following

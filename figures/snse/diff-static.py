@@ -7,7 +7,7 @@ import numpy as np
 from iris import DiffractionDataset
 from skimage.filters import gaussian
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 INPUT = Path("data") / "snse"
 DOWNSAMPLING = 4

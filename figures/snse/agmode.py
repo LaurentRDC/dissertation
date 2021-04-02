@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from plotutils import LARGE_FIGURE_WIDTH, named_arrow
+from dissutils import LARGE_FIGURE_WIDTH, named_arrow
 from pathlib import Path
 from skimage.io import imread
 

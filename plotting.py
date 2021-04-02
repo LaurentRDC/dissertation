@@ -1,6 +1,6 @@
 # STYLE -----------------------------------------------------------------------
 import matplotlib.pyplot as plt
-from plotutils import LARGE_FIGURE_WIDTH, FONTSIZE
+from dissutils import LARGE_FIGURE_WIDTH, FONTSIZE
 
 plt.rcParams["figure.figsize"] = (LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH)
 plt.rcParams["font.size"] = FONTSIZE

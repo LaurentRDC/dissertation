@@ -6,9 +6,9 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
 from matplotlib.lines import Line2D
 import numpy as np
-from plotutils import LARGE_FIGURE_WIDTH, draw_hexagon
+from dissutils import LARGE_FIGURE_WIDTH, draw_hexagon
 from scipy.constants import physical_constants
-from plotutils import CBAR_SIZE
+from dissutils import CBAR_SIZE
 
 INPUT = Path("data") / "graphite" / "weighted-dispersion"
 

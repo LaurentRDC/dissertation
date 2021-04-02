@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from pathlib import Path
 
-from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DATADIR = Path("images")
 DOWNSAMPLING = 5

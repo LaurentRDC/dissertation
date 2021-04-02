@@ -5,7 +5,7 @@ import numpy as np
 from skued import diffread, align
 from skimage.filters import gaussian
 from pathlib import Path
-from plotutils import MEDIUM_FIGURE_WIDTH, tag_axis, ImageGrid
+from dissutils import MEDIUM_FIGURE_WIDTH, tag_axis, ImageGrid
 
 DOWNSAMPLING = 4
 

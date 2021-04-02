@@ -4,7 +4,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
-from plotutils import LARGE_FIGURE_WIDTH, draw_hexagon, discrete_colors
+from dissutils import LARGE_FIGURE_WIDTH, draw_hexagon, discrete_colors
 from scipy.constants import physical_constants
 
 HBAR = physical_constants["Planck constant over 2 pi in eV s"][0]

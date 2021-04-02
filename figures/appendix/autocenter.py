@@ -4,7 +4,7 @@ from matplotlib.ticker import FixedFormatter, FixedLocator
 from pathlib import Path
 from skued import autocenter, diffread
 from skimage.transform import rotate
-from plotutils import LARGE_FIGURE_WIDTH, GRAPHITE_ANGLE, ImageGrid
+from dissutils import LARGE_FIGURE_WIDTH, GRAPHITE_ANGLE, ImageGrid
 from iris import DiffractionDataset
 import numpy as np
 

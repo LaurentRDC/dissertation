@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats
 
-from plotutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
-from plotutils.snse_datasets import overnight4
+from dissutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
+from dissutils.snse import overnight4
 import skued
 from iris import DiffractionDataset
 

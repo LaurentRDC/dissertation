@@ -8,7 +8,7 @@ from math import sqrt
 import numpy as np
 import scipy.interpolate as interpolate
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, draw_hexagon
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, draw_hexagon
 from skued import nfold
 from crystals import Crystal
 from crystals.affine import change_of_basis

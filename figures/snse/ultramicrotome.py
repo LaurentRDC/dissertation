@@ -2,7 +2,7 @@ from skimage.io import imread
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DATADIR = Path("images")
 DOWNSAMPLING = 2

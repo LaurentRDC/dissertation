@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from iris import DiffractionDataset
 from pathlib import Path
-from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors
+from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors
 
 row, col = 1167, 155
 DATASET = Path("data") / "graphite" / "graphite_time_corrected_iris5.hdf5"

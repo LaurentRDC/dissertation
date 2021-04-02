@@ -3,7 +3,7 @@ import numpy as np
 from crystals import Crystal, Element, Atom
 from skued import electrostatic, affe
 from warnings import simplefilter
-from plotutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
+from dissutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
 
 # For division by zero warnings
 simplefilter("ignore", category=RuntimeWarning)

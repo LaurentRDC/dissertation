@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from crystals import Crystal, Atom
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from plotutils import LARGE_FIGURE_WIDTH, ImageGrid, named_arrow
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, named_arrow
 from skued import lorentzian, indices_to_text, electron_wavelength
 
 EWALD_RADIUS = 2 * np.pi / electron_wavelength(keV=100)

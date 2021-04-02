@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import Normalize
 from matplotlib.ticker import FixedFormatter, FixedLocator
 
-from plotutils import named_arrow, MEDIUM_FIGURE_WIDTH
+from dissutils import named_arrow, MEDIUM_FIGURE_WIDTH
 
 # Hopping parameter
 t = 2.7  # eV

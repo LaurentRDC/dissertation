@@ -13,7 +13,7 @@ from mpl_toolkits.mplot3d import axes3d
 import matplotlib.colors as cl
 import matplotlib.pyplot as plt
 
-from plotutils import LARGE_FIGURE_WIDTH
+from dissutils import LARGE_FIGURE_WIDTH
 
 
 ENERGY_CUTOFF = 5  # eV

@@ -7,8 +7,8 @@ import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
-from plotutils.snse_datasets import overnight4
-from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors
+from dissutils.snse import overnight4
+from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
 

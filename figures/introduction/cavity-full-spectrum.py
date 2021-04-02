@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from pathlib import Path
-from plotutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 
 DATADIR = Path("data") / "introduction" / "VNA measurements"
 COLOR = discrete_colors(1)[0]

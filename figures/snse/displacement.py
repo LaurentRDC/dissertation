@@ -10,72 +10,11 @@ from crystals import Crystal
 import scipy.stats as stats
 import scipy.constants as constants
 
-from plotutils.snse_datasets import overnight4
-from plotutils import MEDIUM_FIGURE_WIDTH, box_errorbars
+from dissutils.snse import overnight4, photocarrier_density
+from dissutils import MEDIUM_FIGURE_WIDTH, box_errorbars
 
 DATADIR = Path("data") / "snse"
 CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
-
-SAMPLE_AREA = (50e-6) * (50e-6)  # m^2
-SAMPLE_THICKNESS = 45e-9  # m
-SAMPLE_VOLUME = SAMPLE_AREA * SAMPLE_THICKNESS  # m^3
-BANDGAP = 0.9  # eV, Direct
-MOLAR_MASS = 197.67  # g / mol
-DENSITY = 6.179  # g / cm^3
-
-
-def absorbed_energy(fluence):
-    """
-    Total amount of absorbed energy
-
-    Parameters
-    ----------
-    fluence : float
-        Photoexcitation fluence [mJ/cm2]
-
-    Returns
-    -------
-    abs : float
-        Absorbed energy [J]
-
-    References
-    ----------
-    L. Makinistian and E. A. Albanesi: On the band gap location and core spectra
-    """
-    penetration_depth = 100e-9  # m, from reference
-    absorbed_ratio = 1 - np.exp(-SAMPLE_THICKNESS / penetration_depth)
-
-    # Reflectivity from the reference:
-    eps1, eps2 = 40, 10  # Complex dielectric function (eps1 + i eps2)
-    norm_eps = sqrt(eps1 ** 2 + eps2 ** 2)
-    R = (1 - sqrt(2) * sqrt(norm_eps + eps1) + norm_eps) / (
-        1 + sqrt(2) * sqrt(norm_eps + eps1) + norm_eps
-    )
-
-    percm2_to_perm2 = 1e4
-    mJ_to_J = 1e-3
-    radiant_energy = fluence * mJ_to_J * percm2_to_perm2 * SAMPLE_AREA  # J
-    return (1 - R) * radiant_energy * absorbed_ratio
-
-
-def photocarrier_density(fluence):
-    """
-    Calculate the photocarrier density deposited in sample, at 800nm.
-
-    Parameters
-    ----------
-    fluence : float
-        Photoexcitation fluence [mJ/cm2]
-
-    Returns
-    -------
-    carrier_density : float
-        Injected photocarrier density [cm^-3]
-    """
-    energy = absorbed_energy(fluence)  # J
-    total_carriers = energy / (1.55 * constants.eV)
-    m3_to_cm3 = 1e6
-    return total_carriers / (SAMPLE_VOLUME * m3_to_cm3)  # 1/cm^3
 
 
 def transient_u2(timedelays, intensity, q):
@@ -180,7 +119,7 @@ box_errorbars(
 # Add colorbar to show fluences
 # Note that to match the color of the points,
 cax = ax_displacement.inset_axes([0.28, 0.03, 0.7, 0.03])
-ph_density = photocarrier_density(fluences) * 1e-21  # [10^21 cm^-3]
+ph_density = photocarrier_density(fluences) * 1e-20  # [10^20 cm^-3]
 cb = mpl.colorbar.ColorbarBase(
     cax,
     cmap=mpl.colors.ListedColormap(colors),
@@ -190,7 +129,7 @@ cb = mpl.colorbar.ColorbarBase(
     format=ticker.FixedFormatter([f"{p:.1f}" for p in ph_density]),
     norm=mpl.colors.Normalize(vmin=0, vmax=len(ph_density)),
 )
-cb.set_label("$N_{\gamma}$ [$10^{21}$ cm$^{-3}$]")
+cb.set_label("$N_{\gamma}$ [$10^{20}$ cm$^{-3}$]")
 
 ax_displacement.set_xlim([es.min(), es.max()])
 ax_displacement.set_ylabel("$\\Delta \\langle u_c^2 \\rangle$ [$10^{-2} \AA^2$]")

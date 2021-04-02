@@ -3,7 +3,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
 from crystals import Crystal, Atom
 from skued import electrostatic, affe
-from plotutils import LARGE_FIGURE_WIDTH, CBAR_SIZE, named_arrow, tag_axis
+from dissutils import LARGE_FIGURE_WIDTH, CBAR_SIZE, named_arrow, tag_axis
 
 from scipy.constants import hbar, m_e
 

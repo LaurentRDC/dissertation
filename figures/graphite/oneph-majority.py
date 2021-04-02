@@ -6,7 +6,7 @@ import numpy as np
 from crystals import Crystal
 from matplotlib.ticker import FixedFormatter, FixedLocator
 
-from plotutils import (
+from dissutils import (
     LARGE_FIGURE_WIDTH,
     ImageGrid,
     draw_hexagon_field,

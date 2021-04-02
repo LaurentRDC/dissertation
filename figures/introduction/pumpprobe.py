@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch
-from plotutils import LARGE_FIGURE_WIDTH, discrete_colors
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors
 from matplotlib.ticker import FixedLocator, FixedFormatter
 from skued import gaussian, with_irf
 import numpy as np

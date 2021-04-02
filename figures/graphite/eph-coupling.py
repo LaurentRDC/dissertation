@@ -10,7 +10,7 @@ from scipy.constants import physical_constants
 from scipy.optimize import curve_fit
 from scipy.stats import sem
 from skued import gaussian, with_irf
-from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors
+from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors
 
 
 INPUT = Path("data") / "graphite"

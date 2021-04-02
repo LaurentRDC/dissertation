@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.patches import FancyArrowPatch
 from pathlib import Path
-from plotutils import tag_axis, discrete_colors
+from dissutils import tag_axis, discrete_colors
 
 BAND_COLOR, COLOR_TAU1, COLOR_TAU2 = discrete_colors(3)
 

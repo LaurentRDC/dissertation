@@ -6,7 +6,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from skued import biexponential, with_irf
 from scipy.optimize import curve_fit
 import numpy as np
-from plotutils import LARGE_FIGURE_WIDTH, discrete_colors
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors
 
 INPUT = Path("data") / "graphite" / "populations"
 

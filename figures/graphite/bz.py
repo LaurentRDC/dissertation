@@ -3,7 +3,7 @@ import numpy as np
 from functools import reduce
 from math import radians, sqrt
 from matplotlib.patches import Circle, RegularPolygon
-from plotutils import named_arrow, discrete_colors
+from dissutils import named_arrow, discrete_colors
 
 
 def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):

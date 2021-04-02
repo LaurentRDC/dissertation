@@ -8,7 +8,7 @@ import numpy as np
 from crystals import Crystal
 from iris import DiffractionDataset
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from plotutils import (
+from dissutils import (
     LARGE_FIGURE_WIDTH,
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from functools import reduce
 from matplotlib.patches import Circle, Rectangle
-from plotutils import named_arrow, discrete_colors
+from dissutils import named_arrow, discrete_colors
 
 
 fig, ax = plt.subplots(1, 1, figsize=(3, 2))

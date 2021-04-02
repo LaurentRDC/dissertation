@@ -3,7 +3,7 @@ from matplotlib.ticker import FixedFormatter, FixedLocator
 from crystals import Crystal
 import matplotlib.pyplot as plt
 import numpy as np
-from plotutils import (
+from dissutils import (
     LARGE_FIGURE_WIDTH,
     ImageGrid,
     draw_hexagon_field,

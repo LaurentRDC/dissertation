@@ -13,7 +13,7 @@ from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1 import ImageGrid
 from skued import spectrum_colors
 
-from .snse_datasets import DatasetInfo, DatasetInfo200
+from .snse import DatasetInfo, DatasetInfo200
 
 # CONSTANTS -------------------------------------------------------------------
 

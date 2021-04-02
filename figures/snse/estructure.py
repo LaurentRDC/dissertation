@@ -4,7 +4,7 @@ import matplotlib.ticker as ticker
 import matplotlib.cm as cm
 import matplotlib as mpl
 import matplotlib.colors as colors
-from plotutils import MEDIUM_FIGURE_WIDTH
+from dissutils import MEDIUM_FIGURE_WIDTH
 
 
 def cb1(k, T):

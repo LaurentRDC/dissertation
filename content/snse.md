@@ -346,9 +346,9 @@ The extracted change in atomic displacement along the $c$ axis due to $c$-polari
 
 It is instructive to compare the fluence-dependence of the vibrational amplitude in @fig:snse-displacement-fluence with photocarrier density generated in the sample. The total energy deposited for a particular fluence $f$,  $E(f)$, is given by
 $$
-	E(f) = (1-R) A f \left( 1 - e^{-\frac{t}{\delta}}\right)
+	E(f) = (1-R) \eta f \left( 1 - e^{-\frac{t}{\delta}}\right)
 $$
-where $R=0.54$ is the reflectivity at \SI{1.55}{\electronvolt}[@Makinistian2009], $t$ is the sample thickness, $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{1.55}{\electronvolt}[@Makinistian2009; @Barrios2014], and $A$ is the sample area. For reference, roughly 17% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. Assuming that the efficiency of generating charge carriers from photo absorption is 100%, the photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
+where $R=0.54$ is the reflectivity at \SI{1.55}{\electronvolt}[@Makinistian2009], $\eta=0.27$ is the internal quantum efficiency[^qe], $t$ is the sample thickness, $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{1.55}{\electronvolt}[@Makinistian2009; @Barrios2014], and $A$ is the sample area. For reference, roughly 17% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. Assuming that the efficiency of generating charge carriers from photo absorption is 100%, the photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
 
 ```{.matplotlib #fig:snse-photodoping file="figures/snse/photodoping.py" caption="Photocarrier density generated in SnSe for \SI{800}{\nano\meter} pump fluences on a \SI{50 x 50 x 0.045}{\micro\meter} sample. The lower and upper limits are shown as grey dashed lines, based on the uncertainty of \SI{\pm 5}{\nano\meter} in the thickness of the sample."}
 ```
@@ -431,9 +431,15 @@ The MIR limit expresses that the transport properties of quasiparticles saturate
 
 ### Outlook
 
+There are multiple natural extensions of the research presented in this chapter.
+
+
+
+One important extension is study high-quality, fully-dense crystals. The crystals used here are the exact used in Zhao *et al*[@Zhao2014], which have been criticized for not being fully-dense[@Wei2016] (\SI{5.43}{\gram\per\cubic\centi\meter} vs. \SI{6.13}{\gram\per\cubic\centi\meter}). This discrepancy in densities brings a drop in DC electrical conductivity by a factor of 10[@Zhao2014; @Wei2019]. Using high-quality, low-defect samples will enable the simultaneous application of UEDS and terahertz spectroscopy to fully-characterize the determinants of thermoelectricity following impulsive photodoping.
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 [^zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
+[^qe]: The quantum efficiency was determined by B. Dringoli and D. Cooke via time-resolved Terahertz spectroscopy, which is unpublished at this time.
 
 \FloatBarrier
 ## References {.unnumbered}

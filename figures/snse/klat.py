@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from plotutils import MEDIUM_FIGURE_WIDTH, discrete_colors
+from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors
 from pathlib import Path
 
 DATADIR = Path("data") / "snse"

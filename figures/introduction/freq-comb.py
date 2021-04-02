@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
-from plotutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
+from dissutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
 
 COLOR = discrete_colors(1)[0]
 

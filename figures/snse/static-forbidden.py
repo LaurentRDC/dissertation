@@ -8,8 +8,8 @@ from matplotlib.ticker import FixedLocator, FixedFormatter
 import numpy as np
 from iris import DiffractionDataset
 from skimage.filters import gaussian
-from plotutils import LARGE_FIGURE_WIDTH, ImageGrid
-from plotutils.snse_datasets import overnight4
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid
+from dissutils.snse import overnight4
 
 INPUT = Path("data") / "snse"
 DOWNSAMPLING = 4
