@@ -383,7 +383,7 @@ $$
     \Sigma_{\lambda}(\vec{k}_p) = 
         \sum_{a, b} \int \frac{d\vec{k}_e}{(2\pi)^3} ~ | g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) |^2 ~ \frac{f\left[\epsilon_{a}(\vec{k}_e)\right] - f\left[\epsilon_b(\vec{k}_e + \vec{k}_p)\right]}{\epsilon_a(\vec{k}_e) - \epsilon_b(\vec{k}_e + \vec{k}_p) - \hbar \omega_{\lambda}(\vec{k}_p) + i\eta}
 $${#eq:snse-phonon-self-energy}
-where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, $f(\epsilon)$ is the electronic energy distribution (which might be non-thermal), and $\eta$ is an infinitesimally-small number. The electron-phonon coupling vertex, $g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)$, describes the rate of inelastic single electron scattering between bands $a$ and $b$ through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vec{k}_p)$. The electron-phonon coupling vertex $g$ was encountered in @sec:graphite-coupling-constants.
+where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, $f(\epsilon)$ is the electronic energy distribution (which might be non-thermal), and $\eta$ is an infinitesimally-small number. The electron-phonon coupling vertex, $g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)$, describes the rate of inelastic single electron scattering between bands $a$ and $b$ through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vec{k}_p)$. The electron-phonon coupling vertex $g$ was encountered in @sec:introduction-epc and @sec:graphite-coupling-constants.
 
 The electron-phonon scattering rate (@eq:snse-ep-scattering-rate) and phonon renormalization (@eq:snse-ep-renormalization) are therefore proportional to the $\vec{k}_e$-integrated electron-phonon coupling vertex via @eq:snse-phonon-self-energy. Photoexcitation perturbs the electronic energy distribution ($f$), and this non-thermal energy distribution will scatter to phonons $(\lambda, \vec{k}_p)$ based on the strength of $g$. Therefore, whether the diffuse intensity rise at zone-center is due to selective mode heating, phonon renormalization, or both, is not an important distinction. The diffuse intensity rise at zone-center can be associated with strong electron-phonon coupling to zone-center modes polarized in the $c$ direction and at least an order-of-magnitude lower coupling everywhere else in the plane.
 
@@ -407,7 +407,7 @@ The relaxation mechanism which is compatible with the UEDS measurements involves
 
 The UEDS measurements and the discussion of the previous sections demonstrates that strong electron-phonon coupling to one or more $c$-polarized zone-center phonons is very strong. However, the impacts of this strong coupling depends on which specific phonon branches are involved.
 
-There are two major, competing effects. The modes might involve the acoustic branches which are responsible for most of the thermal transport at equilibrium. On the other hand, ff the strongly-coupled modes are the soft transverse modes involved in the $Pnma \to Cmcm$ phase transition, then the strong electron-phonon coupling may explain the origin of the $Cmcm$ phase.
+There are two major, competing effects. The modes might involve the acoustic branches which are responsible for most of the thermal transport at equilibrium. On the other hand, ff the strongly-coupled modes are the soft transverse modes involved in the $Pnma \to Cmcm$ phase transition, then the strong electron-phonon coupling may drive the $Pnma \to Cmcm$ phase transition.
 
 #### Ultralow thermal transport
 
@@ -424,18 +424,15 @@ The MIR limit expresses that the transport properties of quasiparticles saturate
 
 #### Phase transition mechanism
 
+TODO?
 
 ## Conclusion
 
-
+In this chapter, combined ultrafast electron diffraction and diffuse scattering measurements on photodoped SnSe were presented. The measurements showed strong electron-phonon coupling to zone-center phonon modes polarized along the lattice distortion of the low-temperature $Pnma$ phase, and uniformly-weaker electron-phonon coupling everywhere else. Anharmonic coupling between zone-center modes and modes away from $\Gamma$ was found to be less important than electron-phonon coupling, contrary to most calculations and assumptions made in the literature. These results reveal that strong, anisotropic electron-phonon coupling may play a large role in SnSe's ultralow thermal conductivity and the $Pnma \to Cmcm$ phase transition. These findings recontextualize a lot of previous calculations and measurements on high-performance intrinsic thermoelectrics.  
 
 ### Outlook
 
-There are multiple natural extensions of the research presented in this chapter.
-
-
-
-One important extension is study high-quality, fully-dense crystals. The crystals used here are the exact used in Zhao *et al*[@Zhao2014], which have been criticized for not being fully-dense[@Wei2016] (\SI{5.43}{\gram\per\cubic\centi\meter} vs. \SI{6.13}{\gram\per\cubic\centi\meter}). This discrepancy in densities brings a drop in DC electrical conductivity by a factor of 10[@Zhao2014; @Wei2019]. Using high-quality, low-defect samples will enable the simultaneous application of UEDS and terahertz spectroscopy to fully-characterize the determinants of thermoelectricity following impulsive photodoping.
+There are multiple natural extensions of the research presented in this chapter. Do the phonon dynamics change near \SI{600}{\kelvin}, where the conduction band minimum changes? Can photoexcitation drive the material into a metastable $Cmcm$-like phase with impulsive photodoping? Performing similar UEDS experiments at higher temperatures would answer these questions. Another important avenue to explore is study high-quality, fully-dense crystals. The crystals used here are the exact used in Zhao *et al*[@Zhao2014], which have been criticized for not being fully-dense[@Wei2016] (\SI{5.43}{\gram\per\cubic\centi\meter} vs. \SI{6.13}{\gram\per\cubic\centi\meter}). This discrepancy in densities brings a drop in DC electrical conductivity by a factor of 10[@Zhao2014; @Wei2019]. Using high-quality, low-defect samples will enable the simultaneous application of UEDS and terahertz spectroscopy to fully-characterize the determinants of thermoelectricity following impulsive photodoping.
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 [^zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.

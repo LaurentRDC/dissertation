@@ -352,9 +352,7 @@ The energy trends for modes TA and TO2 are commensurate with the description of 
 
 ## Mode-projected excitation couplings
 
-TODO: better introduction with explanation of coupling matrix elements.
-
-Electron-phonon and phonon-phonon coupling describe the strength of the coupling between excitations in a material. A coupling constant $G$ describes the rate of energy transfer from one excitation type to another, if the temperature of one unit of volume was warmed up by \SI{1}{\kelvin}. Electron-phonon and phonon-phonon coupling is impossible to measure directly at equilibrium. In this section, UEDS measurements of phonon population dynamics will be used to experimentally determine mode-dependent electron-phonon and phonon-phonon coupling terms.
+In this section, the phonon population dynamics will be used to extract the electron-phonon coupling matrix element to the $A_1^\prime$ mode, and compare the value to other measurements and calculations.
 
 The nonequilibrium flow of energy between excitations, both electronic and lattice in nature, has historically been crudely modelled using the *two-temperature model* [@Allen1987]. In summary, this model states that while the concept of temperature does not apply to nonequilibrium situations, the energy distribution of the electrons and lattice waves may be treated separately. In other words, the separate thermalization of the electronic and lattice subsystems is much faster than the energy transver between them. It is evident that such a description does not adequately model experimental results from @sec:graphite-ph-spectroscopy for two main reasons. First, the decay of optical phonons to acoustic ones overlaps significantly in time with the transfer of energy from the photoexcited electrons to strongly-coupled optical modes. Second, the energy distribution of lattice waves is far from thermal, even at \SI{100}{\pico\second}. Some authors have extended the two-temperature model based on the details of the system being studied[@Stange2015].
 
@@ -375,7 +373,9 @@ $$
     \end{array}
 \right\}_{\lambda=1}^{N}
 $${#eq:graphite-nlm}
-where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The constants $G_{ep, \lambda}$ describe the rate of energy flow between the electrons and phonon mode $\lambda$, while constants $G_{pp, \lambda \lambda^\prime}$ encode the rate of energy flow between phonon modes $\lambda$ and $\lambda^\prime$. The constants $G$ are related to electron-phonon and phonon-phonon coupling matrix elements. Their relationship is developed further below in @sec:graphite-coupling-constants.
+where $f(\tau)$ is the laser pulse profile, and $C_e$ and $T_e$ are the electronic heat capacity and electron temperature, respectively. As discussed in @sec:graphite-prev-studies, the use of an electronic temperature is acceptable for $\tau > \SI{100}{\femto\second}$. The constants $G_{ep, \lambda}$ describe the rate of energy flow between the electrons and phonon mode $\lambda$, while constants $G_{pp, \lambda \lambda^\prime}$ encode the rate of energy flow between phonon modes $\lambda$ and $\lambda^\prime$. 
+
+A small clarification is needed. A coupling constant $G$ describes the rate of energy transfer from one excitation type to another, if the temperature of one unit of volume was increase by \SI{1}{\kelvin}. This is *not* directly equivalent to the electron-phonon coupling matrix $g$ introduced in @sec:introduction-epc, but it is a helpful intermediate experimental quantity. The relationship between $G$ and $g$ is developed further below in @sec:graphite-coupling-constants.
 
 Observations of transient phonon populations are more general than mode temperatures. However, in order to make use of the non-thermal lattice model, the mode temperature can be related to transient phonon mode populations via the Bose-Einstein distribution[@Bose1924]:
 $$
@@ -456,7 +456,7 @@ The solution to @eq:graphite-nlm-system using the measurements of the $A_1^\prim
 
 ### Mode-projected electron-phonon coupling matrix elements {#sec:graphite-coupling-constants}
 
-In order to compare to theory and other experiments, the value of electron-phonon coupling matrix-element $\langle g^2_{e, A_1^\prime} \rangle$ is calculated from the coupling constants determined from solving @eq:graphite-nlm-system.
+In order to compare to theory and other experiments, the value of electron-phonon coupling matrix element $g_{e, A_1^\prime}$ (reported in the form of an amplitude $\langle g^2_{e, A_1^\prime} \rangle$) is calculated from the coupling constants $G$ determined from solving @eq:graphite-nlm-system. Refer to @sec:introduction-epc for an introduction to the electron-phonon coupling matrix.
 
 In general, the electron-phonon matrix element $\langle g^2_{e,\lambda}(\vec{k}) \rangle$ between the electronic system and phonon mode $\lambda$ at wavevector $\vec{k}$ is most simply related to the relaxation time $\tau_{e,\lambda}(\vec{k})$ between the two subsystems[@Na2019]:
 $$

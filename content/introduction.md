@@ -81,7 +81,7 @@ The description of the impulse response of ordered systems like crystals is fund
 
 While the lattice impulse response in terms of lattice modes represent a large part of the total impulse response of a crystalline system, few techniques are capable of resolving such lattice waves. This is due to two main reasons. First, lattice waves are a mostly low-energy phenomena ($<\SI{200}{\milli\electronvolt}$). Second, lattice waves may not induce a dipole moment, which makes some of the modes optically-dark. At equilibrium, multiple techniques are either sensitive to some modes (e.g. Raman[@Long1977] and Brillouin[@Bai2018] spectroscopies) or all modes (x-ray[@Holt1999; @Xu2005] and neutron[@Bee1988] thermal diffuse scattering). But at ultrafast time-scales, where modes can be effectively be populated at any wavevector, the choices are much more restrictive. Signal-to-noise in ultrafast electron scattering experiments is now sufficient to measure the effects of lattice waves following impulsive photoexcitation[@Harb2016; @Chase2016; @Waldecker2017; @Stern2018;@RenedeCotret2019; @Otto2020]. 
 
-### Electron-phonon interactions
+### Electron-phonon interactions{#sec:introduction-epc}
 
 Electron-phonon interactions play an important role in impulse response of the lattice to light given that most of the pump optical energy is absorbed by electrons. In this section, a basic description of electron phonon interactions is given, and more details are presented when needed in @sec:graphite and @sec:snse. The Hamiltonian which describes such a system of electrons and ions at zero-temperature is given by:
 $$
@@ -104,9 +104,11 @@ The associated interaction Hamiltonian is given by:
 $$
     \hat{H}_{ep}(\vec{r}) = \int d\vec{r} \hat{\rho}(\vec{r}) V_{ep}(\vec{r})
 $$
-where $\hat{\rho}(\vec{r})$ is the electron density operator.
-
-TODO: what lessons can we pull out of this? E-ph interaction is changed by screening, wihch is induced by photoexcitation.
+where $\hat{\rho}(\vec{r})$ is the electron density operator. In the second quantization framemework, another expression for $\hat{H}_{ep}$ is given by[@Giustino2017]:
+$$
+    \hat{H}_{ep} = \sum_{a,b, \lambda} \int \frac{d\vec{k}_e}{(2 \pi)^3} \int \frac{d\vec{k}_p}{(2 \pi)^3} ~ g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) ~ \hat{c}^{\dagger}_{a}(\vec{k_e} + \vec{k}_p)\hat{c}_b(\vec{k}_e) \left( \hat{a}_{\lambda}(\vec{k}_p) + \hat{a}^{\dagger}_{\lambda}(-\vec{k}_p)\right)
+$$
+where $a$ and $b$ label electron bands, $\lambda$ labels phonon modes, $\hat{c}^{\dagger}_{a}$ ($\hat{c}_{a}$) is the creation (annihilation) operator for electrons in band $a$, $\hat{a}^{\dagger}_{\lambda}$ ($\hat{a}_{\lambda}$) is the creation (annihilation) operator for phonon mode $\lambda$, $\vec{k}_e$ and $\vec{k}_p$ are the electronic and phonon wavevectors respectively, and $g$ is the electron-phonon coupling matrix. The electron-phonon coupling matrix is effectively impossible to measure at equilibrium. Until recently, the determination of this coupling matrix was the purview of calculations. Ultrafast measurements are able to get at $g$ via the lifetime of excitations[@Brorson1990; @Ferrari2007; @Na2019; @RenedeCotret2019].
 
 ## Brief history of ultrafast electron scattering {#sec:ues}
 

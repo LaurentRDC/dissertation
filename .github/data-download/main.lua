@@ -556,7 +556,7 @@ if sharepointDownload or url:find("sharepoint.com", 1, true) then
 			local editorName = item.Editor and item.Editor[1] and item.Editor[1].title
 								or ((item.FileRef:match("/?(.-/[^/]+)"):gsub("[/ ]", "")) or "unknown")
 			local folderName = item.FileLeafRef
-			if folderName:find("2001") then -- TODO
+			if folderName:find("2001") then
 				dlFolder(itemApiUrl .."/children", editorName .."/".. folderName .. "/")
 			end
 		elseif item.FSObjType == "-1" then

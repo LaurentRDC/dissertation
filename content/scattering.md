@@ -211,14 +211,6 @@ $$
 $$
 where $h$, $k$, and $l$ are all integers. Expressed in the reciprocal basis, reciprocal points are traditionally denoted as $\vec{H} = (hkl)$. The indices $h$, $k$, and $l$ are called *Miller indices*, named for W. H. Miller[@Miller1839]. 
 
-<!-- #### Geometrical interpretation of reciprocal space
-
-The reciprocal lattice is the *dual* of real-space lattice. The duality relationship encodes the idea of orthogonality, that is, reciprocal points are supposed to be in some sense perpendicular to the point on the real lattice. To understand what that means, consider the real-space points $\vec{a}_1/h$ and $\vec{a}_2/k$ defined on the real-space lattice, and the reciprocal point $\vec{H} = (hkl)$:
-$$
-    \left( \frac{\vec{a}_1}{h} - \frac{\vec{a}_2}{k} \right) \cdot \vec{H} = 0
-$$
-The vector $\vec{a}_1/h - \vec{a}_2/k$ lies in a plane, and the vector $\vec{H}=(hkl)$ is perpendicular to this plane for any $l$. This example illustrates that reciprocal points $(hkl)$ define planes in real-space. TODO: demonstrate that $|\vec{H}| = 1/d_{hkl}$ -->
-
 #### Diffraction for large crystals
 
 Now that the reciprocal points $\set{\vec{H}}$ have been introduced, an alternative form of @eq:scattering-diffracted-intensity-zero-temp for large crystals can be written down. Consider the counting of atoms to change from label $i$ to labels $(m, s)$, where $m$ labels unit cells and $s$ labels unit cell atoms. In this case, the atomic positions can be written as:
@@ -366,9 +358,9 @@ where the problem has been reduced to the evaluation of $\langle e^{-i \vec{q} \
 
 Consider now the description of the displacement vectors as a superposition of lattice waves, or phonons. This is most easily done in the second quantization framework[@Altland2010SecondQuantization], which states that every displacement vector $\vec{u}_s$ can be expressed as:
 $$
-    \vec{u}_{m,s} = \sum_{\lambda} \sum_{\set{\vec{k}}} \sqrt{\frac{\hbar}{2 \mu_s N \omega_{\lambda}(\vec{k})}} \left( a_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + a_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right) e^{i \vec{k} \cdot \vec{r}_{m,s}}\vec{e}_{s,\lambda}(\vec{k}) 
+    \vec{u}_{m,s} = \sum_{\lambda} \sum_{\set{\vec{k}}} \sqrt{\frac{\hbar}{2 \mu_s N \omega_{\lambda}(\vec{k})}} \left( \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right) e^{i \vec{k} \cdot \vec{r}_{m,s}}\vec{e}_{s,\lambda}(\vec{k}) 
 $${#eq:scattering-displacement}
-where $\set{\lambda}$ label phonon branches, $\mu_s$ is the mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vec{k}$, $a_{\lambda}(\vec{k})$ and $a_{\lambda}^{\dagger}(\vec{k})$ are the creation and annihilation operators for the phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vec{k})$ is the phase of a lattice wave, and $\vec{e}_{s,\lambda}(\vec{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\vec{u}_{m,s}$ is the combined effect of all possible phonon modes at the $\vec{r}_{m,s}$ lattice site. The sum $\sum_{\set{\vec{k}}}$ assumes the normalization of @eq:scattering-norm. 
+where $\set{\lambda}$ label phonon branches, $\mu_s$ is the mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vec{k}$, $\hat{a}_{\lambda}(\vec{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vec{k})$ are the creation and annihilation operators for the phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vec{k})$ is the phase of a lattice wave, and $\vec{e}_{s,\lambda}(\vec{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\vec{u}_{m,s}$ is the combined effect of all possible phonon modes at the $\vec{r}_{m,s}$ lattice site. The sum $\sum_{\set{\vec{k}}}$ assumes the normalization of @eq:scattering-norm. 
 
 The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle$ [@Hausdorff1906]. It states that for two operators $A$ and $B$ with commutator $[A,B]$:
 $$
@@ -378,7 +370,7 @@ This allows to simplify the average as:
 $$
 \langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\vec{u}_s - \vec{u}_{s^\prime}) + \frac{1}{2}[\vec{q} \cdot \vec{u}_s, \vec{q} \cdot \vec{u}_{s^{\prime}}]} \rangle
 $$
-Furthermore, note that $[a_{\lambda}(\vec{k}), a_{\lambda}^{\dagger}(\vec{k})] = 1$ so that the following simplification is valid:
+Furthermore, note that $[\hat{a}_{\lambda}(\vec{k}), \hat{a}_{\lambda}^{\dagger}(\vec{k})] = 1$ so that the following simplification is valid:
 $$
 \langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\vec{u}_s - \vec{u}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vec{q} \cdot \vec{u}_s, \vec{q} \cdot \vec{u}_{s^{\prime}}]} \rangle
 $$
@@ -403,26 +395,26 @@ For small displacement vectors $\vec{u}$, $\vec{q} \cdot \vec{u} \leq |\vec{q}| 
 Using @eq:scattering-displacement:
 \begin{multline}
     (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) = \\
-        \frac{\hbar}{2 N} \left( \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})}{\sqrt{\mu_s \omega_{\lambda}(\vec{k})}} \left[ a_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + a_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right] e^{i \vec{k} \cdot \vec{r}_{m,s}} \right) \\
+        \frac{\hbar}{2 N} \left( \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})}{\sqrt{\mu_s \omega_{\lambda}(\vec{k})}} \left[ \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right] e^{i \vec{k} \cdot \vec{r}_{m,s}} \right) \\
         \left( \sum_{\lambda^\prime} \sum_{\set{\vec{k}^\prime}} \frac{\vec{q} \cdot \vec{e}_{\lambda^\prime,s^\prime}(\vec{k}^\prime)}{\sqrt{\mu_{s^\prime} \omega_{\lambda^\prime}(\vec{k}^\prime)}} \left[ a_{\lambda^\prime}(\vec{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vec{k}^\prime)} + a_{\lambda^\prime}^{\dagger}(\vec{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vec{k}^\prime)} \right] e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}\right)
 \end{multline}
 Equivalently:
 \begin{multline}
     \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle = \\
     \frac{\hbar}{2 N} \sum_{\lambda, \lambda^\prime} \sum_{\set{\vec{k}}, \set{\vec{k}^\prime}} \frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime} \omega_{\lambda}(\vec{k})\omega_{\lambda^\prime}(\vec{k}^\prime)}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}} \\
-    \left\langle \left[ a_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + a_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right] \left[ a_{\lambda^\prime}(\vec{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vec{k}^\prime)} + a_{\lambda^\prime}^{\dagger}(\vec{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vec{k}^\prime)} \right] \right\rangle
+    \left\langle \left[ \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right] \left[ a_{\lambda^\prime}(\vec{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vec{k}^\prime)} + a_{\lambda^\prime}^{\dagger}(\vec{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vec{k}^\prime)} \right] \right\rangle
 \end{multline}
 Since the phases $\phi_{s,m,\lambda}(\vec{k})$ are not correlated across unit cells, the cross terms vanish:
 \begin{align}
     \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle 
     = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\omega_{\lambda}(\vec{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}} \nonumber \\
-      & \left[ a_{\lambda}(\vec{k}) a_{\lambda}(\vec{k}) 
-         + a_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) 
-         + a^{\dagger}_{\lambda}(\vec{k}) a_{\lambda}(\vec{k}) 
+      & \left[ \hat{a}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k}) 
+         + \hat{a}_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) 
+         + a^{\dagger}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k}) 
          + a^{\dagger}_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) \right] \nonumber \\
     = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\omega_{\lambda}(\vec{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}} \left[ 2 n_{\lambda}(\vec{k}) + 1\right]
 \end{align}
-where $n_{\lambda}(\vec{k}) \equiv a_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) = a^{\dagger}_{\lambda}(\vec{k}) a_{\lambda}(\vec{k})  - 1$ is the excitation number operator. Simplifying further:
+where $n_{\lambda}(\vec{k}) \equiv \hat{a}_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) = a^{\dagger}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k})  - 1$ is the excitation number operator. Simplifying further:
 $$
 \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})}\frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}
 $$
