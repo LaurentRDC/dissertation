@@ -16,6 +16,11 @@
 \usepackage{multirow}
 \usepackage{fancyhdr}
 
+% Change footnotes to be marked by symbols instead of number
+% The numbers look too much like citations
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 % Make vectors look bold
 % Vector notation: \vec{q}
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}

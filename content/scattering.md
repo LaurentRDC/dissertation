@@ -505,13 +505,15 @@ The second part of the summation terms are the one-phonon structure factors. The
 ```{.matplotlib #fig:scattering-oneph-example file="figures/scattering/oneph.py" caption="One-phonon structure factor $|F_{1\lambda}(\vec{q})|^2$ for the in-plane longitudinal acoustic mode of graphite. The range of scattering vectors $\vec{q}$ corresponds to the geometry of the instrument described in @sec:experimental_setup."}
 ```
 
-Diffuse scattering and the effect of one-phonon structure factors is further explained in @sec:graphite.
+Diffuse scattering and the effect of one-phonon structure factors is further explored in @sec:graphite.
 
 ## Conclusion
 
-In this chapter, the theory of ultrafast electron scattering measurements were presented.
+In this chapter, the theory of ultrafast electron scattering measurements were presented. First, the scattering of electrons by any potential was considered. This was then applied to the case of elastic scattering of electrons by atoms, and then periodic arrangements of atoms at zero temperature. Finally, the full quantum derivation of ultrafast electron diffuse scattering was presented.
 
-[^tmatrix]: Interested readers are encouraged to peruse chapter 6 of Sakurai and Napolitano [@Sakurai2014].
+The key takeaway from this chapter is that the Debye-Waller effect and diffuse scattering are two faces of the same coin. Both arise from the same physical phenomenon: atomic vibrations expressed as a superposition of lattice waves. In @sec:graphite, ultrafast measurements in a prototypical benchmark system will show the full power of diffuse scattering measurements, while the link between the Debye-Waller effect and diffuse scattering will play a large role in @sec:snse.
+
+[^tmatrix]: Interested readers are encouraged to peruse Chapter 6 of Sakurai and Napolitano [@Sakurai2014].
 [^conj]: Note that because $V(\vec{x})$ is real, $\int d\vec{x}^\prime e^{-i\vec{k} \cdot \vec{x}^\prime} V(\vec{x}) = \int d\vec{x}^\prime e^{i\vec{k} \cdot \vec{x}^\prime} V(\vec{x})$.
 
 \FloatBarrier

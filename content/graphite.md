@@ -535,4 +535,4 @@ The procedure to extract phonon populations in @sec:graphite-ph-spectroscopy can
 ## References {.unnumbered}
 \printbibliography[heading=none]
 
-[^1]: Note that the factor of $\hbar$ has been erroneously ignored by Castro Neto *et al.*[@Neto2009]. 
+[^1]: Note that the factor of $\hbar$ has been erroneously ignored by Castro Neto *et al.*[@Neto2009]

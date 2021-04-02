@@ -104,7 +104,7 @@ The associated interaction Hamiltonian is given by:
 $$
     \hat{H}_{ep}(\vec{r}) = \int d\vec{r} \hat{\rho}(\vec{r}) V_{ep}(\vec{r})
 $$
-where $\hat{\rho}(\vec{r})$ is the electron density operator. In the second quantization framemework, another expression for $\hat{H}_{ep}$ is given by[@Giustino2017]:
+where $\hat{\rho}(\vec{r})$ is the electron density operator. For highly-ordered crystalline systems like the ones studied in this dissertation, it is helpful to express the interaction Hamiltonian in momentum space. In momentum space, $\hat{H}_{ep}$ is expressed most simply in the second quantization framework[@Giustino2017]:
 $$
     \hat{H}_{ep} = \sum_{a,b, \lambda} \int \frac{d\vec{k}_e}{(2 \pi)^3} \int \frac{d\vec{k}_p}{(2 \pi)^3} ~ g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) ~ \hat{c}^{\dagger}_{a}(\vec{k_e} + \vec{k}_p)\hat{c}_b(\vec{k}_e) \left( \hat{a}_{\lambda}(\vec{k}_p) + \hat{a}^{\dagger}_{\lambda}(-\vec{k}_p)\right)
 $$
@@ -114,7 +114,7 @@ where $a$ and $b$ label electron bands, $\lambda$ labels phonon modes, $\hat{c}^
 
 The extension of electron microscopy into time-domain studies is not new. This section will be limited to ultrafast electron scattering in the form of diffraction; see the review by King *et al.*[@King2005] for a historical perspective on ultrafast electron microscopy in general. As early as 1982, Gerard Mourou and Steve Williamson [@Mourou1982] followed the picosecond-scale transformation of an aluminum film following photoexcitation. In this work, the authors prepare \SI{100}{\pico\second} electron bunches using a streak camera. They note that the temporal resolution of the experiment is ultimately limited by the length of the electron bunch:
 
-> *The electron pulse width has been measured by using the camera in the normal streak mode and is found to be ~ 100 ps. This value departs significantly from the 15-ps pulse width expected. The pulse broadening is due to the space-charge effect caused by the relatively high electron flux required to photograph the pattern with our present system.*
+> *The electron pulse width has been measured by using the camera in the normal streak mode and is found to be $\sim$\SI{100}{\pico\second}. This value departs significantly from the \SI{15}{\pico\second} pulse width expected. The pulse broadening is due to the space-charge effect caused by the relatively high electron flux required to photograph the pattern with our present system.*
 
 The challenges of ultrafast electron scattering on the \SI{100}{\femto\second} time-scale were apparent in the first ultrafast electron scattering experiments. Measurements of atomic structure require high beam brightness (i.e. high signal-to-noise), but dense electron bunches experience space-charge repulsion (i.e. worsening time-resolution). The trade-off between signal-to-noise and time-resolution is represented as the expansion of the bunch length $l$:
 $$
@@ -245,7 +245,7 @@ These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to
 
 ### Interactive data exploration software
 
-Scans of the time-delay $\tau$ are repeated multiple times to increase the signal-to-noise ratio. The author has created a software suite (@fig:introduction-iris-screen) that performs data reduction and allows for the interactive exploration of the reduced data. While this software suite has had a profound impact on the research presented in this work, the details are not necessary to appreciate the results presented in @sec:graphite and @sec:snse. Interested readers are encouraged to read more in the @sec:appendix-software and René de Cotret *et al.*[@RenedeCotret2018]
+Scans of the time-delay $\tau$ are repeated multiple times to increase the signal-to-noise ratio. The author has created a software suite (@fig:introduction-iris-screen) that performs data reduction and allows for the interactive exploration of the reduced data. While this software suite has had a profound impact on the research presented in this work, the details are not necessary to appreciate the results presented in @sec:graphite and @sec:snse. Interested readers are encouraged to read more in René de Cotret *et al.*[@RenedeCotret2018]
 
 ![Graphical user interface of `iris`. **Background** Interactive exploration of a dataset of photoexcited TiSe$_2$. **Foreground** Interactive exploration of a dataset of photoexcited polycrystalline VO$_2$](images/iris_screen.png){#fig:introduction-iris-screen}
 

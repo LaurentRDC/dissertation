@@ -43,14 +43,13 @@ SRC = [
     CONTENTDIR / "graphite.md",
     CONTENTDIR / "snse.md",
     CONTENTDIR / "conclusion.md",
+    #CONTENTDIR / "appendix.md"
 ]
 
 BIBFILE = Path("references.bib")
 
-APPENDIX = CONTENTDIR / "appendix.md"
-
-## Auxiliary files
-## (Do not change!)
+# Auxiliary files
+# (Do not change!)
 TITLEPAGE = "titlepage.tex"
 FRONTMATTER = "frontmatter.tex"
 
@@ -143,7 +142,7 @@ def run(cmd, *args, **kwargs):
     return subprocess.run(cmd, *args, shell=True, cwd=cwd, **kwargs)
 
 
-def runpandoc(options, target, sourcefiles, appendices=None):
+def runpandoc(options, target, sourcefiles):
     """
     Run pandoc with options and source files
 
@@ -157,12 +156,8 @@ def runpandoc(options, target, sourcefiles, appendices=None):
         List of source files
     references : path-like
         Reference file
-    appendices : path-like
-        Appendices
     """
     stringify = lambda xs: " ".join([str(x) for x in xs])
-    if appendices is not None:
-        sourcefiles += [appendices]
     return run(
         f"pandoc +RTS -N -RTS {stringify(options)} -o {target} {stringify(sourcefiles)}",
     ).check_returncode()
@@ -198,7 +193,7 @@ def runlatex(source):
     run(f"{LATEX_ENGINE} {latex_options} {source}").check_returncode()
 
 
-def buildpdf(options, target, sourcefiles, appendices=None):
+def buildpdf(options, target, sourcefiles):
     # We purposefully bypass pandoc-citeproc because we want
     # to have references at the end of each chapter
     # This is much easier to do with biblatex.
@@ -211,7 +206,6 @@ def buildpdf(options, target, sourcefiles, appendices=None):
         options=options,
         target=BUILDDIR_PDF / target.with_suffix(".tex"),
         sourcefiles=sourcefiles,
-        appendices=appendices,
     )
 
     # TODO: also check for undefined references in the log file
@@ -260,7 +254,6 @@ def build_simple(target):
         options=OPTIONS,
         target=target,
         sourcefiles=SRC,
-        appendices=APPENDIX,
     )
 
 
@@ -285,6 +278,11 @@ def build_eisvogel(target):
     options += ["-V titlepage=true"]
     options += ["-V titlepage-text-color=FFFFFF"]
     options += ["-V titlepage-rule-height=0"]
+    # TODO: option for print where citations, urls, and internal links
+    #       are in black
+    options += ["-V linkcolor=Violet"]
+    options += ["-V citecolor=Violet"]
+    options += ["-V urlcolor=Violet"]
     # Note that the path separators absolutely needs to be '\'
     titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
     options += [f"-V titlepage-background={titlepage_path}"]
@@ -294,7 +292,6 @@ def build_eisvogel(target):
         options=options,
         target=target,
         sourcefiles=SRC,
-        appendices=APPENDIX,
     )
 
 
