@@ -60,7 +60,7 @@ TMP = [TMP1, TMP2]
 AUX_OPTS = ["--wrap=preserve"]
 
 OPTIONS = [
-    "-f markdown+raw_tex"
+    "-f markdown+raw_tex+latex_macros"
 ]  # Some raw tex for \listoffigures macro and siunitx package
 OPTIONS += ["--standalone"]
 
@@ -100,8 +100,6 @@ OPTIONS += ["--toc"]
 OPTIONS += ["--toc-depth=3"]
 OPTIONS += ["--number-sections"]
 OPTIONS += ["--top-level-division=chapter"]
-
-OPTIONS += ["-V colorlinks=true"]
 
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
 

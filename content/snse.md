@@ -303,16 +303,14 @@ With the appropriate partitioning of the Brillouin zone (@fig:snse-geometry), it
 ```
 
 ### Transient mean-square-displacement due to soft-modes
-
-The extraction of the transient mean-square-displacement due to zone-center soft modes is presented in this section. The transient mean-square-displacement from diffuse scattering is first considered. From @eq:snse-diffuse-amplitude:
+<!-- The extraction of the transient mean-square-displacement due to zone-center soft modes is presented in this section. The transient mean-square-displacement from diffuse scattering is first considered. From @eq:scattering-diffuse-intensity:
 \begin{align}
     I_1(\vec{q}, \tau) - I_1(\vec{q},0) 
-        & = I_e \sum_{\lambda} \left| a_{\lambda}(\vec{k}, \tau)\right|^2 \left| F_{1\lambda}\right|^2 
-          - I_e \sum_{\lambda}\left| a_{\lambda}(\vec{k}, 0)\right|^2 \left| F_{1\lambda}\right|^2 \nonumber \\
-        & = I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left( \left| a_{\lambda}(\vec{k}, \tau)\right|^2 - \left| a_{\lambda}(\vec{k}, 0)\right|^2 \right)
+        & = I_e \sum_{\lambda} \frac{n_{\lambda}(\vec{k},\tau) + 1/2)}{\omega_{\lambda}(\vec{k}, \tau)} \left| F_{1\lambda}\right|^2 
+          - I_e \sum_{\lambda} \frac{n_{\lambda}(\vec{k},0) + 1/2)}{\omega_{\lambda}(\vec{k}, 0)} \left| F_{1\lambda}\right|^2 \nonumber \\
+        & = I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left(\frac{n_{\lambda}(\vec{k},\tau) + 1/2)}{\omega_{\lambda}(\vec{k}, \tau)} - \frac{n_{\lambda}(\vec{k},0) + 1/2)}{\omega_{\lambda}(\vec{k}, 0)} \right)
 \end{align}
-where the prefactors in @eq:scattering-diffuse-intensity have all been collected in the quantity $I_e$. As expected, the change in vibrational amplitude is weighted by the one-phonon structure factors. Therefore, to precisely know the transient vibrational amplitude would require to know which modes are involved, as well as the values of the one-phonon structure factors at zone-center. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso[@QuantumEspresso2009; @QuantumEspresso2017] or VASP[@Kresse1999]. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead. 
-
+As expected, the change in vibrational amplitude ($(n + 1/2)/\omega$) is weighted by the one-phonon structure factors. Therefore, to precisely know the transient vibrational amplitude would require to know which modes are involved, as well as the values of the one-phonon structure factors at zone-center. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso[@QuantumEspresso2009; @QuantumEspresso2017] or VASP[@Kresse1999]. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead.  -->
 The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
 \begin{align}
     \frac{I_0(\vec{q},\tau) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
@@ -420,7 +418,7 @@ The behavior of $\kappa$ with increasing temperature exhibits an asymptotic beha
 ```{.matplotlib file="figures/snse/klat.py" caption="Lattice thermal conductivity $\kappa_{lat}$ along the crystallographic axes of SnSe."}
 ```
 
-The MIR limit expresses that the transport properties of quasiparticles saturate once their mean-free-path has fallen below the lattice dimensions[@Zhang2019]. Our measurements suggest that the phonon mean-free-path in SnSe might be close to the MIR limit above \SI{600}{\kelvin} due to strong EPC. This happens at equilibrium due to the thermal enhancement of the electron-phonon scattering rate (Eq. \ref{EQ:epc-scattering-rate}), and ultrafast PDS reveals a similar behavior via impulsive photodoping. 
+The MIR limit expresses that the transport properties of quasiparticles saturate once their mean-free-path has fallen below the lattice dimensions[@Zhang2019]. Our measurements suggest that the phonon mean-free-path in SnSe might be close to the MIR limit above \SI{600}{\kelvin} due to strong EPC. This happens at equilibrium due to the thermal enhancement of the electron-phonon scattering rate (@eq:snse-ep-scattering-rate), and ultrafast PDS reveals a similar behavior via impulsive photodoping. 
 
 #### Phase transition mechanism
 

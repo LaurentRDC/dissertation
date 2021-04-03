@@ -243,7 +243,7 @@ On the probe line, two barium borate (BBO) crystals are used to generate the thi
 
 These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to 53% of the speed of light. After acceleration, a solenoid lens loosely focuses the electron bunches through the \SI{3}{\milli\meter} aperture of the RF compression cavity described in @sec:intro-cavity, ensuring that electron bunches do not lose much charge before compression. After the RF compression cavity, another solenoid lens focuses the transverse profile of the electron bunches onto the detector, so that the diffraction pattern is imaged clearly. Electron bunches are transmitted through the sample at normal incidence. The scattering pattern is collected by an electron camera (Gatan Ultrascan 895), on a cooled charge-coupled detector. The transmitted, unscattered beam is collected by a Faraday cup. A Keithley 6514 electrometer measures the charge on the Faraday cup at a rate of \SI{1}{\kilo\hertz}, giving a rough estimation of the bunch-to-bunch charge fluctuations.
 
-### Interactive data exploration software
+### Interactive data exploration software {#sec:introduction-data-exploration}
 
 Scans of the time-delay $\tau$ are repeated multiple times to increase the signal-to-noise ratio. The author has created a software suite (@fig:introduction-iris-screen) that performs data reduction and allows for the interactive exploration of the reduced data. While this software suite has had a profound impact on the research presented in this work, the details are not necessary to appreciate the results presented in @sec:graphite and @sec:snse. Interested readers are encouraged to read more in René de Cotret *et al.*[@RenedeCotret2018]
 

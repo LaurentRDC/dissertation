@@ -3,7 +3,7 @@
 
 The scattering of light or particles by a sample is used by a large class of experimental techniques, dating back a hundred years. Scattering can be broadly defined as the modification of an incoming wave by a potential into outgoing wave, a process which imprints the outgoing wave with some characteristic of the potential. The outgoing wave may lose or gain energy, and its momentum might be changed. When multiple incoming waves are simultaneously used -- forming an incoming wavefront --, the outgoing waves may interfere constructively or destructively. This effect is particularly intense for periodic scattering potentials, for example in crystals.
 
-This chapter will consider the special case of *electron scattering*. In crystals, electrons are scattered by the electrostatic potential of ions and the electronic charge-density. Thanks to improvements to instrument stability (@sec:intro-cavity), as well as advances in data acquisition and data analysis attributable to the author (@sec:appendix-software), the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
+This chapter will consider the special case of *electron scattering*. In crystals, electrons are scattered by the electrostatic potential of ions and the electronic charge-density. Thanks to improvements to instrument stability (@sec:intro-cavity), as well as advances in data acquisition and data analysis attributable to the author (@sec:introduction-data-exploration), the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
 
 In writing this chapter, the author has tried original derivations that emphasize concepts that are important for the remainder of this dissertation. The derivation of ultrafast diffuse scattering intensity is of particular interest, because it is the only full quantum-mechanical treatment relevant to ultrafast electron scattering specifically in the literature today.
 
@@ -104,7 +104,7 @@ Electron cameras measure the intensity of the wavefunction. In the case of brigh
 $$
     I(\vec{x}) \equiv \left| \braket{\vec{x} | \Psi} \right|^2
 $$
-In order to sample the scattered wavefunction in reciprocal space, an electron lens can be used to focus the scattered electrons onto the detector. Given that electrons are prepared with definite momentum $\vec{k}_i$, it is trivial to ignore the unscattered part of the wavefunction -- the first term in @eq:scattering-lippmann-schwinger-general -- which is found only at $|\vec{k}_f| = 0$. Therefore, the intensity away from $|\vec{k}_f| = 0$ is related only to the scattered wavefunction, $\Psi$:
+In order to sample the scattered wavefunction in reciprocal space, an electron lens can be used to focus the scattered electrons onto the detector. Given that electrons are prepared with definite momentum $\vec{k}_i$, it is trivial to ignore the unscattered part of the wavefunction -- the first term in @eq:scattering-lippmann-schwinger-general -- which is found only at $\vec{k}_f = \vec{k}_i$. Therefore, the intensity away from $\vec{k}_i$ is related only to the scattered wavefunction, $\Psi$:
 \begin{align}
 I(\vec{k}_f - \vec{k}_i)
     & = \left| \braket{\vec{x} | \Psi} \right|^2 \nonumber \\
@@ -112,7 +112,7 @@ I(\vec{k}_f - \vec{k}_i)
     & = \frac{1}{r^2} |f(\vec{k}_f, \vec{k}_i)|^2
 \label{eq:scattering-intensity}
 \end{align}
-Therefore, the diffracted intensity $I(\vec{k}_f = \vec{k}_i)$ is proportional to the square of the scattering amplitude. 
+Therefore, the diffracted intensity $I(\vec{k}_f - \vec{k}_i)$ is proportional to the square of the scattering amplitude. 
 
 Note that the factor of $1/r^2$ is generally ignored[@Fultz2002r2]. For the instrument configuration presented in @sec:experimental_setup, $1/r^2$ varies from \SIrange{15.92}{16}{\per\square\meter}, from the corner to the center of the detector respectively. While not an insignificant variation, the experiments presented herein generally measure the relative change in intensity, in which case factors are not important.
 

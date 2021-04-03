@@ -106,7 +106,7 @@ You can refer to the equation like so @eq:myequation
 Because the section label for appendices should be a bit different, use a custom label like so:
 
 ```markdown
-lorem ipsum (see [appendix @sec:appendix]) ...
+lorem ipsum (see @sec:appendix) ...
 ```
 
 ## Acknowledgement
