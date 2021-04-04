@@ -19,7 +19,7 @@ jobs:
     - name: Install fonts
       run: |
         mkdir -p "~/.fonts"
-        cp "./fonts/*.otf" ~/.fonts
+        cp ./fonts/* ~/.fonts
         sudo fc-cache -f -v
 
     - name: Install LaTeX dependencies
