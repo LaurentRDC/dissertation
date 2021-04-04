@@ -16,6 +16,12 @@ jobs:
       with:
         python-version: 3.9
 
+    - name: Install fonts
+      run: |
+        mkdir -p "~/.fonts"
+        cp "./fonts/*.otf" ~/.fonts
+        sudo fc-cache -f -v
+
     - name: Install LaTeX dependencies
       run: |
         sudo add-apt-repository universe
@@ -52,6 +58,7 @@ jobs:
 
         # Ensure that iris is correctly set up
         python -c "import iris"
+  
 
     - name: Install Pandoc dependencies
       run: |
