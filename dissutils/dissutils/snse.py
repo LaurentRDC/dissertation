@@ -62,7 +62,7 @@ def photocarrier_density(fluence, thickness=SAMPLE_THICKNESS):
     Returns
     -------
     carrier_density : float
-        Injected photocarrier density [10^21 / cm^3]
+        Injected photocarrier density [1 / cm^3]
     """
     # Efficiency of absorbed photons in generating carriers
     # From B. Dringoli and D. Cooke, unpublished THz conductivity data
@@ -71,7 +71,7 @@ def photocarrier_density(fluence, thickness=SAMPLE_THICKNESS):
     energy = quantum_efficiency * absorbed_energy(fluence, thickness)  # J
     total_carriers = energy / (1.55 * eV)
     m3_to_cm3 = 1e6
-    return total_carriers / (SAMPLE_VOLUME * m3_to_cm3) / 1e20  # 1/cm^3
+    return total_carriers / (SAMPLE_VOLUME * m3_to_cm3)  # 1/cm^3
 
 
 class DatasetInfo:

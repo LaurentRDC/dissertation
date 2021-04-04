@@ -119,7 +119,7 @@ box_errorbars(
 # Add colorbar to show fluences
 # Note that to match the color of the points,
 cax = ax_displacement.inset_axes([0.28, 0.03, 0.7, 0.03])
-ph_density = photocarrier_density(fluences) * 1e-20  # [10^20 cm^-3]
+ph_density = photocarrier_density(fluences) / 1e20  # [10^20 cm^-3]
 cb = mpl.colorbar.ColorbarBase(
     cax,
     cmap=mpl.colors.ListedColormap(colors),

@@ -43,7 +43,7 @@ SRC = [
     CONTENTDIR / "graphite.md",
     CONTENTDIR / "snse.md",
     CONTENTDIR / "conclusion.md",
-    #CONTENTDIR / "appendix.md"
+    CONTENTDIR / "appendix.md",
 ]
 
 BIBFILE = Path("references.bib")

@@ -10,12 +10,14 @@ from dissutils.snse import photocarrier_density, SAMPLE_THICKNESS
 figure, carrier_ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 2.5))
 
 fluences = np.linspace(0, 14, 1024)
-densities = photocarrier_density(fluences, thickness=SAMPLE_THICKNESS)  # 10^21 / cm^3
+densities = (
+    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS) / 1e20
+)  # 10^20 / cm^3
 
 carrier_ax.fill_between(
     fluences,
-    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS + 5e-9),
-    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS - 5e-9),
+    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS + 5e-9)/1e20,
+    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS - 5e-9)/1e20,
     facecolor="gray",
     edgecolor="k",
     linestyle="dashed",

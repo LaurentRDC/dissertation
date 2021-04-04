@@ -245,9 +245,7 @@ These electrons are accelerated via a static potential of \SI{90}{\kilo\volt} to
 
 ### Interactive data exploration software {#sec:introduction-data-exploration}
 
-Scans of the time-delay $\tau$ are repeated multiple times to increase the signal-to-noise ratio. The author has created a software suite (@fig:introduction-iris-screen) that performs data reduction and allows for the interactive exploration of the reduced data. While this software suite has had a profound impact on the research presented in this work, the details are not necessary to appreciate the results presented in @sec:graphite and @sec:snse. Interested readers are encouraged to read more in René de Cotret *et al.*[@RenedeCotret2018]
-
-![Graphical user interface of `iris`. **Background** Interactive exploration of a dataset of photoexcited TiSe$_2$. **Foreground** Interactive exploration of a dataset of photoexcited polycrystalline VO$_2$](images/iris_screen.png){#fig:introduction-iris-screen}
+The experimental procedure employed in the Siwick research group acquires data in a repeating fashion, in order to increase the signal-to-noise ratio. The resulting experimental raw data can be hundreds of gigabytes in size. The author has created a software suite that performs data reduction and allows for the interactive exploration of the reduced data, in real-time. While this software suite has had a profound impact on the research presented in this work, the details are not necessary to appreciate the results presented in @sec:graphite and @sec:snse. Interested readers are encouraged to read more in @sec:appendix.
 
 ## Overview of the dissertation {#sec:overview}
 
