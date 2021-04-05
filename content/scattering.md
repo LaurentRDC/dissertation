@@ -141,7 +141,7 @@ The scattering potential of a single atom is given by:
 $$
     V_a(\vec{x}) = -\frac{Z e^2}{|\vec{x}|} + \sum_{i=1}^{Z} \frac{e^2}{|\vec{x} - \vec{x}_i|}
 $${#eq:scattering-atom-potential}
-where Z is the atomic weight, $\vec{x}$ is a position with respect to the ionic core, and $\vec{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles, using relativistic Hartree-Fock calculations[@Fischer1977; @Kirkland2010] to get the real-space electron density (i.e. determining the possible set $\set{\vec{x}_i}$). This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factors for electrons for light atoms are spherically symmetric[@Zheng2009]. They can be parametrized as:
+where Z is the atomic weight, $\vec{x}$ is a position with respect to the ionic core, and $\vec{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles, using relativistic Hartree-Fock calculations[@Fischer1977;@Kirkland2010] to get the real-space electron density (i.e. determining the possible set $\set{\vec{x}_i}$). This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factors for electrons for light atoms are spherically symmetric[@Zheng2009]. They can be parametrized as:
 $$
     f_e(\vec{q}) = \sum_{i=1}^3 \frac{a_i}{|\vec{q}|^2 + b_i} + c_i e^{-d_i|\vec{q}|^2}
 $${#eq:scattering-affe}
@@ -183,7 +183,7 @@ From @eq:scattering-intensity and @eq:scattering-amplitude-q, the measured diffr
 $$
     I(\vec{q}) = \frac{m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_i f_{e,i}(\vec{q}) e^{-i \vec{q} \cdot \vec{r}_i} \right|^2
 $${#eq:scattering-diffracted-intensity-zero-temp}
-This is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity; @Kittel1996intensity; @Fultz2002intensity; @Kirkland2010intensity]. 
+This is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity;@Kittel1996intensity;@Fultz2002intensity;@Kirkland2010intensity]. 
 
 ### The reciprocal lattice
 
@@ -227,7 +227,7 @@ Finally, note that because the vectors $\set{ \vec{R}_m }$ are integer multiples
 $$
     \sum_{m=1}^{N_c} e^{-i \vec{q} \cdot \vec{R}_m} \xrightarrow[]{N_c \to \infty} N_c \sum_{\set{\vec{H}}} \delta(\vec{q} - \vec{H})
 $${#eq:scattering-discrete-fourier}
-Therefore, for large $N_c$ (large crystals):
+which follows from the definition of the Fourier transform[@Robinson2016DiscreteFourier]. Therefore, for large $N_c$ (large crystals):
 $$
     I(\vec{q}) = \frac{N_c^2 m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_{\set{\vec{H}}}\sum_{s} f_{e,s}(\vec{q}) e^{-i \vec{q} \cdot \vec{x}_s} \delta(\vec{q} - \vec{H})\right|^2
 $$
@@ -344,9 +344,8 @@ Recall from @eq:scattering-intensity that the measurable quantity $|f^{(1)}(\vec
             e^{-i \vec{q} \cdot \vec{u}_{m,s}} e^{ i \vec{q} \cdot \vec{u}_{m^\prime, s^{\prime}}}
     \label{eq:scattering-average}
 \end{align}
-Note that the term $e^{-i \vec{q} \cdot \vec{u}_{m,s}} e^{ i \vec{q} \cdot \vec{u}_{m^\prime, s^{\prime}}}$ cannot always be simplified because $\set{\vec{u}_{m,s}}$ are quantum-mechanical operators, as will be explicitly stated below. 
 
-The evaluation of the sum in @eq:scattering-average requires some thought. The displacement vectors $\set{\vec{u}_{m,s}}$, where $\vec{u}_{m,s}$ and $\vec{u}_{m^\prime, s^{\prime}}$ are essentially uncorrelated (for $m \neq m^\prime$) for a large enough crystal. Then, the sum over $m$ and $m^{\prime}$ is equivalent to a thermal average over time. To this end, let us define the average $\langle \cdots \rangle \equiv \frac{1}{N_c}\sum_m \cdots$. @eq:scattering-average can then be expressed as:
+The evaluation of the sum in @eq:scattering-average requires some thought. The displacement vectors $\vec{u}_{m,s}$ and $\vec{u}_{m^\prime, s^{\prime}}$ are essentially uncorrelated (for $m \neq m^\prime$) for a large enough crystal. Then, the sum over $m$ and $m^{\prime}$ is equivalent to a thermal average over time. To this end, let us define the average $\langle \cdots \rangle \equiv \frac{1}{N_c}\sum_m \cdots$. @eq:scattering-average can then be expressed as:
 $$
     |f^{(1)}(\vec{q})|^2 = \frac{m_e^2}{N_c^2\hbar^4} \sum_{m, m^\prime} \sum_{s,s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q}) e^{-i \vec{q} \cdot (\vec{r}_{m,s} - \vec{r}_{m^\prime, s^{\prime}})}   
             \langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle
@@ -356,72 +355,72 @@ where the problem has been reduced to the evaluation of $\langle e^{-i \vec{q} \
 
 ### Quantizing lattice waves
 
-Consider now the description of the displacement vectors as a superposition of lattice waves, or phonons. This is most easily done in the second quantization framework[@Altland2010SecondQuantization], which states that every displacement vector $\vec{u}_s$ can be expressed as:
+Consider now the description of the displacement vectors as a superposition of lattice waves, or phonons. This is most easily done in the second quantization framework[@Altland2010SecondQuantization;@Giustino2017], which states that atomic displacement can be expressed as the quantum-mechanical operator:
 $$
-    \vec{u}_{m,s} = \sum_{\lambda} \sum_{\set{\vec{k}}} \sqrt{\frac{\hbar}{2 \mu_s N \omega_{\lambda}(\vec{k})}} \left( \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right) e^{i \vec{k} \cdot \vec{r}_{m,s}}\vec{e}_{s,\lambda}(\vec{k}) 
+    \hat{\vec{u}}_{m,s} = \sum_{\lambda} \sum_{\set{\vec{k}}} \sqrt{\frac{\hbar}{2 \mu_s N \omega_{\lambda}(\vec{k})}} \left( \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right) e^{i \vec{k} \cdot \vec{r}_{m,s}}\vec{e}_{s,\lambda}(\vec{k}) 
 $${#eq:scattering-displacement}
-where $\set{\lambda}$ label phonon branches, $\mu_s$ is the mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vec{k}$, $\hat{a}_{\lambda}(\vec{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vec{k})$ are the creation and annihilation operators for the phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vec{k})$ is the phase of a lattice wave, and $\vec{e}_{s,\lambda}(\vec{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\vec{u}_{m,s}$ is the combined effect of all possible phonon modes at the $\vec{r}_{m,s}$ lattice site. The sum $\sum_{\set{\vec{k}}}$ assumes the normalization of @eq:scattering-norm. 
+where $\set{\lambda}$ label phonon branches, $\mu_s$ is the mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vec{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vec{k}$, $\hat{a}_{\lambda}(\vec{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vec{k})$ are the creation and annihilation operators for the phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vec{k})$ is the phase of a lattice wave, and $\vec{e}_{s,\lambda}(\vec{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\hat{\vec{u}}_{m,s}$ is the combined effect of all possible phonon modes at the $\vec{r}_{m,s}$ lattice site. The sum $\sum_{\set{\vec{k}}}$ assumes the normalization of @eq:scattering-norm.
 
-The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle$ [@Hausdorff1906]. It states that for two operators $A$ and $B$ with commutator $[A,B]$:
+The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vec{q} \cdot \hat{\vec{u}}_s} e^{ i \vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}} \rangle$ [@Hausdorff1906]. It states that for two operators $A$ and $B$ with commutator $[A,B]$:
 $$
 e^A e^B = e^{A + B + \frac{1}{2}[A,B]}
 $$
 This allows to simplify the average as:
 $$
-\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\vec{u}_s - \vec{u}_{s^\prime}) + \frac{1}{2}[\vec{q} \cdot \vec{u}_s, \vec{q} \cdot \vec{u}_{s^{\prime}}]} \rangle
+\langle e^{-i \vec{q} \cdot \hat{\vec{u}}_s} e^{ i \vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\hat{\vec{u}}_s - \hat{\vec{u}}_{s^\prime}) + \frac{1}{2}[\vec{q} \cdot \hat{\vec{u}}_s, \vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}]} \rangle
 $$
 Furthermore, note that $[\hat{a}_{\lambda}(\vec{k}), \hat{a}_{\lambda}^{\dagger}(\vec{k})] = 1$ so that the following simplification is valid:
 $$
-\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\vec{u}_s - \vec{u}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vec{q} \cdot \vec{u}_s, \vec{q} \cdot \vec{u}_{s^{\prime}}]} \rangle
+\langle e^{-i \vec{q} \cdot \hat{\vec{u}}_s} e^{ i \vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}} \rangle = \langle e^{-i \vec{q} \cdot (\hat{\vec{u}}_s - \hat{\vec{u}}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vec{q} \cdot \hat{\vec{u}}_s, \vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}]} \rangle
 $$
 Finally, for operators $A$ which are a linear combination of position and momentum operators of a harmonic system, $\langle e^A \rangle = e^{\frac{1}{2}\langle A^2 \rangle}$[@Born1941]. This leads to:
 $$
-\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle} e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_{s^{\prime}})^2\rangle} e^{\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle}
+\langle e^{-i \vec{q} \cdot \hat{\vec{u}}_s} e^{ i \vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}} \rangle = e^{-\frac{1}{2}\langle (\vec{q} \cdot \hat{\vec{u}}_s)^2\rangle} e^{-\frac{1}{2}\langle (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}})^2\rangle} e^{\langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle}
 $$
-The terms $e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle}$ and $e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_{s^{\prime}})^2\rangle}$ are known as the Debye-Waller factors[@Waller1923; @Waller1928], historically defined as:
+The terms $e^{-\frac{1}{2}\langle (\vec{q} \cdot \hat{\vec{u}}_s)^2\rangle}$ and $e^{-\frac{1}{2}\langle (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}})^2\rangle}$ are known as the Debye-Waller factors[@Waller1923;@Waller1928], historically defined as:
 $$
-e^{-\frac{1}{2}\langle (\vec{q} \cdot \vec{u}_s)^2\rangle} \equiv e^{-W_s}
+e^{-\frac{1}{2}\langle (\vec{q} \cdot \hat{\vec{u}}_s)^2\rangle} \equiv e^{-W_s}
 $${#eq:scattering-debye-waller}
 which means that
 $$
-\langle e^{-i \vec{q} \cdot \vec{u}_s} e^{ i \vec{q} \cdot \vec{u}_{s^{\prime}}} \rangle = e^{-W_s} e^{-W_{s^\prime}} e^{\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle}
+\langle e^{-i \vec{q} \cdot \hat{\vec{u}}_s} e^{ i \vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}} \rangle = e^{-W_s} e^{-W_{s^\prime}} e^{\langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle}
 $$
-For small displacement vectors $\vec{u}$, $\vec{q} \cdot \vec{u} \leq |\vec{q}| |\vec{u}|$ is also small, and so:
+For small displacement vectors $\hat{\vec{u}}$, $\vec{q} \cdot \hat{\vec{u}} \leq |\vec{q}| |\hat{\vec{u}}|$ is also small, and so:
 \begin{align}
-    e^{\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle} 
-        & = 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle + \mathcal{O}\left(|\vec{u}_s|^2 |\vec{u}_{s^{\prime}}|^2 \right) \nonumber \\
-        & \approx 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle
+    e^{\langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle} 
+        & = 1 + \langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle + \mathcal{O}\left(|\hat{\vec{u}}_s|^2 |\hat{\vec{u}}_{s^{\prime}}|^2 \right) \nonumber \\
+        & \approx 1 + \langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle
 \end{align}
 Using @eq:scattering-displacement:
 \begin{multline}
-    (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) = \\
+    (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) = \\
         \frac{\hbar}{2 N} \left( \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})}{\sqrt{\mu_s \omega_{\lambda}(\vec{k})}} \left[ \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right] e^{i \vec{k} \cdot \vec{r}_{m,s}} \right) \\
-        \left( \sum_{\lambda^\prime} \sum_{\set{\vec{k}^\prime}} \frac{\vec{q} \cdot \vec{e}_{\lambda^\prime,s^\prime}(\vec{k}^\prime)}{\sqrt{\mu_{s^\prime} \omega_{\lambda^\prime}(\vec{k}^\prime)}} \left[ a_{\lambda^\prime}(\vec{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vec{k}^\prime)} + a_{\lambda^\prime}^{\dagger}(\vec{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vec{k}^\prime)} \right] e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}\right)
+        \left( \sum_{\lambda^\prime} \sum_{\set{\vec{k}^\prime}} \frac{\vec{q} \cdot \vec{e}_{\lambda^\prime,s^\prime}(\vec{k}^\prime)}{\sqrt{\mu_{s^\prime} \omega_{\lambda^\prime}(\vec{k}^\prime)}} \left[ \hat{a}_{\lambda^\prime}(\vec{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vec{k}^\prime)} + \hat{a}_{\lambda^\prime}^{\dagger}(\vec{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vec{k}^\prime)} \right] e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}\right)
 \end{multline}
 Equivalently:
 \begin{multline}
-    \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle = \\
+    \langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle = \\
     \frac{\hbar}{2 N} \sum_{\lambda, \lambda^\prime} \sum_{\set{\vec{k}}, \set{\vec{k}^\prime}} \frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime} \omega_{\lambda}(\vec{k})\omega_{\lambda^\prime}(\vec{k}^\prime)}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}} \\
-    \left\langle \left[ \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right] \left[ a_{\lambda^\prime}(\vec{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vec{k}^\prime)} + a_{\lambda^\prime}^{\dagger}(\vec{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vec{k}^\prime)} \right] \right\rangle
+    \left\langle \left[ \hat{a}_{\lambda}(\vec{k})e^{-i\phi_{s,m,\lambda}(\vec{k})} + \hat{a}_{\lambda}^{\dagger}(\vec{k}) e^{i\phi_{s,m,\lambda}(\vec{k})} \right] \left[ \hat{a}_{\lambda^\prime}(\vec{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vec{k}^\prime)} + \hat{a}_{\lambda^\prime}^{\dagger}(\vec{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vec{k}^\prime)} \right] \right\rangle
 \end{multline}
 Since the phases $\phi_{s,m,\lambda}(\vec{k})$ are not correlated across unit cells, the cross terms vanish:
 \begin{align}
-    \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle 
+    \langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle 
     = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\omega_{\lambda}(\vec{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}} \nonumber \\
       & \left[ \hat{a}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k}) 
-         + \hat{a}_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) 
-         + a^{\dagger}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k}) 
-         + a^{\dagger}_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) \right] \nonumber \\
-    = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\omega_{\lambda}(\vec{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}} \left[ 2 n_{\lambda}(\vec{k}) + 1\right]
+         + \hat{a}_{\lambda}(\vec{k}) \hat{a}^{\dagger}_{\lambda}(\vec{k}) 
+         + \hat{a}^{\dagger}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k}) 
+         + \hat{a}^{\dagger}_{\lambda}(\vec{k}) \hat{a}^{\dagger}_{\lambda}(\vec{k}) \right] \nonumber \\
+    = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\omega_{\lambda}(\vec{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}} \left[ 2 \hat{n}_{\lambda}(\vec{k}) + 1\right]
 \end{align}
-where $n_{\lambda}(\vec{k}) \equiv \hat{a}_{\lambda}(\vec{k}) a^{\dagger}_{\lambda}(\vec{k}) = a^{\dagger}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k})  - 1$ is the excitation number operator. Simplifying further:
+where $\hat{n}_{\lambda}(\vec{k}) \equiv \hat{a}_{\lambda}(\vec{k}) \hat{a}^{\dagger}_{\lambda}(\vec{k}) = \hat{a}^{\dagger}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k})  - 1$ is the excitation number operator. Simplifying further:
 $$
-\langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})}\frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}
+\langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})}\frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}
 $$
 
 ### Scattering amplitude
 
-@eq:scattering-amplitude-average can then be expressed as:
+Using the calculation of the previous section, the scattering amplitude can be computed. Since this calculation holds for a prepared initial state $\vec{k}_i$, the quantities $\hat{\vec{u}}$ and $\hat{n}$ are no longer operators, but observables $\vec{u}$ and $n$ respectively. @eq:scattering-amplitude-average can then be expressed as:
 \begin{align}
     |f^{(1)}(\vec{q})|^2 = & \frac{m_e^2}{N_c^2 \hbar^4} \sum_{m, m^\prime} \sum_{s,s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q}) e^{-i \vec{q} \cdot (\vec{r}_{m,s} - \vec{r}_{m^\prime, s^{\prime}})} e^{-W_s} e^{-W_{s^\prime}}\left[ 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle  \right] \nonumber \\
                          = & \frac{m_e^2}{N_c^2 \hbar^4} \left| \sum_m \sum_s f_{e,s}(\vec{q}) e^{-W_s} e^{-i \vec{q} \cdot \vec{r}_{m,s}} \right|^2 \nonumber \\
@@ -434,7 +433,7 @@ It is now convenient to express the atomic positions $\vec{r}_{m,s}=\vec{R}_m + 
                          + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} 
                             \left| \sum_m \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})\right) e^{-i (\vec{q} - \vec{k}) \cdot \vec{R}_{m}} e^{-i (\vec{q} - \vec{k}) \cdot \vec{x}_{s}} \right|^2
 \end{align}
-The discrete Fourier transform can be used (@eq:scattering-discrete-fourier):
+The Fourier transform identity can be used (@eq:scattering-discrete-fourier):
 $$
     \sum_{m=1}^{N_c} e^{-i \vec{q} \cdot \vec{R}_m} \xrightarrow[]{N_c \to \infty} N_c \sum_{\set{\vec{H}}} \delta(\vec{q} - \vec{H})
 $$

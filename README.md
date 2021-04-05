@@ -9,7 +9,8 @@ The following tools are required to render this dissertation:
 * [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref);
 * [`pandoc-plot`](https://github.com/LaurentRDC/pandoc-plot);
 * [`inkscape`](https://inkscape.org/) 1.0+
-* A LaTeX toolchain, including `pdflatex` and [`biber`](https://sourceforge.net/projects/biblatex-biber/). I tested with `MikTex` (Windows) and `texlive-full` (Ubuntu)
+* A LaTeX toolchain, including `pdflatex` and [`biber`](https://sourceforge.net/projects/biblatex-biber/). I tested with `MikTex` (Windows) and `texlive-full` (Ubuntu).
+* The fonts in `fonts/` need to be installed; they are used for plots.
 
 To install the Python dependencies required to render figures:
 
@@ -68,7 +69,7 @@ Blah blah [see @doe99, pp. 33-35; also @smith04, chap. 1].
 
 Blah blah [@doe99, pp. 33-35, 38-39 and *passim*].
 
-Blah blah [@smith04; @doe99].
+Blah blah [@smith04;@doe99].
 ```
 
 ### Sections, figure, and table labels
@@ -100,14 +101,6 @@ For more complex equation forms (e.g. aligned equations), `\label`s can be used.
 
 You can refer to the equation like so @eq:myequation
 ````
-
-### Appendices
-
-Because the section label for appendices should be a bit different, use a custom label like so:
-
-```markdown
-lorem ipsum (see @sec:appendix) ...
-```
 
 ## Acknowledgement
 
