@@ -22,22 +22,19 @@ python -m pip install -r requirements.txt
 
 Once the environment has been set-up, use the `dissc.py` script to build.
 
-```bash
+```
 > python dissc.py
 usage: dissc [-h] {clean,download-templates,build} ...
 
 Dissertation compiler
 
 positional arguments:
-  {clean,download-templates,build}
-                        sub-command help
-    clean               Clean auxiliary files that are transiently      
-                        generated during build.
-    download-templates  Download optional template Eisvogel
-    build               Build dissertation.
+  {clean,build}  sub-command help
+    clean        Clean auxiliary files that are transiently generated during build.
+    build        Build dissertation.
 
 optional arguments:
-  -h, --help            show this help message and exit
+  -h, --help     show this help message and exit
 ```
 
 The `build` subcommand has other options:
