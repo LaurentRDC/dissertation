@@ -14,7 +14,7 @@ In this chapter, the author seeks to understand one of the most performant therm
 The performance of a thermoelectric material is measured via the figure-of-merit $ZT$:
 $$
     ZT = S^2 \frac{\sigma}{\kappa_e + \kappa_l}T
-$$
+$${#eq:snse-zt}
 where $S$ is the so-called Seebeck coefficient, $\sigma$ is the electrical conductivity, $\kappa_e$ and $\kappa_l$ are the thermal conductivities for the charge carriers and the lattice respectively, and $T$ is the absolute temperature. $ZT$ is an important figure of merit because it is used to describe the efficiency of a thermoelectric module. Consider a device with a cold side at temperature $T_C$, and a hot side at temperature $T_H$. The heat harvesting efficiency is given by:
 $$
 \eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + ZT} - 1}{\sqrt{1 + ZT} + \frac{T_C}{T_H}} \right)
@@ -26,20 +26,21 @@ where $\frac{T_H - T_C}{T_H}$ is understood to be the Carnot efficiency[@Zhang20
 
 ### The Seebeck coefficient
 
-The Seebeck coefficient is a measure of how much voltage can be induced by a temperature gradient, usually expressed in units of \si{\micro\volt\per\kelvin}. It is negative (positive) for n-type (p-type) semiconductors. The Seebeck coefficient for a few elements are listed in @tbl:snse-seebeck-coefficients. Note that the Seebeck coefficient is highest for Selenium and Tellurium, while being vanishingly small for good conductors such as Gold and Platinum.
+The Seebeck coefficient is a measure of how much voltage can be induced by a temperature gradient, usually expressed in units of \si{\micro\volt\per\kelvin}. It is negative (positive) for n-type (p-type) semiconductors. The Seebeck coefficient for a few elements are listed in @tbl:snse-seebeck-coefficients. The Seebeck coefficient is highest for Selenium and Tellurium, while being vanishingly small for good conductors such as Gold and Platinum.
 
+<!-- Note the use of a caption without citation first, because the list of tables doesn't support citations -->
 \begin{table}
 	\centering
-	\caption{Seebeck coefficients for a few selected elements. TODO: find citation}
+	\caption[Seebeck coefficients for a few selected elements.]{Seebeck coefficients for a few selected elements\autocite{Rowe1995}.}
 	\vspace{2mm}
 	\begin{tabular}{c | c}
 		Element & Seebeck Coefficient [\si{\micro \volt \per \kelvin}] \\ \hline\hline
-		Selenium  & 900 \\ \hline
-        Tellurium & 500 \\ \hline
-        Silicon   & 440 \\ \hline
-        Gold      & 6.5 \\ \hline
-        Platinum  & 0   \\ \hline
-        Bismuth   & -72 \\ \hline
+		Selenium  & 895 \\ \hline
+        Tellurium & 495 \\ \hline
+        Silicon   & 435 \\ \hline
+        Gold      & 1.5 \\ \hline
+        Platinum  & -5   \\ \hline
+        Bismuth   & -67 \\ \hline
 	\end{tabular} 
 	\label{tbl:snse-seebeck-coefficients}
 \end{table}
@@ -56,9 +57,13 @@ The Seebeck coefficient is largely determined by the value of the reduced chemic
 
 ### Electrical conductivity
 
+The thermoelectric figure-of-merit (@eq:snse-zt) is directly proportional to the DC electrical conductivity $\sigma$. However, increasing the electrical conductivity of any material also necessarily increases the electronic contribution of the thermal conductivity. In fact, the electronic contribution to the thermal conductivity is directly proportional to the DC electrical conductivity, a phenomenon known as the *Wiedemann-Franz* law [@Franz1853].
+
 ### Thermal conductivity
 
-### Dimensionality reduction
+TODO: this
+
+#### Dimensionality reduction
 
 In two seminal papers, Hicks and Dresselhaus [@Hicks1993a;@Hicks1993b] described the effects of dimensionality reduction on the thermoelectric figure of merit.
 
@@ -409,13 +414,13 @@ There are two major, competing effects. The modes might involve the acoustic bra
 
 #### Ultralow thermal transport
 
-Consider that the strong electron-phonon interactions increase the scattering rate of zone-center acoustic modes. This would in stark contrast to the consensus today about the low lattice thermal conductivity $\kappa_{lat}$ being suppressed by anharmonic interactions.
+Consider that the strong electron-phonon interactions increase the scattering rate of zone-center acoustic modes. This would in stark contrast to the consensus today about the low lattice thermal conductivity $\kappa_l$ being suppressed by anharmonic interactions.
 
 The case for anharmonic phonon-phonon scattering is made in one of two ways. First, the thermal lattice expansion is a measure of anharmonicity through the *Grüneisen* parameter[@Gruneisen1912]. Calculations suggest that anharmonicity along all crystal axes is strong, and strongest along the stacking axis $a$[@Zhao2014]. However, the $ZT$ figure-of-merit remains low along the $a$ axis because the electrical conductivity is also low in this direction[@Zhao2014]. Calculations by Li *et al.*[@Li2015] could only reproduce the low lattice thermal conductivity when taking into account long-range bonding anharmonicity, although these results fail to reproduce the Grüneisen parameter calculations of Zhao *et al.*[@Zhao2014]. The explicit contribution of electron-phonon coupling to SnSe's ultralow thermal conductivity has not been addressed to date.
 
 The behavior of $\kappa$ with increasing temperature exhibits an asymptotic behavior above \SI{600}{\kelvin} which is reminiscent of the Mott-Ioffe-Regel (MIR) limit on the resistivity in so-called "bad metals" [@Ioffe1960;@Mott1974;@Gurvitch1981].
 
-```{.matplotlib file="figures/snse/klat.py" caption="Lattice thermal conductivity $\kappa_{lat}$ along the crystallographic axes of SnSe."}
+```{.matplotlib file="figures/snse/klat.py" caption="Lattice thermal conductivity $\kappa_l$ along the crystallographic axes of SnSe."}
 ```
 
 The MIR limit expresses that the transport properties of quasiparticles saturate once their mean-free-path has fallen below the lattice dimensions[@Zhang2019]. Our measurements suggest that the phonon mean-free-path in SnSe might be close to the MIR limit above \SI{600}{\kelvin} due to strong EPC. This happens at equilibrium due to the thermal enhancement of the electron-phonon scattering rate (@eq:snse-ep-scattering-rate), and ultrafast PDS reveals a similar behavior via impulsive photodoping. 

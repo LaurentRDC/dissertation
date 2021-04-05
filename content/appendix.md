@@ -109,7 +109,7 @@ Accessing and manipulating crystal structures is an important component of many 
 
 `crystals` includes parsers for many standard crystallographic information files. Crystal structures can be parsed from the *de-facto* standard Crystallography Information File (CIF) format (`.cif`)[@Hester2006;@Bjorkman2011]. Crystal structures can also be downloaded from the Crystallography Open Database [@Gravzulis2009;@Gravzulis2012], which are stored in the CIF format. `crystals` also includes an internal database of simple crystal structures, stored in the CIF format. `crystal` also support downloading and parsing crystal structures from the Protein DataBank[@Berman2000;@Hamelryck2003].
 
-`crystals` also supports the parsing of crystal structures determined by calculations. The conversion to and from the Atomic Simulation Environment[@Larsen2017] is supported. Additionally, the crystal structures resulting from plane-wave self-consistent field calculations from Quantum Espresso[@QuantumEspresso2009;@QuantumEspresso2017] are parseable by `crystals`.
+`crystals` also supports the parsing of crystal structures determined by calculations. The conversion to and from the Atomic Simulation Environment[@Larsen2017] is supported. Additionally, the crystal structures resulting from plane-wave self-consistent field calculations from Quantum Espresso[@QuantumEspresso2009;@QuantumEspresso2017] are parseable by `crystals`. Finally, `crystals` can download and parse structures calculated by the Materials Project[@Hautier2010b;@Jain2013;@Ong2015].
 
 ### Representation of crystallographic information
 

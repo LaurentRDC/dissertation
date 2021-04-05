@@ -23,7 +23,7 @@ for color, axis, label, marker in zip(
 
 ax.legend(edgecolor="none")
 ax.set_xlabel("Temperature [K]")
-ax.set_ylabel("$\kappa_{lat}$ [W / m / K]")
+ax.set_ylabel("$\kappa_l$ [W / m / K]")
 
 ax.axvline(x=810, color="k", linestyle="--", linewidth=1)
 ax.text(x=810, y=1.1 * c.max(), s="$T_c$", ha="center")
