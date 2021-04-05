@@ -4,7 +4,7 @@ from matplotlib.ticker import FixedFormatter, FixedLocator
 from pathlib import Path
 from skued import autocenter, diffread
 from skimage.transform import rotate
-from dissutils import LARGE_FIGURE_WIDTH, GRAPHITE_ANGLE, ImageGrid
+from dissutils import LARGE_FIGURE_WIDTH, GRAPHITE_ANGLE, ImageGrid, tag_axis
 from iris import DiffractionDataset
 import numpy as np
 
@@ -34,7 +34,9 @@ mask_graphite = mask_graphite[::DOWNSAMPLING, ::DOWNSAMPLING]
 figure = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH / 2))
 axes = ImageGrid(figure, 111, nrows_ncols=(1, 2), cbar_location="top")
 
-for ax, im, mask in zip(axes, [im_Cr, im_graphite], [mask_Cr, mask_graphite]):
+for ax, im, mask, label in zip(
+    axes, [im_Cr, im_graphite], [mask_Cr, mask_graphite], ["a)", "b)"]
+):
     m = ax.imshow(im, vmin=0, vmax=200, cmap="inferno")
     r, c = autocenter(im, mask)
 
@@ -43,6 +45,7 @@ for ax, im, mask in zip(axes, [im_Cr, im_graphite], [mask_Cr, mask_graphite]):
 
     ax.xaxis.set_visible(False)
     ax.yaxis.set_visible(False)
+    tag_axis(ax, label)
 
 axes[-1].cax.colorbar(
     mappable=m, ticks=FixedLocator(locs=[0, 200]), format=FixedFormatter(["0", "1"])

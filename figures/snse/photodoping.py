@@ -16,8 +16,8 @@ densities = (
 
 carrier_ax.fill_between(
     fluences,
-    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS + 5e-9)/1e20,
-    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS - 5e-9)/1e20,
+    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS + 5e-9) / 1e20,
+    photocarrier_density(fluences, thickness=SAMPLE_THICKNESS - 5e-9) / 1e20,
     facecolor="gray",
     edgecolor="k",
     linestyle="dashed",
