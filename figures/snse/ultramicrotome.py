@@ -50,3 +50,4 @@ for text, xy, xytext in zip(
     )
 
 plt.subplots_adjust(bottom=0, top=1)
+plt.show()

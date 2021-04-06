@@ -1,11 +1,9 @@
 ---
 title: "Ultrafast energy flow across the Brillouin zone in two-dimensional materials"
-#subtitle: "From Markdown to LaTeX to PDF"
 author: "Laurent P. René de Cotret"
-keywords: [Markdown, Example]
 
 studentnumber: "260446509"
-date: "April ?, 2021"
+date: "First half of 2021"
 lang: en-CA
 
 # pandoc-crossref metadata
@@ -40,7 +38,7 @@ acknowledgements: |
   Mark Stern, Jan-Hendrick Pöhls, Tristan Britt, and Syed Ali Hassan. Other members of the Center of Physics of Materials have also positively 
   influenced my research, most importantly Benjamin Dringoli and Dominique Matte.
 
-  I am also grateful to faculty members David Cooke, Mark Sutton, and Patanjali Kambhampati for their advice and support throughout the years.
+  I am also grateful to faculty members Mark Sutton, David Cooke, and Patanjali Kambhampati for their advice and support throughout the years.
 
   The research presented in this dissertation would not have been possible without the support of many McGill employees. I would like to thank Jeannie Mui and S. Kelly Sears 
   from the McGill Facility for Electron Microscopy Research, Richard Rossi and Weihua Wang from the Chemistry department, and Jean-Philippe Guay and 

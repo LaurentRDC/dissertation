@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 from skued import nfold, diffread, autocenter
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Rectangle, Circle
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
@@ -49,6 +49,16 @@ grid[0].add_patch(
         ec="k",
         fc="dimgray",
         alpha=0.5,
+    )
+)
+
+# Center of symmetrized pattern is ugly
+grid[-1].add_patch(
+    Circle(
+        xy=np.asarray(sym.shape) / 2,
+        radius=13,
+        ec="none",
+        fc=plt.get_cmap("inferno")(sym.max()),
     )
 )
 

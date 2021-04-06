@@ -445,7 +445,7 @@ There are multiple natural extensions of the research presented in this chapter.
 
 [^cuong]: The orbital make-up of the electronic bands is known thanks to work by Cuong *et al.*[@Cuong2015], but note that their lattice parameters swap the $b$ and $c$ axes compared to work by all other papers referenced in this chapter.
 [^zt-fully-dense]: Work by Wei *et al.*[@Wei2019] has shown that in fully-dense SnSe single crystals, the maximum value for $ZT$ is reduced to $<1$ at \SI{800}{\kelvin}.
-[^qe]: The quantum efficiency was determined by B. Dringoli and D. Cooke via time-resolved Terahertz spectroscopy, which is unpublished at this time.
+[^qe]: The quantum efficiency was determined by B. Dringoli and D. Cooke via time-resolved Terahertz spectroscopy, which is unpublished at this time[@Dringoli2021].
 
 \FloatBarrier
 ## References {.unnumbered}

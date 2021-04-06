@@ -20,7 +20,7 @@ ax_graphite = figure.add_subplot(gs[1, 0], sharex=ax_gold)
 ax_m1 = figure.add_subplot(gs[2, 0], sharex=ax_gold)
 ax_batio3 = figure.add_subplot(gs[:, 1])
 
-s = np.linspace(2.5, 7, 512)
+s = np.linspace(2.5, 7, 256)
 q = s / (4 * np.pi)
 
 for ax, cryst, color, label in zip(
@@ -42,7 +42,7 @@ ax_m1.set_xlim([q.min(), q.max()])
 ax_m1.set_xlabel("Scattering vector $|\mathbf{q}|$ [$1/\AA$]")
 
 # Electrostatic potential
-extent = np.linspace(-5, 5, 256)
+extent = np.linspace(-5, 5, 128)
 xx, yy = np.meshgrid(extent, extent)
 potential = pelectrostatic(Crystal.from_database("BaTiO3_cubic"), xx, yy)
 

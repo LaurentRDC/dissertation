@@ -415,17 +415,19 @@ Since the phases $\phi_{s,m,\lambda}(\vec{k})$ are not correlated across unit ce
 \end{align}
 where $\hat{n}_{\lambda}(\vec{k}) \equiv \hat{a}_{\lambda}(\vec{k}) \hat{a}^{\dagger}_{\lambda}(\vec{k}) = \hat{a}^{\dagger}_{\lambda}(\vec{k}) \hat{a}_{\lambda}(\vec{k})  - 1$ is the excitation number operator. Simplifying further:
 $$
-\langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})}\frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}
+\langle (\vec{q} \cdot \hat{\vec{u}}_s) ~ (\vec{q} \cdot \hat{\vec{u}}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{\hat{n}_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})}\frac{\left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k}) \right) \left(\vec{q} \cdot \vec{e}_{\lambda,s^\prime}(\vec{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vec{k} \cdot \vec{r}_{m,s}} e^{i \vec{k}^\prime \cdot \vec{r}_{m^\prime, s^\prime}}
 $$
 
 ### Scattering amplitude
 
-Using the calculation of the previous section, the scattering amplitude can be computed. Since this calculation holds for a prepared initial state $\vec{k}_i$, the quantities $\hat{\vec{u}}$ and $\hat{n}$ are no longer operators, but observables $\vec{u}$ and $n$ respectively. @eq:scattering-amplitude-average can then be expressed as:
+Using the calculation of the previous section, the scattering amplitude can be computed. Since this calculation holds for a prepared initial state $\ket{\vec{k}_i}$ and arbitrary final state $\ket{\vec{k}_f}$ (where $\vec{q} = \vec{k}_f - \vec{k}_i$), the quantities $\hat{\vec{u}}$ and $\hat{n}$ are no longer operators, but observables $\vec{u}$ and $n$ respectively. @eq:scattering-amplitude-average can then be expressed as:
 \begin{align}
-    |f^{(1)}(\vec{q})|^2 = & \frac{m_e^2}{N_c^2 \hbar^4} \sum_{m, m^\prime} \sum_{s,s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q}) e^{-i \vec{q} \cdot (\vec{r}_{m,s} - \vec{r}_{m^\prime, s^{\prime}})} e^{-W_s} e^{-W_{s^\prime}}\left[ 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle  \right] \nonumber \\
-                         = & \frac{m_e^2}{N_c^2 \hbar^4} \left| \sum_m \sum_s f_{e,s}(\vec{q}) e^{-W_s} e^{-i \vec{q} \cdot \vec{r}_{m,s}} \right|^2 \nonumber \\
-                         + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} 
-                            \left| \sum_m \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})\right) e^{-i (\vec{q} - \vec{k}) \cdot \vec{r}_{m,s}} \right|^2
+    |f^{(1)}(\vec{q})|^2 
+      & \equiv |\bra{\vec{k}_f}f^{(1)}\ket{\vec{k}_i}|^2 \nonumber \\
+    = & \frac{m_e^2}{N_c^2 \hbar^4} \sum_{m, m^\prime} \sum_{s,s^{\prime}} f_{e,s}(\vec{q}) f_{e,s^{\prime}}(\vec{q}) e^{-i \vec{q} \cdot (\vec{r}_{m,s} - \vec{r}_{m^\prime, s^{\prime}})} e^{-W_s} e^{-W_{s^\prime}}\left[ 1 + \langle (\vec{q} \cdot \vec{u}_s) ~ (\vec{q} \cdot \vec{u}_{s^{\prime}}) \rangle  \right] \nonumber \\
+    = & \frac{m_e^2}{N_c^2 \hbar^4} \left| \sum_m \sum_s f_{e,s}(\vec{q}) e^{-W_s} e^{-i \vec{q} \cdot \vec{r}_{m,s}} \right|^2 \nonumber \\
+    + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vec{k}}} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} 
+        \left| \sum_m \sum_s \frac{f_{e,s}(\vec{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vec{q} \cdot \vec{e}_{\lambda,s}(\vec{k})\right) e^{-i (\vec{q} - \vec{k}) \cdot \vec{r}_{m,s}} \right|^2
 \end{align}
 It is now convenient to express the atomic positions $\vec{r}_{m,s}=\vec{R}_m + \vec{x}_s$, where $\vec{R}_m$ is the absolute position of unit cell $m$, and $\vec{x}_s$ is the position of atom $s$ with respect to the unit cell origin. The above equation becomes:
 \begin{align}
