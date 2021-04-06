@@ -36,17 +36,17 @@ $$
     x_F(t) = \int_{-\infty}^{t}dt_0 ~ G(t, t_0) F(t_0)
 $${#eq:introduction-green-sho}
 
-In the general case, consider a physical system whose state is represented by the phase-space vector $\vec{x}$, and its behavior is governed by the linear differential operator $\hat{L}$:
+In the general case, consider a physical system whose state is represented by the phase-space vector $\vect{x}$, and its behavior is governed by the linear differential operator $\hat{L}$:
 $$
-    \hat{L} \vec{x}(t) = F(\vec{x}, t)
+    \hat{L} \vect{x}(t) = F(\vect{x}, t)
 $${#eq:introduction-l-system}
-where the function $F(\vec{x}, t)$ is a driving force, or *source term*. Given the impulse response of the system, $G(\vec{x}, \vec{x}_0, t, t_0)$, which solves
+where the function $F(\vect{x}, t)$ is a driving force, or *source term*. Given the impulse response of the system, $G(\vect{x}, \vect{x}_0, t, t_0)$, which solves
 $$
-    \hat{L} ~ G(\vec{x}, \vec{x}_0, t, t_0) = \delta(\vec{x} - \vec{x}_0, t - t_0),
+    \hat{L} ~ G(\vect{x}, \vect{x}_0, t, t_0) = \delta(\vect{x} - \vect{x}_0, t - t_0),
 $$
-the solution $\vec{x}_F(t)$ can be expressed as a function of $G(\vec{x}, \vec{x}_0, t, t_0)$:
+the solution $\vect{x}_F(t)$ can be expressed as a function of $G(\vect{x}, \vect{x}_0, t, t_0)$:
 $$
-    \vec{x}_F(t) = \int dt_0 d\vec{x}_0 ~ G(\vec{x}, \vec{x}_0, t, t_0) F(\vec{x}_0, t_0)
+    \vect{x}_F(t) = \int dt_0 d\vect{x}_0 ~ G(\vect{x}, \vect{x}_0, t, t_0) F(\vect{x}_0, t_0)
 $$
 The impulse response $G$ is called the Green's function. Here's the lesson: the response to the system to any perturbation is *completely determined* by the Green's function.
 
@@ -89,26 +89,26 @@ $$
 $$
 where $\hat{H}_{ph}$ is the Hamiltonian of the phonon subsystem, $\hat{H}_e$ is the Hamiltonian of the electronic subsystem, and $\hat{H}_i$ represents the interaction between ions and electrons[@Mahan2000EPInteractions]. The interaction Hamiltonian can be conceptually-expressed as:
 $$
-    \hat{H}_i = \sum_{j, j^\prime} \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime})
+    \hat{H}_i = \sum_{j, j^\prime} \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime})
 $$
-where $\vec{r}^e_j$ and $\vec{r}^i_{j^\prime}$ are the positions of electron $j$ and ion $j^\prime$, respectively. The interaction potential $\hat{V}_i$ is kept general for this discussion. Now consider that the atomic positions $\vec{r}^i_{j^\prime}$ are perturbed by phonons, which results in a (small) displacement $\vec{u}_{j^\prime}$ such that $\vec{r}^i_{j^\prime} \to \vec{r}^i_{j^\prime} + \vec{u}_{j^\prime}$. In this scheme, $\vec{r}^i_{j^\prime}$ is now the position of ions at zero-temperature. To first order, the change in interaction strength is given by the gradient of the interaction potential:
+where $\vect{r}^e_j$ and $\vect{r}^i_{j^\prime}$ are the positions of electron $j$ and ion $j^\prime$, respectively. The interaction potential $\hat{V}_i$ is kept general for this discussion. Now consider that the atomic positions $\vect{r}^i_{j^\prime}$ are perturbed by phonons, which results in a (small) displacement $\vect{u}_{j^\prime}$ such that $\vect{r}^i_{j^\prime} \to \vect{r}^i_{j^\prime} + \vect{u}_{j^\prime}$. In this scheme, $\vect{r}^i_{j^\prime}$ is now the position of ions at zero-temperature. To first order, the change in interaction strength is given by the gradient of the interaction potential:
 $$
-    \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime} - \vec{u}_{j^\prime}) \approx
-        \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime}) - \vec{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vec{r}^e_j - \vec{r}^i_{j^\prime})
+    \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime} - \vect{u}_{j^\prime}) \approx
+        \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime}) - \vect{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime})
 $$
 The first term is the interaction of electrons with ions at their ground-state positions. The second term may be intuitively named the *electron-phonon interaction*:
 $$
-    \hat{V}_{ep}(\vec{r}) \equiv \sum_{j^\prime} \vec{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vec{r} - \vec{r}^i_{j^\prime})
+    \hat{V}_{ep}(\vect{r}) \equiv \sum_{j^\prime} \vect{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vect{r} - \vect{r}^i_{j^\prime})
 $$
 The associated interaction Hamiltonian is given by:
 $$
-    \hat{H}_{ep}(\vec{r}) = \int d\vec{r} \hat{\rho}(\vec{r}) V_{ep}(\vec{r})
+    \hat{H}_{ep}(\vect{r}) = \int d\vect{r} \hat{\rho}(\vect{r}) V_{ep}(\vect{r})
 $$
-where $\hat{\rho}(\vec{r})$ is the electron density operator. For highly-ordered crystalline systems like the ones studied in this dissertation, it is helpful to express the interaction Hamiltonian in momentum space. In momentum space, $\hat{H}_{ep}$ is expressed most simply in the second quantization framework[@Giustino2017]:
+where $\hat{\rho}(\vect{r})$ is the electron density operator. For highly-ordered crystalline systems like the ones studied in this dissertation, it is helpful to express the interaction Hamiltonian in momentum space. In momentum space, $\hat{H}_{ep}$ is expressed most simply in the second quantization framework[@Giustino2017]:
 $$
-    \hat{H}_{ep} = \sum_{a,b, \lambda} \int \frac{d\vec{k}_e}{(2 \pi)^3} \int \frac{d\vec{k}_p}{(2 \pi)^3} ~ g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) ~ \hat{c}^{\dagger}_{a}(\vec{k_e} + \vec{k}_p)\hat{c}_b(\vec{k}_e) \left( \hat{a}_{\lambda}(\vec{k}_p) + \hat{a}^{\dagger}_{\lambda}(-\vec{k}_p)\right)
+    \hat{H}_{ep} = \sum_{a,b, \lambda} \int \frac{d\vect{k}_e}{(2 \pi)^3} \int \frac{d\vect{k}_p}{(2 \pi)^3} ~ g^{\lambda}_{ab}(\vect{k}_p, \vect{k}_e) ~ \hat{c}^{\dagger}_{a}(\vect{k_e} + \vect{k}_p)\hat{c}_b(\vect{k}_e) \left( \hat{a}_{\lambda}(\vect{k}_p) + \hat{a}^{\dagger}_{\lambda}(-\vect{k}_p)\right)
 $$
-where $a$ and $b$ label electron bands, $\lambda$ labels phonon modes, $\hat{c}^{\dagger}_{a}$ ($\hat{c}_{a}$) is the creation (annihilation) operator for electrons in band $a$, $\hat{a}^{\dagger}_{\lambda}$ ($\hat{a}_{\lambda}$) is the creation (annihilation) operator for phonon mode $\lambda$, $\vec{k}_e$ and $\vec{k}_p$ are the electronic and phonon wavevectors respectively, and $g$ is the electron-phonon coupling matrix. The electron-phonon coupling matrix is effectively impossible to measure at equilibrium. Until recently, the determination of this coupling matrix was the purview of calculations. Ultrafast measurements are able to get at $g$ via the lifetime of excitations[@Brorson1990;@Ferrari2007;@Na2019;@RenedeCotret2019].
+where $a$ and $b$ label electron bands, $\lambda$ labels phonon modes, $\hat{c}^{\dagger}_{a}$ ($\hat{c}_{a}$) is the creation (annihilation) operator for electrons in band $a$, $\hat{a}^{\dagger}_{\lambda}$ ($\hat{a}_{\lambda}$) is the creation (annihilation) operator for phonon mode $\lambda$, $\vect{k}_e$ and $\vect{k}_p$ are the electronic and phonon wavevectors respectively, and $g$ is the electron-phonon coupling matrix. The electron-phonon coupling matrix is effectively impossible to measure at equilibrium. Until recently, the determination of this coupling matrix was the purview of calculations. Ultrafast measurements are able to get at $g$ via the lifetime of excitations[@Brorson1990;@Ferrari2007;@Na2019;@RenedeCotret2019].
 
 ## Brief history of ultrafast electron scattering {#sec:ues}
 

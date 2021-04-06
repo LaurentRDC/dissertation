@@ -109,17 +109,17 @@ Interestingly, the *nature* of the band gap is strongly-dependent on the in-plan
 ```{.matplotlib #fig:snse-structure file="figures/snse/structure.py" caption="Atomic structure for two phases of SnSe. **a)** $Pnma$ (low-temperature) phase. **b)** $Cmcm$ (high-temperature) phase."}
 ```
 
-The low-temperature $Pnma$ phase is defined by the lattice vectors $\vec{a}_1 = a ~ \vec{e}_1$, $\vec{a}_2 = b ~ \vec{e}_2$, and $\vec{a}_3 = c ~ \vec{e}_3$ where $a=\SI{11.42}{\angstrom}$, $b=\SI{4.19}{\angstrom}$, and $c=\SI{4.46}{\angstrom}$. The vectors $\set{ \vec{e}_i }$ are understood to be the usual Euclidean vectors. The atomic positions are for the $Pnma$ phase are:
+The low-temperature $Pnma$ phase is defined by the lattice vectors $\vect{a}_1 = a ~ \vect{e}_1$, $\vect{a}_2 = b ~ \vect{e}_2$, and $\vect{a}_3 = c ~ \vect{e}_3$ where $a=\SI{11.42}{\angstrom}$, $b=\SI{4.19}{\angstrom}$, and $c=\SI{4.46}{\angstrom}$. The vectors $\set{ \vect{e}_i }$ are understood to be the usual Euclidean vectors. The atomic positions are for the $Pnma$ phase are:
 $$
 \begin{pmatrix}
-    \vec{\text{Se}}_1 \\
-    \vec{\text{Se}}_2 \\
-    \vec{\text{Se}}_3 \\
-    \vec{\text{Se}}_4 \\
-    \vec{\text{Sn}}_1 \\
-    \vec{\text{Sn}}_2 \\
-    \vec{\text{Sn}}_3 \\
-    \vec{\text{Sn}}_4 
+    \vect{\text{Se}}_1 \\
+    \vect{\text{Se}}_2 \\
+    \vect{\text{Se}}_3 \\
+    \vect{\text{Se}}_4 \\
+    \vect{\text{Sn}}_1 \\
+    \vect{\text{Sn}}_2 \\
+    \vect{\text{Sn}}_3 \\
+    \vect{\text{Sn}}_4 
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -133,22 +133,22 @@ $$
     0.88 & \sfrac{3}{4} & 0.91
 \end{pmatrix}
 \begin{pmatrix}
-    \vec{a}_1 \\
-    \vec{a}_2 \\
-    \vec{a}_3
+    \vect{a}_1 \\
+    \vect{a}_2 \\
+    \vect{a}_3
 \end{pmatrix}
 $$
-The lattice vectors for the *conventional cell* of high-temperature phase $Cmcm$ are given by $\vec{a}_1 = a ~ \vec{e}_1$, $\vec{a}_2 = b ~ \vec{e}_2$, and $\vec{a}_3 = b ~ \vec{e}_3$ where $a=\SI{11.71}{\angstrom}$ and $b=\SI{4.31}{\angstrom}$. The atomic positions in fractional coordinates are:
+The lattice vectors for the *conventional cell* of high-temperature phase $Cmcm$ are given by $\vect{a}_1 = a ~ \vect{e}_1$, $\vect{a}_2 = b ~ \vect{e}_2$, and $\vect{a}_3 = b ~ \vect{e}_3$ where $a=\SI{11.71}{\angstrom}$ and $b=\SI{4.31}{\angstrom}$. The atomic positions in fractional coordinates are:
 $$
 \begin{pmatrix}
-    \vec{\text{Se}}_1 \\
-    \vec{\text{Se}}_2 \\
-    \vec{\text{Se}}_3 \\
-    \vec{\text{Se}}_4 \\
-    \vec{\text{Sn}}_1 \\
-    \vec{\text{Sn}}_2 \\
-    \vec{\text{Sn}}_3 \\
-    \vec{\text{Sn}}_4 
+    \vect{\text{Se}}_1 \\
+    \vect{\text{Se}}_2 \\
+    \vect{\text{Se}}_3 \\
+    \vect{\text{Se}}_4 \\
+    \vect{\text{Sn}}_1 \\
+    \vect{\text{Sn}}_2 \\
+    \vect{\text{Sn}}_3 \\
+    \vect{\text{Sn}}_4 
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -162,9 +162,9 @@ $$
     0.62 & \sfrac{1}{2}  & \sfrac{1}{4}
 \end{pmatrix}
 \begin{pmatrix}
-    \vec{a}_1 \\
-    \vec{a}_2 \\
-    \vec{a}_3
+    \vect{a}_1 \\
+    \vect{a}_2 \\
+    \vect{a}_3
 \end{pmatrix}
 $$
 The primitive cell for the $Pnma$ phase is twice the size of the primitice cell for the $Cmcm$ phase. For convenience, the conventional cells are used throughout this chapter. The atomic structures are shown in @fig:snse-structure. 
@@ -190,12 +190,12 @@ In order to obtain ultrathin samples suitable for ultrafast electron scattering 
 
 Six samples were prepared via ultramicrotomy, a sample preparation technique which involves the cutting of samples using a diamond blade. While this technique has mostly been used to prepare organic samples for cryo-electron microscopy, it has been successfully used in the past decade to prepare samples of two-dimensional materials such as 4H-TaSe$_2$[@Erasmus2012], 1T-TaS$_2$[@Eichberger2013]. The author initially tried ultramicrotomy to prepare samples of 1T-TiSe$_2$[@Otto2020].
 
-```{.matplotlib #fig:snse-ultramicrotomy-femr file="figures/snse/ultramicrotome.py" caption="Ultramicrotome setup used to prepare SnSe samples, from two different angles. Crystals embedded in epoxy are mounted, and a diamond knife is used to shave a section. Sections slide down into a boat filled with water, where they are lated fished out. The images were provided by S. K. Sears from McGill University's Facility for Electron Microscopy Research."}
+```{.matplotlib #fig:snse-ultramicrotomy-femr file="figures/snse/ultramicrotome.py" caption="Ultramicrotome setup used to prepare SnSe samples. Crystals embedded in epoxy are mounted, and a diamond knife is used to shave a section. Sections slide down into a boat filled with water, where they are lated fished out. This image was provided by S. K. Sears from McGill University's Facility for Electron Microscopy Research."}
 ```
 
 First, a bulk crystal of SnSe is embedded in epoxy, with the cutting plane parallel to the material layers. The surface of the bulk crystal is trimmed with a \ang{45} diamond blade to reveal fresh cutting surface. Sections are then cut with a sharper, \ang{35} diamond blade which then fall in a small water container. Floating sections are then fished out with a carbon-coated TEM grid. The assembly is shown in @fig:snse-ultramicrotomy-femr. The effect of cutting on the embedded crystals is shown in @fig:snse-ultramicrotomy. 
 
-```{.matplotlib #fig:snse-ultramicrotomy file="figures/snse/sample.py" caption="Stages of sample preparation via ultramicrotome. **a)** Prism of SnSe embedded in epoxy.  **b)** 4x magnification on the cut surface shown in a) shows large crystalline plateaus. **c)** Surface of embedded SnSe prism after trimming with a \ang{45} diamond knife. **d)** \SI{60}{\nano\meter} section of SnSe cut with a \ang{35} diamond knife. The images were provided by H. Gnaegi from Diatome, Ltd."}
+```{.matplotlib #fig:snse-ultramicrotomy file="figures/snse/sample.py" caption="Stages of sample preparation via ultramicrotome. **a)** Prism of SnSe embedded in epoxy showing large crystalline plateaus. **b)** Surface of embedded SnSe prism after trimming with a \ang{45} diamond knife. **c)** \SI{60}{\nano\meter} section of SnSe cut with a \ang{35} diamond knife. The images were provided by H. Gnaegi from Diatome, Ltd."}
 ```
 
 The samples used in this work were prepared by J. Mui from the Facility for Electron Microscopy Research (FEMR) at McGill University. In the end, six samples were produced: three with a thickness of \SI{70}{\nano\meter} and three with a thickness of \SI{90}{\nano\meter}, each with an area of approximately \SI{200 x 200}{\micro\meter}. 
@@ -232,28 +232,28 @@ An important point which will anchor the discussion below is that the lattice di
 
 ### Debye-Waller dynamics
 
-```{.matplotlib #fig:snse-dwaller file="figures/snse/dwaller.py" caption="Differential intensity dynamics on Bragg peaks for reflections either parallel to $\vec{b}^\star$ or $\vec{c}^\star$. Reflections parallel to $\vec{b}^\star$ are well-described by a single exponential with time-constant \SI{4 \pm 1}{\pico\second}. However, reflections parallel to $\vec{c}^\star$ have a biexponential character the with time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. Error bars represent the fluctuations before photoexcitation ($\tau < 0$) but are too small to see."}
+```{.matplotlib #fig:snse-dwaller file="figures/snse/dwaller.py" caption="Differential intensity dynamics on Bragg peaks for reflections either parallel to $\vect{b}^\star$ or $\vect{c}^\star$. Reflections parallel to $\vect{b}^\star$ are well-described by a single exponential with time-constant \SI{4 \pm 1}{\pico\second}. However, reflections parallel to $\vect{c}^\star$ have a biexponential character the with time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. Error bars represent the fluctuations before photoexcitation ($\tau < 0$) but are too small to see."}
 ```
 
-The overall Bragg peak profiles were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect. In-plane reflections can be separated into two categories: the reflections which are nearly parallel to the $\vec{c}^\star$ axis, and the reflections which are not. For the reflections which are within $\sim\ang{45}$ degrees of the $\vec{c}^\star$ axis, the amplitude of the Bragg peak follows a Debye-Waller suppression with two time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. For reflections which are not nearly parallel to $\vec{c}^\star$, only the slower time-constant is present. @fig:snse-dwaller shows the comparison between the amplitude suppression for reflections which are exactly parallel to $\vec{b}^\star$ ($\set{ (020), (040), ...}$) and reflections which are exactly parallel to $\vec{c}^\star$ ($\set{ (002), (004), ...}$). 
+The overall Bragg peak profiles were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect. In-plane reflections can be separated into two categories: the reflections which are nearly parallel to the $\vect{c}^\star$ axis, and the reflections which are not. For the reflections which are within $\sim\ang{45}$ degrees of the $\vect{c}^\star$ axis, the amplitude of the Bragg peak follows a Debye-Waller suppression with two time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. For reflections which are not nearly parallel to $\vect{c}^\star$, only the slower time-constant is present. @fig:snse-dwaller shows the comparison between the amplitude suppression for reflections which are exactly parallel to $\vect{b}^\star$ ($\set{ (020), (040), ...}$) and reflections which are exactly parallel to $\vect{c}^\star$ ($\set{ (002), (004), ...}$). 
 
-Recall from @eq:scattering-debye-waller that the Debye-Waller factor reports on the average mean-square-displacement of atoms $\langle |\vec{u}|^2 \rangle$ along the direction of the scattering vector $\vec{q}$. The fact that there is a fast component of the transient Debye-Waller dynamics in Bragg peaks nearly parallel to $\vec{c}^\star$ indicates that the mean-square-displacement of atoms along the $c$ axis -- i.e. the $Pnma$ lattice distortion -- is particularly affected by photoexcitation. The increase in mean-square-displacement should be reflected in the diffuse intensity across the Brillouin zone, which is presented next.
+Recall from @eq:scattering-debye-waller that the Debye-Waller factor reports on the average mean-square-displacement of atoms $\langle |\vect{u}|^2 \rangle$ along the direction of the scattering vector $\vect{q}$. The fact that there is a fast component of the transient Debye-Waller dynamics in Bragg peaks nearly parallel to $\vect{c}^\star$ indicates that the mean-square-displacement of atoms along the $c$ axis -- i.e. the $Pnma$ lattice distortion -- is particularly affected by photoexcitation. The increase in mean-square-displacement should be reflected in the diffuse intensity across the Brillouin zone, which is presented next.
 
 ### Large-wavevector phonons
 
-```{.matplotlib #fig:snse-highsym file="figures/snse/highsym.py" caption="Comparison of the diffuse intensity dynamics at various in-plane high-symmetry points. The fit to the average across the entire Brillouin zone where $|\vec{k}| > \SI{0.285}{\per\angstrom}$ is shown as a dashed black trace for reference."}
+```{.matplotlib #fig:snse-highsym file="figures/snse/highsym.py" caption="Comparison of the diffuse intensity dynamics at various in-plane high-symmetry points. The fit to the average across the entire Brillouin zone where $|\vect{k}| > \SI{0.285}{\per\angstrom}$ is shown as a dashed black trace for reference."}
 ```
 
-The slow dynamics (\SI{4 \pm 1}{\pico\second}) in the Debye-Waller dynamics are correlated with the uniform rise of diffuse intensity away from zone-center. @fig:snse-highsym shows the differential intensity changes at three high-symmetry points in the Brillouin zone: $Y$, $Z$, and $T$. See @fig:snse-bz for the geometry of the in-plane section of the Brillouin zone. The diffuse intensity from the Brillouin zone near multiple reflection was averaged to increase signal-to-noise. The three in-plane points show the exact same dependence: a single exponential rise with time-constant $\SI{3.6 \pm 0.6}{\pico\second}$. For reference, the average across the Brillouin zone away from the zone-center ($|\vec{k}| > \SI{0.285}{\per\angstrom}$) is shown.
+The slow dynamics (\SI{4 \pm 1}{\pico\second}) in the Debye-Waller dynamics are correlated with the uniform rise of diffuse intensity away from zone-center. @fig:snse-highsym shows the differential intensity changes at three high-symmetry points in the Brillouin zone: $Y$, $Z$, and $T$. See @fig:snse-bz for the geometry of the in-plane section of the Brillouin zone. The diffuse intensity from the Brillouin zone near multiple reflection was averaged to increase signal-to-noise. The three in-plane points show the exact same dependence: a single exponential rise with time-constant $\SI{3.6 \pm 0.6}{\pico\second}$. For reference, the average across the Brillouin zone away from the zone-center ($|\vect{k}| > \SI{0.285}{\per\angstrom}$) is shown.
 
 ### Small wavevectors phonons{#sec:snse-small-wavevectors}
 
 The rapid increase in mean-square-displacement following excitation is not due to large wavevector phonons, as this rapid increase is not seen in the diffuse intensity away from zone-center. Recall that the $Pnma \to Cmcm$ phase transition involves the softening of many zone-center transverse optical modes polarized in the direction of the lattice distortion. 
 
-```{.matplotlib #fig:snse-diffuse-direction file="figures/snse/diffuse-direction.py" caption="Comparison of the differential intensity dynamics near reflections that are either almost parallel to $\vec{b}^\star$ or $\vec{c}^\star$. Near reflections almost parallel to $\vec{c}^\star$ (e.g. $(004)$, $(01\bar{7})$, etc.), a fast initial rise in intensity is observed which is not measured close to reflections almost parallel to $\vec{b}^\star$ (e.g. $(040)$, $(051)$, etc.)"}
+```{.matplotlib #fig:snse-diffuse-direction file="figures/snse/diffuse-direction.py" caption="Comparison of the differential intensity dynamics near reflections that are either almost parallel to $\vect{b}^\star$ or $\vect{c}^\star$. Near reflections almost parallel to $\vect{c}^\star$ (e.g. $(004)$, $(01\bar{7})$, etc.), a fast initial rise in intensity is observed which is not measured close to reflections almost parallel to $\vect{b}^\star$ (e.g. $(040)$, $(051)$, etc.)"}
 ```
 
-Diffuse intensity dynamics correlated with the fast part of the Debye-Waller dynamics are indeed observed near zone-center. The one-phonon structure factors are expected to be large for the transverse modes polarized in the $c$ direction near reflections that are almost parallel to the $\vec{c}^\star$ axis. @fig:snse-diffuse-direction shows the integration of the total scattering intensity in a *ring* around reflections that are either nearly parallel to $\vec{b}^\star$ or $\vec{c}^\star$. 
+Diffuse intensity dynamics correlated with the fast part of the Debye-Waller dynamics are indeed observed near zone-center. The one-phonon structure factors are expected to be large for the transverse modes polarized in the $c$ direction near reflections that are almost parallel to the $\vect{c}^\star$ axis. @fig:snse-diffuse-direction shows the integration of the total scattering intensity in a *ring* around reflections that are either nearly parallel to $\vect{b}^\star$ or $\vect{c}^\star$. 
 
 These signals will be isolated appropriately and discussed in the next section.
 
@@ -270,7 +270,7 @@ The intensity dynamics shown in @fig:snse-diffuse-direction can be confirmed to 
 $$
     \set{ (0kl) \mid k + l \in 2\mathbb{Z} }
 $$
-where $2\mathbb{Z}$ is understood to be the set of even integers. Forbidden reflections present in the thicker SnSe samples are indicated in @fig:snse-forbidden-location. While double diffraction is visible, the cross-section of a scattering event composed of a diffraction and diffuse scattering event is much less likely (see @sec:scattering-multiple). A comparison of the differential intensity dynamics near allowed and forbidden reflections is shown in @fig:snse-forbidden. For both allowed and forbidden reflections, only those which are roughly parallel to the $\vec{c}^\star$ axis were used. It is clear that the fast intensity increase is not present near the zone-center of reflections which result from double diffraction, which confirms that the ultrafast rise in intensity initially shown in @sec:snse-small-wavevectors is diffuse in nature.
+where $2\mathbb{Z}$ is understood to be the set of even integers. Forbidden reflections present in the thicker SnSe samples are indicated in @fig:snse-forbidden-location. While double diffraction is visible, the cross-section of a scattering event composed of a diffraction and diffuse scattering event is much less likely (see @sec:scattering-multiple). A comparison of the differential intensity dynamics near allowed and forbidden reflections is shown in @fig:snse-forbidden. For both allowed and forbidden reflections, only those which are roughly parallel to the $\vect{c}^\star$ axis were used. It is clear that the fast intensity increase is not present near the zone-center of reflections which result from double diffraction, which confirms that the ultrafast rise in intensity initially shown in @sec:snse-small-wavevectors is diffuse in nature.
 
 ```{.matplotlib #fig:snse-forbidden file="figures/snse/forbidden.py" caption="Differential intensity dynamics in a ring near the Bragg peak of allowed and forbidden reflections. See @sec:snse-regions for a discussion on the geometry of the integration region."}
 ```
@@ -284,9 +284,9 @@ In order to be more quantitative about the diffuse intensity dynamics at zone ce
 
 By looking in a *ring* around Bragg peaks, the intensity dynamics can be separated between Debye-Waller (inner disk) and diffuse intensity near zone-center (outer torus) parametrized by:
 \begin{align}
-    \Omega_{\text{region 1}} &= \left\{ \vec{k} \mid |\vec{k}| < r \right\} \\
-    \Omega_{\text{region 2}} &= \left\{ \vec{k} \mid r \leq |\vec{k}| \leq 2 r \right\} \label{eq:snse-region-2}\\
-    \Omega_{\text{region 3}} &= \left\{ \vec{k} \mid 2 r < |\vec{k}| \right\}
+    \Omega_{\text{region 1}} &= \left\{ \vect{k} \mid |\vect{k}| < r \right\} \\
+    \Omega_{\text{region 2}} &= \left\{ \vect{k} \mid r \leq |\vect{k}| \leq 2 r \right\} \label{eq:snse-region-2}\\
+    \Omega_{\text{region 3}} &= \left\{ \vect{k} \mid 2 r < |\vect{k}| \right\}
 \end{align}
 The amplitude of the diffuse rise at zone-center is affected by the parameter $r$,but the time-constants are not. @fig:snse-size-comparison shows the intensity dynamics when integrating in region 2, for various parameters of $r$. In all cases, the differential intensity dynamics are well-described by a biexponential function. The relative amplitudes of the two exponentials determines the overall shape of the curves, as all the time-constants are comparable. The fitting results are summarized in @tbl:snse-size-comparison. The optimal sizes of the inner and outer radii, as defined by the dimensions which maximize the amplitude of the diffuse rise has $r = \SI{0.114}{\per\angstrom}$; this geometry is shown in @fig:snse-geometry. Region 1 and 2 are fairly small, considering that the in-plane Brillouin zone is \SI{1.49 x 1.41}{\per\angstrom} in size.
 
@@ -316,35 +316,35 @@ With the appropriate partitioning of the Brillouin zone (@fig:snse-geometry), it
 ### Transient mean-square-displacement due to soft-modes
 <!-- The extraction of the transient mean-square-displacement due to zone-center soft modes is presented in this section. The transient mean-square-displacement from diffuse scattering is first considered. From @eq:scattering-diffuse-intensity:
 \begin{align}
-    I_1(\vec{q}, \tau) - I_1(\vec{q},0) 
-        & = I_e \sum_{\lambda} \frac{n_{\lambda}(\vec{k},\tau) + 1/2)}{\omega_{\lambda}(\vec{k}, \tau)} \left| F_{1\lambda}\right|^2 
-          - I_e \sum_{\lambda} \frac{n_{\lambda}(\vec{k},0) + 1/2)}{\omega_{\lambda}(\vec{k}, 0)} \left| F_{1\lambda}\right|^2 \nonumber \\
-        & = I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left(\frac{n_{\lambda}(\vec{k},\tau) + 1/2)}{\omega_{\lambda}(\vec{k}, \tau)} - \frac{n_{\lambda}(\vec{k},0) + 1/2)}{\omega_{\lambda}(\vec{k}, 0)} \right)
+    I_1(\vect{q}, \tau) - I_1(\vect{q},0) 
+        & = I_e \sum_{\lambda} \frac{n_{\lambda}(\vect{k},\tau) + 1/2)}{\omega_{\lambda}(\vect{k}, \tau)} \left| F_{1\lambda}\right|^2 
+          - I_e \sum_{\lambda} \frac{n_{\lambda}(\vect{k},0) + 1/2)}{\omega_{\lambda}(\vect{k}, 0)} \left| F_{1\lambda}\right|^2 \nonumber \\
+        & = I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left(\frac{n_{\lambda}(\vect{k},\tau) + 1/2)}{\omega_{\lambda}(\vect{k}, \tau)} - \frac{n_{\lambda}(\vect{k},0) + 1/2)}{\omega_{\lambda}(\vect{k}, 0)} \right)
 \end{align}
 As expected, the change in vibrational amplitude ($(n + 1/2)/\omega$) is weighted by the one-phonon structure factors. Therefore, to precisely know the transient vibrational amplitude would require to know which modes are involved, as well as the values of the one-phonon structure factors at zone-center. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso[@QuantumEspresso2009;@QuantumEspresso2017] or VASP[@Kresse1999]. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead.  -->
 The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
 \begin{align}
-    \frac{I_0(\vec{q},\tau) - I_0(\vec{q},0)}{I_0(\vec{q},0)} 
-        &\equiv \Delta I_0(\vec{q},\tau) \nonumber \\
-        &= \frac{e^{-2M(\vec{q},\tau)} - e^{-2M(\vec{q},0)}}{e^{-2M(\vec{q},0)}} \nonumber \\
-        &=e^{-2[M(\vec{q},\tau) - M(\vec{q},0)]} - 1
+    \frac{I_0(\vect{q},\tau) - I_0(\vect{q},0)}{I_0(\vect{q},0)} 
+        &\equiv \Delta I_0(\vect{q},\tau) \nonumber \\
+        &= \frac{e^{-2M(\vect{q},\tau)} - e^{-2M(\vect{q},0)}}{e^{-2M(\vect{q},0)}} \nonumber \\
+        &=e^{-2[M(\vect{q},\tau) - M(\vect{q},0)]} - 1
 \end{align}
 Rearranging terms:
 $$
-    - \frac{1}{2} \ln \left[1 + \Delta I_0(\vec{q},t) \right] = M(\vec{q}, \tau) - M(\vec{q}, 0)
+    - \frac{1}{2} \ln \left[1 + \Delta I_0(\vect{q},t) \right] = M(\vect{q}, \tau) - M(\vect{q}, 0)
 $$
 In this formulation, $M$ is the appropriate average of all atom-specific $W_s$ suppression factors from @eq:scattering-debye-waller[@Warren1990DebyeWaller]. There is no general expression for the quantity $M$ for diatomic crystals such as SnSe[@Warren1990DebyeWaller]. 
-The fast component of the transient Debye-Waller dynamics are only visible for reflections nearly parallel to $\vec{c}^\star$, which informs on the atomic displacement in the $c$ direction. The harmonic approximation can be used, which states that if atoms are vibrating in a harmonic potential[@Warren1990Harmonic], the Debye-Waller factor $M$ is given by:
+The fast component of the transient Debye-Waller dynamics are only visible for reflections nearly parallel to $\vect{c}^\star$, which informs on the atomic displacement in the $c$ direction. The harmonic approximation can be used, which states that if atoms are vibrating in a harmonic potential[@Warren1990Harmonic], the Debye-Waller factor $M$ is given by:
 $$
-    M(\vec{q}, \tau) = \frac{1}{2} |\vec{q}|^2 \langle |\bar{\vec{u}} \cdot \vec{e}_3|^2 \rangle
+    M(\vect{q}, \tau) = \frac{1}{2} |\vect{q}|^2 \langle |\bar{\vect{u}} \cdot \vect{e}_3|^2 \rangle
 $$
-where the symbol $\bar{\vec{u}}$ signifies the atomic displacement averaged over the atoms in the unit cell, and $\vec{e}_3$ is the unit vector in the $c$ direction. Then, the transient mean-square-displacement in the $c$ direction, $\Delta \langle |\bar{\vec{u}} \cdot \vec{e}_3|^2 \rangle \equiv \Delta \langle u_c^2 \rangle$, is related to the Bragg intensity at zone center as:
+where the symbol $\bar{\vect{u}}$ signifies the atomic displacement averaged over the atoms in the unit cell, and $\vect{e}_3$ is the unit vector in the $c$ direction. Then, the transient mean-square-displacement in the $c$ direction, $\Delta \langle |\bar{\vect{u}} \cdot \vect{e}_3|^2 \rangle \equiv \Delta \langle u_c^2 \rangle$, is related to the Bragg intensity at zone center as:
 $$
-    \Delta \langle u_c^2 \rangle = -\frac{\ln \left[1 + \Delta I_0(\vec{q},t) \right]}{|\vec{q}|^2}
+    \Delta \langle u_c^2 \rangle = -\frac{\ln \left[1 + \Delta I_0(\vect{q},t) \right]}{|\vect{q}|^2}
 $$
-for $\vec{q}$ nearly parallel to $\vec{c}^\star$. The associated error $\sigma_u$ as a function of the pre-photoexcitation transient intensity error $\sigma_I$ is given by:
+for $\vect{q}$ nearly parallel to $\vect{c}^\star$. The associated error $\sigma_u$ as a function of the pre-photoexcitation transient intensity error $\sigma_I$ is given by:
 $$
-    \sigma_u = \frac{\partial \Delta \langle u_c^2 \rangle}{\partial I} \sigma_I\ = \frac{-\sigma_I}{|\vec{q}|^2 \left[1 + \Delta I_0(\vec{q},t) \right]}
+    \sigma_u = \frac{\partial \Delta \langle u_c^2 \rangle}{\partial I} \sigma_I\ = \frac{-\sigma_I}{|\vect{q}|^2 \left[1 + \Delta I_0(\vect{q},t) \right]}
 $$
 The extracted change in atomic displacement along the $c$ axis due to $c$-polarized transverse modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
 
@@ -368,7 +368,7 @@ In this section, the link between the observations presented previously and the 
 
 Consider first the ultrafast diffuse increase at zone-center. Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
 $$
-    I_1(\vec{q}) \propto \sum_{\lambda} \frac{n_{\lambda}(\vec{k}) + 1/2}{\omega_{\lambda}(\vec{k})} |F_{1\lambda}(\vec{q})|^2
+    I_1(\vect{q}) \propto \sum_{\lambda} \frac{n_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})} |F_{1\lambda}(\vect{q})|^2
 $$
 This equation implies an increase of diffuse intensity is due to an increase in $(n_{\lambda}+1/2) / \omega_{\lambda}$ for one or more modes. Two potential causes of a rise are identified:
 
@@ -379,22 +379,22 @@ In analogy to @eq:scattering-displacement, terms of the form $n_{\lambda} + 1/2 
 
 ### Electron-phonon coupling and phonon renormalization
 
-Given that the energy contained in pump pulses are absorbed by electrons, and that UEDS measures the subsequent lattice response, it is natural to ask how electron-phonon coupling can explain the experiments. The electron-phonon scattering rate $1/ \tau_{\lambda\vec{k}_p, epc}$, or rate of energy transfer between electrons at all wavevectors and phonons at wavevector $\vec{k}_p$, is given by[@Fan2018]:
+Given that the energy contained in pump pulses are absorbed by electrons, and that UEDS measures the subsequent lattice response, it is natural to ask how electron-phonon coupling can explain the experiments. The electron-phonon scattering rate $1/ \tau_{\lambda\vect{k}_p, epc}$, or rate of energy transfer between electrons at all wavevectors and phonons at wavevector $\vect{k}_p$, is given by[@Fan2018]:
 $$
-   1/ \tau_{\lambda\vec{k}_p, epc} = -\frac{2 \pi}{\hbar} \text{Im}\left[ \Sigma_{\lambda}(\vec{k}_p) \right]
+   1/ \tau_{\lambda\vect{k}_p, epc} = -\frac{2 \pi}{\hbar} \text{Im}\left[ \Sigma_{\lambda}(\vect{k}_p) \right]
 $${#eq:snse-ep-scattering-rate}
-where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, and $\Sigma_{\lambda}(\vec{k}_p)$ is the self-energy for the phonon with quantum numbers $(\lambda, \vec{k}_p)$. The phonon self-energy also defines how vibrational frequencies are renormalized from $\omega^0_{\lambda}$ to $\omega_{\lambda}$ due to electron-phonon interactions[@Ando2006]: 
+where $a$ and $b$ label electron bands, $\vect{k}_e$ ($\vect{k}_p$) is the electronic (phonon) wavevector, and $\Sigma_{\lambda}(\vect{k}_p)$ is the self-energy for the phonon with quantum numbers $(\lambda, \vect{k}_p)$. The phonon self-energy also defines how vibrational frequencies are renormalized from $\omega^0_{\lambda}$ to $\omega_{\lambda}$ due to electron-phonon interactions[@Ando2006]: 
 $$
-    \frac{\omega_{\lambda}(\vec{k}_p)^2}{\omega^0_{\lambda}(\vec{k}_p)^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left[ \Sigma_{\lambda}(\vec{k}_p)\right]
+    \frac{\omega_{\lambda}(\vect{k}_p)^2}{\omega^0_{\lambda}(\vect{k}_p)^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left[ \Sigma_{\lambda}(\vect{k}_p)\right]
 $${#eq:snse-ep-renormalization}
 Both a large electron-phonon scattering rate (i.e. selective mode-heating) and phonon frequency renormalization leads to the increased vibrational amplitude measured in SnSe ((@eq:scattering-displacement). Regardless of the physical cause of the increased vibrational amplitude (mode-heating or phonon renormalization), the consequences boil down to an ultrafast modification of the phonon self-energy. Computing the phonon self-energy for particular situations is arduous[@Mahan2000;@Giustino2017], but in the Migdal approximation[@Migdal1958;@Noffsinger2010]: 
 $$
-    \Sigma_{\lambda}(\vec{k}_p) = 
-        \sum_{a, b} \int \frac{d\vec{k}_e}{(2\pi)^3} ~ | g^{\lambda}_{ab}(\vec{k}_p, \vec{k}_e) |^2 ~ \frac{f\left[\epsilon_{a}(\vec{k}_e)\right] - f\left[\epsilon_b(\vec{k}_e + \vec{k}_p)\right]}{\epsilon_a(\vec{k}_e) - \epsilon_b(\vec{k}_e + \vec{k}_p) - \hbar \omega_{\lambda}(\vec{k}_p) + i\eta}
+    \Sigma_{\lambda}(\vect{k}_p) = 
+        \sum_{a, b} \int \frac{d\vect{k}_e}{(2\pi)^3} ~ | g^{\lambda}_{ab}(\vect{k}_p, \vect{k}_e) |^2 ~ \frac{f\left[\epsilon_{a}(\vect{k}_e)\right] - f\left[\epsilon_b(\vect{k}_e + \vect{k}_p)\right]}{\epsilon_a(\vect{k}_e) - \epsilon_b(\vect{k}_e + \vect{k}_p) - \hbar \omega_{\lambda}(\vect{k}_p) + i\eta}
 $${#eq:snse-phonon-self-energy}
-where $a$ and $b$ label electron bands, $\vec{k}_e$ ($\vec{k}_p$) is the electronic (phonon) wavevector, $f(\epsilon)$ is the electronic energy distribution (which might be non-thermal), and $\eta$ is an infinitesimally-small number. The electron-phonon coupling vertex, $g^{\lambda}_{ab}(\vec{k}_e, \vec{k}_p)$, describes the rate of inelastic single electron scattering between bands $a$ and $b$ through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vec{k}_p)$. The electron-phonon coupling vertex $g$ was encountered in @sec:introduction-epc and @sec:graphite-coupling-constants.
+where $a$ and $b$ label electron bands, $\vect{k}_e$ ($\vect{k}_p$) is the electronic (phonon) wavevector, $f(\epsilon)$ is the electronic energy distribution (which might be non-thermal), and $\eta$ is an infinitesimally-small number. The electron-phonon coupling vertex, $g^{\lambda}_{ab}(\vect{k}_e, \vect{k}_p)$, describes the rate of inelastic single electron scattering between bands $a$ and $b$ through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vect{k}_p)$. The electron-phonon coupling vertex $g$ was encountered in @sec:introduction-epc and @sec:graphite-coupling-constants.
 
-The electron-phonon scattering rate (@eq:snse-ep-scattering-rate) and phonon renormalization (@eq:snse-ep-renormalization) are therefore proportional to the $\vec{k}_e$-integrated electron-phonon coupling vertex via @eq:snse-phonon-self-energy. Photoexcitation perturbs the electronic energy distribution ($f$), and this non-thermal energy distribution will scatter to phonons $(\lambda, \vec{k}_p)$ based on the strength of $g$. Therefore, whether the diffuse intensity rise at zone-center is due to selective mode heating, phonon renormalization, or both, is not an important distinction. The diffuse intensity rise at zone-center can be associated with strong electron-phonon coupling to zone-center modes polarized in the $c$ direction and at least an order-of-magnitude lower coupling everywhere else in the plane.
+The electron-phonon scattering rate (@eq:snse-ep-scattering-rate) and phonon renormalization (@eq:snse-ep-renormalization) are therefore proportional to the $\vect{k}_e$-integrated electron-phonon coupling vertex via @eq:snse-phonon-self-energy. Photoexcitation perturbs the electronic energy distribution ($f$), and this non-thermal energy distribution will scatter to phonons $(\lambda, \vect{k}_p)$ based on the strength of $g$. Therefore, whether the diffuse intensity rise at zone-center is due to selective mode heating, phonon renormalization, or both, is not an important distinction. The diffuse intensity rise at zone-center can be associated with strong electron-phonon coupling to zone-center modes polarized in the $c$ direction and at least an order-of-magnitude lower coupling everywhere else in the plane.
 
 This is not entirely unexpected. Calculations by Caruso *et al.*[@Caruso2019] have reported strong electron-phonon coupling to zone-center optical modes polarized in the $c$ direction, most importantly the $B_u$ (\SI{8}{\milli\electronvolt}) and the $B_g$ (\SI{20}{\milli\electronvolt}) modes. The results corroborate these findings, at least qualitatively. 
 

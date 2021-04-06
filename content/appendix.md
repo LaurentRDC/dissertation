@@ -115,9 +115,7 @@ Accessing and manipulating crystal structures is an important component of many 
 
 The results of the parsing described in the previous section is stored a fundamental data structure called `Crystal`. A `Crystal` is a container of atomic positions and lattice information from which everything else can be derived. Most of the information in a `Crystal` is calculated on-the-fly, when requested by the user, so that the presented information is always up to date. Below is an example of the information that can be derived from the crystal structure of graphite:
 
-<!-- Unfortunately, the verbatim and listings environments don't support UTF8
-So the code below doesn't have the proper alpha, beta, gamma, 
-degrees, and angstroms symbols -->
+<!--The verbatim code below requires usage of XeLaTeX / LuaLaTeX because of utf-8 symbols-->
 ```
 > python -m crystals info graphite.cif
 Crystal object with following unit cell:
@@ -126,8 +124,8 @@ Crystal object with following unit cell:
     Atom C  @ (0.33, 0.67, 0.25)
     Atom C  @ (0.67, 0.33, 0.75)
 Lattice parameters:
-    a=2.464A, b=2.464A, c=6.711A
-    alpha=90.000deg, beta=90.000deg, gamma=120.000deg
+    a=2.464Å, b=2.464Å, c=6.711Å
+    α=90.000°, β=90.000°, γ=120.000°
 Chemical composition:
     C: 100.000%
 Symmetry information:

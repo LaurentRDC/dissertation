@@ -56,7 +56,7 @@ grid[0].add_patch(
 grid[-1].add_patch(
     Circle(
         xy=np.asarray(sym.shape) / 2,
-        radius=13,
+        radius=25,
         ec="none",
         fc=plt.get_cmap("inferno")(sym.max()),
     )

@@ -32,7 +32,7 @@ CONTENTDIR = HERE / "content"
 TEMPLATEDIR = HERE / "templates"
 
 PANDOC = "pandoc"
-LATEX_ENGINE = "pdflatex"
+LATEX_ENGINE = "lualatex"
 
 META = HERE / "metadata.yaml"
 
@@ -173,9 +173,9 @@ def runlatex(source):
     latex_options = (
         f" -interaction=batchmode -halt-on-error -output-directory={BUILDDIR_PDF}"
     )
-    run(f"{LATEX_ENGINE} {latex_options} -draftmode {source}").check_returncode()
+    run(f"{LATEX_ENGINE} {latex_options} --draftmode {source}").check_returncode()
     run(f"biber --quiet build/{Path(source).stem}").check_returncode()
-    run(f"{LATEX_ENGINE} {latex_options} -draftmode {source}").check_returncode()
+    run(f"{LATEX_ENGINE} {latex_options} --draftmode {source}").check_returncode()
     run(f"{LATEX_ENGINE} {latex_options} {source}").check_returncode()
 
 

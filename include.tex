@@ -21,10 +21,6 @@
 \usepackage[symbol]{footmisc}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
-% Make vectors look bold
-% Vector notation: \vec{q}
-\renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
-
 % For the use of the \FloatBarrier command, to isolate
 % references from figures
 \usepackage{placeins}
@@ -36,6 +32,11 @@
 
 % For the use of slanted fractions: \sfrac{1}{2}
 \usepackage{xfrac}
+
+% Make vectors look bold
+% Vector notation: \vect{q}
+\usepackage{amsmath}
+\let\vect\mathbf
 
 % https://aty.sdsu.edu/bibliog/latex/floats.html
 % Alter some LaTeX defaults for better treatment of figures:
