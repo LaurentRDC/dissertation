@@ -35,6 +35,7 @@ PANDOC = "pandoc"
 LATEX_ENGINE = "lualatex"
 
 META = HERE / "metadata.yaml"
+TYPOGRAPHY = HERE / "typography.yaml"
 
 SRC = [
     CONTENTDIR / "preface.md",
@@ -64,27 +65,17 @@ OPTIONS += ["--standalone"]
 
 # The order of filters is important!
 OPTIONS += ["--filter pandoc-plot", "--filter pandoc-crossref"]
+OPTIONS += [
+    "-M cref:true",
+    "-M autoEqnLabels:true",
+    "-M plot-configuration=plot-config.yml",
+]
 
-OPTIONS += [f"--metadata-file={META}"]
+OPTIONS += [f"--metadata-file={META}", f"--metadata-file={TYPOGRAPHY}"]
 
 OPTIONS += [f"--include-in-header=include.tex"]
 OPTIONS += [f"--include-in-header={TMP1}"]
 OPTIONS += [f"--include-before-body={TMP2}"]
-
-OPTIONS += [
-    "-V documentclass=scrbook",
-    "-V papersize=a4",
-    "-V fontsize=11pt",
-    "-V classoption:open=right",
-    "-V classoption:twoside=true",
-    "-V classoption:cleardoublepage=empty",
-    "-V classoption:clearpage=empty",
-    "-V geometry:top=30mm",
-    "-V geometry:left=25mm",
-    "-V geometry:bottom=30mm",
-    "-V geometry:width=150mm",
-    "-V geometry:bindingoffset=6mm",
-]
 
 OPTIONS += ["--toc", "--toc-depth=3"]
 OPTIONS += ["--number-sections", "--top-level-division=chapter"]
@@ -110,6 +101,10 @@ parser_build.add_argument(
     default="eisvogel",
 )
 
+parser_prereqs = subparsers.add_parser(
+    "compute-prerequisites", help="Compute plotting prerequisites from data."
+)
+
 
 def check_for_todo(path):
     """ Scan a file and return if there are any TODOs are left """
@@ -119,6 +114,19 @@ def check_for_todo(path):
             if line.find("TODO"):
                 return True
     return False
+
+
+def precompute_plots():
+    """ Compute the plotting prerequisites. """
+    for script in [
+        "mkdecomp.py",
+        "mkdispersion.py",
+        "mkdwaller.py",
+        "mknpstreams-bench.py",
+        "mkoneph.py",
+    ]:
+        path = HERE / "scripts" / script
+        run(f"python -OO {path}")
 
 
 @wraps(subprocess.run)
@@ -266,9 +274,11 @@ def build_eisvogel(target):
     options += ["-V titlepage-rule-height=0"]
     # TODO: option for print where citations, urls, and internal links
     #       are in black
-    options += ["-V linkcolor=Violet"]
-    options += ["-V citecolor=Violet"]
-    options += ["-V urlcolor=Violet"]
+    # The color DarkViolet is defined in the template
+    options += ["-V linkcolor=DarkViolet"]
+    options += ["-V citecolor=DarkViolet"]
+    options += ["-V urlcolor=DarkViolet"]
+    options += ["-V monofontoptions:Color=DarkViolet"]
     # Note that the path separators absolutely needs to be '\'
     titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
     options += [f"-V titlepage-background={titlepage_path}"]
@@ -305,5 +315,7 @@ if __name__ == "__main__":
         multiplexor[arguments.style](target=Path("dissertation.pdf"))
     elif arguments.command == "clean":
         clean(full=arguments.all)
+    elif arguments.command == "compute-prerequisites":
+        precompute_plots()
     else:
         parser.print_help()

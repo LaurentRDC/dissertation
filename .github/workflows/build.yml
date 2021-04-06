@@ -6,6 +6,14 @@ on:
 jobs:
   build:
     if: contains(toJson(github.event.commits), '[ci skip]') == false && contains(toJson(github.event.commits), '[skip ci]') == false
+    strategy:
+      fail-fast: false
+      matrix:
+        # Whether or not compute the plotting prerequisites. Since this
+        # calculation takes ~1h, one of the CI runs will skip this step
+        # so that I can get feedback faster.
+        precompute: [true, false]
+
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +39,7 @@ jobs:
         sudo apt-get --quiet install --yes inkscape
         sudo apt-get --quiet install --yes texlive-science
         sudo apt-get --quiet install --yes texlive-latex-extra
+        sudo apt-get --quiet install --yes texlive-luatex
         sudo apt-get --quiet install --yes texlive-fonts-extra
         sudo apt-get --quiet install --yes biber
     
@@ -81,18 +90,13 @@ jobs:
         echo "$(pandoc --version)"
         echo "$(pandoc-plot --full-version)"
         echo "$(pandoc-crossref --version)"
-        echo "$(pdflatex --version)"
+        echo "$(lualatex --version)"
         echo "$(biber --version)"
     
-    # The following calculations are intermediate stages
-    # between raw data and data that can be plotted.
     - name: Precompute prerequisites
+      if: ${{ matrix.precompute }}
       run: |
-        python scripts/mkdecomp.py
-        python scripts/mkdispersion.py
-        python scripts/mkdwaller.py
-        python scripts/mknpstreams-bench.py
-        python scripts/mkoneph.py
+        python scripts/dissc.py compute-prerequisites
       
     - name: Build dissertation
       run: |
@@ -106,10 +110,10 @@ jobs:
         python scripts/dissc.py build --style simple
         mv build/dissertation.pdf dissertation-simple.pdf
     
-    # - name: Upload PDF
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: dissertation
-    #     path: |
-    #       dissertation-*.pdf
-    #     retention-days: 7
+    - name: Upload PDF
+      uses: actions/upload-artifact@v2
+      with:
+        name: dissertation
+        path: |
+          dissertation-*.pdf
+        retention-days: 7

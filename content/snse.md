@@ -17,9 +17,9 @@ $$
 $${#eq:snse-zt}
 where $S$ is the so-called Seebeck coefficient, $\sigma$ is the electrical conductivity, $\kappa_e$ and $\kappa_l$ are the thermal conductivities for the charge carriers and the lattice respectively, and $T$ is the absolute temperature. $ZT$ is an important figure of merit because it is used to describe the efficiency of a thermoelectric module. Consider a device with a cold side at temperature $T_C$, and a hot side at temperature $T_H$. The heat harvesting efficiency is given by:
 $$
-\eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + Z\sfrac{(T_C + T_H)}{2}} - 1}{\sqrt{1 + Z\sfrac{(T_C + T_H)}{2}} + \frac{T_C}{T_H}} \right)
+\eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + Z\frac{(T_C + T_H)}{2}} - 1}{\sqrt{1 + Z\frac{(T_C + T_H)}{2}} + \frac{T_C}{T_H}} \right)
 $$
-where $\bar{T}=\frac{T_H+T_C}{2}$ is the average device temperature, and $\frac{T_H - T_C}{T_H}$ is understood to be the Carnot efficiency[@Sootsman2009;@Zhang2014]. The value of $\eta$ for an abstract device is shown in @fig:snse-efficiency. This figure illustrates that good efficiency at reasonable temperatures ($<$\SI{450}{\kelvin}) requires a high $ZT$.
+where $\frac{T_H - T_C}{T_H}$ is understood to be the Carnot efficiency[@Sootsman2009;@Zhang2014]. The value of $\eta$ for an abstract device is shown in @fig:snse-efficiency. This figure illustrates that good efficiency at reasonable temperatures ($<$\SI{450}{\kelvin}) requires a high $ZT$.
 
 ```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_H$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$. $Z\sfrac{(T_C + T_H)}{2}$ is the thermoelectric figure-of-merit at the average device temperature."}
 ```
@@ -77,7 +77,7 @@ Which bulk compounds should be used as a starting point for further performance 
 
 ## Tin selenide
 
-Tin selenide (SnSe) is a layered mono-chalcogen which has attracted attention in the past few years because of its very high thermoelectric figure of merit $ZT$, especially at high temperature, as reported by Zhao *et al.* [@Zhao2014;@Zhao2016a;@Zhao2016b]. While the exact value of this figure of merit is debated [@Wei2016], SnSe remains one of the most promising bulk thermoelectric materials[^zt-fully-dense]. The axis-projected $ZT$ based on the work by Zhao *et al.* [@Zhao2014] is shown in @fig:snse-zt. SnSe is interesting not only from a scientific standpoint but also from a practical one because, most importantly because it is lead-free (non-toxic) and composed of earth-abundant elements.
+Tin selenide (SnSe) is a layered mono-chalcogen which has attracted attention in the past few years because of its very high thermoelectric figure of merit $ZT$, especially at high temperature, as reported by Zhao *et al.* [@Zhao2014] and others[@Zhao2016a;@Zhao2016b]. While the exact value of this figure of merit is debated [@Wei2016], SnSe remains one of the most promising bulk thermoelectric materials[^zt-fully-dense]. The axis-projected $ZT$ based on the work by Zhao *et al.* [@Zhao2014] is shown in @fig:snse-zt. SnSe is interesting not only from a scientific standpoint but also from a practical one because, most importantly because it is lead-free (non-toxic) and composed of earth-abundant elements.
 
 ```{.matplotlib #fig:snse-zt file="figures/snse/zt.py" caption="Thermoelectric figure-of-merit $ZT$ along the crystallographic axes of SnSe."}
 ```
@@ -202,7 +202,7 @@ The samples used in this work were prepared by J. Mui from the Facility for Elec
 
 #### Mechanical exfoliation
 
-An ultrathin flake of SnSe was prepared via mechanical exfoliation, a procedure that is analogous to the work by Novoselov *et al.*[@Novoselov2004]. A small chunk of SnSe was embedded in CrystalBond glue, on a standard \SI{3}{\milli\meter} copper TEM grid with a line spacing of 200 lines per inch. The embedded chunk was then exfoliated repeatedly using ordinary adhesive tape, until the embedded flake was translucent when observed with an optical microscope. The glue was washed away with acetone. This procedure resulted in a sample with an area of approximately \SI{50 x 50}{\micro\meter}.
+An ultrathin flake of SnSe was prepared via mechanical exfoliation, a procedure that is analogous to the work by Novoselov *et al.*[@Novoselov2004] A small chunk of SnSe was embedded in CrystalBond glue, on a standard \SI{3}{\milli\meter} copper TEM grid with a line spacing of 200 lines per inch. The embedded chunk was then exfoliated repeatedly using ordinary adhesive tape, until the embedded flake was translucent when observed with an optical microscope. The glue was washed away with acetone. This procedure resulted in a sample with an area of approximately \SI{50 x 50}{\micro\meter}.
 
 The sample thickness was determined by taking the ratio of various reflections at thicknesses of \SI{70}{\nano\meter} and \SI{90}{\nano\meter} -- correcting for sample volume and electron flux -- and extrapolating to the intensity of the reflections in the exfoliated sample. Using this procedure, the thickness of the exfoliated sample was estimeted to be $\SI{45 \pm 5}{\nano\meter}$.
 

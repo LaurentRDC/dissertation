@@ -1,0 +1,20 @@
+---
+documentclass: book
+papersize: a4
+classoption: 
+- open=right
+- twoside=true
+- cleardoublepage=empty
+- clearpage=empty
+
+geometry:
+- top=30mm
+- left=25mm
+- bottom=30mm
+- width=150mm
+- bindingoffset=6mm
+
+fontsize: 11pt
+
+monofont: "Monoid Regular"
+---
