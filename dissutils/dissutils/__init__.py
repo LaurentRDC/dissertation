@@ -8,8 +8,6 @@ import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
 from crystals.affine import change_of_basis
-from matplotlib.collections import PatchCollection
-from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1 import ImageGrid
 from skued import spectrum_colors
 
@@ -151,27 +149,3 @@ def discrete_colors(num):
 
     step = (ma - mi) / (num - 1)
     return [cmap(mi + i * step) for i in range(num)]
-
-
-def box_errorbars(ax, xdata, ydata, xerr, yerr, colors):
-    """
-    Create error boxes instead of error bars
-    """
-    # Create list for all the error patches
-    errorboxes = []
-    # Loop over data points; create box from errors at each point
-    for x, y, xe, ye in zip(xdata, ydata, xerr, yerr):
-        rect = Rectangle((x - xe, y - ye / 2), 2 * xe, ye)
-        errorboxes.append(rect)
-
-    # Create patch collection with specified colour/alpha
-    pc = PatchCollection(errorboxes, edgecolor=colors, facecolor=colors)
-
-    # Add collection to axes
-    ax.add_collection(pc)
-
-    # Plot invisible scatter points to get automatic plot bounds that
-    # make sense
-    artists = ax.scatter(xdata, ydata, s=0, c=colors)
-
-    return artists

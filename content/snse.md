@@ -17,11 +17,11 @@ $$
 $${#eq:snse-zt}
 where $S$ is the so-called Seebeck coefficient, $\sigma$ is the electrical conductivity, $\kappa_e$ and $\kappa_l$ are the thermal conductivities for the charge carriers and the lattice respectively, and $T$ is the absolute temperature. $ZT$ is an important figure of merit because it is used to describe the efficiency of a thermoelectric module. Consider a device with a cold side at temperature $T_C$, and a hot side at temperature $T_H$. The heat harvesting efficiency is given by:
 $$
-\eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + ZT} - 1}{\sqrt{1 + ZT} + \frac{T_C}{T_H}} \right)
+\eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + Z\sfrac{(T_C + T_H)}{2}} - 1}{\sqrt{1 + Z\sfrac{(T_C + T_H)}{2}} + \frac{T_C}{T_H}} \right)
 $$
-where $\frac{T_H - T_C}{T_H}$ is understood to be the Carnot efficiency[@Zhang2014]. The value of $\eta$ for an abstract device is shown in @fig:snse-efficiency. This figure illustrates that good efficiency at reasonable temperatures ($<$\SI{450}{\kelvin}) requires a high $ZT$.
+where $\bar{T}=\frac{T_H+T_C}{2}$ is the average device temperature, and $\frac{T_H - T_C}{T_H}$ is understood to be the Carnot efficiency[@Sootsman2009;@Zhang2014]. The value of $\eta$ for an abstract device is shown in @fig:snse-efficiency. This figure illustrates that good efficiency at reasonable temperatures ($<$\SI{450}{\kelvin}) requires a high $ZT$.
 
-```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_H$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$."}
+```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_H$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$. $Z\sfrac{(T_C + T_H)}{2}$ is the thermoelectric figure-of-merit at the average device temperature."}
 ```
 
 ### The Seebeck coefficient
@@ -55,19 +55,25 @@ $$
 $$
 The Seebeck coefficient is largely determined by the value of the reduced chemical potential, and thus is mostly sensitive to doping [@Hicks1993a].
 
-### Electrical conductivity
+### Electronic transport
 
-The thermoelectric figure-of-merit (@eq:snse-zt) is directly proportional to the DC electrical conductivity $\sigma$. However, increasing the electrical conductivity of any material also necessarily increases the electronic contribution of the thermal conductivity. In fact, the electronic contribution to the thermal conductivity is directly proportional to the DC electrical conductivity, a phenomenon known as the *Wiedemann-Franz* law [@Franz1853].
+The thermoelectric figure-of-merit (@eq:snse-zt) is directly proportional to the DC electrical conductivity $\sigma$. For a given material, the conductivity can be improved via charge-carrier doping[@Rowe1995;@Bennett2017], which is also known to negatively affect the Seebeck coefficient [@Sootsman2009;@Ikeda2010;@Fiorentini2016]. Therefore, the improvement of the term $S^2 \sigma$ via charge-carrier doping reaches a maximum at some optimum carrier concentration[@Bennett2017], which limits the overall potential for thermoelectric performance gains. 
 
-### Thermal conductivity
+There is another complication related to targeted improvements in DC conductivity. Increasing the electrical conductivity of any material also necessarily increases the electronic contribution of the thermal conductivity. In fact, the electronic contribution to the thermal conductivity is directly proportional to the DC electrical conductivity, a phenomenon known as the *Wiedemann-Franz* law [@Franz1853].
 
-TODO: this
+### Dimensionality-reduction
 
-#### Dimensionality reduction
+On the more practical, device-driven side of things, the thermoelectric figure-of-merit can be dramatically improved via nanostructuring. In two seminal papers, Hicks and Dresselhaus [@Hicks1993a;@Hicks1993b] described the desireable effects of dimensionality reduction (nanosheets and quantum wires) on the both $S^2 \sigma$ and $\kappa_l$. With respect to electronic transport, quantum confinement pseudo-discretizes the electronic density-of-states[@Heremans2013]; with the appropriate doping, the power factor[^powerfactor] $S^2 \sigma$ can be dramatically improved[@Hicks1996]. Nanostructuring also reduces the lattice thermal conductivity. The reduction in phonon mean-free-path at interfaces is appreciable[@Kapitza1941;@Rowe1974], and this is no different in nanostructured devices[@Joshi2008]. 
 
-In two seminal papers, Hicks and Dresselhaus [@Hicks1993a;@Hicks1993b] described the effects of dimensionality reduction on the thermoelectric figure of merit.
+However, the maximum performance of nanostructured thermoelectrics -- while enhanced -- is still limited by the intrinsic thermoelectric performance of the underlying bulk material.
 
-Due to the Wiedemann-Franz law, ...
+### Lattice thermal conductivity
+
+The last major thermoelectric tuning parameter is the lattice thermal conductivity, which has been historically considered independent from electronic structure changes. The canonical way to alter the lattice heat transport properties from a given compound is to introduce defects via solid solutions[@Wang2013].
+
+Which bulk compounds should be used as a starting point for further performance improvements? From the point-of-view of low lattice thermal conductivity, the ideal material has been called a *phonon glass/electron crystal* (PGEC) [@Rowe1995PGEC]. The prototypical PGEC is a low-symmetry material with heavy atoms that are somewhat free to vibrate, resulting in an intrisically-low thermal conductivity (phonon glass), but with high-enough electron mobility (electron crystal). Well-known PGEC materials include Bi$_2$Se$_3$[@Hicks1993a](also a topological insulator [@Sobota2012]), PbTe[@Harman1996], and more recently SnSe[@Zhao2014].
+
+[^powerfactor]: The term power factor is an unfortunate misnomer, as it does not relate to energy flow over time. It is used here for historical coherence.
 
 ## Tin selenide
 
@@ -91,12 +97,12 @@ There are actually many soft-modes with characteristics similar to the lowest en
 
 ### Electronic instability
 
-The electronic structure of SnSe is also of interest. The valence band of SnSe is primarily composed of Se-$4p$ orbitals, while the conduction band is primarily composed of Sn-$5p$ orbitals[@Li2015;@Cuong2015;@Kutorasinski2015;@Hong2019]. Moreover, different valence and conduction pockets in momentum space correspond to particular $p$-orbital polarizations [@Cuong2015]. SnSe is a p-type semiconductor (i.e. the top of the valence band is much closer to the Fermi energy than the bottom of the conduction band) with a indirect band gap in the $Pnma$ phase, and a direct band gap in the $Cmcm$. Interestingly, the *nature* of the band gap is strongly-dependent on the in-plane lattice parameters. Towards $T_c$, the $a$ and $b$ axes expand, while the $c$ axis contracts towards the length of the $b$ axis [@Chattopadhyay1986]. At \SI{300}{\kelvin}, the conduction band minimum is located at $\frac{2}{3}Y$ and is composed of Sn-$5p_y$ orbitals. At \SI{600}{\kelvin}, the conduction band minimum switches to a pocket of Sn-$5p_x$ at $\Gamma$. The valence band maximum for the $Pnma$ phase remains near $\frac{2}{3}Z$ across the temperature range and is composed of Se-$4p_z$ orbitals[^cuong]. The evolution of the electronic band structure along the $Z - \Gamma - Y$ line, based on the work by Wei *el al.* [@Wei2019], is shown in @fig:snse-electronic-structure.
+The electronic structure of SnSe is also of interest. The valence band of SnSe is primarily composed of Se-$4p$ orbitals, while the conduction band is primarily composed of Sn-$5p$ orbitals[@Li2015;@Cuong2015;@Kutorasinski2015;@Hong2019]. Moreover, different valence and conduction pockets in momentum space correspond to particular $p$-orbital polarizations [@Cuong2015]. SnSe is a p-type semiconductor (i.e. the top of the valence band is much closer to the Fermi energy than the bottom of the conduction band) with a indirect band gap in the $Pnma$ phase, and a direct band gap in the $Cmcm$. 
+
+Interestingly, the *nature* of the band gap is strongly-dependent on the in-plane lattice parameters. Towards $T_c$, the $a$ and $b$ axes expand, while the $c$ axis contracts towards the length of the $b$ axis [@Chattopadhyay1986]. At \SI{300}{\kelvin}, the conduction band minimum is located at $\frac{2}{3}Y$ and is composed of Sn-$5p_y$ orbitals. At \SI{600}{\kelvin}, the conduction band minimum switches to a pocket of Sn-$5p_x$ at $\Gamma$. The valence band maximum for the $Pnma$ phase remains near $\frac{2}{3}Z$ across the temperature range and is composed of Se-$4p_z$ orbitals[^cuong]. The evolution of the electronic band structure along the $Z - \Gamma - Y$ line, based on the work by Wei *el al.* [@Wei2019], is shown in @fig:snse-electronic-structure. In particular, the shape of valence band near the $Z$ point -- known as "pudding mold" -- is thought to strongly-improve the power factor $S^2\sigma$[@Kuroki2007].
 
 ```{.matplotlib #fig:snse-electronic-structure file="figures/snse/estructure.py" caption="Schematic of the evolution of the electronic structure of SnSe in the $Pnma$ phase as temperature increases. At \SI{600}{\kelvin}, the conduction band minimum changes from $\frac{2}{3}Y$ to $\Gamma$; the crossing point is marked with a dashed line. The valence band maximum remains near $\frac{2}{3}Z$ across the temperature range."}
 ```
-
-TODO: Pudding mold band near Z [@Kuroki2007]
 
 ### Structural parameters
 

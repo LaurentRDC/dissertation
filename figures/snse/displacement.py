@@ -3,6 +3,8 @@ from pathlib import Path
 from math import sin, pi, sqrt
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+from matplotlib.patches import Rectangle
+from matplotlib.collections import PatchCollection
 import matplotlib as mpl
 import numpy as np
 import scipy.optimize as opt
@@ -11,10 +13,34 @@ import scipy.stats as stats
 import scipy.constants as constants
 
 from dissutils.snse import overnight4, photocarrier_density
-from dissutils import MEDIUM_FIGURE_WIDTH, box_errorbars
+from dissutils import MEDIUM_FIGURE_WIDTH
 
 DATADIR = Path("data") / "snse"
 CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
+
+
+def box_errorbars(ax, xdata, ydata, xerr, yerr, colors):
+    """
+    Create error boxes instead of error bars
+    """
+    # Create list for all the error patches
+    errorboxes = []
+    # Loop over data points; create box from errors at each point
+    for x, y, xe, ye in zip(xdata, ydata, xerr, yerr):
+        rect = Rectangle((x - xe, y - ye / 2), 2 * xe, ye)
+        errorboxes.append(rect)
+
+    # Create patch collection with specified colour/alpha
+    pc = PatchCollection(errorboxes, edgecolor=colors, facecolor=colors)
+
+    # Add collection to axes
+    ax.add_collection(pc)
+
+    # Plot invisible scatter points to get automatic plot bounds that
+    # make sense
+    artists = ax.scatter(xdata, ydata, s=0, c=colors)
+
+    return artists
 
 
 def transient_u2(timedelays, intensity, q):
@@ -70,7 +96,7 @@ def delta_msd_fluence(fluence):
 
 
 figure, ax_displacement = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3))
-
+ax_carrdensity = ax_displacement.twiny()
 
 fluences = np.array([6.6, 7.9, 9.5, 10.7, 12, 13.2])
 rms = []
@@ -116,23 +142,17 @@ box_errorbars(
     colors=colors,
 )
 
-# Add colorbar to show fluences
-# Note that to match the color of the points,
-cax = ax_displacement.inset_axes([0.28, 0.03, 0.7, 0.03])
-ph_density = photocarrier_density(fluences) / 1e20  # [10^20 cm^-3]
-cb = mpl.colorbar.ColorbarBase(
-    cax,
-    cmap=mpl.colors.ListedColormap(colors),
-    orientation="horizontal",
-    ticklocation="top",
-    ticks=[i + 0.5 for i, _ in enumerate(colors)],
-    format=ticker.FixedFormatter([f"{p:.1f}" for p in ph_density]),
-    norm=mpl.colors.Normalize(vmin=0, vmax=len(ph_density)),
-)
-cb.set_label("$N_{\gamma}$ [$10^{20}$ cm$^{-3}$]")
-
 ax_displacement.set_xlim([es.min(), es.max()])
 ax_displacement.set_ylabel("$\\Delta \\langle u_c^2 \\rangle$ [$10^{-2} \AA^2$]")
 ax_displacement.set_xlabel("Fluence [mJ cm$^{-2}$]")
+
+
+carrier_density = photocarrier_density(es) / 1e20
+ax_carrdensity.set_xlim([carrier_density.min(), carrier_density.max()])
+ax_carrdensity.set_xticks(photocarrier_density(fluences) / 1e20)
+ax_carrdensity.xaxis.set_major_formatter(ticker.FuncFormatter(lambda n, _: f"{n:.1f}"))
+ax_carrdensity.xaxis.set_label_position("top")
+ax_carrdensity.xaxis.tick_top()
+ax_carrdensity.set_xlabel("$N_{\gamma}$ [$10^{20}$ cm$^{-3}$]")
 
 plt.tight_layout()
