@@ -126,9 +126,9 @@ In this section, the consequences of an electron scattering *once* in crystallin
                                   & = -\frac{m_e}{2 \pi \hbar^2} \int d\vect{x}^\prime e^{i(\vect{k}_i - \vect{k}_f)\cdot \vect{x}^\prime} V(\vect{x}^\prime)
     \label{eq:scattering-first-born-approx}
 \end{align}
-where the normalization of @eq:scattering-norm was used. The reader may recognize that the scattering amplitude $f^{(1)}(\vect{k}_f, \vect{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vect{k}_i - \vect{k}_f \equiv \vect{q}$, the *scattering vector*. If the Fourier transform functional operator is defined as:
+where the normalization of @eq:scattering-norm was used. The reader may recognize that the scattering amplitude $f^{(1)}(\vect{k}_f, \vect{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vect{k}_f - \vect{k}_i \equiv \vect{q}$, the *scattering vector*. If the Fourier transform functional operator is defined as:
 $$
-    \mathcal{F}\left[ f(\vect{x}) \right] \equiv \hat{f}(\vect{q}) = \frac{1}{2 \pi} \int d\vect{x}^\prime e^{i \vect{q} \cdot \vect{x}^\prime}f(\vect{x}^\prime).
+    \mathcal{F}\left[ f(\vect{x}) \right] \equiv \hat{f}(\vect{q}) = \frac{1}{2 \pi} \int d\vect{x}^\prime e^{-i \vect{q} \cdot \vect{x}^\prime}f(\vect{x}^\prime).
 $$
 then @eq:scattering-first-born-approx can be simplified to:
 $$
@@ -160,15 +160,15 @@ $$
 $$
 where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}_i$, and $V_a$ is given by @eq:scattering-atom-potential. Note that for any function $h(\vect{x})$: 
 \begin{align}
-    \mathcal{F}\left[ h(\vect{x} + \vect{y}) \right] & = \frac{1}{2\pi} \int d\vect{x}^\prime e^{i\vect{q}\cdot(\vect{x}^\prime + \vect{y})} h(\vect{x}^\prime) \nonumber \\
-                                                   & = \frac{e^{i \vect{q} \cdot \vect{y}}}{2 \pi} \int d\vect{x}^\prime e^{i\vect{q} \vect{x}^\prime} h(\vect{x}^\prime) \nonumber \\
-                                                   & = e^{i \vect{q} \cdot \vect{y}} \mathcal{F}\left[ h(\vect{x}) \right]
+    \mathcal{F}\left[ h(\vect{x} + \vect{y}) \right] & = \frac{1}{2\pi} \int d\vect{x}^\prime e^{-i\vect{q}\cdot(\vect{x}^\prime + \vect{y})} h(\vect{x}^\prime) \nonumber \\
+                                                   & = \frac{e^{-i \vect{q} \cdot \vect{y}}}{2 \pi} \int d\vect{x}^\prime e^{i\vect{q} \vect{x}^\prime} h(\vect{x}^\prime) \nonumber \\
+                                                   & = e^{-i \vect{q} \cdot \vect{y}} \mathcal{F}\left[ h(\vect{x}) \right]
     \label{eq:scattering-fourier-shift}
 \end{align}
 where $\vect{y}$ is some arbitrary translation vector. Therefore, the Fourier transform of the scattering potential of the entire crystal is related to the Fourier transform  the potential its constituent atoms (@eq:scattering-atom-potential) as:
 \begin{align}
-    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_i V_a(\vect{x} - \vect{r}_i) \right] \nonumber \\
-                       & = \sum_i \mathcal{F}\left[ V_a(\vect{x} - \vect{r}_i) \right] \nonumber \\
+    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_i V_a(\vect{x} + \vect{r}_i) \right] \nonumber \\
+                       & = \sum_i \mathcal{F}\left[ V_a(\vect{x} + \vect{r}_i) \right] \nonumber \\
                        & = \sum_i \mathcal{F}\left[ V_a(\vect{x}) \right] e^{-i \vect{q} \cdot \vect{r}_i} \nonumber \\
                        & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
     \label{eq:scattering-potential-crystal}
@@ -327,7 +327,7 @@ This section will only consider single-scattering events. A discussion of dynami
 
 Consider the vector $\vect{r}_{m,s}$ to be the position of atom $s$ in the unit cell $m$. In this scheme, the indices $s$ run over the size of the unit cell, while the indices $m$ run over the number of unit cells: $1 \leq m \leq N_c$. Due to the presence of lattice waves, the atoms are displaced from their equilibrium positions $\set{\vect{r}_{m,s}}$. Let $\set{\vect{u}_{m,s}}$ be the *displacement vectors* due to lattice waves. Then, the atomic positions can be expressed as $\set{\vect{r}_{m,s} \to \vect{r}_{m,s} + \vect{u}_{m,s}}$. The scattering potential of the crystal (@eq:scattering-potential-crystal) becomes:
 \begin{align}
-    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_m \sum_s V_a(\vect{x} - \vect{r}_{m,s} - \vect{u}_{m,s}) \right] \nonumber \\
+    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_m \sum_s V_a(\vect{x} + \vect{r}_{m,s} + \vect{u}_{m,s}) \right] \nonumber \\
                        & = \sum_m \sum_s f_e(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_{m,s}} e^{-i \vect{q} \cdot \vect{u}_{m,s}}
     \label{eq:scattering-potential-temp}
 \end{align}
