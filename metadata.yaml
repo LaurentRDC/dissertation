@@ -6,6 +6,13 @@ keywords: [Markdown, Example]
 
 studentnumber: "260446509"
 date: "April ?, 2021"
+lang: en-CA
+
+# pandoc-crossref metadata
+cref: true
+autoEqnLabels: true
+# pandoc-plot metadata
+plot-configuration: plot-config.yml
 
 abstract-fr: |
   Ceci est le résumé.

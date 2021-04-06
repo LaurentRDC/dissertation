@@ -48,8 +48,6 @@ SRC = [
 
 BIBFILE = Path("references.bib")
 
-# Auxiliary files
-# (Do not change!)
 TITLEPAGE = "titlepage.tex"
 FRONTMATTER = "frontmatter.tex"
 
@@ -65,41 +63,31 @@ OPTIONS = [
 OPTIONS += ["--standalone"]
 
 # The order of filters is important!
-OPTIONS += ["--filter pandoc-plot"]
-OPTIONS += ["-M plot-configuration=plot-config.yml"]
+OPTIONS += ["--filter pandoc-plot", "--filter pandoc-crossref"]
 
-OPTIONS += ["--filter pandoc-crossref"]
-OPTIONS += ["-M cref:true"]
-OPTIONS += ["-M autoEqnLabels:true"]
-
-OPTIONS += ["-M lang=en-CA"]
 OPTIONS += [f"--metadata-file={META}"]
 
 OPTIONS += [f"--include-in-header=include.tex"]
 OPTIONS += [f"--include-in-header={TMP1}"]
 OPTIONS += [f"--include-before-body={TMP2}"]
 
-# OPTIONS += ["--listings"]
+OPTIONS += [
+    "-V documentclass=scrbook",
+    "-V papersize=a4",
+    "-V fontsize=11pt",
+    "-V classoption:open=right",
+    "-V classoption:twoside=true",
+    "-V classoption:cleardoublepage=empty",
+    "-V classoption:clearpage=empty",
+    "-V geometry:top=30mm",
+    "-V geometry:left=25mm",
+    "-V geometry:bottom=30mm",
+    "-V geometry:width=150mm",
+    "-V geometry:bindingoffset=6mm",
+]
 
-OPTIONS += ["-V documentclass=scrbook"]
-OPTIONS += ["-V papersize=a4"]
-OPTIONS += ["-V fontsize=11pt"]
-
-OPTIONS += ["-V classoption:open=right"]
-OPTIONS += ["-V classoption:twoside=true"]
-OPTIONS += ["-V classoption:cleardoublepage=empty"]
-OPTIONS += ["-V classoption:clearpage=empty"]
-
-OPTIONS += ["-V geometry:top=30mm"]
-OPTIONS += ["-V geometry:left=25mm"]
-OPTIONS += ["-V geometry:bottom=30mm"]
-OPTIONS += ["-V geometry:width=150mm"]
-OPTIONS += ["-V geometry:bindingoffset=6mm"]
-
-OPTIONS += ["--toc"]
-OPTIONS += ["--toc-depth=3"]
-OPTIONS += ["--number-sections"]
-OPTIONS += ["--top-level-division=chapter"]
+OPTIONS += ["--toc", "--toc-depth=3"]
+OPTIONS += ["--number-sections", "--top-level-division=chapter"]
 
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
 
