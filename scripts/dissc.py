@@ -121,7 +121,6 @@ def precompute_plots():
     for script in [
         "mkdecomp.py",
         "mkdispersion.py",
-        "mkdwaller.py",
         "mknpstreams-bench.py",
         "mkoneph.py",
     ]:
