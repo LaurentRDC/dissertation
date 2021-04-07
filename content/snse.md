@@ -380,7 +380,7 @@ where $a$ and $b$ label electron bands, $\vect{k}_e$ ($\vect{k}_p$) is the elect
 $$
     \frac{\omega_{\lambda}(\vect{k}_p)^2}{\omega^0_{\lambda}(\vect{k}_p)^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left[ \Sigma_{\lambda}(\vect{k}_p)\right]
 $${#eq:snse-ep-renormalization}
-Both a large electron-phonon scattering rate (i.e. selective mode-heating) and phonon frequency renormalization leads to the increased vibrational amplitude measured in SnSe ((@eq:scattering-displacement). Regardless of the physical cause of the increased vibrational amplitude (mode-heating or phonon renormalization), the consequences boil down to an ultrafast modification of the phonon self-energy. Computing the phonon self-energy for particular situations is arduous[@Mahan2000;@Giustino2017], but in the Migdal approximation[@Migdal1958;@Noffsinger2010]: 
+Both a large electron-phonon scattering rate (i.e. selective mode-heating) and phonon frequency renormalization leads to the increased vibrational amplitude measured in SnSe ((@eq:scattering-displacement). Regardless of the physical cause of the increased vibrational amplitude (mode-heating or phonon renormalization), the consequences boil down to an ultrafast modification of the phonon self-energy. Computing the phonon self-energy for particular situations is arduous[@Mahan2000SelfEnergy;@Giustino2017], but in the Migdal approximation[@Migdal1958;@Noffsinger2010]: 
 $$
     \Sigma_{\lambda}(\vect{k}_p) = 
         \sum_{a, b} \int \frac{d\vect{k}_e}{(2\pi)^3} ~ | g^{\lambda}_{ab}(\vect{k}_p, \vect{k}_e) |^2 ~ \frac{f\left[\epsilon_{a}(\vect{k}_e)\right] - f\left[\epsilon_b(\vect{k}_e + \vect{k}_p)\right]}{\epsilon_a(\vect{k}_e) - \epsilon_b(\vect{k}_e + \vect{k}_p) - \hbar \omega_{\lambda}(\vect{k}_p) + i\eta}
