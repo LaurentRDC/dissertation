@@ -93,7 +93,7 @@ def threshold_oneph(threshold):
 
 def draw_bragg_peaks(ax, reflections):
     """ Draw bragg peak locations with black scatter points. """
-    cryst = Crystal.from_pwscf(INPUT / "output.out")
+    cryst = Crystal.from_pwscf(INPUT / "graphite.out")
     astar, bstar, cstar = cryst.reciprocal_vectors
     bragg_peaks = np.vstack(
         [h * astar + k * bstar + l * cstar for (h, k, l) in reflections]

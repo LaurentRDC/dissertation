@@ -77,7 +77,7 @@ for ax, im, label in zip(grid, [b4t0, b4t0_symmetrized], ["a)", "b)"]):
 draw_hexagon_field(
     grid[1],
     radius=1.7,
-    crystal=Crystal.from_pwscf(Path("data") / "graphite" / "output.out"),
+    crystal=Crystal.from_pwscf(Path("data") / "graphite" / "graphite.out"),
     reflections=it.product(range(-5, 5), range(-5, 5), [0]),
     color="w",
     linewidth=0.3,

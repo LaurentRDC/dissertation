@@ -457,7 +457,7 @@ def prepare_modes(reflections, decimate=3):
 
 @lru_cache(maxsize=16)
 def _prepare_modes(reflections, decimate=3):
-    cryst = Crystal.from_pwscf(INPUT / "output.out")
+    cryst = Crystal.from_pwscf(INPUT / "graphite.out")
 
     k_points, frequencies, polarizations = extract_info_ordered(
         INPUT / "Gra-C_XDM_mode_grid_new2.json", crystal=cryst

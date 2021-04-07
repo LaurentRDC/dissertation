@@ -17,7 +17,7 @@ GAMMA_RADIUS = 0.45  # inverse angstroms
 INPUT = Path("data") / "graphite" / "populations"
 TIMES = [0.5, 1.5, 5, 100]  # ps
 MODES = ["TO2", "TA", "LA"]
-GRAPHITE = Crystal.from_pwscf(Path("data") / "graphite" / "output.out")
+GRAPHITE = Crystal.from_pwscf(Path("data") / "graphite" / "graphite.out")
 COLORMAP = "hot"
 
 

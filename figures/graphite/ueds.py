@@ -82,7 +82,7 @@ with DiffractionDataset(DATASET) as dset:
         draw_hexagon_field(
             ax,
             radius=1.7,
-            crystal=Crystal.from_pwscf(Path("data") / "graphite" / "output.out"),
+            crystal=Crystal.from_pwscf(Path("data") / "graphite" / "graphite.out"),
             reflections=it.product(
                 [-5, -4, -3, -2, -1, 0], [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], [0]
             ),

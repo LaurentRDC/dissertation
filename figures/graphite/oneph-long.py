@@ -49,7 +49,7 @@ grid = ImageGrid(
 qx = np.load(INPUT / "oneph" / "qx.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
 qy = np.load(INPUT / "oneph" / "qy.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
 bragg_peaks = np.load(INPUT / "oneph" / "bragg_peaks.npy")
-cryst = Crystal.from_pwscf(INPUT / "output.out")
+cryst = Crystal.from_pwscf(INPUT / "graphite.out")
 
 # Only Longitudinal modes here
 modes = filter(lambda s: s.startswith("L"), IN_PLANE_MODES)

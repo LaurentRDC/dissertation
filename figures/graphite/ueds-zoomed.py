@@ -36,7 +36,7 @@ qx, qy, _ = detector_scattvectors(
 qq = np.sqrt(qx ** 2 + qy ** 2)
 
 # Find location of (100) and (200) BZs
-graphite = Crystal.from_pwscf(DATADIR / "output.out")
+graphite = Crystal.from_pwscf(DATADIR / "graphite.out")
 q010 = graphite.scattering_vector((0, 1, 0))
 q020 = graphite.scattering_vector((0, 2, 0))
 hex_radius = sqrt(3) * np.linalg.norm(q020 - q010) / 2.7

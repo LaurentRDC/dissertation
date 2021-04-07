@@ -21,7 +21,7 @@ cbar_ax = divider.append_axes("top", size=CBAR_SIZE, pad=0.05)
 qx = np.load(INPUT / "oneph" / "qx.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
 qy = np.load(INPUT / "oneph" / "qy.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
 bragg_peaks = np.load(INPUT / "oneph" / "bragg_peaks.npy")
-cryst = Crystal.from_pwscf(INPUT / "output.out")
+cryst = Crystal.from_pwscf(INPUT / "graphite.out")
 image = np.load(INPUT / "oneph" / f"LA_oneph.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
 
 # Image is scaled so maximum is always 1

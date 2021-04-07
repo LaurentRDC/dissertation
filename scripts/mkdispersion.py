@@ -44,7 +44,7 @@ def mkpath(points, nsteps):
     vertices : iterable of ndarrays, shape (3,)
         `points` scaled to fit reciprocal space.
     """
-    cryst = Crystal.from_pwscf(INPUT / "output.out")
+    cryst = Crystal.from_pwscf(INPUT / "graphite.out")
     pairs = [(points[i], points[i + 1]) for i in range(len(points) - 1)]
     frac_path = list(
         chain.from_iterable(
