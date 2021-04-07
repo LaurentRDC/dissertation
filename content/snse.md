@@ -63,7 +63,7 @@ There is another complication related to targeted improvements in DC conductivit
 
 ### Dimensionality-reduction
 
-On the more practical, device-driven side of things, the thermoelectric figure-of-merit can be dramatically improved via nanostructuring. In two seminal papers, Hicks and Dresselhaus [@Hicks1993a;@Hicks1993b] described the desireable effects of dimensionality reduction (nanosheets and quantum wires) on the both $S^2 \sigma$ and $\kappa_l$. With respect to electronic transport, quantum confinement pseudo-discretizes the electronic density-of-states[@Heremans2013]; with the appropriate doping, the power factor[^powerfactor] $S^2 \sigma$ can be dramatically improved[@Hicks1996]. Nanostructuring also reduces the lattice thermal conductivity. The reduction in phonon mean-free-path at interfaces is appreciable[@Kapitza1941;@Rowe1974], and this is no different in nanostructured devices[@Joshi2008]. 
+On the more practical, device-driven side of things, the thermoelectric figure-of-merit can be dramatically improved via nanostructuring. In two seminal papers, Hicks and Dresselhaus [@Hicks1993a;@Hicks1993b] described the desireable effects of dimensionality reduction (nanosheets and quantum wires) on the both $S^2 \sigma$ and $\kappa_l$. With respect to electronic transport, quantum confinement pseudo-discretizes the electronic density-of-states[@Heremans2013]; with the appropriate doping, the power factor[^powerfactor] $S^2 \sigma$ can be dramatically improved[@Hicks1996]. Nanostructuring also reduces the lattice thermal conductivity. The reduction in phonon mean-free-path at interfaces is appreciable[@Kapitza1971;@Rowe1974], and this is no different in nanostructured devices[@Joshi2008]. 
 
 However, the maximum performance of nanostructured thermoelectrics -- while enhanced -- is still limited by the intrinsic thermoelectric performance of the underlying bulk material.
 
@@ -314,14 +314,7 @@ With the appropriate partitioning of the Brillouin zone (@fig:snse-geometry), it
 ```
 
 ### Transient mean-square-displacement due to soft-modes
-<!-- The extraction of the transient mean-square-displacement due to zone-center soft modes is presented in this section. The transient mean-square-displacement from diffuse scattering is first considered. From @eq:scattering-diffuse-intensity:
-\begin{align}
-    I_1(\vect{q}, \tau) - I_1(\vect{q},0) 
-        & = I_e \sum_{\lambda} \frac{n_{\lambda}(\vect{k},\tau) + 1/2)}{\omega_{\lambda}(\vect{k}, \tau)} \left| F_{1\lambda}\right|^2 
-          - I_e \sum_{\lambda} \frac{n_{\lambda}(\vect{k},0) + 1/2)}{\omega_{\lambda}(\vect{k}, 0)} \left| F_{1\lambda}\right|^2 \nonumber \\
-        & = I_e \sum_{\lambda} \left| F_{1\lambda}\right|^2 \left(\frac{n_{\lambda}(\vect{k},\tau) + 1/2)}{\omega_{\lambda}(\vect{k}, \tau)} - \frac{n_{\lambda}(\vect{k},0) + 1/2)}{\omega_{\lambda}(\vect{k}, 0)} \right)
-\end{align}
-As expected, the change in vibrational amplitude ($(n + 1/2)/\omega$) is weighted by the one-phonon structure factors. Therefore, to precisely know the transient vibrational amplitude would require to know which modes are involved, as well as the values of the one-phonon structure factors at zone-center. The reason this was not possible is twofold. First, the author is not competent in the use of density-functional-theory software suites such as Quantum Espresso[@QuantumEspresso2009;@QuantumEspresso2017] or VASP[@Kresse1999]. Second, calculations have repeatedly failed to capture the physics of SnSe [@Pletikosic2018]. Therefore, another, more robust approach was taken instead.  -->
+
 The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
 \begin{align}
     \frac{I_0(\vect{q},\tau) - I_0(\vect{q},0)}{I_0(\vect{q},0)} 

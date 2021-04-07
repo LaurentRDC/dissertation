@@ -44,7 +44,7 @@ The performance comparison between `npstreams` and `numpy` at averaging sequence
 
 ## Functions and data structure for ultrafast electron scattering{#sec:appendix-scikit-ued}
 
-The scientific Python community has access to multiple research-oriented packages called *scikits*[@Pedregosa2011;@Van2014], which are extensions of the general-purpose SciPy package[@Virtanen2020].
+The scientific Python community has access to multiple research-oriented packages called *scikits*[@Van2014], which are extensions of the general-purpose SciPy package[@Virtanen2020].
 
 `scikit-ued` is a package which specializes in routines and data structures relevant to ultrafast electron diffraction and related techniques. `scikit-ued` powers most of the functionality of the graphical program `iris`; it is therefore easy for researchers to incorporate the same analysis techniques in their own workflow. The functionality of `scikit-ued` covers a large area of subjects, including but not limited to:
 
@@ -60,7 +60,7 @@ Some important examples are presented below.
 
 ### Baseline-determination
 
-Baseline-determination of polycrystalline and single-crystal diffraction patterns is included in `scikit-ued`. For polycrystalline diffraction patterns, an iterative baseline-removal routine[@RenedeCotret2017] based on the dual-tree complex transform[@Kingsbury1998;@Selesnick2005]. This routine allows for the removal of a baseline without any *a-priori* knowledge. Most importantly, the baseline-removal is stable; small changes in the time-resolved data do not result in large spontaneous changes in the baseline. An example of baseline-removal from a static polycrystalline diffraction pattern of rutile VO$_2$ is shown in @fig:appendix-baseline-vo2. This approach has also been extended to optical spectroscopy with great success[@Chevalier2019]. For single-crystal diffraction patterns, a two-dimensional iterative baseline-removal based on the discrete wavelet transform is provided[@Galloway2009].
+Baseline-determination of polycrystalline and single-crystal diffraction patterns is included in `scikit-ued`. For polycrystalline diffraction patterns, an iterative baseline-removal routine[@RenedeCotret2017] based on the dual-tree complex transform[@Selesnick2005]. This routine allows for the removal of a baseline without any *a-priori* knowledge. Most importantly, the baseline-removal is stable; small changes in the time-resolved data do not result in large spontaneous changes in the baseline. An example of baseline-removal from a static polycrystalline diffraction pattern of rutile VO$_2$ is shown in @fig:appendix-baseline-vo2. This approach has also been extended to optical spectroscopy with great success[@Chevalier2019]. For single-crystal diffraction patterns, a two-dimensional iterative baseline-removal based on the discrete wavelet transform is provided[@Galloway2009].
 
 ```{.matplotlib #fig:appendix-baseline-vo2 file="figures/appendix/baseline.py" caption="Example of baseline-determination using the dual-tree complex wavelet transform. **a)** Polycrystalline diffraction of rutile VO$_2$ with an added known background, compared to the calculated baseline. **b)** Comparison of the true intensity (signal without background) and the background-subtracted intensity shows excellent agreement, without any prior knowledge about the background."}
 ```
@@ -109,7 +109,7 @@ Accessing and manipulating crystal structures is an important component of many 
 
 `crystals` includes parsers for many standard crystallographic information files. Crystal structures can be parsed from the *de-facto* standard Crystallography Information File (CIF) format (`.cif`)[@Hester2006;@Bjorkman2011]. Crystal structures can also be downloaded from the Crystallography Open Database [@Gravzulis2009;@Gravzulis2012], which are stored in the CIF format. `crystals` also includes an internal database of simple crystal structures, stored in the CIF format. `crystal` also support downloading and parsing crystal structures from the Protein DataBank[@Berman2000;@Hamelryck2003].
 
-`crystals` also supports the parsing of crystal structures determined by calculations. The conversion to and from the Atomic Simulation Environment[@Larsen2017] is supported. Additionally, the crystal structures resulting from plane-wave self-consistent field calculations from Quantum Espresso[@QuantumEspresso2009;@QuantumEspresso2017] are parseable by `crystals`. Finally, `crystals` can download and parse structures calculated by the Materials Project[@Hautier2010b;@Jain2013;@Ong2015].
+`crystals` also supports the parsing of crystal structures determined by calculations. The conversion to and from the Atomic Simulation Environment[@Larsen2017] is supported. Additionally, the crystal structures resulting from plane-wave self-consistent field calculations from Quantum Espresso[@Giannozzi2009;@Giannozzi2017] are parseable by `crystals`. Finally, `crystals` can download and parse structures calculated by the Materials Project[@Hautier2010b;@Jain2013;@Ong2015].
 
 ### Representation of crystallographic information
 
