@@ -155,15 +155,25 @@ Throughout the rest of this chapter, "scattering intensity" will imply discrete 
 
 This section contains the details of the calculations used throughout this chapter, including what is shown in @fig:graphite-static-dispersion. The aim of the computations was to extract the phonon mode frequencies $\set{ \omega_{\lambda}(\vect{k})}$ and polarization vectors $\set{ \vect{e}_{\lambda, s}(\vect{k})}$ that appear in @eq:scattering-one-phonon-structure-factor.
 
-TODO: explain simply the procedure behind dynamical matrices
+#### Structure-determination{#sec:graphite-structure-relaxation}
 
 In order to calculate the force between atoms, the structure of graphite was computed via *structure relaxation*, performed using the plane-wave self-consistent field program `PWSCF` from the `QUANTUM ESPRESSO` software suite [@Giannozzi2017]. The structure was relaxed using a 18 × 18 × 10 $\vect{k}$ mesh centered at $\vect{\Gamma}$ -- selected using the Monkhorst-Pack method [@Monkhorst1976] -- and force and energy thresholds of \SI{1e-8}{\rydberg\per\bohr} and \SI{1e-15}{\rydberg} respectively, where \si{\bohr} is the Bohr radius. Based on the force constants determined from the relaxed structure, the dynamical matrices were computed on a 5 × 5 × 3 $\vect{q}$ mesh using a self-consistency threshold of \SI{1e-18}{\rydberg}. The resulting graphite structure is equivalent to @eq:graphite-lattice, with $a=\SI{1.231}{\angstrom}$ and $c=\SI{6.837}{\angstrom}$.
 
-The phonon mode frequencies $\set{ \omega_{\lambda}(\vect{k}) }$ and polarization vectors $\set{ \vect{e}_{\lambda, s}(\vect{k})}$ were computed using the `PHONON` program, again within the `QUANTUM ESPRESSO` software suite. This calculation made use of the B86b exchange-coupled Perdew-Burke-Ernzerhof generalized-gradient approximation [@Becke1986;@Perdew1996] and the projector augmented-wave method [@Blochl1994]. The cutoff energy of the wave function was set to \SI{100}{\rydberg}, while the cutoff energy for the charge density was set to \SI{1.2e3}{\rydberg}. A Fermi-Dirac smearing of \SI{0.06}{\rydberg} was also applied. To include the dispersion of energy along the stacking axis $\vect{a}_3$, the exchange-hole dipole moment method was used [@Becke2007]. 
+#### Phonon properties
+
+From a structure with zero-temperature atomic positions $\set{\vect{r}_s}$ and instantaneous displacements $\set{\vect{u}_s}$, the potential energy $U$ due to ions repulsion is given by:
+$$
+    U = \frac{1}{2}\sum_{s, s^\prime} \vect{u}_s \vect{D}(\vect{r}_s - \vect{r}_{s^\prime}) \vect{u}_{s^\prime}
+$$
+where the *dynamical matrix* $\vect{D}$ encodes the change in potential energy associated with a small change in distance between ions[@Ashcroft1976DynMatrix]. Given that the displacement vectors $\set{\vect{u}_s}$ can be expressed as a sum of lattice waves (@eq:scattering-displacement), the eigenvalues and eigenvectors of the dynamical matrix are related to vibrational frequencies and polarizations respectively[^dynmat].
+
+The phonon frequencies $\set{ \omega_{\lambda}(\vect{k}) }$ and polarization vectors $\set{ \vect{e}_{\lambda, s}(\vect{k})}$ associated with the structure calculated in @sec:graphite-structure-relaxation were computed using the `PHONON` program, again within the `QUANTUM ESPRESSO` software suite. This calculation made use of the B86b exchange-coupled Perdew-Burke-Ernzerhof generalized-gradient approximation [@Becke1986;@Perdew1996] and the projector augmented-wave method [@Blochl1994]. The cutoff energy of the wave function was set to \SI{100}{\rydberg}, while the cutoff energy for the charge density was set to \SI{1.2e3}{\rydberg}. A Fermi-Dirac smearing of \SI{0.06}{\rydberg} was also applied. To include the dispersion of energy along the stacking axis $\vect{a}_3$, the exchange-hole dipole moment method was used [@Becke2007]. 
+
+[^dynmat]: This is an intuitive picture of the dynamical matrix. In practice, diagonalization is usually performed in reciprocal space. For an example, see Al-Jishi and Dresselhaus[@AlJishi1982].
 
 #### Clustering of phonon properties into physically-relevant branches
 
-The calculation of phonon properties relevant to his work involves diagonalizing the dynamical matrix. In practice, the force constants that make the dynamical matrix need to be evaluated for every irreducible $\vect{k}$ point, which means that a diagonalization procedure is repeated for every irreducible $\vect{k}$ point. As with most (all?) diagonalization procedures, the eigenvalues and eigenvectors (phonon frequencies and polarization vectors, in the present case) are returned in an order that is not physically-relevant. Therefore, in order to determine what are the phonon properties of a phonon mode $\lambda$, the phonon properties calculated by `PHONON` need to be *clustered*.
+As with most diagonalization procedures, the eigenvalues and eigenvectors of the dynamical matrix are returned in an order that is not physically-relevant. Therefore, in order to determine what are the phonon properties of a phonon mode $\lambda$, the phonon properties calculated by `PHONON` need to be assigned a mode, or *clustered*.
 
 As of writing this, there is no component within the `QUANTUM ESPRESSO` software suite that can do this. The scheme described in this section was used instead. The general idea behind the procedure is that phonon properties are continuous. Let $P_{\lambda, \vect{k}_i}$ be the abstract vector representing phonon properties of mode $\lambda$ at one of the irreducible $\vect{k}$ points $\set{\vect{k}_i}$:
 $$
@@ -226,7 +236,7 @@ Based on @eq:graphite-debye-waller, the Debye-Waller factor is not sensitive mea
 
 The potential time-dependence of the Debye-Waller factors was investigated, via the time-dependence of mode populations. Profoundly non-equilibrium distribution of phonon mode populations were simulated, with all modes populated according to room-temperature average energy except for one mode at high temperature. To account for differences in heat capacities, the maximum temperature for optical modes was \SI{5000}{\kelvin}, while the maximum temperature for acoustic modes was capped at \SI{1500}{\kelvin}. These extreme non-equilibrium scenarios increase the value of $\sum_s W_s(\vect{q})$ by at most 1.5\% for optical modes, and 8\% for acoustic modes. Since those fractional changes are constant across $\vect{q}$, wavevector-dependent changes in UEDS signals are not significantly impacted by changes in the Debye-Waller factors. Any time-dependence of the one-phonon structure factors can be ignored to a first approximation. 
 
-<!-- TODO: should we show this plot below? I don't like it. -->
+<!-- should I show this plot below? I don't like it. -->
 <!-- The most significant example is shown in @fig:graphite-debye-waller-la, where the LA mode is populated according to a temperature of \SI{1500}{\kelvin}. Since those fractional changes are constant across $\vect{q}$, wavevector-dependent changes in UEDS signals are not significantly impacted by changes in the Debye-Waller factors $W_s(\vect{q}, \tau)$, and so any time-dependence of the one-phonon structure factors can be ignored to a first approximation. 
 
 ```{#fig:graphite-debye-waller-la .matplotlib file="figures/graphite/debye-waller.py" caption="Effect of profoundly non-equilibrium distribution of phonon mode populations on the Debye-Waller factors. **a)** Sum of Debye-Waller factors according to the expected phonon distribution at room temperature. **b)** Difference between a) and the sum of Debye-Waller factors where all phonon modes are distributed according to room-temperature, except where the LA mode is populated according to a temperature of \SI{1500}{\kelvin}."}
@@ -466,7 +476,7 @@ where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\nu}$ 
 $$
     D_e(\epsilon) = \frac{2 A}{\pi} \frac{|\epsilon|}{(\hbar v_{F})^2}
 $$
-where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^1]. It follows that the determination of the mode-dependent electron-phonon coupling matrix element $g^2_{e,\lambda}(\vect{k})$ relies on the calculation of the mode-dependent relaxation time $\tau_{e,\lambda}(\vect{k})$ based on UEDS measurements. 
+where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^neto-hbar]. It follows that the determination of the mode-dependent electron-phonon coupling matrix element $g^2_{e,\lambda}(\vect{k})$ relies on the calculation of the mode-dependent relaxation time $\tau_{e,\lambda}(\vect{k})$ based on UEDS measurements. 
 
 The calculation for the electron-$A_1^\prime$ coupling matrix element $\langle g^2_{e,A_1^\prime} \rangle \equiv \langle g^2_{e,\lambda=\text{TO2}}(\vect{k} \approx \vect{K}) \rangle$ is demonstrated below. Consider the following sum of terms from @eq:graphite-nlm:
 $$
@@ -514,11 +524,11 @@ Using the coupling constants and heat capacities from @sec:graphite-eph-solution
 	\vspace{2mm}
 	\begin{tabular}{l | c | l}
 		Source & $\langle g^2_{e, A_1^\prime} \rangle$ [\si{\electronvolt\squared}] & Notes \\ \hline\hline
-        This work, René de Cotret \emph{et al}\autocite{RenedeCotret2019} & $0.035 \pm 0.001$ & Experiment \\ \hline
-        Piscanec \emph{et al}\autocite{Piscanec2004}                      & $< 0.0994$        & Theory (graphene, upper bound) \\ \hline
-        Johannsen \emph{et al}\autocite{Johannsen2013}                    & $0.033 \pm 0.007$ & Experiment (trARPES, graphene) \\ \hline
-        \multirow{2}{*}{Na \emph{et al}\autocite{Na2019}}                 & $0.050 \pm 0.011$ & Experiment (trARPES) \\ \cline{2-3} 
-                                                                          & $0.040$           & Theory \\ \hline
+        This work, René de Cotret \emph{et al.}\autocite{RenedeCotret2019} & $0.035 \pm 0.001$ & Experiment \\ \hline
+        Piscanec \emph{et al.}\autocite{Piscanec2004}                      & $< 0.0994$        & Theory (graphene, upper bound) \\ \hline
+        Johannsen \emph{et al.}\autocite{Johannsen2013}                    & $0.033 \pm 0.007$ & Experiment (trARPES, graphene) \\ \hline
+        \multirow{2}{*}{Na \emph{et al.}\autocite{Na2019}}                 & $0.050 \pm 0.011$ & Experiment (trARPES) \\ \cline{2-3} 
+                                                                           & $0.040$           & Theory \\ \hline
 	\end{tabular} 
 	\label{tbl:graphite-eph-coupling-comparison}
 \end{table}
@@ -529,10 +539,10 @@ In this chapter, a clear demonstration of the power of ultrafast electron diffus
 
 ### Outlook
 
-The procedure to extract phonon populations in @sec:graphite-ph-spectroscopy can be easily extended to other situations. One such situation is the case of thermal diffuse scattering measurements. At constant temperature, the phonon populations are directly related to their vibrational frequency; hence, the phonon band structure could be extracted. Phonon dispersion relations has been extracted before from x-ray diffuse scattering experiments[@Holt1999;@Xu2005], but these schemes are based on iterative (and unstable) fitting procedures. Using electron diffuse scattering instead presents some advantages, namely the inherently stronger scattering cross-section of electrons and the relatice commodity of electron microscopes, and the ability to directly invert the measurements matrix without fitting. Another situation where the method presented here can be extended is for the case of non-thermal phonon renormalization. For very early time-delays (say, $\tau < \SI{300}{\femto\second}$), the phonon populations may be considered somewhat constant. The dynamics effect on ultrafast electron diffuse scattering signals may be attributed to phonon renormalization, i.e. a change in vibrational frequency. In this case, the change $\Delta \omega_{\lambda}(\vect{k}, \tau)$ can be extracted while keeping the phonon populations fixed. This has been used by the author in the case of photoexcited titanium diselenide, where a change in electronic correlations can change the dielectric screening, thereby hardening a particular phonon mode [@Otto2020].
+The procedure to extract phonon populations in @sec:graphite-ph-spectroscopy can be easily extended to other situations. One such situation is the case of thermal diffuse scattering measurements. At constant temperature, the phonon populations are directly related to their vibrational frequency; hence, the phonon band structure could be extracted. Phonon dispersion relations has been extracted before from x-ray diffuse scattering experiments[@Holt1999;@Xu2005], but these schemes are based on iterative (and unstable) fitting procedures. Using electron diffuse scattering instead presents some advantages, namely the inherently stronger scattering cross-section of electrons -- which might be the only way to observe diffuse scattering in monoyalers[@Caruso2021] -- and the relative commodity of electron microscopes, and the ability to directly invert the measurements matrix without fitting. Another situation where the method presented here can be extended is for the case of non-thermal phonon renormalization. For very early time-delays (say, $\tau < \SI{300}{\femto\second}$), the phonon populations may be considered somewhat constant. The dynamics effect on ultrafast electron diffuse scattering signals may be attributed to phonon renormalization, i.e. a change in vibrational frequency. In this case, the change $\Delta \omega_{\lambda}(\vect{k}, \tau)$ can be extracted while keeping the phonon populations fixed. This has been used by the author in the case of photoexcited titanium diselenide, where a change in electronic correlations can change the dielectric screening, thereby hardening a particular phonon mode [@Otto2020].
 
 \FloatBarrier
 ## References {.unnumbered}
 \printbibliography[heading=none]
 
-[^1]: Note that the factor of $\hbar$ has been erroneously ignored by Castro Neto *et al.*[@Neto2009]
+[^neto-hbar]: Note that the factor of $\hbar$ has been erroneously ignored by Castro Neto *et al.*[@Neto2009]
