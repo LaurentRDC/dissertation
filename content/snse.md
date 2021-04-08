@@ -17,11 +17,11 @@ $$
 $${#eq:snse-zt}
 where $S$ is the so-called Seebeck coefficient, $\sigma$ is the electrical conductivity, $\kappa_e$ and $\kappa_l$ are the thermal conductivities for the charge carriers and the lattice respectively, and $T$ is the absolute temperature. $ZT$ is an important figure of merit because it is used to describe the efficiency of a thermoelectric module. Consider a device with a cold side at temperature $T_C$, and a hot side at temperature $T_H$. The heat harvesting efficiency is given by:
 $$
-\eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + Z\frac{(T_C + T_H)}{2}} - 1}{\sqrt{1 + Z\frac{(T_C + T_H)}{2}} + \frac{T_C}{T_H}} \right)
+\eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + ZT_{avg}} - 1}{\sqrt{1 + ZT_{avg}} + \frac{T_C}{T_H}} \right)
 $$
-where $\frac{T_H - T_C}{T_H}$ is understood to be the Carnot efficiency[@Sootsman2009;@Zhang2014]. The value of $\eta$ for an abstract device is shown in @fig:snse-efficiency. This figure illustrates that good efficiency at reasonable temperatures ($<$\SI{450}{\kelvin}) requires a high $ZT$.
+where $T_{avg} = \sfrac{(T_C + T_H)}{2}$ is the average device temperature, and $\sfrac{(T_H - T_C)}{T_H}$ is understood to be the Carnot efficiency[@Sootsman2009;@Zhang2014]. The value of $\eta$ for an abstract device is shown in @fig:snse-efficiency. This figure illustrates that good efficiency at reasonable temperatures ($<$\SI{450}{\kelvin}) requires a high $ZT$.
 
-```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_H$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$. $Z\sfrac{(T_C + T_H)}{2}$ is the thermoelectric figure-of-merit at the average device temperature."}
+```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_H$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$. $ZT_{avg}$ is the thermoelectric figure-of-merit at the average device temperature."}
 ```
 
 ### The Seebeck coefficient
