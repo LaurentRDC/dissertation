@@ -466,25 +466,29 @@ The solution to @eq:graphite-nlm-system using the measurements of the $A_1^\prim
 
 ### Mode-projected electron-phonon coupling matrix elements {#sec:graphite-coupling-constants}
 
-TODO: is this section clear?
+In order to compare to theory and other experiments, the value of electron-phonon coupling $g$ is calculated from the coupling constants $G$ determined from solving @eq:graphite-nlm-system. Refer to @sec:introduction-epc for an introduction to the electron-phonon coupling matrix.
 
-In order to compare to theory and other experiments, the value of electron-phonon coupling $g$ is calculated from the coupling constants $G$ determined from solving @eq:graphite-nlm-system. Refer to @sec:introduction-epc for an introduction to the electron-phonon coupling matrix. Photoexcitation with \SI{1.55}{\electronvolt} photons will drive vertical electronic transitions, many of which might couple to a particular phonon mode. Let $\langle \cdots \rangle_{\gamma}$ be the average over all photoexcited electron states. The average electron-phonon coupling $\langle g^2_{e,\lambda}(\vect{k}) \rangle_{\gamma}$ is most simply related to the relaxation time $\tau_{e,\lambda}(\vect{k})$ between the two subsystems[@Sentef2013;@Na2019]:
+Photoexcitation with \SI{1.55}{\electronvolt} photons will drive vertical electronic transitions, many of which might couple to a particular phonon mode. Let $\langle \cdots \rangle_{\gamma}$ be the average over all photoexcited electron states. The average electron-phonon coupling $\langle g^2_{e,\lambda}(\vect{k}) \rangle_{\gamma}$ is most simply related to the relaxation time $\tau_{e,\lambda}(\vect{k})$ between the two subsystems[@Sentef2013;@Na2019]:
 $$
 \frac{1}{\tau_{e,\lambda}(\vect{k})} = \frac{2 \pi}{\hbar} \langle g^2_{e,\lambda}(\vect{k}) \rangle_{\gamma} D_e(\hbar \omega_{\gamma} - \hbar \omega_{j}(\vect{k}))
 $${#eq:graphite-scattering-rate}
 where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\gamma}$ is the optical excitation energy (\SI{1.55}{\electronvolt} in the case of \SI{800}{\nano\meter} light), and $\omega_{\lambda}(\vect{k})$ is the vibrational frequency of phonon mode $\lambda$ at wavevector $\vect{k}$, as defined previously. 
 
-The calculation for the average electron-$A_1^\prime$ coupling matrix element $\langle g^2_{e,A_1^\prime} \rangle_{\gamma} \equiv \langle g^2_{e,\lambda=\text{TO2}}(\vect{k} \approx \vect{K}) \rangle_{\gamma}$ is demonstrated. @eq:graphite-scattering-rate is a statement on the rate of scattering of an electron, loosing some energy and creating an $A_1^\prime$ phonon. What was measured in the previous section is the rate of *energy flow* in and out of subsystems. Therefore, $G_{ep, \lambda} / C_e$ is the rate of electron emitting phonons $\lambda$, and $-G_{ep, \lambda} / C_{ph, \lambda}$ is the rate of electrons absorbing phonons $\lambda$. With this information, the scattering rate of electrons is related to the energy flow measurements as:
+The scattering rate in terms of heat rate constant $G$ is simply given by the conversion factor between energy and particle number, the heat capacity[@Nihira2003]:
 $$
-\frac{1}{\tau_{e,\lambda}(\vect{k})} = \sum_{\lambda} \left( \frac{G_{ep,\lambda}}{C_e} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}\right).
-$${#eq:graphite-scattering-rate-meas}
-where the first sum is the scattering which results in energy transfer *into* the electron system, and the second sum is the energy transfer *out* of the electron system.Using the coupling constants and heat capacities from @sec:graphite-eph-solution and equating @eq:graphite-scattering-rate with @eq:graphite-scattering-rate-meas, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$.
+    \tau_{e,A_1^\prime} = \frac{G_{e,A_1^\prime}}{C_e}
+$$
+with associated error $\sigma_{\tau}$ related to the error in the heat rate $\sigma_G$[@Bevington2003error]:
+$$
+    \sigma_{\tau} = \left| \frac{\partial \tau}{\partial G}\right| \sigma_G = \frac{C_e}{G^2_{e,A_1^\prime}} \sigma_G
+$$
+Using the coupling constant $G_{e,A_1^\prime}$ and electronic heat capacity from @sec:graphite-eph-solution, $\tau_{e, A_1^\prime} = \SI{99 \pm 1}{\femto\second}$. Since the electronic heat capacity is highly dependent on temperature, the maximum value of the electronic temperature after photoexcitation was used (\SI{8500}{\kelvin} according to the solution to @eq:graphite-nlm-system).
 
 In order to calculate the average electron-phonon coupling matrix element from the scattering rate, the electronic density-of-states needs to be approximated. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Neto2009]:
 $$
     D_e(\epsilon) = \frac{2 A}{\pi} \frac{|\epsilon|}{(\hbar v_{F})^2}
 $$
-where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^neto-hbar]. Combining this form the the density-of-states with the measurement of the scattering rate in @eq:graphite-scattering-rate gives $\langle g^2_{e, A_1^\prime} \rangle_{\gamma} = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
+where $A$ is the in-plane unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^neto-hbar]. Combining this form the the density-of-states with the measurement of the scattering rate in @eq:graphite-scattering-rate gives $\langle g^2_{e, A_1^\prime} \rangle_{\gamma} = \SI{0.032 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
 
 \begin{table}
 	\centering
@@ -492,11 +496,11 @@ where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is 
 	\vspace{2mm}
 	\begin{tabular}{l | c | l}
 		Source & $\langle g^2_{e, A_1^\prime} \rangle_{\gamma}$ [\si{\electronvolt\squared}] & Notes \\ \hline\hline
-        This work, René de Cotret \emph{et al.}\autocite{RenedeCotret2019} & $0.035 \pm 0.001$ & Experiment \\ \hline
-        Piscanec \emph{et al.}\autocite{Piscanec2004}                      & $< 0.0994$        & Theory (graphene, upper bound) \\ \hline
-        Johannsen \emph{et al.}\autocite{Johannsen2013}                    & $0.033 \pm 0.007$ & Experiment (trARPES, graphene) \\ \hline
-        \multirow{2}{*}{Na \emph{et al.}\autocite{Na2019}}                 & $0.050 \pm 0.011$ & Experiment (trARPES) \\ \cline{2-3} 
-                                                                           & $0.040$           & Theory \\ \hline
+        This work,                                           & $0.032 \pm 0.001$ & Experiment \\ \hline
+        Piscanec \emph{et al.}\autocite{Piscanec2004}        & $< 0.0994$        & Theory (graphene, upper bound) \\ \hline
+        Johannsen \emph{et al.}\autocite{Johannsen2013}      & $0.033 \pm 0.007$ & Experiment (trARPES, graphene) \\ \hline
+        \multirow{2}{*}{Na \emph{et al.}\autocite{Na2019}}   & $0.050 \pm 0.011$ & Experiment (trARPES) \\ \cline{2-3} 
+                                                             & $0.040$           & Theory \\ \hline
 	\end{tabular} 
 	\label{tbl:graphite-eph-coupling-comparison}
 \end{table}

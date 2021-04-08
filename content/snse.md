@@ -335,9 +335,9 @@ where the symbol $\bar{\vect{u}}$ signifies the atomic displacement averaged ove
 $$
     \Delta \langle u_c^2 \rangle = -\frac{\ln \left[1 + \Delta I_0(\vect{q},t) \right]}{|\vect{q}|^2}
 $$
-for $\vect{q}$ nearly parallel to $\vect{c}^\star$. The associated error $\sigma_u$ as a function of the pre-photoexcitation transient intensity error $\sigma_I$ is given by:
+for $\vect{q}$ nearly parallel to $\vect{c}^\star$. The associated error $\sigma_u$ as a function of the pre-photoexcitation transient intensity error $\sigma_I$ is given by[@Bevington2003error]:
 $$
-    \sigma_u = \frac{\partial \Delta \langle u_c^2 \rangle}{\partial I} \sigma_I\ = \frac{-\sigma_I}{|\vect{q}|^2 \left[1 + \Delta I_0(\vect{q},t) \right]}
+    \sigma_u = \left| \frac{\partial \Delta \langle u_c^2 \rangle}{\partial I}\right|  \sigma_I = \frac{-\sigma_I}{|\vect{q}|^2 \left[1 + \Delta I_0(\vect{q},t) \right]}
 $$
 The extracted change in atomic displacement along the $c$ axis due to $c$-polarized transverse modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
 

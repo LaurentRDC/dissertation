@@ -275,30 +275,15 @@ def calculate_ep_coupling():
     Gek = 6.8e17 / molar_density(graphite)  # W / mol / K
     Gek_err = 0.3e16 / molar_density(graphite)  # W / mol / K
 
-    Gel = 8.32e9 / molar_density(graphite)
-    Gel_err = 6e15 / molar_density(graphite)
-
     # Use temperature around peak of K-TO transient intensity (~750fs)
     Ce = electron_heat_capacity(8500)
-    Ck = k_to_heat_capacity(4500)
-    Cl = k_to_sink_heat_capacity(1000)
 
-    # "harmonic" is the equation that defines 1/tau
-    # I call it harmonic because it looks like the equation for
-    # current flow in parallel resistors.
-    harmonic = sum(
-        Gj / Ce - sum(Gi / Cj for Gi in [Gek, Gel])
-        for Gj, Cj in zip([Gek, Gel], [Ck, Cl])
-    )
-    tconst = 1 / harmonic
+    tconst = 1 / (Gek / Ce)
 
     # Propagation of error with derivatives
-    tconst_err = sqrt(
-        abs(Gek_err / (Ce * harmonic ** 2)) ** 2
-        + abs(Gel_err / (Ce * harmonic ** 2)) ** 2
-    )
+    tconst_err = (Ce / (Gek) ** 2) * Gek_err
 
-    # k-TO mode has energy of 0.2 eV
+    # k-TO mode has energy of 0.165 eV
     dos = electron_density_of_states(1.55 - 0.165)  # eV/unitcell
     g2 = (hbar_eV / tconst) * (1 / (2 * np.pi * dos))
     gerr = (hbar_eV / tconst ** 2) * (1 / (2 * np.pi * dos)) * tconst_err
