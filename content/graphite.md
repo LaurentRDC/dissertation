@@ -466,64 +466,32 @@ The solution to @eq:graphite-nlm-system using the measurements of the $A_1^\prim
 
 ### Mode-projected electron-phonon coupling matrix elements {#sec:graphite-coupling-constants}
 
-In order to compare to theory and other experiments, the value of electron-phonon coupling matrix element $g_{e, A_1^\prime}$ (reported in the form of an amplitude $\langle g^2_{e, A_1^\prime} \rangle$) is calculated from the coupling constants $G$ determined from solving @eq:graphite-nlm-system. Refer to @sec:introduction-epc for an introduction to the electron-phonon coupling matrix.
+TODO: is this section clear?
 
-In general, the electron-phonon matrix element $\langle g^2_{e,\lambda}(\vect{k}) \rangle$ between the electronic system and phonon mode $\lambda$ at wavevector $\vect{k}$ is most simply related to the relaxation time $\tau_{e,\lambda}(\vect{k})$ between the two subsystems[@Na2019]:
+In order to compare to theory and other experiments, the value of electron-phonon coupling $g$ is calculated from the coupling constants $G$ determined from solving @eq:graphite-nlm-system. Refer to @sec:introduction-epc for an introduction to the electron-phonon coupling matrix. Photoexcitation with \SI{1.55}{\electronvolt} photons will drive vertical electronic transitions, many of which might couple to a particular phonon mode. Let $\langle \cdots \rangle_{\gamma}$ be the average over all photoexcited electron states. The average electron-phonon coupling $\langle g^2_{e,\lambda}(\vect{k}) \rangle_{\gamma}$ is most simply related to the relaxation time $\tau_{e,\lambda}(\vect{k})$ between the two subsystems[@Sentef2013;@Na2019]:
 $$
-\frac{\hbar}{\tau_{e,\lambda}(\vect{k})} = 2 \pi \langle g^2_{e,\lambda}(\vect{k}) \rangle D_e(\hbar \omega_{\nu} - \hbar \omega_{j}(\vect{k}))
+\frac{1}{\tau_{e,\lambda}(\vect{k})} = \frac{2 \pi}{\hbar} \langle g^2_{e,\lambda}(\vect{k}) \rangle_{\gamma} D_e(\hbar \omega_{\gamma} - \hbar \omega_{j}(\vect{k}))
+$${#eq:graphite-scattering-rate}
+where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\gamma}$ is the optical excitation energy (\SI{1.55}{\electronvolt} in the case of \SI{800}{\nano\meter} light), and $\omega_{\lambda}(\vect{k})$ is the vibrational frequency of phonon mode $\lambda$ at wavevector $\vect{k}$, as defined previously. 
+
+The calculation for the average electron-$A_1^\prime$ coupling matrix element $\langle g^2_{e,A_1^\prime} \rangle_{\gamma} \equiv \langle g^2_{e,\lambda=\text{TO2}}(\vect{k} \approx \vect{K}) \rangle_{\gamma}$ is demonstrated. @eq:graphite-scattering-rate is a statement on the rate of scattering of an electron, loosing some energy and creating an $A_1^\prime$ phonon. What was measured in the previous section is the rate of *energy flow* in and out of subsystems. Therefore, $G_{ep, \lambda} / C_e$ is the rate of electron emitting phonons $\lambda$, and $-G_{ep, \lambda} / C_{ph, \lambda}$ is the rate of electrons absorbing phonons $\lambda$. With this information, the scattering rate of electrons is related to the energy flow measurements as:
 $$
-where $D_e(\epsilon)$ is the electronic density-of-states, $\hbar \omega_{\nu}$ is the optical excitation energy (\SI{1.55}{\electronvolt} in the case of \SI{800}{\nano\meter} light), and $\omega_{\lambda}(\vect{k})$ is the vibrational frequency of phonon mode $\lambda$ at wavevector $\vect{k}$, as defined previously. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Neto2009]:
+\frac{1}{\tau_{e,\lambda}(\vect{k})} = \sum_{\lambda} \left( \frac{G_{ep,\lambda}}{C_e} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}\right).
+$${#eq:graphite-scattering-rate-meas}
+where the first sum is the scattering which results in energy transfer *into* the electron system, and the second sum is the energy transfer *out* of the electron system.Using the coupling constants and heat capacities from @sec:graphite-eph-solution and equating @eq:graphite-scattering-rate with @eq:graphite-scattering-rate-meas, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$.
+
+In order to calculate the average electron-phonon coupling matrix element from the scattering rate, the electronic density-of-states needs to be approximated. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Neto2009]:
 $$
     D_e(\epsilon) = \frac{2 A}{\pi} \frac{|\epsilon|}{(\hbar v_{F})^2}
 $$
-where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^neto-hbar]. It follows that the determination of the mode-dependent electron-phonon coupling matrix element $g^2_{e,\lambda}(\vect{k})$ relies on the calculation of the mode-dependent relaxation time $\tau_{e,\lambda}(\vect{k})$ based on UEDS measurements. 
-
-The calculation for the electron-$A_1^\prime$ coupling matrix element $\langle g^2_{e,A_1^\prime} \rangle \equiv \langle g^2_{e,\lambda=\text{TO2}}(\vect{k} \approx \vect{K}) \rangle$ is demonstrated below. Consider the following sum of terms from @eq:graphite-nlm:
-$$
-     C_e(T_e) \frac{\partial T_e}{\partial \tau} - \sum_{\lambda} C_{ph,\lambda}(T_{ph,\lambda}) \frac{\partial T_{ph,\lambda}}{\partial \tau} \nonumber
-$$
-which simplifies to:
-\begin{align}
-    & \frac{\partial T_e}{\partial \tau} - \sum_{\lambda} \frac{\partial T_{ph,\lambda}}{\partial \tau} = \label{eq:graphite-tau-1} \\
-    & \sum_{\lambda} \Bigg[ \frac{G_{ep,\lambda}}{C_e} ~ (T_e - T_{ph,\lambda}) \nonumber  -\sum_{\lambda^\prime} \bigg( \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}} ~ (T_e - T_{ph,\lambda^\prime}) + \frac{G_{pp,\lambda \lambda^\prime}}{C_{ph,\lambda}} ~ (T_{ph,\lambda^\prime} - T_{ph,\lambda}) \bigg) \Bigg] \nonumber
-\end{align}
-At early times ($< \SI{5}{\pico\second}$), the $A_1^\prime$-phonon rate of energy flow $G_{A_1^\prime, l}$ is negligible compared to other coupling constants (@tbl:graphite-eph-coupling). Then, @eq:graphite-tau-1 can be simplified to:
-$$
-	\frac{\partial T_e}{\partial \tau} - \sum_{\lambda} \frac{\partial T_{ph,\lambda}}{\partial \tau} = \sum_{\lambda} \frac{G_{ep,\lambda}}{C_e} (T_e - T_{ph,\lambda}) - \sum_{\lambda, \lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}(T_e - T_{ph,\lambda^\prime})
-$${#eq:graphite-tau-2}
-By performing a substitution $\lambda = T_e - \sum_{\lambda} T_{ph,\lambda}$, the equation above simplifies to a familiar situation:
-$$
-    \dot{\lambda}(\tau) - a(\tau) \lambda(\tau) = 0
-$${#eq:graphite-tau-3}
-where
-$$
-    a(\tau) = \sum_{\lambda} \left( \frac{G_{ep,\lambda}}{C_e(T_e(\tau))} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}(T_{ph, \lambda}(\tau))}\right).
-$$
-@eq:graphite-tau-3 is a separable equation with solution:
-$$
-\lambda(\tau) = \exp{\int d\tau \left[ a(\tau) \right]}.
-$$
-For a slow-varying integrand $a(\tau) \approx a$, then $a = 1/\bar{\tau}$, where $\bar{\tau}$ is a compound variable representing the relaxation of the system. This leads to the following form:
-$$
-\frac{1}{\bar{\tau}} \approx \sum_{\lambda} \left( \frac{G_{ep,\lambda}}{C_e} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}\right).
-\label{eq:graphite-tau-4}
-$$
-As an aside, the above expression reduces nicely in the case of the two-temperature model, where all phonon modes are considered to be thermalized with each other, with isochoric heat capacity $C_{ph}$:
-$$
-\frac{1}{\bar{\tau}} = G_{ep} \left( \frac{1}{C_e} - \frac{1}{C_{ph}}\right)
-$$
-and it is apparent that $\bar{\tau}$ physically represents the relaxation time of the electronic system into the lattice. @eq:graphite-tau-4 can be thought of as a sum of relaxation times between the electronic subsystem and specific modes $\tau_{e,\lambda}$:
-$$
-\frac{1}{\tau_{e,\lambda}} = \frac{G_{ep,\lambda}}{C_e} - \sum_{\lambda^\prime} \frac{G_{ep,\lambda^\prime}}{C_{ph,\lambda}}.
-$$
-Using the coupling constants and heat capacities from @sec:graphite-eph-solution, $\tau_{e, A_1^\prime} = \SI{106 \pm 11}{\femto\second}$ and $\langle g^2_{e, A_1^\prime} \rangle = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
+where $A$ is the unit cell area and $v_F = \SI{9.06e5}{\meter \per \second}$ is the Fermi velocity[^neto-hbar]. Combining this form the the density-of-states with the measurement of the scattering rate in @eq:graphite-scattering-rate gives $\langle g^2_{e, A_1^\prime} \rangle_{\gamma} = \SI{0.035 \pm 0.001}{\square\electronvolt}$. This value is compared to other references in @tbl:graphite-eph-coupling-comparison.
 
 \begin{table}
 	\centering
-	\caption{Comparison of measured and calculated values for the electron-phonon coupling matrix element $\langle g^2_{e, A_1^\prime}\rangle$}
+	\caption{Comparison of measured and calculated values for the electron-phonon coupling matrix element $\langle g^2_{e, A_1^\prime}\rangle_{\gamma}$}
 	\vspace{2mm}
 	\begin{tabular}{l | c | l}
-		Source & $\langle g^2_{e, A_1^\prime} \rangle$ [\si{\electronvolt\squared}] & Notes \\ \hline\hline
+		Source & $\langle g^2_{e, A_1^\prime} \rangle_{\gamma}$ [\si{\electronvolt\squared}] & Notes \\ \hline\hline
         This work, René de Cotret \emph{et al.}\autocite{RenedeCotret2019} & $0.035 \pm 0.001$ & Experiment \\ \hline
         Piscanec \emph{et al.}\autocite{Piscanec2004}                      & $< 0.0994$        & Theory (graphene, upper bound) \\ \hline
         Johannsen \emph{et al.}\autocite{Johannsen2013}                    & $0.033 \pm 0.007$ & Experiment (trARPES, graphene) \\ \hline
