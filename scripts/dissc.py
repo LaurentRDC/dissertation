@@ -277,7 +277,6 @@ def build_eisvogel(target):
     options += ["-V linkcolor=DarkViolet"]
     options += ["-V citecolor=DarkViolet"]
     options += ["-V urlcolor=DarkViolet"]
-    options += ["-V monofontoptions:Color=DarkViolet"]
     # Note that the path separators absolutely needs to be '\'
     titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
     options += [f"-V titlepage-background={titlepage_path}"]

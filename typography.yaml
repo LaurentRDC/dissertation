@@ -17,4 +17,6 @@ geometry:
 fontsize: 11pt
 
 monofont: "Monoid Regular"
+monofontoptions:
+- Scale=MatchLowercase
 ---

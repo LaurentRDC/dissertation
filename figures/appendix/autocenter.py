@@ -8,7 +8,7 @@ from dissutils import LARGE_FIGURE_WIDTH, GRAPHITE_ANGLE, ImageGrid, tag_axis
 from iris import DiffractionDataset
 import numpy as np
 
-DOWNSAMPLING = 4
+DOWNSAMPLING = 8
 
 im_Cr = np.clip(diffread(Path("data") / "appendix" / "Cr_1.tif"), 0, 200)
 mask_Cr = np.ones_like(im_Cr, dtype=bool)

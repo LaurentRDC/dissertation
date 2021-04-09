@@ -171,9 +171,6 @@ $endif$
 $if(sansfont)$
   \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $endif$
-$if(monofont)$
-  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
-$endif$
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
 $endfor$
@@ -532,34 +529,6 @@ $if(logo)$
 $endif$
 $endif$
 
-%
-% language specification
-%
-% If no language is specified, use English as the default main document language.
-%
-$if(lang)$$else$
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=english]{babel}
-$if(babel-newcommands)$
-  $babel-newcommands$
-$endif$
-\else
-  $if(mainfont)$
-  $else$
-  % Workaround for bug in Polyglossia that breaks `\familydefault` when `\setmainlanguage` is used.
-  % See https://github.com/Wandmalfarbe/pandoc-latex-template/issues/8
-  % See https://github.com/reutenauer/polyglossia/issues/186
-  % See https://github.com/reutenauer/polyglossia/issues/127
-  \renewcommand*\familydefault{\sfdefault}
-  $endif$
-  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-$for(polyglossia-otherlangs)$
-  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
-$endfor$
-\fi
-$endif$
 
 $if(page-background)$
 \usepackage[pages=all]{background}
@@ -629,50 +598,20 @@ $endif$
   $else$
   \usepackage[default]{sourcesanspro}
   \usepackage{sourcecodepro}
-
-  % XeLaTeX specific adjustments for straight quotes: https://tex.stackexchange.com/a/354887
-  % This issue is already fixed (see https://github.com/silkeh/latex-sourcecodepro/pull/5) but the
-  % fix is still unreleased.
-  % TODO: Remove this workaround when the new version of sourcecodepro is released on CTAN.
-  \ifxetex
-    \makeatletter
-    \defaultfontfeatures[\ttfamily]
-      { Numbers   = \sourcecodepro@figurestyle,
-        Scale     = \SourceCodePro@scale,
-        Extension = .otf }
-    \setmonofont
-      [ UprightFont    = *-\sourcecodepro@regstyle,
-        ItalicFont     = *-\sourcecodepro@regstyle It,
-        BoldFont       = *-\sourcecodepro@boldstyle,
-        BoldItalicFont = *-\sourcecodepro@boldstyle It ]
-      {SourceCodePro}
-    \makeatother
-  \fi
   $endif$
 \fi
 
-%
-% heading color
-%
-\definecolor{heading-color}{RGB}{40,40,40}
-$if(beamer)$
-$else$
-\addtokomafont{section}{\color{heading-color}}
+$if(monofont)$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
 $endif$
-% When using the classes report, scrreprt, book,
-% scrbook or memoir, uncomment the following line.
-\addtokomafont{chapter}{\color{heading-color}}
 
 %
 % variables for title, author and date
 %
-$if(beamer)$
-$else$
 \usepackage{titling}
 \title{$title$}
 \author{$for(author)$$author$$sep$, $endfor$}
 \date{$date$}
-$endif$
 
 %
 % remove paragraph indention
@@ -684,10 +623,6 @@ $endif$
 %
 % header and footer
 %
-$if(beamer)$
-$else$
-$if(disable-header-and-footer)$
-$else$
 \usepackage{fancyhdr}
 
 \fancypagestyle{eisvogel-header-footer}{
@@ -713,8 +648,6 @@ contents={%
   \includegraphics[width=\paperwidth,height=\paperheight]{$page-background$}
   }%
 }
-$endif$
-$endif$
 $endif$
 
 %%

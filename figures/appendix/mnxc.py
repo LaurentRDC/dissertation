@@ -7,7 +7,7 @@ from skimage.filters import gaussian
 from pathlib import Path
 from dissutils import MEDIUM_FIGURE_WIDTH, tag_axis, ImageGrid
 
-DOWNSAMPLING = 4
+DOWNSAMPLING = 8
 
 ref = np.clip(diffread(Path("data") / "appendix" / "Cr_1.tif"), 0, 200)
 im = np.clip(diffread(Path("data") / "appendix" / "Cr_2.tif"), 0, 200)
