@@ -88,7 +88,7 @@ named_arrow(
 
 ax1.set_xlim([-1.2, 1.2])
 ax1.set_ylim([-1.2, 1.2])
-ax1.axhline(y=0, linestyle="--", linewidth=1, color="k")
+ax1.axhline(y=0, linestyle="--", linewidth=0.5, color="k")
 ax1.set_ylabel(r"$E(\mathbf{k})$ [eV]")
 
 plt.tight_layout()

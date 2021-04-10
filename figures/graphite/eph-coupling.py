@@ -418,7 +418,7 @@ ax_K.set_xlim([simulation_times.min(), simulation_times.max()])
 ax_K.set_ylim([-0.25, 1.1])
 ax_T.set_ylim(intensity_to_temperature(np.array(ax_K.get_ylim())))
 
-ax_K.axvline(x=0, linestyle="--", linewidth=1, color="k")
+ax_K.axvline(x=0, linestyle="--", linewidth=0.5, color="k")
 ax_K.set_ylabel(r"$\Delta n_{A_1'}(\tau)$ [a.u.]")
 ax_T.set_ylabel(r"Temperature [K]")
 

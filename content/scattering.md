@@ -38,7 +38,7 @@ $${#eq:scattering-stationary-schroedinger}
 $$ 
 \left[ \nabla^2 + k_a^2\right] u_a(\vect{x}) = 0
 $${#eq:scattering-helmholtz}
-where $k_a^2 \equiv 2 m_e E_a/\hbar^2$. Physical reasoning and the classical result of the Helmholtz equation reveal that $k_a$ is the **wavevector**, related to the wave momentum as $k_a^2 \equiv \vect{k}_a \cdot \vect{k}_a \equiv \vect{p}_a^2/\hbar^2$. [Eq. @eq:scattering-helmholtz] can be solved using separation of variables, where the solution along linearly-independent directions are considered independently:
+where $k_a^2 \equiv 2 m_e E_a/\hbar^2$. Physical reasoning and the classical result of the Helmholtz equation reveal that $k_a$ is the *wavevector*, related to the wave momentum as $k_a^2 \equiv \vect{k}_a \cdot \vect{k}_a \equiv \vect{p}_a^2/\hbar^2$. [Eq. @eq:scattering-helmholtz] can be solved using separation of variables, where the solution along linearly-independent directions are considered independently:
 $$
 u_a(\vect{x})\equiv u_{a,x}(\vect{x} \cdot \hat{\vect{x}}) u_{a,y}(\vect{x} \cdot \hat{\vect{y}}) u_{a,z}(\vect{x} \cdot \hat{\vect{z}}).
 $$
@@ -70,19 +70,19 @@ $$
 $${#eq:scattering-norm}
 and $\vect{k}$ takes discrete values. The calculations will become physical after taking the limit $L \to \infty$. In this approximation, the scattered wave $\braket{\vect{x} | \Psi}$ is given by the *Lippmann-Schwinger* equation[@Lippmann1950]:
 $$
-    \braket{\vect{x} | \Psi} = \braket{\vect{x} | \vect{k}_i} - \frac{2 m_e}{\hbar^2} \int d^3 x^\prime \frac{e^{ik|\vect{x}-\vect{x}^\prime|}}{4 \pi |\vect{x}-\vect{x}^\prime|} V(\vect{x}^\prime) \braket{\vect{x}^\prime | \Psi}
+    \braket{\vect{x} | \Psi} = \braket{\vect{x} | \vect{k}_i} - \frac{2 m_e}{\hbar^2} \int d^3 x^\prime \frac{e^{i|\vect{k}_i||\vect{x}-\vect{x}^\prime|}}{4 \pi |\vect{x}-\vect{x}^\prime|} V(\vect{x}^\prime) \braket{\vect{x}^\prime | \Psi}
 $${#eq:scattering-lippmann-schwinger}
 where $\ket{\vect{k}_i}$ represents the initial plane-wave of incoming scattering electrons, and $\ket{\Psi}$ is the final scattered state. Provided that the scattered wavefunction $\braket{\vect{x} | \Psi}$ is measured far from where the scattering potential is localized:
 $$
-    e^{i|\vect{k}_i||\vect{x}-\vect{x}^\prime|} \approx e^{ikr}e^{-i\vect{k} \cdot \vect{x}^\prime}
+    e^{i|\vect{k}||\vect{x}-\vect{x}^\prime|} \approx e^{ikr}e^{-i\vect{k}_i \cdot \vect{x}^\prime}
 $$
-where $r \equiv |\vect{x}-\vect{x}^\prime|$ and $k \equiv |\vect{k}_i|$. @eq:scattering-lippmann-schwinger can then be simplified as:
+where $r \equiv |\vect{x}-\vect{x}^\prime|$ and $k \equiv |\vect{k}|$. @eq:scattering-lippmann-schwinger can then be simplified as:
 $$
-    \braket{\vect{x} | \Psi} = \braket{\vect{x} | \vect{k}_i} - \frac{m_e}{2 \pi \hbar^2} \frac{e^{ikr}}{r}\int d^3 x^\prime e^{-i \vect{k}_f \cdot \vect{x}^\prime} V(\vect{x}^\prime) \braket{\vect{x}^\prime | \Psi}
+    \braket{\vect{x} | \Psi} = \braket{\vect{x} | \vect{k}_i} - \frac{m_e}{2 \pi \hbar^2} \frac{e^{i k_f r}}{r}\int d^3 x^\prime e^{-i \vect{k}_f \cdot \vect{x}^\prime} V(\vect{x}^\prime) \braket{\vect{x}^\prime | \Psi}
 $${#eq:scattering-lippmann-schwinger-rad}
 The canonical description of the Lippmann-Schwinger equation is usually reduced to:
 $$
-    \braket{\vect{x} | \Psi} = \frac{1}{L^{3/2}} \left[ e^{i \vect{k}_i \cdot \vect{x}} + \frac{e^{ikr}}{r} f(\vect{k}_f, \vect{k}_i)\right]
+    \braket{\vect{x} | \Psi} = \frac{1}{L^{3/2}} \left[ e^{i \vect{k}_i \cdot \vect{x}} + \frac{e^{i k_f r}}{r} f(\vect{k}_f, \vect{k}_i)\right]
 $${#eq:scattering-lippmann-schwinger-general}
 where
 \begin{align}

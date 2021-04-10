@@ -93,7 +93,7 @@ for i in range(0, 6):
         zs=[Eminus.min() - 1 / 2, (Eminus - Eplus.min()).max() - 1 / 4],
         color="gray",
         linestyle="dashed",
-        linewidth=1,
+        linewidth=0.5,
     )
 
 ax1.plot3D([1.5, 1.5], [-2, 2], zs=Eminus.min() - 1 / 2, color="k", linestyle=":")

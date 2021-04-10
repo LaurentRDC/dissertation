@@ -19,8 +19,8 @@ time_points = time_points[time_points < 20]
 fig, ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 2))
 
 ax.plot(time_points, intensity, ".", color=discrete_colors(1)[0])
-ax.axvline(x=0, linestyle="dashed", linewidth=1, color="k")
-ax.axhline(y=1, linestyle="dashed", linewidth=1, color="k")
+ax.axvline(x=0, linestyle="dashed", linewidth=0.5, color="k")
+ax.axhline(y=1, linestyle="dashed", linewidth=0.5, color="k")
 
 ax.set_xlim([time_points.min(), time_points.max()])
 ax.set_ylim([0.9, 1.01])

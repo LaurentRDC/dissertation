@@ -27,7 +27,7 @@ ax.legend(loc="upper left", edgecolor="none")
 ax.set_xlabel("Temperature [K]")
 ax.set_ylabel("$ZT$ [a.u.]")
 ax.set_ylim([-0.1, 3])
-ax.axvline(x=810, color="k", linestyle="--", linewidth=1)
+ax.axvline(x=810, color="k", linestyle="--", linewidth=0.5)
 ax.text(x=810, y=3.1, s="$T_c$", ha="center")
 offset = 50
 ax.text(x=810 - offset, y=3.1, s="$\leftarrow Pnma$", ha="right")

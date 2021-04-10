@@ -25,7 +25,7 @@ ax.legend(edgecolor="none")
 ax.set_xlabel("Temperature [K]")
 ax.set_ylabel("$\kappa_l$ [W / m / K]")
 
-ax.axvline(x=810, color="k", linestyle="--", linewidth=1)
+ax.axvline(x=810, color="k", linestyle="--", linewidth=0.5)
 ax.text(x=810, y=1.1 * c.max(), s="$T_c$", ha="center")
 offset = 50
 ax.text(x=810 - offset, y=1.1 * c.max(), s="$\leftarrow Pnma$", ha="right")

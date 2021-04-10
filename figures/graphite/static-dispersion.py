@@ -31,9 +31,9 @@ for mode, color in zip(modes, discrete_colors(len(modes))):
 labels = [r"$\mathbf{\Gamma}$", r"$\mathbf{M}$", r"$\mathbf{K}$", r"$\mathbf{\Gamma}$"]
 nsteps = np.size(f) / 3
 for i in range(1, len(labels)):
-    ax.axvline(x=i * nsteps, color="k", linestyle="--", linewidth=1)
+    ax.axvline(x=i * nsteps, color="k", linestyle="--", linewidth=0.5)
 
-ax.axhline(y=25, color="k", linestyle="--", linewidth=1)  # room temperature
+ax.axhline(y=25, color="k", linestyle="--", linewidth=0.5)  # room temperature
 
 # Draw BZ
 hex_radius = 0.4

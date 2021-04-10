@@ -71,7 +71,7 @@ with
                &+ 4  \cos\left[\tfrac{\sqrt{3} a}{2} ~ (\vect{k} \cdot \vect{b}_2) \right] 
                     \cos\left[\tfrac{3 a}{2} ~ (\vect{k} \cdot \vect{b}_1) \right] \nonumber
 \end{align}
-where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. The in-plane dispersion for a tight-binding energy of $t=\SI{2.7}{\electronvolt}$ is shown on @fig:graphite-electronic-structure. More complete expressions that are not limited to nearest neighbor interactions are given elsewhere [@Neto2009].
+where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. The in-plane dispersion for a tight-binding energy of $t=\SI{2.7}{\electronvolt}$ is shown on @fig:graphite-electronic-structure. More complete expressions that are not limited to nearest neighbor interactions are given elsewhere [@Partoens2006;@Neto2009].
 
 ```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vect{k})$ for graphite. The in-plane section of the Brillouin zone is shown below. The dotted black line represents the line-cut used for @fig:graphite-photoexcitation."}
 ```
@@ -101,11 +101,11 @@ An important feature of the phonon dispersion of graphite that is not replicated
 
 Ultrafast studies of graphite conceptually start with the work by Kampfrath *et al.* [@Kampfrath2005] The strong coupling between charge carriers and optical phonons $A_1^\prime$ and $E_{2g}$ was demonstrated using time-resolved terahertz spectroscopy by tracking the transient in-plane dielectric function after pumping with short pulses of \SI{1.5}{\electronvolt} photons. The authors reveal that by \SI{500}{\femto\second} after photoexcitation, more than 90% of the absorbed pump energy has been transferred to the lattice. The authors subsequently determine the lifetime of the strongly-coupled optical modes.
 
-The understanding of hot carrier dynamics in allotropes of carbon lept forward significantly following the development of time- and angle-resolved photoemission spectroscopy (trARPES). Early work by Johannsen *et al.*[@Johannsen2013] probed graphene photoexcited with \SI{1.5}{\electronvolt} photons. This experiment showed that for all time-delay after photoexcitation, the energy distribution for electrons near the Dirac cones can be described by Fermi-Dirac statistics. This implies that by \SI{60}{\femto\second} after photoexcitation -- the effective time-resolution of the experiment --, the electrons have thermalized. This work also determines the process by which energy is transferred to acoustic phonons. According to their modelling, the restricted set of momentum-conserving energy-transfer pathways between the hot electron gas and acoustic phonon can be substantially expanded thanks to defect-mediated interactions, via a process called *supercollision*[@Song2012;@Betz2013].
+The understanding of hot carrier dynamics in allotropes of carbon lept forward significantly following the development of time- and angle-resolved photoemission spectroscopy (trARPES). Early work by Johannsen *et al.*[@Johannsen2013] probed graphene photoexcited with \SI{1.5}{\electronvolt} photons. This experiment showed that for all time-delay after photoexcitation, the energy distribution for electrons near the Dirac cones can be described by Fermi-Dirac statistics. This implies that by \SI{60}{\femto\second} after photoexcitation -- the effective time-resolution of the experiment --, the electrons have thermalized. This estimate has been confirmed by optical pump-probe spectroscopy [@Breusing2009]. Johannsen *et al.*[@Johannsen2013] also determine the process by which energy is transferred to acoustic phonons. According to their modelling, the restricted set of momentum-conserving energy-transfer pathways between the hot electron gas and acoustic phonon can be substantially expanded thanks to defect-mediated interactions, via a process called *supercollision*[@Song2012;@Betz2013].
 
 The experiment by Stange *et al.* [@Stange2015] on graphite showcases some important differences between ultrafast work on graphite and graphene. With a time-resolution of \SI{32}{\femto\second}, it was found that the electronic energy distribution is not well-described by Fermi-Dirac statistics until about \SI{100}{\femto\second}, after which an effective electronic temperature can be defined. The authors also weigh in on the subsequent phonon thermalization mechanism. Contrary to the work by Johannsen *et al.*, Stange *et al.* show that the supercollision model *does not explain* ultrafast thermalization in graphite. Instead, anharmonic coupling between optical and acoustic modes, initially proposed by Yan *et al.*[@Yan2009], is found to be the most important thermalization mechanism. The difference in thermalization process is attributed to the much longer electron mean-free path in graphite (\SIrange{0.2}{10}{\micro\meter})[@Garcia2008] vs. substrate-supported graphene ($<\SI{150}{\nano\meter}$)[@Betz2013].
 
-Ultrafast studies of graphite with structural probes have also been performed. Carbone *et al.*[@Carbone2008] studied the ablation of whole graphene layers from graphite samples photoexcited with an optical density of up to \SI{44.5}{\milli\joule\per\square\centi\meter} via ultrafast electron diffraction. Their results support the existence of strongly-coupled optical phonon modes, as demonstrated by Kampfrath *et al.*[@Kampfrath2005] Ultrafast electron diffraction measurements by Chatelain *et al.*[@Chatelain2014a] also confirms the existence of two strongly-coupled optical modes by observing their coherent generation, indicating that the characteristic energy-transfer time from the hot electron gas is shorter that the phonon period. The dynamics of strongly-coupled optical phonons measured with ultrafast electron diffraction has been the subject of multiple other studies[@Raman2008;@Schafer2011;@VanMourik2014;@Harb2016].
+Ultrafast studies of graphite with structural probes have also been performed. Carbone *et al.*[@Carbone2008] studied the ablation of whole graphene layers from graphite samples photoexcited with an optical density of up to \SI{44.5}{\milli\joule\per\square\centi\meter} via ultrafast electron diffraction. Their results support the existence of strongly-coupled optical phonon modes, as demonstrated by Kampfrath *et al.*[@Kampfrath2005] Ultrafast electron diffraction measurements by Chatelain *et al.*[@Chatelain2014a] also confirms the existence of two strongly-coupled optical modes by observing their coherent generation, indicating that the characteristic energy-transfer time from the hot electron gas is shorter that the phonon period. The dynamics of strongly-coupled optical phonons measured with ultrafast diffraction (electron and X-ray) has been the subject of multiple other studies[@Raman2008;@Schafer2011;@VanMourik2014;@Liang2014;@White2014;@Harb2016;@Stern2018].
 
 ### Geometrical interpretation of electron-phonon coupling in photoexcited graphite
 
@@ -141,10 +141,10 @@ $$
 where $\vect{R}(\theta)$ is the in-plane rotation matrix:
 $$
     \vect{R}(\theta) = \begin{pmatrix}
-                      \cos{\theta} & -\sin{\theta} & 0\\
-                      \sin{\theta} & \cos{\theta}  & 0\\
-                      0            & 0             & 1
-                     \end{pmatrix}
+                       \cos{\theta} & -\sin{\theta} & 0\\
+                       \sin{\theta} & \cos{\theta}  & 0\\
+                       0            & 0             & 1
+                       \end{pmatrix}
 $$
 Throughout the rest of this chapter, "scattering intensity" will imply discrete azimuthal average unless otherwise noted. An example of six-fold averaged diffraction pattern is shown in @fig:graphite-static b).
 
@@ -484,7 +484,7 @@ $$
 $$
 Using the coupling constant $G_{e,A_1^\prime}$ and electronic heat capacity from @sec:graphite-eph-solution, $\tau_{e, A_1^\prime} = \SI{99 \pm 1}{\femto\second}$. Since the electronic heat capacity is highly dependent on temperature, the maximum value of the electronic temperature after photoexcitation was used (\SI{8500}{\kelvin} according to the solution to @eq:graphite-nlm-system).
 
-In order to calculate the average electron-phonon coupling matrix element from the scattering rate, the electronic density-of-states needs to be approximated. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Neto2009]:
+In order to calculate the average electron-phonon coupling matrix element from the scattering rate, the electronic density-of-states needs to be approximated. Given the nature of the experiments presented here, as shown on @fig:graphite-photoexcitation, an approximation to the electronic density of states for graphite close to the Dirac point can be used[@Partoens2006;@Neto2009]:
 $$
     D_e(\epsilon) = \frac{2 A}{\pi} \frac{|\epsilon|}{(\hbar v_{F})^2}
 $$

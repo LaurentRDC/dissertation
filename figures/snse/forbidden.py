@@ -73,8 +73,8 @@ for indices, color, ax in zip(
         label=skued.indices_to_text(*indices),
     )
 
-    ax.axhline(y=1, linestyle="dashed", color="k", linewidth=1)
-    ax.axvline(x=0, linestyle="dashed", color="k", linewidth=1)
+    ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
+    ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
     tag_axis(
         ax,
         skued.indices_to_text(*indices),

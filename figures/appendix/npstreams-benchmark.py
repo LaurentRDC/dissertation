@@ -16,7 +16,7 @@ fig, (ax1, ax3) = plt.subplots(
 )
 ax2 = ax1.twinx()
 
-ax1.axvline(x=2048, linestyle="dashed", color="k", linewidth=1)
+ax1.axvline(x=2048, linestyle="dashed", color="k", linewidth=0.5)
 ax1.plot(
     sizes,
     np_times,

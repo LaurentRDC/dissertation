@@ -48,12 +48,12 @@ The Seebeck coefficient is a measure of how much voltage can be induced by a tem
 For a solid that is well-described by parabolic electronic bands, the Seebeck coefficient can be expressed as [@Rittner1959]:
 $$
     S = - \frac{k_B}{e} \left( \frac{5 F_{3/2}(\bar{\mu})}{3 F_{1/2}(\bar{\mu})} - \bar{\mu}\right)
-$$
+$${#eq:snse-seebeck}
 where $k_B$ is Boltzmann's constant, $e$ is the quantum of charge, $\bar{\mu}=\mu/k_B T$ is the reduced chemical potential (relative to the edge of the conduction band), and $F_i$ is the Fermi-Dirac function defined as:
 $$
     F_i(\bar{\mu})= \int_0^\infty dx \frac{x^i}{e^{x - \bar{\mu}} + 1}
 $$
-The Seebeck coefficient is largely determined by the value of the reduced chemical potential, and thus is mostly sensitive to doping [@Hicks1993a].
+The above equation makes it clear that the Seebeck coefficient is largely determined by the value of the reduced chemical potential, and thus is mostly sensitive to doping [@Hicks1993a].
 
 ### Electronic transport
 

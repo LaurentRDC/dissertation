@@ -25,7 +25,7 @@ for ax in (ax_full, ax_3ghz):
     ax.set_xlabel("Frequency [GHz]")
     ax.set_ylabel("Spectral power [dBm]")
 
-ax_full.axvline(x=2.9985, linestyle="dashed", color="k", linewidth=1)
+ax_full.axvline(x=2.9985, linestyle="dashed", color="k", linewidth=0.5)
 
 ax_full.plot(frequencies_fullbw, power_fullbw, color=COLOR)
 ax_full.set_ylim([-75, -15])
