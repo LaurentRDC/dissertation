@@ -696,8 +696,19 @@ $if(titlepage-background)$
   {\Large \textsf{$subtitle$}}
   $endif$
   \vskip 2em
-  \noindent {\Large \textsf{$for(author)$$author$$sep$, $endfor$} \vskip 0.6em \textsf{$date$}}
-  \vfill
+  \noindent {
+    \Large \textsf{$author$} 
+    \vskip 2em
+    \setstretch{1}
+    \Large\textsf{Department of Physics\\Faculty of Science\\McGill University, Montr\'{e}al}
+    \vskip 2em
+    \Large\textsf{$date$}
+    \vfill
+    \normalsize\textsf{A dissertation submitted to McGill University in partial fulfillment of the requirements of the degree of Doctor of Philosophy}
+    \vskip 0.6em
+    \normalsize\textsf{\copyright $author$, 2021}
+  }
+  
 }
 $else$
 {

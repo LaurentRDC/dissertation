@@ -105,6 +105,13 @@ parser_build.add_argument(
     choices=["simple", "eisvogel"],
     default="eisvogel",
 )
+parser_build.add_argument(
+    "--print",
+    action="store_const",
+    const=True,
+    help="Build the dissertation for printing media: no hyperlinks, single linespacing, etc.",
+    default=False,
+)
 
 parser_prereqs = subparsers.add_parser(
     "compute-prerequisites", help="Compute plotting prerequisites from data."
@@ -217,7 +224,7 @@ def buildpdf(options, target, sourcefiles):
         print(termcolor.colored("WARNING: There are still TODOs remaining.", "red"))
 
 
-def build_auxiliary(aux_options=AUX_OPTS):
+def build_auxiliary(aux_options=AUX_OPTS, forprint=False):
     """
     Build auxiliary files required by other builds.
 
@@ -240,17 +247,22 @@ def build_auxiliary(aux_options=AUX_OPTS):
         )
 
 
-def build_simple(target):
+def build_simple(target, forprint=False):
     """ Build the dissertation in the simple book style """
-    build_auxiliary()
+    build_auxiliary(forprint=forprint)
+
+    options = OPTIONS
+    if not forprint:
+        options += ["-V linestretch=1.5"]
+
     buildpdf(
-        options=OPTIONS,
+        options=options,
         target=target,
         sourcefiles=SRC,
     )
 
 
-def build_eisvogel(target):
+def build_eisvogel(target, forprint=False):
     """ Build the dissertation in the Eisvogel style. """
 
     # We use run-py as a kind of script-runner
@@ -261,7 +273,7 @@ def build_eisvogel(target):
 
     aux_options = AUX_OPTS
     aux_options += ["-M eisvogel=true"]
-    build_auxiliary(aux_options=aux_options)
+    build_auxiliary(aux_options=aux_options, forprint=forprint)
 
     options = OPTIONS
     options += ["-V float-placement-figure=htpb"]
@@ -271,12 +283,13 @@ def build_eisvogel(target):
     options += ["-V titlepage=true"]
     options += ["-V titlepage-text-color=FFFFFF"]
     options += ["-V titlepage-rule-height=0"]
-    # TODO: option for print where citations, urls, and internal links
-    #       are in black
     # The color DarkViolet is defined in the template
-    options += ["-V linkcolor=DarkViolet"]
-    options += ["-V citecolor=DarkViolet"]
-    options += ["-V urlcolor=DarkViolet"]
+    if not forprint:
+        options += ["-V linestretch=1.5"]
+        options += ["-V linkcolor=DarkViolet"]
+        options += ["-V citecolor=DarkViolet"]
+        options += ["-V urlcolor=DarkViolet"]
+
     # Note that the path separators absolutely needs to be '\'
     titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
     options += [f"-V titlepage-background={titlepage_path}"]
@@ -310,7 +323,9 @@ if __name__ == "__main__":
             "simple": build_simple,
             "eisvogel": build_eisvogel,
         }
-        multiplexor[arguments.style](target=Path("dissertation.pdf"))
+        multiplexor[arguments.style](
+            target=Path("dissertation.pdf"), forprint=arguments.print
+        )
     elif arguments.command == "clean":
         clean(full=arguments.all)
     elif arguments.command == "compute-prerequisites":

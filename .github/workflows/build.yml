@@ -104,11 +104,21 @@ jobs:
 
         python scripts/dissc.py build --style eisvogel
         mv build/dissertation.pdf dissertation-eisvogel.pdf
+        
+        python scripts/dissc.py clean 
+
+        python scripts/dissc.py build --style eisvogel --print
+        mv build/dissertation.pdf dissertation-eisvogel-print.pdf
 
         python scripts/dissc.py clean 
 
         python scripts/dissc.py build --style simple
         mv build/dissertation.pdf dissertation-simple.pdf
+
+        python scripts/dissc.py clean
+
+        python scripts/dissc.py build --style simple --print
+        mv build/dissertation.pdf dissertation-simple-print.pdf
     
     - name: Upload PDF
       uses: actions/upload-artifact@v2
