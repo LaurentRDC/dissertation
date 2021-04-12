@@ -73,6 +73,11 @@ OPTIONS += [
 
 OPTIONS += [f"--metadata-file={META}", f"--metadata-file={TYPOGRAPHY}"]
 
+OPTIONS += ["--biblatex", f"-V bibliography={BIBFILE}"]
+OPTIONS += [
+    "-V biblatexoptions=backend=biber,citestyle=numeric,bibstyle=numeric,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"
+]
+
 OPTIONS += [f"--include-in-header=include.tex"]
 OPTIONS += [f"--include-in-header={TMP1}"]
 OPTIONS += [f"--include-before-body={TMP2}"]
@@ -190,11 +195,6 @@ def buildpdf(options, target, sourcefiles):
     # We purposefully bypass pandoc-citeproc because we want
     # to have references at the end of each chapter
     # This is much easier to do with biblatex.
-    options += ["--biblatex"]
-    options += [
-        "-V biblatexoptions=backend=biber,citestyle=numeric,bibstyle=numeric,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"
-    ]
-    options += ["-V bibliography=references.bib"]
     runpandoc(
         options=options,
         target=BUILDDIR_PDF / target.with_suffix(".tex"),
