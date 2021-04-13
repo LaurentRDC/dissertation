@@ -58,9 +58,7 @@ TMP = [TMP1, TMP2]
 
 AUX_OPTS = ["--wrap=preserve"]
 
-OPTIONS = [
-    "-f markdown+raw_tex+latex_macros"
-]  # Some raw tex for \listoffigures macro and siunitx package
+OPTIONS = ["-f markdown+raw_tex+latex_macros"]
 OPTIONS += ["--standalone"]
 
 # The order of filters is important!
@@ -75,7 +73,7 @@ OPTIONS += [f"--metadata-file={META}", f"--metadata-file={TYPOGRAPHY}"]
 
 OPTIONS += ["--biblatex", f"-V bibliography={BIBFILE}"]
 OPTIONS += [
-    "-V biblatexoptions=backend=biber,citestyle=numeric,bibstyle=numeric,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"
+    f"-V biblatexoptions=backend=biber,citestyle=numeric,style=numeric,bibstyle=bibstyle,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"
 ]
 
 OPTIONS += [f"--include-in-header=include.tex"]

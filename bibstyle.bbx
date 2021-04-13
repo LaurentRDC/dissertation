@@ -1,0 +1,38 @@
+\ProvidesFile{bibstyle.bbx}
+[\abx@bbxid]
+
+\RequireBibliographyStyle{numeric}
+
+% Custom field formatting
+
+
+\DeclareFieldFormat{labelnumberwidth}{\textsuperscript{#1}}
+
+% Italics title
+\DeclareFieldFormat
+  [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  {title}{\emph{#1\isdot}}
+
+% Only write "In: ..." for @incollection entries 
+\renewbibmacro{in:}{%
+  \ifentrytype{incollection}{\printtext{\bibstring{in}\intitlepunct}}{}}
+
+% Split Vol.Num into Vol Num
+\renewbibmacro{volume+number+eid}{%
+  \printfield{volume}%
+  \setunit*{\addnbspace}%
+  \printfield{number}%
+  \setunit{\bibeidpunct}%
+  \printfield{eid}}
+
+% Bold volume
+\DeclareFieldFormat
+  [article,inproceedings]
+  {volume}{\textbf{#1\isdot}}
+
+% Issue number "no. XXX"
+\DeclareFieldFormat
+  [article,inproceedings]
+  {number}{no. #1}
+
+\endinput
