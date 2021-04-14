@@ -28,15 +28,12 @@ HERE = Path(os.getcwd())
 BUILDDIR_PDF = HERE / "build"
 BUILDDIR_PDF.mkdir(exist_ok=True)
 
-CONTENTDIR = HERE / "content"
-TEMPLATEDIR = HERE / "templates"
-
-PANDOC = "pandoc"
 LATEX_ENGINE = "lualatex"
 
 META = HERE / "metadata.yaml"
 TYPOGRAPHY = HERE / "typography.yaml"
 
+CONTENTDIR = HERE / "content"
 SRC = [
     CONTENTDIR / "preface.md",
     CONTENTDIR / "introduction.md",
@@ -48,9 +45,6 @@ SRC = [
 ]
 
 BIBFILE = Path("references.bib")
-
-TITLEPAGE = "titlepage.tex"
-TITLEPAGEFILLED = BUILDDIR_PDF / "__titlepage.filled.tex"
 
 OPTIONS = ["-f markdown+raw_tex+latex_macros"]
 OPTIONS += ["--standalone"]
@@ -71,7 +65,6 @@ OPTIONS += [
 ]
 
 OPTIONS += [f"--include-in-header=include.tex"]
-OPTIONS += [f"--include-in-header={TITLEPAGEFILLED}"]
 
 OPTIONS += ["--toc", "--toc-depth=3"]
 OPTIONS += ["--number-sections", "--top-level-division=chapter"]
@@ -168,7 +161,7 @@ def render_diagram(source, target):
 
 def runlatex(source):
     """
-    Run a full build of latex (i.e. latex, bibtex, 2xlatex)
+    Run a full build of latex (i.e. latex, biber, 2xlatex)
     """
     # Important: the options -aux-directory is Miktex-only, so I'm not using it
     # so that this script also supports TexLive. Also, confusingly, Texlive uses -jobname
@@ -182,14 +175,40 @@ def runlatex(source):
     run(f"{LATEX_ENGINE} {latex_options} {source}").check_returncode()
 
 
-def buildpdf(options, target, sourcefiles):
+def build(target, forprint=False):
+    """ Build the dissertation from source. """
+
+    # Build diagrams
+    diagrams = list((HERE / "diagrams").glob("*.svg"))
+    targets = [diagram.with_suffix(".pdf") for diagram in diagrams]
+    nprocs = min([len(diagrams), os.cpu_count()])
+    with mp.Pool(processes=nprocs) as pool:
+        pool.starmap(render_diagram, zip(diagrams, targets))
+
+    # Build titlepage background
+    if not (BUILDDIR_PDF / "titlepage.pdf").exists():
+        run(f"python scripts/mktitlepage.py {BUILDDIR_PDF / 'titlepage.pdf'}")
+
+    options = OPTIONS
+    # The color DarkViolet is defined in the template
+    if not forprint:
+        options += ["-V linestretch=1.5"]
+        options += ["-V linkcolor=DarkViolet"]
+        options += ["-V citecolor=DarkViolet"]
+        options += ["-V urlcolor=DarkViolet"]
+
+    # Note that the path separators absolutely needs to be '\'
+    titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
+    options += [f"-V titlepage-background={titlepage_path}"]
+    options += [f"--template={HERE / 'template.tex'}"]
+
     # We purposefully bypass pandoc-citeproc because we want
     # to have references at the end of each chapter
     # This is much easier to do with biblatex.
     runpandoc(
         options=options,
         target=BUILDDIR_PDF / target.with_suffix(".tex"),
-        sourcefiles=sourcefiles,
+        sourcefiles=SRC,
     )
 
     # TODO: also check for undefined references in the log file
@@ -206,46 +225,6 @@ def buildpdf(options, target, sourcefiles):
         print("--------------------------------")
     if todo_left:
         print(termcolor.colored("WARNING: There are still TODOs remaining.", "red"))
-
-
-def build(target, forprint=False):
-    """ Build the dissertation from source. """
-
-    # Build diagrams
-    diagrams = list((HERE / "diagrams").glob("*.svg"))
-    targets = [diagram.with_suffix(".pdf") for diagram in diagrams]
-    nprocs = min([len(diagrams), os.cpu_count()])
-    with mp.Pool(processes=nprocs) as pool:
-        pool.starmap(render_diagram, zip(diagrams, targets))
-
-    # Build titlepage
-    if not (BUILDDIR_PDF / "titlepage.pdf").exists():
-        run(f"python scripts/mktitlepage.py {BUILDDIR_PDF / 'titlepage.pdf'}")
-
-    runpandoc(
-        options=[f"--template={TITLEPAGE}", f"--metadata-file={META}"],
-        target=TITLEPAGEFILLED,
-        sourcefiles=[TITLEPAGE],
-    )
-
-    options = OPTIONS
-    # The color DarkViolet is defined in the template
-    if not forprint:
-        options += ["-V linestretch=1.5"]
-        options += ["-V linkcolor=DarkViolet"]
-        options += ["-V citecolor=DarkViolet"]
-        options += ["-V urlcolor=DarkViolet"]
-
-    # Note that the path separators absolutely needs to be '\'
-    titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
-    options += [f"-V titlepage-background={titlepage_path}"]
-    options += [f"--template={HERE / 'template.tex'}"]
-
-    buildpdf(
-        options=options,
-        target=target,
-        sourcefiles=SRC,
-    )
 
 
 def clean(full=False):

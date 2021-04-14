@@ -1,10 +1,9 @@
 
 %%
-% This is the Eisvogel pandoc LaTeX template.
+% This template is based on the Eisvogel pandoc LaTeX template.
 %
-% It has been modified by L. René de Cotret to remove
-% specialize the layout (e.g. removing the bibliography at the
-% end of the document).
+% It has been modified by L. P. René de Cotret to specialize the layout and
+% other tweaks.
 % 
 % For the original Eisvogel template, visit the official GitHub page:
 % https://github.com/Wandmalfarbe/pandoc-latex-template
@@ -14,14 +13,6 @@
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*,table}{xcolor}
-$if(dir)$
-$if(latex-dir-rtl)$
-\PassOptionsToPackage{RTLdocument}{bidi}
-$endif$
-$endif$
-$if(CJKmainfont)$
-\PassOptionsToPackage{space}{xeCJK}
-$endif$
 %
 \documentclass[
 $if(fontsize)$
@@ -38,7 +29,7 @@ $endif$
 $for(classoption)$
   $classoption$$sep$,
 $endfor$
-  ,captions=tableheading
+  captions=tableheading
 ]{scrbook}
 
 \usepackage{amsmath,amssymb}
@@ -90,23 +81,6 @@ $else$
   \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
 $endif$
-$if(CJKmainfont)$
-  \ifxetex
-    \usepackage{xeCJK}
-    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
-  \fi
-$endif$
-$if(luatexjapresetoptions)$
-  \ifluatex
-    \usepackage[$for(luatexjapresetoptions)$$luatexjapresetoptions$$sep$,$endfor$]{luatexja-preset}
-  \fi
-$endif$
-$if(CJKmainfont)$
-  \ifluatex
-    \usepackage[$for(luatexjafontspecoptions)$$luatexjafontspecoptions$$sep$,$endfor$]{luatexja-fontspec}
-    \setmainjfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
-  \fi
-$endif$
 \fi
 
 % Use upquote if available, for straight quotes in verbatim environments
@@ -138,14 +112,6 @@ $endif$
 \definecolor{default-citecolor}{HTML}{4077C0}
 \definecolor{default-urlcolor}{HTML}{4077C0}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-$if(footnotes-pretty)$
-% load footmisc in order to customize footnotes (footmisc has to be loaded before hyperref, cf. https://tex.stackexchange.com/a/169124/144087)
-\usepackage[hang,flushmargin,bottom,multiple]{footmisc}
-\setlength{\footnotemargin}{0.8em} % set space between footnote nr and text
-\setlength{\footnotesep}{\baselineskip} % set space between multiple footnotes
-\setlength{\skip\footins}{0.3cm} % set space between page content and footnote
-\setlength{\footskip}{0.9cm} % set space between footnote and page bottom
-$endif$
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
 $if(title-meta)$
@@ -173,7 +139,7 @@ $else$
   hidelinks,
 $endif$
   breaklinks=true,
-  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+  pdfcreator={LaTeX via pandoc and pandoc-plot}}
 \urlstyle{same} % disable monospaced font for URLs
 $if(verbatim-in-note)$
 \VerbatimFootnotes % allow verbatim text in footnotes
@@ -182,10 +148,6 @@ $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $else$
 \usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
-$endif$
-$if(logo)$
-\usepackage[export]{adjustbox}
-\usepackage{graphicx}
 $endif$
 $if(listings)$
 \usepackage{listings}
@@ -290,6 +252,7 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
+
 $if(lang)$
 \ifxetex
   $if(mainfont)$
@@ -380,14 +343,7 @@ $endif$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
 
-
-$if(page-background)$
-\usepackage[pages=all]{background}
-$endif$
-
-%
 % for the background color of the title page
-%
 $if(titlepage)$
 \usepackage{pagecolor}
 \usepackage{afterpage}
@@ -400,27 +356,19 @@ $else$
 $endif$
 $endif$
 
-%
 % break urls
-%
 \PassOptionsToPackage{hyphens}{url}
 
-%
 % When using babel or polyglossia with biblatex, loading csquotes is recommended
 % to ensure that quoted texts are typeset according to the rules of your main language.
-%
 \usepackage{csquotes}
 
-%
 % captions
-%
 \definecolor{caption-color}{HTML}{777777}
 \usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=$if(caption-justification)$$caption-justification$$else$raggedright$endif$]{caption}
 \setcapindent{0em}
 
-%
 % blockquote
-%
 \definecolor{blockquote-border}{RGB}{221,221,221}
 \definecolor{blockquote-text}{RGB}{119,119,119}
 \usepackage{mdframed}
@@ -428,13 +376,11 @@ $endif$
 \renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
 \item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
 
-%
 % Source Sans Pro as the de­fault font fam­ily
 % Source Code Pro for monospace text
 %
 % 'default' option sets the default
 % font family to Source Sans Pro, not \sfdefault.
-%
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   $if(fontfamily)$
   $else$
@@ -453,27 +399,21 @@ $if(monofont)$
   \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
 $endif$
 
-%
 % variables for title, author and date
-%
 \usepackage{titling}
 \title{$title$}
 \author{$for(author)$$author$$sep$, $endfor$}
 \date{$date$}
 
-%
 % remove paragraph indention
-%
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 
-%
-% header and footer
-%
+%------------------------------------- Header/Footer -------------------------------
 \usepackage{fancyhdr}
 
-\fancypagestyle{eisvogel-header-footer}{
+\fancypagestyle{header-footer-style}{
   \fancyhead{}
   \fancyfoot{}
   \lhead[$if(header-right)$$header-right$$else$$date$$endif$]{$if(header-left)$$header-left$$else$$title$$endif$}
@@ -485,28 +425,12 @@ $endif$
   \renewcommand{\headrulewidth}{0.4pt}
   \renewcommand{\footrulewidth}{0.4pt}
 }
-\pagestyle{eisvogel-header-footer}
-$if(page-background)$
-\backgroundsetup{
-scale=1,
-color=black,
-opacity=$if(page-background-opacity)$$page-background-opacity$$else$0.2$endif$,
-angle=0,
-contents={%
-  \includegraphics[width=\paperwidth,height=\paperheight]{$page-background$}
-  }%
-}
-$endif$
-
-%%
-%% end added
-%%
+\pagestyle{header-footer-style}
+%------------------------------------- Header/Footer -------------------------------
 
 \begin{document}
 
-%%
-%% begin titlepage
-%%
+%------------------------------------- Titlepage -----------------------------------
 $if(titlepage)$
 \begin{titlepage}
 $if(titlepage-background)$
@@ -579,10 +503,7 @@ $endif$
 \end{titlepage}
 \restoregeometry
 $endif$
-
-%%
-%% end titlepage
-%%
+%------------------------------------- Titlepage -----------------------------------
 
 \frontmatter
 
@@ -632,10 +553,10 @@ $acknowledgements$
 $endif$
 %------------------------------------- Acknowledgements Page -----------------------
 
-%------------------------------------- Use Eisvogel Header/Footer ------------------
+%------------------------------------- Use Header/Footer ---------------------------
 \lhead[\leftmark]{}
 \rhead[]{\rightmark}
-%------------------------------------- Use Eisvogel Header/Footer ------------------
+%------------------------------------- Use Header/Footer ---------------------------
 
 \mainmatter
 
