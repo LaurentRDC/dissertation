@@ -22,8 +22,6 @@ monofontoptions:
 
 float-placement-figure: htpb
 listings-no-page-break: true
-toc-own-page: true
-book: true
 
 titlepage: true
 titlepage-text-color: FFFFFF

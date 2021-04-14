@@ -50,13 +50,7 @@ SRC = [
 BIBFILE = Path("references.bib")
 
 TITLEPAGE = "titlepage.tex"
-FRONTMATTER = "frontmatter.tex"
-
-TMP1 = BUILDDIR_PDF / "__titlepage.filled.tex"
-TMP2 = BUILDDIR_PDF / "__frontmatter.filled.tex"
-TMP = [TMP1, TMP2]
-
-AUX_OPTS = ["--wrap=preserve"]
+TITLEPAGEFILLED = BUILDDIR_PDF / "__titlepage.filled.tex"
 
 OPTIONS = ["-f markdown+raw_tex+latex_macros"]
 OPTIONS += ["--standalone"]
@@ -77,8 +71,7 @@ OPTIONS += [
 ]
 
 OPTIONS += [f"--include-in-header=include.tex"]
-OPTIONS += [f"--include-in-header={TMP1}"]
-OPTIONS += [f"--include-before-body={TMP2}"]
+OPTIONS += [f"--include-in-header={TITLEPAGEFILLED}"]
 
 OPTIONS += ["--toc", "--toc-depth=3"]
 OPTIONS += ["--number-sections", "--top-level-division=chapter"]
@@ -215,40 +208,25 @@ def buildpdf(options, target, sourcefiles):
         print(termcolor.colored("WARNING: There are still TODOs remaining.", "red"))
 
 
-def build_auxiliary(aux_options=AUX_OPTS, forprint=False):
-    """
-    Build auxiliary files required by other builds.
+def build(target, forprint=False):
+    """ Build the dissertation from source. """
 
-    Parameters
-    ----------
-    aux_options : List[str]
-        List of options, e.g. ["--test true", "--foo=bar"]
-    """
+    # Build diagrams
     diagrams = list((HERE / "diagrams").glob("*.svg"))
     targets = [diagram.with_suffix(".pdf") for diagram in diagrams]
     nprocs = min([len(diagrams), os.cpu_count()])
     with mp.Pool(processes=nprocs) as pool:
         pool.starmap(render_diagram, zip(diagrams, targets))
 
-    for template, result in zip([TITLEPAGE, FRONTMATTER], [TMP1, TMP2]):
-        runpandoc(
-            options=aux_options + [f"--template={template}", f"--metadata-file={META}"],
-            target=result,
-            sourcefiles=[template],
-        )
-
-def build(target, forprint=False):
-    """ Build the dissertation from source. """
-
-    # We use run-py as a kind of script-runner
-    # because it's too hard to import other python scripts
-    # into this one
+    # Build titlepage
     if not (BUILDDIR_PDF / "titlepage.pdf").exists():
         run(f"python scripts/mktitlepage.py {BUILDDIR_PDF / 'titlepage.pdf'}")
 
-    aux_options = AUX_OPTS
-    aux_options += ["-M eisvogel=true"]
-    build_auxiliary(aux_options=aux_options, forprint=forprint)
+    runpandoc(
+        options=[f"--template={TITLEPAGE}", f"--metadata-file={META}"],
+        target=TITLEPAGEFILLED,
+        sourcefiles=[TITLEPAGE],
+    )
 
     options = OPTIONS
     # The color DarkViolet is defined in the template
@@ -287,7 +265,7 @@ if __name__ == "__main__":
 
     arguments = parser.parse_args()
     if arguments.command == "build":
-        build(target=Path("dissertation.pdf"), forprint=arguments.print) 
+        build(target=Path("dissertation.pdf"), forprint=arguments.print)
     elif arguments.command == "clean":
         clean(full=arguments.all)
     elif arguments.command == "compute-prerequisites":
