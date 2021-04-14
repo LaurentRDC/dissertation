@@ -60,9 +60,9 @@ with associated energy eigenvalue $E_a = \hbar^2 \vect{k}_a^2 / 2 m_e=\hbar \ome
 
 ### The Lippmann-Schwinger equation
 
-The problem of scattering with a non-trivial potential $V$ will now be considered. This is a fundamental problem in quantum mechanics; approximations appropriate for the research presented in this dissertation will be made to simplify and clarify the presentation. In particular, the following derivations assume that the scattering potential $V(\vect{x})$ is *local*, that is:
+The problem of scattering with a non-trivial potential $\hat{V}$ will now be considered. This is a fundamental problem in quantum mechanics; approximations appropriate for the research presented in this dissertation will be made to simplify and clarify the presentation. In particular, the following derivations assume that the scattering potential $V(\vect{x})$ is *local*, that is:
 $$
-    \bra{\vect{x}^\prime} V \ket{\vect{x}^{\prime \prime}} = V(\vect{x}^\prime) \delta(\vect{x}^\prime - \vect{x}^{\prime \prime})
+    \bra{\vect{x}^\prime} \hat{V} \ket{\vect{x}^{\prime \prime}} = V(\vect{x}^\prime) \delta(\vect{x}^\prime - \vect{x}^{\prime \prime})
 $$
 This is a reasonable assumption as the electrostatic potential has a $\sfrac{1}{|\vect{x}|}$ dependence (@eq:scattering-electrostatic-potential). Further simplifications can be made if allowed momentum states are assumed to be defined in a (large) cube of size-length $L$, such that
 $$
@@ -87,16 +87,16 @@ $${#eq:scattering-lippmann-schwinger-general}
 where
 \begin{align}
     f(\vect{k}_f, \vect{k}_i) & \equiv -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vect{x}^\prime \frac{e^{-i \vect{k}_f \cdot \vect{x}^\prime}}{L^{3/2}} V(\vect{x}^\prime) \braket{\vect{x}^\prime | \Psi} \nonumber \\
-                            & =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vect{k}_f}V\ket{\Psi}
+                            & =  -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vect{k}_f} \hat{V} \ket{\Psi}
     \label{eq:scattering-amplitude}
 \end{align}
 $f(\vect{k}_f, \vect{k})$ is called the *scattering amplitude*. In this notation, the vector $\vect{k}_f$ is a formal variable, and not a known state like $\vect{k}_i$. The form of @eq:scattering-lippmann-schwinger-general complies with intuition: the final scattered wavefunction is composed of an unscattered part ($\braket{\vect{x} | \vect{k}_i} \propto e^{i \vect{k}_i \cdot \vect{x}}$) as well as an outgoing spherical wave with amplitude $f(\vect{k}_f, \vect{k}_i)$ in the $\vect{k}_f$ direction.
 
-The calculation of the scattered wavefunction $\braket{\vect{x}|\Psi}$ has been reduced to the calculation of $\bra{\vect{k}_f}V\ket{\Psi}$ for arbitrary values of $\vect{k}_f$. The derivation of an expression for this is beyond the scope of this work, and the final result is stated[^tmatrix]:
+The calculation of the scattered wavefunction $\braket{\vect{x}|\Psi}$ has been reduced to the calculation of $\bra{\vect{k}_f} \hat{V} \ket{\Psi}$ for arbitrary values of $\vect{k}_f$. The derivation of an expression for this is beyond the scope of this work, and the final result is stated[^tmatrix]:
 $$
-    \bra{\vect{k}_f}V\ket{\Psi} = \bra{\vect{k}_f} \left[ \sum_{j=0}^{\infty} V \left( \frac{1}{E_i - H_0 + i \epsilon} V\right)^j \right] \ket{\vect{k}_i}
+    \bra{\vect{k}_f} \hat{V} \ket{\Psi} = \bra{\vect{k}_f} \left[ \sum_{n=1}^{\infty} \hat{V} \left( \frac{1}{E_i - \hat{H}_0 + i \epsilon} \hat{V}\right)^{n-1} \right] \ket{\vect{k}_i}
 $${#eq:scattering-potential-decomp}
-where $H_0$ is the free-space Hamiltonian with eigenvalue $E_i=\hbar^2 |\vect{k}_i|^2/2 m_e$, and $\epsilon$ is a vanishingly small real number. In particular, each term with index $j$ in the sum of @eq:scattering-potential-decomp corresponds to the electron scattering $j$ times[@Feynman1965].
+where $\hat{H}_0$ is the free-space Hamiltonian with eigenvalue $E_i=\hbar^2 |\vect{k}_i|^2/2 m_e$, and $\epsilon$ is a vanishingly small real number. In particular, each term with index $n$ in the sum of @eq:scattering-potential-decomp corresponds to the electron scattering $n$ times[@Feynman1965].
 
 ### Measuring the scattered wavefunction
 
@@ -118,21 +118,22 @@ Note that the factor of $1/r^2$ is generally ignored[@Fultz2002r2]. For the inst
 
 ## Elastic scattering in a crystal
 
-In this section, the consequences of an electron scattering *once* in crystalline solid will be explored. In this approximation, historically called the *first Born approximation* [@Born1926], only the first term in @eq:scattering-potential-decomp ($j=0$) is considered:
+In this section, the consequences of an electron scattering *once* in crystalline solid will be explored. In this approximation, historically called the *first Born approximation* [@Born1926], only the first term in @eq:scattering-potential-decomp ($n=1$) is considered:
 \begin{align}
-    f^{(1)}(\vect{k}_f, \vect{k}_i) & = -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vect{k}_f} V \ket{\vect{k}_i} \nonumber \\
-                                  & = -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vect{x}^\prime \bra{\vect{k}_f} V(\vect{x}^\prime) \ket{\vect{x}^\prime}\braket{\vect{x}^\prime | \vect{k}_i} \nonumber \\
-                                  & = -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vect{x}^\prime \frac{e^{i(\vect{k}_i - \vect{k}_f)\cdot \vect{x}^\prime}}{L^3} V(\vect{x}^\prime) \nonumber \\
-                                  & = -\frac{m_e}{2 \pi \hbar^2} \int d\vect{x}^\prime e^{i(\vect{k}_i - \vect{k}_f)\cdot \vect{x}^\prime} V(\vect{x}^\prime)
+    f^{(1)}(\vect{k}_f, \vect{k}_i) 
+        & = -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vect{k}_f} \hat{V} \ket{\vect{k}_i} \nonumber \\
+        & = -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vect{x}^\prime \bra{\vect{k}_f} V(\vect{x}^\prime) \ket{\vect{x}^\prime}\braket{\vect{x}^\prime | \vect{k}_i} \nonumber \\
+        & = -\frac{m_e L^3}{2 \pi \hbar^2} \int d\vect{x}^\prime \frac{e^{i(\vect{k}_i - \vect{k}_f)\cdot \vect{x}^\prime}}{L^3} V(\vect{x}^\prime) \nonumber \\
+        & = -\frac{m_e}{2 \pi \hbar^2} \int d\vect{x}^\prime e^{i(\vect{k}_i - \vect{k}_f)\cdot \vect{x}^\prime} V(\vect{x}^\prime)
     \label{eq:scattering-first-born-approx}
 \end{align}
 where the normalization of @eq:scattering-norm was used. The reader may recognize that the scattering amplitude $f^{(1)}(\vect{k}_f, \vect{k}_i)$ is proportional to the Fourier transform of the scattering potential with respect to $\vect{k}_f - \vect{k}_i \equiv \vect{q}$, the *scattering vector*. If the Fourier transform functional operator is defined as:
 $$
-    \mathcal{F}\left[ f(\vect{x}) \right] \equiv \hat{f}(\vect{q}) = \frac{1}{2 \pi} \int d\vect{x}^\prime e^{-i \vect{q} \cdot \vect{x}^\prime}f(\vect{x}^\prime).
+    \mathcal{F}\left[ f(\vect{x}) \right] \equiv \ft{f}(\vect{q}) = \frac{1}{2 \pi} \int d\vect{x}^\prime e^{-i \vect{q} \cdot \vect{x}^\prime}f(\vect{x}^\prime).
 $$
 then @eq:scattering-first-born-approx can be simplified to:
 $$
-    f^{(1)}(\vect{q}=\vect{k}_f - \vect{k}_i) = -\frac{m_e}{\hbar^2} \hat{V}(\vect{q})
+    f^{(1)}(\vect{q}=\vect{k}_f - \vect{k}_i) = -\frac{m_e}{\hbar^2} \ft{V}(\vect{q})
 $${#eq:scattering-amplitude-q}
 
 ### Scattering potential of a single atom{#sec:affe}
@@ -158,7 +159,7 @@ With the knowledge of the scattering potential of a single atom, the scattering 
 $$
     V_c(\vect{x}) = \sum_i V_{a,i}(\vect{x} - \vect{r}_i)
 $$
-where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}_i$, and $V^a$ is given by @eq:scattering-atom-potential. Note that for any function $h(\vect{x})$: 
+where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}_i$. The potential for each atom $V_{a,i}$ is taken to be more general than the single-atom potential of @eq:scattering-atom-potential, in order to model bonding, for example. Note that for any function $h(\vect{x})$: 
 \begin{align}
     \mathcal{F}\left[ h(\vect{x} + \vect{y}) \right] & = \frac{1}{2\pi} \int d\vect{x}^\prime e^{-i\vect{q}\cdot(\vect{x}^\prime + \vect{y})} h(\vect{x}^\prime) \nonumber \\
                                                    & = \frac{e^{-i \vect{q} \cdot \vect{y}}}{2 \pi} \int d\vect{x}^\prime e^{i\vect{q} \vect{x}^\prime} h(\vect{x}^\prime) \nonumber \\
@@ -167,13 +168,12 @@ where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}
 \end{align}
 where $\vect{y}$ is some arbitrary translation vector. Therefore, the Fourier transform of the scattering potential of the entire crystal is related to the Fourier transform  the potential its constituent atoms (@eq:scattering-atom-potential) as:
 \begin{align}
-    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_i V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
-                        & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
-                        & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x}) \right] e^{-i \vect{q} \cdot \vect{r}_i} \nonumber \\
-                        & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
+    \ft{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_i V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
+                       & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
+                       & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x}) \right] e^{-i \vect{q} \cdot \vect{r}_i} \nonumber \\
+                       & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
     \label{eq:scattering-potential-crystal}
 \end{align}
-It is worth noting that @eq:scattering-potential-crystal holds for a $V_{a,i}$ that is more general than the single-atom potential of @eq:scattering-atom-potential, which does not model bonding.
 
 ```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for an abstract crystal. **a)** Electrostatic potential $V(\vect{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vect{a}_1$ and $\vect{a}_2$ are shown; lattice vector $\vect{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vect{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
 ``` 
@@ -262,28 +262,28 @@ $${#eq:scattering-bragg-hist}
 
 ### The Ewald sphere{#sec:scattering-ewald-sphere}
 
-Elastic electron scattering, or *electron diffraction*, can be discussed more concretely. Consider an electron initially propagating in the $\hat{\vect{z}}$ direction with wavevector $\vect{k}_i$ that interacts with a scattering potential $\hat{V}(\vect{q})$, and scatters to a final wavevector $\vect{k}_f$. The elastic scattering condition $|\vect{k}_i| = |\vect{k}_f|$ constrains the observation of $\hat{V}(\vect{q})$ to scattering vectors $\vect{q}$ that lie on a sphere of radius $|\vect{q}|=\tfrac{1}{\lambda}$. This sphere is called the *Ewald sphere*[@Ewald1921].
+Elastic electron scattering, or *electron diffraction*, can be discussed more concretely. Consider an electron initially propagating in the $\hat{\vect{z}}$ direction with wavevector $\vect{k}_i$ that interacts with a scattering potential $\ft{V}(\vect{q})$, and scatters to a final wavevector $\vect{k}_f$. The elastic scattering condition $|\vect{k}_i| = |\vect{k}_f|$ constrains the observation of $\ft{V}(\vect{q})$ to scattering vectors $\vect{q}$ that lie on a sphere of radius $|\vect{q}|=\tfrac{1}{\lambda}$. This sphere is called the *Ewald sphere*[@Ewald1921].
 
-```{.matplotlib #fig:scattering-ewald-sphere file="figures/scattering/ewald.py" caption="Demonstration of the Ewald sphere, a visual representation of the conservation of energy in diffraction. The Fourier transform of the scattering potential from an abstract cubic lattice of side length \SI{5}{\angstrom}, $\hat{V}(\vect{q})$, is shown in the background, with the associated reciprocal lattice vectors $\set{\vect{b}_i}$. The Ewald sphere of radius $\vect{q}$ is shown for two scatterers: electrons (solid) and hard x-ray (dashed)."}
+```{.matplotlib #fig:scattering-ewald-sphere file="figures/scattering/ewald.py" caption="Demonstration of the Ewald sphere, a visual representation of the conservation of energy in diffraction. The Fourier transform of the scattering potential from an abstract cubic lattice of side length \SI{5}{\angstrom}, $\ft{V}(\vect{q})$, is shown in the background, with the associated reciprocal lattice vectors $\set{\vect{b}_i}$. The Ewald sphere of radius $\vect{q}$ is shown for two scatterers: electrons (solid) and hard x-ray (dashed)."}
 ```
 
-The Ewald sphere is a great mental model of the information contained in diffraction patterns. Because diffracting electrons can only sample scattering vectors on the Ewald sphere, any particular measurement of a scattering potential $V(\vect{x})$ is effectively a two-dimensional *slice* of the three-dimensional Fourier transform of $V(\vect{x})$, $\hat{V}(\vect{q})$. This is represented in @fig:scattering-ewald-sphere. In this figure, the potential $\hat{V}(\vect{q})$ for an idealized simple cubic crystal with side-length \SI{5}{\angstrom} is shown in the plane spanned by $\vect{b}_2$ and $\vect{b}_3$. The Ewald spheres associated with \SI{100}{\kilo\electronvolt} electrons (large $|\vect{q}|$) and \SI{13}{\kilo\electronvolt} x-rays (smaller $|\vect{q}|$) are also shown. This electron energy is typical of the work presented in this dissertation, while the x-ray energy is an upper bound on the available energies at the Linac Coherent Light Source as of 2021[@Bostedt2013]. The reciprocal points that intersect the Ewald sphere appear in measurements as diffraction peaks, or Bragg peaks. @fig:scattering-ewald-sphere shows the advantage of electron scattering to study two-dimensional materials: given the proper orientation of the electron beam, a large range of wavevectors can be studied in the plane of interest.
+The Ewald sphere is a great mental model of the information contained in diffraction patterns. Because diffracting electrons can only sample scattering vectors on the Ewald sphere, any particular measurement of a scattering potential $V(\vect{x})$ is effectively a two-dimensional *slice* of the three-dimensional Fourier transform of $V(\vect{x})$, $\ft{V}(\vect{q})$. This is represented in @fig:scattering-ewald-sphere. In this figure, the potential $\ft{V}(\vect{q})$ for an idealized simple cubic crystal with side-length \SI{5}{\angstrom} is shown in the plane spanned by $\vect{b}_2$ and $\vect{b}_3$. The Ewald spheres associated with \SI{100}{\kilo\electronvolt} electrons (large $|\vect{q}|$) and \SI{13}{\kilo\electronvolt} x-rays (smaller $|\vect{q}|$) are also shown. This electron energy is typical of the work presented in this dissertation, while the x-ray energy is an upper bound on the available energies at the Linac Coherent Light Source as of 2021[@Bostedt2013]. The reciprocal points that intersect the Ewald sphere appear in measurements as diffraction peaks, or Bragg peaks. @fig:scattering-ewald-sphere shows the advantage of electron scattering to study two-dimensional materials: given the proper orientation of the electron beam, a large range of wavevectors can be studied in the plane of interest.
 
 ## Multiple scattering of electrons {#sec:scattering-multiple}
 
-Electrons interact quite strongly with matter through the Coulomb interaction. For scattering targets which are thick enough, an electron may scatter more than once before exiting the scattering potential volume. In this section, the scattering of an electron *twice* will be considered. In this case, the second term in @eq:scattering-potential-decomp ($j=1$) is considered:
+Electrons interact quite strongly with matter through the Coulomb interaction. For scattering targets which are thick enough, an electron may scatter more than once before exiting the scattering potential volume. In this section, the scattering of an electron *twice* will be considered. In this case, the second term in @eq:scattering-potential-decomp ($n=2$) is considered:
 $$
-    f^{(2)}(\vect{k}_f, \vect{k}_i) = -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vect{k}_f} V \frac{1}{E_i - H_0 + i \epsilon}V \ket{\vect{k}_i}
+    f^{(2)}(\vect{k}_f, \vect{k}_i) = -\frac{m_e L^3}{2 \pi \hbar^2} \bra{\vect{k}_f} \hat{V} \frac{1}{E_i - \hat{H}_0 + i \epsilon}\hat{V} \ket{\vect{k}_i}
 $$
 The calculation of $f^{(2)}(\vect{k}_f, \vect{k}_i)$ involves the insertion of two complete sets of basis states:
 \begin{multline}
-    \bra{\vect{k}_f} V \frac{1}{E_i - H_0 + i \epsilon}V \ket{\vect{k}_i} = \\ 
+    \bra{\vect{k}_f} \hat{V} \frac{1}{E_i - \hat{H}_0 + i \epsilon} \hat{V} \ket{\vect{k}_i} = \\ 
         \int d\vect{x}^\prime \int d\vect{x}^{\prime\prime} 
-            \braket{\vect{k}_f | \vect{x}^\prime} V(\vect{x}^\prime) \bra{\vect{x}^\prime} \frac{1}{E_i - H_0 + i \epsilon} \ket{\vect{x}^{\prime\prime}}V(\vect{x}^{\prime\prime}) \braket{\vect{x}^{\prime\prime} | \vect{k}_i}
+            \braket{\vect{k}_f | \vect{x}^\prime} V(\vect{x}^\prime) \bra{\vect{x}^\prime} \frac{1}{E_i - \hat{H}_0 + i \epsilon} \ket{\vect{x}^{\prime\prime}}V(\vect{x}^{\prime\prime}) \braket{\vect{x}^{\prime\prime} | \vect{k}_i}
 \end{multline}
-The evaluation of the term $\bra{\vect{x}^\prime} \frac{1}{E_i - H_0 + i \epsilon} \ket{\vect{x}^{\prime\prime}}$ naturally happens in the derivation of @eq:scattering-lippmann-schwinger, and so the result is simply stated here:
+The evaluation of the term $\bra{\vect{x}^\prime} \frac{1}{E_i - \hat{H}_0 + i \epsilon} \ket{\vect{x}^{\prime\prime}}$ naturally happens in the derivation of @eq:scattering-lippmann-schwinger, and so the result is simply stated here:
 $$
-    \bra{\vect{x}^\prime} \frac{1}{E_i - H_0 + i \epsilon} \ket{\vect{x}^{\prime\prime}} = -\frac{m_e}{2 \pi \hbar^2} \frac{e^{i |\vect{k}_i| |\vect{x}^\prime - \vect{x}^{\prime\prime}|}}{|\vect{x}^\prime - \vect{x}^{\prime\prime}|}
+    \bra{\vect{x}^\prime} \frac{1}{E_i - \hat{H}_0 + i \epsilon} \ket{\vect{x}^{\prime\prime}} = -\frac{m_e}{2 \pi \hbar^2} \frac{e^{i |\vect{k}_i| |\vect{x}^\prime - \vect{x}^{\prime\prime}|}}{|\vect{x}^\prime - \vect{x}^{\prime\prime}|}
 $$
 It follows that the scattering amplitude for the double-scattering of an electron is given by:
 $$
@@ -328,15 +328,15 @@ This section will only consider single-scattering events. A discussion of dynami
 
 Consider the vector $\vect{r}_{m,s}$ to be the position of atom $s$ in the unit cell $m$. In this scheme, the indices $s$ run over the size of the unit cell, while the indices $m$ run over the number of unit cells: $1 \leq m \leq N_c$. Due to the presence of lattice waves, the atoms are displaced from their equilibrium positions $\set{\vect{r}_{m,s}}$. Let $\set{\vect{u}_{m,s}}$ be the *displacement vectors* due to lattice waves. Then, the atomic positions can be expressed as $\set{\vect{r}_{m,s} \to \vect{r}_{m,s} + \vect{u}_{m,s}}$. The scattering potential of the crystal (@eq:scattering-potential-crystal) becomes:
 \begin{align}
-    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_m \sum_s V_a(\vect{x} + \vect{r}_{m,s} + \vect{u}_{m,s}) \right] \nonumber \\
-                       & = \sum_m \sum_s f_e(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_{m,s}} e^{-i \vect{q} \cdot \vect{u}_{m,s}}
+    \ft{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_m \sum_s V_{a,s}(\vect{x} + \vect{r}_{m,s} + \vect{u}_{m,s}) \right] \nonumber \\
+                       & = \sum_m \sum_s f_{e,s}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_{m,s}} e^{-i \vect{q} \cdot \vect{u}_{m,s}}
     \label{eq:scattering-potential-temp}
 \end{align}
-Recall from @eq:scattering-intensity that the measurable quantity $|f^{(1)}(\vect{q})|^2$ is proportional to $|\hat{V}(\vect{q})|$:
+Recall from @eq:scattering-intensity that the measurable quantity $|f^{(1)}(\vect{q})|^2$ is proportional to $|\ft{V}(\vect{q})|$:
 \begin{align}
     |f^{(1)}(\vect{q})|^2 
-        & = \left| -\frac{m_e}{\hbar^2} \hat{V}(\vect{q}) \right|^2 \nonumber \\
-        & = \frac{m_e^2}{\hbar^4} \hat{V}(\vect{q}) \hat{V}^{\star}(\vect{q}) \nonumber \\
+        & = \left| -\frac{m_e}{\hbar^2} \ft{V}(\vect{q}) \right|^2 \nonumber \\
+        & = \frac{m_e^2}{\hbar^4} \ft{V}(\vect{q}) \ft{V}^{\star}(\vect{q}) \nonumber \\
         & = \frac{m_e^2}{\hbar^4}  
             \left(\sum_m \sum_{s} f_{e,s}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_{m,s}} e^{-i \vect{q} \cdot \vect{u}_{m,s}} \right)  
             \left(\sum_{m^\prime} \sum_{s^{\prime}} f_{e,s^{\prime}}(\vect{q}) e^{i \vect{q} \cdot \vect{r}_{m^\prime, s^{\prime}}} e^{i \vect{q} \cdot \vect{u}_{m^\prime, s^{\prime}}} \right) \nonumber \\
@@ -362,9 +362,9 @@ $$
 $${#eq:scattering-displacement}
 where $\set{\lambda}$ label phonon branches, $\mu_s$ is the mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vect{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vect{k}$, $\hat{a}_{\lambda}(\vect{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vect{k})$ are the creation and annihilation operators for the phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vect{k})$ is the phase of a lattice wave, and $\vect{e}_{s,\lambda}(\vect{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\hat{\vect{u}}_{m,s}$ is the combined effect of all possible phonon modes at the $\vect{r}_{m,s}$ lattice site. The sum $\sum_{\set{\vect{k}}}$ assumes the normalization of @eq:scattering-norm.
 
-The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle$ [@Hausdorff1906]. It states that for two operators $A$ and $B$ with commutator $[A,B]$:
+The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle$ [@Hausdorff1906]. It states that for two operators $\hat{A}$ and $\hat{B}$ with commutator $[\hat{A},\hat{B}]$:
 $$
-e^A e^B = e^{A + B + \frac{1}{2}[A,B]}
+e^{\hat{A}} e^{\hat{B}} = e^{\hat{A} + \hat{B} + \frac{1}{2}[\hat{A},\hat{B}]}
 $$
 This allows to simplify the average as:
 $$
@@ -424,7 +424,6 @@ $$
 Using the calculation of the previous section, the scattering amplitude can be computed. Since this calculation holds for a prepared initial state $\ket{\vect{k}_i}$ and arbitrary final state $\ket{\vect{k}_f}$ (where $\vect{q} = \vect{k}_f - \vect{k}_i$), the quantities $\hat{\vect{u}}$ and $\hat{n}$ are no longer operators, but observables $\vect{u}$ and $n$ respectively. @eq:scattering-amplitude-average can then be expressed as:
 \begin{align}
     |f^{(1)}(\vect{q})|^2 
-      & \equiv |\bra{\vect{k}_f}f^{(1)}\ket{\vect{k}_i}|^2 \nonumber \\
     = & \frac{m_e^2}{N_c^2 \hbar^4} \sum_{m, m^\prime} \sum_{s,s^{\prime}} f_{e,s}(\vect{q}) f_{e,s^{\prime}}(\vect{q}) e^{-i \vect{q} \cdot (\vect{r}_{m,s} - \vect{r}_{m^\prime, s^{\prime}})} e^{-W_s} e^{-W_{s^\prime}}\left[ 1 + \langle (\vect{q} \cdot \vect{u}_s) ~ (\vect{q} \cdot \vect{u}_{s^{\prime}}) \rangle  \right] \nonumber \\
     = & \frac{m_e^2}{N_c^2 \hbar^4} \left| \sum_m \sum_s f_{e,s}(\vect{q}) e^{-W_s} e^{-i \vect{q} \cdot \vect{r}_{m,s}} \right|^2 \nonumber \\
     + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{n_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})} 

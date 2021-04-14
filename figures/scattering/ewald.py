@@ -37,7 +37,7 @@ m = ax.imshow(
 cbar = ax.cax.colorbar(
     m, ticks=FixedLocator(locs=[0, im.max()]), format=FixedFormatter(["0", "1"])
 )
-ax.cax.set_xlabel("$|\hat{V}(\mathbf{q})|$ [a.u.]")
+ax.cax.set_xlabel("$|\\tilde{V}(\mathbf{q})|$ [a.u.]")
 
 # Ewald spheres
 ax.add_patch(
