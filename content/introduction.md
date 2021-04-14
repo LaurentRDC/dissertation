@@ -52,7 +52,7 @@ the solution $\vect{x}_F(t)$ can be expressed as a function of $G(\vect{x}, \vec
 $$
     \vect{x}_F(t) = \int dt_0 d\vect{x}_0 ~ G(\vect{x}, \vect{x}_0, t, t_0) F(\vect{x}_0, t_0)
 $$
-The impulse response $G$ is called the Green's function. Here's the lesson: the response to the system to any perturbation is *completely determined* by the Green's function.
+The impulse response $G$ is called the Green's function. Here's the lesson: the response to the system to any perturbation is *completely determined* by the Green's function[^retgreen].
 
 Why is this relevant? Real physical systems in condensed matter physics are governed by a linear differential operator, the Schrödinger operator:
 $$
@@ -65,6 +65,8 @@ $$
 which is equivalent to the usual Schrödinger equation $i \hbar \frac{d\Psi}{dt} = (\hat{H} + \hat{V}_0)\Psi$. The Green's function of the Schrödinger operator is sometimes called the propagator[@Sakurai2014Propagators]. In practice, the total wavefunction $\Psi$ is intractable, with more than $10^{23}$ degrees of freedom at the macroscopic scale. Nonetheless, this system is completely determined by the response to an energy impulse, i.e. the Green's function of $\hat{L}$. In fact, the Green's function formalism is at the heart of many-body theory[@Fetter1971GreensFunction;@Sentef2013]. 
 
 Ultrafast measurements allow us to measure an approximation of this impulse response. Distinct excitation conditions and probing techniques explore separate parts of the Hilbert space of possibilities. With the right probes, a shadow of the true impulse response may be assembled to understand important physics which -- while not experimentally-accessible at equilibrium -- still govern macroscopic phenomena. The knowledge of the impulse response of materials can then inform on the behavior of systems under a variety of external conditions $\hat{V}_0$ such as thermal gradients, external electric and magnetic fields, stoichiometric doping, and pressure.
+
+[^retgreen]: In time-dependent situations, the Green's function can be separated into retarded and advanced components, but this distinction is overly technical in the context of this section.
 
 ### The reversible pump-probe scheme
 
@@ -97,7 +99,7 @@ where $\hat{H}_{ph}$ is the Hamiltonian of the phonon subsystem, $\hat{H}_e$ is 
 $$
     \hat{H}_i = \sum_{j, j^\prime} \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime})
 $$
-where $\vect{r}^e_j$ and $\vect{r}^i_{j^\prime}$ are the positions of electron $j$ and ion $j^\prime$, respectively. The interaction potential $\hat{V}_i$ is kept general for this discussion. Now consider that the atomic positions $\vect{r}^i_{j^\prime}$ are perturbed by phonons, which results in a (small) displacement $\vect{u}_{j^\prime}$ such that $\vect{r}^i_{j^\prime} \to \vect{r}^i_{j^\prime} + \vect{u}_{j^\prime}$. In this scheme, $\vect{r}^i_{j^\prime}$ is now the position of ions at zero-temperature. To first order, the change in interaction strength is given by the gradient of the interaction potential:
+where $\vect{r}^e_j$ and $\vect{r}^i_{j^\prime}$ are the positions of electron $j$ and ion $j^\prime$, respectively. The interaction potential $\hat{V}_i$ is kept general for this discussion. Now consider that the atomic positions $\vect{r}^i_{j^\prime}$ are perturbed by phonons, which results in a (small) displacement $\vect{u}_{j^\prime}$ such that $\vect{r}^i_{j^\prime} \to \vect{r}^i_{j^\prime} + \vect{u}_{j^\prime}$. In this scheme, $\vect{r}^i_{j^\prime}$ is now the equilibrium position of ions. To first order, the change in interaction strength is given by the gradient of the interaction potential:
 $$
     \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime} - \vect{u}_{j^\prime}) \approx
         \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime}) - \vect{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vect{r}^e_j - \vect{r}^i_{j^\prime})
@@ -120,7 +122,7 @@ The electron-phonon coupling matrix is effectively impossible to measure at equi
 
 ## Brief history of ultrafast electron scattering {#sec:ues}
 
-The extension of electron microscopy into time-domain studies is not new. This section will be limited to ultrafast electron scattering in the form of diffraction; see the review by King *et al.*[@King2005] for a historical perspective on ultrafast electron microscopy in general. As early as 1982, Gerard Mourou and Steve Williamson [@Mourou1982] followed the picosecond-scale transformation of an aluminum film following photoexcitation. In this work, the authors prepare \SI{100}{\pico\second} electron bunches using a streak camera. They note that the temporal resolution of the experiment is ultimately limited by the length of the electron bunch:
+The extension of electron microscopy into time-domain studies is not new. This section will be limited to ultrafast electron scattering in the form of diffraction; see the review by King *et al.*[@King2005] for a historical perspective on ultrafast electron microscopy in general. As early as 1982, Gerard Mourou and Steve Williamson [@Mourou1982] followed the picosecond-scale transformation of an aluminum film following photoexcitation. In this work, the authors prepare \SI{100}{\pico\second} electron bunches using a streak camera. They note that the temporal resolution of the experiment is ultimately limited by the length of the electron bunch[@Mourou1982]:
 
 > *The electron pulse width has been measured by using the camera in the normal streak mode and is found to be $\sim$\SI{100}{\pico\second}. This value departs significantly from the \SI{15}{\pico\second} pulse width expected. The pulse broadening is due to the space-charge effect caused by the relatively high electron flux required to photograph the pattern with our present system.*
 

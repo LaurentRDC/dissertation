@@ -64,7 +64,7 @@ The problem of scattering with a non-trivial potential $V$ will now be considere
 $$
     \bra{\vect{x}^\prime} V \ket{\vect{x}^{\prime \prime}} = V(\vect{x}^\prime) \delta(\vect{x}^\prime - \vect{x}^{\prime \prime})
 $$
-This is a reasonable assumption as the electrostatic potential has a $1/|\vect{x}|2$ dependence (@eq:scattering-electrostatic-potential). Further simplifications can be made if allowed momentum states are assumed to be defined in a (large) cube of size-length $L$, such that
+This is a reasonable assumption as the electrostatic potential has a $\sfrac{1}{|\vect{x}|}$ dependence (@eq:scattering-electrostatic-potential). Further simplifications can be made if allowed momentum states are assumed to be defined in a (large) cube of size-length $L$, such that
 $$
     \braket{\vect{x} | \vect{k}} = \frac{1}{L^{3/2}} e^{i \vect{k} \cdot \vect{x}}
 $${#eq:scattering-norm}
@@ -156,9 +156,9 @@ The contribution of individual electronic orbitals to the atomic form factor for
 
 With the knowledge of the scattering potential of a single atom, the scattering potential of a crystalline lattice can be calculated:
 $$
-    V_c(\vect{x}) = \sum_i V_a(\vect{x} - \vect{r}_i)
+    V_c(\vect{x}) = \sum_i V_{a,i}(\vect{x} - \vect{r}_i)
 $$
-where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}_i$, and $V_a$ is given by @eq:scattering-atom-potential. Note that for any function $h(\vect{x})$: 
+where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}_i$, and $V^a$ is given by @eq:scattering-atom-potential. Note that for any function $h(\vect{x})$: 
 \begin{align}
     \mathcal{F}\left[ h(\vect{x} + \vect{y}) \right] & = \frac{1}{2\pi} \int d\vect{x}^\prime e^{-i\vect{q}\cdot(\vect{x}^\prime + \vect{y})} h(\vect{x}^\prime) \nonumber \\
                                                    & = \frac{e^{-i \vect{q} \cdot \vect{y}}}{2 \pi} \int d\vect{x}^\prime e^{i\vect{q} \vect{x}^\prime} h(\vect{x}^\prime) \nonumber \\
@@ -167,12 +167,13 @@ where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}
 \end{align}
 where $\vect{y}$ is some arbitrary translation vector. Therefore, the Fourier transform of the scattering potential of the entire crystal is related to the Fourier transform  the potential its constituent atoms (@eq:scattering-atom-potential) as:
 \begin{align}
-    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_i V_a(\vect{x} + \vect{r}_i) \right] \nonumber \\
-                       & = \sum_i \mathcal{F}\left[ V_a(\vect{x} + \vect{r}_i) \right] \nonumber \\
-                       & = \sum_i \mathcal{F}\left[ V_a(\vect{x}) \right] e^{-i \vect{q} \cdot \vect{r}_i} \nonumber \\
-                       & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
+    \hat{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_i V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
+                        & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
+                        & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x}) \right] e^{-i \vect{q} \cdot \vect{r}_i} \nonumber \\
+                        & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
     \label{eq:scattering-potential-crystal}
 \end{align}
+It is worth noting that @eq:scattering-potential-crystal holds for a $V_{a,i}$ that is more general than the single-atom potential of @eq:scattering-atom-potential, which does not model bonding.
 
 ```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for an abstract crystal. **a)** Electrostatic potential $V(\vect{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vect{a}_1$ and $\vect{a}_2$ are shown; lattice vector $\vect{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vect{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
 ``` 
@@ -241,13 +242,13 @@ By definition, the reciprocal points of the crystal scattering potential, locate
 $$
     \vect{k}_f - \vect{k}_i = h ~ \vect{b}_1 + k ~ \vect{b}_2 + l ~ \vect{b}_3 \quad \forall ~ h,k,l \in \mathbb{Z}
 $${#eq:scattering-bragg-vector}
-This is precisely the *vector* form of Bragg's law [@Warren1990Bragg]. To recover the canonical form of Bragg's law, consider that an electron state with wavevector $\vect{k}$ can be associated with a wavelength of $\lambda = \tfrac{1}{|\vect{k}|}$. Since for elastic scattering, $|\vect{k}_i| = |\vect{k}_f| = \tfrac{1}{\lambda}$, @eq:scattering-bragg-vector becomes:
+This is precisely the *vector* form of Bragg's law [@Warren1990Bragg]. To recover the canonical form of Bragg's law, consider that an electron state with wavevector $\vect{k}$ can be associated with a wavelength of $\lambda = \tfrac{2 \pi}{|\vect{k}|}$. Since for elastic scattering, $|\vect{k}_i| = |\vect{k}_f| = \tfrac{2 \pi}{\lambda}$, @eq:scattering-bragg-vector becomes:
 $$
-    \frac{1}{\lambda} \left( \hat{\vect{k}}_f - \hat{\vect{k}}_i\right) = \vect{H}
+    \frac{2 \pi}{\lambda} \left( \hat{\vect{k}}_f - \hat{\vect{k}}_i\right) = \vect{H}
 $${#eq:scattering-bragg-1}
 where $\hat{\vect{k}}$ denotes a unit-length vector in the direction of $\vect{k}$. Given that the vectors on both sides of the equation have the same magnitude and direction, the direction of $\vect{H}$ must bisect the angle between $\vect{k}_f$ and $\vect{k}_i$, historically defined as $2\theta$. Taking the amplitude of @eq:scattering-bragg-1:
 $$
-     \frac{1}{\lambda} \left| \hat{\vect{k}}_f - \hat{\vect{k}}_i\right| = \frac{2 \sin{\theta}}{\lambda} 
+     \frac{2\pi}{\lambda} \left| \hat{\vect{k}}_f - \hat{\vect{k}}_i\right| = \frac{2 \pi \sin{\theta}}{\lambda} 
 $$
 and
 $$
@@ -255,7 +256,7 @@ $$
 $$
 which can be combined as
 $$
-    \frac{2 \sin{\theta}}{\lambda} = \frac{1}{d_{hkl}}.
+    \frac{4 \pi \sin{\theta}}{\lambda} = \frac{1}{d_{hkl}}.
 $${#eq:scattering-bragg-hist}
 @eq:scattering-bragg-hist is the historical form of Bragg's law as it relates to polycrystalline diffraction patterns[@Bragg1913]. Note that the vector form of @eq:scattering-bragg-vector is richer than the original form of Bragg's law as it places constraint on the full three-dimensional direction of the scattering vector $\vect{q} = \vect{k}_f - \vect{k}_i$.
 
@@ -468,7 +469,7 @@ Henceforth, the phonon eigenvectors are assumed to be periodic, that is, $\vect{
 \end{align}
 A visual representation of the relationship between vectors $\vect{H}_{\vect{q}}$, $\vect{q}$, and $\vect{k_0}$ is shown in @fig:scattering-vector-geometry.
 
-```{.matplotlib #fig:scattering-vector-geometry file="figures/scattering/vector-geometry.py" caption="Geometrical relationship between the scattering vector $\vect{q}$, reciprocal point $\vect{H}$, and wavevector $\vect{k}_0$ for a hypothetical cubic crystal. The in-plane section of the Brillouin, where $\vect{k}_0$ is confined, is shown as well."}
+```{.matplotlib #fig:scattering-vector-geometry file="figures/scattering/vector-geometry.py" caption="Geometrical relationship between the scattering vector $\vect{q}$, the reciprocal point closest to $\vect{q}$, $\vect{H}_{\vec{q}}$, and wavevector $\vect{k}_0$ for a hypothetical cubic crystal. The in-plane section of the Brillouin, where $\vect{k}_0$ is confined, is shown as well."}
 ```
 
 Combining @eq:scattering-amplitude-reduced and @eq:scattering-intensity, the measured intensity is therefore:
@@ -479,7 +480,7 @@ where
 $$
     I_0(\vect{q}) = \frac{m_e^2}{r^2 \hbar^4} \left|\sum_{\set{\vect{H}}} \sum_s f_{e,s}(\vect{q}) e^{-W_s} e^{-i \vect{q} \cdot \vect{x}_{s}} \delta(\vect{q} - \vect{H}) \right|^2
 $${#eq:scattering-diffracted-intensity-finite-temp}
-is the diffracted intensity. The diffracted intensity at finite temperature is equivalent to @eq:scattering-diffracted-intensity-zero-temp, with the substitution $f_{e,s}(\vect{q}) \to f_{e,s}(\vect{q}) e^{-W_s}$. The physical meaning of this substitution is that atomic vibrations due to temperature decreases the periodicity of the lattice, which results in a suppression of the atomic form factor in reciprocal space. The other term, $I_1(\vect{q})$, is known as *first order diffuse scattering*:
+is the diffracted intensity. The diffracted intensity at finite temperature is equivalent to @eq:scattering-diffracted-intensity-zero-temp, with the substitution $f_{e,s}(\vect{q}) \to f_{e,s}(\vect{q}) e^{-W_s}$. The physical meaning of this substitution is that atomic vibrations due to temperature decreases the periodicity of the lattice(TODO: MS says this is not right?), which results in a suppression of the atomic form factor in reciprocal space. The other term, $I_1(\vect{q})$, is known as *first order diffuse scattering*:
 $$
     I_1(\vect{q}) = \frac{m_e^2}{r^2 N \hbar^3} \sum_{\lambda} \frac{n_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})} 
                             \left| \sum_s \frac{f_{e,s}(\vect{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})\right)\right|^2
