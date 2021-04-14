@@ -19,4 +19,13 @@ fontsize: 11pt
 monofont: "Monoid Regular"
 monofontoptions:
 - Scale=MatchLowercase
+
+float-placement-figure: htpb
+listings-no-page-break: true
+toc-own-page: true
+book: true
+
+titlepage: true
+titlepage-text-color: FFFFFF
+titlepage-rule-height: 0
 ---

@@ -97,13 +97,6 @@ parser_clean.add_argument(
 
 parser_build = subparsers.add_parser("build", help="Build dissertation.")
 parser_build.add_argument(
-    "--style",
-    action="store",
-    help="Style of dissertation to use. Default is `eisvogel`.",
-    choices=["simple", "eisvogel"],
-    default="eisvogel",
-)
-parser_build.add_argument(
     "--print",
     action="store_const",
     const=True,
@@ -244,24 +237,8 @@ def build_auxiliary(aux_options=AUX_OPTS, forprint=False):
             sourcefiles=[template],
         )
 
-
-def build_simple(target, forprint=False):
-    """ Build the dissertation in the simple book style """
-    build_auxiliary(forprint=forprint)
-
-    options = OPTIONS
-    if not forprint:
-        options += ["-V linestretch=1.5"]
-
-    buildpdf(
-        options=options,
-        target=target,
-        sourcefiles=SRC,
-    )
-
-
-def build_eisvogel(target, forprint=False):
-    """ Build the dissertation in the Eisvogel style. """
+def build(target, forprint=False):
+    """ Build the dissertation from source. """
 
     # We use run-py as a kind of script-runner
     # because it's too hard to import other python scripts
@@ -274,13 +251,6 @@ def build_eisvogel(target, forprint=False):
     build_auxiliary(aux_options=aux_options, forprint=forprint)
 
     options = OPTIONS
-    options += ["-V float-placement-figure=htpb"]
-    options += ["-V listings-no-page-break=true"]
-    options += ["-V book=true"]
-    options += ["-V toc-own-page=true"]
-    options += ["-V titlepage=true"]
-    options += ["-V titlepage-text-color=FFFFFF"]
-    options += ["-V titlepage-rule-height=0"]
     # The color DarkViolet is defined in the template
     if not forprint:
         options += ["-V linestretch=1.5"]
@@ -291,7 +261,7 @@ def build_eisvogel(target, forprint=False):
     # Note that the path separators absolutely needs to be '\'
     titlepage_path = str(BUILDDIR_PDF / "titlepage.pdf").replace("\\", "/")
     options += [f"-V titlepage-background={titlepage_path}"]
-    options += [f"--template={TEMPLATEDIR / 'eisvogel.tex'}"]
+    options += [f"--template={HERE / 'template.tex'}"]
 
     buildpdf(
         options=options,
@@ -317,13 +287,7 @@ if __name__ == "__main__":
 
     arguments = parser.parse_args()
     if arguments.command == "build":
-        multiplexor = {
-            "simple": build_simple,
-            "eisvogel": build_eisvogel,
-        }
-        multiplexor[arguments.style](
-            target=Path("dissertation.pdf"), forprint=arguments.print
-        )
+        build(target=Path("dissertation.pdf"), forprint=arguments.print) 
     elif arguments.command == "clean":
         clean(full=arguments.all)
     elif arguments.command == "compute-prerequisites":
