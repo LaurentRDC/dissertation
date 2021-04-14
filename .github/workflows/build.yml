@@ -70,14 +70,18 @@ jobs:
   
 
     - name: Install Pandoc dependencies
+      env:
+        pandoc-version: 2.13
+        pandoc-crossref-version: 0.3.10.0a
+        pandoc-plot-version: 1.1.1
       run: |
         mkdir $GITHUB_WORKSPACE/bin && cd $GITHUB_WORKSPACE/bin
-        curl -ksSL https://github.com/jgm/pandoc/releases/download/2.12/pandoc-2.12-linux-amd64.tar.gz | tar xvz
-        mv pandoc-2.12/bin/pandoc .
+        curl -ksSL https://github.com/jgm/pandoc/releases/download/${{ env.pandoc-version }}/pandoc-${{ env.pandoc-version }}-linux-amd64.tar.gz | tar xvz
+        mv pandoc-${{ env.pandoc-version }}/bin/pandoc .
 
-        curl -ksSL https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.10.0/pandoc-crossref-Linux.tar.xz | tar xvJ
+        curl -ksSL https://github.com/lierdakil/pandoc-crossref/releases/download/v${{ env.pandoc-crossref-version }}/pandoc-crossref-Linux.tar.xz | tar xvJ
 
-        curl -ksSL -o pandocplot.zip https://github.com/LaurentRDC/pandoc-plot/releases/download/1.1.1/pandoc-plot-Linux-x86_64-static.zip 
+        curl -ksSL -o pandocplot.zip https://github.com/LaurentRDC/pandoc-plot/releases/download/${{ env.pandoc-plot-version }}/pandoc-plot-Linux-x86_64-static.zip 
         unzip pandocplot.zip
 
         sudo chmod u+x pandoc pandoc-crossref pandoc-plot
@@ -115,5 +119,5 @@ jobs:
       with:
         name: dissertation
         path: |
-          dissertation-*.pdf
+          dissertation*.pdf
         retention-days: 7

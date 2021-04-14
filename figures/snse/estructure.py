@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-import matplotlib.cm as cm
 import matplotlib as mpl
 import matplotlib.colors as colors
 from dissutils import MEDIUM_FIGURE_WIDTH
