@@ -155,23 +155,25 @@ The contribution of individual electronic orbitals to the atomic form factor for
 
 ### Scattering potential of a crystal
 
-With the knowledge of the scattering potential of a single atom, the scattering potential of a crystalline lattice can be calculated:
+The scattering potential of a crystalline lattice can be expressed as:
 $$
     V_c(\vect{x}) = \sum_i V_{a,i}(\vect{x} - \vect{r}_i)
 $$
-where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}_i$. The potential for each atom $V_{a,i}$ is taken to be more general than the single-atom potential of @eq:scattering-atom-potential, in order to model bonding, for example. Note that for any function $h(\vect{x})$: 
+where  the sum index $i$ runs over atoms in the crystal with positions $\vect{r}_i$. The potential for each atom $V_{a,i}$ is taken to be more general than the single-atom potential of @eq:scattering-atom-potential, in order to model ion-ion interactions (e.g. bonding). Note that for any function $h(\vect{x})$: 
 \begin{align}
-    \mathcal{F}\left[ h(\vect{x} + \vect{y}) \right] & = \frac{1}{2\pi} \int d\vect{x}^\prime e^{-i\vect{q}\cdot(\vect{x}^\prime + \vect{y})} h(\vect{x}^\prime) \nonumber \\
-                                                   & = \frac{e^{-i \vect{q} \cdot \vect{y}}}{2 \pi} \int d\vect{x}^\prime e^{i\vect{q} \vect{x}^\prime} h(\vect{x}^\prime) \nonumber \\
-                                                   & = e^{-i \vect{q} \cdot \vect{y}} \mathcal{F}\left[ h(\vect{x}) \right]
+    \mathcal{F}\left[ h(\vect{x} + \vect{y}) \right] 
+        & = \frac{1}{2\pi} \int d\vect{x}^\prime e^{-i\vect{q}\cdot(\vect{x}^\prime + \vect{y})} h(\vect{x}^\prime) \nonumber \\
+        & = \frac{e^{-i \vect{q} \cdot \vect{y}}}{2 \pi} \int d\vect{x}^\prime e^{i\vect{q} \vect{x}^\prime} h(\vect{x}^\prime) \nonumber \\
+        & = e^{-i \vect{q} \cdot \vect{y}} \mathcal{F}\left[ h(\vect{x}) \right]
     \label{eq:scattering-fourier-shift}
 \end{align}
 where $\vect{y}$ is some arbitrary translation vector. Therefore, the Fourier transform of the scattering potential of the entire crystal is related to the Fourier transform  the potential its constituent atoms (@eq:scattering-atom-potential) as:
 \begin{align}
-    \ft{V}_c(\vect{q}) & = \mathcal{F}\left[ \sum_i V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
-                       & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
-                       & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x}) \right] e^{-i \vect{q} \cdot \vect{r}_i} \nonumber \\
-                       & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
+    \ft{V}_c(\vect{q}) 
+        & = \mathcal{F}\left[ \sum_i V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
+        & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x} + \vect{r}_i) \right] \nonumber \\
+        & = \sum_i \mathcal{F}\left[ V_{a,i}(\vect{x}) \right] e^{-i \vect{q} \cdot \vect{r}_i} \nonumber \\
+        & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
     \label{eq:scattering-potential-crystal}
 \end{align}
 
@@ -370,6 +372,7 @@ This allows to simplify the average as:
 $$
 \langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = \langle e^{-i \vect{q} \cdot (\hat{\vect{u}}_s - \hat{\vect{u}}_{s^\prime}) + \frac{1}{2}[\vect{q} \cdot \hat{\vect{u}}_s, \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}]} \rangle
 $$
+
 Furthermore, note that $[\hat{a}_{\lambda}(\vect{k}), \hat{a}_{\lambda}^{\dagger}(\vect{k})] = 1$ so that the following simplification is valid:
 $$
 \langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = \langle e^{-i \vect{q} \cdot (\hat{\vect{u}}_s - \hat{\vect{u}}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vect{q} \cdot \hat{\vect{u}}_s, \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}]} \rangle
@@ -386,6 +389,7 @@ which means that
 $$
 \langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = e^{-W_s} e^{-W_{s^\prime}} e^{\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle}
 $$
+
 For small displacement vectors $\hat{\vect{u}}$, $\vect{q} \cdot \hat{\vect{u}} \leq |\vect{q}| |\hat{\vect{u}}|$ is also small, and so:
 \begin{align}
     e^{\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle} 
@@ -404,6 +408,7 @@ Equivalently:
     \frac{\hbar}{2 N} \sum_{\lambda, \lambda^\prime} \sum_{\set{\vect{k}}, \set{\vect{k}^\prime}} \frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\sqrt{\mu_s \mu_{s^\prime} \omega_{\lambda}(\vect{k})\omega_{\lambda^\prime}(\vect{k}^\prime)}} e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}} \\
     \left\langle \left[ \hat{a}_{\lambda}(\vect{k})e^{-i\phi_{s,m,\lambda}(\vect{k})} + \hat{a}_{\lambda}^{\dagger}(\vect{k}) e^{i\phi_{s,m,\lambda}(\vect{k})} \right] \left[ \hat{a}_{\lambda^\prime}(\vect{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vect{k}^\prime)} + \hat{a}_{\lambda^\prime}^{\dagger}(\vect{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vect{k}^\prime)} \right] \right\rangle
 \end{multline}
+
 Since the phases $\phi_{s,m,\lambda}(\vect{k})$ are not correlated across unit cells, the cross terms vanish:
 \begin{align}
     \langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle 
@@ -429,6 +434,7 @@ Using the calculation of the previous section, the scattering amplitude can be c
     + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{n_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})} 
         \left| \sum_m \sum_s \frac{f_{e,s}(\vect{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})\right) e^{-i (\vect{q} - \vect{k}) \cdot \vect{r}_{m,s}} \right|^2
 \end{align}
+
 It is now convenient to express the atomic positions $\vect{r}_{m,s}=\vect{R}_m + \vect{x}_s$, where $\vect{R}_m$ is the absolute position of unit cell $m$, and $\vect{x}_s$ is the position of atom $s$ with respect to the unit cell origin. The above equation becomes:
 \begin{align}
     |f^{(1)}(\vect{q})|^2 = & \frac{m_e^2}{N_c^2 \hbar^4} \left| \sum_m \sum_s f_{e,s}(\vect{q}) e^{-W_s} e^{-i \vect{q} \cdot \vect{R}_{m}} e^{-i \vect{q} \cdot \vect{x}_{s}} \right|^2 \nonumber \\
@@ -445,6 +451,7 @@ The equation for the scattering amplitude becomes:
                          + & \frac{m_e^2}{N N_c^2 \hbar^3} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{n_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})} 
                             \left| \sum_m \sum_s \frac{f_{e,s}(\vect{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})\right) e^{-i (\vect{q} - \vect{k}) \cdot \vect{R}_{m}} e^{-i (\vect{q} - \vect{k}) \cdot \vect{x}_{s}} \right|^2
 \end{align}
+
 The sum over $\vect{k}$ in the second term can be simplified in a similar way. For any $\vect{q}$, there is one reciprocal point which is closest, $\vect{H}_{\vect{q}}$. Define $\vect{k}_0$ to be such that $\vect{q} = \vect{H}_{\vect{q}} + \vect{k}_0$, i.e. $\vect{k}_0$ is constrained to lie in the first Brillouin zone. Then:
 $$
     \sum_m e^{-i (\vect{q} - \vect{k}) \cdot \vect{r}_{m,s}} = N_c \delta(\vect{k}-\vect{k}_0) 
@@ -455,6 +462,7 @@ The sum $\sum_{\set{\vect{H}}}$ is implicitly contained in the constraints on th
                          + &  \frac{m_e^2}{N \hbar^3} \sum_{\lambda} \frac{n_{\lambda}(\vect{k}_0) + 1/2}{\omega_{\lambda}(\vect{k}_0)} 
                             \left| \sum_s \frac{f_{e,s}(\vect{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}_0)\right) e^{-i \vect{H}_{\vect{q}} \cdot \vect{x}_{s}} \right|^2 
 \end{align}
+
 The phase factor $e^{-i \vect{H}_{\vect{q}} \cdot \vect{x}_{s}}$ is a matter of convention[@Xu2005]. In the expression for the displacement vectors in @eq:scattering-displacement, it was assumed that the phonon eigenvectors were not periodic in general, that is:
 $$
     \vect{e}_{\lambda,s}(\vect{k} + \vect{k}^\prime) = \vect{e}_{\lambda,s}(\vect{k}) e^{-i \vect{k{^\prime}\cdot \vect{x}_s}}

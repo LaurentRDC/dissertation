@@ -89,7 +89,7 @@ def memory_profile(size):
 
 
 sizes = list(range(512, 4096, 256)) + list(range(4096, 8192, 512))
-seqsizes = range(10, 2000, 50)
+seqsizes = range(64, 2000, 50)
 
 np_times = list()
 np_seq_times = list()
