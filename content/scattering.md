@@ -322,7 +322,7 @@ where $a$ is the inter-atomic distance of the crystal. In the approximation desc
 \end{align}
 where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj].
 
-## The effect of lattice waves on ultrafast electron scattering
+## The effect of lattice waves on ultrafast electron scattering{#sec:scattering-lattice-waves}
 
 In this section, the effect of lattice waves on ultrafast electron diffraction measurements will be considered, ending in the derivation of what is known as *diffuse scattering*. 
 
@@ -364,7 +364,7 @@ $$
 $${#eq:scattering-displacement}
 where $\set{\lambda}$ label phonon branches, $\mu_s$ is the mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vect{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vect{k}$, $\hat{a}_{\lambda}(\vect{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vect{k})$ are the creation and annihilation operators for the phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vect{k})$ is the phase of a lattice wave, and $\vect{e}_{s,\lambda}(\vect{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\hat{\vect{u}}_{m,s}$ is the combined effect of all possible phonon modes at the $\vect{r}_{m,s}$ lattice site. The sum $\sum_{\set{\vect{k}}}$ assumes the normalization of @eq:scattering-norm.
 
-The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle$ [@Hausdorff1906]. It states that for two operators $\hat{A}$ and $\hat{B}$ with commutator $[\hat{A},\hat{B}]$:
+The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle$ [@Campbell1897]. It states that for two operators $\hat{A}$ and $\hat{B}$ with commutator $[\hat{A},\hat{B}]$:
 $$
 e^{\hat{A}} e^{\hat{B}} = e^{\hat{A} + \hat{B} + \frac{1}{2}[\hat{A},\hat{B}]}
 $$
@@ -487,7 +487,7 @@ where
 $$
     I_0(\vect{q}) = \frac{m_e^2}{r^2 \hbar^4} \left|\sum_{\set{\vect{H}}} \sum_s f_{e,s}(\vect{q}) e^{-W_s} e^{-i \vect{q} \cdot \vect{x}_{s}} \delta(\vect{q} - \vect{H}) \right|^2
 $${#eq:scattering-diffracted-intensity-finite-temp}
-is the diffracted intensity. The diffracted intensity at finite temperature is equivalent to @eq:scattering-diffracted-intensity-zero-temp, with the substitution $f_{e,s}(\vect{q}) \to f_{e,s}(\vect{q}) e^{-W_s}$. The physical meaning of this substitution is that atomic vibrations due to temperature decreases the periodicity of the lattice(TODO: MS says this is not right?), which results in a suppression of the atomic form factor in reciprocal space. The other term, $I_1(\vect{q})$, is known as *first order diffuse scattering*:
+is the diffracted intensity. The diffracted intensity at finite temperature is equivalent to @eq:scattering-diffracted-intensity-zero-temp, with the substitution $f_{e,s}(\vect{q}) \to f_{e,s}(\vect{q}) e^{-W_s}$. The physical meaning of this substitution is that atomic vibrations due to temperature decrease the periodicity of the lattice, which results in a suppression of the atomic form factor in reciprocal space. The other term, $I_1(\vect{q})$, is known as *first order diffuse scattering*:
 $$
     I_1(\vect{q}) = \frac{m_e^2}{r^2 N \hbar^3} \sum_{\lambda} \frac{n_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})} 
                             \left| \sum_s \frac{f_{e,s}(\vect{q}) e^{-W_s}}{\sqrt{\mu_s}} \left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})\right)\right|^2

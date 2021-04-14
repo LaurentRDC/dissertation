@@ -241,7 +241,6 @@ def clean(full=False):
 
 
 if __name__ == "__main__":
-
     arguments = parser.parse_args()
     if arguments.command == "build":
         build(target=Path("dissertation.pdf"), forprint=arguments.print)

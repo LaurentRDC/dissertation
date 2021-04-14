@@ -5,8 +5,15 @@
 
 % Custom field formatting
 
-
+% Labels in bibliography should be superscript, like the in-text citations
 \DeclareFieldFormat{labelnumberwidth}{\textsuperscript{#1}}
+
+% DOI is case insensitive, so let's normalize them to lowercase
+\DeclareFieldFormat{doi}{%
+  DOI\addcolon\space
+  \ifhyperref
+    {\lowercase{\href{https://doi.org/#1}{\nolinkurl{#1}}}}
+    {\lowercase{\nolinkurl{#1}}}}
 
 % Italics title
 \DeclareFieldFormat

@@ -165,7 +165,7 @@ In order to calculate the force between atoms, the structure of graphite was com
 
 From a structure with zero-temperature atomic positions $\set{\vect{r}_s}$ and instantaneous displacements $\set{\vect{u}_s}$, the potential energy $U$ due to ions repulsion is given by:
 $$
-    U = \frac{1}{2}\sum_{s, s^\prime} \vect{u}_s \vect{D}(\vect{r}_s - \vect{r}_{s^\prime}) \vect{u}_{s^\prime}
+    U = \frac{1}{2}\sum_{s, s^\prime} \vect{u}_s \cdot \left[ \vect{D}(\vect{r}_s - \vect{r}_{s^\prime}) ~ \vect{u}_{s^\prime} \right]
 $$
 where the *dynamical matrix* $\vect{D}$ encodes the change in potential energy associated with a small change in distance between ions[@Ashcroft1976DynMatrix]. Given that the displacement vectors $\set{\vect{u}_s}$ can be expressed as a sum of lattice waves (@eq:scattering-displacement), the eigenvalues and eigenvectors of the dynamical matrix are related to vibrational frequencies and polarizations respectively[^dynmat].
 
@@ -196,7 +196,7 @@ The change in scattering intensity $\Delta I(\vect{q}, t=\tau) \equiv I(\vect{q}
 ```{#fig:graphite-ueds .matplotlib file="figures/graphite/ueds.py" caption="Change in scattering intensity $\Delta I(\vect{q}, t=\tau) \equiv I(\vect{q}, \tau) - I(\vect{q}, \tau < 0)$ of photoexcited graphite for a few representative time-delays $\tau$. Hexagonal Brillouin zones are shown on half of the reflections to guide the eye. Scattering patterns show diffuse scattering in the range of $|\vect{q}| < \SI{12}{\per\angstrom}$. Negative going features (blue) are exclusively due to the transient Debye-Waller effect on the Bragg peaks. All positive changes (red) are diffuse scattering intensity."}
 ```
 
-First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall symmetry of the lattice(TODO: MS comment: symmetry is still there), which in turn results in smaller Bragg peaks. This is analogous to the (static) thermal Debye-Waller effect [@Debye1913;@Waller1923]. An example curve for the $(200)$ reflection is shown in @fig:graphite-dw-example. The dynamics associated with the Bragg peaks in photoexcited graphite are discussed in detail elsewhere[@Chatelain2014;@Chatelain2014a]. This leaves only positive-going features everywhere away from Bragg peaks, which are diffuse in nature.
+First and foremost, note that negative-going features are only visible in the vicinity of Bragg peaks. This is due exclusively to the transient Debye-Waller effect [@Ligges2009]. As photodeposited energy transfers from the electrons to the lattice, average real-space disorder due to phonons lowers the overall periodicity of the lattice, which in turn results in smaller Bragg peaks (@sec:scattering-lattice-waves). This is analogous to the (static) thermal Debye-Waller effect [@Debye1913;@Waller1923]. An example curve for the $(200)$ reflection is shown in @fig:graphite-dw-example. The dynamics associated with the Bragg peaks in photoexcited graphite are discussed in detail elsewhere[@Chatelain2014;@Chatelain2014a]. This leaves only positive-going features everywhere away from Bragg peaks, which are diffuse in nature.
 
 ```{.matplotlib #fig:graphite-dw-example file="figures/graphite/dw-example.py" caption="Relative intensity change of the $(200)$ reflection after photoexcitation examplifies the transient Debye-Waller effect."}
 ```
