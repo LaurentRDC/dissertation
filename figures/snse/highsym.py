@@ -84,7 +84,7 @@ for k, ts in timeseries.items():
 
 
 figure, axes = plt.subplots(
-    3, 1, sharex=True, sharey=True, figsize=(MEDIUM_FIGURE_WIDTH, 5)
+    3, 1, sharex=True, sharey=True, figsize=(MEDIUM_FIGURE_WIDTH, 3.375)
 )
 
 # background fit
@@ -147,4 +147,6 @@ for ax, ts_name, color in zip(
 axes[-1].set_xlim([-1.6, 12])
 axes[-1].set_xlabel("Time-delay [ps]")
 
-plt.tight_layout()
+plt.subplots_adjust(
+    top=0.986, bottom=0.148, left=0.173, right=0.944, hspace=0.1, wspace=0.095
+)

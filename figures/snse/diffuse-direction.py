@@ -65,16 +65,12 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
 for k, ts in timeseries.items():
     timeseries[k] /= np.mean(ts[timedelays < 0])
 
-figure, (ax_b, ax_c) = plt.subplots(2, 1, sharex=True, figsize=(MEDIUM_FIGURE_WIDTH, 4))
+figure, (ax_b, ax_c) = plt.subplots(2, 1, sharex=True, figsize=(MEDIUM_FIGURE_WIDTH, 3))
 
-for ax, ts, color, label in zip(
+for ax, ts, color in zip(
     [ax_b, ax_c],
     ["gamma-b", "gamma-c"],
     discrete_colors(2),
-    [
-        "$\mathbf{q} ~ || ~ \mathbf{b}^{\star}$",
-        "$\mathbf{q} ~ || ~ \mathbf{c}^{\star}$",
-    ],
 ):
     ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
     ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
@@ -89,14 +85,28 @@ for ax, ts, color, label in zip(
         elinewidth=0.5,
     )
 
-    tag_axis(
-        ax, text=label, y=0.95, x=0.975, horizontalalignment="right", edgecolor="w"
-    )
     ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
 
 ax_b.set_xlim([-1.6, 12])
-
 ax_b.xaxis.set_visible(False)
 ax_c.set_xlabel("Time-delay [ps]")
+
+tag_axis(
+    ax_b,
+    text="$\mathbf{q} ~ || ~ \mathbf{b}^{\star}$",
+    y=0.6,
+    x=0.975,
+    horizontalalignment="right",
+    verticalalignment="center",
+    edgecolor="w",
+)
+tag_axis(
+    ax_c,
+    text="$\mathbf{q} ~ || ~ \mathbf{c}^{\star}$",
+    y=0.7,
+    x=0.975,
+    horizontalalignment="right",
+    edgecolor="w",
+)
 
 plt.tight_layout()

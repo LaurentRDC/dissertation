@@ -81,8 +81,8 @@ m = ax.imshow(
 ax.cax.colorbar(mappable=m, format=PercentFormatter(xmax=1))
 
 ax.cax.set_xlabel("$\Delta I / I_0$ [a.u.]")
-ax.set_xlabel("$\mathbf{k}_y / \mathbf{b_2}$ [a.u.]")
-ax.set_ylabel("$\mathbf{k}_z / \mathbf{b_3}$ [a.u.]")
+ax.set_xlabel("$\mathbf{k}_y / |\mathbf{b}^\star|$ [a.u.]")
+ax.set_ylabel("$\mathbf{k}_z / |\mathbf{c}^\star|$ [a.u.]")
 
 for label, pos in [
     ("T", (1 / 2, 1 / 2)),

@@ -22,7 +22,7 @@ figure, axes = plt.subplots(
     4,
     2,
     sharex=True,
-    figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH),
+    figsize=(LARGE_FIGURE_WIDTH, 4.5),
     gridspec_kw=dict(hspace=0.05, wspace=0.025),
 )
 
@@ -136,9 +136,11 @@ for index, ((refl, (ws, centers, err_fwhm, err_center)), color) in enumerate(
     ax_center.yaxis.set_label_position("right")
     ax_center.yaxis.tick_right()
     ax_center.set_ylim([-0.035, 0.035])
-    ax_center.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
+    ax_center.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=1))
 
-    tag_axis(ax_width, skued.indices_to_text(*refl), y=0.9, edgecolor="w")
+    tag_axis(
+        ax_width, skued.indices_to_text(*refl), x=0.025, y=0.95, edgecolor="w", alpha=0
+    )
 
 axes[0, 0].set_xlim([-1.5, 5])
 
@@ -147,5 +149,5 @@ axes[-1, 0].set_xlabel("Time-delay [ps]")
 axes[-1, 1].set_xlabel("Time-delay [ps]")
 
 plt.subplots_adjust(
-    top=0.975, bottom=0.085, left=0.125, right=0.9, hspace=0.2, wspace=0.2
+    top=0.975, bottom=0.11, left=0.12, right=0.88, hspace=0.2, wspace=0.2
 )
