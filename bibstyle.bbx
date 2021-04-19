@@ -5,6 +5,17 @@
 
 % Custom field formatting
 
+% Hide day/month in date. Not all entries
+% have a month, for example, which makes the presentation
+% of dates inconsistent
+% https://latex.org/forum/viewtopic.php?t=11447
+\AtEveryBibitem{%
+  \clearfield{day}%
+  \clearfield{month}%
+  \clearfield{endday}%
+  \clearfield{endmonth}%
+}
+
 % Labels in bibliography should be superscript, like the in-text citations
 \DeclareFieldFormat{labelnumberwidth}{\textsuperscript{#1}}
 
@@ -17,7 +28,7 @@
 
 % Italics title
 \DeclareFieldFormat
-  [article,inbook,incollection,inproceedings,patent,thesis,unpublished]
+  [article,inbook,incollection,inproceedings,patent,thesis,unpublished,misc]
   {title}{\emph{#1\isdot}}
 
 % Only write "In: ..." for @incollection entries 

@@ -5,7 +5,7 @@ The pursuit of science is accompanied by serious software development in most fi
 
 ## Data processing and graphical user interface
 
-Ultrafast electron scattering datasets contain a lot of information, even compared to other time-resolved techniques like optical spectroscopies. The research presented in this dissertation, as well as other research projects within the Siwick group[@Stern2018;@Otto2020], have benefitted from the ability to interactively explore the data. A program was designed and implemented by the author for this very purpose. This program, named `iris`, solves three problems:
+Ultrafast electron scattering datasets contain a lot of information, even compared to other time-resolved techniques like optical spectroscopies. The research presented in this dissertation, as well as other research projects within the Siwick group[@Stern2018;@Otto2021], have benefitted from the ability to interactively explore the data. A program was designed and implemented by the author for this very purpose. This program, named `iris`, solves three problems:
 
 1. Data processing: the reduction of raw data, which is often very redundant, into a processed dataset;
 
@@ -25,7 +25,7 @@ Over the years, the specific data-acquisition scheme has changed. For example, t
 
 ### Interactive exploration
 
-The alignment of HDF5 datasets in memory allows to extract time-series from time-resolved scattering datasets in real-time. This allows datasets reduced by `iris` to be explored interactively. Interactive exploration of time-resolved scattering datasets has profoundly impacted the way research is done in the Siwick research group because the observation of diffuse scattering signals is not limited to Bragg peaks. With time-resolved diffraction experiments, the dynamics -- however complex[@Gao2013] -- can reduced to a set of time-traces, one for each reflection. With diffuse scattering, the space of possibilities is so large that measurements cannot be neatly reduced *a-priori*. Interactive exploration of datasets has been central to the understanding of time-resolved studies on graphite[@Stern2018;@RenedeCotret2019], TiSe$_2$[@Otto2020], and SnSe (@sec:snse).
+The alignment of HDF5 datasets in memory allows to extract time-series from time-resolved scattering datasets in real-time. This allows datasets reduced by `iris` to be explored interactively. Interactive exploration of time-resolved scattering datasets has profoundly impacted the way research is done in the Siwick research group because the observation of diffuse scattering signals is not limited to Bragg peaks. With time-resolved diffraction experiments, the dynamics -- however complex[@Gao2013] -- can reduced to a set of time-traces, one for each reflection. With diffuse scattering, the space of possibilities is so large that measurements cannot be neatly reduced *a-priori*. Interactive exploration of datasets has been central to the understanding of time-resolved studies on graphite[@Stern2018;@RenedeCotret2019], TiSe$_2$[@Otto2021], and SnSe (@sec:snse).
 
 ![Graphical user interface of `iris`. **Background** Interactive exploration of a dataset of photoexcited TiSe$_2$. **Foreground** Interactive exploration of a dataset of photoexcited polycrystalline VO$_2$](images/iris_screen.png){#fig:appendix-iris-screen}
 
