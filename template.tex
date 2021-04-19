@@ -107,10 +107,6 @@ $if(verbatim-in-note)$
 $endif$
 \usepackage{xcolor}
 \definecolor{DarkViolet}{HTML}{36004D}
-\definecolor{default-linkcolor}{HTML}{A50000}
-\definecolor{default-filecolor}{HTML}{A50000}
-\definecolor{default-citecolor}{HTML}{4077C0}
-\definecolor{default-urlcolor}{HTML}{4077C0}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
@@ -131,10 +127,10 @@ $if(keywords)$
 $endif$
 $if(colorlinks)$
   colorlinks=true,
-  linkcolor=$if(linkcolor)$$linkcolor$$else$default-linkcolor$endif$,
-  filecolor=$if(filecolor)$$filecolor$$else$default-filecolor$endif$,
-  citecolor=$if(citecolor)$$citecolor$$else$default-citecolor$endif$,
-  urlcolor=$if(urlcolor)$$urlcolor$$else$default-urlcolor$endif$,
+  linkcolor=$if(linkcolor)$$linkcolor$$else$DarkViolet$endif$,
+  filecolor=$if(filecolor)$$filecolor$$else$DarkViolet$endif$,
+  citecolor=$if(citecolor)$$citecolor$$else$DarkViolet$endif$,
+  urlcolor=$if(urlcolor)$$urlcolor$$else$DarkViolet$endif$,
 $else$
   hidelinks,
 $endif$
