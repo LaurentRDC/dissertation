@@ -23,10 +23,14 @@ t = 2.7  # eV
 tprime = -0.2 * t
 
 
-def colormap(base="plasma", alpha=0.9):
+def colormap():
     """ Modify the colormap `base` so the last color is completely transparent """
-    base_colors = plt.get_cmap(base).colors
-    colors = [bc + [alpha] for bc in base_colors]
+    purples = plt.get_cmap("Purples")
+    yellows = plt.get_cmap("YlOrBr_r")
+
+    colors = [purples(i) for i in np.linspace(0, 1, 128)] + [
+        yellows(i) for i in np.linspace(0, 1, 128)
+    ]
     colors[-1] = [0, 0, 0, 0]  # Make end color transparent
     return cl.LinearSegmentedColormap.from_list(name="awesome", colors=colors)
 

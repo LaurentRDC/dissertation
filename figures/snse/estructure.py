@@ -1,75 +1,104 @@
-import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
 import matplotlib.ticker as ticker
-import matplotlib as mpl
-import matplotlib.colors as colors
+import matplotlib.gridspec as gridspec
+import mpl_toolkits.mplot3d.art3d as art3d
+import matplotlib.colors as cl
+import numpy as np
 from dissutils import MEDIUM_FIGURE_WIDTH
+import skued
 
 
-def cb1(k, T):
-    t = T / 600 - 1
-    kc = 0.66 + 0.05 * t
-    return 15 * (k - kc) ** 2 + 0.6 + t / 2
+def colormap():
+    """ Modify the colormap `base` so the last color is completely transparent """
+    purples = plt.get_cmap("Purples")
+    yellows = plt.get_cmap("YlOrBr_r")
+
+    colors = [purples(i) for i in np.linspace(0, 1, 128)] + [
+        yellows(i) for i in np.linspace(0, 1, 128)
+    ]
+    return cl.LinearSegmentedColormap.from_list(name="", colors=colors)
 
 
-def cb2(k, T):
-    t = T / 600 - 1
-    return 5 * k ** 2 + 0.6 - t / 5
+def electron_dispersion(ky, kz):
+    elec_energy = np.zeros_like(ky)
+
+    for (cy, cz), height, width in zip(
+        [(2 / 3, 0), (-2 / 3, 0), (0, 0), (0, 2 / 3), (0, -2 / 3)],
+        [1.0, 1.0, 0.8, 0.7, 0.7],
+        [0.4, 0.4, 0.6, 0.4, 0.4],
+    ):
+        gauss = skued.gaussian(coordinates=[ky, kz], center=[cy, cz], fwhm=width)
+        gauss /= gauss.max()
+        elec_energy += height * gauss
+
+    elec_energy /= elec_energy.max()
+    elec_energy *= -1
+    elec_energy -= elec_energy.min()
+    return elec_energy
 
 
-def vb1(k, T):
-    t = T / 600 - 1
-    kc = 0.66 + 0.05 * t
-    return -20 * (k - kc) ** 2 + t / 4 - 0.35
+def hole_dispersion(ky, kz):
+    hole_energy = np.zeros_like(ky)
+
+    for (cy, cz), height, width in zip(
+        [
+            (-2 / 3, 0),
+            (2 / 3, 0),
+            (0, 0),
+            (0, -3 / 4),
+            (0, -3 / 4),
+            (0, 3 / 4),
+            (0, 3 / 4),
+        ],
+        # Pudding mold band represented by the difference of a tall wide gaussian
+        # and a narrow, small gaussian
+        [0.7, 0.7, 0.6, 1.0, -0.4, 1.0, -0.4],
+        [0.4, 0.4, 0.7, 0.4, 0.08, 0.4, 0.08],
+    ):
+        gauss = skued.gaussian(coordinates=[ky, kz], center=[cy, cz], fwhm=width)
+        gauss /= np.abs(gauss).max()
+        hole_energy += height * gauss
+    hole_energy /= hole_energy.max()
+
+    hole_energy -= hole_energy.max()
+    return hole_energy
 
 
-def vb2(k, T):
-    t = T / 600
-    kc = -0.75
+ky, kz = np.meshgrid(*[np.linspace(-1, 1, num=256)] * 2)
+elec_energy = electron_dispersion(ky, kz) + 0.1
+hole_energy = hole_dispersion(ky, kz) - 0.1
 
-    return -1000 * (k - kc) ** 4 + (15 / t) * (k - kc) ** 2 + t / 10 - 0.4
-
-
-def gm(k, T):
-    t = T / 600
-    kc = 0
-    return -0.9 * (k - kc) ** 2 - 0.9 + t / 15
-
-
-figure, ax = plt.subplots(
+figure, ax_3d = plt.subplots(
     1,
     1,
-    figsize=(MEDIUM_FIGURE_WIDTH, 2),
-)
-k = np.linspace(-1, 1, 256)
-cmap = plt.get_cmap("hot")
-for T in range(800, 300, -25):
-    c = cmap((T - 300) / 700)
-    ax.plot(k, cb1(k, T), color=c)
-    ax.plot(k, vb1(k, T), color=c)
-    ax.plot(k, cb2(k, T), color=c)
-    ax.plot(k, vb2(k, T), color=c)
-    ax.plot(k, gm(k, T), color=c)
-
-ax.axhline(y=0.6, xmin=0.40, xmax=0.92, linestyle="dashed", color="k", linewidth=0.5)
-ax.set_ylim([-1, 1.25])
-ax.set_xlim([k.min(), k.max()])
-ax.xaxis.set_major_locator(ticker.FixedLocator(locs=[-1, 0, 1]))
-ax.xaxis.set_major_formatter(ticker.FixedFormatter(["$Z$", "$\Gamma$", "$Y$"]))
-ax.set_yticks([])
-ax.set_ylim([-1, 1.25])
-
-cax = ax.inset_axes([1.02, 0.0, 0.03, 1])
-cb = mpl.colorbar.ColorbarBase(
-    cax,
-    cmap=cmap,
-    orientation="vertical",
-    ticklocation="right",
-    ticks=[300, 800],
-    format=ticker.FixedFormatter(["300K", "800K"]),
-    norm=mpl.colors.Normalize(vmin=300, vmax=800),
+    figsize=(MEDIUM_FIGURE_WIDTH, MEDIUM_FIGURE_WIDTH),
+    subplot_kw=dict(projection="3d", elev=10, azim=-60),
 )
 
-ax.axhline(y=0.6, xmin=0.40, xmax=0.92, linestyle="dashed", color="k", linewidth=0.5)
+surface_kwds = dict(
+    antialiased=True, rcount=128, ccount=128, cmap=colormap(), vmin=-1, vmax=1
+)
+ax_3d.plot_surface(ky, kz, hole_energy, **surface_kwds)
+ax_3d.plot_surface(ky, kz, elec_energy, **surface_kwds)
+
+ax_3d.set_box_aspect((1, 1, 1.2))
+
+locator = ticker.FixedLocator([-1, -0.5, 0, 0.5, 1])
+formatter = ticker.FixedFormatter(["-1", "-½", "0", "½", "1"])
+for axis in [ax_3d.xaxis, ax_3d.yaxis]:
+    axis.set_major_locator(locator)
+    axis.set_major_formatter(formatter)
+
+ax_3d.zaxis.set_major_locator(ticker.FixedLocator([-1, -0.5, 0, 0.5, 1]))
+ax_3d.zaxis.set_major_formatter(ticker.FixedFormatter(5 * [""]))
+
+ax_3d.set_xlabel(r"$\mathbf{k} / |\mathbf{b}_2|$")
+ax_3d.set_ylabel(r"$\mathbf{k} / |\mathbf{b}_3|$")
+
+ax_3d.set_xlim3d([-1, 1])
+ax_3d.set_ylim3d([-1, 1])
+
+ax_3d.set_zlabel("$E(\mathbf{k})$ [a.u.]")
 
 plt.tight_layout()
