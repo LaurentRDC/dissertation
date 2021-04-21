@@ -184,6 +184,6 @@ for index, time in enumerate(TIMES):
 cbar = grid[0].cax.colorbar(
     m, ticks=FixedLocator(locs=[0, 1]), format=FixedFormatter(["0", "1"])
 )
-cbar.ax.set_xlabel(r"Change in population $\Delta n_{j}(\mathbf{k}, \tau)$ [a.u.]")
+cbar.ax.set_xlabel(r"Change in population $\Delta n_{\lambda}(\mathbf{k}, \tau)$ [a.u.]")
 
 plt.subplots_adjust(bottom=0.01)
