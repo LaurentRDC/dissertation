@@ -76,7 +76,7 @@ where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. T
 ```{.matplotlib #fig:graphite-electronic-structure file="figures/graphite/estructure.py" caption="In-plane electronic dispersion $E(\vect{k})$ for graphite. The in-plane section of the Brillouin zone is shown below. The dotted black line represents the line-cut used for @fig:graphite-photoexcitation."}
 ```
 
-The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vect{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. Near the Dirac points, the dispersion adopts a conical shape, called Dirac cones.
+The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vect{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. In analogy to graphene[@Novoselov2005], the dispersion in graphite adopts a conical shape, called Dirac cones, near the Dirac points[@Zhou2006]. 
 
 TODO: MS comment: mention Fermi surface
 
