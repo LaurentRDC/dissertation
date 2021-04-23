@@ -98,7 +98,7 @@ beamblock_patch = mpatches.Rectangle(
     edgecolor="k",
     facecolor="w",
 )
-move_in = 1 * dk  # needs to be pixel-perfect. Adjusted for 600 DPI
+move_in = 2 * dk  # needs to be pixel-perfect. Adjusted for 600 DPI
 crossover_patch = mpatches.Rectangle(
     xy=(x + move_in, y + move_in),
     width=width - 2 * move_in,

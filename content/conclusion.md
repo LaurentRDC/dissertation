@@ -9,7 +9,14 @@ The last chapter on SnSe is a taste of things to come; the future is bright for 
 
 The author hopes that in the next 5-10 years, ultrafast electron scattering hardware will be commoditized, at which point it will become a standard tool in the study of low-dimensional materials. Given the unique ability to resolve lattice dynamics across the Brillouin zone, ultrafast electron diffuse scattering is poised to democratize the experimental access to strongly-coupled systems and revolutionize our understanding of strong interactions in functional materials.
 
-TODO: discuss potential for monolayers [@Desai2016;@Liu2019;@Liu2020]
+## Outlook
+
+TODO: this section
+
+```{.matplotlib #fig:conclusion-monolayers file="figures/conclusion/monolayer.py" caption="Diffraction patterns of ultrawide (\SI{250 x 250}{\micro\meter}) monolayers on \SI{10}{\nano\meter}-thick silicon nitride windows. **a)** Monolayer WSe$_2$. **b)** Monolayer MoS$_2$."}
+```
+
+@fig:conclusion-monolayers shows two diffraction patterns of monolayers (WSe$_2$ and MoS$_2$). These ultrawide monolayers -- (\SI{250 x 250}{\micro\meter}) -- were extracted from a bulk crystal via gold-mediated exfoliation[@Desai2016;@Liu2019;@Liu2020] and deposited on a \SI{10}{\nano\meter}-thick silicon nitride windows. The large area of these monolayers results in a number of diffracting cells that is comparable to typical multilayer samples of smaller area. In fact, the exposition conditions of the diffraction patterns in @fig:conclusion-monolayers (15 000 shots with a bunch charge of \SI{0.16}{\pico\coulomb}) are equivalent to those used in @fig:graphite-static and @fig:snse-diff-static
 
 \FloatBarrier
 ## References {.unnumbered}
