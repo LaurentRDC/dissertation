@@ -1,5 +1,5 @@
 \appendix
-# Interactive ultrafast electron scattering data exploration {#sec:appendix-software label="Appendix"}
+# Appendix: Interactive ultrafast electron scattering data exploration {#sec:appendix-software label="Appendix"}
 
 The pursuit of science is accompanied by serious software development in most fields, often in the forms of instrument control, data acquisition, data analysis, and data presentation. One project spearheaded by the author, a graphical program for the interactive exploration of ultrafast electron scattering data [@RenedeCotret2018], has had such a profound impact on the research within the Siwick research group that it deserves its own brief section. 
 
