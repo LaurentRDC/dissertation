@@ -61,7 +61,7 @@ OPTIONS += [f"--metadata-file={META}", f"--metadata-file={TYPOGRAPHY}"]
 
 OPTIONS += ["--biblatex", f"-V bibliography={BIBFILE}"]
 OPTIONS += [
-    f"-V biblatexoptions=backend=biber,citestyle=numeric,style=numeric,bibstyle=bibstyle,refsection=chapter,sorting=none,autocite=superscript,maxnames=99"
+    f"-V biblatexoptions=backend=biber,citestyle=numeric,style=numeric,bibstyle=bibstyle,refsection=chapter,sorting=none,sortcites=true,autocite=superscript,maxnames=99"
 ]
 
 OPTIONS += [f"--include-in-header=include.tex"]
