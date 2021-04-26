@@ -458,21 +458,27 @@ $endif$
 \frontmatter
 
 %------------------------------------- Custom Abstract Page ------------------------
+
 \cleardoublepage
-\begin{minipage}{\linewidth}
+
+$if(linestretch)$
+\setstretch{$linestretch$}
+$endif$
 
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 $abstract-en$
 
-
 \newpage
+
 \chapter*{Résumé}
 \addcontentsline{toc}{chapter}{Résumé}
 $abstract-fr$
 
-\end{minipage}
-\cleardoublepage
+$if(linestretch)$
+\setstretch{1.2}
+$endif$
+
 %------------------------------------- Custom Abstract Page ------------------------
 
 %------------------------------------- Tables of contents/figures/tables -----------
