@@ -127,6 +127,7 @@ elec_energy_2d[n // 2 : :] = elec_energy[n // 2, n // 2 : :]
 hole_energy_2d[0 : n // 2] = hole_energy[0 : n // 2, n // 2]
 hole_energy_2d[n // 2 : :] = hole_energy[n // 2, n // 2 : :]
 
+ax_2d.axvline(x=0, color="k", linestyle="--", linewidth=0.5)
 ax_2d.scatter(
     line,
     hole_energy_2d,

@@ -8,8 +8,22 @@ from math import sqrt
 import matplotlib.pyplot as plt
 from matplotlib.colors import Normalize
 from matplotlib.ticker import FixedFormatter, FixedLocator
+import matplotlib.colors as cl
 
 from dissutils import named_arrow, MEDIUM_FIGURE_WIDTH
+
+
+def colormap():
+    """ Modify the colormap `base` so the last color is completely transparent """
+    purples = plt.get_cmap("Purples")
+    yellows = plt.get_cmap("YlOrBr_r")
+
+    colors = [purples(i) for i in np.linspace(0, 1, 128)] + [
+        yellows(i) for i in np.linspace(0, 1, 128)
+    ]
+    colors[-1] = [0, 0, 0, 0]  # Make end color transparent
+    return cl.LinearSegmentedColormap.from_list(name="awesome", colors=colors)
+
 
 # Hopping parameter
 t = 2.7  # eV
@@ -33,9 +47,9 @@ ky = np.linspace(-1.5, 1.5, num=1024)
 Eplus, Eminus = E(kx=1.5, ky=ky)
 
 norm = Normalize(vmin=Eminus.min(), vmax=Eplus.max())
-scatter_kwargs = dict(cmap="plasma", norm=norm, s=2)
-ax1.scatter(ky, Eplus, c=Eplus, **scatter_kwargs)
-ax1.scatter(ky, Eminus, c=Eminus, **scatter_kwargs)
+scatter_kwargs = dict(cmap=colormap(), norm=norm, s=2)
+ax1.scatter(ky, Eplus, c=2 * Eplus, **scatter_kwargs)  # Scale color to get more range
+ax1.scatter(ky, Eminus, c=2 * Eminus, **scatter_kwargs)  # Scale color to get more range
 ax1.xaxis.set_major_locator(FixedLocator([-1.7 / 2, 0, 1.7 / 2]))
 ax1.xaxis.set_major_formatter(
     FixedFormatter([r"$\mathbf{K}$", r"$\mathbf{M}$", r"$\mathbf{K}$"])
@@ -59,6 +73,7 @@ named_arrow(
     color="r",
     fc="r",
     tkwds=dict(ha="left", va="top", color="r", fontsize=16),
+    toffset=(0.02, 0),
     **arrow_kwds,
 )
 
@@ -66,11 +81,12 @@ named_arrow(
     ax=ax1,
     x=ky[x],
     y=np.abs(Eminus[x]),
-    dx=2 * ky[len(ky) - x],
+    dx=2 * ky[len(ky) - x] - 0.02,
     dy=0,
     text=r"$A_1^\prime$",
     fc="k",
     tkwds=dict(ha="center", va="bottom"),
+    toffset=(0, 0.02),
     **arrow_kwds,
 )
 
@@ -78,11 +94,12 @@ named_arrow(
     ax=ax1,
     x=ky[x],
     y=np.abs(Eminus[x]),
-    dx=2 * (ky[np.argmax(Eminus)] - ky[x]),
+    dx=2 * (ky[np.argmax(Eminus)] - ky[x]) + 0.02,
     dy=0,
     text=r"$E_{2g}$",
     fc="k",
     tkwds=dict(ha="center", va="bottom"),
+    toffset=(0, 0.02),
     **arrow_kwds,
 )
 
