@@ -35,8 +35,8 @@
 
 % Make vectors look bold
 % Vector notation: \vect{q}
-\usepackage{amsmath}
-\let\vect\mathbf
+% The macro "\symbfup" is provided by the unicode-math package
+\newcommand\vect[1]{\symbfup{#1}}
 
 % Fourier transforms
 \newcommand\ft[1]{\tilde{#1}}
