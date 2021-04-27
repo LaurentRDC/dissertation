@@ -11,18 +11,9 @@ ax.axis("off")
 
 for x, y in product([-2, -1, 0, 1, 2], repeat=2):
     ax.scatter(x=x, y=y, s=2, c="k")
-    ax.add_patch(
-        Rectangle(
-            xy=(x - 1 / 2, y - 1 / 2),
-            width=1,
-            height=1,
-            facecolor="None",
-            fill=False,
-            edgecolor="k",
-            linestyle=(0, (5, 5)),
-            linewidth=0.5,
-        )
-    )
+    ax.axhline(y=y - 1 / 2, linestyle=(0, (5, 5)), linewidth=0.5, color="k")
+    ax.axvline(x=x - 1 / 2, linestyle=(0, (5, 5)), linewidth=0.5, color="k")
+
 for x, y in product([0, 1], repeat=2):
 
     ax.add_patch(
