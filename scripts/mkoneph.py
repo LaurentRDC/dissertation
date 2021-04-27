@@ -147,23 +147,23 @@ def extract_info_ordered(fname, crystal, **kwargs):
 
 
 def rowdot(arr, brr):
-    """ Row-wise dot product """
+    """Row-wise dot product"""
     # This is much, much faster than np.inner for some reason.
     return np.einsum("ij,ij->i", arr, brr).reshape((-1, 1))
 
 
 def coth(*args, **kwargs):
-    """ Hyperbolic cotangent """
+    """Hyperbolic cotangent"""
     return np.cosh(*args, **kwargs) / np.sinh(*args, **kwargs)
 
 
 def mapply(matrix, table):
-    """ Apply a matrix transformation to a table where every row is considered a vector. """
+    """Apply a matrix transformation to a table where every row is considered a vector."""
     return np.transpose(matrix @ table.T)
 
 
 def unique_by_row_idx(arr):
-    """ Return the indices of the unique rows in arr """
+    """Return the indices of the unique rows in arr"""
     # np.unique can be rather slow when checking for uniqueness in rows
     # The optimization below results in ~3X faster performance
     #
@@ -176,20 +176,20 @@ def unique_by_row_idx(arr):
 
 
 def unique_by_rows(*arrs):
-    """ Filter arrays by the unique rows of the first array """
+    """Filter arrays by the unique rows of the first array"""
     unique_row_indices = unique_by_row_idx(arrs[0])
     return tuple(arr[unique_row_indices] for arr in arrs)
 
 
 def roughly_unique_by_rows(*arrs, decimals, axis=0):
-    """ Apply uniqueness rules on an array, based on lower precision. """
+    """Apply uniqueness rules on an array, based on lower precision."""
     rough = np.copy(arrs[0])
     np.around(rough, decimals=decimals, out=rough)
     return unique_by_rows(rough, *arrs[1:])
 
 
 def tile_over_rows(*arrs):
-    """ Tile arrays over rows time until all arrays have the same number of rows as the first array"""
+    """Tile arrays over rows time until all arrays have the same number of rows as the first array"""
     nrows = arrs[0].shape[0]
 
     arrays = [arrs[0]]
@@ -204,7 +204,7 @@ def tile_over_rows(*arrs):
 
 
 def is_in_plane(transformation):
-    """ Determine if a symmetry transformation is in the a-b plane """
+    """Determine if a symmetry transformation is in the a-b plane"""
     translation = transformation[0:3, -1]
 
     if not isclose(translation[2], 0, abs_tol=1e-5):
@@ -290,7 +290,7 @@ class Mode:
         self.hkls = hkls
 
     def save(self, fname):
-        """ Save all mode information """
+        """Save all mode information"""
         np.savez(
             fname,
             q_points=self.q_points,
@@ -300,7 +300,7 @@ class Mode:
         )
 
     def k_points(self):
-        """ Determine the unique k-points in this mode. """
+        """Determine the unique k-points in this mode."""
         from_miller = change_of_basis(
             np.array(self.crystal.reciprocal_vectors), np.eye(3)
         )
@@ -308,7 +308,7 @@ class Mode:
         return self.q_points - bragg
 
     def filter_gamma(self, radius):
-        """ Filter information so that k-points near Gamma are removed. """
+        """Filter information so that k-points near Gamma are removed."""
         not_near_gamma = np.greater(np.linalg.norm(self.k_points(), axis=1), radius)
 
         return Mode(
@@ -520,7 +520,7 @@ def phonon_amplitude(frequencies, temperature):
 
 
 def _debye_waller_factor(modes, temperatures, atm_index):
-    """ Calculate a Debye-Waller factor for one atom. """
+    """Calculate a Debye-Waller factor for one atom."""
     # This calculation assumes that the Debye-Waller factor is isotropic
     # i.e. it only depends on the magnitude of q and polarizations ek
     # The anisotropic factor is much more computationally expensive

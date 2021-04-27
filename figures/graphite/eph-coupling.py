@@ -25,7 +25,7 @@ avogadro, *_ = physical_constants["Avogadro constant"]  # 1 / mol
 
 @lru_cache(1)
 def molar_density(crystal):
-    """ Molar density [mol / m**3] """
+    """Molar density [mol / m**3]"""
     mol_in_unitcell = len(crystal) / avogadro  # mol
     vol_of_unitcell = crystal.volume / 1e30  # m**3
     return mol_in_unitcell / vol_of_unitcell

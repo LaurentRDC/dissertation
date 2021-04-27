@@ -18,7 +18,7 @@ COLORS = discrete_colors(len(ELEMENTS))
 
 
 def potential(element, r):
-    """ Radial electrostatic potential for an element [V] """
+    """Radial electrostatic potential for an element [V]"""
     return electrostatic(
         Crystal(
             unitcell=[Atom(element, coords=(0, 0, 0))],

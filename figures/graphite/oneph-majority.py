@@ -36,7 +36,7 @@ DOWNSAMPLING = 4
 
 
 def oneph_weighted(mode):
-    """ |F_{1\lambda}|^2 / \omega_{j, k} """
+    """|F_{1\lambda}|^2 / \omega_{j, k}"""
     F1j = np.load(INPUT / "oneph" / f"{mode}_oneph.npy")[::DOWNSAMPLING, ::DOWNSAMPLING]
     omega = np.load(INPUT / "oneph" / f"{mode}_freq.npy")[
         ::DOWNSAMPLING, ::DOWNSAMPLING
@@ -92,7 +92,7 @@ def threshold_oneph(threshold):
 
 
 def draw_bragg_peaks(ax, reflections):
-    """ Draw bragg peak locations with black scatter points. """
+    """Draw bragg peak locations with black scatter points."""
     cryst = Crystal.from_pwscf(INPUT / "graphite.out")
     astar, bstar, cstar = cryst.reciprocal_vectors
     bragg_peaks = np.vstack(

@@ -96,7 +96,7 @@ parser_prereqs = subparsers.add_parser(
 
 
 def check_for_todo(path):
-    """ Scan a file and return if there are any TODOs are left """
+    """Scan a file and return if there are any TODOs are left"""
     logging.info("Checking for TODOs...")
     with open(path, mode="r") as f:
         for line in f:
@@ -106,7 +106,7 @@ def check_for_todo(path):
 
 
 def precompute_plots():
-    """ Compute the plotting prerequisites. """
+    """Compute the plotting prerequisites."""
     for script in [
         "mkdecomp.py",
         "mkdispersion.py",
@@ -146,7 +146,7 @@ def runpandoc(options, target, sourcefiles):
 
 
 def render_diagram(source, target):
-    """ Render SVG diagram `source` to `target` """
+    """Render SVG diagram `source` to `target`"""
     try:
         run(
             f"inkscape --export-area-page --export-filename {target} {source}",
@@ -176,7 +176,7 @@ def runlatex(source):
 
 
 def build(target, forprint=False):
-    """ Build the dissertation from source. """
+    """Build the dissertation from source."""
 
     # Build diagrams
     diagrams = list((HERE / "diagrams").glob("*.svg"))
@@ -228,7 +228,7 @@ def build(target, forprint=False):
 
 
 def clean(full=False):
-    """ Clean the build directory. If `full`, delete also the figures cache. """
+    """Clean the build directory. If `full`, delete also the figures cache."""
     if full:
         shutil.rmtree(BUILDDIR_PDF, ignore_errors=True)
         logging.info(f"Removed {BUILDDIR_PDF}")

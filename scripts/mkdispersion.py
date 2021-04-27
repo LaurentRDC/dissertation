@@ -61,7 +61,7 @@ def mkpath(points, nsteps):
 
 
 def dispersion(mode_str, path, reflections):
-    """ Calculate a dispersion curve. """
+    """Calculate a dispersion curve."""
     modes = prepare_modes(reflections=tuple(reflections))
     mode = modes[mode_str]
 
@@ -83,7 +83,7 @@ def dispersion(mode_str, path, reflections):
 
 
 def weighted_dispersion(mode_sre, path, reflections):
-    """ Calculate a dispersion curve weighted by the one-phonon structure factor """
+    """Calculate a dispersion curve weighted by the one-phonon structure factor"""
     modes = prepare_modes(reflections=tuple(reflections))
     Ms = debye_waller_factors(modes)
     mode = modes[mode_str]

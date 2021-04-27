@@ -93,11 +93,11 @@ class DatasetInfo:
         self.cstar = np.array(reciprocal_basis[(0, 0, 1)]) - np.array(self.center)
 
     def miller_to_arrindex(self, h, k, l):
-        """ Determine the array indices for Miller indices (h, k, l). """
+        """Determine the array indices for Miller indices (h, k, l)."""
         return (k * self.bstar + l * self.cstar + np.array(self.center)).astype(int)
 
     def kgrid(self):
-        """ Calculate the kx, ky meshgrid of the dataset. """
+        """Calculate the kx, ky meshgrid of the dataset."""
         wavelength = skued.electron_wavelength(keV=90)
         # Grid of detector dimention in meters
         pixel_width = 14e-6  # Pixel width of a Gatan Ultrascan 895

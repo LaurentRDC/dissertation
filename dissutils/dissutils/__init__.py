@@ -41,7 +41,7 @@ ImageGrid = partial(
 
 
 def named_arrow(ax, x, y, dx, dy, text, toffset=(0, 0), tkwds=dict(), **kwargs):
-    """ Draw an arrow annotated with some text """
+    """Draw an arrow annotated with some text"""
     ox, oy = toffset
     ax.arrow(x=x, y=y, dx=dx, dy=dy, **kwargs)
     ax.text(x=x + ox + dx / 2, y=y + oy + dy / 2, s=text, **tkwds)
@@ -57,7 +57,7 @@ def tag_axis(
     edgecolor="k",
     alpha=1,
 ):
-    """ Tag an axis with some text, e.g. "a)" """
+    """Tag an axis with some text, e.g. "a)" """
     ax.text(
         x=x,
         y=y,
@@ -100,7 +100,7 @@ def draw_hexagon_field(
     center=(0, 0),
     **kwargs
 ):
-    """ Fill the plot with hexagons centered at the Bragg points """
+    """Fill the plot with hexagons centered at the Bragg points"""
     center = np.array(center)
     from_frac = change_of_basis(np.array(crystal.reciprocal_vectors), np.eye(3))
     for refl in reflections:
@@ -123,7 +123,7 @@ def draw_hexagon(
     facecolor="none",
     **kwargs
 ):
-    """ Draw a hexagon within an Axes object"""
+    """Draw a hexagon within an Axes object"""
     if "linewidth" not in kwargs:
         kwargs["linewidth"] = 1
     hexagon = mpatches.RegularPolygon(
@@ -139,7 +139,7 @@ def draw_hexagon(
 
 
 def discrete_colors(num):
-    """ Returns a list of discrete colors to plot, for example, various time-traces. """
+    """Returns a list of discrete colors to plot, for example, various time-traces."""
     cmap = plt.get_cmap("inferno")
     mi, ma = 0.11, 0.75
 

@@ -9,7 +9,7 @@ import skued
 
 
 def colormap():
-    """ Modify the colormap `base` so the last color is completely transparent """
+    """Modify the colormap `base` so the last color is completely transparent"""
     purples = plt.get_cmap("Purples")
     yellows = plt.get_cmap("YlOrBr_r")
 
