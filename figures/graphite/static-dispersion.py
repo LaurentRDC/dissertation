@@ -10,7 +10,7 @@ from scipy.constants import physical_constants
 HBAR = physical_constants["Planck constant over 2 pi in eV s"][0]
 HZ_TO_EV = HBAR * 2 * np.pi
 
-modes = ["LA", "LO2", "TA", "TO2"]
+modes = ["LO2", "TA", "TO2", "LA"]
 
 fig, ax = plt.subplots(1, 1, figsize=(LARGE_FIGURE_WIDTH, 3))
 ax_thz = ax.twinx()
