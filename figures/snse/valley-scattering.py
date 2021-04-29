@@ -122,8 +122,8 @@ figure, (ax_elec1, ax_elec2, ax_elec3) = plt.subplots(
     1, 3, figsize=(LARGE_FIGURE_WIDTH, 0.4 * LARGE_FIGURE_WIDTH)
 )
 
-elec_cax = ax_elec1.inset_axes(bounds=[0.1, 0.98, 0.8, 0.05])
-hole_cax = ax_elec1.inset_axes(bounds=[0.1, -0.03, 0.8, 0.05])
+elec_cax = ax_elec2.inset_axes(bounds=[0.05, 1.04, 0.9, 0.05])
+hole_cax = ax_elec2.inset_axes(bounds=[0.05, -0.09, 0.9, 0.05])
 
 for i, (ax, epop, hpop) in enumerate(
     zip(
@@ -133,7 +133,10 @@ for i, (ax, epop, hpop) in enumerate(
     )
 ):
 
-    ax.axis("off")
+    ax.set_xlim([-1, 1])
+    ax.set_ylim([-1, 1])
+    ax.xaxis.set_visible(False)
+    ax.yaxis.set_visible(False)
     ax.set_aspect(1)
 
     # By adding a small constant, the "transparent" color
@@ -270,7 +273,7 @@ for i, ax in enumerate([ax_elec1, ax_elec2, ax_elec3]):
 
     for (x, y), label in zip(
         [(1, 0), (0, 1), (1, 1), (-1, 0), (0, -1), (-1, -1), (-1, 1), (1, -1)],
-        ["$Y$", "$Z$", "$T$", "$Y$", "$Z$", "$T$", "$T$", "$T$"],
+        ["$Y$", "$Z$", "$T$", "", "", "", "", ""],
     ):
         ax.add_patch(
             Circle(
@@ -283,8 +286,8 @@ for i, ax in enumerate([ax_elec1, ax_elec2, ax_elec3]):
             )
         )
 
-        # only annotate the middle subplot
-        if i == 1:
+        # only annotate the first subplot
+        if i == 0:
             offset = np.array([signum(x) * 0.06, signum(y) * 0.06])
             ax.annotate(
                 xy=(x, y),
@@ -303,6 +306,15 @@ for cax, mappable, label, pos in zip(
     cax.xaxis.set_ticks([])
     cax.set_xlabel(label)
     cax.xaxis.set_label_position(pos)
+
+ax_elec1.xaxis.set_visible(True)
+ax_elec1.yaxis.set_visible(True)
+ax_elec1.xaxis.set_major_locator(ticker.FixedLocator([-1, 0, 1]))
+ax_elec1.xaxis.set_major_formatter(ticker.FixedFormatter(["-½", "0", "½"]))
+ax_elec1.yaxis.set_major_locator(ticker.FixedLocator([-1, 0, 1]))
+ax_elec1.yaxis.set_major_formatter(ticker.FixedFormatter(["-½", "0", "½"]))
+ax_elec1.set_xlabel("$k_y/b^{*}$")
+ax_elec1.set_ylabel("$k_z/c^{*}$")
 
 tag_kwds = dict(x=0.12, y=0.88)
 tag_axis(ax_elec1, "a)", **tag_kwds)

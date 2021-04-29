@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools as it
 from matplotlib.ticker import PercentFormatter
-from matplotlib.patches import Ellipse
+from matplotlib.patches import Ellipse, Circle
+import matplotlib.ticker as ticker
 from pathlib import Path
 from iris import DiffractionDataset
 from dissutils import MEDIUM_FIGURE_WIDTH, ImageGrid
@@ -81,15 +82,29 @@ m = ax.imshow(
 ax.cax.colorbar(mappable=m, format=PercentFormatter(xmax=1))
 
 ax.cax.set_xlabel("$\Delta I / I_0$ [a.u.]")
-ax.set_xlabel("$\mathbf{k}_y / |\mathbf{b}^\star|$ [a.u.]")
-ax.set_ylabel("$\mathbf{k}_z / |\mathbf{c}^\star|$ [a.u.]")
+ax.set_xlabel("$k_y / b^{*}$")
+ax.set_ylabel("$k_z / c^{*}$")
+
+ax.xaxis.set_major_locator(ticker.FixedLocator([-0.5, 0, 0.5]))
+ax.xaxis.set_major_formatter(ticker.FixedFormatter(["-½", "0", "½"]))
+ax.yaxis.set_major_locator(ticker.FixedLocator([-0.5, 0, 0.5]))
+ax.yaxis.set_major_formatter(ticker.FixedFormatter(["-½", "0", "½"]))
 
 for label, pos in [
     ("T", (1 / 2, 1 / 2)),
     ("Y", (1 / 2, 0)),
     ("Z", (0, 1 / 2)),
 ]:
-    ax.scatter(*pos, color="k", clip_on=False)
+    ax.add_patch(
+        Circle(
+            xy=pos,
+            radius=0.015,
+            edgecolor="None",
+            facecolor="k",
+            zorder=np.inf,
+            clip_on=False,
+        )
+    )
     ax.annotate(
         label,
         xy=pos,
