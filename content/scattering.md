@@ -7,7 +7,7 @@ This chapter will consider the special case of *electron scattering*. In crystal
 
 In writing this chapter, the author has tried original derivations that emphasize concepts that are important for the remainder of this dissertation. The derivation of ultrafast diffuse scattering intensity is of particular interest, because it is the only full quantum-mechanical treatment relevant to ultrafast electron scattering specifically in the literature today.
 
-## Elastic electron scattering and the Lippmann-Schwinger formalism
+## Electron scattering and the Lippmann-Schwinger formalism
 
 Consider an electron wavefunction $\Psi(\vect{x}, t)$. The scattering of $\Psi(\vect{x}, t)$ by an arbitrary potential $V(\vect{x},t)$ is described by the Schrödinger equation:
 $$
@@ -476,7 +476,7 @@ Henceforth, the phonon eigenvectors are assumed to be periodic, that is, $\vect{
 \end{align}
 A visual representation of the relationship between vectors $\vect{H}_{\vect{q}}$, $\vect{q}$, and $\vect{k_0}$ is shown in @fig:scattering-vector-geometry.
 
-```{.matplotlib #fig:scattering-vector-geometry file="figures/scattering/vector-geometry.py" caption="Geometrical relationship between the scattering vector $\vect{q}$, the reciprocal point closest to $\vect{q}$, $\vect{H}_{\vec{q}}$, and wavevector $\vect{k}_0$ for a hypothetical cubic crystal. The in-plane section of the Brillouin, where $\vect{k}_0$ is confined, is shown as well."}
+```{.matplotlib #fig:scattering-vector-geometry file="figures/scattering/vector-geometry.py" caption="Geometrical relationship between the scattering vector $\vect{q}$, the reciprocal point closest to $\vect{q}$, $\vect{H}_{\vect{q}}$, and wavevector $\vect{k}_0$ for a hypothetical cubic crystal. The in-plane section of the Brillouin, where $\vect{k}_0$ is confined, is shown as well."}
 ```
 
 Combining @eq:scattering-amplitude-reduced and @eq:scattering-intensity, the measured intensity is therefore:
