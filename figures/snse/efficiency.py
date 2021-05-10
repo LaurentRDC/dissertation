@@ -33,7 +33,7 @@ m = ax.contourf(
     extent=[zt.min(), zt.max(), tt.min(), tt.max()],
 )
 ax.contour(m, colors="dimgray", linestyles="dashed", linewidths=0.4)
-ax.set_xlabel("$ZT_{avg}$ [a.u.]")
+ax.set_xlabel("$ZT_{avg}$")
 ax.set_ylabel("$T_H$ [K]")
 
 cax = make_axes_locatable(ax).append_axes("right", size=CBAR_SIZE, pad=0.03)

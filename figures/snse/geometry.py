@@ -192,7 +192,6 @@ ax_im.set_ylim([width, -width])
 # Beam block patch
 # -----------------------------------------------------------------------------
 
-beamblock_indices = np.argwhere(static_mask > 0)
 width = 0.15
 height = 0.6
 x, y = 0.5 - width / 2, 1
