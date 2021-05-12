@@ -9,18 +9,31 @@ abstract-fr: |
   Ceci est le résumé.
 
 abstract-en: |
-  Ultrafast electron diffraction with bunch compression has reached a level of performance which allows for the accurate measurement of 
-  time-resolved diffuse scattering. This information extends ultrafast electron diffraction to the time-resolved study of lattice waves. 
-  In this dissertation, time-resolved diffuse scattering is explored in two low-dimensional materials. Time-resolved diffuse scattering 
-  is first explored in graphite, where anisotropic electron-phonon couplign and stiff phonon bands allow for maximum measurement contrast. 
-  The redundancy in ultrafast electron scattering patterns, as well as crystal symmetry, are used to robustly recover energy resolution. 
-  The mode-, momentum- and time-dependent phonon populations are determined, eschewing the concept of lattice temperature. These measurements 
-  provide a direct view of anharmonic decay pathways of phonons across the Brillouin zone. It is shown how to extract electron-phonon coupling 
-  matrix elements across the Brillouin zone from phonon population. The lessons are then applied to one of the best intrinsic thermoelectric 
-  materials, tin selenide.  There, combined ultrafast electron diffraction and diffuse scattering measurements elucidate the mystery of 
-  ultralow thermal conductivity that gives tin selenide its high thermoelectric efficiency. It is found that strong and anisotropic 
-  electron-phonon coupling dominates the zone-center phonon dynamics, not anharmonic coupling as previously thought. These findings 
-  recontextualize what was thought about the determinants of thermoelectric performance, primarily the role of electron-phonon coupling
+  Ultrafast electron diffraction with bunch compression has reached a level of 
+  performance which allows for the accurate measurement of time-resolved diffuse 
+  scattering with a time-resolution of 150 femtoseconds. This information 
+  extends ultrafast electron diffraction to time- and momentum-resolved studies 
+  of phonon systems (lattice waves) in single-crystal materials. In this 
+  dissertation, time-resolved diffuse scattering is explored in two 
+  low-dimensional materials. Time-resolved diffuse scattering is first explored 
+  in graphite, where anisotropic electron-phonon coupling and stiff phonon bands 
+  allow for maximum measurement contrast. The redundancy in ultrafast electron 
+  scattering patterns, as well as crystal symmetry, are used to robustly recover 
+  the occupancy of all in-plane phonon modes. The mode-, momentum- and 
+  time-dependent phonon populations are determined, revealing the nonequilibrium 
+  lattice states that follow photoexcitation and the complete breakdown of the 
+  two-temperature model often used to describe these dynamics. The measurements 
+  presented also provide a direct view of anharmonic decay pathways of phonons 
+  across the Brillouin zone, and a technique to extract electron-phonon coupling 
+  matrix elements from phonon population is developed. The lessons are then 
+  applied to further our understanding of the best intrinsic thermoelectric 
+  materials, tin selenide.  There, combined ultrafast electron diffraction 
+  and diffuse scattering measurements elucidate the mystery of ultralow thermal 
+  conductivity that gives tin selenide its high thermoelectric efficiency. It 
+  is found that strong and anisotropic electron-phonon coupling dominates the 
+  zone-center phonon dynamics, not anharmonic coupling as previously thought. 
+  These findings recontextualize what was thought about the determinants of 
+  thermoelectric performance, primarily the role of electron-phonon coupling
   in lowering thermal conductivity.
 
 acknowledgements: |

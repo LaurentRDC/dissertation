@@ -89,6 +89,8 @@ With four atoms per unit cell, the structure of graphite supports twelve distinc
 ```{#fig:graphite-static-dispersion .matplotlib file="figures/graphite/static-dispersion.py" caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
 ```
 
+TODO: discuss Kohn anomalies further
+
 An important feature of the phonon dispersion of graphite that is not replicated by the simple calculation of @fig:graphite-static-dispersion are *Kohn anomalies* [@Kohn1959]. Kohn anomalies are pronounced dips with a $|E - E_0|$ character in the phonon dispersion. These kinks have been shown to appear for transverse optical modes at $\vect{\Gamma}$ (mode $E_{2g}$) and $\vect{K}$ (mode $A_1^\prime$) by inelastic x-ray scattering measurements performed by Maultzsch *et al.* [@Maultzsch2004] Theoretical work by Piscanec *et al.* [@Piscanec2004] has linked the slope of these kinks to the strength of the coupling between the electronic system and these specific modes. The calculated band structure including the two Kohn anomalies in graphite is presented in @fig:graphite-kohn-anomalies.
 
 <!-- The figure below is raw latex because an alternate caption without citations needs to be use so that it looks OK in the list of figures-->
