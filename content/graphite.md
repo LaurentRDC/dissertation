@@ -78,8 +78,6 @@ where $t$ is the tight-binding constant and $a$ is the carbon-carbon distance. T
 
 The nonequilibrium behavior of photoexcited graphite is dominated by the structure of the electronic dispersion near the $\vect{K}$ points, at the corner of the Brillouin zone. These points, where the dispersion of each band meet, are called Dirac points. In analogy to graphene[@Novoselov2005], the dispersion in graphite adopts a conical shape, called Dirac cones, near the Dirac points[@Zhou2006]. 
 
-TODO: MS comment: mention Fermi surface
-
 ### Phonon landscape {#sec:graphite-phonon-landscape}
 
 With four atoms per unit cell, the structure of graphite supports twelve distinct phonon modes. The layered nature of graphite results in a clear distinction between in-plane and out-of-plane phonon modes. These modes are longitudinal modes LA, LO1 - LO3, in-plane transverse modes TA, TO1 - TO3, and out-of-plane traverse modes ZA, ZO1 - ZO3. The phonon dispersion relation for in-plane modes was calculated as described further below in @sec:computational-details, and is shown in @fig:graphite-static-dispersion. The out-of-plane transverse modes are not taken into account as the experiments are not sensitive to them. 
@@ -89,9 +87,11 @@ With four atoms per unit cell, the structure of graphite supports twelve distinc
 ```{#fig:graphite-static-dispersion .matplotlib file="figures/graphite/static-dispersion.py" caption="Phonon dispersion relation of graphite for in-plane modes LA, TA, and two-fold degenerate modes LO and TO. The path in reciprocal space is shown in the center. A horizontal dashed line at \SI{25}{\milli\electronvolt} indicates the average energy stored in the phonon modes at room temperature (\SI{300}{\kelvin})."}
 ```
 
-TODO: discuss Kohn anomalies further
+### Kohn anomalies
 
-An important feature of the phonon dispersion of graphite that is not replicated by the simple calculation of @fig:graphite-static-dispersion are *Kohn anomalies* [@Kohn1959]. Kohn anomalies are pronounced dips with a $|E - E_0|$ character in the phonon dispersion. These kinks have been shown to appear for transverse optical modes at $\vect{\Gamma}$ (mode $E_{2g}$) and $\vect{K}$ (mode $A_1^\prime$) by inelastic x-ray scattering measurements performed by Maultzsch *et al.* [@Maultzsch2004] Theoretical work by Piscanec *et al.* [@Piscanec2004] has linked the slope of these kinks to the strength of the coupling between the electronic system and these specific modes. The calculated band structure including the two Kohn anomalies in graphite is presented in @fig:graphite-kohn-anomalies.
+An important feature of the phonon dispersion of graphite that is not replicated by the simple calculation of @fig:graphite-static-dispersion are *Kohn anomalies* [@Kohn1959]. Kohn anomalies are pronounced dips with a $|E - E_0|$ character in the phonon dispersion of metals. In other words, the derivative of the phononic dispersion curve is discontinuous. In extreme cases, the softening of the phonon dispersion to zero creates a lattice distortion, which is one of the causes of charge-density wave phases[@Williams1974;@Johannes2008;@Otto2021].
+
+Kohn anomalies have been shown to appear in graphite for transverse optical modes at $\vect{\Gamma}$ (mode $E_{2g}$) and $\vect{K}$ (mode $A_1^\prime$) by inelastic x-ray scattering measurements performed by Maultzsch *et al.* [@Maultzsch2004] Theoretical work by Piscanec *et al.* [@Piscanec2004] has linked the slope of these kinks to the strength of the coupling between the electronic system and these specific modes. The calculated band structure including the two Kohn anomalies in graphite is presented in @fig:graphite-kohn-anomalies.
 
 <!-- The figure below is raw latex because an alternate caption without citations needs to be use so that it looks OK in the list of figures-->
 \begin{figure}
