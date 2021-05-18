@@ -430,6 +430,18 @@ If strong electron-phonon coupling to acoustic modes were also at play in tin se
 
 The behavior of $\kappa$ with increasing temperature exhibits an asymptotic behavior above \SI{600}{\kelvin} which is reminiscent of the Mott-Ioffe-Regel limit on the resistivity in so-called "bad metals" [@Ioffe1960;@Mott1974;@Gurvitch1981]. The Mott-Ioffe-Regel limit expresses that the transport properties of quasiparticles saturate once their mean-free-path has fallen below the lattice dimensions[@Zhang2019]. Our measurements suggest that the phonon mean-free-path in SnSe might be close to the Mott-Ioffe-Regel limit above \SI{600}{\kelvin} due to strong electron-phonon coupling. This happens at equilibrium due to the thermal enhancement of the electron-phonon scattering rate (@eq:snse-ep-scattering-rate), and ultrafast electron diffuse scattering reveals a similar behavior via impulsive photodoping. 
 
+### Polaronic strain field
+
+TODO: this section. [@Guzelturk2021]
+
+$$
+    \frac{\Delta I}{I} \propto \frac{k r_p^3}{\left( 1 + q^2 r_p^2\right)^2} \vect{H} \cdot \hat{\vect{r}}
+$$
+where
+
+```{.matplotlib file="figures/snse/polaron.py" caption=""}
+```
+
 ## Conclusion
 
 In this chapter, combined ultrafast electron diffraction and diffuse scattering measurements on photodoped SnSe were presented. The measurements showed strong electron-phonon coupling to zone-center phonon modes polarized along the lattice distortion of the low-temperature $Pnma$ phase, and uniformly-weaker electron-phonon coupling everywhere else. Anharmonic coupling between zone-center modes and modes away from $\Gamma$ was found to be less important than electron-phonon coupling, contrary to most calculations and assumptions made in the literature. These results reveal that strong, anisotropic electron-phonon coupling may play a large role in SnSe's ultralow thermal conductivity and the $Pnma \to Cmcm$ phase transition. These findings recontextualize a lot of previous calculations and measurements on high-performance intrinsic thermoelectrics.  
