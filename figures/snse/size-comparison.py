@@ -54,8 +54,8 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
             diffuse_selection = skued.RingSelection(
                 shape=dset.resolution,
                 center=(xi, yi),
-                inner_radius=r,
-                outer_radius=2 * r,
+                inner_radius=inner_radius,
+                outer_radius=outer_radius,
             )
             timeseries[r] += dset.time_series_selection(diffuse_selection) / q2
 
