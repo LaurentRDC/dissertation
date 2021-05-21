@@ -432,10 +432,13 @@ The behavior of $\kappa$ with increasing temperature exhibits an asymptotic beha
 
 ### Polaronic strain field
 
+Caruso *et al*.[@Caruso2019] suggest that in SnSe, the phonon modes which are the most coupled to the conduction electrons are zone-center optical polar modes polarized along the $c$ axis. The dressing of charge-carriers by polar phonons -- known as polarons -- have been the subject of much research [@Frohlich1950;@Feynman1955]. 
+
+
 TODO: this section. [@Guzelturk2021]
 
 $$
-    \frac{\Delta I}{I} \propto \frac{k r_p^3}{\left( 1 + q^2 r_p^2\right)^2} \vect{H} \cdot \hat{\vect{r}}
+    \frac{\Delta I}{I} \propto \frac{k r_p^3}{\left( 1 + k^2 r_p^2\right)^2} \vect{H} \cdot \hat{\vect{r}}
 $$
 where
 
