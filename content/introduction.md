@@ -109,16 +109,22 @@ $$
 The first term is the interaction of electrons with ions at their ground-state positions. The second term may be intuitively named the *electron-phonon interaction*:
 $$
     \hat{V}_{ep}(\vect{r}) \equiv \sum_{j^\prime} \vect{u}_{j^\prime} \cdot \nabla \hat{V}_i(\vect{r} - \vect{r}^i_{j^\prime})
-$$
+$${#eq:introduction-vep}
 The associated interaction Hamiltonian is given by:
 $$
-    \hat{H}_{ep}(\vect{r}) = \int d\vect{r} \hat{\rho}(\vect{r}) \hat{V}_{ep}(\vect{r})
+    \hat{H}_{ep} = \int d\vect{r} \hat{\rho}(\vect{r}) \hat{V}_{ep}(\vect{r})
 $$
-where $\hat{\rho}(\vect{r})$ is the electron density operator. For highly-ordered crystalline systems like the ones studied in this dissertation, it is helpful to express the interaction Hamiltonian in momentum space. In momentum space, $\hat{H}_{ep}$ is expressed most simply in the second quantization framework[@Giustino2017]:
+where $\hat{\rho}(\vect{r})$ is the electron density operator. 
+
+For highly-ordered crystalline systems like the ones studied in this dissertation, phonons are well-defined. In this case, the displacement vectors can be expressed as a sum of phonons in reciprocal space in the second quantization framework:
+$$
+    \vect{u}_j \propto \sum_{\lambda} \int \frac{d\vect{k}_p}{(2\pi)^3} \frac{1}{\sqrt{\omega_{\lambda}(\vect{k}_p)}} \left[ \hat{a}_{\lambda}(\vect{k}_p) + \hat{a}^{\dagger}_{\lambda}(-\vect{k}_p) \right] \vect{e}_{\lambda}(\vect{k}_p) e^{i \vect{k}_p \cdot \vect{r}_j}
+$$
+where $\lambda$ labels phonon modes, $\vect{k}_p$ are the phonon wavevectors, $\hat{a}^{\dagger}_{\lambda}$ ($\hat{a}_{\lambda}$) is the creation (annihilation) operator for phonon mode $\lambda$, and $\vect{e}_{\lambda}(\vect{k}_p)$ is the polarization direction of mode $\lambda$. This expansion will be discussed further in @sec:scattering-lattice-waves. Substituting the expanded form for $\vect{u}_j$ in @eq:introduction-vep yields the following expression for the interaction Hamiltonian $\hat{H}_{ep}$[@Giustino2017]:
 $$
     \hat{H}_{ep} = \sum_{a,b, \lambda} \int \frac{d\vect{k}_e}{(2 \pi)^3} \int \frac{d\vect{k}_p}{(2 \pi)^3} ~ g^{\lambda}_{ab}(\vect{k}_p, \vect{k}_e) ~ \hat{c}^{\dagger}_{a}(\vect{k_e} + \vect{k}_p)\hat{c}_b(\vect{k}_e) \left( \hat{a}_{\lambda}(\vect{k}_p) + \hat{a}^{\dagger}_{\lambda}(-\vect{k}_p)\right)
 $$
-where $a$ and $b$ label electron bands, $\lambda$ labels phonon modes, $\hat{c}^{\dagger}_{a}$ ($\hat{c}_{a}$) is the creation (annihilation) operator for electrons in band $a$, $\hat{a}^{\dagger}_{\lambda}$ ($\hat{a}_{\lambda}$) is the creation (annihilation) operator for phonon mode $\lambda$, $\vect{k}_e$ and $\vect{k}_p$ are the electronic and phonon wavevectors respectively, and $g$ is the electron-phonon coupling matrix which describes the strength of the coupling (in units of energy) between the electronic and phonon subsystems. The matrix element $g^{\lambda}_{ab}(\vect{k}_p, \vect{k}_e)$ encodes the strength of the scattering of an electron from band $a$ and wavevector $\vect{k}_e$ to band $b$ and wavevector $\vect{k}_e + \vect{k}_p$ through the interaction (emission or absorption) of a phonon in branch $\lambda$ with wavevector $\vect{k}_p$.
+where $a$ and $b$ label electron bands, $\hat{c}^{\dagger}_{a}$ ($\hat{c}_{a}$) is the creation (annihilation) operator for electrons in band $a$,$\vect{k}_e$ is the electronic wavevector, and $g$ is the electron-phonon coupling matrix which describes the strength of the coupling (in units of energy) between the electronic and phonon subsystems. The matrix element $g^{\lambda}_{ab}(\vect{k}_p, \vect{k}_e)$ encodes the strength of the scattering of an electron from band $a$ and wavevector $\vect{k}_e$ to band $b$ and wavevector $\vect{k}_e + \vect{k}_p$ through the interaction (emission or absorption) of a phonon in branch $\lambda$ with wavevector $\vect{k}_p$.
 
 The electron-phonon coupling matrix is effectively impossible to measure at equilibrium. Until recently, the determination of this coupling matrix was the purview of calculations. Ultrafast measurements are able to get at $g$ via the lifetime of excitations[@Brorson1990;@Ferrari2007;@Na2019]. Ultrafast electron diffuse scattering is currently the only laboratory-scale technique where electron-phonon coupling matrix elements are accessible with momentum-resolution across the entire Brillouin zone[@@RenedeCotret2019].
 
