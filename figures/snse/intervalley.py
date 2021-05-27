@@ -18,6 +18,24 @@ def signum(x):
     return (x > 0) - (x < 0)
 
 
+def elec_cmap():
+    cmap = plt.get_cmap("YlOrBr")
+    colors = [cmap(i) for i in np.linspace(0, 0.9, num=256)]
+    # The point of the plots in this script are to show regions where the images are 0
+    # which is easiest to see if these regions are white
+    colors[0] = (1, 1, 1, 1)
+    return cl.ListedColormap(colors)
+
+
+def hole_cmap():
+    cmap = plt.get_cmap("Purples")
+    colors = [cmap(i) for i in np.linspace(0, 1, num=256)]
+    # The point of the plots in this script are to show regions where the images are 0
+    # which is easiest to see if these regions are white
+    colors[0] = (1, 1, 1, 1)
+    return cl.ListedColormap(colors)
+
+
 def electron_dispersion(ky, kz):
     elec_energy = np.zeros_like(ky)
 
@@ -78,7 +96,9 @@ def pathways(ky, kz, energy, nlevels=32):
     for low, high in energy_levels:
         source = np.array(energy, copy=True)
         drain = np.array(energy, copy=True)
-        source_mask = np.logical_or(np.less_equal(energy, low), np.greater_equal(energy, high))
+        source_mask = np.logical_or(
+            np.less_equal(energy, low), np.greater_equal(energy, high)
+        )
         source[source_mask] = 0
 
         drain[np.greater_equal(energy, low)] = 0
@@ -96,8 +116,11 @@ hole_energy = hole_dispersion(ky, kz)
 hole_energy[hole_energy < hole_energy.max() - 0.4] = 0
 
 pathways_e = pathways(ky, kz, elec_energy)
+pathways_e -= pathways_e.min()
 pathways_e /= pathways_e.max()
+
 pathways_h = pathways(ky, kz, -hole_energy)
+pathways_h -= pathways_h.min()
 pathways_h /= pathways_h.max()
 
 figure, (ax_e, ax_h) = plt.subplots(
@@ -105,7 +128,7 @@ figure, (ax_e, ax_h) = plt.subplots(
     2,
     sharex=True,
     sharey=True,
-    figsize=(LARGE_FIGURE_WIDTH, 0.5 * LARGE_FIGURE_WIDTH),
+    figsize=(LARGE_FIGURE_WIDTH, 0.6 * LARGE_FIGURE_WIDTH),
 )
 
 elec_cax = ax_e.inset_axes(bounds=[0.05, 1.04, 0.9, 0.05])
@@ -121,14 +144,14 @@ me = ax_e.imshow(
     vmin=0,
     vmax=1,
     extent=[ky.min(), ky.max(), kz.min(), kz.max()],
-    cmap="YlOrBr",
+    cmap=elec_cmap(),
 )
 mh = ax_h.imshow(
     pathways_h,
     vmin=0,
     vmax=1,
     extent=[ky.min(), ky.max(), kz.min(), kz.max()],
-    cmap="Purples",
+    cmap=hole_cmap(),
 )
 
 # Annotate high-symmetry points -----------------------------------------------
@@ -175,7 +198,8 @@ for cax, mappable, label in zip(
     cax.xaxis.tick_top()
     cax.xaxis.set_label_position("top")
 
-tag_axis(ax_e, "a) e$^{-}$")
-tag_axis(ax_h, "b) h$^{+}$")
-plt.tight_layout()
-plt.show()
+tag_axis(ax_e, "a)")
+tag_axis(ax_h, "b)")
+plt.subplots_adjust(
+    top=0.875, bottom=0.037, left=0.029, right=0.972, hspace=0.2, wspace=0.128
+)

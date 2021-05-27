@@ -12,7 +12,7 @@ import matplotlib.colors as cl
 from dissutils import LARGE_FIGURE_WIDTH, tag_axis
 import skued
 
-ARROWSTYLE = dict(arrowstyle="-|>", zorder=np.inf, mutation_scale=5, fc="k", ec="k")
+ARROWSTYLE = dict(arrowstyle="-|>", zorder=np.inf, mutation_scale=7, fc="k", ec="k")
 
 
 def signum(x):
@@ -70,20 +70,20 @@ def hole_dispersion(ky, kz):
 
 
 def elec_cmap():
-    cmap = plt.get_cmap("RdBu")
-    colors = [cmap(i) for i in np.linspace(0.5, 0, num=256)]
+    cmap = plt.get_cmap("YlOrBr")
+    colors = [cmap(i) for i in np.linspace(0, 0.9, num=256)]
     colors[0] = (0, 0, 0, 0)
     return cl.ListedColormap(colors)
 
 
 def hole_cmap():
-    cmap = plt.get_cmap("RdBu")
-    colors = [cmap(i) for i in np.linspace(0.5, 1, num=256)]
+    cmap = plt.get_cmap("Purples")
+    colors = [cmap(i) for i in np.linspace(0, 1, num=256)]
     colors[0] = (0, 0, 0, 0)
     return cl.ListedColormap(colors)
 
 
-ky, kz = np.meshgrid(*[np.linspace(-1, 1, num=256)] * 2)
+ky, kz = np.meshgrid(*[np.linspace(-1, 1, num=512)] * 2)
 hole_region = ky < -kz
 elec_region = np.logical_not(hole_region)
 
@@ -99,10 +99,6 @@ elec_pop2 = np.zeros_like(elec_energy)
 elec_pop2[elec_energy < 0.4 * elec_energy.max()] = 1
 elec_pop2[:] = gaussian(elec_pop2, 10)
 
-elec_pop3 = np.zeros_like(elec_energy)
-elec_pop3[elec_energy < 0.03 * elec_energy.max()] = 1
-elec_pop3[:] = gaussian(elec_pop2, 10)
-
 hole_pop1 = np.zeros_like(hole_energy)
 hole_pop1[hole_energy > -0.6] = 1
 hole_pop1[:] = gaussian(hole_pop1, 20)
@@ -111,15 +107,11 @@ hole_pop2 = np.zeros_like(hole_energy)
 hole_pop2[hole_energy > -0.5] = 1
 hole_pop2[:] = gaussian(hole_pop2, 10)
 
-hole_pop3 = np.zeros_like(hole_energy)
-hole_pop3[hole_energy > -0.35] = 1
-hole_pop3[:] = gaussian(hole_pop3, 10)
-
 elec_energy[hole_region] = elec_energy.max()
 hole_energy[elec_region] = hole_energy.min()
 
-figure, (ax_elec1, ax_elec2, ax_elec3) = plt.subplots(
-    1, 3, figsize=(LARGE_FIGURE_WIDTH, 0.4 * LARGE_FIGURE_WIDTH)
+figure, (ax_elec1, ax_elec2) = plt.subplots(
+    1, 2, figsize=(LARGE_FIGURE_WIDTH, 0.6 * LARGE_FIGURE_WIDTH)
 )
 
 elec_cax = ax_elec2.inset_axes(bounds=[0.05, 1.04, 0.9, 0.05])
@@ -127,9 +119,9 @@ hole_cax = ax_elec2.inset_axes(bounds=[0.05, -0.09, 0.9, 0.05])
 
 for i, (ax, epop, hpop) in enumerate(
     zip(
-        [ax_elec1, ax_elec2, ax_elec3],
-        [elec_pop1, elec_pop2, elec_pop3],
-        [hole_pop1, hole_pop2, hole_pop3],
+        [ax_elec1, ax_elec2],
+        [elec_pop1, elec_pop2],
+        [hole_pop1, hole_pop2],
     )
 ):
 
@@ -141,8 +133,8 @@ for i, (ax, epop, hpop) in enumerate(
 
     # By adding a small constant, the "transparent" color
     # only appears in the opposite region
-    epop += 0.01
-    hpop += 0.01
+    epop += 0.001
+    hpop += 0.001
     epop[hole_region] = 0
     hpop[elec_region] = 0
 
@@ -223,49 +215,10 @@ for n in range(0, 6):
         FancyArrowPatch(posA=xy, posB=start_in + xy, shrinkA=0, **ARROWSTYLE)
     )
 
-# Intervalley scattering ------------------------------------------------------
-extrema = namedtuple("Extrema", ["yz", "E"])
-elec_endpoints = [
-    extrema(yz=(0, 2 / 3), E=2),
-    extrema(yz=(0, 0), E=1),
-    extrema(yz=(2 / 3, 0), E=0),
-]
-hole_endpoints = [
-    extrema(yz=(0, -3 / 4), E=2),
-    extrema(yz=(0, 0), E=0),
-    extrema(yz=(-2 / 3, 0), E=1),
-]
-
-valid_elec_pathway = lambda t: t[0].E > t[1].E  # Electrons scatter down
-valid_hole_pathway = lambda t: t[0].E < t[1].E  # Holes scatter up
-
-# Filter to remove pathways that go up in energy
-elec_pathways = list(filter(valid_elec_pathway, it.product(elec_endpoints, repeat=2)))
-hole_pathways = list(filter(valid_hole_pathway, it.product(hole_endpoints, repeat=2)))
-
-for (start, _), (end, _) in elec_pathways + hole_pathways:
-    start = np.asarray(start)
-    end = np.asarray(end)
-    midpoint = (start + end) / 2
-
-    for angle, alpha in zip(
-        [-15, -7.5, 0, 7.5, 15], [0.3, 0.7, 1, 0.7, 0.3]
-    ):  # degrees
-        # Rotate arrows about the midpoint
-        ax_elec3.add_patch(
-            FancyArrowPatch(
-                posA=midpoint + rotmat(angle) @ (start - midpoint),
-                posB=midpoint + rotmat(angle) @ (end - midpoint),
-                shrinkA=5,
-                shrinkB=5,
-                alpha=alpha,
-                **ARROWSTYLE
-            )
-        )
 
 # Annotate high-symmetry points -----------------------------------------------
 
-for i, ax in enumerate([ax_elec1, ax_elec2, ax_elec3]):
+for i, ax in enumerate([ax_elec1, ax_elec2]):
 
     ax.add_patch(
         Rectangle(xy=(-1, -1), width=2, height=2, fc="none", ec="k", clip_on=False)
@@ -316,9 +269,8 @@ ax_elec1.yaxis.set_major_formatter(ticker.FixedFormatter(["-½", "0", "½"]))
 ax_elec1.set_xlabel("$k_y/b^{*}$")
 ax_elec1.set_ylabel("$k_z/c^{*}$")
 
-tag_kwds = dict(x=0.12, y=0.88)
+tag_kwds = dict(x=0.06, y=0.94)
 tag_axis(ax_elec1, "a)", **tag_kwds)
 tag_axis(ax_elec2, "b)", **tag_kwds)
-tag_axis(ax_elec3, "c)", **tag_kwds)
 
 plt.tight_layout()
