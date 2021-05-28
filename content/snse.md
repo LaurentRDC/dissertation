@@ -415,7 +415,7 @@ Similarly, the isotropic slow rise of diffuse intensity for large wavevectors is
 $$
     P_{e^{-}}(\vect{k}) \propto \int_{0}^{\infty} d\epsilon \left[ g^i_{e^{-}}(\epsilon) E(\vect{k}) \right] \star \left[ \Theta\left\{-g^i_{e^{-}}(\epsilon)\right\} E(\vect{k}) \right]
 $$
-where $\star$ is the cross-correlation operation with symmetric boundary conditions, which accounts for scattering to other Brillouin zones (Umklapp scattering). The proportionality constant is chosen so that $P_{e^{-}}(\vect{k}) \leq 1$. Similarly, holes scatter up in energy so that:
+where $\star$ is the cross-correlation operation with symmetric boundary conditions, which accounts for Umklapp scattering processes[@Peierls1929]. The proportionality constant is chosen so that $P_{e^{-}}(\vect{k}) \leq 1$. Similarly, holes scatter up in energy so that:
 $$
     P_{h^{+}}(\vect{k}) \propto \int_{0}^{\infty} d\epsilon \left[ g^i_{h^{+}}(\epsilon) E(\vect{k}) \right] \star \left[ \Theta\left\{g^i_{h^{+}}(\epsilon)\right\} E(\vect{k}) \right]
 $$

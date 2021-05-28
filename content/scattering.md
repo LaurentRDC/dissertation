@@ -377,7 +377,7 @@ Furthermore, note that $[\hat{a}_{\lambda}(\vect{k}), \hat{a}_{\lambda}^{\dagger
 $$
 \langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = \langle e^{-i \vect{q} \cdot (\hat{\vect{u}}_s - \hat{\vect{u}}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vect{q} \cdot \hat{\vect{u}}_s, \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}]} \rangle
 $$
-Finally, for operators $A$ which are a linear combination of position and momentum operators of a harmonic system, $\langle e^A \rangle = e^{\frac{1}{2}\langle A^2 \rangle}$[@Born1941]. This leads to:
+Finally, for operators $A$ which are a linear combination of position and momentum operators of a harmonic system, $\langle e^A \rangle = e^{\frac{1}{2}\langle A^2 \rangle}$[@Born1941], sometimes known as the Bloch identity. This leads to:
 $$
 \langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = e^{-\frac{1}{2}\langle (\vect{q} \cdot \hat{\vect{u}}_s)^2\rangle} e^{-\frac{1}{2}\langle (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}})^2\rangle} e^{\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle}
 $$
