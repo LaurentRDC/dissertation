@@ -73,7 +73,7 @@ jobs:
       env:
         pandoc-version: 2.14
         pandoc-crossref-version: 0.3.11.0
-        pandoc-plot-version: 1.2.1
+        pandoc-plot-version: 1.2.2
       run: |
         mkdir $GITHUB_WORKSPACE/bin && cd $GITHUB_WORKSPACE/bin
         curl -ksSL https://github.com/jgm/pandoc/releases/download/${{ env.pandoc-version }}/pandoc-${{ env.pandoc-version }}-linux-amd64.tar.gz | tar xvz
