@@ -3,14 +3,15 @@ from pathlib import Path
 
 import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FixedFormatter, FixedLocator
 import numpy as np
 import scipy.optimize as opt
 import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
-from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
-from dissutils.snse import overnight4
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
+from dissutils.snse import overnight4, static
 from skimage.filters import gaussian
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
@@ -34,10 +35,30 @@ def biexponential(time, *args, **kwargs):
     return skued.biexponential(time, *args, **kwargs)
 
 
+with DiffractionDataset(static.path, mode="r") as static_dset:
+    static_pattern = static_dset.diff_data(0)
+    static_mask = static_dset.invalid_mask
+static_pattern[:, 1024::] += 6  # Difference in bias between the two halves of the CCD
+static_pattern[static_mask] = 0
+static_pattern[:] = gaussian(static_pattern, 4)
+# Removing some hot pixels
+static_pattern = np.maximum(static_pattern, 0)
+
+# Scaling between 0 and 1
+static_pattern -= static_pattern.min()
+static_pattern /= 200
+
 figure, axes = plt.subplots(
-    4, 1, sharex=True, sharey=True, figsize=(MEDIUM_FIGURE_WIDTH, 5)
+    4,
+    2,
+    sharex="col",
+    sharey="col",
+    figsize=(LARGE_FIGURE_WIDTH, 6),
+    gridspec_kw=dict(width_ratios=[3.5, 1]),
 )
 
+axs_trace = axes[:, 0]
+axs_im = axes[:, 1]
 
 timeseries = dict()
 with DiffractionDataset(overnight4.path, mode="r") as dset:
@@ -67,8 +88,8 @@ for k, ts in timeseries.items():
 kx, _ = overnight4.kgrid()
 dk = kx[0, 1] - kx[0, 0]
 
-for ax, (r, ts), color in zip(
-    axes, timeseries.items(), discrete_colors(len(timeseries))
+for ax, ax_im, (r, ts), color in zip(
+    axs_trace, axs_im, timeseries.items(), discrete_colors(len(timeseries))
 ):
 
     ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
@@ -80,13 +101,6 @@ for ax, (r, ts), color in zip(
         ts[timedelays < 15],
         p0=(0, -0.01, 0.01, 0.1, 3.7, 1),
     )
-    # perr = np.sqrt(np.diag(pcov))
-    # tau1 = (params[3], perr[3])
-    # tau2 = (params[4], perr[4])
-
-    # ax.text(x=1.02, y=2/3, s=f'fast: ${tau1[0]:.3f} \pm {tau1[1]:.3f}$ ps', ha='left', va='center', transform=ax.transAxes)
-    # ax.text(x=1.02, y=1/3, s=f'slow: ${tau2[0]:.3f} \pm {tau2[1]:.3f}$ ps', ha='left', va='center', transform=ax.transAxes)
-
     ax.plot(timedelays, biexponential(timedelays, *params), linewidth=1, color=color)
 
     ax.errorbar(
@@ -110,11 +124,41 @@ for ax, (r, ts), color in zip(
         edgecolor="w",
     )
 
+    kx, _ = static.kgrid()
+    dk = kx[0, 1] - kx[0, 0]
+    yc, xc = static.center
+    yi_, xi_ = static.miller_to_arrindex(0, 0, 2)
 
-axes[0].set_xlim([-1.6, 15])
+    ax_im.xaxis.set_visible(False)
+    ax_im.yaxis.set_visible(False)
+    ax_im.imshow(static_pattern, vmin=0, vmax=1, cmap="CMRmap_r")
+    ax_im.set_xlim([yi_ - 75, yi_ + 75])
+    ax_im.set_ylim([xi_ - 75, xi_ + 75])
 
-axes[-1].xaxis.set_visible(True)
-axes[-1].set_xlabel("Time-delay [ps]")
+    inner_circ, outer_circ = skued.RingSelection(
+        shape=static_pattern.shape,
+        center=(xi_, yi_),
+        inner_radius=r,
+        outer_radius=2 * r,
+    ).mpatch(edgecolor="k", linewidth=1, fill=False)
+    ax_im.add_patch(inner_circ)
+    ax_im.add_patch(outer_circ)
 
+
+ax_im = axs_im[-1]
+ax_im.xaxis.set_major_locator(
+    FixedLocator(locs=[yi_ + (-1 / 3) / dk, yi_, yi_ + (1 / 3) / dk])
+)
+ax_im.xaxis.set_major_formatter(FixedFormatter(["-⅓", "0", "⅓"]))
+ax_im.xaxis.set_visible(True)
+ax_im.set_xlabel("$|\mathbf{k}|$ [$\AA^{-1}$]")
+for x in [yi_ + (-1 / 3) / dk, yi_, yi_ + (1 / 3) / dk]:
+    ax_im.axvline(
+        x=x, linewidth=0.5, linestyle="--", color="k", ymax=4.57, clip_on=False
+    )
+
+axs_trace[0].set_xlim([-1.6, 15])
+axs_trace[-1].xaxis.set_visible(True)
+axs_trace[-1].set_xlabel("Time-delay [ps]")
 
 plt.tight_layout()
