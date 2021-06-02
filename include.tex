@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                   INCLUDE.TEX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[separate-uncertainty=true, multi-part-units=single]{siunitx}
+% We restrict to siunitx older v2 api because it includes the \bohr and \angstrom units
+\usepackage[separate-uncertainty=true, multi-part-units=single]{siunitx}[=v2]
 \sisetup{detect-all,mode=text,range-phrase = {\text{~to~}}}
 % Rydbergs are not SI; need to define separately
 \DeclareSIUnit\rydberg{Ry}
