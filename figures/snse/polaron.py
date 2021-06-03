@@ -1,11 +1,9 @@
 from math import sqrt
 from pathlib import Path
 
-import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize as opt
-import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
@@ -13,7 +11,8 @@ from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 from dissutils.snse import overnight4
 from skimage.filters import gaussian
 
-CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
+DATADIR = Path("data") / "snse"
+CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
 
 INDICES_DIFFUSE = [
     (0, -1, 3),
@@ -35,60 +34,12 @@ def biexponential(time, *args, **kwargs):
 
 
 def polaron(q, A, rp):
-    return A * q * rp ** 3 / (1 + (q * rp) ** 2) ** 2
+    return A * q * rp ** 3 * np.exp(-(q ** 2 * rp ** 2) / 4) / (1 + (q * rp) ** 2) ** 2
 
 
-radii = range(10, 70, 1)
-timeseries = dict()
-with DiffractionDataset(overnight4.path, mode="r") as dset:
-    timedelays = dset.time_points
-
-    for r in radii:
-        inner_radius = r - 5
-        outer_radius = r + 5
-        timeseries[r] = np.zeros_like(timedelays)
-        for indices in INDICES_DIFFUSE:
-            q2 = np.linalg.norm(CRYSTAL.scattering_vector(indices)) ** 2
-
-            yi, xi = overnight4.miller_to_arrindex(*indices)
-            diffuse_selection = skued.RingSelection(
-                shape=dset.resolution,
-                center=(xi, yi),
-                inner_radius=inner_radius,
-                outer_radius=outer_radius,
-            )
-            timeseries[r] += dset.time_series_selection(diffuse_selection) / q2
-
-# Normalize all time-series to pre-time-zero
-for k, ts in timeseries.items():
-    timeseries[k] /= np.mean(ts[timedelays < 0])
-
-kx, _ = overnight4.kgrid()
-dk = kx[0, 1] - kx[0, 0]
-
-amplitudes = list()
-amplitudes_err = list()
-radii_ = list()
-for (r, ts) in timeseries.items():
-
-    params, pcov = opt.curve_fit(
-        biexponential,
-        timedelays[timedelays < 15],
-        ts[timedelays < 15],
-        p0=(-0.01, 0.01, 0.4, 3.7, 1),
-    )
-
-    amp = abs(params[0])
-    err = np.sqrt(np.diag(pcov))[0]
-
-    if err < amp:
-        radii_.append(r)
-        amplitudes.append(amp)
-        amplitudes_err.append(err)
-
-ks = dk * np.asarray(radii_)
-amplitudes = np.asarray(amplitudes)
-amplitudes_err = np.asarray(amplitudes_err)
+ks, amplitudes, amplitudes_err = np.loadtxt(
+    DATADIR / "fast-diffuse.csv", delimiter=",", unpack=True
+)
 
 params, pcov = opt.curve_fit(
     polaron,
