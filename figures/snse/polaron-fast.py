@@ -34,7 +34,7 @@ def biexponential(time, *args, **kwargs):
 
 
 def polaron(q, A, rp):
-    return A * q * rp ** 3 * np.exp(-(q ** 2 * rp ** 2) / 4) / (1 + (q * rp) ** 2) ** 2
+    return A * q * rp ** 3 / (1 + (q * rp) ** 2) ** 2
 
 
 ks, amplitudes, amplitudes_err = np.loadtxt(
@@ -75,6 +75,6 @@ ax.plot(ks_, polaron(ks_, *params), linestyle="-", color="k")
 
 ax.set_xlim([ks.min(), ks.max()])
 ax.set_ylabel("Amplitude [a.u.]")
-ax.set_xlabel("Radius [1/$\AA$]")
+ax.set_xlabel("$|\mathbf{k}|$ [1/$\AA$]")
 
 plt.tight_layout()

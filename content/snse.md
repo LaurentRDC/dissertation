@@ -447,18 +447,45 @@ The behavior of $\kappa$ with increasing temperature exhibits an asymptotic beha
 
 ### Polaronic strain field
 
-Caruso *et al*.[@Caruso2019] suggest that in SnSe, the phonon modes which are the most coupled to the conduction electrons are zone-center optical polar modes polarized along the $c$ axis. The dressing of charge-carriers by polar phonons -- known as polarons -- have been the subject of much research [@Frohlich1950;@Feynman1955]. 
+Caruso *et al*.[@Caruso2019] suggest that in SnSe, the phonon modes which are the most coupled to the conduction electrons are zone-center optical polar modes polarized along the $c$ axis. The dressing of charge-carriers by polar phonons -- known as polarons -- have been the subject of much research [@Frohlich1950;@Feynman1955]. TODO: continue
 
+#### Point-defect model
 
-TODO: this section. [@Guzelturk2021]
-
+Recall the scattered wavevection (@eq:scattering-diffracted-intensity-zero-temp):
 $$
-    \frac{\Delta I}{I} \propto \frac{k r_p^3}{\left( 1 + k^2 r_p^2\right)^2} \vect{H} \cdot \hat{\vect{r}}
+    \bra{\vect{x}}\ket{\Psi}_0 \equiv F(\vect{q}) \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i}
 $$
-where
+where $F(\vect{q})$ is the static structure factor, and $\set{f_{e,i}}$ and $\set{\vect{r}_i}$ are the atomic form factors and positions, respectively. The subscript $0$ indicates that no polarons are present, for example before photoexcitation. A polaron induces a lattice distortion just like a point defect. For simplicity, assume that the polaron is located at the origin of the coordinate system, and that its deformation field $\vect{u}(\vect{r})$ is spherically-symmetric. The effect of the polaron is given by the substitution $\vect{r}_i \to \vect{u}(\vect{r}_i)$[@Fultz2013defect]:
+\begin{align}
+    \braket{\vect{x} | \Psi} 
+        & \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \left[ \vect{r}_i + \vect{u}(\vect{r}_i) \right]} \nonumber \\
+        & \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i} ~ e^{-i \vect{q} \cdot \vect{u}(\vect{r}_i)} \nonumber \\
+        & \approx \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i} ~ \left[ 1 - i \vect{H} \cdot \vect{u}(\vect{r}_i)\right] \nonumber \\
+        & \approx \braket{\vect{x} | \Psi}_0 \left[ 1 - i \vect{H} \cdot \hat{\vect{r}} \sum_i |\vect{u}(\vect{r}_i) |e^{i \vect{k} \cdot \vect{r}_i} \right]
+\end{align}
+where in the last step, the spherical symmetry of the displacement field was used. The approximations are described in more details elsewhere [@Fultz2013defect;@Guzelturk2021]. The vector $\vect{H}$ is the Bragg reflection nearest to $\vect{q} = \vect{H} + \vect{k}$ and $\vect{k}$ is limited to the first Brillouin zone, as defined in @sec:scattering-lattice-waves. The diffracted intensity including the effects of displacement, $I_p(\vect{q})$ becomes:
+$$
+    I_p(\vect{q}) \propto \left| I_0 \right|^2 \left| 1 - i \vect{H} \cdot \hat{\vect{r}} \sum_i |\vect{u}(\vect{r}_i) |e^{i \vect{k} \cdot \vect{r}_i} \right|^2 
+$$
+where $\left| \braket{\vect{x} | \Psi}_0 \right|^2 \equiv I_0(\vect{q})$ is the diffraction intensity without defect contributions. 
+The displacement field can be modelled using the following phenomenological spherically-symmetric deformation:
+$$
+    \vect{u}(\vect{x}) \propto e^{-\frac{\vect{x}}{r_p}} \hat{\vect{x}}
+$$
+where $r_p$ is a characteristic dimension of the polaron. In this case, the relative difference in the diffracted intensity caused by polaron is therefore given by[@Guzelturk2021]:
+$$
+    \frac{I_p(\vect{q}) - I_0(\vect{q})}{I_0(\vect{q})} \propto \frac{|\vect{k}| r^3_p}{(1 + |\vect{k}|^2 r_p^2)^2} \vect{H} \cdot \hat{\vect{r}}
+$$
 
-```{.matplotlib file="figures/snse/polaron.py" caption=""}
+```{.matplotlib file="figures/snse/polaron-fast.py" caption=""}
 ```
+
+```{.matplotlib file="figures/snse/polaron-localization.py" caption=""}
+```
+
+```{.matplotlib file="figures/snse/polaron-slow.py" caption=""}
+```
+
 
 ## Conclusion
 
