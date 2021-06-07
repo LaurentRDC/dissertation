@@ -12,56 +12,21 @@ import matplotlib.ticker as ticker
 import matplotlib.gridspec as gridspec
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import skued
-import scipy.optimize as opt
 from crystals import Crystal
-from iris import DiffractionDataset
 from dissutils import (
     LARGE_FIGURE_WIDTH,
     CBAR_SIZE,
     GRID_AXES_PAD,
-    discrete_colors,
     tag_axis,
 )
-from dissutils.snse import overnight4
-from skimage.filters import gaussian
 
 DATADIR = Path("data") / "snse"
 CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
 
-INDICES_DIFFUSE = [
-    (0, -1, 3),
-    (0, 0, 4),
-    (0, -2, 4),
-    (0, -1, 5),
-    (0, -1, 7),
-    (0, -3, 5),
-    (0, -5, 3),
-]
-
-# FWHM of the gaussian IRF
-IRF = 130  # femtoseconds
-
-
-@skued.with_irf(IRF / 1e3)
-def biexponential(time, *args, **kwargs):
-    return skued.biexponential(time, 0, *args, **kwargs)
-
 
 def polaron(q, A, rp):
-    return A * q * rp ** 3 / (1 + (q * rp) ** 2) ** 2
+    return A * q * rp ** 3 * np.exp(-(q ** 2 * rp ** 2) / 4)
 
-
-ks, amplitudes, amplitudes_err = np.loadtxt(
-    DATADIR / "fast-diffuse.csv", delimiter=",", unpack=True
-)
-
-params, pcov = opt.curve_fit(
-    polaron,
-    ks,
-    amplitudes,
-    sigma=amplitudes_err,
-    bounds=([-np.inf, 0], [np.inf, np.inf]),
-)
 
 figure = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 4))
 gs = gridspec.GridSpec(2, 2, width_ratios=[2, 1])
@@ -72,10 +37,10 @@ ax_large = figure.add_subplot(gs[0, 1])
 cax = make_axes_locatable(ax).append_axes("top", size=CBAR_SIZE, pad=GRID_AXES_PAD)
 
 ks_ = np.linspace(0, 1, num=1024)  # Gamma to T distance is 1 inv Angs
-kk, rr = np.meshgrid(ks_, np.linspace(0.5, 4, num=256))
+kk, rr = np.meshgrid(ks_, np.linspace(1, 9, num=256))
 fwhm = 2 * np.sqrt(2 * np.log(2)) * rr
 
-im = polaron(kk, params[0], rr)
+im = polaron(kk, 1, rr)
 
 # Conserve the spectral weight at each row
 weight = np.trapz(y=im, x=kk, axis=1)
@@ -131,7 +96,7 @@ m = ax.imshow(
 plt.colorbar(mappable=m, cax=cax, orientation="horizontal")
 cax.xaxis.tick_top()
 cax.xaxis.set_label_position("top")
-cax.set_xlabel("Diffuse intensity [a.u.]")
+cax.set_xlabel("Polaron scattering intensity [a.u.]")
 
 ax.set_ylabel("Polaron FWHM [$\AA$]")
 ax.set_xlabel("$|\mathbf{k}|$ [1/$\AA$]")

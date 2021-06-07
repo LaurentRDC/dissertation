@@ -470,20 +470,17 @@ $$
 where $\left| \braket{\vect{x} | \Psi}_0 \right|^2 \equiv I_0(\vect{q})$ is the diffraction intensity without defect contributions. 
 The displacement field can be modelled using the following phenomenological spherically-symmetric deformation:
 $$
-    \vect{u}(\vect{x}) \propto e^{-\frac{\vect{x}}{r_p}} \hat{\vect{x}}
+    \vect{u}(\vect{x}) \propto e^{-\frac{|\vect{x}|^2}{r_p^2}} \hat{\vect{x}}
 $$
-where $r_p$ is a characteristic dimension of the polaron. In this case, the relative difference in the diffracted intensity caused by polaron is therefore given by[@Guzelturk2021]:
+where $r_p$ is a characteristic dimension of the polaron, with an associated full-width at half-maximum of $2 \sqrt{2 \ln{2}} ~ r_p$. In this case, the relative difference in the diffracted intensity caused by polaron is therefore given by[@Guzelturk2021]:
 $$
-    \frac{I_p(\vect{q}) - I_0(\vect{q})}{I_0(\vect{q})} \propto \frac{|\vect{k}| r^3_p}{(1 + |\vect{k}|^2 r_p^2)^2} \vect{H} \cdot \hat{\vect{r}}
+    \frac{I_p(\vect{q}) - I_0(\vect{q})}{I_0(\vect{q})} \propto |\vect{k}| r^3_p e^{|\vect{k}|^2 r_p^2/4} \vect{H} \cdot \hat{\vect{r}}
 $$
 
-```{.matplotlib file="figures/snse/polaron-fast.py" caption=""}
+```{.matplotlib file="figures/snse/polaron-size-model.py" caption=""}
 ```
 
-```{.matplotlib file="figures/snse/polaron-localization.py" caption=""}
-```
-
-```{.matplotlib file="figures/snse/polaron-slow.py" caption=""}
+```{.matplotlib file="figures/snse/polaron-fits.py" caption=""}
 ```
 
 
