@@ -447,13 +447,15 @@ The behavior of $\kappa$ with increasing temperature exhibits an asymptotic beha
 
 ### Polaronic strain field
 
-Caruso *et al*.[@Caruso2019] suggest that in SnSe, the phonon modes which are the most coupled to the conduction electrons are zone-center optical polar modes polarized along the $c$ axis. The dressing of charge-carriers by polar phonons -- known as polarons -- have been the subject of much research [@Frohlich1950;@Feynman1955]. TODO: continue
+The relaxation of photogenerated carriers or the anharmonic decay of phonons is expected to imprint the structure of the electronic or phonon dispersion on the diffuse intensity, respectively, due to energy- and momentum-conservation \cite{Stern2018, RenedeCotret2019, Otto2020}. However, measured changes in the diffuse intensity are broad and radially-symmetric in reciprocal space. This is indicative of lattice distortions that are local in real-space. Given that SnSe is a polar lattice, and that strong electron-phonon coupling to polar phonon modes has been calculated\cite{Caruso2019}, our results can be understood as the formation of polarons.
+
+The dressing of charge-carriers by polar phonons -- known as polarons -- have been the subject of much research [@Frohlich1950;@Feynman1955]. TODO: a bit more general information about polarons. A polaron, like any point-defect-like deformation of the lattice, involves many phonon modes as local lattice distortions in real-space cannot be described with a finite number of lattice normal modes. Calculations by Sio *et al.*[Sio2019] have demonstrated that in other polar lattices, electron and hole polarons have widely different characteristic lengths. Electron polarons tend to be larger and hence are composed of low-wavevector modes, while hole polarons tend to be smaller due to the relative flatness of the valence band and thus involve phonons modes across a wider range of wavevectors. 
 
 #### Point-defect model
 
 Recall the scattered wavevection (@eq:scattering-diffracted-intensity-zero-temp):
 $$
-    \bra{\vect{x}}\ket{\Psi}_0 \equiv F(\vect{q}) \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i}
+    \braket{\vect{x}|\Psi}_0 \equiv F(\vect{q}) \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i}
 $$
 where $F(\vect{q})$ is the static structure factor, and $\set{f_{e,i}}$ and $\set{\vect{r}_i}$ are the atomic form factors and positions, respectively. The subscript $0$ indicates that no polarons are present, for example before photoexcitation. A polaron induces a lattice distortion just like a point defect. For simplicity, assume that the polaron is located at the origin of the coordinate system, and that its deformation field $\vect{u}(\vect{r})$ is spherically-symmetric. The effect of the polaron is given by the substitution $\vect{r}_i \to \vect{u}(\vect{r}_i)$[@Fultz2013defect]:
 \begin{align}
@@ -465,24 +467,33 @@ where $F(\vect{q})$ is the static structure factor, and $\set{f_{e,i}}$ and $\se
 \end{align}
 where in the last step, the spherical symmetry of the displacement field was used. The approximations are described in more details elsewhere [@Fultz2013defect;@Guzelturk2021]. The vector $\vect{H}$ is the Bragg reflection nearest to $\vect{q} = \vect{H} + \vect{k}$ and $\vect{k}$ is limited to the first Brillouin zone, as defined in @sec:scattering-lattice-waves. The diffracted intensity including the effects of displacement, $I_p(\vect{q})$ becomes:
 $$
-    I_p(\vect{q}) \propto \left| I_0 \right|^2 \left| 1 - i \vect{H} \cdot \hat{\vect{r}} \sum_i |\vect{u}(\vect{r}_i) |e^{i \vect{k} \cdot \vect{r}_i} \right|^2 
+    I_p(\vect{q}) \propto I_0 \left| 1 - i \vect{H} \cdot \hat{\vect{r}} \sum_i |\vect{u}(\vect{r}_i) |e^{i \vect{k} \cdot \vect{r}_i} \right|^2 
 $$
-where $\left| \braket{\vect{x} | \Psi}_0 \right|^2 \equiv I_0(\vect{q})$ is the diffraction intensity without defect contributions. 
+where $I_0(\vect{q}) \equiv \left| \braket{\vect{x} | \Psi}_0 \right|^2$ is the diffraction intensity without defect contributions. 
+
+```{.matplotlib #fig:snse-polaron-size-model file="figures/snse/polaron-size-model.py" caption="Scattering intensity due to polarons as a function of polaron size. **a)** Radial intensity profile due to a polaron with a Gaussian displacement field (@eq:snse-polaron-strain-field). The color scaling applies to all subfigures. **b)** Scattering intensity across the Brillouin zone due to a large polaron (FWHM of \SI{21.2}{\angstrom}). **c)** Scattering intensity across the Brillouin zone due to a small polaron (FWHM of \SI{4.7}{\angstrom})."}
+```
+
 The displacement field can be modelled using the following phenomenological spherically-symmetric deformation:
 $$
-    \vect{u}(\vect{x}) \propto e^{-\frac{|\vect{x}|^2}{r_p^2}} \hat{\vect{x}}
-$$
-where $r_p$ is a characteristic dimension of the polaron, with an associated full-width at half-maximum of $2 \sqrt{2 \ln{2}} ~ r_p$. In this case, the relative difference in the diffracted intensity caused by polaron is therefore given by[@Guzelturk2021]:
+    \vect{u}(\vect{r}) \propto e^{-\sfrac{|\vect{r}|^2}{r_p^2}} \hat{\vect{r}}
+$${#eq:snse-polaron-strain-field}
+where $r_p$ is a characteristic dimension of the polaron, with an associated full-width at half-maximum of $2 \sqrt{2 \ln{2}} ~ r_p$. In this case, the relative difference in the diffracted intensity caused by polaron is therefore given by[@Fultz2013defect;@Guzelturk2021]:
 $$
     \frac{I_p(\vect{q}) - I_0(\vect{q})}{I_0(\vect{q})} \propto |\vect{k}| r^3_p e^{|\vect{k}|^2 r_p^2/4} \vect{H} \cdot \hat{\vect{r}}
-$$
+$${#eq:snse-polaron-intensity-change}
+@fig:snse-polaron-size-model shows the contribution of a polaron to the total scattering intensity profile. Other radially-symmetric displacement fields have been modelled in Guzelturk *et al.*[@@Guzelturk2021], which only changes the definition of the polaron characteristic length $r_p$.
 
-```{.matplotlib file="figures/snse/polaron-size-model.py" caption=""}
+#### Time-resolved polaron formation
+
+The change in the diffuse intensity profile at two characteristic timescales -- \SI{1}{\pico\second} and \SI{5}{\pico\second} -- can be fit using the modelling summarized in @fig:snse-polaron-size-model. Only reflections which are nearly parallel to $\vect{c}^{\star}$ were used in the following analysis. 
+
+For the fast time-scale, the radial diffuse intensity change is much easier to extract using a biexponential fitting over time, much like what is shown in @fig:snse-size-comparison. This is because directly extracting the diffuse intensity profile at \SI{1}{\pico\second} includes the nearby Bragg peak contribution. The diffuse intensity change was integrated in a ring of radius $|\vect{k}|$, and fit with a biexponential. The diffuse intensity change at \SI{1}{\pico\second} -- the maximum of the curve -- is proportional to the amplitude of the fast exponential, and so the exponential amplitude is used as a proxy value. The error in the amplitude is taken to be the uncertainty in the fitting parameter. For the slow time-scale, the Bragg peak dynamics are mostly flat, and so the radial diffuse intensity profile can be extracted directly. This is effectively the azimuthal average of @fig:snse-relaxation-amplitude. The error in the diffuse intensity change at \SI{5}{\pico\second} is taken to be the standard error in the diffuse intensity at equivalent radii. The change in the diffuse intensity profile is shown in @fig:snse-polaron-fits.
+
+```{.matplotlib #fig:snse-polaron-fits file="figures/snse/polaron-fits.py" caption="Change in diffuse intensity profile. The areas in gray represent the standard error in the intensity change. Solid curves are best fits to @eq:snse-polaron-intensity-change **a)** Radial profile of the intensity change at \SI{1}{\pico\second}, which is consistent with a polaron with a full-width at half-maximum of \SI{23.0 \pm 0.3}{\angstrom} **b)** Radial profile of the intensity change at \SI{5}{\pico\second}, which is consistent with a polaron with a full-width at half-maximum of \SI{4.4 \pm 0.1}{\angstrom}."}
 ```
 
-```{.matplotlib file="figures/snse/polaron-fits.py" caption=""}
-```
-
+The radial profile changes were fit with the modelling of @eq:snse-polaron-intensity-change using a nonlinear least-squares routine. The change in radial intensity profile at \SI{1}{\pico\second} is consistent with a polaron with a FWHM of \SI{23.0 \pm 0.3}{\angstrom}, while the change in radial intensity profile at \SI{5}{\pico\second} is consistent with a much smaller polaron with a FWHM of \SI{4.4 \pm 0.1}{\angstrom}. The fits are shown in @fig:snse-polaron-fits. 
 
 ## Conclusion
 

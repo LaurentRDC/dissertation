@@ -29,7 +29,7 @@ def polaron(q, A, rp):
 
 
 figure = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 4))
-gs = gridspec.GridSpec(2, 2, width_ratios=[2, 1])
+gs = gridspec.GridSpec(2, 2, width_ratios=[2.5, 1])
 ax = figure.add_subplot(gs[:, 0])
 ax_small = figure.add_subplot(gs[1, 1])
 ax_large = figure.add_subplot(gs[0, 1])
@@ -37,7 +37,7 @@ ax_large = figure.add_subplot(gs[0, 1])
 cax = make_axes_locatable(ax).append_axes("top", size=CBAR_SIZE, pad=GRID_AXES_PAD)
 
 ks_ = np.linspace(0, 1, num=1024)  # Gamma to T distance is 1 inv Angs
-kk, rr = np.meshgrid(ks_, np.linspace(1, 9, num=256))
+kk, rr = np.meshgrid(ks_, np.linspace(2, 9, num=256))
 fwhm = 2 * np.sqrt(2 * np.log(2)) * rr
 
 im = polaron(kk, 1, rr)
@@ -105,4 +105,11 @@ tag_axis(ax, "a)")
 tag_axis(ax_large, "b)", x=0.1, y=0.9)
 tag_axis(ax_small, "c)", x=0.1, y=0.9)
 
-plt.tight_layout()
+plt.subplots_adjust(
+    top=0.862,
+    bottom=0.161,
+    left=0.098,
+    right=0.897,
+    hspace=0.131,
+    wspace=0.06
+)
