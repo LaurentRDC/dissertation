@@ -2,14 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.optimize as opt
 from functools import partial
-from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
+from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 from pathlib import Path
+from scipy.ndimage import gaussian_filter
 
 DATADIR = Path("data") / "snse"
 
 
-def polaron(q, A, rp, C):
-    return A * q * rp ** 3 * np.exp(-(q ** 2 * rp ** 2) / 4) + C
+def polaron(q, A, rp):
+    return A * q * rp ** 3 * np.exp(-(q ** 2 * rp ** 2) / 4)
 
 
 rf, pf, ef = np.loadtxt(
@@ -32,8 +33,8 @@ paramsf, _ = opt.curve_fit(
     rf[rf < 0.32],
     pf[rf < 0.32],
     sigma=ef[rf < 0.32],
-    p0=(8e-3, 12, 0),
-    bounds=([0, 0, -1], [np.inf, np.inf, 1]),
+    p0=(8e-3, 12),
+    bounds=([0, 0], [np.inf, np.inf]),
 )
 
 paramss, _ = opt.curve_fit(
@@ -41,33 +42,36 @@ paramss, _ = opt.curve_fit(
     rs,
     ps,
     sigma=es,
-    bounds=([-np.inf, 0, -np.inf], [np.inf, np.inf, np.inf]),
+    bounds=([-np.inf, 0], [np.inf, np.inf]),
 )
 
-figure, (ax_fast, ax_slow) = plt.subplots(1, 2, figsize=(LARGE_FIGURE_WIDTH, 2))
+figure, ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3.5))
 
-for ax, (r, p, e), params, color in zip(
-    [ax_fast, ax_slow],
+for (r, p, e), params, marker, color, label in zip(
     [(rf, pf, ef), (rs, ps, es)],
     [paramsf, paramss],
+    ["^", "o"],
     discrete_colors(2),
+    ["$\\tau=1$ ps", "$\\tau=5$ ps"],
 ):
+    p_smooth = gaussian_filter(p, sigma=3)
     ax.plot(
         r,
-        p,
-        marker="o",
+        p_smooth,
+        marker=marker,
+        markerfacecolor="none",
         color=color,
-        markersize=2,
+        markersize=6,
         linestyle="None",
+        label=label,
     )
 
     ax.fill_between(
         r,
-        y1=p + e,
-        y2=p - e,
-        facecolor="gray",
-        edgecolor="k",
-        linestyle="dashed",
+        y1=p_smooth + e,
+        y2=p_smooth - e,
+        facecolor=color,
+        edgecolor="none",
         linewidth=1,
         alpha=0.2,
     )
@@ -78,12 +82,10 @@ for ax, (r, p, e), params, color in zip(
     ax.set_ylabel("$\Delta I / I_0$ [a.u.]")
     ax.set_xlabel("$|\mathbf{k}|$ [1/$\AA$]")
 
-    ax.set_xlim([r.min(), r.max()])
+ax.set_xlim([rf.min(), rf.max()])
 
-ax_slow.yaxis.tick_right()
-ax_slow.yaxis.set_label_position("right")
-
-tag_axis(ax_fast, "a)", x=0.9, y=0.9, horizontalalignment="left")
-tag_axis(ax_slow, "b)", y=0.9)
+ax.legend(
+    loc="center", ncol=2, bbox_to_anchor=(0.5, 1.05), edgecolor="none", facecolor="none"
+)
 
 plt.tight_layout()

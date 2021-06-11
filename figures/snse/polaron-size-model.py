@@ -106,10 +106,5 @@ tag_axis(ax_large, "b)", x=0.1, y=0.9)
 tag_axis(ax_small, "c)", x=0.1, y=0.9)
 
 plt.subplots_adjust(
-    top=0.862,
-    bottom=0.161,
-    left=0.098,
-    right=0.897,
-    hspace=0.131,
-    wspace=0.06
+    top=0.862, bottom=0.161, left=0.098, right=0.897, hspace=0.131, wspace=0.06
 )

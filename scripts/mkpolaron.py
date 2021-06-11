@@ -105,10 +105,16 @@ ks = dk * np.asarray(radii_)
 amplitudes = np.asarray(amplitudes)
 amplitudes_err = np.asarray(amplitudes_err)
 
-data = np.empty(shape=(len(ks), 3))
-data[:, 0] = ks
-data[:, 1] = amplitudes
-data[:, 2] = amplitudes_err
+_, bstar, cstar, *_ = CRYSTAL.reciprocal.lattice_parameters
+
+data = np.empty(shape=(2 * len(ks), 3))
+data[:, 0] = np.concatenate(
+    [ks, np.linspace(ks.max(), np.hypot(bstar / 2, cstar / 2), num=len(ks))]
+)
+data[:, 1] = np.concatenate([amplitudes, np.zeros_like(ks)])
+data[:, 2] = np.concatenate(
+    [amplitudes_err, np.full_like(amplitudes_err, fill_value=amplitudes_err.mean())]
+)
 
 np.savetxt(DATADIR / "fast-diffuse-profile.csv", data, delimiter=",", header=HEADER)
 
