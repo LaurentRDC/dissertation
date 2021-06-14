@@ -71,7 +71,7 @@ jobs:
 
     - name: Install Pandoc dependencies
       env:
-        pandoc-version: 2.14.0.1
+        pandoc-version: 2.14.0.2
         pandoc-crossref-version: 0.3.11.0a
         pandoc-plot-version: 1.2.3
       run: |
