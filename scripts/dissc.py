@@ -32,7 +32,6 @@ LATEX_ENGINE = "lualatex"
 
 META = HERE / "metadata.yaml"
 TYPOGRAPHY = HERE / "typography.yaml"
-
 CONTENTDIR = HERE / "content"
 SRC = [
     CONTENTDIR / "preface.md",
@@ -107,14 +106,9 @@ def check_for_todo(path):
 
 def precompute_plots():
     """Compute the plotting prerequisites."""
-    for script in [
-        "mkdecomp.py",
-        "mkdispersion.py",
-        "mknpstreams-bench.py",
-        "mkoneph.py",
-    ]:
-        path = HERE / "scripts" / script
-        run(f"python -OO {path}")
+    logging.info("Running prerequisites")
+    for script in (HERE / "scripts" / "prerequisites").glob('*.py'):
+        run(f"python -OO {script.relative_to(HERE)}")
 
 
 @wraps(subprocess.run)
