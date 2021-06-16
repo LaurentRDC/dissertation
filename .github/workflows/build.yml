@@ -72,7 +72,7 @@ jobs:
     - name: Install Pandoc dependencies
       env:
         pandoc-version: 2.14.0.2
-        pandoc-crossref-version: 0.3.11.0a
+        pandoc-crossref-version: 0.3.12.0
         pandoc-plot-version: 1.2.3
       run: |
         mkdir $GITHUB_WORKSPACE/bin && cd $GITHUB_WORKSPACE/bin
