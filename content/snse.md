@@ -433,7 +433,7 @@ Recall the scattered wavevection (@eq:scattering-diffracted-intensity-zero-temp)
 $$
     \braket{\vect{x}|\Psi}_0 \equiv F(\vect{q}) \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i}
 $$
-where $F(\vect{q})$ is the static structure factor, and $\set{f_{e,i}}$ and $\set{\vect{r}_i}$ are the atomic form factors and positions, respectively. The subscript $0$ indicates that no polarons are present, for example before photoexcitation. A polaron induces a lattice distortion just like a point defect. For simplicity, assume that the polaron is located at the origin of the coordinate system, and that its deformation field $\vect{u}(\vect{r})$ is spherically-symmetric. The effect of the polaron is given by the substitution $\vect{r}_i \to \vect{u}(\vect{r}_i)$[@Fultz2013defect]:
+where $F(\vect{q})$ is the static structure factor, and $\set{f_{e,i}}$ and $\set{\vect{r}_i}$ are the atomic form factors and positions, respectively. The subscript $0$ indicates that no polarons are present, for example before photoexcitation. A polaron induces a lattice distortion just like a point defect. For simplicity, assume that the polaron is located at the origin of the coordinate system, and that its deformation field $\vect{u}(\vect{r})$ is spherically-symmetric. The effect of the polaron is given by the substitution $\vect{r}_i \to \vect{r}_i + \vect{u}(\vect{r}_i)$[@Fultz2013defect]:
 \begin{align}
     \braket{\vect{x} | \Psi} 
         & \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \left[ \vect{r}_i + \vect{u}(\vect{r}_i) \right]} \nonumber \\
