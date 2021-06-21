@@ -107,7 +107,7 @@ def check_for_todo(path):
 def precompute_plots():
     """Compute the plotting prerequisites."""
     logging.info("Running prerequisites")
-    for script in (HERE / "scripts" / "prerequisites").glob('*.py'):
+    for script in (HERE / "scripts" / "prerequisites").glob("*.py"):
         run(f"python -OO {script.relative_to(HERE)}")
 
 
