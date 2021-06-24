@@ -471,6 +471,9 @@ For the fast time-scale, the radial diffuse intensity change is much easier to e
 
 The radial profile changes were fit with the modelling of @eq:snse-polaron-intensity-change using a nonlinear least-squares routine. The change in radial intensity profile at \SI{1}{\pico\second} is consistent with a polaron with a FWHM of \SI{19.4 \pm 0.2}{\angstrom}, while the change in radial intensity profile at \SI{5}{\pico\second} is consistent with a much smaller polaron with a FWHM of \SI{4.2 \pm 0.1}{\angstrom}. The fits are shown in @fig:snse-polaron-fits. 
 
+```{.matplotlib #fig:snse-polaron-realspace file="figures/snse/polaron-realspace.py"}
+```
+
 ### Phase transition mechanism
 
 The ultrafast electron scattering measurements and the discussion of the previous sections demonstrates that strong electron-phonon coupling to one or more $c$-polarized zone-center phonons is very strong. Calculations by Caruso *et al.*[@Caruso2019] suggest that electron-phonon interactions are strongest with the optical modes linked to the $Pnma \to Cmcm$ phase transition. In second-order, displacive phase transitions like the $Pnma \to Cmcm$ transition, the frequency of the soft phonon mode which freezes at the transition temperature $T_c$ can be used as an order parameter[@Dove1997]. This kind of Landau theory description is phenomenological in nature, and so there is no unified driving mechanism behind such phase transitions. In this regard, the measurements presented in this chapter can be identified as a *destabilization* of the $Pnma$ phase with photocarriers. The dependence of the destabilization with fluence (@fig:snse-photodoping) reinforces the idea that the thermal phase transition is driven by electron-phonon interactions, because the thermal carrier-density naturally increases with temperature.
