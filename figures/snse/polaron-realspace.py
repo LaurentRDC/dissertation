@@ -12,7 +12,7 @@ NY = NZ = 5  # Supercell factor in b and c directions
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
 SNCOLOR, SECOLOR = plt.get_cmap("inferno")([0.2, 0.8])
 PATCH_PARAMS = {"Sn": dict(radius=0.4, fc=SNCOLOR), "Se": dict(radius=0.3, fc=SECOLOR)}
-COLORMAP = "PuRd"
+COLORMAP = "Purples"  # Important that lowest values map to ~(1,1,1,1) (white)
 
 
 def signum(x):
