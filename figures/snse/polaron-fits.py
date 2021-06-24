@@ -76,16 +76,17 @@ for (r, p, e), params, marker, color, label in zip(
         alpha=0.2,
     )
 
-    r_ = np.linspace(r.min(), r.max(), 1024)
+    r_ = np.linspace(rf.min(), rs.max(), 1024)
     ax.plot(r_, polaron(r_, *params), color=color, linestyle="-")
 
     ax.set_ylabel("$\Delta I / I_0$ [a.u.]")
     ax.set_xlabel("$|\mathbf{k}|$ [1/$\AA$]")
 
-ax.set_xlim([rf.min(), rf.max()])
+ax.set_xlim([rf.min(), rs.max()])
 
 ax.legend(
     loc="center", ncol=2, bbox_to_anchor=(0.5, 1.05), edgecolor="none", facecolor="none"
 )
 
 plt.tight_layout()
+plt.show()
