@@ -91,13 +91,10 @@ for (r, ts) in timeseries.items():
         timedelays[timedelays < 15],
         ts[timedelays < 15],
         p0=(-0.01, 0.01, 0.4, 3.7, 1),
-        method='trf',
-        bounds=(
-            [-np.inf, 0, 0, 2.5, -np.inf], 
-            [0, np.inf, 0.7, np.inf, np.inf]
-        ),
+        method="trf",
+        bounds=([-np.inf, 0, 0, 2.5, -np.inf], [0, np.inf, 0.7, np.inf, np.inf]),
         max_nfev=1000,
-        ftol=1e-10
+        ftol=1e-10,
     )
     amp = abs(params[0])
     err = np.sqrt(np.diag(pcov))[0]
@@ -118,7 +115,7 @@ data[:, 0] = np.concatenate(
 )
 data[:, 1] = np.concatenate([amplitudes, np.zeros_like(ks)])
 data[:, 2] = np.concatenate(
-    [amplitudes_err, np.full_like(amplitudes_err, fill_value=amplitudes_err.mean()/2)]
+    [amplitudes_err, np.full_like(amplitudes_err, fill_value=amplitudes_err.mean() / 2)]
 )
 
 np.savetxt(DATADIR / "fast-diffuse-profile.csv", data, delimiter=",", header=HEADER)
