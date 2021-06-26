@@ -49,18 +49,17 @@ yy, zz = np.meshgrid(
     np.linspace(-NY / 2, NY / 2, num=256), np.linspace(-NZ / 2, NZ / 2, num=256)
 )
 
-for ax, (sy, sz), dirf, amp, label in zip(
-    [ax_1d, ax_3d], [(1, 5), (20, 20)], [linear, radial], [2, 1], ["a)", "b)"]
+for ax, (sy, sz), dirf, amp, vmin, label in zip(
+    [ax_1d, ax_3d], [(3, 20), (3, 3)], [linear, radial], [1.5, 1], [0.992, 0.92], ["a)", "b)"]
 ):
 
     ax.axis("off")
     ax.set_aspect(1)
     im = gaussian2d(yy, zz, sy, sz)
-    vmin = max([im[:, 0].max(), im[:, -1].max(), im[0, :].max(), im[-1, :].max()])
-    vmax = im.max()
+    im/= im.max()
     m = ax.imshow(
         im,
-        vmax=vmax + (vmax - vmin) / 3,
+        vmax=1,
         vmin=vmin,
         cmap=COLORMAP,
         extent=[-NY * b / 2, NY * b / 2, -NZ * c / 2, NZ * c / 2],
