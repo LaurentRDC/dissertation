@@ -67,7 +67,6 @@ jobs:
 
         # Ensure that iris is correctly set up
         python -c "import iris"
-  
 
     - name: Install Pandoc dependencies
       env:

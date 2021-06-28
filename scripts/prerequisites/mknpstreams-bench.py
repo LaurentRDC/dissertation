@@ -5,7 +5,7 @@ from tqdm import tqdm
 from timeit import default_timer as timer
 from pathlib import Path
 
-OUTPUT = Path(__file__).parent.parent / "data" / "introduction" / "npstreams-benchmark"
+OUTPUT = Path("data") / "introduction" / "npstreams-benchmark"
 OUTPUT.mkdir(exist_ok=True)
 
 

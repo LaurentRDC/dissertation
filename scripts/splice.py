@@ -4,6 +4,8 @@
 Pandoc filter to allow interpolation of metadata fields
 into a document.  %{fields} will be replaced by the field's
 value, assuming it is of the type MetaInlines or MetaString.
+
+Modified from the examples in https://github.com/jgm/pandocfilters.
 """
 
 from pandocfilters import toJSONFilter, attributes, Span, Str

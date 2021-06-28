@@ -20,7 +20,7 @@ from mkoneph import (
     IN_PLANE_MODES,
 )
 
-INPUT = Path(__file__).parent.parent / "data" / "graphite"
+INPUT = Path("data") / "graphite"
 OUTPUT_STATIC = INPUT / "static-dispersion"
 OUTPUT_STATIC.mkdir(exist_ok=True)
 OUTPUT_WEIGHTED = INPUT / "weighted-dispersion"

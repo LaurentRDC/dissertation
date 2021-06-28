@@ -22,7 +22,7 @@ from skimage.filters import gaussian
 from skued import affe, detector_scattvectors
 from tqdm import tqdm
 
-INPUT = Path(__file__).parent.parent / "data" / "graphite"
+INPUT = Path("data") / "graphite"
 OUTPUT = INPUT / "oneph"
 OUTPUT.mkdir(exist_ok=True)
 
