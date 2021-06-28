@@ -50,13 +50,18 @@ yy, zz = np.meshgrid(
 )
 
 for ax, (sy, sz), dirf, amp, vmin, label in zip(
-    [ax_1d, ax_3d], [(3, 20), (3, 3)], [linear, radial], [1.5, 1], [0.992, 0.92], ["a)", "b)"]
+    [ax_1d, ax_3d],
+    [(3, 20), (3, 3)],
+    [linear, radial],
+    [1.5, 1],
+    [0.992, 0.92],
+    ["a)", "b)"],
 ):
 
     ax.axis("off")
     ax.set_aspect(1)
     im = gaussian2d(yy, zz, sy, sz)
-    im/= im.max()
+    im /= im.max()
     m = ax.imshow(
         im,
         vmax=1,

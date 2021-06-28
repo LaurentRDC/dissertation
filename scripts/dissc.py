@@ -30,8 +30,6 @@ BUILDDIR_PDF.mkdir(exist_ok=True)
 
 LATEX_ENGINE = "lualatex"
 
-META = HERE / "metadata.yaml"
-TYPOGRAPHY = HERE / "typography.yaml"
 CONTENTDIR = HERE / "content"
 SRC = [
     CONTENTDIR / "preface.md",
@@ -49,14 +47,22 @@ OPTIONS = ["-f markdown+raw_tex+latex_macros"]
 OPTIONS += ["--standalone"]
 
 # The order of filters is important!
-OPTIONS += ["--filter pandoc-plot", "--filter pandoc-crossref"]
+OPTIONS += [
+    "--filter pandoc-plot",
+    "--filter scripts/splice.py",
+    "--filter pandoc-crossref",
+]
 OPTIONS += [
     "-M cref:true",
     "-M autoEqnLabels:true",
     "-M plot-configuration=plot-config.yml",
 ]
 
-OPTIONS += [f"--metadata-file={META}", f"--metadata-file={TYPOGRAPHY}"]
+OPTIONS += [
+    f"--metadata-file={ HERE / 'metadata.yaml' }",  # Document metadata
+    f"--metadata-file={ HERE / 'typography.yaml'}",  # Formatting
+    f"--metadata-file={ HERE / 'variables.yaml' }",  # Splice variables, eg. fit values
+]
 
 OPTIONS += ["--biblatex", f"-V bibliography={BIBFILE}"]
 OPTIONS += [
