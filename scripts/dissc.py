@@ -114,7 +114,7 @@ def precompute_plots():
     """Compute the plotting prerequisites."""
     logging.info("Running prerequisites")
     for script in (HERE / "scripts" / "prerequisites").glob("*.py"):
-        run(f"python -OO {script.relative_to(HERE)}")
+        run(f"python -OO {script.relative_to(HERE)}").check_returncode()
 
 
 @wraps(subprocess.run)
