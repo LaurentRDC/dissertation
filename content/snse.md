@@ -234,7 +234,7 @@ An important point which will anchor the discussion below is that the lattice di
 ```{.matplotlib #fig:snse-dwaller file="figures/snse/dwaller.py" caption="Differential intensity dynamics on Bragg peaks for reflections either parallel to $\vect{b}^\star$ or $\vect{c}^\star$. Reflections parallel to $\vect{b}^\star$ are well-described by a single exponential with time-constant \SI{4 \pm 1}{\pico\second}. However, reflections parallel to $\vect{c}^\star$ have a biexponential character the with time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. Error bars represent the fluctuations before photoexcitation ($\tau < 0$) but are too small to see."}
 ```
 
-The overall Bragg peak profiles were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect. In-plane reflections can be separated into two categories: the reflections which are nearly parallel to the $\vect{c}^\star$ axis, and the reflections which are not. For the reflections which are within $\sim\ang{45}$ degrees of the $\vect{c}^\star$ axis, the amplitude of the Bragg peak follows a Debye-Waller suppression with two time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. For reflections which are not nearly parallel to $\vect{c}^\star$, only the slower time-constant is present. @fig:snse-dwaller shows the comparison between the amplitude suppression for reflections which are exactly parallel to $\vect{b}^\star$ ($\set{ (020), (040), ...}$) and reflections which are exactly parallel to $\vect{c}^\star$ ($\set{ (002), (004), ...}$). 
+The overall Bragg peak profiles were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect (@sec:scattering-lattice-waves). In-plane reflections can be separated into two categories: the reflections which are nearly parallel to the $\vect{c}^\star$ axis, and the reflections which are not. For the reflections which are within $\sim\ang{45}$ degrees of the $\vect{c}^\star$ axis, the amplitude of the Bragg peak follows a Debye-Waller suppression with two time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. For reflections which are not nearly parallel to $\vect{c}^\star$, only the slower time-constant is present. @fig:snse-dwaller shows the comparison between the amplitude suppression for reflections which are exactly parallel to $\vect{b}^\star$ ($\set{ (020), (040), ...}$) and reflections which are exactly parallel to $\vect{c}^\star$ ($\set{ (002), (004), ...}$). 
 
 Recall from @eq:scattering-debye-waller that the Debye-Waller factor reports on the average mean-square-displacement of atoms $\langle |\vect{u}|^2 \rangle$ along the direction of the scattering vector $\vect{q}$. The fact that there is a fast component of the transient Debye-Waller dynamics in Bragg peaks nearly parallel to $\vect{c}^\star$ indicates that the mean-square-displacement of atoms along the $c$ axis -- i.e. the $Pnma$ lattice distortion -- is particularly affected by photoexcitation. The increase in mean-square-displacement should be reflected in the diffuse intensity across the Brillouin zone, which is presented next.
 
@@ -309,15 +309,15 @@ The amplitude of the diffuse rise at zone-center is affected by the parameter $r
 
 With the appropriate partitioning of the Brillouin zone (@fig:snse-geometry), it is possible to separate the dynamics of the Bragg peak from the diffuse intensity at zone-center. The diffuse dynamics at zone-center presented in the previous section are definitely affected to some degree by the dynamics of the nearby Bragg peak. However, because it has been shown that the Bragg peak profiles are constant, the Debye-Waller dynamics from region 1 can be subtracted. The results are presented in @fig:snse-clean-traces. Most importantly, this reveals that the slow diffuse intensity decrease near zone-center is *not due* to the nearby Bragg peak, but is rather intrinsic to the diffuse dynamics.
 
-```{.matplotlib #fig:snse-clean-traces file="figures/snse/clean-traces.py" caption="Transient ultrafast electron scattering intensity at various points in the Brillouin zone. The integration geometry is shown in @fig:snse-geometry. The decrease of intensity directly on the Bragg peak shows the expected transient Debye-Waller effect with fast and slow components. Average transient diffuse intensity across region 3 is shown for context. Error bars represent the standard error in the mean of intensity before time-zero, but are generally smaller than the markers."}
+```{.matplotlib #fig:snse-clean-traces file="figures/snse/clean-traces.py" caption="Transient ultrafast electron scattering intensity at various points in the Brillouin zone. The integration geometry is shown in @fig:snse-geometry. The decrease of intensity directly on the Bragg peak where $\vect{q} || \vect{c}^\star$ shows the expected transient Debye-Waller effect with fast and slow components, while the Debye-Waller suppression on Bragg peaks where $\vect{q} || \vect{b}^\star$ only displays slow exponential behavior. Average transient diffuse intensity across region $\Omega_3$ is shown for context. Error bars represent the standard error in the mean of intensity before time-zero, but are generally smaller than the markers."}
 ```
 
-### Transient mean-square-displacement due to soft-modes
+### Transient mean-square-displacement due to strongly-coupled modes
 
-```{.matplotlib #fig:snse-displacement-fluence file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the zone-center $c$-polarized transverse modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
+```{.matplotlib #fig:snse-displacement-fluence file="figures/snse/displacement.py" caption="Increase in mean-square-displacement of all atoms $\Delta \langle u^2 \rangle$, due to the change in vibrational amplitude of the strongly-coupled zone-center $c$-polarized modes exclusively. Boxes are used to represent error bars along both axes. Color bar shows associated photocarrier density $N_{\gamma}$."}
 ```
 
-The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
+The fast component of the transient Debye-Waller dynamics (@fig:snse-dwaller) can be used to infer the change in vibrational amplitudes due exclusively to the strongly-coupled modes at zone-center. The time-resolved suppression of Bragg intensity due to atomic vibrations is given by the following expression (@eq:scattering-diffracted-intensity-finite-temp):
 \begin{align}
     \frac{I_0(\vect{q},\tau) - I_0(\vect{q},0)}{I_0(\vect{q},0)} 
         &\equiv \Delta I_0(\vect{q},\tau) \nonumber \\
@@ -329,7 +329,7 @@ $$
     - \frac{1}{2} \ln \left[1 + \Delta I_0(\vect{q},t) \right] = M(\vect{q}, \tau) - M(\vect{q}, 0)
 $$
 In this formulation, $M$ is the appropriate average of all atom-specific $W_s$ suppression factors from @eq:scattering-debye-waller [@Warren1990DebyeWaller]. There is no general expression for the quantity $M$ for diatomic crystals such as SnSe[@Warren1990DebyeWaller]. 
-The fast component of the transient Debye-Waller dynamics are only visible for reflections nearly parallel to $\vect{c}^\star$, which informs on the atomic displacement in the $c$ direction. The harmonic approximation can be used, which states that if atoms are vibrating in a harmonic potential[@Warren1990Harmonic], the Debye-Waller factor $M$ is given by:
+The fast component of the transient Debye-Waller dynamics are only visible for reflections nearly parallel to $\vect{c}^\star$, which informs on the atomic displacement in the $c$ direction. Since the Debye-Waller suppression is small ($\sim 1\%$, @fig:snse-dwaller), the harmonic approximation can be used. This approximation states that if atoms are vibrating very close to their equilibrium position, the potential is harmonic [@Warren1990Harmonic], and the Debye-Waller factor $M$ is given by:
 $$
     M(\vect{q}, \tau) = \frac{1}{2} |\vect{q}|^2 \langle |\bar{\vect{u}} \cdot \vect{e}_3|^2 \rangle
 $$
@@ -349,14 +349,14 @@ It is instructive to compare the fluence-dependence of the vibrational amplitude
 $$
 	E(f) = (1-R) \eta f \left( 1 - e^{-\frac{t}{\delta}}\right)
 $$
-where $R=0.54$ is the reflectivity at \SI{1.55}{\electronvolt}[@Makinistian2009], $\eta=0.27$ is the internal quantum efficiency[^qe], $t$ is the sample thickness, $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{1.55}{\electronvolt}[@Makinistian2009;@Barrios2014], and $A$ is the sample area. For reference, roughly 17% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. Assuming that the efficiency of generating charge carriers from photo absorption is 100%, the photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
+where $R=0.54$ is the reflectivity at \SI{1.55}{\electronvolt}[@Makinistian2009], $\eta=0.27$ is the internal quantum efficiency[^qe], $t$ is the sample thickness, and $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{1.55}{\electronvolt}[@Makinistian2009;@Barrios2014]. For reference, roughly 17% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. The photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
 
 ```{.matplotlib #fig:snse-photodoping file="figures/snse/photodoping.py" caption="Photocarrier density generated in SnSe for \SI{800}{\nano\meter} pump fluences on a \SI{50 x 50 x 0.045}{\micro\meter} sample. The lower and upper limits are shown as grey dashed lines, based on the uncertainty of \SI{\pm 5}{\nano\meter} in the thickness of the sample."}
 ```
 
 ## Discussion
 
-In this section, the link between the observations presented previously and the origin of SnSe's high thermoelectric performance are discussed.
+In this section, the interpretation of the observations presented previously are discussed. 
 
 Consider first the ultrafast diffuse increase at zone-center. Recall the definition for the diffuse intensity (@eq:scattering-diffuse-intensity):
 $$
@@ -369,7 +369,7 @@ This equation implies an increase of diffuse intensity is due to an increase in 
 
 In analogy to @eq:scattering-displacement, terms of the form $n_{\lambda} + 1/2 / \omega_{\lambda}$ are directly proportional to vibrational amplitude. In this formulation, the fast diffuse intensity rise at $\Gamma$ is due to an increase in vibrational amplitude of one or more phonon modes polarized in the direction of the $Pnma$ lattice distortion. 
 
-### Electron-phonon coupling and phonon renormalization
+### Electron-phonon coupling
 
 Given that the energy contained in pump pulses are absorbed by electrons, and that ultrafast electron scattering measures the subsequent lattice response, it is natural to ask how electron-phonon coupling can explain the experiments. The electron-phonon scattering rate $1/ \tau_{\lambda\vect{k}_p, epc}$, or rate of energy transfer between electrons at all wavevectors and phonons at wavevector $\vect{k}_p$, is given by[@Fan2018]:
 $$
@@ -392,7 +392,81 @@ The electron-phonon scattering rate (@eq:snse-ep-scattering-rate) and phonon ren
 
 This is not entirely unexpected. Calculations by Ma *et al.*[@Ma2018] have revealed that the mobility of electrons and holes is strongly-modified at zone-center due to polar optical modes. Calculations by Caruso *et al.*[@Caruso2019] have reported strong electron-phonon coupling to zone-center optical modes polarized in the $c$ direction, most importantly the $B_u$ (\SI{8}{\milli\electronvolt}) and the $B_g$ (\SI{20}{\milli\electronvolt}) modes. The results presented in this chapter corroborate these findings, at least qualitatively. 
 
-### Initial intravalley scattering
+### Polaron formation
+
+The relaxation of photogenerated carriers or the anharmonic decay of phonons is expected to imprint the structure of the electronic or phonon dispersion on the diffuse intensity, respectively, due to energy- and momentum-conservation [@Stern2018;@RenedeCotret2019;@Otto2021]. However, measured changes in the diffuse intensity are broad and radially-symmetric in reciprocal space. This is indicative of lattice distortions that are local in real-space. Given that SnSe is a polar lattice, and that strong electron-phonon coupling to polar phonon modes has been calculated[@Caruso2019], our results can be understood as the formation of polarons. Polarons has been the subject of much research [@Landau1933;@Frohlich1950;@Feynman1955;@Holstein1959]. Polarons are quasiparticles that combine a free charge carrier with the effect the charge carrier has on the polarizable lattice, creating a local lattice distortion. The free charge is said to be *dressed* by polar phonons as the charge and lattice distortion propagate together. Polarons play a large role in many material properties, including charge transport and multiferroism; interested readers are encouraged to read Franchini *et al.* [@Franchini2021]
+
+A polaron, like any point-defect-like deformation of the lattice, involves many phonon modes as local lattice distortions in real-space cannot be described with a finite number of lattice normal modes. Calculations by Sio *et al.*[@Sio2019] have demonstrated that in other polar lattices, electron and hole polarons have widely different characteristic lengths. Electron polarons tend to be larger and hence are composed of low-wavevector modes, while hole polarons tend to be smaller due to the relative flatness of the valence band and thus involve phonons modes across a wider range of wavevectors. 
+
+#### Point-defect model
+
+Recall the scattered wavevection (@eq:scattering-diffracted-intensity-zero-temp):
+$$
+    \braket{\vect{x}|\Psi}_0 \equiv F(\vect{q}) \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i}
+$$
+where $F(\vect{q})$ is the static structure factor, and $\set{f_{e,i}}$ and $\set{\vect{r}_i}$ are the atomic form factors and positions, respectively. The subscript $0$ indicates that no polarons are present, for example before photoexcitation. A polaron induces a lattice distortion just like a point defect, which is expressed as the displacement field $\vect{u}(\vect{r})$. For simplicity, assume that the polaron is located at the origin of the coordinate system. The effect of the polaron is given by the substitution $\vect{r}_i \to \vect{r}_i + \vect{u}(\vect{r}_i)$[@Fultz2013defect]:
+\begin{align}
+    \braket{\vect{x} | \Psi} 
+        &= \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \left[ \vect{r}_i + \vect{u}(\vect{r}_i) \right]} \nonumber \\
+        &= \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i} ~ e^{-i \vect{q} \cdot \vect{u}(\vect{r}_i)}
+\end{align}
+Note that $e^{-i \vect{q} \cdot \vect{r}_i}$ is directly proportional to $e^{-i \vect{k} \cdot \vect{r}_i}$ by definition of the reciprocal vectors. For small displacement fields, $e^{-i \vect{q} \cdot \vect{u}(\vect{r}_i)}$ can truncated to first order in $|\vect{u}|$:
+$$
+    \braket{\vect{x} | \Psi} \approx \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{k} \cdot \vect{r}_i} ~ \left[ 1 - i \vect{H} \cdot \vect{u}(\vect{r}_i)\right]
+$${#eq:snse-polaron-amplitude}
+The displacement field can be modelled using the following phenomenological deformation[@Guzelturk2021]:
+$$
+    \vect{u}(\vect{r}) = A e^{-\frac{|\vect{r}|^2}{r_p^2}} \hat{\vect{r}}
+$${#eq:snse-polaron-strain-field}
+where $A$ is an arbitrary constant and $r_p$ is a characteristic dimension of the polaron, with an associated full-width at half-maximum of $2 \sqrt{2 \ln{2}} ~ r_p$. As will be made clear shortly, the direction vector $\hat{\vect{r}}$ is arbitrary, and $\vect{u}(\vect{r})$ is not assumed to be spherically-symmetric. Substituting this displacement field in @eq:snse-polaron-amplitude:
+$$
+    \braket{\vect{x} | \Psi} \approx \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{k} \cdot \vect{r}_i} ~ \left[ 1 - i \vect{H} \cdot \hat{\vect{r}} A e^{-\frac{|\vect{r}_i|^2}{r_p^2}} \right]
+$${#eq:snse-polaron-amplitude-gauss}
+The evaluation of this expression is most easily done using continuous integration, rather than summation. Let $\vect{r}_i \to \vect{r}$, $\sum_i \to \int d\vect{r}$, and $f_{e,i} \to f_{e}$ be the appropriate average atomic form factor for all atomic species. @eq:snse-polaron-amplitude-gauss becomes:
+\begin{align}
+    \braket{\vect{x} | \Psi} 
+        &\approx f_e(\vect{q}) \int d\vect{r} ~ e^{-i \vect{k} \cdot \vect{r}} ~ \left[ 1 - i \vect{H} \cdot \hat{\vect{r}} A e^{-\frac{|\vect{r}|^2}{r_p^2}} \right] \nonumber \\
+        &\approx 4 \pi f_e(\vect{q}) \left[ \delta(\vect{k}) - i \vect{H} \cdot \hat{\vect{r}} A \sqrt{\pi} r_p e^{-\frac{|\vect{k}|^2 r_p^2}{4}} \right]
+\end{align}
+The scattering intensity is proportional to $\left| \braket{\vect{x} | \Psi} \right|^2$:
+\begin{align}
+    I(\vect{q}) 
+        &= \left| \braket{\vect{x} | \Psi} \right|^2 \nonumber \\
+        &= \left| 4 \pi f_e(\vect{q}) \right|^2 \left| \delta(\vect{k}) - i \vect{H} \cdot \hat{\vect{r}} A \sqrt{\pi} r_p e^{-\frac{|\vect{k}|^2 r_p^2}{4}} \right|^2 \nonumber \\
+        &= \left| 4 \pi f_e(\vect{q}) \right|^2 \left[ \delta(\vect{k}) - i \vect{H} \cdot \hat{\vect{r}} A \sqrt{\pi} r_p e^{-\frac{|\vect{k}|^2 r_p^2}{4}} \right] \left[ \delta(\vect{k}) + i \vect{H} \cdot \hat{\vect{r}} A \sqrt{\pi} r_p e^{-\frac{|\vect{k}|^2 r_p^2}{4}} \right] \nonumber \\
+        &= \left| 4 \pi f_e(\vect{q}) \right|^2 \left[ \delta(\vect{k})^2 + A^2 \pi (\vect{H} \cdot \hat{\vect{r}})^2 r_p^2 e^{-\frac{|\vect{k}|^2 r_p^2}{2}} \right] \nonumber \\
+        &= I_0(\vect{q}) + \left| 4 \pi f_e(\vect{q}) \right|^2 \pi r_p^2 e^{-\frac{|\vect{k}|^2 r_p^2}{2}} (\vect{H} \cdot \hat{\vect{r}})^2
+\end{align}
+where $I_0$ is the scattering intensity without lattice distortion. It follows that the fractional change in scattering intensity is given by:
+\begin{align}
+    \frac{I(\vect{q}) - I_0(\vect{q})}{I_0(\vec{q})}
+        &\equiv \Delta I/I_0 \nonumber \\
+        &\propto \frac{r_p^2 e^{-\frac{|\vect{k}|^2 r_p^2}{2}}}{I_0} ~ \hat{\vect{H}} \cdot \hat{\vect{r}}
+\end{align}
+where $\hat{\vect{H}}$ is used to denote the unit vector along the $\vect{H}$ reflection. Assuming that the scattering intensity without polaronic lattice distortion ($I_0$) falls off like $\sfrac{1}{\vect{k}}$:
+$$
+    \Delta I/I_0 \propto |\vect{k}| r_p^2 e^{-\frac{|\vect{k}|^2 r_p^2}{2}} ~ \hat{\vect{H}} \cdot \hat{\vect{r}}
+$${#eq:snse-polaron-intensity-change}
+Importantly, whether $\vect{u}(\vect{r})$ is three-dimensional or uniaxial only changes at which reflections are relative intensity changes visible ($\hat{\vect{H}} \cdot \hat{\vect{r}}$). @fig:snse-polaron-size-model shows the contribution of a polaron to the total scattering intensity profile. Other radially-symmetric displacement fields have been modelled in Guzelturk *et al.*[@Guzelturk2021], which only changes the definition of the polaron characteristic length $r_p$.
+
+```{.matplotlib #fig:snse-polaron-size-model file="figures/snse/polaron-size-model.py" caption="Scattering intensity due to polarons as a function of polaron size. **a)** Radial intensity profile due to a polaron with a Gaussian displacement field (@eq:snse-polaron-strain-field). The color scaling applies to all subfigures. **b)** Scattering intensity across the Brillouin zone due to a large polaron (FWHM of \SI{21.2}{\angstrom}). **c)** Scattering intensity across the Brillouin zone due to a small polaron (FWHM of \SI{4.7}{\angstrom})."}
+```
+
+#### Time-resolved polaron formation
+
+The change in the diffuse intensity profile at two characteristic timescales -- \SI{1}{\pico\second} and \SI{5}{\pico\second} -- can be fit using the modelling summarized in @fig:snse-polaron-size-model. Only reflections which are nearly parallel to $\vect{c}^{\star}$ were used in the following analysis. 
+
+For the fast time-scale, the radial diffuse intensity change is much easier to extract using a biexponential fitting over time, much like what is shown in @fig:snse-size-comparison. This is because directly extracting the diffuse intensity profile at \SI{1}{\pico\second} includes the nearby Bragg peak contribution. The diffuse intensity change was integrated in a ring of radius $|\vect{k}|$, and fit with a biexponential. The diffuse intensity change at \SI{1}{\pico\second} -- the maximum of the curve -- is proportional to the amplitude of the fast exponential, and so the exponential amplitude is used as a proxy value. The error in the amplitude is taken to be the uncertainty in the fitting parameter. For the slow time-scale, the Bragg peak dynamics are mostly flat, and so the radial diffuse intensity profile can be extracted directly. This is effectively the azimuthal average of @fig:snse-relaxation-amplitude. The error in the diffuse intensity change at \SI{5}{\pico\second} is taken to be the standard error in the diffuse intensity at equivalent radii. The change in the diffuse intensity profile is shown in @fig:snse-polaron-fits.
+
+```{.matplotlib #fig:snse-polaron-fits file="figures/snse/polaron-fits.py" caption="Change in the radial scattering intensity profile for two time-delays after photoexcitation, for reflections nearly parallel to the $\vect{c}^{\star}$ axis. The colored areas represents the standard error in the intensity change. Solid curves are best fits to @eq:snse-polaron-intensity-change. The radial profile of the intensity change at \SI{1}{\pico\second} is consistent with a polaron with a full-width at half-maximum of %{electron-polaron-size} . The radial profile of the intensity change at \SI{5}{\pico\second} is consistent with a polaron with a full-width at half-maximum of %{hole-polaron-size} ."}
+```
+
+The radial profile changes were fit with the modelling of @eq:snse-polaron-intensity-change using a nonlinear least-squares routine. The change in radial intensity profile at \SI{1}{\pico\second} is consistent with a polaron with a FWHM of %{electron-polaron-size} , while the change in radial intensity profile at \SI{5}{\pico\second} is consistent with a much smaller polaron with a FWHM of %{hole-polaron-size} . The fits are shown in @fig:snse-polaron-fits. 
+
+```{.matplotlib #fig:snse-polaron-realspace file="figures/snse/polaron-realspace.py"}
+```
+
+### The first picosecond
 
 ```{.matplotlib #fig:snse-intravalley file="figures/snse/intravalley.py" caption="In-plane carrier relaxation process in the first picosecond. Color intensity represents the photoelectron and photohole densities $N_{e^{-}}$ and $N_{h^{+}}$ respectively, where white is zero. The contours represent the dispersion of @fig:snse-electronic-structure. **a)** Carrier densities just after photoexcitation. **b)** Carrier densities after $\sim\SI{1}{\pico\second}$ showing that carriers have undergone intravalley scattering mediated by small wavevector phonons (arrows) to the local extrema of the conduction and valence bands."}
 ```
@@ -421,58 +495,6 @@ $$
 $$
 where $g^i_{h^{+}}(\epsilon)$ is the initial holes density-of-states as shown in @fig:snse-intravalley b). The results of these calculations are shown in @fig:snse-intervalley-sim. While these calculations are sensitive to the initial density-of-states, note that there are still many regions in reciprocal space where relaxation is forbidden regardless of the initial conditions (i.e. $P_{e^{-}}(\vect{k})$ and $P_{h^{+}}(\vect{k})$ are zero). It follows that intervalley scattering of charge-carriers does not explain the isotropic rise in diffuse intensity on a \SI{3.5}{\pico\second} time-scale.
 
-### Polaronic strain field
-
-The relaxation of photogenerated carriers or the anharmonic decay of phonons is expected to imprint the structure of the electronic or phonon dispersion on the diffuse intensity, respectively, due to energy- and momentum-conservation [@Stern2018;@RenedeCotret2019;@Otto2021]. However, measured changes in the diffuse intensity are broad and radially-symmetric in reciprocal space. This is indicative of lattice distortions that are local in real-space. Given that SnSe is a polar lattice, and that strong electron-phonon coupling to polar phonon modes has been calculated[@Caruso2019], our results can be understood as the formation of polarons.
-
-The dressing of charge-carriers by polar phonons -- known as polarons -- have been the subject of much research [@Landau1933;@Frohlich1950;@Feynman1955;@Holstein1959]. TODO: a bit more general information about polarons. A polaron, like any point-defect-like deformation of the lattice, involves many phonon modes as local lattice distortions in real-space cannot be described with a finite number of lattice normal modes. Calculations by Sio *et al.*[@Sio2019] have demonstrated that in other polar lattices, electron and hole polarons have widely different characteristic lengths. Electron polarons tend to be larger and hence are composed of low-wavevector modes, while hole polarons tend to be smaller due to the relative flatness of the valence band and thus involve phonons modes across a wider range of wavevectors. 
-
-#### Point-defect model
-
-Recall the scattered wavevection (@eq:scattering-diffracted-intensity-zero-temp):
-$$
-    \braket{\vect{x}|\Psi}_0 \equiv F(\vect{q}) \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i}
-$$
-where $F(\vect{q})$ is the static structure factor, and $\set{f_{e,i}}$ and $\set{\vect{r}_i}$ are the atomic form factors and positions, respectively. The subscript $0$ indicates that no polarons are present, for example before photoexcitation. A polaron induces a lattice distortion just like a point defect. For simplicity, assume that the polaron is located at the origin of the coordinate system, and that its deformation field $\vect{u}(\vect{r})$ is spherically-symmetric. The effect of the polaron is given by the substitution $\vect{r}_i \to \vect{r}_i + \vect{u}(\vect{r}_i)$[@Fultz2013defect]:
-\begin{align}
-    \braket{\vect{x} | \Psi} 
-        & \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \left[ \vect{r}_i + \vect{u}(\vect{r}_i) \right]} \nonumber \\
-        & \propto \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i} ~ e^{-i \vect{q} \cdot \vect{u}(\vect{r}_i)} \nonumber \\
-        & \approx \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{q} \cdot \vect{r}_i} ~ \left[ 1 - i \vect{H} \cdot \vect{u}(\vect{r}_i)\right] \nonumber \\
-        & \approx \braket{\vect{x} | \Psi}_0 \left[ 1 - i \vect{H} \cdot \hat{\vect{r}} \sum_i |\vect{u}(\vect{r}_i) |e^{i \vect{k} \cdot \vect{r}_i} \right]
-\end{align}
-where in the last step, the spherical symmetry of the displacement field was used. The approximations are described in more details elsewhere [@Fultz2013defect;@Guzelturk2021]. The vector $\vect{H}$ is the Bragg reflection nearest to $\vect{q} = \vect{H} + \vect{k}$ and $\vect{k}$ is limited to the first Brillouin zone, as defined in @sec:scattering-lattice-waves. The diffracted intensity including the effects of displacement, $I_p(\vect{q})$ becomes:
-$$
-    I_p(\vect{q}) \propto I_0 \left| 1 - i \vect{H} \cdot \hat{\vect{r}} \sum_i |\vect{u}(\vect{r}_i) |e^{i \vect{k} \cdot \vect{r}_i} \right|^2 
-$$
-where $I_0(\vect{q}) \equiv \left| \braket{\vect{x} | \Psi}_0 \right|^2$ is the diffraction intensity without defect contributions. 
-
-```{.matplotlib #fig:snse-polaron-size-model file="figures/snse/polaron-size-model.py" caption="Scattering intensity due to polarons as a function of polaron size. **a)** Radial intensity profile due to a polaron with a Gaussian displacement field (@eq:snse-polaron-strain-field). The color scaling applies to all subfigures. **b)** Scattering intensity across the Brillouin zone due to a large polaron (FWHM of \SI{21.2}{\angstrom}). **c)** Scattering intensity across the Brillouin zone due to a small polaron (FWHM of \SI{4.7}{\angstrom})."}
-```
-
-The displacement field can be modelled using the following phenomenological spherically-symmetric deformation:
-$$
-    \vect{u}(\vect{r}) \propto e^{-\sfrac{|\vect{r}|^2}{r_p^2}} \hat{\vect{r}}
-$${#eq:snse-polaron-strain-field}
-where $r_p$ is a characteristic dimension of the polaron, with an associated full-width at half-maximum of $2 \sqrt{2 \ln{2}} ~ r_p$. In this case, the relative difference in the diffracted intensity caused by polaron is therefore given by[@Fultz2013defect;@Guzelturk2021]:
-$$
-    \frac{I_p(\vect{q}) - I_0(\vect{q})}{I_0(\vect{q})} \propto |\vect{k}| r^3_p e^{|\vect{k}|^2 r_p^2/4} \vect{H} \cdot \hat{\vect{r}}
-$${#eq:snse-polaron-intensity-change}
-@fig:snse-polaron-size-model shows the contribution of a polaron to the total scattering intensity profile. Other radially-symmetric displacement fields have been modelled in Guzelturk *et al.*[@@Guzelturk2021], which only changes the definition of the polaron characteristic length $r_p$.
-
-#### Time-resolved polaron formation
-
-The change in the diffuse intensity profile at two characteristic timescales -- \SI{1}{\pico\second} and \SI{5}{\pico\second} -- can be fit using the modelling summarized in @fig:snse-polaron-size-model. Only reflections which are nearly parallel to $\vect{c}^{\star}$ were used in the following analysis. 
-
-For the fast time-scale, the radial diffuse intensity change is much easier to extract using a biexponential fitting over time, much like what is shown in @fig:snse-size-comparison. This is because directly extracting the diffuse intensity profile at \SI{1}{\pico\second} includes the nearby Bragg peak contribution. The diffuse intensity change was integrated in a ring of radius $|\vect{k}|$, and fit with a biexponential. The diffuse intensity change at \SI{1}{\pico\second} -- the maximum of the curve -- is proportional to the amplitude of the fast exponential, and so the exponential amplitude is used as a proxy value. The error in the amplitude is taken to be the uncertainty in the fitting parameter. For the slow time-scale, the Bragg peak dynamics are mostly flat, and so the radial diffuse intensity profile can be extracted directly. This is effectively the azimuthal average of @fig:snse-relaxation-amplitude. The error in the diffuse intensity change at \SI{5}{\pico\second} is taken to be the standard error in the diffuse intensity at equivalent radii. The change in the diffuse intensity profile is shown in @fig:snse-polaron-fits.
-
-```{.matplotlib #fig:snse-polaron-fits file="figures/snse/polaron-fits.py" caption="Change in the radial scattering intensity profile for two time-delays after photoexcitation, for reflections nearly parallel to the $\vect{c}^{\star}$ axis. The colored areas represents the standard error in the intensity change. Solid curves are best fits to @eq:snse-polaron-intensity-change. The radial profile of the intensity change at \SI{1}{\pico\second} is consistent with a polaron with a full-width at half-maximum of %{electron-polaron-size} . The radial profile of the intensity change at \SI{5}{\pico\second} is consistent with a polaron with a full-width at half-maximum of %{hole-polaron-size} ."}
-```
-
-The radial profile changes were fit with the modelling of @eq:snse-polaron-intensity-change using a nonlinear least-squares routine. The change in radial intensity profile at \SI{1}{\pico\second} is consistent with a polaron with a FWHM of %{electron-polaron-size} , while the change in radial intensity profile at \SI{5}{\pico\second} is consistent with a much smaller polaron with a FWHM of %{hole-polaron-size} . The fits are shown in @fig:snse-polaron-fits. 
-
-```{.matplotlib #fig:snse-polaron-realspace file="figures/snse/polaron-realspace.py"}
-```
 
 ### Phase transition mechanism
 

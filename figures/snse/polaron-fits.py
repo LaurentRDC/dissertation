@@ -10,7 +10,7 @@ DATADIR = Path("data") / "snse"
 
 
 def polaron(q, A, rp):
-    return A * q * rp ** 3 * np.exp(-(q ** 2 * rp ** 2) / 4)
+    return A * q * rp ** 2 * np.exp(-(q ** 2 * rp ** 2) / 2)
 
 
 rf, pf, ef = np.loadtxt(
