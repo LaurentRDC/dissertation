@@ -18,9 +18,17 @@ CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
 INNER_RADIUS = 15
 OUTER_RADIUS = 30
 
+# Reflections where the diffuse rise is not measured
+# because q || b*
+INDICES_DIFFUSE_B = [
+    (0, -4, 0),
+    (0, -3, 1),
+    (0, -3, -1),
+    (0, -5, 1),
+]
 
 # Determine the peak position and the time-series integration bounding box
-INDICES_DIFFUSE = [
+INDICES_DIFFUSE_C = [
     (0, -1, 3),
     (0, 0, 4),
     (0, -2, 4),
@@ -32,7 +40,12 @@ INDICES_DIFFUSE = [
 INDICES_BRAGG = [(0, 1, 2), (0, -1, -2), (0, 0, 1), (0, 0, -1), (0, 1, 0), (0, -1, 0)]
 
 inferno = plt.get_cmap("inferno")
-DWCOLOR, GAMMA_COLOR, AVERAGE_COLOR = inferno(30), inferno(100), inferno(200)
+DWCOLOR, GAMMA_COLOR, DWBCOLOR, AVERAGE_COLOR = (
+    inferno(30),
+    inferno(100),
+    inferno(150),
+    inferno(200),
+)
 
 # FWHM of the gaussian IRF
 IRF = 130  # femtoseconds
@@ -48,7 +61,7 @@ def biexponential(time, *args, **kwargs):
     return skued.biexponential(time, *args, **kwargs)
 
 
-figure, diffuse_ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3))
+figure, diffuse_ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 3.5))
 
 diffuse_ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
 diffuse_ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
@@ -72,9 +85,26 @@ with DiffractionDataset(overnight4.path, mode="r") as dset:
             / q2
         )
 
+    timeseries["debye-waller-b"] = np.zeros_like(timedelays)
+    for indices in INDICES_DIFFUSE_B:
+        q2 = np.linalg.norm(CRYSTAL.scattering_vector(indices)) ** 2
+
+        yi, xi = overnight4.miller_to_arrindex(*indices)
+
+        timeseries["debye-waller-b"] += (
+            dset.time_series_selection(
+                skued.DiskSelection(
+                    shape=dset.resolution,
+                    center=(xi, yi),
+                    radius=OUTER_RADIUS,
+                )
+            )
+            / q2
+        )
+
     timeseries["average"] = np.zeros_like(timedelays)
     timeseries["gamma"] = np.zeros_like(timedelays)
-    for indices in INDICES_DIFFUSE:
+    for indices in INDICES_DIFFUSE_C:
         q2 = np.linalg.norm(CRYSTAL.scattering_vector(indices)) ** 2
 
         yi, xi = overnight4.miller_to_arrindex(*indices)
@@ -119,7 +149,7 @@ plot_params = dict(
     marker="x",
     markersize=3,
     color=DWCOLOR,
-    label="(1) Bragg",
+    label="Bragg ($\mathbf{q} || \mathbf{c}^\star$)",
     linestyle="None",
     elinewidth=0.5,
 )
@@ -132,6 +162,35 @@ diffuse_ax.errorbar(
     **plot_params,
 )
 
+
+# -----------------------------------------------------------------------------
+# fit and plot Debye-Waller dynamics along b-axis
+# -----------------------------------------------------------------------------
+
+dwbparams, dwbpcov = opt.curve_fit(
+    exponential,
+    timedelays,
+    timeseries["debye-waller-b"],
+    p0=(0, 0.01, 0.02, 1),
+)
+
+dwbfit_curve = exponential(timedelays, *dwbparams)
+plot_params = dict(
+    marker="+",
+    markersize=4,
+    color=DWBCOLOR,
+    label="Bragg ($\mathbf{q} || \mathbf{b}^\star$)",
+    linestyle="None",
+    elinewidth=0.5,
+)
+diffuse_ax.plot(timedelays, dwbfit_curve, linewidth=1, color=DWBCOLOR)
+
+diffuse_ax.errorbar(
+    x=timedelays,
+    y=timeseries["debye-waller-b"],
+    yerr=scipy.stats.sem(timeseries["debye-waller-b"][timedelays < 0]),
+    **plot_params,
+)
 
 # -----------------------------------------------------------------------------
 # Gamma points
@@ -157,7 +216,7 @@ diffuse_ax.errorbar(
     markersize=2,
     color=GAMMA_COLOR,
     linestyle="None",
-    label="(2) $\Gamma$",
+    label="$\Gamma$ ($\Omega_2$)",
     elinewidth=0.5,
 )
 
@@ -168,7 +227,7 @@ plot_params = dict(
     marker="D",
     markersize=2,
     color=AVERAGE_COLOR,
-    label="(3) background",
+    label="background ($\Omega_3$)",
     linestyle="None",
     elinewidth=0.5,
 )
@@ -201,6 +260,7 @@ diffuse_ax.legend(
     bbox_to_anchor=(0.75, 0.3),
     bbox_transform=diffuse_ax.transAxes,
     edgecolor="none",
+    fontsize=plt.rcParams["font.size"] - 1,
 )
 
 diffuse_ax.set_xlabel("Time-delay [ps]")
