@@ -202,7 +202,6 @@ Initial characterization of the electron compressor in 2012 was performed with a
 ```
 
 TODO: Label EM modes of resonances (TM010, TM011, etc.)
-TODO: Field-vector plot for a couple of modes?
 
 The temperature-dependence of the resonant frequency was also investigated. By changing the temperature of the cavity via liquid cooling, its dimensions are modified slightly due to thermal expansion. The change in the transmission spectrum near \SI{3}{\giga\hertz} is presented in @fig:introduction-cavity-temp-sweep.
 

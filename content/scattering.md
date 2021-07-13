@@ -320,7 +320,9 @@ where $a$ is the inter-atomic distance of the crystal. In the approximation desc
             e^{-i\vect{k}_f \cdot \vect{x}^\prime} V(\vect{x}^\prime) \right|^2 \left| \frac{m_e}{2 \pi \hbar^2} \int d\vect{x}^{\prime\prime} e^{i\vect{k}_i \cdot \vect{x}^{\prime\prime}} V(\vect{x}^{\prime\prime}) \right|^2 \nonumber \\
             & < \frac{1}{a} \left( \frac{d\sigma_1}{d\Omega}\right)^2
 \end{align}
-where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj].
+where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj]. Importantly, the cross-section for multiple scattering integrated over the sample thickness scales quadratically with sample thickness, given that the scattering cross-section for a single scattering event is linear in the sample thickness. Measurements of multiple scattering effects will be discussed further in @sec:snse.
+
+[^conj]: Note that because $V(\vect{x})$ is real, $\int d\vect{x}^\prime e^{-i\vect{k} \cdot \vect{x}^\prime} V(\vect{x}) = \int d\vect{x}^\prime e^{i\vect{k} \cdot \vect{x}^\prime} V(\vect{x})$.
 
 ## The effect of lattice waves on ultrafast electron scattering{#sec:scattering-lattice-waves}
 
@@ -522,7 +524,6 @@ In this chapter, the theory of ultrafast electron scattering measurements were p
 The key takeaway from this chapter is that the Debye-Waller effect and diffuse scattering are two faces of the same coin. Both arise from the same physical phenomenon: atomic vibrations expressed as a superposition of lattice waves. In @sec:graphite, ultrafast measurements in a prototypical benchmark system will show the full power of diffuse scattering measurements, while the link between the Debye-Waller effect and diffuse scattering will play a large role in @sec:snse.
 
 [^tmatrix]: Interested readers are encouraged to peruse Chapter 6 of Sakurai and Napolitano [@Sakurai2014].
-[^conj]: Note that because $V(\vect{x})$ is real, $\int d\vect{x}^\prime e^{-i\vect{k} \cdot \vect{x}^\prime} V(\vect{x}) = \int d\vect{x}^\prime e^{i\vect{k} \cdot \vect{x}^\prime} V(\vect{x})$.
 
 \FloatBarrier
 ## References {.unnumbered}
