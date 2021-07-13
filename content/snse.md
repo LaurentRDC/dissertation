@@ -342,17 +342,6 @@ $$
 $$
 The extracted change in atomic displacement along the $c$ axis due to $c$-polarized transverse modes at zone-center as a function of fluence is shown in @fig:snse-displacement-fluence.  
 
-#### Comparison with photocarrier density
-
-It is instructive to compare the fluence-dependence of the vibrational amplitude in @fig:snse-displacement-fluence with photocarrier density generated in the sample. The total energy deposited for a particular fluence $f$, $E(f)$, is given by
-$$
-	E(f) = (1-R) \eta f \left( 1 - e^{-\frac{t}{\delta}}\right)
-$$
-where $R=0.54$ is the reflectivity at \SI{1.55}{\electronvolt}[@Makinistian2009], $\eta=0.27$ is the internal quantum efficiency[^qe], $t$ is the sample thickness, and $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{1.55}{\electronvolt}[@Makinistian2009;@Barrios2014]. For reference, roughly 17% of the light is absorbed by a sample with thickness of \SI{45}{\nano\meter}. The photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
-
-```{.matplotlib #fig:snse-photodoping file="figures/snse/photodoping.py" caption="Photocarrier density generated in SnSe for \SI{800}{\nano\meter} pump fluences on a \SI{50 x 50 x 0.045}{\micro\meter} sample. The lower and upper limits are shown as grey dashed lines, based on the uncertainty of \SI{\pm 5}{\nano\meter} in the thickness of the sample."}
-```
-
 ## Discussion
 
 In this section, the interpretation of the observations presented previously are discussed. 
@@ -502,7 +491,26 @@ The radial profile changes were fit with the modelling of @eq:snse-polaron-inten
 ```{.matplotlib #fig:snse-polaron-realspace file="figures/snse/polaron-realspace.py" caption="Real-space visualization of the atomic displacement due to the large and small polarons. The unperturbed dimensions of the unit cell are marked by solid black lines. In both subpanels, the background color is used to show the full-width at half-maximum of the displacement associated with the polaron. **a)** Large one-dimensional electron polaron along the $\vect{c}$-axis. **b)** Small symmetrical hole polaron in the $\vect{b}$ -- $\vect{c}$ plane."}
 ```
 
+[@Frost2017;@Joshi2019;@Wang2020b]
+
+### Polarons and thermoelectric properties
+
+The photocarrier density $N_{\gamma}$ is given by $E(f) / V / \SI{1.55}{\electronvolt}$, where $V$ is the sample volume, and $E(f)$ is total energy deposited in the sample for a particular fluence $f$:
+$$
+	E(f) = (1-R) \eta f \left( 1 - e^{-\frac{t}{\delta}}\right)
+$$
+Here $R=0.54$ is the reflectivity at \SI{1.55}{\electronvolt}[@Makinistian2009], $\eta=0.27$ is the internal quantum efficiency[^qe], $t$ is the sample thickness, and $\delta=\SI{100}{\nano\meter}$ is the penetration depth at \SI{1.55}{\electronvolt}[@Makinistian2009;@Barrios2014]. The relationship between fluence and $N_{\gamma}$ is shown in @fig:snse-photodoping for a \SI{50 x 50 x 0.045}{\micro\meter} sample.
+
+```{.matplotlib #fig:snse-photodoping file="figures/snse/photodoping.py" caption="Photocarrier density generated in SnSe for \SI{800}{\nano\meter} pump fluences on a \SI{50 x 50 x 0.045}{\micro\meter} sample. The lower and upper limits are shown as grey dashed lines, based on the uncertainty of \SI{\pm 5}{\nano\meter} in the thickness of the sample."}
+```
+
+The density of polarons overlapping at a distance equal to their full-width at half-maximum is \SI{3.2e19}{\per\cubic\centi\meter} for the larger (electron) polarons and \SI{3.2e21}{\per\cubic\centi\meter} for the smaller (hole) polarons. These densities imply that if most photocarriers are dressed by phonons, SnSe finds itself in a *polaron liquid* state in which polarons are overlapping, even at the lowest fluence investigated. This polaron density is also in line with the optimal carrier doping in SnSe required for the operation of efficient thermoelectric devices[@Sootsman2009;@Zhao2016a;@Fan2018].
+
+The polaronic nature of the charge-carriers likely explains the phonon-glass, electron-crsytal nature of SnSe[@Rowe1995]. The dressed charges are better isolated from scattering mechanisms because of higher screening. The scattering of undressed charges might otherwise limit the carrier mobility at high temperatures and carrier doping.
+
 ### Phase transition mechanism
+
+TODO: relocate this information
 
 The ultrafast electron scattering measurements and the discussion of the previous sections demonstrates that strong electron-phonon coupling to one or more $c$-polarized zone-center phonons is very strong. Calculations by Caruso *et al.*[@Caruso2019] suggest that electron-phonon interactions are strongest with the optical modes linked to the $Pnma \to Cmcm$ phase transition. In second-order, displacive phase transitions like the $Pnma \to Cmcm$ transition, the frequency of the soft phonon mode which freezes at the transition temperature $T_c$ can be used as an order parameter[@Dove1997]. This kind of Landau theory description is phenomenological in nature, and so there is no unified driving mechanism behind such phase transitions. In this regard, the measurements presented in this chapter can be identified as a *destabilization* of the $Pnma$ phase with photocarriers. The dependence of the destabilization with fluence (@fig:snse-photodoping) reinforces the idea that the thermal phase transition is driven by electron-phonon interactions, because the thermal carrier-density naturally increases with temperature.
 
