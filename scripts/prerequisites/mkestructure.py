@@ -40,7 +40,6 @@ def valence(ky, kz, args):
         (ay, -cy, 0, sy, oy),
         (az, 0, cz, sz, oz),
         (az, 0, -cz, sz, oz),
-        # TODO: pudding mold band
     ]:
         e_valence += a * gaussian(coordinates=[ky, kz], center=(cy_, cz_), std=s) + o
 

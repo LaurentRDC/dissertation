@@ -236,7 +236,8 @@ def clean(full=False):
 
     files = [entry.path for entry in os.scandir(path=BUILDDIR_PDF) if entry.is_file()]
     for f in files:
-        os.remove(f)
+        with contextlib.suppress(PermissionError):
+            os.remove(f)
         logging.info(f"Removed {f}")
 
 
