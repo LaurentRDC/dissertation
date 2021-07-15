@@ -71,7 +71,7 @@ OPTIONS += [
 
 OPTIONS += [f"--include-in-header=include.tex"]
 
-OPTIONS += ["--toc", "--toc-depth=3"]
+OPTIONS += ["--toc", "--toc-depth=4"]
 OPTIONS += ["--number-sections", "--top-level-division=chapter"]
 
 parser = argparse.ArgumentParser(prog="dissc", description="Dissertation compiler")
