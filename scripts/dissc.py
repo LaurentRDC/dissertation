@@ -99,6 +99,8 @@ parser_prereqs = subparsers.add_parser(
     "compute-prerequisites", help="Compute plotting prerequisites from data."
 )
 
+parser_format = subparsers.add_parser("format", help="Format Python files.")
+
 
 def check_for_todo(path):
     """Scan a file and return if there are any TODOs are left"""
@@ -241,6 +243,12 @@ def clean(full=False):
         logging.info(f"Removed {f}")
 
 
+def format_scripts():
+    """Format all Python files in this directory"""
+    run("isort --atomic .")
+    run("black --safe .")
+
+
 if __name__ == "__main__":
     arguments = parser.parse_args()
     if arguments.command == "build":
@@ -249,5 +257,7 @@ if __name__ == "__main__":
         clean(full=arguments.all)
     elif arguments.command == "compute-prerequisites":
         precompute_plots()
+    elif arguments.command == "format":
+        format_scripts()
     else:
         parser.print_help()
