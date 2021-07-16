@@ -3,16 +3,17 @@ from pathlib import Path
 
 import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FixedFormatter, FixedLocator
 import numpy as np
 import scipy.optimize as opt
 import scipy.stats
 import skued
 from crystals import Crystal
 from iris import DiffractionDataset
+from matplotlib.ticker import FixedFormatter, FixedLocator
+from skimage.filters import gaussian
+
 from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 from dissutils.snse import overnight4, static
-from skimage.filters import gaussian
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
 

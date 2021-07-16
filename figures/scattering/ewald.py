@@ -4,10 +4,11 @@ import matplotlib.lines as mlines
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
-from crystals import Crystal, Atom
+from crystals import Atom, Crystal
 from matplotlib.ticker import FixedFormatter, FixedLocator
+from skued import electron_wavelength, indices_to_text, lorentzian
+
 from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, named_arrow
-from skued import lorentzian, indices_to_text, electron_wavelength
 
 EWALD_RADIUS = 2 * np.pi / electron_wavelength(keV=100)
 EWALD_RADIUS_XRAY = 2 * np.pi / 0.95  # 13 keV x-rays

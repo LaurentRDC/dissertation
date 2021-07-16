@@ -4,9 +4,9 @@ Calculate the in-plane one-phonon structure factors for Graphite.
 
 The calculation of those is required for multiple plots. 
 """
+import json
 import multiprocessing as mp
 from functools import lru_cache, partial
-import json
 from math import isclose
 from os import cpu_count
 from pathlib import Path

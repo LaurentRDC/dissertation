@@ -1,9 +1,11 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
-from pathlib import Path
-from skued import nfold, diffread, autocenter
-from matplotlib.patches import Rectangle, Circle
+from matplotlib.patches import Circle, Rectangle
 from matplotlib.ticker import FixedFormatter, FixedLocator
+from skued import autocenter, diffread, nfold
+
 from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DOWNSAMPLING = 4

@@ -1,13 +1,14 @@
+import itertools as it
 from math import floor
 from pathlib import Path
-import itertools as it
 
-import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from matplotlib.ticker import FixedLocator, FixedFormatter
+import matplotlib.pyplot as plt
 import numpy as np
 from iris import DiffractionDataset
+from matplotlib.ticker import FixedFormatter, FixedLocator
 from skimage.filters import gaussian
+
 from dissutils import LARGE_FIGURE_WIDTH, ImageGrid
 from dissutils.snse import overnight4
 

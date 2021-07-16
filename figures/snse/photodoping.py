@@ -1,11 +1,11 @@
-from pathlib import Path
 from math import sqrt
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors
-from dissutils.snse import photocarrier_density, SAMPLE_THICKNESS
-
+from dissutils.snse import SAMPLE_THICKNESS, photocarrier_density
 
 figure, carrier_ax = plt.subplots(1, 1, figsize=(MEDIUM_FIGURE_WIDTH, 2.5))
 

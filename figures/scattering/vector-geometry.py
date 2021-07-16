@@ -1,7 +1,7 @@
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, FancyArrowPatch
 from itertools import product
 
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyArrowPatch, Rectangle
 
 figure, ax = plt.subplots(1, 1, figsize=(3, 3))
 

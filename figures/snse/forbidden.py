@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats
-
-from dissutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
-from dissutils.snse import overnight4
 import skued
 from iris import DiffractionDataset
 
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
+from dissutils.snse import overnight4
 
 INNER_RADIUS = 15
 OUTER_RADIUS = 30

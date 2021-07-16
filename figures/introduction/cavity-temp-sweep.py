@@ -2,8 +2,8 @@ import csv
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-from matplotlib.ticker import LinearLocator, StrMethodFormatter
 import numpy as np
+from matplotlib.ticker import LinearLocator, StrMethodFormatter
 
 from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 

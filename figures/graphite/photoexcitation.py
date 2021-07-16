@@ -3,14 +3,15 @@ Visualization of the effect of photoexcitation on the electronic structure of gr
 
 Based on Castro-Neto et al, The electronic properties of graphene, Rev Mod Phys (2009)
 """
-import numpy as np
 from math import sqrt
+
+import matplotlib.colors as cl
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.colors import Normalize
 from matplotlib.ticker import FixedFormatter, FixedLocator
-import matplotlib.colors as cl
 
-from dissutils import named_arrow, MEDIUM_FIGURE_WIDTH
+from dissutils import MEDIUM_FIGURE_WIDTH, named_arrow
 
 
 def colormap():

@@ -8,8 +8,9 @@ value, assuming it is of the type MetaInlines or MetaString.
 Modified from the examples in https://github.com/jgm/pandocfilters.
 """
 
-from pandocfilters import toJSONFilter, attributes, Span, Str
 import re
+
+from pandocfilters import Span, Str, attributes, toJSONFilter
 
 pattern = re.compile("%\{(.*)\}$")
 

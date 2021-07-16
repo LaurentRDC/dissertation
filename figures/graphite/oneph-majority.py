@@ -9,9 +9,9 @@ from matplotlib.ticker import FixedFormatter, FixedLocator
 from dissutils import (
     LARGE_FIGURE_WIDTH,
     ImageGrid,
+    discrete_colors,
     draw_hexagon_field,
     tag_axis,
-    discrete_colors,
 )
 
 MODE_ORDERING = {

@@ -1,11 +1,13 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import Rectangle
 from matplotlib.ticker import FixedFormatter, FixedLocator
-import numpy as np
-from skued import diffread, align
 from skimage.filters import gaussian
-from pathlib import Path
-from dissutils import MEDIUM_FIGURE_WIDTH, tag_axis, ImageGrid
+from skued import align, diffread
+
+from dissutils import MEDIUM_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DOWNSAMPLING = 8
 

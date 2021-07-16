@@ -4,11 +4,12 @@ Thermoelectric Figure-of-Merit of Fully Dense Single-Crystalline SnSe
 (DOI:10.1021/acsomega.8b03323).
 """
 
+from pathlib import Path
+
 import numpy as np
 import scipy.optimize as opt
-from skued import gaussian
 import skimage.filters as filters
-from pathlib import Path
+from skued import gaussian
 
 DATADIR = Path("data") / "snse" / "estructure"
 

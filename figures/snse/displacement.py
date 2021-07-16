@@ -1,19 +1,19 @@
+from math import pi, sin, sqrt
 from pathlib import Path
 
-from math import sin, pi, sqrt
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-from matplotlib.patches import Rectangle
-from matplotlib.collections import PatchCollection
-import matplotlib as mpl
 import numpy as np
-import scipy.optimize as opt
-from crystals import Crystal
-import scipy.stats as stats
 import scipy.constants as constants
+import scipy.optimize as opt
+import scipy.stats as stats
+from crystals import Crystal
+from matplotlib.collections import PatchCollection
+from matplotlib.patches import Rectangle
 
-from dissutils.snse import overnight4, photocarrier_density
 from dissutils import MEDIUM_FIGURE_WIDTH
+from dissutils.snse import overnight4, photocarrier_density
 
 DATADIR = Path("data") / "snse"
 CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")

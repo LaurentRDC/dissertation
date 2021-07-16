@@ -1,8 +1,10 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
-from skued import gaussian, baseline_dt
+from skued import baseline_dt, gaussian
+
 from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
-from pathlib import Path
 
 s, intensity = np.load(Path("data") / "appendix" / "rutile_vo2.npy")
 q = 4 * np.pi * s

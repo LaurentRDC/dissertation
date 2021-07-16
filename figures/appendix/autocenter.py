@@ -1,12 +1,14 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
+import numpy as np
+from iris import DiffractionDataset
 from matplotlib.patches import Circle
 from matplotlib.ticker import FixedFormatter, FixedLocator
-from pathlib import Path
-from skued import autocenter, diffread
 from skimage.transform import rotate
-from dissutils import LARGE_FIGURE_WIDTH, GRAPHITE_ANGLE, ImageGrid, tag_axis
-from iris import DiffractionDataset
-import numpy as np
+from skued import autocenter, diffread
+
+from dissutils import GRAPHITE_ANGLE, LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DOWNSAMPLING = 8
 

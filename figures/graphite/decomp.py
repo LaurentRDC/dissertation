@@ -1,17 +1,18 @@
 import itertools as it
+from math import sqrt
 from pathlib import Path
 
 import h5py
-import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from math import sqrt
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.interpolate as interpolate
-from matplotlib.ticker import FixedFormatter, FixedLocator
-from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, draw_hexagon
-from skued import nfold
 from crystals import Crystal
 from crystals.affine import change_of_basis
+from matplotlib.ticker import FixedFormatter, FixedLocator
+from skued import nfold
+
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, draw_hexagon
 
 GAMMA_RADIUS = 0.45  # inverse angstroms
 INPUT = Path("data") / "graphite" / "populations"

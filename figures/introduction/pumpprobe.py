@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch
-from dissutils import LARGE_FIGURE_WIDTH, discrete_colors
-from matplotlib.ticker import FixedLocator, FixedFormatter
-from skued import gaussian, with_irf
 import numpy as np
+from matplotlib.patches import FancyArrowPatch
+from matplotlib.ticker import FixedFormatter, FixedLocator
+from skued import gaussian, with_irf
+
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors
 
 TAU = [0.75, 1.7, 2.5]
 PUMPTIMES = [0, 3, 6, 9]

@@ -5,14 +5,15 @@ Usage:
 
 python mktitlepage.py TARGET
 """
-import random
-import math
-from pathlib import Path
-import sys
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
 import itertools
+import math
+import random
+import sys
+from pathlib import Path
+
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+import numpy as np
 
 random.seed(23)
 np.random.seed(23)

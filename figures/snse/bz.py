@@ -1,9 +1,10 @@
+from functools import reduce
+
 import matplotlib.pyplot as plt
 import numpy as np
-from functools import reduce
 from matplotlib.patches import Circle, Rectangle
-from dissutils import named_arrow, discrete_colors
 
+from dissutils import discrete_colors, named_arrow
 
 fig, ax = plt.subplots(1, 1, figsize=(3, 2))
 ax.set_xlim([-1.1, 1.1])

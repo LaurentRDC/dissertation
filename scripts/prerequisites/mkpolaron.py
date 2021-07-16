@@ -3,14 +3,15 @@
 Extract the fast component of the diffuse intensity change in SnSe
 as a function of radius.
 """
+import itertools as it
 from pathlib import Path
 
 import numpy as np
 import scipy.optimize as opt
 import skued
-import itertools as it
 from crystals import Crystal
 from iris import DiffractionDataset
+
 from dissutils.snse import overnight4
 
 DATADIR = Path("data") / "snse"

@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
-from crystals import Crystal, Atom
-from skued import electrostatic, affe
-from dissutils import LARGE_FIGURE_WIDTH, CBAR_SIZE, named_arrow, tag_axis
-
+from crystals import Atom, Crystal
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 from scipy.constants import hbar, m_e
+from skued import affe, electrostatic
+
+from dissutils import CBAR_SIZE, LARGE_FIGURE_WIDTH, named_arrow, tag_axis
 
 Pu = Crystal.from_database("Pu-epsilon")
 

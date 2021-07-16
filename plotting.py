@@ -1,6 +1,7 @@
 # STYLE -----------------------------------------------------------------------
 import matplotlib.pyplot as plt
-from dissutils import LARGE_FIGURE_WIDTH, FONTSIZE
+
+from dissutils import FONTSIZE, LARGE_FIGURE_WIDTH
 
 plt.rcParams["figure.figsize"] = (LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH)
 plt.rcParams["font.family"] = "sans-serif"
@@ -12,6 +13,7 @@ plt.rcParams["mpl_toolkits.legacy_colorbar"] = False
 
 # WARNINGS --------------------------------------------------------------------
 import warnings
+
 import numpy
 
 warnings.filterwarnings("ignore", category=UserWarning, module="iris*")

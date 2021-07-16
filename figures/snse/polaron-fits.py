@@ -1,10 +1,12 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy.optimize as opt
 from functools import partial
-from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 from pathlib import Path
+
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.optimize as opt
 from scipy.ndimage import gaussian_filter
+
+from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 
 DATADIR = Path("data") / "snse"
 

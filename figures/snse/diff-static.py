@@ -1,12 +1,13 @@
 from math import floor
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
 import numpy as np
 from iris import DiffractionDataset
-from skimage.filters import gaussian
 from matplotlib.ticker import FixedFormatter, FixedLocator
+from skimage.filters import gaussian
+
 from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 INPUT = Path("data") / "snse"

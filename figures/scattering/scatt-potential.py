@@ -1,9 +1,11 @@
+from warnings import simplefilter
+
 import matplotlib.pyplot as plt
 import numpy as np
-from crystals import Crystal, Element, Atom
-from skued import electrostatic, affe
-from warnings import simplefilter
-from dissutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
+from crystals import Atom, Crystal, Element
+from skued import affe, electrostatic
+
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 
 # For division by zero warnings
 simplefilter("ignore", category=RuntimeWarning)

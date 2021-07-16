@@ -1,7 +1,9 @@
-import matplotlib.pyplot as plt
-from dissutils import MEDIUM_FIGURE_WIDTH, tag_axis, named_arrow
 from pathlib import Path
+
+import matplotlib.pyplot as plt
 from skimage.io import imread
+
+from dissutils import MEDIUM_FIGURE_WIDTH, named_arrow, tag_axis
 
 IMAGES = Path("images")
 

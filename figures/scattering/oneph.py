@@ -1,9 +1,11 @@
 from pathlib import Path
-from crystals import Crystal
-from mpl_toolkits.axes_grid1 import make_axes_locatable
+
 import matplotlib.pyplot as plt
 import numpy as np
-from dissutils import MEDIUM_FIGURE_WIDTH, CBAR_SIZE, draw_hexagon_field
+from crystals import Crystal
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+from dissutils import CBAR_SIZE, MEDIUM_FIGURE_WIDTH, draw_hexagon_field
 
 INPUT = Path("data") / "graphite"
 DOWNSAMPLING = 4

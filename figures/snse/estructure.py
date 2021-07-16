@@ -1,11 +1,12 @@
-import matplotlib.pyplot as plt
-from matplotlib.patches import Circle
-import matplotlib.ticker as ticker
-import matplotlib.gridspec as gridspec
 import matplotlib.colors as cl
+import matplotlib.gridspec as gridspec
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import numpy as np
-from dissutils import LARGE_FIGURE_WIDTH, tag_axis
 import skued
+from matplotlib.patches import Circle
+
+from dissutils import LARGE_FIGURE_WIDTH, tag_axis
 
 
 def colormap():

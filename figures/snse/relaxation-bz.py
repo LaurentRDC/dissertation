@@ -1,14 +1,16 @@
-import matplotlib.pyplot as plt
-import numpy as np
 import itertools as it
-from matplotlib.ticker import PercentFormatter
-from matplotlib.patches import Ellipse, Circle
-import matplotlib.ticker as ticker
 from pathlib import Path
+
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+from crystals import Crystal
 from iris import DiffractionDataset
+from matplotlib.patches import Circle, Ellipse
+from matplotlib.ticker import PercentFormatter
+
 from dissutils import MEDIUM_FIGURE_WIDTH, ImageGrid
 from dissutils.snse import overnight4
-from crystals import Crystal
 
 # To perform analysis on another dataset, simply change the following
 # line:

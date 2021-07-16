@@ -1,7 +1,9 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
+
 from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
-from pathlib import Path
 
 DATADIR = Path("data") / "snse"
 

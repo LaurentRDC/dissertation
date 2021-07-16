@@ -2,13 +2,13 @@ from math import sqrt
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
-from matplotlib.lines import Line2D
 import numpy as np
-from dissutils import LARGE_FIGURE_WIDTH, draw_hexagon
+from matplotlib.lines import Line2D
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 from scipy.constants import physical_constants
-from dissutils import CBAR_SIZE
+
+from dissutils import CBAR_SIZE, LARGE_FIGURE_WIDTH, draw_hexagon
 
 INPUT = Path("data") / "graphite" / "weighted-dispersion"
 

@@ -2,10 +2,11 @@
 Important constants for datasets
 """
 from math import sqrt
-import numpy as np
 from pathlib import Path
-from crystals import Crystal
+
+import numpy as np
 import skued
+from crystals import Crystal
 from scipy.constants import eV
 
 CAMERA_LENGTH = 0.2939  # m

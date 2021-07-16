@@ -6,17 +6,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 from crystals import Crystal
 from iris import DiffractionDataset
+from skimage.filters import gaussian
+from skimage.transform import rotate
+from skued import detector_scattvectors, indices_to_text, nfold
+
 from dissutils import (
     GRAPHITE_ANGLE,
     GRAPHITE_CAMERA_LENGTH,
     MEDIUM_FIGURE_WIDTH,
-    draw_hexagon_field,
     draw_hexagon,
+    draw_hexagon_field,
     tag_axis,
 )
-from skimage.transform import rotate
-from skimage.filters import gaussian
-from skued import detector_scattvectors, indices_to_text, nfold
 
 DATADIR = Path("data") / "graphite"
 DATASET = DATADIR / "graphite_time_corrected_iris5.hdf5"

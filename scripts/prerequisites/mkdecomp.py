@@ -12,12 +12,6 @@ import numpy as np
 import scipy.interpolate as interpolate
 import scipy.optimize as opt
 from iris import DiffractionDataset
-from dissutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH
-from skimage.filters import gaussian
-from skimage.transform import rotate
-from skued import detector_scattvectors, nfold
-from tqdm import tqdm
-
 from mkoneph import (
     IN_PLANE_MODES,
     debye_waller_factors,
@@ -25,6 +19,12 @@ from mkoneph import (
     one_phonon_structure_factor,
     prepare_modes,
 )
+from skimage.filters import gaussian
+from skimage.transform import rotate
+from skued import detector_scattvectors, nfold
+from tqdm import tqdm
+
+from dissutils import GRAPHITE_ANGLE, GRAPHITE_CAMERA_LENGTH
 
 INPUT = Path("data") / "graphite"
 OUTPUT = INPUT / "populations"

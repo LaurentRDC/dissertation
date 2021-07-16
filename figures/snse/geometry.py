@@ -10,9 +10,10 @@ from iris import DiffractionDataset
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
-from dissutils import FONTSIZE, CBAR_SIZE, tag_axis
-from dissutils.snse import static
 from skimage.filters import gaussian
+
+from dissutils import CBAR_SIZE, FONTSIZE, tag_axis
+from dissutils.snse import static
 
 INPUT = Path("data") / "snse"
 

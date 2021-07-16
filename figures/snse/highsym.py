@@ -1,13 +1,15 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize as opt
 import scipy.stats
-from skimage.filters import gaussian
-from pathlib import Path
-from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
-from dissutils.snse import overnight4
 import skued
 from iris import DiffractionDataset
+from skimage.filters import gaussian
+
+from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
+from dissutils.snse import overnight4
 
 OUTER_RADIUS = 30
 

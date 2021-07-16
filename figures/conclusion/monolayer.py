@@ -3,10 +3,11 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
-from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 from matplotlib.patches import Rectangle
 from matplotlib.ticker import FixedFormatter, FixedLocator
 from skued import autocenter
+
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis
 
 DOWNSAMPLING = 4
 

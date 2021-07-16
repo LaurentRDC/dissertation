@@ -1,17 +1,19 @@
-import matplotlib.pyplot as plt
-from pathlib import Path
 import itertools as it
-from math import sqrt, radians
-from functools import reduce
 from collections import namedtuple
-from matplotlib.patches import Rectangle, Circle, FancyArrowPatch
-import matplotlib.ticker as ticker
+from functools import reduce
+from math import radians, sqrt
+from pathlib import Path
+
 import matplotlib.cm as cm
-import numpy as np
 import matplotlib.colors as cl
-from dissutils import LARGE_FIGURE_WIDTH, tag_axis
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
 import skued
+from matplotlib.patches import Circle, FancyArrowPatch, Rectangle
 from scipy.signal import correlate2d
+
+from dissutils import LARGE_FIGURE_WIDTH, tag_axis
 
 DATADIR = Path("data") / "snse" / "estructure"
 

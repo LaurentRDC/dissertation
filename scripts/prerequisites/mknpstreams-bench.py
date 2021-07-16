@@ -1,9 +1,10 @@
-from itertools import repeat, count
+from itertools import count, repeat
+from pathlib import Path
+from timeit import default_timer as timer
+
 import npstreams as ns
 import numpy as np
 from tqdm import tqdm
-from timeit import default_timer as timer
-from pathlib import Path
 
 OUTPUT = Path("data") / "introduction" / "npstreams-benchmark"
 OUTPUT.mkdir(exist_ok=True)

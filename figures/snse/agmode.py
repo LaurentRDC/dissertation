@@ -1,7 +1,9 @@
-import matplotlib.pyplot as plt
-from dissutils import LARGE_FIGURE_WIDTH, named_arrow
 from pathlib import Path
+
+import matplotlib.pyplot as plt
 from skimage.io import imread
+
+from dissutils import LARGE_FIGURE_WIDTH, named_arrow
 
 IMAGES = Path("images")
 

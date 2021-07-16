@@ -1,9 +1,11 @@
-import numpy as np
-import matplotlib.pyplot as plt
 from pathlib import Path
-from matplotlib.font_manager import FontProperties
+
 import matplotlib.gridspec as gridspec
-from dissutils import discrete_colors, tag_axis, LARGE_FIGURE_WIDTH
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.font_manager import FontProperties
+
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
 
 NS_COLOR, NP_COLOR = discrete_colors(2)
 

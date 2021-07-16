@@ -1,16 +1,18 @@
-import matplotlib.pyplot as plt
 import itertools as it
-from math import sqrt, radians
-from functools import reduce
 from collections import namedtuple
-from matplotlib.patches import Rectangle, Circle, FancyArrowPatch
-import matplotlib.ticker as ticker
+from functools import reduce
+from math import radians, sqrt
+
 import matplotlib.cm as cm
-from skimage.filters import gaussian
-import numpy as np
 import matplotlib.colors as cl
-from dissutils import LARGE_FIGURE_WIDTH, tag_axis
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
 import skued
+from matplotlib.patches import Circle, FancyArrowPatch, Rectangle
+from skimage.filters import gaussian
+
+from dissutils import LARGE_FIGURE_WIDTH, tag_axis
 
 ARROWSTYLE = dict(arrowstyle="-|>", zorder=np.inf, mutation_scale=7, fc="k", ec="k")
 

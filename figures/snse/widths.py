@@ -1,16 +1,18 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
-import scipy.optimize as opt
-import scipy.stats
-import scipy.signal as signal
 import scipy.interpolate as interpolate
-from pathlib import Path
-from crystals import Crystal
-from dissutils import LARGE_FIGURE_WIDTH, tag_axis, discrete_colors
-from dissutils.snse import overnight4
+import scipy.optimize as opt
+import scipy.signal as signal
+import scipy.stats
 import skued
+from crystals import Crystal
 from iris import DiffractionDataset
+
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, tag_axis
+from dissutils.snse import overnight4
 
 CRYSTAL = Crystal.from_cif(Path("data") / "snse" / "snse_pnma.cif")
 

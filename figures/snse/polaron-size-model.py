@@ -6,19 +6,15 @@ on the diffuse intensity profile
 from math import sqrt
 from pathlib import Path
 
-import matplotlib.pyplot as plt
-import numpy as np
-import matplotlib.ticker as ticker
 import matplotlib.gridspec as gridspec
-from mpl_toolkits.axes_grid1 import make_axes_locatable
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
 import skued
 from crystals import Crystal
-from dissutils import (
-    LARGE_FIGURE_WIDTH,
-    CBAR_SIZE,
-    GRID_AXES_PAD,
-    tag_axis,
-)
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+from dissutils import CBAR_SIZE, GRID_AXES_PAD, LARGE_FIGURE_WIDTH, tag_axis
 
 DATADIR = Path("data") / "snse"
 CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")

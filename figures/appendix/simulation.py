@@ -1,17 +1,17 @@
-import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-from mpl_toolkits.axes_grid1 import make_axes_locatable
+import matplotlib.pyplot as plt
 import numpy as np
+from crystals import Crystal
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from skued import pelectrostatic, powdersim
+
 from dissutils import (
-    LARGE_FIGURE_WIDTH,
-    GRID_AXES_PAD,
     CBAR_SIZE,
+    GRID_AXES_PAD,
+    LARGE_FIGURE_WIDTH,
     discrete_colors,
     tag_axis,
 )
-from crystals import Crystal
-from skued import pelectrostatic, powdersim
-
 
 figure = plt.figure(figsize=(LARGE_FIGURE_WIDTH, (3 / 5) * LARGE_FIGURE_WIDTH))
 gs = gridspec.GridSpec(nrows=3, ncols=2, figure=figure)

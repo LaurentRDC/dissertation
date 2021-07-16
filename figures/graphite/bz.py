@@ -1,9 +1,11 @@
-import matplotlib.pyplot as plt
-import numpy as np
 from functools import reduce
 from math import radians, sqrt
+
+import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import Circle, RegularPolygon
-from dissutils import named_arrow, discrete_colors
+
+from dissutils import discrete_colors, named_arrow
 
 
 def named_arrow(ax, x, y, dx, dy, text, tkwds=dict(), **kwargs):

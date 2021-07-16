@@ -4,8 +4,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
-from dissutils import LARGE_FIGURE_WIDTH, draw_hexagon, discrete_colors
 from scipy.constants import physical_constants
+
+from dissutils import LARGE_FIGURE_WIDTH, discrete_colors, draw_hexagon
 
 HBAR = physical_constants["Planck constant over 2 pi in eV s"][0]
 HZ_TO_EV = HBAR * 2 * np.pi

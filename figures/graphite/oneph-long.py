@@ -1,14 +1,11 @@
 from pathlib import Path
-from matplotlib.ticker import FixedFormatter, FixedLocator
-from crystals import Crystal
+
 import matplotlib.pyplot as plt
 import numpy as np
-from dissutils import (
-    LARGE_FIGURE_WIDTH,
-    ImageGrid,
-    draw_hexagon_field,
-    tag_axis,
-)
+from crystals import Crystal
+from matplotlib.ticker import FixedFormatter, FixedLocator
+
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, draw_hexagon_field, tag_axis
 
 INPUT = Path("data") / "graphite"
 DOWNSAMPLING = 4

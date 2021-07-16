@@ -9,16 +9,15 @@ import npstreams as ns
 import numpy as np
 from crystals import Crystal
 from crystals.affine import change_of_basis
-from scipy.interpolate import griddata
-from tqdm import tqdm
-
 from mkoneph import (
-    prepare_modes,
+    IN_PLANE_MODES,
     debye_waller_factors,
     one_phonon_structure_factor,
+    prepare_modes,
     render,
-    IN_PLANE_MODES,
 )
+from scipy.interpolate import griddata
+from tqdm import tqdm
 
 INPUT = Path("data") / "graphite"
 OUTPUT_STATIC = INPUT / "static-dispersion"

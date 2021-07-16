@@ -3,18 +3,18 @@ Visualization of the electronic structure of graphene
 
 Based on Castro-Neto et al, The electronic properties of graphene, Rev Mod Phys (2009)
 """
-import numpy as np
-from math import sqrt
 from functools import reduce
+from math import sqrt
+
+import matplotlib.colors as cl
+import matplotlib.pyplot as plt
+import numpy as np
 
 # Documentation for mplot3d:
 #   https://matplotlib.org/api/toolkits/mplot3d.html
 from mpl_toolkits.mplot3d import axes3d
-import matplotlib.colors as cl
-import matplotlib.pyplot as plt
 
 from dissutils import LARGE_FIGURE_WIDTH
-
 
 ENERGY_CUTOFF = 5  # eV
 

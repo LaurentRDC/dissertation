@@ -1,9 +1,10 @@
-from skimage.io import imread
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
 from pathlib import Path
 
-from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, tag_axis, discrete_colors
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+from skimage.io import imread
+
+from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, discrete_colors, tag_axis
 
 DATADIR = Path("images")
 DOWNSAMPLING = 5

@@ -1,14 +1,16 @@
-from pathlib import Path
-from math import pi
 from dataclasses import dataclass
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Circle, Ellipse, Rectangle, FancyArrowPatch
-import matplotlib.gridspec as gridspec
-import matplotlib.ticker as ticker
+from math import pi
+from pathlib import Path
+
 import matplotlib
-from crystals import Crystal, Atom, distance_cartesian
-from dissutils import tag_axis, named_arrow, LARGE_FIGURE_WIDTH
+import matplotlib.gridspec as gridspec
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+from crystals import Atom, Crystal, distance_cartesian
+from matplotlib.patches import Circle, Ellipse, FancyArrowPatch, Rectangle
+
+from dissutils import LARGE_FIGURE_WIDTH, named_arrow, tag_axis
 
 NXE, NZE = 2, 5  # Supercell factor in a and c direction for electron polaron
 NYH = NZH = 3  # Supercell factor in b and c directions for hole polaron

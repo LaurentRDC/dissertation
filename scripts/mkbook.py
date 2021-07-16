@@ -3,13 +3,13 @@ Generate the structure required by Rust's mdBook
 
 """
 
+import argparse
 import json
+import re
 import subprocess
 import sys
-from pathlib import Path
-import re
 from collections import namedtuple
-import argparse
+from pathlib import Path
 
 Header = namedtuple(typename="Header", field_names="lineno,level,content")
 
