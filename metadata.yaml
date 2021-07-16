@@ -3,10 +3,35 @@ title: "Ultrafast energy flow across the Brillouin zone in two-dimensional mater
 author: "Laurent P. René de Cotret"
 
 studentnumber: "260446509"
-date: "April 15, 2021"
+date: "August 15, 2021"
 
 abstract-fr: |
-  Ceci est le résumé.
+  La diffraction ultrarapide par électron avec compression radio-fréquence a atteint
+  un niveau de performance qui permet la mesure précise de diffusion diffuse 
+  par électron résolue dans le temps avec une résolution de 150 femtosecondes. 
+  Cette technique étend la diffraction ultrarapide par électron aux études du système
+  phononique (ondes du réseau d'atomes) résolues dans le temps et l'espace réciproque.
+  Cette thèse élabore l'exploration de la diffusion diffuse d'électron résolue dans le 
+  temps dans deux matériaux bidimensionels. Le premier matériau est le graphite, dans 
+  lequel l'anisotropie du couplage électron-phonon et le réseau d'atomes très tendu donne
+  un contraste maximal aux mesures expérimentales. La redondance dans les patrons de 
+  diffusion, ainsi que la symmétrie du réseau d'atomes, sont exploitées pour déterminer 
+  l'occupation de tous les modes phononiques dans le plan atomique. L'occupation des modes 
+  phononiques résolue dans le temps et l'espace réciproque révèle l'effondrement du modèle 
+  à deux températures souvent utilisé pour expliquer les résultats d'expèriences ultrarapides.
+  Ces mesures donnent aussi une vue directe des chemins de relaxation des phonons
+  à travers la zone de Brillouin, et une méthode pour en extraire le couplage électron-phonon
+  est aussi présentée. Ces leçons sont ensuite appliquées à l'étude d'un des meilleurs matériaux
+  thermoélectriques, le séléniure d'étain. Dans ces expériences, la combinaison de diffraction et 
+  diffusion diffuse ultrarapide par électron élucide le mystère de la pauvre conduction thermique
+  et bonne mobilité des porteurs de charges qui donnent au séléniure d'étain sa performance 
+  thermoélectrique remarquable. Les résultats démontrent un important couplage électron-phonon aux modes
+  phononique polarisés qui dominent la dynamique au centre de la zone de Brillouin. La distortion du
+  réseau d'atomes qui ensuit la photoexcitation est attribuable à deux types de polarons, l'un 
+  formé par des électrons et l'autre par des trous d'électrons, qui se forment à deux vitesses 
+  différentes. Ces résultats expliquent comment le séléniure d'étain peut à la fois être un
+  mauvais conducteur thermique et un bon conducteur électrique dû au couplage électron-phonon 
+  particulier.
 
 abstract-en: |
   Ultrafast electron diffraction with bunch compression has reached a level of 
@@ -15,43 +40,52 @@ abstract-en: |
   extends ultrafast electron diffraction to time- and momentum-resolved studies 
   of phonon systems (lattice waves) in single-crystal materials. In this 
   dissertation, time-resolved diffuse scattering is explored in two 
-  low-dimensional materials. Time-resolved diffuse scattering is first explored 
-  in graphite, where anisotropic electron-phonon coupling and stiff phonon bands 
-  allow for maximum measurement contrast. The redundancy in ultrafast electron 
-  scattering patterns, as well as crystal symmetry, are used to robustly recover 
-  the occupancy of all in-plane phonon modes. The mode-, momentum- and 
-  time-dependent phonon populations are determined, revealing the nonequilibrium 
-  lattice states that follow photoexcitation and the complete breakdown of the 
-  two-temperature model often used to describe these dynamics. The measurements 
-  presented also provide a direct view of anharmonic decay pathways of phonons 
-  across the Brillouin zone, and a technique to extract electron-phonon coupling 
-  matrix elements from phonon population is developed. The lessons are then 
+  low-dimensional materials. First comes graphite, where anisotropic electron-phonon 
+  coupling and stiff phonon bands allow for maximum measurement contrast. 
+  The redundancy in ultrafast electron scattering patterns, as well as crystal 
+  symmetry, are used to robustly recover the occupancy of all in-plane phonon modes. 
+  The mode-, momentum- and time-dependent phonon populations reveal 
+  the nonequilibrium lattice states that follow photoexcitation and the complete 
+  breakdown of the two-temperature model often used to describe these dynamics. 
+  The measurements presented also provide a direct view of anharmonic decay pathways 
+  of phonons across the Brillouin zone, and a technique to extract electron-phonon 
+  coupling matrix elements from phonon population is developed. The lessons are then 
   applied to further our understanding of the best intrinsic thermoelectric 
-  materials, tin selenide.  There, combined ultrafast electron diffraction 
+  materials, tin selenide. There, combined ultrafast electron diffraction 
   and diffuse scattering measurements elucidate the mystery of ultralow thermal 
-  conductivity that gives tin selenide its high thermoelectric efficiency. It 
-  is found that strong and anisotropic electron-phonon coupling dominates the 
-  zone-center phonon dynamics, not anharmonic coupling as previously thought. 
+  conductivity and high carrier mobility that gives tin selenide its high 
+  thermoelectric efficiency. It is found that strong and anisotropic electron-phonon 
+  coupling to polar modes dominates the zone-center phonon dynamics. Light-induced lattice 
+  distortions are found to be attributable with fast-forming one-dimensional electron 
+  polarons and slow-forming three-dimensional hole polarons.
   These findings recontextualize what was thought about the determinants of 
-  thermoelectric performance, primarily the role of electron-phonon coupling
-  in lowering thermal conductivity.
+  thermoelectric performance, primarily the role of electron-phonon coupling to 
+  polar modes in preserving high carrier mobility in low-symmetry crystals.
 
 acknowledgements: |
   I would like to thank everyone who has made this work possible. 
   
-  I am most grateful to my doctoral advisor Bradley Siwick for his continuing support. Following the trail marked by his questions has led me 
-  to be a better scientist. I am also indebted to my fellow research group members who have played a pivotal role in my research: Martin Otto, 
-  Mark Stern, Jan-Hendrick Pöhls, Tristan Britt, and Syed Ali Hassan. Other members of the Center of Physics of Materials have also positively 
-  influenced my research, most importantly Benjamin Dringoli and Dominique Matte.
+  I am most grateful to my doctoral advisor Bradley Siwick for his continuing support. 
+  Following the trail marked by his questions has led me to be a better scientist. 
+  I am also indebted to my fellow research group members who have played a pivotal role 
+  in my research: Martin Otto, Mark Stern, Jan-Hendrick Pöhls, Tristan Britt, and 
+  Syed Ali Hassan. Other members of the Center of Physics of Materials have also 
+  positively influenced my research, most importantly Benjamin Dringoli and Dominique 
+  Matte.
 
-  I am also grateful to faculty members Mark Sutton and David Cooke for their advice and support throughout the years.
+  I am also grateful to faculty members Mark Sutton and David Cooke for their advice 
+  and support throughout the years.
 
-  The research presented in this dissertation would not have been possible without the support of many McGill employees. I would like to thank Jeannie Mui and S. Kelly Sears 
-  from the McGill Facility for Electron Microscopy Research, Richard Rossi and Weihua Wang from the Chemistry department, and Jean-Philippe Guay and 
-  John Smeros from the Physics department.
+  The research presented in this dissertation would not have been possible without the 
+  support of many McGill employees. I would like to thank Jeannie Mui and S. Kelly Sears 
+  from the McGill Facility for Electron Microscopy Research, Richard Rossi and Weihua 
+  Wang from the Chemistry department, and Jean-Philippe Guay and John Smeros 
+  from the Physics department.
 
-  Finally, I would like to thank the students in our shared office for their friendship and personal support: Dallas Strandell, Gabriela Romero Esquivel, Patrick Brosseau, 
-  Cameron Reid, Colin Sonnichsen, Harry Baker, Hélène Seiler, Samuel Palato, and many others.
+  Finally, I would like to thank the students in our shared office for their 
+  friendship and personal support: Dallas Strandell, Gabriela Romero Esquivel, 
+  Patrick Brosseau, Cameron Reid, Colin Sonnichsen, Harry Baker, Hélène Seiler, 
+  Samuel Palato, and many others.
 
 declaration: |
   Declaration of originality

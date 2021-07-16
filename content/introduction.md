@@ -1,11 +1,11 @@
 
 # Introduction {#sec:introduction}
 
-The basic physical principles of low-energy quantum mechanics are understood reasonably-well, and yet the emergence of new phenomena from the fundamental laws of Physics continues to surprise.
+The basic physical principles of low-energy quantum mechanics are understood reasonably-well, and yet the emergence of new phenomena from the fundamental laws of physics continues to surprise.
 
 The field of condensed matter physics tackles a variety of intertwined questions, from fundamental physics to concrete applications. Given that condensed matter systems are complex, many experimental dimensions are used to distinguish between phenomena. Electron microscopy comes to mind as an example of a technique which can selectively observe physical systems in real-space (via imaging) or in momentum (via diffraction).
 
-TODO: expand here
+The processes by which quantum systems equilibrate strongly influence the properties of systems at equilibrium. In this sense, ultrafast science -- which has now reached the ability to observe atomic-scale dynamics in real-time -- is poised to revolutionize the understanding of exotic states of matter.
 
 ## Outrunning temperature to resolve atomic dynamics
 
@@ -22,8 +22,6 @@ On the other hand, ultrafast methodologies are able to *rule out* apparent coupl
 The power of ultrafast methodologies lies in their ability to deconvolve interactions in the time-domain[@Sentef2013]. By definition, measurements at equilibrium are unable to determine energy flow and resulting couplings, as equilibrium is defined by the balanced flow of energy throughout a system. 
 
 ### An analogy with Green's functions
-
-TODO: mention the fluctuation-dissipation theorem
 
 Ultrafast methodologies are a way to lift the veil and peer at an aspect of the system's impulse response. In this sense, an analogy with Green's functions is appropriate.
 
