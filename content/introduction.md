@@ -196,12 +196,12 @@ The shape of the cavity is also important. In its simplest form, a "pillbox" cav
 
 ### Compressor characterization
 
-Initial characterization of the electron compressor in 2012 was performed with a vector network analyzer up to \SI{3}{\giga\hertz} only. The author characterized the cavity again in December 2019 across a much larger bandwidth of \SI{50}{\giga\hertz}, using an Agilent Technologies N5247A vector network analyzer. The transmission spectrum is presented in @fig:introduction-cavity-full-spectrum. The main resonance near \SI{3}{\giga\hertz} is clearly visible.
+Initial characterization of the electron compressor in 2012 was performed with a vector network analyzer up to \SI{3}{\giga\hertz} only. The author characterized the cavity again in December 2019 across a much larger bandwidth of \SI{50}{\giga\hertz}, using an Agilent Technologies N5247A vector network analyzer. The transmission spectrum is presented in @fig:introduction-cavity-full-spectrum. The main resonance near \SI{3}{\giga\hertz} is clearly visible. Simulations have revealed that some higher-frequency modes are also suitable for electron pulse compression[^cavsim]. Further work is planned to test whether using two or more cavity compression modes can enhance instrument performance.
 
-```{.matplotlib #fig:introduction-cavity-full-spectrum file="figures/introduction/cavity-full-spectrum.py" caption="Characterization of the cavity transmission spectrum at \SI{13}{\celsius}. **a)** Transmitted amplitude near \SI{3}{\giga\hertz}. **b)** Phase of the transmitted signal near \SI{3}{\giga\hertz}. **c)** Amplitude spectrum in a wide band shows multiple resonances up to \SI{12}{\giga\hertz}."}
+[^cavsim]: The cavity resonance simulation and modelling have been performed by Tristan Britt.
+
+```{.matplotlib #fig:introduction-cavity-full-spectrum file="figures/introduction/cavity-full-spectrum.py" caption="Characterization of the cavity transmission spectrum at \SI{13}{\celsius}. **a)** Transmitted amplitude near \SI{3}{\giga\hertz}. **b)** Phase of the transmitted signal near \SI{3}{\giga\hertz}. **c)** Amplitude spectrum in a wide band shows multiple resonances up to \SI{12}{\giga\hertz}. Gray overlays mark compression modes of the cavity."}
 ```
-
-TODO: Label EM modes of resonances (TM010, TM011, etc.)
 
 The temperature-dependence of the resonant frequency was also investigated. By changing the temperature of the cavity via liquid cooling, its dimensions are modified slightly due to thermal expansion. The change in the transmission spectrum near \SI{3}{\giga\hertz} is presented in @fig:introduction-cavity-temp-sweep.
 
