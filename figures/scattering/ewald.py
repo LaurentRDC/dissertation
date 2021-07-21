@@ -10,7 +10,7 @@ from skued import electron_wavelength, indices_to_text, lorentzian
 
 from dissutils import LARGE_FIGURE_WIDTH, ImageGrid, named_arrow
 
-EWALD_RADIUS = 2 * np.pi / electron_wavelength(keV=100)
+EWALD_RADIUS = 2 * np.pi / electron_wavelength(keV=90)
 EWALD_RADIUS_XRAY = 2 * np.pi / 0.95  # 13 keV x-rays
 
 ELECTRONS_COLOR = "k"
@@ -100,7 +100,7 @@ electron_handle = mlines.Line2D(
     color=ELECTRONS_COLOR,
     marker=None,
     linestyle="solid",
-    label="Electrons (100 keV)",
+    label="Electrons (90 keV)",
 )
 xray_handle = mlines.Line2D(
     [], [], color=XRAY_COLOR, marker=None, linestyle="dashed", label="X-rays (13 keV)"

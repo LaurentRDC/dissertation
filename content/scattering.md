@@ -3,7 +3,7 @@
 
 The scattering of light or particles by a sample is used by a large class of experimental techniques, dating back a hundred years. Scattering can be broadly defined as the modification of an incoming wave by a potential into outgoing wave, a process which imprints the outgoing wave with some characteristic of the potential. The outgoing wave may lose or gain energy, and its momentum might be changed. When multiple incoming waves are simultaneously used -- forming an incoming wavefront --, the outgoing waves may interfere constructively or destructively. This effect is particularly intense for periodic scattering potentials, for example in crystals.
 
-This chapter will consider the special case of *electron scattering*. In crystals, electrons are scattered by the electrostatic potential of ions and the electronic charge-density. Thanks to improvements to instrument stability (@sec:intro-cavity), as well as advances in data acquisition and data analysis attributable to the author (@sec:introduction-data-exploration), the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
+This chapter will consider the special case of *electron scattering*. In crystals, electrons are scattered by the electrostatic potential of ions and the electronic charge-density. Thanks to improvements to instrument stability (@sec:intro-cavity), as well as advances in data acquisition and data analysis attributable to the author (@sec:appendix-software), the ultrafast electron scattering instrument used herein can reliably measure the effects of *diffuse scattering*.
 
 In writing this chapter, the author has tried original derivations that emphasize concepts that are important for the remainder of this dissertation. The derivation of ultrafast diffuse scattering intensity is of particular interest, because it is the only full quantum-mechanical treatment relevant to ultrafast electron scattering specifically in the literature today.
 
@@ -18,7 +18,7 @@ The scattering electrons used in this work have an enormous amount of kinetic en
 $$
     V = \frac{Z e^2}{4 \pi \epsilon_0 |\vect{x}|}
 $${#eq:scattering-electrostatic-potential}
-where $\epsilon_0$ is the vacuum dielectric constant, $Z$ the atomic number, $e$ is the unit of charge. For the simple example of graphite ($Z=12$, $|\vect{x}|\approx \SI{1}{\angstrom}$), the potential energy associated with the Coulomb interaction is less than \SI{10}{\electronvolt}. Given that scattering electrons have nearly \SI{100}{\kilo\electronvolt}, the potential $V(\vect{x}, t)$ shall be treated as a perturbation.
+where $\epsilon_0$ is the vacuum dielectric constant, $Z$ the atomic number, $e$ is the unit of charge. For the simple example of graphite ($Z=12$, $|\vect{x}|\approx \SI{1}{\angstrom}$), the potential energy associated with the Coulomb interaction is less than \SI{10}{\electronvolt}. This is very small compared to the kinetic energy of scattering electrons (\SI{90}{\kilo\electronvolt}), and so the potential $V(\vect{x}, t)$ shall be treated as a perturbation.
 
 ### Electrons propagating in free space
 
@@ -104,7 +104,7 @@ Electron cameras measure the intensity of the wavefunction. In the case of brigh
 $$
     I(\vect{x}) \equiv \left| \braket{\vect{x} | \Psi} \right|^2
 $$
-In order to sample the scattered wavefunction in reciprocal space, an electron lens can be used to focus the scattered electrons onto the detector. Given that electrons are prepared with definite momentum $\vect{k}_i$, it is trivial to ignore the unscattered part of the wavefunction -- the first term in @eq:scattering-lippmann-schwinger-general -- which is found only at $\vect{k}_f = \vect{k}_i$. Therefore, the intensity away from $\vect{k}_i$ is related only to the scattered wavefunction, $\Psi$:
+where $\vect{x}$ represents the possible spatial positions of the detector. In order to sample the scattered wavefunction in reciprocal space, an electron lens can be used to focus the scattered electrons onto the detector. Given that electrons are prepared with definite momentum $\vect{k}_i$, it is trivial to ignore the unscattered part of the wavefunction -- the first term in @eq:scattering-lippmann-schwinger-general -- which is found only at $\vect{k}_f = \vect{k}_i$. Therefore, the intensity away from $\vect{k}_i$ is related only to the scattered wavefunction, $\Psi$:
 \begin{align}
 I(\vect{k}_f - \vect{k}_i)
     & = \left| \braket{\vect{x} | \Psi} \right|^2 \nonumber \\
@@ -141,12 +141,14 @@ $${#eq:scattering-amplitude-q}
 The scattering potential of a single atom is given by:
 $$
     V_a(\vect{x}) = -\frac{Z e^2}{|\vect{x}|} + \sum_{i=1}^{Z} \frac{e^2}{|\vect{x} - \vect{x}_i|}
-$${#eq:scattering-atom-potential}
+    \label{eq:scattering-atom-potential}
+$$
 where Z is the atomic weight, $\vect{x}$ is a position with respect to the ionic core, and $\vect{x}_i$ is the position of the $i^{\text{th}}$ electron. The potential in @eq:scattering-atom-potential can be calculated from first principles, using relativistic Hartree-Fock calculations[@Fischer1977;@Kirkland2010] to get the real-space electron density (i.e. determining the possible set $\set{\vect{x}_i}$). This is beyond the scope of the present work, and the final result is used here. When discussing electron scattering, the scattering amplitude for a single atom is usually called the *atomic form factors for electron scattering*. To a reasonable degree of accuracy, the atomic form factors for electrons for light atoms are spherically symmetric[@Zheng2009]. They can be parametrized as:
 $$
     f_e(\vect{q}) = \sum_{i=1}^3 \frac{a_i}{|\vect{q}|^2 + b_i} + c_i e^{-d_i|\vect{q}|^2}
-$${#eq:scattering-affe}
-where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via @eq:scattering-amplitude-q. Examples of $f_e(\vect{q})$ and associated $V_a(\vect{x})$ are shown in @fig:scattering-potential for a few elements.
+    \label{eq:scattering-affe}
+$$
+where the constants $\set{ a_i, b_i, c_i, d_i }$ are element-specific fitting parameters which are tabulated in Kirkland [@Kirkland2010]. The associated real-space potential can be calculated via the reciprocal of @eq:scattering-amplitude-q. Examples of $f_e(\vect{q})$ and associated $V_a(\vect{x})$ are shown in @fig:scattering-potential for a few elements.
 
 ```{.matplotlib #fig:scattering-potential file="figures/scattering/scatt-potential.py" caption="Demonstration of the electrostatic potential of atoms, which scatters electrons. **a)** Radial view of the electrostatic potential in real-space **b)** Radial view of the electrostatic potential in reciprocal space, also known as the *atomic form factor*."}
 ```
@@ -176,16 +178,18 @@ where $\vect{y}$ is some arbitrary translation vector. Therefore, the Fourier tr
         & = \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i}
     \label{eq:scattering-potential-crystal}
 \end{align}
+The scattering form factor for each atom $\set{f_{e,i}}$ are not in general equal to the single-atom scattering form factors of @eq:scattering-affe. This difference may explain, for example, why the diffraction intensity for the $(222)$ reflection is visible in diamond[@Bragg1920] and silicon[@Keating1971]. 
 
 ```{.matplotlib #fig:scattering-polonium-example file="figures/scattering/polonium.py" caption="Calculated scattering potential and associated scattering amplitude for an abstract crystal. **a)** Electrostatic potential $V(\vect{x})$ in the $z=0$ plane. The two in-plane lattice vectors $\vect{a}_1$ and $\vect{a}_2$ are shown; lattice vector $\vect{a}_3$ points out of the page. **b)** Scattering amplitude $f(\vect{q})$ associated with the electrostatic potential shown in a). The periodic nature of the potential in real-space creates a structure in reciprocal space called the *reciprocal lattice*."}
 ``` 
 
-@eq:scattering-potential-crystal has historically been called the *static structure factor*, named thus because the atomic positions are assumed to be fixed. This stands in contrast to the *dynamic structure factor* discussed below in @sec:diffuse-scattering. A visual representation of the scattering potential of a crystal is helpful. Consider the example of a crystal of Polonium, consists in a Pu atom at the every vertex of a rectangular prism of dimensions \SI{5 x 3 x 3}{\angstrom}. The calculated electrostatic potential of this arrangement along the unit cell base is shown in @fig:scattering-polonium-example a). The lattice vectors $\vect{a}_1$ and $\vect{a}_2$ are indicated, with $\vect{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f_e(\vect{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
+@eq:scattering-potential-crystal has historically been called the *static structure factor*, named thus because the atomic positions are assumed to be fixed. This stands in contrast to the *dynamic structure factor* discussed below in @sec:diffuse-scattering. A visual representation of the scattering potential of a crystal is helpful. Consider the example of an abstract crystal, consisting in an atom at the every vertex of a rectangular prism of dimensions \SI{5 x 3 x 3}{\angstrom}. The calculated electrostatic potential of this arrangement along the unit cell base is shown in @fig:scattering-polonium-example a). The lattice vectors $\vect{a}_1$ and $\vect{a}_2$ are indicated, with $\vect{a}_3$ being aligned out of the page. The periodic nature of this scattering potential is demonstrated by calculating the resulting scattering amplitude $f_e(\vect{q})$ from @eq:scattering-amplitude-q, which is shown in @fig:scattering-polonium-example b). The periodicity in spatial-frequency-space, also called *reciprocal space*, is evident, and forms a *reciprocal lattice*, formally defined in the next section.
 
 From @eq:scattering-intensity and @eq:scattering-amplitude-q, the measured diffracted intensity is:
 $$
     I(\vect{q}) = \frac{m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_i f_{e,i}(\vect{q}) e^{-i \vect{q} \cdot \vect{r}_i} \right|^2
-$${#eq:scattering-diffracted-intensity-zero-temp}
+    \label{eq:scattering-diffracted-intensity-zero-temp}
+$$
 This is the standard result for the diffracted intensity being proportional to the square of the static structure factor[@Warren1990intensity;@Kittel1996intensity;@Fultz2002intensity;@Kirkland2010intensity]. 
 
 ### The reciprocal lattice
@@ -198,7 +202,7 @@ $$
 $$
 which leads to the following reciprocal lattice vectors:
 $$
-    \left\{ \vect{b}_i = 2 \pi \frac{\vect{a}_j \times \vect{a}_k}{\vect{a_i} \cdot (\vect{a_j} \times \vect{a}_k)} ~ \middle| ~ (i,j,k) \in C \right\}
+    \left\{ \vect{b}_i = 2 \pi \frac{\vect{a}_j \times \vect{a}_k}{\vect{a}_i \cdot (\vect{a}_j \times \vect{a}_k)} ~ \middle| ~ (i,j,k) \in C \right\}
 $$
 where $C$ is the set of cyclic permutations. For the example of $\alpha$-Pu, where
 $$
@@ -229,7 +233,8 @@ where $\vect{R}_m$ is the position of unit cell $m$, and $\vect{x}_s$ is the pos
 Finally, note that because the vectors $\set{ \vect{R}_m }$ are integer multiples of lattice vectors:
 $$
     \sum_{m=1}^{N_c} e^{-i \vect{q} \cdot \vect{R}_m} \xrightarrow[]{N_c \to \infty} N_c \sum_{\set{\vect{H}}} \delta(\vect{q} - \vect{H})
-$${#eq:scattering-discrete-fourier}
+    \label{eq:scattering-discrete-fourier}
+$$
 which follows from the definition of the Fourier transform[@Robinson2016DiscreteFourier]. Therefore, for large $N_c$ (large crystals):
 $$
     I(\vect{q}) = \frac{N_c^2 m_e^2}{4 \pi^2 \hbar^4 r^2} \left| \sum_{\set{\vect{H}}}\sum_{s} f_{e,s}(\vect{q}) e^{-i \vect{q} \cdot \vect{x}_s} \delta(\vect{q} - \vect{H})\right|^2
@@ -240,11 +245,11 @@ This form of @eq:scattering-diffracted-intensity-zero-temp makes it more obvious
 
 It is possible to *deduce* Bragg's law from @eq:scattering-amplitude-q and our definition of the reciprocal lattice.
 
-By definition, the reciprocal points of the crystal scattering potential, located at the spatial frequencies where the crystal potential strong, form a lattice with basis vectors $\set{ \vect{b}_i }$. Consider an electron with initial wavevector $\vect{k}_i$ that scatters elastically to a final wavevector $\vect{k}_f$. The scattering amplitude for this event, $f(\vect{k}_f, \vect{k}_i)$ is most intense where $\hat{V}(\vect{k}_f - \vect{k}_i)$ is strong; that is, the condition for strong scattering is:
+By definition, the reciprocal points of the crystal scattering potential, located at the spatial frequencies where the crystal potential is strong, form a lattice with basis vectors $\set{ \vect{b}_i }$. Consider an electron with initial wavevector $\vect{k}_i$ that scatters elastically to a final wavevector $\vect{k}_f$. The scattering amplitude for this event, $f(\vect{k}_f, \vect{k}_i)$ is most intense where $\hat{V}(\vect{k}_f - \vect{k}_i)$ is strong; that is, the condition for strong scattering is:
 $$
     \vect{k}_f - \vect{k}_i = h ~ \vect{b}_1 + k ~ \vect{b}_2 + l ~ \vect{b}_3 \quad \forall ~ h,k,l \in \mathbb{Z}
 $${#eq:scattering-bragg-vector}
-This is precisely the *vector* form of Bragg's law [@Warren1990Bragg]. To recover the canonical form of Bragg's law, consider that an electron state with wavevector $\vect{k}$ can be associated with a wavelength of $\lambda = \tfrac{2 \pi}{|\vect{k}|}$. Since for elastic scattering, $|\vect{k}_i| = |\vect{k}_f| = \tfrac{2 \pi}{\lambda}$, @eq:scattering-bragg-vector becomes:
+This is precisely the *vector* form of Bragg's law [@Warren1990Bragg]. To recover the canonical form of Bragg's law, consider that an electron state with wavevector $\vect{k}$ can be associated with a *de Broglie* wavelength of $\lambda = \tfrac{2 \pi}{|\vect{k}|}$. Since for elastic scattering, $|\vect{k}_i| = |\vect{k}_f| = \tfrac{2 \pi}{\lambda}$, @eq:scattering-bragg-vector becomes:
 $$
     \frac{2 \pi}{\lambda} \left( \hat{\vect{k}}_f - \hat{\vect{k}}_i\right) = \vect{H}
 $${#eq:scattering-bragg-1}
@@ -259,17 +264,18 @@ $$
 which can be combined as
 $$
     \frac{4 \pi \sin{\theta}}{\lambda} = \frac{1}{d_{hkl}}.
-$${#eq:scattering-bragg-hist}
+    \label{eq:scattering-bragg-hist}
+$$
 @eq:scattering-bragg-hist is the historical form of Bragg's law as it relates to polycrystalline diffraction patterns[@Bragg1913]. Note that the vector form of @eq:scattering-bragg-vector is richer than the original form of Bragg's law as it places constraint on the full three-dimensional direction of the scattering vector $\vect{q} = \vect{k}_f - \vect{k}_i$.
 
 ### The Ewald sphere{#sec:scattering-ewald-sphere}
 
-Elastic electron scattering, or *electron diffraction*, can be discussed more concretely. Consider an electron initially propagating in the $\hat{\vect{z}}$ direction with wavevector $\vect{k}_i$ that interacts with a scattering potential $\ft{V}(\vect{q})$, and scatters to a final wavevector $\vect{k}_f$. The elastic scattering condition $|\vect{k}_i| = |\vect{k}_f|$ constrains the observation of $\ft{V}(\vect{q})$ to scattering vectors $\vect{q}$ that lie on a sphere of radius $|\vect{q}|=\tfrac{1}{\lambda}$. This sphere is called the *Ewald sphere*[@Ewald1921].
+Elastic electron scattering, or *electron diffraction*, can be discussed more concretely. Consider an electron initially propagating in the $\hat{\vect{z}}$ direction with wavevector $\vect{k}_i$ that interacts with a scattering potential $\ft{V}(\vect{q})$, and scatters to a final wavevector $\vect{k}_f$. The elastic scattering condition $|\vect{k}_i| = |\vect{k}_f|$ constrains the observation of $\ft{V}(\vect{q})$ to scattering vectors $\vect{q}$ that lie on a sphere of radius $|\vect{q}|=\tfrac{2 \pi}{\lambda}$. This sphere is called the *Ewald sphere*[@Ewald1921].
 
 ```{.matplotlib #fig:scattering-ewald-sphere file="figures/scattering/ewald.py" caption="Demonstration of the Ewald sphere, a visual representation of the conservation of energy in diffraction. The Fourier transform of the scattering potential from an abstract cubic lattice of side length \SI{5}{\angstrom}, $\ft{V}(\vect{q})$, is shown in the background, with the associated reciprocal lattice vectors $\set{\vect{b}_i}$. The Ewald sphere of radius $\vect{q}$ is shown for two scatterers: electrons (solid) and hard x-ray (dashed)."}
 ```
 
-The Ewald sphere is a great mental model of the information contained in diffraction patterns. Because diffracting electrons can only sample scattering vectors on the Ewald sphere, any particular measurement of a scattering potential $V(\vect{x})$ is effectively a two-dimensional *slice* of the three-dimensional Fourier transform of $V(\vect{x})$, $\ft{V}(\vect{q})$. This is represented in @fig:scattering-ewald-sphere. In this figure, the potential $\ft{V}(\vect{q})$ for an idealized simple cubic crystal with side-length \SI{5}{\angstrom} is shown in the plane spanned by $\vect{b}_2$ and $\vect{b}_3$. The Ewald spheres associated with \SI{100}{\kilo\electronvolt} electrons (large $|\vect{q}|$) and \SI{13}{\kilo\electronvolt} x-rays (smaller $|\vect{q}|$) are also shown. This electron energy is typical of the work presented in this dissertation, while the x-ray energy is an upper bound on the available energies at the Linac Coherent Light Source as of 2021[@Bostedt2013]. The reciprocal points that intersect the Ewald sphere appear in measurements as diffraction peaks, or Bragg peaks. @fig:scattering-ewald-sphere shows the advantage of electron scattering to study two-dimensional materials: given the proper orientation of the electron beam, a large range of wavevectors can be studied in the plane of interest.
+The Ewald sphere is a great mental model of the information contained in diffraction patterns. Because diffracting electrons can only sample scattering vectors on the Ewald sphere, any particular measurement of a scattering potential $V(\vect{x})$ is effectively a two-dimensional *slice* of the three-dimensional Fourier transform of $V(\vect{x})$, $\ft{V}(\vect{q})$. This is represented in @fig:scattering-ewald-sphere. In this figure, the potential $\ft{V}(\vect{q})$ for an idealized simple cubic crystal with side-length \SI{5}{\angstrom} is shown in the plane spanned by $\vect{b}_2$ and $\vect{b}_3$. The Ewald spheres associated with \SI{90}{\kilo\electronvolt} electrons (large $|\vect{q}|$) and \SI{13}{\kilo\electronvolt} x-rays (smaller $|\vect{q}|$) are also shown. This electron energy is typical of the work presented in this dissertation, while the x-ray energy is an upper bound on the available energies at the Linac Coherent Light Source, an x-ray free-electron laser[@Huang2007], as of 2021[@Bostedt2013]. The reciprocal points that intersect the Ewald sphere appear in measurements as diffraction peaks, or Bragg peaks. @fig:scattering-ewald-sphere shows the advantage of electron scattering to study two-dimensional materials: given the proper orientation of the electron beam, a large range of wavevectors can be studied in the plane of interest in a single experiment.
 
 ## Multiple scattering of electrons {#sec:scattering-multiple}
 
@@ -292,7 +298,8 @@ $$
     f^{(2)}(\vect{k}_f, \vect{k}_i) =
         \left( \frac{m_e}{2 \pi \hbar^2} \right)^2 \int d\vect{x}^\prime \int d\vect{x}^{\prime\prime} 
             e^{-i\vect{k}_f \cdot \vect{x}^\prime} V(\vect{x}^\prime) \left( \frac{e^{i |\vect{k}_i| |\vect{x}^\prime - \vect{x}^{\prime\prime}|}}{|\vect{x}^\prime - \vect{x}^{\prime\prime}|} \right) e^{i\vect{k}_i \cdot \vect{x}^{\prime\prime}} V(\vect{x}^{\prime\prime})
-$${#eq:scattering-amplitude-mult}
+    \label{eq:scattering-amplitude-mult}
+$$
 The structure of @eq:scattering-amplitude-mult informs on the following physical interpretation. Double scattering involves a first scattering at $\vect{x}^{\prime\prime}$ ($V(\vect{x}^{\prime\prime})$), which "radiates" as a spherical wave moving from $\vect{x}^{\prime\prime}$ to $\vect{x}^{\prime}$ ($e^{i |\vect{k}_i| |\vect{x}^\prime - \vect{x}^{\prime\prime}|}/|\vect{x}^\prime - \vect{x}^{\prime\prime}|$), followed by a second scattering at $\vect{x}^\prime$ ($V(\vect{x}^{\prime})$).
 
 ### Comparing cross-sections
@@ -422,7 +429,7 @@ Since the phases $\phi_{s,m,\lambda}(\vect{k})$ are not correlated across unit c
 \end{align}
 where $\hat{n}_{\lambda}(\vect{k}) \equiv \hat{a}_{\lambda}(\vect{k}) \hat{a}^{\dagger}_{\lambda}(\vect{k}) = \hat{a}^{\dagger}_{\lambda}(\vect{k}) \hat{a}_{\lambda}(\vect{k})  - 1$ is the excitation number operator. Simplifying further:
 $$
-\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{\hat{n}_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})}\frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}}
+\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vect{k}}} \left( \frac{\hat{n}_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})}\right) \left(\frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}}\right) e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}}
 $$
 
 ### Scattering amplitude
@@ -508,20 +515,20 @@ named thus in contrast to the static structure factor of @eq:scattering-potentia
 
 A few clarifications can be made about diffuse intensity. The diffuse intensity at any scattering vector $\vect{q}$ involves the contribution of all phonon modes $\lambda$. The contribution of each mode can be conceptually separated into two parts. 
 
-The first part of each term in the sum of @eq:scattering-diffuse-intensity, proportional to $(n_{\lambda}(\vect{k}) + 1/2)(\omega_{\lambda}(\vect{k}))$, represents the vibrational amplitude of each mode by analogy with the expression of @eq:scattering-displacement. A higher population ($\uparrow n_{\lambda}$) results in a larger vibrational amplitude because the displacement of atoms is linear in the number of phonons that participate. A lower vibrational frequency ($\downarrow \omega_{\lambda}$) implies a smaller restoring force (in the harmonic oscillator sense), which also intuitively results in a wider vibrational amplitude.
+The first part of each term in the sum of @eq:scattering-diffuse-intensity, proportional to $(n_{\lambda}(\vect{k}) + 1/2)/\omega_{\lambda}(\vect{k})$, represents the vibrational amplitude of each mode by analogy with the expression of @eq:scattering-displacement. A higher population ($\uparrow n_{\lambda}$) results in a larger vibrational amplitude because the displacement of atoms is linear in the number of phonons that participate. A lower vibrational frequency ($\downarrow \omega_{\lambda}$) implies a smaller restoring force (in the harmonic oscillator sense), which also intuitively results in a wider vibrational amplitude.
 
 The second part of the summation terms are the one-phonon structure factors. These factors are a geometrical weight ($|F_{1\lambda}(\vect{q})|^2$) which determines if the atomic motion associated with a phonon mode can be captured on the detector. The most important terms to consider are terms of the form $\set{\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})}$. For a phonon polarization which is parallel to the propagation of the scattering electrons, the projection of the polarization onto the detector plane is $0$, and hence the associated diffuse intensity will not contribute. An example of one-phonon structure factor for the in-plane longitudinal acoustic mode of graphite is shown in @fig:scattering-oneph-example. Being a longitudinal mode, the polarization of this mode is in the direction of propagation, which means that terms $\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})$ should have a radial character in reciprocal space.
 
 ```{.matplotlib #fig:scattering-oneph-example file="figures/scattering/oneph.py" caption="One-phonon structure factor $|F_{1\lambda}(\vect{q})|^2$ for the in-plane longitudinal acoustic mode of graphite. The range of scattering vectors $\vect{q}$ corresponds to the geometry of the instrument described in @sec:experimental_setup."}
 ```
 
-Diffuse scattering and the effect of one-phonon structure factors is further explored in @sec:graphite.
+Diffuse scattering and the effect of one-phonon structure factors is further explored in @sec:graphite. The key takeaway from this section is that the Debye-Waller effect and diffuse scattering are two faces of the same coin. Both arise from the same physical phenomenon: atomic vibrations expressed as a superposition of lattice waves.
 
 ## Conclusion
 
 In this chapter, the theory of ultrafast electron scattering measurements were presented. First, the scattering of electrons by any potential was considered. This was then applied to the case of elastic scattering of electrons by atoms, and then periodic arrangements of atoms at zero temperature. Finally, the full quantum derivation of ultrafast electron diffuse scattering was presented.
 
-The key takeaway from this chapter is that the Debye-Waller effect and diffuse scattering are two faces of the same coin. Both arise from the same physical phenomenon: atomic vibrations expressed as a superposition of lattice waves. In @sec:graphite, ultrafast measurements in a prototypical benchmark system will show the full power of diffuse scattering measurements, while the link between the Debye-Waller effect and diffuse scattering will play a large role in @sec:snse.
+In @sec:graphite, ultrafast measurements in a prototypical benchmark system will show the full power of diffuse scattering measurements, while the link between the Debye-Waller effect and diffuse scattering will play a large role in @sec:snse.
 
 [^tmatrix]: Interested readers are encouraged to peruse Chapter 6 of Sakurai and Napolitano [@Sakurai2014].
 

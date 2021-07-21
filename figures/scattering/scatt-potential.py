@@ -56,7 +56,7 @@ ax.set_ylabel("Potential [V]")
 ax.set_xlim([r.min(), r.max()])
 ax.set_ylim([-10, 10000])
 
-ax_r.set_xlabel("Scattering vector $\mathbf{q}$ [$\AA^{-1}$]")
+ax_r.set_xlabel("Scattering vector $|\mathbf{q}|$ [$\AA^{-1}$]")
 ax_r.set_ylabel("Scattering amplitude")
 ax_r.set_xlim([q.min(), q.max()])
 ax_r.yaxis.tick_right()

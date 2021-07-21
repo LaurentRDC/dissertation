@@ -136,9 +136,7 @@ ax_amp.text(
 )
 slope_err = np.sqrt(cov[0, 0])
 Ts = np.linspace(284, 305, num=32)
-ax_center.plot(
-    Ts, np.polyval([slope, intercept], Ts), "-k", linewidth=1
-)
+ax_center.plot(Ts, np.polyval([slope, intercept], Ts), "-k", linewidth=1)
 
 ax_amp.set_xlabel("Frequency [GHz]")
 ax_amp.set_ylabel("Amplitude [dB]")
