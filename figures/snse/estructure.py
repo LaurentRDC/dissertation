@@ -92,8 +92,8 @@ ax_3d.plot_surface(ky, kz, elec_energy, **surface_kwds)
 
 ax_3d.set_box_aspect((1, 1, 1.2))
 
-locator = ticker.FixedLocator([-1, -0.5, 0, 0.5, 1])
-formatter = ticker.FixedFormatter(["-1", "-½", "0", "½", "1"])
+locator = ticker.FixedLocator([-1, 0, 1])
+formatter = ticker.FixedFormatter(["-½", "0", "½"])
 for axis in [ax_3d.xaxis, ax_3d.yaxis]:
     axis.set_major_locator(locator)
     axis.set_major_formatter(formatter)
@@ -101,8 +101,8 @@ for axis in [ax_3d.xaxis, ax_3d.yaxis]:
 ax_3d.zaxis.set_major_locator(ticker.FixedLocator([-1, -0.5, 0, 0.5, 1]))
 ax_3d.zaxis.set_major_formatter(ticker.FixedFormatter(5 * [""]))
 
-ax_3d.set_xlabel(r"$\mathbf{k} / |\mathbf{b}_2|$")
-ax_3d.set_ylabel(r"$\mathbf{k} / |\mathbf{b}_3|$")
+ax_3d.set_xlabel(r"$\mathbf{k} / |\mathbf{b}|$")
+ax_3d.set_ylabel(r"$\mathbf{k} / |\mathbf{c}|$")
 
 ax_3d.set_xlim3d([-1, 1])
 ax_3d.set_ylim3d([-1, 1])
@@ -141,7 +141,7 @@ ax_2d.set_ylim(-1, 1)
 ax_2d.set_xlim([line.min(), line.max()])
 
 ax_2d.xaxis.set_major_locator(ticker.FixedLocator([-1, 0, 1]))
-ax_2d.xaxis.set_major_formatter(ticker.FixedFormatter(["$Z$", "$\Gamma$", "$Y$"]))
+ax_2d.xaxis.set_major_formatter(ticker.FixedFormatter(["$\mathbf{Z}$", "$\mathbf{\Gamma}$", "$\mathbf{Y}$"]))
 
 ax_2d.axhline(y=-0.1, linestyle="dashed", linewidth=0.5, color="k")
 ax_2d.text(

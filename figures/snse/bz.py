@@ -25,7 +25,7 @@ named_arrow(
     ax,
     dx=0,
     dy=height / 2,
-    text=r"$\mathbf{b}_2$",
+    text=r"$\mathbf{b}$",
     toffset=(0.05, 0),
     tkwds=dict(va="center", ha="left"),
     **arrow_kwds
@@ -34,7 +34,7 @@ named_arrow(
     ax,
     dx=width / 2,
     dy=0,
-    text=r"$\mathbf{b}_3$",
+    text=r"$\mathbf{c}$",
     toffset=(0, -0.05),
     tkwds=dict(ha="center", va="top"),
     **arrow_kwds

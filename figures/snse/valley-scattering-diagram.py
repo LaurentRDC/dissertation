@@ -275,7 +275,7 @@ for i, ax in enumerate([ax_elec1, ax_elec2, ax_elec3]):
 
     for (x, y), label in zip(
         [(1, 0), (0, 1), (1, 1), (-1, 0), (0, -1), (-1, -1), (-1, 1), (1, -1)],
-        ["$Y$", "$Z$", "$T$", "", "", "", "", ""],
+        ["$\mathbf{Y}$", "$\mathbf{Z}$", "$\mathbf{T}$", "", "", "", "", ""],
     ):
         ax.add_patch(
             Circle(

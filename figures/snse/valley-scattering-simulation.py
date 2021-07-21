@@ -143,7 +143,7 @@ for i, ax in enumerate([ax_e, ax_h]):
 
     for (x, y), label in zip(
         [(1, 0), (0, -1), (1, -1), (-1, 0), (0, 1), (-1, -1), (-1, 1), (1, 1)],
-        ["$Y$", "$Z$", "$T$", "", "", "", "", ""],
+        ["$\mathbf{Y}$", "$\mathbf{Z}$", "$\mathbf{T}$", "", "", "", "", ""],
     ):
         ax.add_patch(
             Circle(

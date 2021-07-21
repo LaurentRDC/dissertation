@@ -114,7 +114,7 @@ for label, pos in [
     )
 
 ax.annotate(
-    "$\Gamma$",
+    "$\mathbf{\Gamma}$",
     xy=(0, 0),
     xytext=(0.4, 0.65),
     textcoords="axes fraction",

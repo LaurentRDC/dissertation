@@ -217,7 +217,7 @@ diffuse_ax.errorbar(
     markersize=2,
     color=GAMMA_COLOR,
     linestyle="None",
-    label="$\Gamma$ ($\Omega_2$)",
+    label="$\mathbf{\Gamma}$ ($\Omega_2$)",
     elinewidth=0.5,
 )
 
