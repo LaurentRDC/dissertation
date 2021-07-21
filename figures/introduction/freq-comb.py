@@ -35,6 +35,7 @@ ax_full.set_xlim([-0.01, frequencies_fullbw.max()])
 ax_full.text(
     x=0.5, y=1.01, ha="center", va="bottom", s="$f_{40}$", transform=ax_full.transAxes
 )
+ax_full.set_xticks([0, 1, 2, 3, 4, 5])
 
 maxf = frequencies_3ghz[np.argmax(power_3ghz)]
 ax_3ghz.plot(frequencies_3ghz, power_3ghz, color=COLOR)
@@ -47,7 +48,7 @@ ax_3ghz.text(
     transform=ax_3ghz.transAxes,
 )
 
-ax_3ghz.set_xlim([maxf - 0.001, maxf + 0.001])
+ax_3ghz.set_xlim([2.9975, 2.9995])
 ax_3ghz.yaxis.tick_right()
 ax_3ghz.yaxis.set_label_position("right")
 

@@ -132,11 +132,12 @@ ax_amp.text(
 
 # Relationship between resonance and cavity temperature should be linear
 (slope, intercept), cov = np.polyfit(
-    x=sweep[:, 0], y=sweep[:, 1], deg=1, full=False, cov=True
+    x=kelvins(sweep[:, 0]), y=sweep[:, 1], deg=1, full=False, cov=True
 )
 slope_err = np.sqrt(cov[0, 0])
+Ts = np.linspace(284, 305, num=32)
 ax_center.plot(
-    kelvins(sweep[:, 0]), np.polyval([slope, intercept], sweep[:, 0]), "-k", linewidth=1
+    Ts, np.polyval([slope, intercept], Ts), "-k", linewidth=1
 )
 
 ax_amp.set_xlabel("Frequency [GHz]")
@@ -144,6 +145,7 @@ ax_amp.set_ylabel("Amplitude [dB]")
 ax_amp.set_xlim([f_min, f_max])
 ax_amp.set_ylim([-57, -34])
 
+ax_center.set_xlim([Ts.min(), Ts.max()])
 ax_center.set_xticks([284, 288, 292, 296, 300, 304])
 ax_center.yaxis.set_major_locator(LinearLocator(numticks=5))
 ax_center.set_xlabel("Cavity temperature [K]")

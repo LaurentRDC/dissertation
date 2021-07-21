@@ -197,7 +197,7 @@ First, a bulk crystal of SnSe is embedded in epoxy, with the cutting plane paral
 ```{.matplotlib #fig:snse-ultramicrotomy file="figures/snse/sample.py" caption="Stages of sample preparation via ultramicrotome. **a)** Prism of SnSe embedded in epoxy showing large crystalline plateaus. **b)** Surface of embedded SnSe prism after trimming with a \ang{45} diamond knife. **c)** \SI{60}{\nano\meter} section of SnSe cut with a \ang{35} diamond knife. The images were provided by H. Gnaegi from Diatome, Ltd."}
 ```
 
-The samples used in this work were prepared by J. Mui from the Facility for Electron Microscopy Research (FEMR) at McGill University. In the end, six samples were produced: three with a thickness of \SI{70}{\nano\meter} and three with a thickness of \SI{90}{\nano\meter}, each with an area of approximately \SI{200 x 200}{\micro\meter}. 
+In the end, six samples were produced: three with a thickness of \SI{70}{\nano\meter} and three with a thickness of \SI{90}{\nano\meter}, each with an area of approximately \SI{200 x 200}{\micro\meter}. 
 
 #### Mechanical exfoliation
 
