@@ -404,7 +404,7 @@ For small displacement vectors $\hat{\vect{u}}$, $\vect{q} \cdot \hat{\vect{u}} 
         & = 1 + \langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle + \mathcal{O}\left(|\hat{\vect{u}}_s|^2 |\hat{\vect{u}}_{s^{\prime}}|^2 \right) \nonumber \\
         & \approx 1 + \langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle
 \end{align}
-This approximation limits the final expression to the effects of *one-phonon* scattering. This is a good first approximation for simple crystal structure like graphite and MoS$_2$[@Zacharias2021], but there are reports that compounds with intrinsically-low thermal conductivity -- specifically black Phosphorus -- display a measureable degree of multi-phonon diffuse scattering [@Seiler2021]. Using @eq:scattering-displacement:
+This approximation limits the final expression to the effects of *one-phonon* scattering. This is a good first approximation for simple crystal structure like graphite and MoS$_2$[@Zacharias2021b], but there are reports that compounds with intrinsically-low thermal conductivity -- specifically black Phosphorus -- display a measureable degree of multi-phonon diffuse scattering [@Zacharias2021b;@Seiler2021]. Using @eq:scattering-displacement:
 \begin{multline}
     (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) = \\
         \frac{\hbar}{2 N} \left( \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})}{\sqrt{\mu_s \omega_{\lambda}(\vect{k})}} \left[ \hat{a}_{\lambda}(\vect{k})e^{-i\phi_{s,m,\lambda}(\vect{k})} + \hat{a}_{\lambda}^{\dagger}(\vect{k}) e^{i\phi_{s,m,\lambda}(\vect{k})} \right] e^{i \vect{k} \cdot \vect{r}_{m,s}} \right) \\
