@@ -141,7 +141,9 @@ ax_2d.set_ylim(-1, 1)
 ax_2d.set_xlim([line.min(), line.max()])
 
 ax_2d.xaxis.set_major_locator(ticker.FixedLocator([-1, 0, 1]))
-ax_2d.xaxis.set_major_formatter(ticker.FixedFormatter(["$\mathbf{Z}$", "$\mathbf{\Gamma}$", "$\mathbf{Y}$"]))
+ax_2d.xaxis.set_major_formatter(
+    ticker.FixedFormatter(["$\mathbf{Z}$", "$\mathbf{\Gamma}$", "$\mathbf{Y}$"])
+)
 
 ax_2d.axhline(y=-0.1, linestyle="dashed", linewidth=0.5, color="k")
 ax_2d.text(

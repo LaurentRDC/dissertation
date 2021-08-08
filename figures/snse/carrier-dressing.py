@@ -7,7 +7,7 @@ from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 UNIFORM_COLOR, DISTORT_COLOR = discrete_colors(2)
 
 fig = plt.figure(
-    figsize=(MEDIUM_FIGURE_WIDTH, MEDIUM_FIGURE_WIDTH/1.5),
+    figsize=(MEDIUM_FIGURE_WIDTH, MEDIUM_FIGURE_WIDTH / 1.5),
 )
 
 gs = gridspec.GridSpec(nrows=2, ncols=2, figure=fig, width_ratios=[0.5, 2])
@@ -34,16 +34,14 @@ for _ax, color, fermi in zip(
 
     _x = np.linspace(0, 0.7, num=128)
     lb = 1.2 - np.sqrt(0.75 ** 2 - _x ** 2)
-    _ax.fill_between(
-        _x, y1=lb, y2=fermi, where=lb < fermi, color=color
-    )
+    _ax.fill_between(_x, y1=lb, y2=fermi, where=lb < fermi, color=color)
 
     # lower band
-    _ax.add_patch(
-        Circle(xy=(0, -1.2), radius=0.75, fc=color, ec="k")
-    )
+    _ax.add_patch(Circle(xy=(0, -1.2), radius=0.75, fc=color, ec="k"))
 
-ax_dos_u.text(s="$E_F$", x=0.85, y=2*fermi, va="bottom", ha="left", transform=ax_dos_u.transData)
+ax_dos_u.text(
+    s="$E_F$", x=0.85, y=2 * fermi, va="bottom", ha="left", transform=ax_dos_u.transData
+)
 
 # polaron band
 ax_dos_d.add_patch(Ellipse(xy=(0, 0), width=0.6, height=0.25, fc=DISTORT_COLOR, ec="k"))
@@ -62,7 +60,9 @@ ax_fe.yaxis.set_label_position("right")
 
 q_uniform = np.linspace(-1, 1, num=128)
 q_distorted = np.linspace(0, 2, num=128)
-ax_fe.plot(q_uniform, 0.6 * q_uniform ** 2 + 0.75, linestyle="solid", color=UNIFORM_COLOR)
+ax_fe.plot(
+    q_uniform, 0.6 * q_uniform ** 2 + 0.75, linestyle="solid", color=UNIFORM_COLOR
+)
 ax_fe.vlines(x=0, ymin=0, ymax=0.75, linestyles="dashed", linewidth=1, colors="k")
 ax_fe.plot(
     q_distorted, (q_distorted - 1) ** 2 + 0.25, linestyle="solid", color=DISTORT_COLOR
@@ -87,13 +87,13 @@ ax_fe.text(
 )
 ax_fe.text(s="$E$", x=-1.05, y=1, rotation=90, ha="right", va="center")
 
-ax_fe.text(s="No\ndistortion", x=-0.05, y=0, ha='right', va='bottom')
-ax_fe.text(s="Polaron\ndistortion", x=1.05, y=0, ha='left', va='bottom')
+ax_fe.text(s="No\ndistortion", x=-0.05, y=0, ha="right", va="bottom")
+ax_fe.text(s="Polaron\ndistortion", x=1.05, y=0, ha="left", va="bottom")
 
 
-ax_fe.text(s="Delocalized", x=1, y=1.35, color=UNIFORM_COLOR, ha='center', va='bottom')
-ax_fe.text(s="Localized", x=2, y=1.25, color=DISTORT_COLOR, ha='center', va='bottom')
+ax_fe.text(s="Delocalized", x=1, y=1.35, color=UNIFORM_COLOR, ha="center", va="bottom")
+ax_fe.text(s="Localized", x=2, y=1.25, color=DISTORT_COLOR, ha="center", va="bottom")
 
-tag_axis(ax_dos_u, 'a)', x=-0.15, horizontalalignment='right')
-tag_axis(ax_dos_d, 'b)', x=-0.15, horizontalalignment='right')
-tag_axis(ax_fe, 'c)', y=0.975)
+tag_axis(ax_dos_u, "a)", x=-0.15, horizontalalignment="right")
+tag_axis(ax_dos_d, "b)", x=-0.15, horizontalalignment="right")
+tag_axis(ax_fe, "c)", y=0.975)

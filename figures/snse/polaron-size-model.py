@@ -192,8 +192,8 @@ ax_fits.legend(
     loc="center", ncol=1, bbox_to_anchor=(0.8, 0.5), edgecolor="none", facecolor="none"
 )
 
-tag_axis(ax, "a)")
-tag_axis(ax_fits, "b)")
+tag_axis(ax, "a)", x=0.025, y=0.9625)
+tag_axis(ax_fits, "b)", x=0.025)
 tag_axis(ax_large, "c)", x=0.1, y=0.9)
 tag_axis(ax_small, "d)", x=0.1, y=0.9)
 
