@@ -1,4 +1,4 @@
-# Ultrafast energy flow across the Brillouin zone in two-dimensional materials
+# From carrier cooling to polaron formation: Ultrafast phonon dynamics across the Brillouin zone
 
 ## Setting up environment
 
