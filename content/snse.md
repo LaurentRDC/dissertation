@@ -371,7 +371,7 @@ $$
 $$
 where $a$ and $b$ label electron bands, $\vect{k}_e$ ($\vect{k}_p$) is the electronic (phonon) wavevector, and $\Sigma_{\lambda}(\vect{k}_p)$ is the self-energy for phonons with quantum numbers $(\lambda, \vect{k}_p)$. The phonon self-energy also defines how vibrational frequencies are renormalized from $\omega^0_{\lambda}$ to $\omega_{\lambda}$ due to electron-phonon interactions[@Ando2006]: 
 $$
-    \frac{\omega_{\lambda}(\vect{k}_p)^2}{\omega^0_{\lambda}(\vect{k}_p)^2} - 1 = \frac{2}{\hbar \omega_0} \text{Re} \left[ \Sigma_{\lambda}(\vect{k}_p)\right]
+    \frac{\omega_{\lambda}(\vect{k}_p)^2}{\omega^0_{\lambda}(\vect{k}_p)^2} - 1 = \frac{2}{\hbar \omega^0_{\lambda}(\vect{k}_p)} \text{Re} \left[ \Sigma_{\lambda}(\vect{k}_p)\right]
 $${#eq:snse-ep-renormalization}
 The renormalization of phonon vibrational frequencies due to strong electron-phonon coupling was encountered in @sec:graphite-phonon-landscape in the form of Kohn anomalies[@Kohn1959].
 
