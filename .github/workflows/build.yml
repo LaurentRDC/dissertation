@@ -89,6 +89,7 @@ jobs:
       run: |
         export PATH=$GITHUB_WORKSPACE/bin:$PATH
         echo "$(python --version)"
+        echo "$(python -m pip list)"
         echo "$(inkscape --version)"
         echo "$(pandoc --version)"
         echo "$(pandoc-plot --full-version)"
