@@ -451,6 +451,7 @@ $$
     \braket{\vect{x} | \Psi} \approx \sum_i f_{e,i}(\vect{q}) ~ e^{-i \vect{k} \cdot \vect{r}_i} ~ \left[ 1 - i \vect{H} \cdot \vect{u}(\vect{r}_i)\right]
     \label{eq:snse-polaron-amplitude}
 $$
+where $\vect{q}=\vect{H}+\vect{k}$ as shown in @fig:scattering-vector-geometry.
 
 The displacement field can be modelled using the following phenomenological deformation:
 $$
