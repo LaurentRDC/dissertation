@@ -19,3 +19,5 @@ import numpy
 warnings.filterwarnings("ignore", category=UserWarning, module="iris*")
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 numpy.seterr(divide="ignore")
+
+# PLOT ------------------------------------------------------------------------
