@@ -88,7 +88,7 @@ for ax in axes[-1, :]:
     ax.set_xlabel("Time-delay [ps]")
 
 for ax in axes[:, 0]:
-    ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
+    ax.set_ylabel(r"$\Delta I/I_0$ [a.u.]")
 
 axes[0, 0].set_title("Allowed reflections")
 axes[0, 1].set_title("Forbidden reflections")

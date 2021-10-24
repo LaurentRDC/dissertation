@@ -114,7 +114,7 @@ for ax, ax_im, (r, ts), color in zip(
         linestyle="None",
         elinewidth=0.5,
     )
-    ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
+    ax.set_ylabel(r"$\Delta I/I_0$ [a.u.]")
     ax.xaxis.set_visible(False)
     tag_axis(
         ax,

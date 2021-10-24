@@ -142,7 +142,7 @@ for (r, p, e), params, marker, color, label in zip(
     r_ = np.linspace(rf.min(), rs.max(), 1024)
     ax_fits.plot(r_, polaron(r_, *params), color=color, linestyle="-")
 
-    ax_fits.set_ylabel("$\Delta I / I_0$ [a.u.]")
+    ax_fits.set_ylabel(r"$\Delta I / I_0$ [a.u.]")
     ax_fits.set_xlabel("$|\mathbf{k}|$ [1/$\AA$]")
 
 ax_fits.set_xlim([rf.min(), max(ax.get_xlim())])

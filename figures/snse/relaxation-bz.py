@@ -83,7 +83,7 @@ m = ax.imshow(
 )
 ax.cax.colorbar(mappable=m, format=PercentFormatter(xmax=1))
 
-ax.cax.set_xlabel("$\Delta I / I_0$ [a.u.]")
+ax.cax.set_xlabel(r"$\Delta I / I_0$ [a.u.]")
 ax.set_xlabel("$k_y / b^{*}$")
 ax.set_ylabel("$k_z / c^{*}$")
 

@@ -142,7 +142,7 @@ for ax, ts_name, color in zip(
 
     ax.axhline(y=1, linestyle="dashed", color="k", linewidth=0.5)
     ax.axvline(x=0, linestyle="dashed", color="k", linewidth=0.5)
-    ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
+    ax.set_ylabel(r"$\Delta I/I_0$ [a.u.]")
     ax.set_yticks([1.00, 1.01])
     tag_axis(ax, ts_name, y=0.9, x=0.05, edgecolor="w")
 

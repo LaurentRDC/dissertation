@@ -85,7 +85,7 @@ for ax, ts, color in zip(
         elinewidth=0.5,
     )
 
-    ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
+    ax.set_ylabel(r"$\Delta I/I_0$ [a.u.]")
 
 ax_b.set_xlim([-1.6, 12])
 ax_b.xaxis.set_visible(False)

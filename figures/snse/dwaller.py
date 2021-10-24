@@ -127,6 +127,6 @@ diffuse_ax.set_xlim([-1.6, 30])
 diffuse_ax.set_yticks([0.99, 1.00])
 
 diffuse_ax.set_xlabel("Time-delay [ps]")
-diffuse_ax.set_ylabel("$\Delta I/I_0$ [a.u.]")
+diffuse_ax.set_ylabel(r"$\Delta I/I_0$ [a.u.]")
 
 plt.tight_layout()

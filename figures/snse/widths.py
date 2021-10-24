@@ -131,7 +131,7 @@ for index, ((refl, (ws, centers, err_fwhm, err_center)), color) in enumerate(
         ax_width.xaxis.set_visible(False)
         ax_center.xaxis.set_visible(False)
 
-    ax_width.set_ylabel("$\Delta \sigma$ [$\AA^{-1}$]")
+    ax_width.set_ylabel(r"$\Delta \sigma$ [$\AA^{-1}$]")
     ax_width.set_ylim([-0.015, 0.015])
 
     ax_center.set_ylabel(r"$\Delta x_c / \bar{\sigma}$")
