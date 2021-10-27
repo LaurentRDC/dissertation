@@ -44,12 +44,12 @@ Note that the solution to an arbitrary driving force is completely determined by
 In the general case, consider a physical system whose state is represented by the phase-space vector $\vect{x}$, and its behavior is governed by the linear differential operator $\hat{L}$:
 $$
     \hat{L} \vect{x}(t) = F(\vect{x}, t)
-$$
+$${#eq:introduction-general-ode}
 where the function $F(\vect{x}, t)$ is a driving force, or *source term*. Given the impulse response of the system, $G(\vect{x}, \vect{x}_0, t, t_0)$, which solves
 $$
     \hat{L} ~ G(\vect{x}, \vect{x}_0, t, t_0) = \delta(\vect{x} - \vect{x}_0, t - t_0),
 $$
-the solution $\vect{x}_F(t)$ can be expressed as a function of $G(\vect{x}, \vect{x}_0, t, t_0)$:
+the solution to @eq:introduction-general-ode, $\vect{x}_F(t)$, can be expressed as a function of $G(\vect{x}, \vect{x}_0, t, t_0)$:
 $$
     \vect{x}_F(t) = \int dt_0 d\vect{x}_0 ~ G(\vect{x}, \vect{x}_0, t, t_0) F(\vect{x}_0, t_0)
 $$
@@ -132,13 +132,13 @@ The extension of electron microscopy into time-domain studies is not new. This s
 
 > *The electron pulse width has been measured by using the camera in the normal streak mode and is found to be $\sim$\SI{100}{\pico\second}. This value departs significantly from the \SI{15}{\pico\second} pulse width expected. The pulse broadening is due to the space-charge effect caused by the relatively high electron flux required to photograph the pattern with our present system.*
 
-The challenges of ultrafast electron scattering on the \SI{100}{\femto\second} time-scale -- which is the current state-of-the-art -- were apparent in the first ultrafast electron scattering experiments. Measurements of atomic structure require high beam brightness to achieve a high signal-to-noise ratio, but dense electron bunches experience space-charge repulsion (i.e. worsening time-resolution). The trade-off between signal-to-noise and time-resolution is represented as the expansion of the bunch length $l$. Using a mean-field equation[@Siwick2002], the bunch length $l$ is given by:
+The challenges of ultrafast electron scattering on the \SI{100}{\femto\second} time-scale -- which is the current state-of-the-art -- were apparent in the first ultrafast electron scattering experiments. Measurements of atomic structure require high beam brightness to achieve a high signal-to-noise ratio, but dense electron bunches experience space-charge repulsion (i.e. worsening time-resolution). The trade-off between signal-to-noise and time-resolution is represented as the expansion of the bunch length $l$. Using a mean-field equation[@Siwick2002], the bunch length $l$ expands as follows:
 $$
 \frac{d^2l}{dt^2} = \frac{N e^2}{m_e \epsilon_0 \pi r^2} \left[ 1 - \frac{l}{\sqrt{l^2 + 4 r^2}}\right]
 $$
 where $N$ is the number of electrons in the bunch, $e$ the quantum of charge, $m_e$ the electron mass, $\epsilon_0$ the vacuum permittivity, and $r$ is the beam radius. The first demonstration of ultrafast electron scattering was done by the same authors[@Mourou1982] to study the ultrafast melting of aluminium[@Williamson1984] with a time-resolution a tens of picoseconds.
 
-The modern form of pump-probe ultrafast electron scattering was brought by Ahmed Zewail and his team. At the time, Zewail was already known as the "Father of Femtochemistry" for the development of ultrafast spectroscopy[@Zewail1988]. Zewail and collaborators proposed to replace the optical probe pulse used in pump-probe femtosecond spectroscopy to an electron pulse[@Williamson1991;@Williamson1997]. What followed was a series of experiments probing the transient molecular structures at the picosecond time-scale following photoexcitation in the gas phase[@Ihee2001;@Ruan2001;@Lobastov2001]. The ability to track the nuclear coordinates directly represented the perfect complement to Zewail's Nobel prize-winning work on femtochemistry via ultrafast spectroscopy.
+The modern form of pump-probe ultrafast electron scattering was brought by Ahmed Zewail and his team. At the time, Zewail was already known as the "Father of Femtochemistry" for the development of ultrafast spectroscopy[@Zewail1988]. Zewail and collaborators proposed to replace the optical probe pulse used in pump-probe femtosecond spectroscopy with an electron pulse[@Williamson1991;@Williamson1997]. What followed was a series of experiments probing the transient molecular structures at the picosecond time-scale following photoexcitation in the gas phase[@Ihee2001;@Ruan2001;@Lobastov2001]. The ability to track the nuclear coordinates directly represented the perfect complement to Zewail's Nobel prize-winning work on femtochemistry via ultrafast spectroscopy.
 
 It was not until Siwick *et al.*[@Siwick2003;@Siwick2004], however, that the ideas of Mourou and Williamson were applied with sub-picosecond sensitivity (\SI{600}{\femto\second}) to the solid state. This work reached a time-resolution sufficient to address whether or not the ultrafast phase transition from solid to liquid-like was analogous to the thermal phase transition[@Guo2000].
 
@@ -257,7 +257,7 @@ The heart of the apparatus consists of the ultrafast laser system. A mode-locked
 
 ### Pump line
 
-On the pump line, the laser pulses propagate to a delay stage (Newport ILS200CCHA) on which a retroreflector is installed. This delay stage provides a resolution of \SI{300}{\nano\meter}, with total travel of \SI{20}{\centi\meter}. These dimensions translate to a time-delay resolution of \SI{2}{\femto\second} and temporal range of \SI{1.3}{\nano\second}. The energy of the pump pulses is then attenuated by using ultrafast attenuator assembly to the desired pump energies. A lens is used to focus the pump pulses onto the sample. 
+On the pump line, the laser pulses propagate to a delay stage (Newport ILS200CCHA) on which a retroreflector is installed. This delay stage provides a resolution of \SI{300}{\nano\meter}, with total travel of \SI{20}{\centi\meter}. These dimensions translate to a time-delay resolution of \SI{2}{\femto\second} and temporal range of \SI{1.3}{\nano\second}. The energy of the pump pulses is then attenuated by using an ultrafast attenuator assembly, composed of a waveplate and polarizing filter. A lens is used to focus the pump pulses onto the sample. 
 
 The attenuation and focus of the beam are adjusted to achieve the desired photoexcitation density (or *fluence*) on an area that is much larger than the sample, ensuring uniform illumination conditions. The attenuated and focused pump pulses are routed inside the vacuum chamber through a z-cut quartz (SiO$_2$) window, which is transparent over a large range of wavelengths. Inside the vacuum, two mirrors is positioned so that the pump pulses are transmitted through the sample and routed outside to a photodiode, for alignment purposes.
 
