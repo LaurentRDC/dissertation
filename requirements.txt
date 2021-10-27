@@ -10,3 +10,5 @@ pandocfilters   >= 1, <2
 scipy           >= 1.6, <2
 scikit-image    >= 0.18, <1
 termcolor       > 1, <2
+# Bug in matplotlib and pyparsing 3.0.1
+pyparsing       >=2.4, <3
