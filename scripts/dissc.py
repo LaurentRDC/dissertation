@@ -107,7 +107,7 @@ def check_for_todo(path):
     logging.info("Checking for TODOs...")
     with open(path, mode="r") as f:
         for line in f:
-            if "TODO " in line:
+            if "TODO" in line:
                 return True
     return False
 

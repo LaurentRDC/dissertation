@@ -20,7 +20,7 @@ where $S$ is the Seebeck coefficient, $\sigma$ is the electrical conductivity, $
 $$
 \eta = \frac{T_H - T_C}{T_H} \left( \frac{\sqrt{1 + ZT_{avg}} - 1}{\sqrt{1 + ZT_{avg}} + \frac{T_C}{T_H}} \right)
 $$
-where $T_{avg} = \sfrac{(T_C + T_H)}{2}$ is the average device temperature, and $\sfrac{(T_H - T_C)}{T_H}$ is understood to be the Carnot efficiency[@Sootsman2009;@Zhang2014]. The value of $\eta$ for an abstract device with a given $ZT$ is shown in @fig:snse-efficiency, which illustrates that good efficiency ($>$20%) at reasonable temperatures ($<$\SI{600}{\kelvin}) requires a high $ZT$ ($>$4).
+where $T_{avg} = \sfrac{(T_C + T_H)}{2}$ is the average device temperature, and $\sfrac{(T_H - T_C)}{T_H}$ is understood to be the Carnot efficiency[@Sootsman2009;@Zhang2014]. The value of $\eta$ for an abstract device with a given $ZT$ is shown in @fig:snse-efficiency, which illustrates that good efficiency ($>$ 20%) at reasonable temperatures ($<$ \SI{600}{\kelvin}) requires a high $ZT$ ($>$ 4).
 
 ```{.matplotlib #fig:snse-efficiency file="figures/snse/efficiency.py" caption="Efficiency of an abstract thermoelectric device harvesting energy from an interface at temperature $T_H$ and attached to a cold size at $T_C=\SI{300}{\kelvin}$. $ZT_{avg}$ is the thermoelectric figure-of-merit at the average device temperature."}
 ```
@@ -75,7 +75,7 @@ However, the maximum performance of nanostructured thermoelectrics -- while enha
 
 The last major thermoelectric tuning parameter is the lattice thermal conductivity, which has been historically considered essentially independent from electronic structure changes in most of the litterature on thermoelectrics. The canonical way to alter the lattice heat transport properties from a given compound is to introduce defects via solid solutions[@Wang2013].
 
-Which bulk compounds should be used as a starting point for further performance improvements? From the point-of-view of low lattice thermal conductivity, the ideal material has been called a *phonon glass--electron crystal* [@Rowe1995PGEC]. The prototypical phonon glass--electron crystal is a low-symmetry material with heavy atoms that are somewhat free to vibrate, resulting in an intrisically-low thermal conductivity (phonon glass), but with high-enough electron mobility (electron crystal). Well-known phonon glass--electron crystals include Bi$_2$Se$_3$[@Hicks1993a](also a topological insulator [@Sobota2012]), PbTe[@Harman1996], and more recently SnSe[@Zhao2014]. The phonon glass-electron crystal concept also applies to the light-harvesting lead-halide perovskites[@Miyata2017].
+Which bulk compounds should be used as a starting point for further performance improvements? From the point-of-view of low lattice thermal conductivity, the ideal material has been called a *phonon glass--electron crystal* [@Rowe1995PGEC]. The prototypical phonon glass--electron crystal is a low-symmetry material with heavy atoms that are somewhat free to vibrate, resulting in an intrisically-low thermal conductivity (phonon glass), but with high-enough electron mobility (electron crystal). Well-known phonon glass--electron crystals include Bi$_2$Se$_3$ [@Hicks1993a](also a topological insulator [@Sobota2012]), PbTe[@Harman1996], and more recently SnSe[@Zhao2014]. The phonon glass-electron crystal concept also applies to the light-harvesting lead-halide perovskites[@Miyata2017].
 
 ## Tin selenide
 
@@ -94,8 +94,6 @@ In the high-temperature $Cmcm$ phase, the lattice is stabilized by two soft, anh
 
 ```{.matplotlib #fig:snse-bz file="figures/snse/bz.py" caption="In-plane section of the Brillouin zone of SnSe."}
 ```
-
-TODO: include band structure which shows softening
 
 There are actually many soft-modes with characteristics similar to the lowest energy $A_g$ mode that soften towards the phase transition; $A_g$ simply happens to be the lowest-energy one, and therefore freezes at the phase transition. Work by Gong *et al.*[@Gong2020] and others[@Liu2018] has shown the temperature-dependence of multiple modes. Of interest is the $B_g$ mode (\SI{14}{\milli\electronvolt} at \SI{300}{\kelvin}), which is also polarized along the $Pnma$ lattice distortion just like the $A_g$ mode, but displays one of the most pronounced temperature-dependence across multiple two-dimensional systems such as black phosphorus, monolayer and few-layers MoS$_2$, and graphene.
 
@@ -233,7 +231,7 @@ An important point which will anchor the discussion below is that the lattice di
 
 ### Debye-Waller dynamics
 
-```{.matplotlib #fig:snse-dwaller file="figures/snse/dwaller.py" caption="Differential intensity dynamics on Bragg peaks for reflections either parallel to $\vect{b}^\star$ or $\vect{c}^\star$. Reflections parallel to $\vect{b}^\star$ are well-described by a single exponential with time-constant \SI{4 \pm 1}{\pico\second}. However, reflections parallel to $\vect{c}^\star$ have a biexponential character the with time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. Error bars represent the fluctuations before photoexcitation ($\tau < 0$) but are too small to see."}
+```{.matplotlib #fig:snse-dwaller file="figures/snse/dwaller.py" caption="Differential intensity dynamics on Bragg peaks for reflections either parallel to $\vect{b}^\star$ or $\vect{c}^\star$. Reflections parallel to $\vect{b}^\star$ are well-described by a single exponential with time-constant \SI{4 \pm 1}{\pico\second}. However, reflections parallel to $\vect{c}^\star$ have a biexponential character with time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. Error bars represent the fluctuations before photoexcitation ($\tau < 0$) but are too small to see."}
 ```
 
 The Bragg peaks were modified in one important way: a photoinduced amplitude change was measured, attributable to the transient Debye-Waller effect (@sec:scattering-lattice-waves). In-plane reflections can be separated into two categories: the reflections which are nearly parallel to the $\vect{c}^\star$ axis, and the reflections which are not. For the reflections which are within $\sim\ang{45}$ degrees of the $\vect{c}^\star$ axis, the amplitude of the Bragg peak follows a Debye-Waller suppression with two time-constants \SI{400 \pm 100}{\femto\second} and \SI{4 \pm 1}{\pico\second}. For reflections which are not nearly parallel to $\vect{c}^\star$, only the slower time-constant is present. @fig:snse-dwaller shows the comparison between the amplitude suppression for reflections which are exactly parallel to $\vect{b}^\star$ ($\set{ (020), (040), ...}$) and reflections which are exactly parallel to $\vect{c}^\star$ ($\set{ (002), (004), ...}$). 
@@ -360,24 +358,24 @@ This equation implies an increase of diffuse intensity is due to an increase in 
 1. Selective mode-heating ($\uparrow n_{\lambda}$). Phonon modes may be populated selectively as the electronic system thermalizes. This is similar to the physics that was described in @sec:graphite.
 2. Frequency renormalization ($\downarrow \omega_{\lambda}$). There are multiple zone-center phonon modes polarized in the $\vect{c}$ direction which are known to soften towards the phase transition. The opposite has been observed by the author in TiSe$_2$ in Otto *et al.*[@Otto2021], where the photodoping of carriers selectively stiffened a soft zone-boundary phonon.
 
-Due to the energy-integrative nature of ultrafast electron diffuse scattering measurements, it is not possible to distinguish between these two types of dynamics. In analogy to @eq:scattering-displacement, terms of the form $n_{\lambda} + 1/2 / \omega_{\lambda}$ are directly proportional to vibrational amplitude. In this formulation, the fast diffuse intensity rise at $\vect{\Gamma}$ is due to an increase in vibrational amplitude of one or more small-wavevector phonon modes polarized in the direction of the $Pnma$ lattice distortion. 
+Due to the energy-integrative nature of ultrafast electron diffuse scattering measurements, it is not possible to distinguish between these two types of dynamics. In analogy to @eq:scattering-displacement, terms of the form $\left( n_{\lambda} + 1/2 \right)/ \omega_{\lambda}$ are directly proportional to vibrational amplitude. In this formulation, the fast diffuse intensity rise at $\vect{\Gamma}$ is due to an increase in vibrational amplitude of one or more small-wavevector phonon modes polarized in the direction of the $Pnma$ lattice distortion. 
 
 ### Electron-phonon coupling
 
 Given that the energy contained in pump pulses are absorbed by electrons, and that ultrafast electron scattering measures the subsequent lattice response, it is natural to ask how electron-phonon coupling can explain the experiments. The electron-phonon scattering rate $1/ \tau_{\lambda\vect{k}_p}$, or rate of energy transfer between electrons at all wavevectors and phonons at wavevector $\vect{k}_p$, is given by[@Fan2018]:
 $$
-   1/ \tau_{\lambda\vect{k}_p} = -\frac{2 \pi}{\hbar} \text{Im}\left[ \Sigma_{\lambda}(\vect{k}_p) \right]
+   1/ \tau_{\lambda\vect{k}_p} = -\frac{2 \pi}{\hbar} \text{Im}\left[ \Pi_{\lambda}(\vect{k}_p) \right]
    \label{eq:snse-ep-scattering-rate}
 $$
-where $a$ and $b$ label electron bands, $\vect{k}_e$ ($\vect{k}_p$) is the electronic (phonon) wavevector, and $\Sigma_{\lambda}(\vect{k}_p)$ is the self-energy for phonons with quantum numbers $(\lambda, \vect{k}_p)$. The phonon self-energy also defines how vibrational frequencies are renormalized from $\omega^0_{\lambda}$ to $\omega_{\lambda}$ due to electron-phonon interactions[@Ando2006]: 
+where $a$ and $b$ label electron bands, $\vect{k}_e$ ($\vect{k}_p$) is the electronic (phonon) wavevector, and $\Pi_{\lambda}(\vect{k}_p)$ is the self-energy for phonons with quantum numbers $(\lambda, \vect{k}_p)$. The phonon self-energy also defines how vibrational frequencies are renormalized from $\omega^0_{\lambda}$ to $\omega_{\lambda}$ due to electron-phonon interactions[@Ando2006]: 
 $$
-    \frac{\omega_{\lambda}(\vect{k}_p)^2}{\omega^0_{\lambda}(\vect{k}_p)^2} - 1 = \frac{2}{\hbar \omega^0_{\lambda}(\vect{k}_p)} \text{Re} \left[ \Sigma_{\lambda}(\vect{k}_p)\right]
+    \frac{\omega_{\lambda}(\vect{k}_p)^2}{\omega^0_{\lambda}(\vect{k}_p)^2} - 1 = \frac{2}{\hbar \omega^0_{\lambda}(\vect{k}_p)} \text{Re} \left[ \Pi_{\lambda}(\vect{k}_p)\right]
 $${#eq:snse-ep-renormalization}
 The renormalization of phonon vibrational frequencies due to strong electron-phonon coupling was encountered in @sec:graphite-phonon-landscape in the form of Kohn anomalies[@Kohn1959].
 
 Both a large electron-phonon scattering rate (i.e. selective mode-heating) and phonon frequency renormalization can lead to an increase in the phonon vibrational amplitude measured in SnSe (@eq:scattering-displacement). Regardless of the physical cause of the increased vibrational amplitude (mode-heating or phonon renormalization), the consequences boil down to an ultrafast modification of the phonon self-energy. Computing the phonon self-energy for particular situations is arduous[@Mahan2000SelfEnergy;@Giustino2017], but in the Migdal approximation[@Migdal1958;@Noffsinger2010]: 
 $$
-    \Sigma_{\lambda}(\vect{k}_p) = 
+    \Pi_{\lambda}(\vect{k}_p) = 
         \sum_{a, b} \int \frac{d\vect{k}_e}{(2\pi)^3} ~ | g^{\lambda}_{ab}(\vect{k}_p, \vect{k}_e) |^2 ~ \frac{f\left[\epsilon_{a}(\vect{k}_e)\right] - f\left[\epsilon_b(\vect{k}_e + \vect{k}_p)\right]}{\epsilon_a(\vect{k}_e) - \epsilon_b(\vect{k}_e + \vect{k}_p) - \hbar \omega_{\lambda}(\vect{k}_p) + i\eta}
 $${#eq:snse-phonon-self-energy}
 where $a$ and $b$ label electron bands, $\vect{k}_e$ ($\vect{k}_p$) is the electronic (phonon) wavevector, $f(\epsilon)$ is the electronic energy distribution, and $\eta$ is an infinitesimally-small number. The electronic energy distribution $f(\epsilon)$ might be non-thermal in general, and indeed is non-thermal on the timescale of the experiments presented herein. The electron-phonon coupling tensor, $g^{\lambda}_{ab}(\vect{k}_e, \vect{k}_p)$, describes the rate of inelastic single electron scattering between bands $a$ and $b$ through the creation or annihilation of a phonon with quantum numbers $(\lambda, \vect{k}_p)$. The electron-phonon coupling tensor $g$ was encountered in @sec:introduction-epc and @sec:graphite-coupling-constants.
@@ -504,7 +502,7 @@ For the slow time-scale, the Bragg peak dynamics are mostly flat, and so the rad
 
 The radial profile changes were fit with the modelling of @eq:snse-polaron-intensity-change using a nonlinear least-squares routine. The change in radial intensity profile at \SI{1}{\pico\second} is consistent with a polaron with a full-width at half-maximum of %{electron-polaron-size} along the $\vect{c}$-axis, while the change in radial intensity profile at \SI{5}{\pico\second} is consistent with a much smaller polaron with a FWHM of %{hole-polaron-size} in the $\vect{b}$--$\vect{c}$ plane. The fits are shown in @fig:snse-polaron-size-model. In analogy with the work by Sio *et al.* [@Sio2019], the large, fast-forming polaron is assigned to be an electron polaron, while the small and slow-forming polaron is assigned to be a hole polaron. It must be emphasized that this assignment is tentative. However, with this assignment in mind, a visualization of the polaronic strain in real-space is shown in @fig:snse-polaron-realspace, where the displacement of atoms is calculated based on Born effective charges from Caruso *et al.* [@Caruso2019]
 
-```{.matplotlib #fig:snse-polaron-realspace file="figures/snse/polaron-realspace.py" caption="Real-space visualization of the atomic displacement due to the large and small polarons. The unperturbed dimensions of the unit cell are marked by solid black lines. In both subpanels, the background color is used to show the full-width at half-maximum of the displacement associated with the polaron. **a)** Large one-dimensional electron polaron along the $\vect{c}$-axis. **b)** Small symmetrical hole polaron in the $\vect{b}$ -- $\vect{c}$ plane."}
+```{.matplotlib #fig:snse-polaron-realspace file="figures/snse/polaron-realspace.py" caption="Real-space visualization of the atomic displacement due to the large and small polarons. The magnitude of the atomic displacements is exaggerated for visual clarity. The unperturbed dimensions of the unit cell are marked by solid black lines. In both subpanels, the background color is used to show the full-width at half-maximum of the displacement associated with the polaron. **a)** Large one-dimensional electron polaron along the $\vect{c}$-axis. **b)** Small symmetrical hole polaron in the $\vect{b}$ -- $\vect{c}$ plane."}
 ```
 
 ### Polarons and thermoelectric properties

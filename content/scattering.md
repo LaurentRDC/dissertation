@@ -100,7 +100,7 @@ where $\hat{H}_0$ is the free-space Hamiltonian with eigenvalue $E_i=\hbar^2 |\v
 
 ### Measuring the scattered wavefunction
 
-Electron cameras measure the intensity of the wavefunction. In the case of bright-field electron microscopy, where the wavefunction is imaged directly, the intensity on the detector is given by:
+Electron cameras measure the intensity of the wavefunction. In the case of electron microscopy in the transmission geometry, where the wavefunction is imaged directly, the intensity on the detector is given by:
 $$
     I(\vect{x}) \equiv \left| \braket{\vect{x} | \Psi} \right|^2
 $$
@@ -329,7 +329,7 @@ where $a$ is the inter-atomic distance of the crystal. In the approximation desc
 \end{align}
 where $d\sigma_1/d\Omega$ is the differential cross-section for a single elastic scattering event[^conj]. Importantly, the cross-section for multiple scattering integrated over the sample thickness scales quadratically with sample thickness, given that the scattering cross-section for a single scattering event is linear in the sample thickness. Measurements of multiple scattering effects will be discussed further in @sec:snse.
 
-[^conj]: Note that because $V(\vect{x})$ is real, $\int d\vect{x}^\prime e^{-i\vect{k} \cdot \vect{x}^\prime} V(\vect{x}) = \int d\vect{x}^\prime e^{i\vect{k} \cdot \vect{x}^\prime} V(\vect{x})$.
+[^conj]: Note that because $V(\vect{x})$ is real, the complex conjugate of $\ft{V}(\vect{k})$ is $\ft{V}(-\vect{k})$.
 
 ## The effect of lattice waves on ultrafast electron scattering{#sec:scattering-lattice-waves}
 
@@ -373,20 +373,21 @@ $$
 $${#eq:scattering-displacement}
 where $\set{\lambda}$ label phonon branches, $\mu_s$ is the mass of atom $s$, $N$ is the number of atoms in the crystal, $\omega_{\lambda}(\vect{k})$ is the vibrational frequency of mode $\lambda$ at wavevector $\vect{k}$, $\hat{a}_{\lambda}(\vect{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vect{k})$ are the creation and annihilation operators for the phonon mode $\lambda$, $\phi_{s,m,\lambda}(\vect{k})$ is the phase of a lattice wave, and $\vect{e}_{s,\lambda}(\vect{k})$ is the polarization vector of mode $\lambda$[@Sinha2001]. The expression for $\hat{\vect{u}}_{m,s}$ is the combined effect of all possible phonon modes at the $\vect{r}_{m,s}$ lattice site. The sum $\sum_{\set{\vect{k}}}$ assumes the normalization of @eq:scattering-norm.
 
-The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle$ [@Campbell1897]. It states that for two operators $\hat{A}$ and $\hat{B}$ with commutator $[\hat{A},\hat{B}]$:
+The Baker-Campbell-Hausdorff lemma can be used to compute the average $\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle$ [@Campbell1897]. It states that for two operators $\hat{A}$ and $\hat{B}$:
 $$
-e^{\hat{A}} e^{\hat{B}} = e^{\hat{A} + \hat{B} + \frac{1}{2}[\hat{A},\hat{B}]}
+e^{\hat{A}} e^{\hat{B}} = \exp \left( \hat{A} + \hat{B} + \frac{1}{2}[\hat{A},\hat{B}] + \frac{1}{12}\left(\left[ \hat{A}, [\hat{A}, \hat{B}]\right] + \left[ \hat{B}, [\hat{B}, \hat{A}]\right] \right) + ...\right)
 $$
-This allows to simplify the average as:
+where the omitted terms involve higher commutators of $\hat{A}$ and $\hat{B}$ [@Dynkin1947]. Since $[\hat{a}_{\lambda}(\vect{k}), \hat{a}_{\lambda^\prime}^{\dagger}(\vect{k}^\prime)] = \delta_{\vect{k}\vect{k}^\prime}\delta_{\lambda \lambda^\prime}$, the higher order commutators for operators $\hat{A}$ and $\hat{B}$ that are linear in $\hat{a}_{\lambda}(\vect{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vect{k})$ vanish, and the following relation holds:
 $$
-\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = \langle e^{-i \vect{q} \cdot (\hat{\vect{u}}_s - \hat{\vect{u}}_{s^\prime}) + \frac{1}{2}[\vect{q} \cdot \hat{\vect{u}}_s, \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}]} \rangle
+e^{\hat{A}} e^{\hat{B}} = e^{\hat{A} + \hat{B} + \frac{1}{2} [\hat{A}, \hat{B}]}
 $$
-
-Furthermore, note that $[\hat{a}_{\lambda}(\vect{k}), \hat{a}_{\lambda}^{\dagger}(\vect{k})] = 1$ so that the following simplification is valid:
-$$
-\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = \langle e^{-i \vect{q} \cdot (\hat{\vect{u}}_s - \hat{\vect{u}}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vect{q} \cdot \hat{\vect{u}}_s, \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}]} \rangle
-$$
-Finally, for operators $A$ which are a linear combination of position and momentum operators of a harmonic system, $\langle e^A \rangle = e^{\frac{1}{2}\langle A^2 \rangle}$[@Born1941], sometimes known as the Bloch identity. This leads to:
+This special case of the Baker-Campbell-Hausdorff allows to simplify the average of @eq:scattering-amplitude-average as:
+\begin{align}
+\langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle 
+    & = \langle e^{-i \vect{q} \cdot (\hat{\vect{u}}_s - \hat{\vect{u}}_{s^\prime}) + \frac{1}{2}[\vect{q} \cdot \hat{\vect{u}}_s, \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}]} \rangle \nonumber \\
+    & = \langle e^{-i \vect{q} \cdot (\hat{\vect{u}}_s - \hat{\vect{u}}_{s^\prime})}\rangle \langle e^{\frac{1}{2}[\vect{q} \cdot \hat{\vect{u}}_s, \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}]} \rangle
+\end{align}
+where the second line follows from the commutation relation of $\hat{a}_{\lambda}(\vect{k})$ and $\hat{a}_{\lambda}^{\dagger}(\vect{k})$. Finally, for operators $\hat{A}$ which are a linear combination of position and momentum operators of a harmonic system, $\langle e^{\hat{A}} \rangle = e^{\frac{1}{2}\langle \hat{A}^2 \rangle}$[@Born1941], sometimes known as the Bloch identity. This leads to:
 $$
 \langle e^{-i \vect{q} \cdot \hat{\vect{u}}_s} e^{ i \vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}} \rangle = e^{-\frac{1}{2}\langle (\vect{q} \cdot \hat{\vect{u}}_s)^2\rangle} e^{-\frac{1}{2}\langle (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}})^2\rangle} e^{\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle}
 $$
@@ -404,32 +405,32 @@ For small displacement vectors $\hat{\vect{u}}$, $\vect{q} \cdot \hat{\vect{u}} 
         & = 1 + \langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle + \mathcal{O}\left(|\hat{\vect{u}}_s|^2 |\hat{\vect{u}}_{s^{\prime}}|^2 \right) \nonumber \\
         & \approx 1 + \langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle
 \end{align}
-This approximation limits the final expression to the effects of *one-phonon* scattering. This is a good first approximation for simple crystal structure like graphite and MoS$_2$[@Zacharias2021b], but there are reports that compounds with intrinsically-low thermal conductivity -- specifically black Phosphorus -- display a measureable degree of multi-phonon diffuse scattering [@Zacharias2021b;@Seiler2021]. Using @eq:scattering-displacement:
+This approximation limits the final expression to the effects of *one-phonon* scattering. This is a good first approximation for simple crystal structures like graphite and MoS$_2$[@Zacharias2021b], but there are reports that compounds with intrinsically-low thermal conductivity -- specifically black Phosphorus -- display a measureable degree of multi-phonon diffuse scattering [@Zacharias2021b;@Seiler2021]. Using @eq:scattering-displacement:
 \begin{multline}
     (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) = \\
         \frac{\hbar}{2 N} \left( \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k})}{\sqrt{\mu_s \omega_{\lambda}(\vect{k})}} \left[ \hat{a}_{\lambda}(\vect{k})e^{-i\phi_{s,m,\lambda}(\vect{k})} + \hat{a}_{\lambda}^{\dagger}(\vect{k}) e^{i\phi_{s,m,\lambda}(\vect{k})} \right] e^{i \vect{k} \cdot \vect{r}_{m,s}} \right) \\
-        \left( \sum_{\lambda^\prime} \sum_{\set{\vect{k}^\prime}} \frac{\vect{q} \cdot \vect{e}_{\lambda^\prime,s^\prime}(\vect{k}^\prime)}{\sqrt{\mu_{s^\prime} \omega_{\lambda^\prime}(\vect{k}^\prime)}} \left[ \hat{a}_{\lambda^\prime}(\vect{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vect{k}^\prime)} + \hat{a}_{\lambda^\prime}^{\dagger}(\vect{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vect{k}^\prime)} \right] e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}}\right)
+        \left( \sum_{\lambda^\prime} \sum_{\set{\vect{k}^\prime}} \frac{\vect{q} \cdot \vect{e}_{\lambda^\prime,s^\prime}(\vect{k}^\prime)}{\sqrt{\mu_{s^\prime} \omega_{\lambda^\prime}(\vect{k}^\prime)}} \left[ \hat{a}_{\lambda^\prime}(\vect{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vect{k}^\prime)} + \hat{a}_{\lambda^\prime}^{\dagger}(\vect{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vect{k}^\prime)} \right] e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}}\right)
 \end{multline}
 Equivalently:
 \begin{multline}
     \langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle = \\
     \frac{\hbar}{2 N} \sum_{\lambda, \lambda^\prime} \sum_{\set{\vect{k}}, \set{\vect{k}^\prime}} \frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\sqrt{\mu_s \mu_{s^\prime} \omega_{\lambda}(\vect{k})\omega_{\lambda^\prime}(\vect{k}^\prime)}} e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}} \\
-    \left\langle \left[ \hat{a}_{\lambda}(\vect{k})e^{-i\phi_{s,m,\lambda}(\vect{k})} + \hat{a}_{\lambda}^{\dagger}(\vect{k}) e^{i\phi_{s,m,\lambda}(\vect{k})} \right] \left[ \hat{a}_{\lambda^\prime}(\vect{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vect{k}^\prime)} + \hat{a}_{\lambda^\prime}^{\dagger}(\vect{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda}(\vect{k}^\prime)} \right] \right\rangle
+    \left\langle \left[ \hat{a}_{\lambda}(\vect{k})e^{-i\phi_{s,m,\lambda}(\vect{k})} + \hat{a}_{\lambda}^{\dagger}(\vect{k}) e^{i\phi_{s,m,\lambda}(\vect{k})} \right] \left[ \hat{a}_{\lambda^\prime}(\vect{k}^\prime)e^{-i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vect{k}^\prime)} + \hat{a}_{\lambda^\prime}^{\dagger}(\vect{k}^\prime) e^{i\phi_{s^\prime,m^\prime,\lambda^\prime}(\vect{k}^\prime)} \right] \right\rangle
 \end{multline}
 
 Since the phases $\phi_{s,m,\lambda}(\vect{k})$ are not correlated across unit cells, the cross terms vanish:
 \begin{align}
     \langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle 
-    = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\omega_{\lambda}(\vect{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}} \nonumber \\
+    = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\omega_{\lambda}(\vect{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k} \cdot \vect{r}_{m, s^\prime}} \nonumber \\
       & \left[ \hat{a}_{\lambda}(\vect{k}) \hat{a}_{\lambda}(\vect{k}) 
          + \hat{a}_{\lambda}(\vect{k}) \hat{a}^{\dagger}_{\lambda}(\vect{k}) 
          + \hat{a}^{\dagger}_{\lambda}(\vect{k}) \hat{a}_{\lambda}(\vect{k}) 
          + \hat{a}^{\dagger}_{\lambda}(\vect{k}) \hat{a}^{\dagger}_{\lambda}(\vect{k}) \right] \nonumber \\
-    = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\omega_{\lambda}(\vect{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}} \left[ 2 \hat{n}_{\lambda}(\vect{k}) + 1\right]
+    = & \frac{\hbar}{2 N} \sum_{\lambda} \sum_{\set{\vect{k}}} \frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\omega_{\lambda}(\vect{k})\sqrt{\mu_s \mu_{s^\prime}}} e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k} \cdot \vect{r}_{m, s^\prime}} \left[ 2 \hat{n}_{\lambda}(\vect{k}) + 1\right]
 \end{align}
 where $\hat{n}_{\lambda}(\vect{k}) \equiv \hat{a}_{\lambda}(\vect{k}) \hat{a}^{\dagger}_{\lambda}(\vect{k}) = \hat{a}^{\dagger}_{\lambda}(\vect{k}) \hat{a}_{\lambda}(\vect{k})  - 1$ is the excitation number operator. Simplifying further:
 $$
-\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vect{k}}} \left( \frac{\hat{n}_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})}\right) \left(\frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}}\right) e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k}^\prime \cdot \vect{r}_{m^\prime, s^\prime}}
+\langle (\vect{q} \cdot \hat{\vect{u}}_s) ~ (\vect{q} \cdot \hat{\vect{u}}_{s^{\prime}}) \rangle = \frac{\hbar}{N} \sum_{\lambda} \sum_{\set{\vect{k}}} \left( \frac{\hat{n}_{\lambda}(\vect{k}) + 1/2}{\omega_{\lambda}(\vect{k})}\right) \left(\frac{\left(\vect{q} \cdot \vect{e}_{\lambda,s}(\vect{k}) \right) \left(\vect{q} \cdot \vect{e}_{\lambda,s^\prime}(\vect{k})\right)}{\sqrt{\mu_s \mu_{s^\prime}}}\right) e^{i \vect{k} \cdot \vect{r}_{m,s}} e^{i \vect{k} \cdot \vect{r}_{m, s^\prime}}
 $$
 
 ### Scattering amplitude

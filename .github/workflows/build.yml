@@ -12,7 +12,7 @@ jobs:
         # Whether or not compute the plotting prerequisites. Since this
         # calculation takes ~1h, one of the CI runs will skip this step
         # so that I can get feedback faster.
-        precompute: [true, false]
+        precompute: [false]
 
     runs-on: ubuntu-latest
 
@@ -70,7 +70,7 @@ jobs:
 
     - name: Install Pandoc dependencies
       env:
-        pandoc-version: 2.15
+        pandoc-version: 2.16.1
         pandoc-crossref-version: 0.3.12.0
         pandoc-plot-version: 1.3.0
       run: |
