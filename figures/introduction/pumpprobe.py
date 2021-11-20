@@ -118,7 +118,7 @@ ax3.xaxis.set_major_locator(FixedLocator([0, 3, 6, 9]))
 ax3.xaxis.set_major_formatter(FixedFormatter(["0", "1", "2", "3"]))
 
 ax_dyn3.set_xlim([dyn_times.min() / 3, dyn_times.max() / 3])
-ax_dyn3.set_xlabel("Time-delay [T]")
+ax_dyn3.set_xlabel("Time-delay [$\\tau$]")
 
 ax1.legend(ncol=3, loc="center", bbox_to_anchor=(0.5, 1.15), edgecolor="none")
 

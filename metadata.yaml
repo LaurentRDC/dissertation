@@ -46,7 +46,7 @@ abstract-en: |
   symmetry, are used to robustly recover the occupancy of all in-plane phonon modes. 
   The mode-, momentum- and time-dependent phonon populations reveal 
   the nonequilibrium lattice states that follow photoexcitation and the complete 
-  breakdown of the two-temperature model often used to describe these dynamics. 
+  breakdown of the two-temperature model often used to describe dynamics on the femtosecond time-scale. 
   The measurements presented also provide a direct view of anharmonic decay pathways 
   of phonons across the Brillouin zone, and a technique to extract electron-phonon 
   coupling matrix elements from phonon population is developed. The lessons are then 
@@ -57,7 +57,7 @@ abstract-en: |
   thermoelectric efficiency. It is found that strong and anisotropic electron-phonon 
   coupling to polar modes dominates the zone-center phonon dynamics. Light-induced lattice 
   distortions are found to be attributable with fast-forming one-dimensional electron 
-  polarons and slow-forming three-dimensional hole polarons.
+  polarons and slow-forming hole polarons isotropic in the plane.
   These findings recontextualize what was thought about the determinants of 
   thermoelectric performance, primarily the role of electron-phonon coupling to 
   polar modes in preserving high carrier mobility in low-symmetry crystals.
