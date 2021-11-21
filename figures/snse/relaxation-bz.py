@@ -78,7 +78,7 @@ m = ax.imshow(
     result,
     vmin=-vmax,
     vmax=vmax,
-    EXTENT=[EXTENT.min(), EXTENT.max(), EXTENT.max(), EXTENT.min()],
+    extent=[EXTENT.min(), EXTENT.max(), EXTENT.max(), EXTENT.min()],
     cmap="RdBu_r",
 )
 ax.cax.colorbar(mappable=m, format=PercentFormatter(xmax=1))
