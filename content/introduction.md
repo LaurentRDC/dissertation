@@ -282,9 +282,9 @@ This dissertation has two goals: to push the understanding of nonequilibrium lat
 
 To this end, the dissertation starts proper with a description of the theoretical framework of ultrafast electron diffraction and diffuse scattering in @sec:scattering. This chapter holds a special place in the author's heart. At the time of writing, it is the only quantum-mechanical derivation of ultrafast diffuse scattering amplitude for either x-ray or electrons. The thorny subject of multiple electron scattering is also discussed.
 
-Ultrafast electron diffuse scattering measurements in graphite are considered next in @sec:graphite. Graphite is a wonderful benchmark system because of the stiffness of the lattice, which gives diffuse scattering measurements incredibly high contrast. In a way, diffuse scattering in graphite is the most definitive diffuse scattering experiment.
+Ultrafast electron diffuse scattering measurements in graphite are considered next in @sec:graphite. Graphite is a wonderful benchmark system because of the stiffness of the lattice, which gives diffuse scattering measurements incredibly high contrast. In a way, diffuse scattering in graphite is the most definitive diffuse scattering experiment. The work in this chapter was peer-reviewed and published in René de Cotret *et al.*[@RenedeCotret2019]
 
-The study of the origin of tin selenide's high thermoelectric performance is the subject of @sec:snse. In this material, ultrafast electron diffraction and diffuse scattering are used in conjunction to observe polaron formation, which might explain how strong electron-phonon coupling can positively impact thermoelectric performance.
+The study of the origin of tin selenide's high thermoelectric performance is the subject of @sec:snse. In this material, ultrafast electron diffraction and diffuse scattering are used in conjunction to observe polaron formation, which might explain how strong electron-phonon coupling can positively impact thermoelectric performance. The work in this chapter was peer-reviewed and published in René de Cotret *et al.*[@RenedeCotret2021]
 
 \FloatBarrier
 ## References {.unnumbered}
