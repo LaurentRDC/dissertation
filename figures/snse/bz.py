@@ -18,8 +18,8 @@ arrow_kwds = dict(
     x=0, y=0, length_includes_head=True, width=0.001, head_width=0.07, fc="k"
 )
 
-width = 2
-height = 1.5
+width = 1.5
+height = 2
 
 named_arrow(
     ax,

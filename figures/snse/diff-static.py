@@ -100,6 +100,7 @@ cbar = grid[0].cax.colorbar(
     m,
     ticks=FixedLocator(locs=[0, 150]),
     format=FixedFormatter(["0", "1"]),
+    ticklocation="top",
 )
 cbar.ax.xaxis.set_label_position("top")
 cbar.ax.set_xlabel("Scattering intensity [a.u.]")
