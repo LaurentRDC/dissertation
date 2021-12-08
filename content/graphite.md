@@ -355,16 +355,16 @@ The energy flow that follows photoexcitation described in this section is exactl
 
 ### Long-term decay
 
-```{.matplotlib #fig:graphite-long-term file="figures/graphite/energy.py" caption="Energy stored in-plane after photoexcitation. **Inset** long-term trend shows that thermalization has not yet occurred by \SI{600}{\pico\second}, which would appear as the total energy change (yellow curve) going back to zero."}
+```{.matplotlib #fig:graphite-long-term file="figures/graphite/energy.py" caption="Change in the energy stored in-plane as phonons after photoexcitation. **Inset** long-term trend shows that thermalization with the environment has not yet occurred by \SI{600}{\pico\second}, which would appear as the total energy change (yellow curve) going back to zero."}
 ```
 
 It is possible to quantify how long the non-equilibrium distribution of lattice waves lasts in graphite. The energy transferred to the sample from photoexcitation, stored in plane in a mode $\lambda$, can be expressed as follows:
 $$
     \Delta E_{\lambda}(\tau) = \int_{\text{BZ}} d\vect{k} ~ \Delta n_{\lambda}(\vect{k}, \tau) \hbar \omega_{\lambda}(\vect{k}, \tau)
 $$
-where $\int_{\text{BZ}} d\vect{k}$ is understood to be the integral over the in-plane section of the Brillouin zone. Using the population measurements $\set{ n_{\lambda}(\vect{k}, \tau)}$ presented in @fig:graphite-ph-populations, the mode-dependent relative change in stored energy (in-plane) can be calculated. The results are shown in @fig:graphite-long-term.
+where $\int_{\text{BZ}} d\vect{k}$ is understood to be the integral over the in-plane section of the Brillouin zone. Using the population measurements $\set{ n_{\lambda}(\vect{k}, \tau)}$ presented in @fig:graphite-ph-populations, the mode-dependent relative change in stored energy (in-plane) can be calculated. The results are shown in @fig:graphite-long-term. 
 
-The energy trends for modes TA and TO2 are commensurate with the description of @sec:graphite-pop-dynamics. The fascinating aspect of this analysis is revealed by looking at the total energy stored in-plane. Even by \SI{600}{\pico\second}, thermalization of the energy dumped into the sample by photoexcitation has not occurred at all. 
+The energy trends for modes TA and TO2 are commensurate with the description of @sec:graphite-pop-dynamics. The fascinating aspect of this analysis is revealed by looking at the total energy stored in-plane. Even by \SI{600}{\pico\second}, thermalization of the energy dumped into the sample by photoexcitation with the experimental environment (\SI{300}{\kelvin}) has not occurred at all. Note that this figure is not a representation of the thermalization of these modes with each other; there is no expectation of these trends to be equal due to their differing isobaric heat capacities. 
 
 ## Mode-projected excitation couplings
 
