@@ -42,8 +42,8 @@ def electron_heat_capacity(temperature):
     # Nihira 2003, Eq. 43
     heat_capacity = (
         (13.8 * temperature)
-        + (1.16e-3 * temperature ** 2)
-        + (2.6e-7 * temperature ** 3)
+        + (1.16e-3 * temperature**2)
+        + (2.6e-7 * temperature**3)
     )  # uJ / mol / K
     heat_capacity *= 1e-6  # J / mol / K
     return heat_capacity
@@ -88,7 +88,7 @@ def mode_heat_capacity(temperature, frequency):
     operand = hbar * omega / (temperature * boltzmann_hz_per_K)
 
     heat_capacity = (
-        boltzmann * (operand ** 2) * np.exp(operand) / (np.expm1(operand) ** 2)
+        boltzmann * (operand**2) * np.exp(operand) / (np.expm1(operand) ** 2)
     )  # J / K
     return heat_capacity * avogadro  # J / mol / K
 
@@ -253,7 +253,7 @@ def electron_density_of_states(energy):
     """
     # Constants from reference.
     lattice_constant = 1.42  # Angstroms
-    in_plane_area = (3 / 2) * np.sqrt(3) * lattice_constant ** 2
+    in_plane_area = (3 / 2) * np.sqrt(3) * lattice_constant**2
 
     # The estimation of the hopping parameter is provided shown in ref
     # at top of page 114
@@ -264,7 +264,7 @@ def electron_density_of_states(energy):
     # DOS in [1/eV/atom]
     # Reference has form in [1/eV/unitcell], which is 4 times larger since
     # graphite has 4 unitcell atoms
-    return (in_plane_area / (2 * np.pi)) * np.abs(energy) / (fermi_velocity ** 2)
+    return (in_plane_area / (2 * np.pi)) * np.abs(energy) / (fermi_velocity**2)
 
 
 def calculate_ep_coupling():
@@ -286,7 +286,7 @@ def calculate_ep_coupling():
     # k-TO mode has energy of 0.165 eV
     dos = electron_density_of_states(1.55 - 0.165)  # eV/unitcell
     g2 = (hbar_eV / tconst) * (1 / (2 * np.pi * dos))
-    gerr = (hbar_eV / tconst ** 2) * (1 / (2 * np.pi * dos)) * tconst_err
+    gerr = (hbar_eV / tconst**2) * (1 / (2 * np.pi * dos)) * tconst_err
 
     print("tau:    {:.2e} ± {:.2e} fs".format(tconst / 1e-15, tconst_err / 1e-15))
     print("<g>^2: ({:.3e} ± {:.0e})".format(g2, gerr), "eV^2")
@@ -323,7 +323,7 @@ best_params, covariance = curve_fit(
     sigma=restricted_errs,
     absolute_sigma=True,
     p0=[
-        17e-4,
+        20e-4,
         5e17 / molar_density(graphite) / 1e12,
         1e18 / molar_density(graphite) / 1e12,
         1e16 / molar_density(graphite) / 1e12,
@@ -429,3 +429,5 @@ ax_K.legend(
     edgecolor="none",
 )
 plt.tight_layout()
+
+# TODO: clamp conditions

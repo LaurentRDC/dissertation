@@ -84,7 +84,7 @@ with h5py.File(INPUT / "population_timeseries.hdf5", mode="r") as f:
 
     kmax = np.linalg.norm(kx_, axis=1).max() + 0.25
     kx, ky = np.meshgrid(np.linspace(-kmax, kmax, 256), np.linspace(-kmax, kmax, 256))
-    kk = np.sqrt(kx ** 2 + ky ** 2)
+    kk = np.sqrt(kx**2 + ky**2)
 
     for mode_name in MODES:
         image = interpolate.griddata(
@@ -185,6 +185,8 @@ for index, time in enumerate(TIMES):
 cbar = grid[0].cax.colorbar(
     m, ticks=FixedLocator(locs=[0, 1]), format=FixedFormatter(["0", "1"])
 )
+cbar.ax.xaxis.set_label_position("top")
+cbar.ax.xaxis.tick_top()
 cbar.ax.set_xlabel(
     r"Change in population $\Delta n_{\lambda}(\mathbf{k}, \tau)$ [a.u.]"
 )

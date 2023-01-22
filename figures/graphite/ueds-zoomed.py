@@ -34,7 +34,7 @@ qx, qy, _ = detector_scattvectors(
     pixel_size=14e-6,
     center=(c, r),
 )
-qq = np.sqrt(qx ** 2 + qy ** 2)
+qq = np.sqrt(qx**2 + qy**2)
 
 # Find location of (100) and (200) BZs
 graphite = Crystal.from_pwscf(DATADIR / "graphite.out")

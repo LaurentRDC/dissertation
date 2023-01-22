@@ -49,7 +49,7 @@ QX, QY, _ = detector_scattvectors(
     pixel_size=14e-6,
     center=(c, r),
 )
-QQ = np.sqrt(QX ** 2 + QY ** 2)
+QQ = np.sqrt(QX**2 + QY**2)
 
 
 def gaussian_table(points, values, sigma=5):

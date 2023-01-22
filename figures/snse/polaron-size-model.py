@@ -3,7 +3,7 @@ Visualization of the effect of polaron localization (from large to small)
 on the diffuse intensity profile
 """
 
-from math import sqrt, log
+from math import log, sqrt
 from pathlib import Path
 
 import matplotlib.gridspec as gridspec
@@ -11,10 +11,10 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
 import scipy.optimize as opt
-from scipy.ndimage import gaussian_filter
 import skued
 from crystals import Crystal
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from scipy.ndimage import gaussian_filter
 
 from dissutils import (
     CBAR_SIZE,
@@ -29,7 +29,7 @@ CRYSTAL = Crystal.from_cif(DATADIR / "snse_pnma.cif")
 
 
 def polaron(q, A, rp):
-    return A * q * rp ** 2 * np.exp(-(q ** 2 * rp ** 2) / 2)
+    return A * q * rp**2 * np.exp(-(q**2 * rp**2) / 2)
 
 
 figure = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 6))

@@ -1,7 +1,8 @@
-import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch, Circle, Ellipse
 import matplotlib.gridspec as gridspec
+import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patches import Circle, Ellipse, FancyArrowPatch
+
 from dissutils import MEDIUM_FIGURE_WIDTH, discrete_colors, tag_axis
 
 UNIFORM_COLOR, DISTORT_COLOR = discrete_colors(2)
@@ -33,7 +34,7 @@ for _ax, color, fermi in zip(
     _ax.add_patch(Circle(xy=(0, 1.2), radius=0.75, fc="none", ec="k"))
 
     _x = np.linspace(0, 0.7, num=128)
-    lb = 1.2 - np.sqrt(0.75 ** 2 - _x ** 2)
+    lb = 1.2 - np.sqrt(0.75**2 - _x**2)
     _ax.fill_between(_x, y1=lb, y2=fermi, where=lb < fermi, color=color)
 
     # lower band
@@ -61,7 +62,7 @@ ax_fe.yaxis.set_label_position("right")
 q_uniform = np.linspace(-1, 1, num=128)
 q_distorted = np.linspace(0, 2, num=128)
 ax_fe.plot(
-    q_uniform, 0.6 * q_uniform ** 2 + 0.75, linestyle="solid", color=UNIFORM_COLOR
+    q_uniform, 0.6 * q_uniform**2 + 0.75, linestyle="solid", color=UNIFORM_COLOR
 )
 ax_fe.vlines(x=0, ymin=0, ymax=0.75, linestyles="dashed", linewidth=1, colors="k")
 ax_fe.plot(

@@ -70,7 +70,7 @@ def conduction(ky, kz, args):
     # Gamma is special; it looks more like a parabola
     # It does not "add" on top of the other valleys, but rather is slotted in
     center = (ky / 0.477) ** 2 + (kz / 0.563) ** 2 < 1
-    e_conduction[center] = ((agy * ky ** 2 + agz * kz ** 2) + og)[center]
+    e_conduction[center] = ((agy * ky**2 + agz * kz**2) + og)[center]
 
     return e_conduction
 

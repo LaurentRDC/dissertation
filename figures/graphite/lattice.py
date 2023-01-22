@@ -1,9 +1,10 @@
 """ Visualization of the lattice structure of graphite"""
 
-from crystals import Crystal
 from itertools import groupby
 from math import sqrt
+
 import matplotlib.pyplot as plt
+from crystals import Crystal
 from matplotlib.patches import Circle
 
 from dissutils import FONTSIZE, discrete_colors, named_arrow

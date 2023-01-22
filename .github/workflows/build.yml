@@ -17,10 +17,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v2
+      # As of 2023-01-22, there are no wheels for h5py for python 3.11
+      # Until there are, we can't easily install h5py remotely
       with:
         python-version: '3.10'
 
@@ -53,7 +55,7 @@ jobs:
         mv LaurentP.RenédeCotret_data $GITHUB_WORKSPACE/data
 
     - name: Cache Python libraries
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-py310
@@ -63,16 +65,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install --upgrade wheel
         pip install -r requirements.txt
-        pip install -e dissutils
 
         # Ensure that iris is correctly set up
         python -c "import iris"
 
     - name: Install Pandoc dependencies
       env:
-        pandoc-version: 2.18
-        pandoc-crossref-version: 0.3.12.2a
-        pandoc-plot-version: 1.5.3
+        pandoc-version: "3.0"
+        pandoc-crossref-version: "0.3.15.0"
+        pandoc-plot-version: "1.6.1"
       run: |
         mkdir $GITHUB_WORKSPACE/bin && cd $GITHUB_WORKSPACE/bin
         curl -ksSL https://github.com/jgm/pandoc/releases/download/${{ env.pandoc-version }}/pandoc-${{ env.pandoc-version }}-linux-amd64.tar.gz | tar xvz

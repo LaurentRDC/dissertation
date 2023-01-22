@@ -45,7 +45,7 @@ ys = slice(c - side_length, c + side_length)
 
 qx = qx[ys, xs]
 qy = qy[ys, xs]
-qq = np.sqrt(qx ** 2 + qy ** 2)
+qq = np.sqrt(qx**2 + qy**2)
 
 fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH))
 grid = ImageGrid(fig, 111, nrows_ncols=(2, 2), cbar_location="top")
@@ -103,6 +103,7 @@ cbar = ax.cax.colorbar(
     format=FixedFormatter(["-1", "0", "1"]),
 )
 cbar.ax.xaxis.set_label_position("top")
+cbar.ax.xaxis.tick_top()
 cbar.ax.set_xlabel("Scattering intensity change [a.u.]")
 
 plt.subplots_adjust(bottom=0.01)
