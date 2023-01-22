@@ -66,7 +66,7 @@ ax2.set_yscale("log")
 ax2.set_ylabel("Memory [MB]")
 
 ax2.set_xscale("log", base=2)
-ax2.set_xticks([2 ** 9, 2 ** 10, 2 ** 11, 2 ** 12, 2 ** 13])
+ax2.set_xticks([2**9, 2**10, 2**11, 2**12, 2**13])
 ax2.set_xlabel("Array size ($n \\times n$)")
 
 ax3.plot(

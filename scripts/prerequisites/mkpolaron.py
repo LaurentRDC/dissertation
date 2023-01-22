@@ -163,7 +163,7 @@ err = np.zeros_like(result)
 for (h, k, l) in INDICES_DIFFUSE_SLOW:
     r, e = diffuse_5ps(h, k, l)
     result += r
-    err += e ** 2
+    err += e**2
 
 result /= len(INDICES_DIFFUSE_SLOW)
 err = np.sqrt(err) / len(INDICES_DIFFUSE_SLOW)

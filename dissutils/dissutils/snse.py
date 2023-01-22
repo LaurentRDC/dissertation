@@ -40,7 +40,7 @@ def absorbed_energy(fluence, thickness=SAMPLE_THICKNESS):
 
     # Reflectivity from the reference:
     eps1, eps2 = 40, 10  # Complex dielectric function (eps1 + i eps2)
-    norm_eps = sqrt(eps1 ** 2 + eps2 ** 2)
+    norm_eps = sqrt(eps1**2 + eps2**2)
     R = (1 - sqrt(2) * sqrt(norm_eps + eps1) + norm_eps) / (
         1 + sqrt(2) * sqrt(norm_eps + eps1) + norm_eps
     )
@@ -107,7 +107,7 @@ class DatasetInfo:
         extent_y = np.arange(0, 2048) - cy
         xx, yy = np.meshgrid(pixel_width * extent_x, pixel_width * extent_y)
 
-        r, phi = np.sqrt(xx ** 2 + yy ** 2), np.arctan2(yy, xx)
+        r, phi = np.sqrt(xx**2 + yy**2), np.arctan2(yy, xx)
         angle = np.arctan(r / CAMERA_LENGTH)
 
         # Scattering vector norm (inverse Angs)

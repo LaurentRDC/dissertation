@@ -45,7 +45,7 @@ ys = slice(c - side_length, c + side_length)
 
 qx = qx[ys, xs]
 qy = qy[ys, xs]
-qq = np.sqrt(qx ** 2 + qy ** 2)
+qq = np.sqrt(qx**2 + qy**2)
 
 fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, LARGE_FIGURE_WIDTH))
 grid = ImageGrid(fig, 111, nrows_ncols=(2, 2), cbar_location="top")

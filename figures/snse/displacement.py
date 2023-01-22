@@ -64,11 +64,11 @@ def transient_u2(timedelays, intensity, q):
     I = np.array(intensity, copy=True)
     I0 = np.mean(intensity[timedelays < 0])
     deltaI0 = (I - I0) / I0
-    u2 = -np.log(1 + deltaI0) / q ** 2
+    u2 = -np.log(1 + deltaI0) / q**2
 
     # Propagation of errors : error in [A ln(1 + x)] is [A x_err/x]
     sigma_I0 = np.max(deltaI0[timedelays < 0]) - np.min(deltaI0[timedelays < 0])
-    err = -sigma_I0 / ((q ** 2) * (1 + deltaI0))
+    err = -sigma_I0 / ((q**2) * (1 + deltaI0))
     return u2, err
 
 

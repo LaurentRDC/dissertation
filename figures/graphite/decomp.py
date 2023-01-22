@@ -84,7 +84,7 @@ with h5py.File(INPUT / "population_timeseries.hdf5", mode="r") as f:
 
     kmax = np.linalg.norm(kx_, axis=1).max() + 0.25
     kx, ky = np.meshgrid(np.linspace(-kmax, kmax, 256), np.linspace(-kmax, kmax, 256))
-    kk = np.sqrt(kx ** 2 + ky ** 2)
+    kk = np.sqrt(kx**2 + ky**2)
 
     for mode_name in MODES:
         image = interpolate.griddata(
