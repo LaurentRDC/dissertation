@@ -9,7 +9,6 @@ plt.rcParams["font.sans-serif"] = "Source Sans 3"
 plt.rcParams["font.monospace"] = "Monoid"
 plt.rcParams["font.size"] = FONTSIZE
 plt.rcParams["savefig.pad_inches"] = 0.0
-plt.rcParams["mpl_toolkits.legacy_colorbar"] = False
 
 # WARNINGS --------------------------------------------------------------------
 import warnings
