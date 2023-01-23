@@ -429,3 +429,5 @@ ax_K.legend(
     edgecolor="none",
 )
 plt.tight_layout()
+
+# TODO: clamp conditions
