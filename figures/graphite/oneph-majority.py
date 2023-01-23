@@ -165,5 +165,7 @@ cbar = ax.cax.colorbar(
     ticks=FixedLocator(locs=np.arange(0, 10) + 0.5),
     format=FixedFormatter(labels),
 )
+cbar.ax.xaxis.set_label_position("top")
+cbar.ax.xaxis.tick_top()
 
 plt.subplots_adjust(bottom=0.01)
