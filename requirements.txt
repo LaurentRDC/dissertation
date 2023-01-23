@@ -13,3 +13,4 @@ termcolor       > 1, <2
 # Bug in matplotlib and pyparsing 3.0.1
 # https://github.com/pyparsing/pyparsing/issues/317
 pyparsing       >=2.4, !=3.0.1
+./dissutils
