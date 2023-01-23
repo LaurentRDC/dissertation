@@ -18,7 +18,7 @@ images = [sample_tape_lowmag, sample_cut_lowmag, sample_on_grid]
 scale_bar_left = 2 * [2017] + [1813]
 
 fig = plt.figure(figsize=(LARGE_FIGURE_WIDTH, 0.28 * LARGE_FIGURE_WIDTH))
-axes = ImageGrid(fig, 111, nrows_ncols=(1, 3), cbar_mode="none")
+axes = ImageGrid(fig, 111, nrows_ncols=(1, 3), cbar_mode=None)
 
 for (ax, fname, left, tag) in zip(axes, images, scale_bar_left, "abc"):
     im = imread(fname)[::DOWNSAMPLING, ::DOWNSAMPLING, :]
