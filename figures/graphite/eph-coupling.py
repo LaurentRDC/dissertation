@@ -323,7 +323,7 @@ best_params, covariance = curve_fit(
     sigma=restricted_errs,
     absolute_sigma=True,
     p0=[
-        17e-4,
+        20e-4,
         5e17 / molar_density(graphite) / 1e12,
         1e18 / molar_density(graphite) / 1e12,
         1e16 / molar_density(graphite) / 1e12,
@@ -429,5 +429,3 @@ ax_K.legend(
     edgecolor="none",
 )
 plt.tight_layout()
-
-# TODO: clamp conditions
