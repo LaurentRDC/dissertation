@@ -77,4 +77,5 @@ cbar = grid[0].cax.colorbar(
     format=FixedFormatter(["0", "1"]),
 )
 cbar.ax.xaxis.set_label_position("top")
+cbar.ax.xaxis.tick_top()
 cbar.ax.set_xlabel("Scattering intensity [a.u.]")
