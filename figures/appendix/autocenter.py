@@ -53,5 +53,7 @@ axes[-1].cax.colorbar(
     mappable=m, ticks=FixedLocator(locs=[0, 200]), format=FixedFormatter(["0", "1"])
 )
 axes[-1].cax.set_xlabel("Intensity [a.u.]")
+axes[-1].cax.xaxis.set_label_position('top')
+axes[-1].cax.xaxis.tick_top()
 
 plt.subplots_adjust(bottom=0.01)

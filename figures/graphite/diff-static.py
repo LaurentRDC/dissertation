@@ -136,3 +136,4 @@ cbar.ax.xaxis.tick_top()
 cbar.ax.set_xlabel("Scattering intensity [a.u.]")
 
 plt.subplots_adjust(bottom=0.01)
+plt.show()
